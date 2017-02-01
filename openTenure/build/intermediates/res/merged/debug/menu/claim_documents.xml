@@ -1,0 +1,10 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/action_new_attachment"
+          android:icon="@drawable/clip"
+          android:title="@string/action_new_attachment"
+          android:showAsAction="ifRoom" />
+    <item android:id="@+id/action_new_picture"
+          android:icon="@drawable/camera"
+          android:title="@string/action_new_picture"
+          android:showAsAction="ifRoom" />
+</menu>

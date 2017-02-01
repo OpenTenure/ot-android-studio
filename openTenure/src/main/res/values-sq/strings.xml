@@ -1,0 +1,529 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Open Tenure</string>
+    <string name="preload">Duke hapur imazhin</string>
+    <string name="action_settings">Konfigurimet</string>
+    <string name="action_search">Kërko</string>
+    <string name="action_new">E re</string>
+    <string name="action_done">U krye</string>
+    <string name="action_remove_attachment">Fshi skedarin bashkangjitur</string>
+    <string name="action_remove_owner">Fshi të drejtat e pronarit</string>
+    <string name="action_remove_additional_info">Fshi informacionin</string>
+    <string name="action_remove_claim">Fshi pretendimin</string>
+    <string name="action_remove_section_element">Fshi elementin</string>
+    <string name="action_camera">Kamera</string>
+    <string name="action_map">Harta</string>
+    <string name="action_login">Kyçu</string>
+    <string name="action_download_tiles">Shkarko imazhet(tile)</string>
+    <string name="action_logout">Ç\'kyçu</string>
+    <string name="action_print">Printo</string>
+    <string name="action_save">Ruaj</string>
+    <string name="action_center">Qendër</string>
+    <string name="action_submit">Paraqit</string>
+    <string name="action_download_file">Shkarko skedarin</string>
+    <string name="action_download_claims">Shkarko pretendimet</string>
+    <string name="action_new_picture">Foto e re</string>
+    <string name="action_new_additional_info">Shto informacionin</string>
+    <string name="action_new_attachment">Dokument i ri</string>
+    <string name="action_lock_db">Konfiguro mbrojtjen e të dhënave</string>
+    <string name="action_export">Eksporto</string>
+    <string name="action_rotate">Rrotullo hartën duke përdorur kompasin e pajisjes</string>
+    <string name="action_stop_rotating">Ndalo rrotullimin e hartës</string>
+    <string name="action_claim_map_snapshot">Bashkëngjit një foto të hartës të këtij pretendimi</string>
+    <string name="title_news">Të reja</string>
+    <string name="title_map">Harta e Komunitetit</string>
+    <string name="title_claims">Lista e pretendimeve</string>
+    <string name="title_persons">Personat</string>
+    <string name="title_challenged_claims">Pretendimet e kundërshtuara</string>
+    <string name="title_claim">Pretendim</string>
+    <string name="title_person_details">Detajet e personit</string>
+    <string name="title_group_details">Detajet e grupit</string>
+    <string name="title_claim_additional_info">Informacion shtesë</string>
+    <string name="title_claim_documents">Dokumente</string>
+    <string name="title_claim_photos">Foto të pretendimit</string>
+    <string name="title_claim_map">Harta</string>
+    <string name="title_claim__downloading_map">Duke shkarkuar pretendimin</string>
+    <string name="title_claim_adjacencies">Kufitarët</string>
+    <string name="title_claim_owners">Pjesët</string>
+    <string name="title_share">Pjesa</string>
+    <string name="title_claim_challenges">Ankesat</string>
+    <string name="title_export">Duke eksportuar pretendimin si skedar të ngjeshur</string>
+    <string name="title_section">Seksion</string>
+    <string name="title_item">Artikull</string>
+    <string name="title_activity_settings">Konfigurime</string>
+    <string name="title_activity_claim">Open Tenure: Pretendim i ri</string>
+    <string name="title_i_m_here">Vendndodhja juaj</string>
+    <string name="title_activity_person">Open Tenure: Person i ri</string>
+    <string name="title_activity_group">Open Tenure: Grup i ri</string>
+    <string name="title_activity_select_claim">Open Tenure: Zgjidh pretendimin</string>
+    <string name="title_activity_select_person">Open Tenure: Zgjidh personin</string>
+    <string name="title_activity_share_details">Open Tenure: Detajet e pjesës</string>
+    <string name="title_activity_file_chooser">Zgjidh një skedar</string>
+    <string name="title_lock_db">Mbro të dhënat lokale</string>
+    <string name="title_add_non_boundary">Shto një vendndodhje, jo kufi</string>
+    <string name="title_exit_dialog">Dalje</string>
+    <string name="title_remove_person_dialog">Hiq personin</string>
+    <string name="title_save_claim_dialog">Pretendimi u modifikua</string>
+    <string name="title_save_person_dialog">Personi u modifikua</string>
+    <string name="title_save_group_dialog">Grupi u modifikua</string>
+    <string name="choose_file">Zgjidh një program për të selektuar skedarin</string>
+    <string name="person_name">Emri i personit</string>
+    <string name="community_recorder_name">Regjistrues i komunitetit</string>
+    <string name="postal_address">Adresa postare</string>
+    <string name="email_address">Email adresa</string>
+    <string name="gender_masculine">Mashkull</string>
+    <string name="gender_feminine">Femër</string>
+    <string name="physical_person">Person fizik</string>
+    <string name="legal_person">Person juridik</string>
+    <string name="gender">Gjinia *</string>
+    <string name="person_type">Tipi i personit *</string>
+    <string name="claim">Pretendim</string>
+    <string name="date">Data</string>
+    <string name="share_value">Vlera në përqindje : </string>
+    <string name="additional_info">Informacion shtesë</string>
+    <string name="adjacency">Kufitar</string>
+    <string name="adjacencies">Kufitarët</string>
+    <string name="cardinal_direction">Drejtimi kryesor</string>
+    <string name="new_entity">Entitet i ri</string>
+    <string name="by">Nga</string>
+    <string name="type">Tipi</string>
+    <string name="na">N.A.</string>
+    <string name="group_name">Emër</string>
+    <string name="signature">Nënshkrimi</string>
+    <string name="software_version_title">Versioni i programit</string>
+    <string name="claim_date">Data e pretendimit</string>
+    <string name="claim_name">Emri i pretendimit</string>
+    <string name="claim_name_label">Emri i pretendimit *</string>
+    <string name="claim_type">Tipi i pretendimit *</string>
+    <string name="claim_type_no_star">Tipi i pretendimit</string>
+    <string name="default_claim_name">Pretendim i ri</string>
+    <string name="first_name">Emri</string>
+    <string name="first_name_label">Emri *</string>
+    <string name="last_name">Atësia</string>
+    <string name="last_name_label">Atësia *</string>
+    <string name="date_of_birth">Datëlindja (VVVV-MM-DD)</string>
+    <string name="date_of_birth_simple">Datëlindja </string>
+    <string name="date_of_birth_label">Datëlindja * (VVVV-MM-DD)</string>
+    <string name="date_of_start">Data e pretendimit vlen nga (VVVV-MM-DD)</string>
+    <string name="date_of_start_label">Data e pretendimit vlen nga (VVVV-MM-DD)</string>
+    <string name="place_of_birth">Vendlindja</string>
+    <string name="place_of_birth_label">Vendlindja *</string>
+    <string name="date_of_establishment_label">Data e themelimit</string>
+    <string name="recorded_by">U regjistrua nga : </string>
+    <string name="mobile_phone_number">Celular</string>
+    <string name="contact_phone_number">Numër kontakti(tel)</string>
+    <string name="password">Fjalëkalimi</string>
+    <string name="attachment_removed">Skedari i bashkangjitur është hequr</string>
+    <string name="owner_removed">Pronari është hequr</string>
+    <string name="section_element_removed">Elementi është hequr</string>
+    <string name="additional_info_removed">Informacioni është hequr</string>
+    <string name="message_password_too_short">Fjalëkalimi duhet të jetë të paktën %d karaktere i gjatë</string>
+    <string name="message_password_character_is_wrong">Fjalëkalimi duhet të përmbaje vetëm numra dhe gërma</string>
+    <string name="message_saved">U ruajt</string>
+    <string name="message_server_error_saving_claim">Gabim i brendshëm i Serverit</string>
+    <string name="message_service_not_available">Shërbimi nuk është i disponoheshim</string>
+    <string name="message_connection_error">Lidhja e pa disponoheshe</string>
+    <string name="message_attachment_downloaded">Shkarkoni skedarin bashkangjitur %s</string>
+    <string name="message_attachment_downloading">Skedari %s bashkangjitur, është duke u shkarkuar </string>
+    <string name="message_attachment_download_failed">Shkarkimi i skedarit %s dështoi </string>
+    <string name="message_attachment_download_not_complete">Shkarkimi i skedarit %s nuk përfundoi </string>
+    <string name="message_remove_person">Personi %s u fshi</string>
+    <string name="message_remove_person_dialog">A jeni i sigurt se doni të fshini %s?</string>
+    <string name="message_error_remove_person">Personi %s nuk u fshi </string>
+    <string name="message_remaining_days">Ditët e ngelura për të kundërshtuar pretendimin :  </string>
+    <string name="message_map_snapshot_saved">Snapshot i hartës u ruajt</string>
+    <string name="message_adjacencies_saved">Kufitarët u ruajtën</string>
+    <string name="message_adjacencies_not_saved"> Kufitarët nuk u ruajtën </string>
+    <string name="message_downloading_attachment">Duke shkarkuar shtojcën</string>
+    <string name="message_uploading_attachment">Duke ngarkuar shtojcën</string>
+    <string name="message_invalid_url">URL e pavlefshme</string>
+    <string name="message_unable_to_save">Nuk mund të ruhet. Kontrollo detajet dhe provoje përsëri</string>
+    <string name="message_unable_to_save_missing_claim_name">Nuk mund të ruhet. Mungon emri i pretenduesit</string>
+    <string name="message_unable_to_save_missing_person">Nuk mund të ruhet. Mungon pretenduesi</string>
+    <string name="message_submitted">Pretendimi u paraqit</string>
+    <string name="message_uploading">Pretendimi është tek ngarkimet</string>
+    <string name="message_added_attachment">Shtojca iu shtua pretendimit</string>
+    <string name="message_adding_attachment_not_ok">Gabim gjatë bashkëngjitjes së shtojcës</string>
+    <string name="message_submission_error">Gabim gjatë paraqitjes së pretendimit</string>
+    <string name="message_save_claim_before_submit">Pretendimi duhet të ruhet përpara paraqitjes</string>
+    <string name="message_save_snapshot_before_printing">Bashkëngjitni një snapshot të hartës përpara printimit</string>
+    <string name="message_save_claim_before_adding_content">Pretendimi duhet të ruhet përpara se të shtoni përmbajtjen</string>
+    <string name="message_save_person_before_adding_content">Personi duhet të ruhet përpara se të shtoni përmbajtjen</string>
+    <string name="message_export">Duke eksportuar</string>
+    <string name="message_no_claim_to_download">S\'ka pretendim për tu shkarkuar</string>
+    <string name="message_claims_downloaded">Pretendimi u shkarkua me sukses</string>
+    <string name="message_error_downloading_claims">Pretendimi %s u shkarkua. Nuk u shkarkuan të gjithë pretendimet</string>
+    <string name="message_login_no_more_valid">Seksioni skadoi. Kyçuni përsëri</string>
+    <string name="message_db_locked">Të dhënat janë të mbrojtura me fjalëkalim</string>
+    <string name="message_db_password">Fjalëkalimi për të aksesuar të dhënat</string>
+    <string name="message_cant_open_db">Të dhënat nuk u aksesuan</string>
+    <string name="message_no_application">Nuk mundi të gjejë aplikacion për ta hapur skedarin</string>
+    <string name="message_error_opening_file">Gabim. Skedari nuk mund të hapet : </string>
+    <string name="message_old_db_password">Fjalëkalimi ekzistues</string>
+    <string name="message_new_db_password">Fjalëkalimi i ri (lëre bosh për të dhëna të pambrojtura)?</string>
+    <string name="message_password_dont_match">Fjalekalimi i ri nuk u konfirmua. Provojeni përsëri.</string>
+    <string name="message_encryption_failed">E pamundur të mbrojë të dhënat lokale</string>
+    <string name="message_data_unencrypted">Kujdes: të dhënat lokale nuk janë të mbrojtura</string>
+    <string name="message_encryption_set">Të dhënat lokale janë të mbrojtura. Vendosni fjalëkalimin e të dhënave të mbrojtura herës tjetër që do të hapni OpenTenure</string>
+    <string name="message_confirm_new_db_password">Konfirmo fjalëkalimin e ri</string>
+    <string name="message_enter_description">Vendos përshkrimin</string>
+    <string name="message_add_marker">Shtoni një shënjues në kufi</string>
+    <string name="message_remove_marker">Hiq shënjuesin?</string>
+    <string name="message_remove_attachment">Hiq shtojcën?</string>
+    <string name="message_remove_owner">Hiq pronarin?</string>
+    <string name="message_remove_section_element">Hiq elementin?</string>
+    <string name="message_remove_additional_info">Hiq informacionin?</string>
+    <string name="message_not_supported_on_this_device">Nuk suportohet në ketë pajisje</string>
+    <string name="message_exit_dialog">A jeni i sigurt që doni të dilni nga aplikacioni?</string>
+    <string name="message_create_before_edit">Krijoni një pretendim duke specifikuar detajet përpara se të shtoni informacionin</string>
+    <string name="message_map_not_yet_draw">Harta e pretendimit nuk është e përfunduar</string>
+    <string name="message_no_available_shares">Zvogëloni numrin e pjesëve në këtë pretendim përpara se të modifikoni vlerën e kësaj pjese </string>
+    <string name="message_no_available_shares_adding_new">Zvogëloni numrin e pjesëve në këtë pretendim përpara se të shtoni një pjesë të re</string>
+    <string name="message_share_saved">Pjesa u ruajt</string>
+    <string name="message_share_not_saved">Gabim gjatë ruajtjes së pjesës</string>
+    <string name="message_already_owner">Personi i selektuar tashmë e ka një pjese tek ky pretendim</string>
+    <string name="message_touch_to_select_a_person">Preke për të zgjedhur një person</string>
+    <string name="message_touch_to_select_a_claim">Preke për të zgjedhur një pretendim</string>
+    <string name="message_error_mandatory_fields">Plotësoni të gjitha fushat e detyruara përpara se ta ruani</string>
+    <string name="message_error_mandatory_field_first_name">Plotëso fushën e detyruar emri, përpara se ta ruani</string>
+    <string name="message_error_mandatory_field_last_name">Plotëso fushën e detyruar mbiemri, përpara se ta ruani</string>
+    <string name="message_error_mandatory_field_gender">Plotëso fushën e detyruar gjinia, përpara se ta ruani</string>
+    <string name="message_error_mandatory_birthdate">Datëlindja nuk është ne formatin e duhur ose është bosh</string>
+    <string name="message_error_startdate">Data e fillimit të të drejtave nuk është në formatin e duhur ose është bosh</string>
+    <string name="message_remove_quest">Doni ta tërhiqni këtë pretendim?</string>
+    <string name="message_remove_claim">Doni ta hiqni këtë pretendim?</string>
+    <string name="message_error_withdraw_claim">Gabim gjatë tërheqjes së pretendimit: </string>
+    <string name="message_withdrawn_claim">Pretendimi u tërhoq me sukses</string>
+    <string name="message_deleted_claim">Pretendimi u fshi lokalisht me sukses</string>
+    <string name="message_error_deleting_claim">Gabim gjatë fshirjes së pretendimit në memorien lokale</string>
+    <string name="message_save_changes">Doni ti ruani ndryshimet?</string>
+    <string name="message_discard_changes">Doni të dilni pa ruajtur ndryshimet?</string>
+    <string name="message_claim_modified">Pretendimi u modifikua</string>
+    <string name="message_entity_type">Cilin tip entiteti?</string>
+    <string name="message_title_app_initializing">Duke inicializuar OpenTenure</string>
+    <string name="message_app_initializing">Ju lutem, prisni&#8230;</string>
+    <string name="message_title_app_not_initialized">Aplikacioni nuk u inicializua</string>
+    <string name="message_app_not_initialized_network">Rrjeti nuk është i disponueshëm</string>
+    <string name="message_app_not_yet_initialized">Aplikacioni nuk është inicializuar akoma</string>
+    <string name="message_app_not_initialized">Kontrollo tek \'Konfigurimet\' që konfigurimet e Komunitetit Open Tenure Server janë të sakta dhe inicializo procesin përsëri</string>
+    <string name="message_title_app_initialized"> Aplikacioni u inicializua </string>
+    <string name="message_app_initialized_default">Aplikacioni është i gatshëm të punojë dhe komunikojë me Komunitetin kryesor të Open Tenure Server</string>
+    <string name="message_app_initialized">Aplikacioni është i gatshëm të punojë dhe komunikojë me Komunitetin Open Tenure Server</string>
+    <string name="check_location_service">S\'ka informacion mbi vendndodhjen. Kontrollo nëse shërbimi i vendndodhjes është i hapur tek konfigurimet.</string>
+    <string name="tiles_queued"> Janë  %d tiles në listën e shkarkimit </string>
+    <string name="too_many_tiles_queued">Janë  %d tiles në listën e shkarkimit. Ju lutem prisni përpara se të shkarkoni tile shtese</string>
+    <string name="all_tiles_downloaded">Të gjitha tilet në listën e shkarkimit u shkarkuan</string>
+    <string name="not_all_tiles_downloaded">%d tiles për ketë sipërfaqe harte nuk u shkarkuan. Kontrollo nëse është e mjaftueshme ose riprovoni shkarkimin</string>
+    <string name="zoom_level_too_low">Sipërfaqja është shumë e madhe. Zmadhohuni më shumë që të mund të shkarkoni të dhënat nga harta</string>
+    <string name="yes">Po</string>
+    <string name="person">Person</string>
+    <string name="group">Grup</string>
+    <string name="no">Jo</string>
+    <string name="up">Lart</string>
+    <string name="down">Poshtë</string>
+    <string name="left">Majtas</string>
+    <string name="right">Djathtas</string>
+    <string name="confirm">Konfirmo</string>
+    <string name="cancel">Anulo</string>
+    <string name="not_boundary">Jo kufi</string>
+    <string name="new_snapshot">Snapshot i ri</string>
+    <string name="new_file">Skedar i ri</string>
+    <string name="new_multipage">Skedar i ri me shumë faqe</string>
+    <string name="withdraw_claim">Tërhiq Pretendimin</string>
+    <string name="new_additional_info">Shto informacion</string>
+    <string name="add_description">Përshkrim</string>
+    <string name="add_key">Çelës?</string>
+    <string name="add_value">Vlerë?</string>
+    <string name="draggable_marker">Shënues i lëvizshëm</string>
+    <string name="sticky_marker">Shënues i ngjitur</string>
+    <string name="claimant_picture">Foto e pretenduesit</string>
+    <string name="claimant">Pretenduesi *</string>
+    <string name="claimant_no_star">Pretenduesi</string>
+    <string name="delete_locally">Fshi lokalisht</string>
+    <string name="owner">Pronar</string>
+    <string name="challenge_to">Ankesë për</string>
+    <string name="challenged_by">Ankimuar nga</string>
+    <string name="owners">Pronaret</string>
+    <string name="claim_notes">Shënime</string>
+    <string name="insert_claim_notes">Fut shënimet e pretenduesit</string>
+    <string name="person_picture">Foto e Personit</string>
+    <string name="map_provider_google_normal">Google Maps</string>
+    <string name="map_provider_google_satellite">Google Earth</string>
+    <string name="map_provider_google_hybrid">Google Hybrid</string>
+    <string name="map_provider_google_terrain">Google Terrain</string>
+    <string name="map_provider_osm_mapnik">Open Street Map MapNik</string>
+    <string name="map_provider_osm_mapquest">Open Street Map MapQuest</string>
+    <string name="map_provider_local_tiles">Të dhëna lokale</string>
+    <string name="map_provider_geoserver">GeoServer</string>
+    <string name="cs_url_pref_title"> URL e Komunitetit Server</string>
+    <string name="cs_url_pref_summary">Web adresat e Komunitetit OpenTenure Server</string>
+    <string name="cs_url_pref_dialog_title">Vendos URL e Komunitetit OpenTenure Server</string>
+    <string name="geoserver_url_pref_title">GeoServer URL</string>
+    <string name="geoserver_url_pref_summary">URL bazë e instancës web-map të GeoServerit tuaj privat</string>
+    <string name="geoserver_url_pref_dialog_title">Vendosni URL e GeoServer-it tuaj</string>
+    <string name="geoserver_layer_pref_title">Shtresat e GeoServer</string>
+    <string name="geoserver_layer_pref_summary">Shtresat WMS që mund të gjenden tek GeoServer (pyesni administratorin)</string>
+    <string name="geoserver_layer_pref_dialog_title">Vendosni emrin e shtresës WMS</string>
+    <string name="form_template_url_pref_title">Forma URL</string>
+    <string name="form_template_url_pref_summary">URL për formën e rilevimit</string>
+    <string name="form_template_url_pref_dialog_title">Vendosni URL për formën e rilevimit</string>
+    <string name="property">Pasuri</string>
+    <string name="id_type">Id Tipi</string>
+    <string name="id_number">Id Numër</string>
+    <string name="land_use">Përdorimi i Tokës</string>
+    <string name="calculated_adjacencies">Pretendimet ngjitur</string>
+    <string name="adjacent_claims">Pretendimet ngjitur</string>
+    <string name="adjacent_properties">Pasuritë ngjitur</string>
+    <string name="north_adjacency">Në Veri</string>
+    <string name="south_adjacency">Në Jug</string>
+    <string name="east_adjacency">Në Lindje</string>
+    <string name="west_adjacency">Në Perëndim</string>
+    <string name="north">Veri</string>
+    <string name="south">Jug</string>
+    <string name="east">Lindje</string>
+    <string name="west">Perëndim</string>
+    <string name="north_east">Veri-Lindje</string>
+    <string name="north_west">Veri-Perëndim</string>
+    <string name="south_east">Jug-Lindje</string>
+    <string name="south_west">Jug-Perëndim</string>
+    <string name="message_claim_exported_error">Pretendimi %s nuk u eksportua</string>
+    <string name="message_claim_exported">Pretendimi %s u eksportua</string>
+    <string name="add_owner">Shto Pronarin </string>
+    <string name="action_modify_claimant">Modifiko Pretenduesin</string>
+    <string name="action_add_claimant">Shto Pretenduesin</string>
+    <string name="action_select_challenge">Zgjidh pretendimin për ta kundërshtuar</string>
+    <string name="title_challenged_claim">Pretendimet e kundërshtuara : </string>
+    <string name="status">status : </string>
+    <string name="title_no_connection">Lidhja mungon</string>
+    <string name="message_no_connection_at_startup">Lidhja me Internetin mungon. Konfigurimi mund të mos i reflektojë ndryshimet e fundit dhe nuk do jeni në gjendje të ngarkoni apo shkarkoni të dhëna. Lidhuni në internet nëse doni të transferoni të dhëna me OpenTenure</string>
+    <string name="action_backup_db">Backup të dhënat lokale</string>
+    <string name="message_db_backed_up">Një kopje e bazës të të dhënave lokale u krijua</string>
+    <string name="title_initialization_process">Inicializim Procesi</string>
+    <string name="message_initialize_before"> Përpara, bëni Inicializimin </string>
+    <string name="message_default_initialization">Aplikacioni po hapet me të dhënat aktuale të Komunitetit Server. Të dhënat aktuale të Komunitetit Server duhet të përdoren vetëm për qëllime demonstrimi. A doni të vazhdoni? Përndryshe shtypni Anulo dhe vendosni të dhënat e Komunitetit Server tek konfigurimi</string>
+    <string name="title_confirm_data_transfer">Konfirmo transferimin e të dhënave</string>
+    <string name="message_data_over_mobile">Ju jeni duke transferuar një sasi të madhe të dhënash nëpërmjet lidhjes së internetit me celular. Kostoja e internetit mund të jetë e lartë në varësi të planit tarifor të internetit që ju keni</string>
+    <string name="action_view_community_area">Shiko Zonën e Komunitetit</string>
+    <string name="hint_type_to_filter">Shtypni disa karaktere të filtroni nga lista</string>
+    <string name="shares_prompt">Zgjidhni pjesët</string>
+    <string name="action_import">Import</string>
+    <string name="khmer_language">Khmer</string>
+    <string name="albanian_language">Shqip</string>
+    <string name="default_language">E paracaktuar</string>
+    <string name="tiles_provider">Ofruesi i Tiles </string>
+    <string name="tms_tiles_provider">Ofruesi i TMS Tiles </string>
+    <string name="tms_tiles_provider_key">TMS</string>
+    <string name="geoserver_tiles_provider">Ofruesi i GeoServer Tiles</string>
+    <string name="geoserver_tiles_provider_key">GeoServer</string>
+    <string name="title_import">Duke importuar Deklarimin e kompresuar</string>
+    <string name="generated_on">Generated on</string>
+    <string name="date_of_start_label_print">Data e deklaruar</string>
+    <string name="attachment_updated">Bashkengjitja e dokumentit eshte perditesuar</string>
+    <string name="message_claim_imported">Deklarimi eshte importuar </string>
+    <string name="message_claim_ready_to_import">Deklarimi gati per tu importuar</string>
+    <string name="message_claim_ready_to_import_no_dynamic">Deklarimi do te importohet por pjesa dynamike do te humbase</string>
+    <string name="message_claim_import_password_error">Fjalekalim i gabuar. Provoni perseri</string>
+    <string name="message_claim_import_not_compressed_claim">File Zip nuk eshte nje deklarim i kompresuar</string>
+    <string name="message_claim_import_not_claim_archive">Arkiva e deklarimit nuk mund te krijohet.Kontrollo te dhenat e detajuara te deklarimit</string>
+    <string name="message_claim_import_already_present">Deklarimi eshte tashme The claim is already present on the client</string>
+    <string name="message_claim_import_claim_not_belongs_to_community">Ky deklarim nuk i perket komunitetit</string>
+    <string name="message_claim_import_preparing">Duke pergatitur raportin e deklarimit</string>
+    <string name="message_claim_not_imported">Gabim, deklarimi nuk eshte importuar </string>
+    <string name="message_download_snapshot_before_printing">Shkarko fragmentin e hartes nga serveri perpara se ta printosh ate</string>
+    <string name="message_available_shares">Shuma e bashkepjesemarrjes eshte me e vogel se 100%</string>
+    <string name="message_files_not_present">Nje ose me shume file te deklarimit nuk gjenden</string>
+    <string name="message_warnings">Paralajmerim : </string>
+    <string name="claim_area_label">Siperfaqja</string>
+    <string name="square_meters">m2</string>
+    <string name="parcel">Parcela</string>
+    <string name="tms_url_pref_title">TMS URL</string>
+    <string name="tms_url_pref_summary">Baza URL e Tiles Map Serverit tuaj</string>
+    <string name="tms_url_pref_dialog_title">Vendosni URL te Serverit tuaj te Map Tiles</string>
+    <string name="created">u krijua</string>
+    <string name="uploading">duke u shkarkuar</string>
+    <string name="updating">duke u perditesuar</string>
+    <string name="uploaded">u shkarkua</string>
+    <string name="deleted">u fshi</string>
+    <string name="description">Pershkrim</string>
+    <string name="upload_incomplete">shkarkimi nuk eshte kryer</string>
+    <string name="update_incomplete">perditesimi nuk eshte kryer</string>
+    <string name="upload_error">gabim ne shkarkim</string>
+    <string name="update_error">gabim ne perditesim</string>
+    <string name="download_incomplete">shkarkimi nuk eshte kryer</string>
+    <string name="download_failed">shkarkimi deshtoi</string>
+    <string name="downloading">duke shkarkuar</string>
+    <string name="moderated"> i moderuar</string>
+    <string name="unmoderated">jo i moderuar</string>
+    <string name="rejected">i refuzuar</string>
+    <string name="reviewed">i rishikuar</string>
+    <string name="language">Gjuha</string>
+    <string name="map_sources">burimi i Hartes</string>
+    <string name="general"> I Pergjithshem</string>
+    <string name="dynamic_form">Forma dinamike</string>
+    <string name="information">Informacion</string>
+    <string name="null_label">Asnje</string>
+    <string name="tiles_provider_dialog_title">Zgjidhni llojin e ofruesit offline te map tiles</string>
+    <string name="language_dialog_title">Zgjidhni gjuhen</string>
+    <string name="title_restart_dialog">Kerkohet rifillimi</string>
+    <string name="message_restart_dialog">Qe ndryshimi ne konfigurimin e Open Tenure te behet efektiv duhet ta rifilloni ate. Deshironi ta rifilloni Open Tenure tani?</string>
+    <string name="action_change_map_mode">Ndrysho formen e hartes</string>
+    <string name="action_add_from_gps">Shto piken nga GPS</string>
+    <string name="action_add_boundary">Shto shenjen e kufirit</string>
+    <string name="action_add_non_boundary">Shto shenjen jo kufitare</string>
+    <string name="action_measure">Mat</string>
+    <string name="action_export_geo">Eksporto te dhenat gjeografike</string>
+    <string name="wtms_tiles_provider">WTMS Tiles Provider</string>
+    <string name="wtms_tiles_provider_key">WTMS</string>
+    <string name="action_to_group">Ndrysho ne grup</string>
+    <string name="action_to_person">Ndrysho ne person</string>
+    <string name="message_exported">Eksportuar</string>
+    <string name="message_add_non_boundary_marker">Shto shenje jo kufitare?</string>
+    <string name="tiles_download_status">Duke shkarkuar tile-n %1$d of %2$d</string>
+    <string name="markers_distance_label">Distanca</string>
+    <string name="meters">m</string>
+    <string name="wtms_url_pref_title">WTMS URL</string>
+    <string name="wtms_url_pref_summary">Base URL of your Web Tiles Map Server</string>
+    <string name="wtms_url_pref_dialog_title">Vendos URL te Web Tiles Map Server-it tuaj</string>
+
+    <string-array name="language_keys">
+        <item>Khmer</item>
+        <item>Albanian</item>
+        <item>Default</item>
+    </string-array>
+    <string-array name="language_values">
+        <item>khmer_language</item>
+        <item>albanian_language</item>
+        <item>default_language</item>
+    </string-array>
+    <string-array name="tiles_provider_keys">
+        <item >WTMS</item>
+        <item >TMS</item>
+        <item >GeoServer</item>
+    </string-array>
+    <string-array name="tiles_provider_values">
+        <item >WTMS</item>
+        <item >TMS</item>
+        <item >GeoServer</item>
+    </string-array>
+    <string-array name="share_values">
+        <item >1</item>
+        <item >2</item>
+        <item >3</item>
+        <item >4</item>
+        <item >5</item>
+        <item >6</item>
+        <item >7</item>
+        <item >8</item>
+        <item >9</item>
+        <item >10</item>
+        <item >11</item>
+        <item >12</item>
+        <item >13</item>
+        <item >14</item>
+        <item >15</item>
+        <item >16</item>
+        <item >17</item>
+        <item >18</item>
+        <item >19</item>
+        <item >20</item>
+        <item >21</item>
+        <item >22</item>
+        <item >23</item>
+        <item >24</item>
+        <item >25</item>
+        <item >26</item>
+        <item >27</item>
+        <item >28</item>
+        <item >29</item>
+        <item >30</item>
+        <item >31</item>
+        <item >32</item>
+        <item >33</item>
+        <item >34</item>
+        <item >35</item>
+        <item >36</item>
+        <item >37</item>
+        <item >38</item>
+        <item >39</item>
+        <item >40</item>
+        <item >41</item>
+        <item >42</item>
+        <item >43</item>
+        <item >44</item>
+        <item >45</item>
+        <item >46</item>
+        <item >47</item>
+        <item >48</item>
+        <item >49</item>
+        <item >50</item>
+        <item >51</item>
+        <item >52</item>
+        <item >53</item>
+        <item >54</item>
+        <item >55</item>
+        <item >56</item>
+        <item >57</item>
+        <item >58</item>
+        <item >59</item>
+        <item >60</item>
+        <item >61</item>
+        <item >62</item>
+        <item >63</item>
+        <item >64</item>
+        <item >65</item>
+        <item >66</item>
+        <item >67</item>
+        <item >68</item>
+        <item >69</item>
+        <item >70</item>
+        <item >71</item>
+        <item >72</item>
+        <item >73</item>
+        <item >74</item>
+        <item >75</item>
+        <item >76</item>
+        <item >77</item>
+        <item >78</item>
+        <item >79</item>
+        <item >80</item>
+        <item >81</item>
+        <item >82</item>
+        <item >83</item>
+        <item >84</item>
+        <item >85</item>
+        <item >86</item>
+        <item >87</item>
+        <item >88</item>
+        <item >89</item>
+        <item >90</item>
+        <item >91</item>
+        <item >92</item>
+        <item >93</item>
+        <item >94</item>
+        <item >95</item>
+        <item >96</item>
+        <item >97</item>
+        <item >98</item>
+        <item >99</item>
+        <item >100</item>
+    </string-array>
+    <string name="action_export_log">Export log</string>
+    <string name="action_go_to">Go to</string>
+    <string name="action_select_bookmark">Go to bookmark</string>
+    <string name="advanced_settings">Advanced settings (don\'t touch unless you know what you are doing)</string>
+    <string name="burmese_language">Myanmar</string>
+    <string name="change_to_disable_form_validation">Change to disable dynamic fields validation</string>
+    <string name="change_to_enable_form_validation">Change to enable dynamic fields validation</string>
+    <string name="form_validation">Dynamic fields validation on submit</string>
+    <string name="form_validation_off">Off</string>
+    <string name="form_validation_on">On</string>
+    <string name="message_add_map_bookmark_marker">Add map bookmark marker?</string>
+    <string name="message_log_exported">A copy of the application log has been exported</string>
+    <string name="message_update_client">The Community Server is using a new version of the communication protocol. Wait for an update of Open Tenure before proceeding</string>
+    <string name="message_update_server">The Community Server is using an old version of the communication protocol. Wait for your administrator to update the Community Server before proceeding</string>
+    <string name="title_activity_select_bookmark">Open Tenure: Select bookmark</string>
+    <string name="title_add_map_bookmark">Add map bookmark</string>
+    <string name="title_bookmarks">Bookmarks</string>
+
+</resources>

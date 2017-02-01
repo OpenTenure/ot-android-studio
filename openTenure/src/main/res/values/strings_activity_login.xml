@@ -1,0 +1,27 @@
+<resources>
+
+    <string name="title_activity_login_activity_test">Log in</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_username">Username</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_log_in_register"><b>Log in</b></string>
+    <string name="action_sign_in_short">Log in</string>
+    <string name="action_forgot_password">Recover lost password</string>
+    <string name="login_progress_signing_in">Logging in&#8230;</string>
+    <string name="error_invalid_username">This username is too short</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">Username or Password is incorrect</string>
+    <string name="error_generic_login">An error has occurred during login </string>
+    <string name="error_generic_conection">An error has occurred during connection</string>
+    <string name="error_connection">The connection is not available</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="message_login_before">Do login before</string>
+    <string name="message_logout_ok">You have successfully logged out</string>
+    <string name="message_login_ok">You have successfully logged in</string>
+    <string name="message_logout_not_ok">Logout failed</string>
+    <string name="message_logout_error">Logout error</string>
+    <string name="message_unknowhost_error">Unknown Host Error. Is the network available?</string>
+    <string name="message_timeout_exception">Timeout exception</string>
+
+</resources>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/light_background_opentenure"
+    android:baselineAligned="false"
+    android:orientation="vertical" >
+
+    <EditText
+        android:id="@+id/filter_input_field"
+        android:layout_width="fill_parent"
+        android:layout_height="60dp"
+        android:background="@color/dark_background_opentenure"
+        android:drawableRight="@android:drawable/ic_search_category_default"
+        android:hint="@string/hint_type_to_filter"
+        android:inputType="text"
+        android:padding="10dp" >
+    </EditText>
+
+    <ListView
+        android:id="@android:id/list"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@color/light_background_opentenure"
+        android:drawSelectorOnTop="true" />
+
+</LinearLayout>

@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="action_showcase">Voir le Tutoriel</string>
+    <string name="showcase_main_title">Qu\'est-ce-que SOLA Open Tenure ?</string>
+    <string name="showcase_main_message">\n \n 
+        									\n Open Tenure est une application libre développée par l\'ONU FAO dédiée à la collecte terrain des droits fonciers.
+											\n L\'application permet la cartographie des limites d\'une propriété, la collecte d\'informations sur les droits de propriété, ainsi que la capture de photos de la propriété ou d\'images de la documentation existante des droits.
+											\n Open Tenure utilise un serveur web dédié à une communautaire (comme le Serveur Communautaire SOLA) où les informations existantes des propriétés et une image satellite peuvent être téléchargées avant ou après la collecte sur le terrain.
+
+    </string>
+    
+    <string name="showcase_claim_title">Informations de la Déclaration</string>
+    <string name="showcase_news_message">\n \n 
+        									L\'onglet Actualités vous donne accès au serveur SOLA test de la FAO. Vous y trouverez les informations des propriétés collectées et téléchargées avec Open Tenure.
+                                         \n L\'onglet permet aussi d\'accéder au site web de la communauté FLOSS SOLA où vous trouverez plus d\'informations concernant les solutions du logiciel libre SOLA.</string>
+    
+    <string name="showcase_map_message">\n \n L\'onglet Plan permet d\'accéder à la visualisation du plan Open Tenure.
+                                        
+    </string>
+    <string name="showcase_persons_message">\n
+        									 Affiche la liste des personnes établissant des déclarations au nom d\'autres personnes ou en leur nom.
+        									\n \n
+        									 Sélectionner un élément de la liste pour éditer les détails de la personnes incluant le nom, la date de naissance, le genre, l\'identité et une photo
+											\n \n ....ou.... 
+    </string>
+    <string name="showcase_claims_message">\n L\'onglet Déclarations affiche une liste des déclarations des propriétés qui ont été téléchargées ou collectées sur votre appareil avec leur statut correspondant
+                                           \n \n Types de statut :
+                                           \n   •   L - Déposée
+                                           \n   •   U - Téléchargée/Non-modérée
+                                           \n   *   C - Contestée
+                                           \n   •   M - Modérée
+                                           \n   •   R - Rejetée
+                                           \n   •   W - Retirée
+    </string>
+    <string name="showcase_claim_select_message"> \n \n \n
+        										 Sélectionner une déclaration de la liste pour visualiser ou éditer ses informations et cartographier la propriété.
+ 										      \n \n Utiliser l\'icône à la flèche bleue pour charger la déclaration sur le serveur communautaire.
+										      \n \n Utiliser l\'icône X rouge pour supprimer localement une déclaration de la liste.
+    </string>
+    
+    <string name="showcase_claim_message"> \n Etablir une déclaration en entrant les informations à travers les onglets disponibles.
+                                           \n Les 6 premiers onglets ont des formats fixes suivant les caractéristiques des modèles LADM/STDM.
+                                           \n Les 2 derniers onglets sont dynamiques et leurs contenus peuvent être définis en utilisant l\'application SOLA Web Admin.
+                                           \n \n L\'onglet Déclaration possède ces champs:
+                                           \n* "Nom de la déclaration" correspond au nom ou à l\'identifiant connu de la propriété à déclarer.
+                                           \n* "Type de déclaration" correspond au droit primaire de la propriété (extension au LADM ou SOLA)
+                                           \n* "Utilisation du Sol" correspond à l\'utilisation actuelle du terrain (extension SOLA).
+                                           \n* "La date de la déclaration s\'applique à partir de" correspond à la date à laquelle le droit primaire existant a été connu
+                                           \n* "Commentaires" correspond aux informations supplémentaires nécessaires relevées par le Collecteur.
+                                           \n \n En bas du formulaire, il y a 2 boutons:
+                                           \n* "Ajouter (ou Modifier) le déclarant" pour collecter le(s) propriétaire(s) du terrain
+                                           \n* "Sélectionner la déclaration à contester" s\'utilise dans le cas où un conflit s\'est avéré sur un droit de propriété et une déclaration est contestée par la tiers partie. Cette fonction permet de relier la déclaration à une déclaration contestataire.
+     </string>
+    
+    <string name="showcase_claim_map_message">\n \n Vous permet de définir les limites du terrain déclaré en utilisant l\'image du plan comme base de référence et, si nécessaire, la position GPS indiquée par l\'appareil.
+                                        	  \n \n Une fois que toutes les limites ont été définies, un plan du terrain déclaré peut être généré et ajouté comme document support à la déclaration.
+    </string>
+    
+    <string name="showcase_claim_mapdraw_message">\n \n En appuyant longtemps sur le plan, on crée un point additionnel à la limite.
+        										  \n \n A (light) En appuyant rapidement sur un point de la limite, il est possible de modifier ce point
+                                                  \n Les opérations du mode Edition sont:
+                                                  \n* L\'icone X blance supprime le point de limite sélectionné.
+                                                  \n* L\'icône boussole blanche donne accès à des éditions spatiales précises : les flèches des points cardinaux s\'affichent.
+                                                  \n Utiliser ces flèches pour la définition précise les points de la limite du terrain puis l\'icône au point blanc lorsque le point de limite est satisfaisant.
+                                                  \n* L\'icône au cercle blanc avec diagonale permet de sortir du mode Edition.
+                                           		  \n \n Appuyer longtemps sur un point pour changer sa position sur le plan.
+                                                  \n \n Open Tenure possède un mode accrochage à des points ou des arrêtes de limites de propriétés voisines.
+    </string>
+    <string name="showcase_claim_document_message">\n \n \n 
+        										  Affiche une liste de documents attachés à la déclaration.
+         										   \n \n 
+         										  Un document peut être sélectionné dans la liste pour visualiser ses informations.
+                                                  \n L\'icône X rouge supprime le document de la déclaration.
+         										    
+        										 
+        	                                        
+    </string>
+    <string name="showcase_claim_documentAttach_message">\n \n \n 
+        										  L\'icône presse-papier permet d\'attacher un fichier existant qui a été précédemment enregistré dans votre appareil.
+        										   \n \n
+        										  L\'icône appareil photo active l\'appareil photo de l\'appareil afin de prendre une photo et de l\'attacher
+                                                  \n à la déclaration.
+        										    
+         										  
+        	                                        
+    </string>
+    
+    <string name="showcase_claim_adjacencies_message">\n \n \n 
+        										  Inscrit le nom des propriétaires ou des propriétés contigües 
+                                                  \n au terrain déclaré (nord, sud, est et ouest)
+         										   \n \n 
+         										  Là où il existe des déclarations contigües au terrain déjà inscrites dans Open Tenure, ces déclarations seront automatiquement affichées comme contigües.
+         										  
+        										 
+        	                                        
+    </string>
+    
+    <string name="showcase_claim_challenges_message">\n \n \n 
+        										  Affiche une liste des contestations engagées contre la déclaration en question.
+                                                  \n \n Pour visualiser les informations d\'une contestation, retenir le nom du terrain contesté ou du déclarant et la rechercher en utilisant ce nom dans l\'onglet de recherche dédié à cet effet.
+        										    
+    </string>
+    
+    <string name="showcase_claim_shares_message">
+        										  Liste les parts des droits de propriété inscrites dans la déclaration.
+         										   \n (Open Tenure part du principe que 100 des parts sont allouées au déclarant ; c\'est ce qui apparaît à l\'écran. Ce principe peut être modifié en utilisant les mécanismes suivants)
+                                                    
+         										  \n Une part peut être sélectionnée dans la liste afin de visualiser le(s) propriétaire(s) associé(s), pour changer les informations d\'un propriétaire ou ajouter d\'autres propriétaires aux parts.
+                                                  
+												  \n Le compteur permet de changer le pourcentage des parts associées.
+                                                  
+                                                  \n L\'icône X rouge permet de supprimer une part.
+                                
+												  \n L\'icône + verte permet d\'ajouter une nouvelle part et d\'inscrire un arrangement complex du droit de propriété à la déclaration.
+                                                  
+                                                  \n Open Tenure permet d\'inscrire un arrangement des parts de propriété qui n\'est pas égal à 100%.
+        										 
+        	                                        
+    </string>
+    <string name="showcase_actionNews_message"> \n \n L\’icône en triangle blanc doté d\'un point d\'exclamation s\'affiche quand Open Tenure est utilisé pour la première fois. Cette fonction
+                                                \n doit être alors utilisée pour initialiser l\'utilisation d\'Open Tenure avec un serveur communautaire particulier.
+                                                \n \n L\'icône de connexion donne accès au serveur communautaire une fois que vous avez entré vos identifiants 
+                                                \n (nom d\'utilisateur et mot de passe obtenus en s\'enregistrant sur le site du serveur communautaire).
+                                                \n L\'icône de verrouillage encode les données capturées en utilisant Open Tenure pour envoyer les données par email.
+        										\n L\'icône Liste donne accès à :
+        										\n• "Paramètres" pour définir la valeur de l\'URL et la couche du plan du serveur communautaire, le Geoserver (imagerie satellite) et les formulaires d\'enquête.
+												\n•  "Visualiser le Tutoriel" pour revoir ce tutoriel.
+           
+    </string>
+    <string name="showcase_actionMap_message"> \n Community Map Tab Icons:
+                                               \n* L\'icône de téléchargement de fichier s\'affiche seulement quand vous êtes zoomé au maimum et commencé à télécharger des images satellites mosaïquées
+                                               \n depuis le Geoserver image pour la zone affichée dans l\'onglet plan d\'Open Tenure.
+                                               \n* L\'icône de connexion pour afficher le formulaire de connexion (vous devez d\'abord vous enregistrer comme utilisateur sur le serveur communautaire).
+                                               \n* L\'icône (repliée) Plan centre le plan Open Tenure sur la zone d\'intérêt \'définie.
+                                               \n* L\'icône Oeil de Boeuf centre le plan Open Tenure à votre position actuelle.
+        								  	   \n* L\'icône de Téléchargement Cloud initie le téléchargement des informations des déclarations depuis le serveur communautaire pour la zone actuellement
+                                               \n  affichée dans le plan Open Tenure.
+        									   \n* L\'icône Liste présent les options du plan de base Open Tenure disponibles pour la sélection.
+    </string>
+    <string name="showcase_actionPersons_message"> \n Cliquer sur l\'icône + pour ajouter une nouvelle personne ou un groupe et inscrire les informations relatives :
+                                                \n \n Personne
+                                                \n* "Prénom" (obligatoire) – inscrit le prénom
+                                                \n* "Nom" (obligatoire) – inscrit le nom de famille
+                                                \n* "Date de Naissance" (obligatoire) – utilise le contrôleur de date ou entrer la date manuellement au format AAAA-MM-JJ
+                                                \n* "Genre" (obligatoire)
+                                                \n* "Type de carte d\'identité" sélectionne la valeur dans la liste
+                                                \n* "Numéro d\'identité" inscrit sur le numéro d\'identité
+                                                \n* "Adresse Postale"
+                                                \n* "Adresse Email" – cette adresse email est utilisée pour l\'envoi des messages automatiques concernant la déclaration
+                                                \n* "Numéro de Téléphone Mobile"
+                                                \n* "Numéro de Téléphone autre"
+                                                \n \n Groupe
+                                                \n* "Prénom" (obligatoire) – nom du groupe
+                                                \n* "Date d'établissement" (obligatoire) – utilise le contrôleur de date ou entrer la date manuellement au format AAAA-MM-JJ
+                                                \n* "Numéro d\'identité" – n\'existe peut-être pas, mais uniquement pour des personnes juridiques comme les entreprises, inscrire leur numéro d\'enregistrement.
+                                                \n* "Adresse postale"
+                                                \n* "Adresse Email" – cette adresse email est utilisée pour l\'envoi des messages automatiques concernant la déclaration
+                                                \n* "Numéro de Téléphone Mobile"
+                                                \n* "Numéro de Téléphone autre"
+                                                
+                                                
+    </string>
+    <string name="showcase_actionClaims_message"> \n \n L\'icône de signalement de personne pour inscrire une nouvelle déclaration.
+                                                  \n \n L\'icône de connexion pour afficher le formulaire de connexion qui servira ensuite de télécharger complètement les déclarations
+                                                  \n \n L\'icône Liste donne accès à :
+                                                  \n• "Paramètres" pour définir la valeur de l\'URL et la couche du plan du serveur communautaire, le Geoserver (imagerie satellite) et les formulaires d\'enquête.
+                                                  \n•  " Visualiser le Tutoriel" pour revoir ce tutoriel.
+                                                  \n•  "Backup des données locales" pour sauvegarder les déclarations inscrites dans l\'appareil
+    </string>
+    
+    <string name="showcase_actionClaimDetails_message"> \n \n  L\'icône de Sauvegarde sauvegarde toutes les données décrivant cette déclaration
+                                                        \n \n  L\'icône Export crée un fichier compressé zip des déclarations (afin d\'être envoyé par email sur le serveur communautaire)
+                                                        \n une fois que la déclaration est remplie complètement et sauvegardée
+        												\n \n  L\'icône Imprimer crée un résumé des informations de la déclaration
+                                                        \n une fois que le terrain a été cartographié et la déclaration sauvegardée.
+                                                        \n \n L\'icône Liste contient un menu option de la Visualisation du Tutoriel pour revoir ce tutoriel
+</string>
+    <string name="showcase_actionClaimMap_message"> \n \n  L\'icône + verte crée un nouveau point de limite à la position actuelle déterminée par le GPS de l\'appareil.
+                                                     A cause des contraintes de précision du GPS intégré, le point de limite doit être repositionné (appuyer longuement sur l\'affichage du plan)
+                                                     relativement sur l\'image satellite si la position de la limite est claire. Dans ce cas, Open Tenure enregistre les deux positions GPS et image satellite.
+                                                    \n \n L\'icône de rotation blanche pivote le plan et affiche la boussole de l\'appareil. Pour arrêter la fonction Rotation, utiliser l\'icône Cercle blanc avec la diagonale. Une motion à 2 doigts sur l\'appareil peut aussi faire tourner le plan. Utile pour l\'orientation sur le terrain
+        										    \n  l\'icône œil de bœuf centre le plan à la position actuelle (déterminée par le GPS intégré)
+        										    \n \n  L\'icône Appareil génère un plan de base sur l\'affichage du plan et l\'attach automatiquement comme document support à la déclaration. Au cas où un plan précédent aurait été stocké, ce nouveau remplace l\'ancien.
+    </string>
+    
+    
+    <string name="showcase_actionAlert1_message"> \n \n  Maintenant, vous devrez initialiser l\'application.
+        
+    </string>
+    <string name="showcase_actionAlert_message"> \n   L\'icône initialise Open Tenure en le configurant pour l\'utilisation avec le serveur communautaire SOLA test.
+                                                  \n  Lorsque vous avez besoin de vous connecter au serveur communautaire pour votre communauté, vous devrez nettoyer les
+                                                  \n données Open Tenure de votre appareil, changer les paramètres de l\'url pour le serveur communautaire et réinitialiser.
+                                                  \n \n  Les étapes sont :
+                                                  \n  1) Pour les paramètres Android - Apps - Open Tenure. Cliquer sur le bouton Nettoyer les données
+                                                  \n  2) Changer la valeur de l\'url dans les Paramètres du menu option disponible depuis l\'onglet Liste des Déclarations du formulaire principal Open Tenure.
+                                                  \n  3) Utiliser l\'icône Triangle pour (re)initialiser Open Tenure (disponible depuis l\'onglet Actualités dans le formulaire principal Open Tenure)
+    </string>
+    
+    <string name="showcase_end_message">\n \n 
+        									..et maintenant..
+											\n \n Essayer d\'utiliser Open Tenure. Si vous avez des suggestions à faire ou si vous rencontrer quelque problème
+                                            \n contactez nous (neil.pullar@fao.org)
+											\n\n Vous pouvez revoir ce tutoriel à tout moment en sélectionnant "Visualiser le Tutoriel" de la liste – mune option Visualiser Tutoriel.
+     </string>
+    
+    
+    
+    <string name="next">Suivant</string>
+    <string name="close">Fermer</string>
+    <string name="skip">Passer</string>
+    <string name="ok">OK</string>
+    
+</resources>

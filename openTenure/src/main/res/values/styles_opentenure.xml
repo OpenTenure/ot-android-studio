@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- File created by the Android Action Bar Style Generator
+
+     Copyright (C) 2011 The Android Open Source Project
+     Copyright (C) 2012 readyState Software Ltd
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+  
+          http://www.apache.org/licenses/LICENSE-2.0
+  
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <style name="Theme.Opentenure" parent="@android:style/Theme.Holo.Light">
+        <item name="android:actionBarItemBackground">@drawable/selectable_background_opentenure</item>
+        <item name="android:popupMenuStyle">@style/PopupMenu.Opentenure</item>
+        <item name="android:dropDownListViewStyle">@style/DropDownListView.Opentenure</item>
+        <item name="android:actionBarTabStyle">@style/ActionBarTabStyle.Opentenure</item>
+        <item name="android:actionDropDownStyle">@style/DropDownNav.Opentenure</item>
+        <item name="android:actionBarStyle">@style/ActionBar.Solid.Opentenure</item>
+        <item name="android:actionBarTabTextStyle">@style/ActionBarTabText.Opentenure</item>
+        <item name="android:actionMenuTextColor">@color/ab_menu_text_opentenure</item>
+        <item name="android:actionModeBackground">@drawable/cab_background_top_opentenure</item>
+        <item name="android:actionModeSplitBackground">@drawable/cab_background_bottom_opentenure</item>
+        <item name="android:actionModeCloseButtonStyle">@style/ActionButton.CloseMode.Opentenure</item>
+        
+        
+    </style>
+
+    <style name="ActionBar.Solid.Opentenure" parent="@android:style/Widget.Holo.Light.ActionBar.Solid">
+        <item name="android:background">@drawable/ab_solid_opentenure</item>
+        <item name="android:backgroundStacked">@drawable/ab_stacked_solid_opentenure</item>
+        <item name="android:backgroundSplit">@drawable/ab_bottom_solid_opentenure</item>
+        <item name="android:progressBarStyle">@style/ProgressBar.Opentenure</item>
+        <item name="android:titleTextStyle">@style/ActionBarTitleText.Opentenure</item>
+        </style>
+
+    <style name="ActionBarTitleText.Opentenure"
+           parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Title">
+        <item name="android:textColor">@color/ab_title_text_opentenure</item>
+    </style>
+
+    <style name="ActionBarTabText.Opentenure"
+           parent="@android:style/Widget.Holo.ActionBar.TabText">
+        <item name="android:textColor">@color/ab_tab_text_opentenure</item>
+    </style>
+    
+    <style name="ActionBar.Transparent.Opentenure" parent="@android:style/Widget.Holo.Light.ActionBar">
+        <item name="android:background">@drawable/ab_transparent_opentenure</item>
+        <item name="android:progressBarStyle">@style/ProgressBar.Opentenure</item>
+    </style>
+
+    <style name="PopupMenu.Opentenure" parent="@android:style/Widget.Holo.Light.ListPopupWindow">
+        <item name="android:popupBackground">@drawable/menu_dropdown_panel_opentenure</item>	
+    </style>
+
+    <style name="DropDownListView.Opentenure" parent="@android:style/Widget.Holo.Light.ListView.DropDown">
+        <item name="android:listSelector">@drawable/selectable_background_opentenure</item>
+    </style>
+
+    <style name="ActionBarTabStyle.Opentenure" parent="@android:style/Widget.Holo.Light.ActionBar.TabView">
+        <item name="android:background">@drawable/tab_indicator_ab_opentenure</item>
+    </style>
+
+    <style name="DropDownNav.Opentenure" parent="@android:style/Widget.Holo.Light.Spinner">
+        <item name="android:background">@drawable/spinner_background_ab_opentenure</item>
+        <item name="android:popupBackground">@drawable/menu_dropdown_panel_opentenure</item>
+        <item name="android:dropDownSelector">@drawable/selectable_background_opentenure</item>
+    </style>
+    
+    <style name="ProgressBar.Opentenure" parent="@android:style/Widget.Holo.Light.ProgressBar.Horizontal">
+        <item name="android:progressDrawable">@drawable/progress_horizontal_opentenure</item>
+    </style>
+    
+    <style name="ActionButton.CloseMode.Opentenure" parent="@android:style/Widget.Holo.Light.ActionButton.CloseMode">
+        <item name="android:background">@drawable/btn_cab_done_opentenure</item>
+    </style>
+
+    <!-- this style is only referenced in a Light.DarkActionBar based theme -->
+    <style name="Theme.Opentenure.Widget" parent="@android:style/Theme.Holo">
+        <item name="android:popupMenuStyle">@style/PopupMenu.Opentenure</item>
+        <item name="android:dropDownListViewStyle">@style/DropDownListView.Opentenure</item>
+    </style>
+    
+    <style name="LoginFormContainer">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">16dp</item>
+    </style>
+    <style name="CompatDarkActionBarTheme" parent="android:Theme.Holo.Light" />
+
+    
+    <style name="ListItemBigtext">
+        <item name="android:textColor">#25467A</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceLarge</item>
+        <item name="android:fontFamily">sans-serif-light</item>
+        <item name="android:textStyle">italic</item>
+    </style>
+
+    <style name="ListItemSubtext">
+        <item name="android:textAppearance">?android:attr/textAppearanceSmall</item>
+        <item name="android:textColor">?android:attr/textColorSecondary</item>
+    </style>
+    
+    <style name="mySpinnerItemStyle" parent="@android:style/Widget.Holo.DropDownItem.Spinner">
+    <item name="android:textColor">@android:color/black</item>
+    <item name="android:textColorHint">@android:color/black</item>
+    </style>
+
+</resources>

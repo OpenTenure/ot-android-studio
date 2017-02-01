@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/light_background_opentenure"
+    android:orientation="horizontal"
+    android:padding="10dp" 
+    android:baselineAligned="false">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="9"
+        android:background="@color/light_background_opentenure"
+        android:orientation="vertical"
+        android:padding="0dp" >
+
+        <TextView
+            android:id="@+id/additional_info_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/item_color"
+            android:gravity="left|center"
+            android:text="@string/title_item" />
+
+        <TextView
+            android:id="@+id/additional_info_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/item_color"
+            android:gravity="left|center"
+            android:text="@string/title_item" />
+
+        <TextView
+            android:id="@+id/additional_info_status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/item_color"
+            android:gravity="left|center"
+            android:paddingTop="10sp"
+            android:text="@string/title_item" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:layout_weight="5"
+        android:background="@color/light_background_opentenure"
+        android:orientation="horizontal"
+        android:padding="0dp" >
+
+        <ImageView
+            android:id="@+id/remove_icon"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:contentDescription="@string/action_remove_additional_info"
+            android:src="@android:drawable/ic_delete" />
+    </LinearLayout>
+
+</LinearLayout>

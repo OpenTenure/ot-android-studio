@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/light_background_opentenure"
+    android:orientation="horizontal"
+    android:padding="10dp" >
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="9"
+        android:background="@color/light_background_opentenure"
+        android:orientation="vertical"
+        android:padding="0dp" >
+
+        <TextView
+            android:id="@+id/field_group_name"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+	        android:layout_weight="1"
+            android:background="@drawable/item_color"
+            android:gravity="left|center"
+            android:text="@string/title_item" />
+
+        <TextView
+            android:id="@+id/field_group_slogan"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+	        android:layout_weight="3"
+            android:background="@drawable/item_color"
+            android:gravity="left|center"
+            android:text="@string/title_item" />
+
+        </LinearLayout>
+
+  <ImageView
+      android:id="@+id/remove_icon"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_weight="1"
+      android:contentDescription="@string/action_remove_section_element"
+      android:src="@android:drawable/ic_delete" />
+  
+</LinearLayout>

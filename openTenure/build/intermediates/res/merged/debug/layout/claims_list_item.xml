@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/light_background_opentenure"
+    android:orientation="horizontal"
+    android:padding="10dp" >
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="9"
+        android:background="@color/light_background_opentenure"
+        android:orientation="vertical"
+        android:padding="0dp" >
+
+        <TextView
+            android:id="@+id/claim_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/item_color"            
+            android:text="@string/title_item" 
+            android:visibility="gone"/>
+        
+        <TextView
+            android:id="@+id/claim_number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/item_color"            
+            android:text="@string/title_item" />
+
+        <TextView
+            android:id="@+id/claim_slogan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/item_color"
+            android:paddingTop="5sp"            
+            android:text="@string/title_item" />
+
+        <TextView
+            android:id="@+id/claim_challenging_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/item_color"            
+            android:paddingTop="5sp"
+            android:text="@string/title_item" />
+
+        <TextView
+            android:id="@+id/claim_status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/item_color"            
+            android:paddingTop="10sp"
+            android:text="@string/title_item"
+            android:textSize="20sp"
+            android:visibility="gone" />
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxHeight="10sp"
+            android:minHeight="10sp"
+            android:paddingTop="5sp"
+            android:visibility="gone" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/claimant_picture"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="2"
+        android:contentDescription="@string/claimant_picture"
+        android:paddingEnd="10sp"
+        android:paddingStart="10sp"
+        android:src="@drawable/ic_contact_picture" />
+
+    <ImageView
+        android:id="@+id/status_unmoderated"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="2"
+        android:contentDescription="@string/claimant_picture"
+        android:src="@drawable/ic_unmoderated"
+        android:visibility="gone" />
+
+    <ImageView
+        android:id="@+id/status_challenged"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="2"
+        android:contentDescription="@string/claimant_picture"
+        android:src="@drawable/ic_challenged"
+        android:visibility="gone" />
+
+    <ImageView
+        android:id="@+id/status_local"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="2"
+        android:contentDescription="@string/claimant_picture"
+        android:src="@drawable/ic_claim_status_local"
+        android:visibility="gone" />
+
+    <ImageView
+        android:id="@+id/status_moderated"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="2"
+        android:contentDescription="@string/claimant_picture"
+        android:src="@drawable/ic_moderated"
+        android:visibility="gone" />
+
+    <ImageView
+        android:id="@+id/status_withdrawn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="2"
+        android:contentDescription="@string/claimant_picture"
+        android:src="@drawable/ic_withdrawn"
+        android:visibility="gone" />
+    
+     <ImageView
+        android:id="@+id/status_reviewed"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="2"
+        android:contentDescription="@string/claimant_picture"
+        android:src="@drawable/ic_rejected"
+        android:visibility="gone" />
+
+    <ImageView
+        android:id="@+id/action_submit_to_server"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="2"
+        android:contentDescription="@string/action_submit"
+        android:src="@drawable/ic_submit_big"
+        android:visibility="visible" />
+    
+    <ImageView
+        android:id="@+id/action_export_to_server"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="2"
+        android:contentDescription="@string/action_submit"
+        android:src="@drawable/upload_blue"
+        android:visibility="visible" />
+
+    <ImageView
+        android:id="@+id/action_remove_claim"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:contentDescription="@string/action_remove_claim"
+        android:src="@android:drawable/ic_delete" />
+
+</LinearLayout>

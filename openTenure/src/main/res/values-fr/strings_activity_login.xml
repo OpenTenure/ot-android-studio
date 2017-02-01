@@ -1,0 +1,27 @@
+<resources>
+
+    <string name="title_activity_login_activity_test">Se connecter</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_username">Identifiant</string>
+    <string name="prompt_password">Mot de passe</string>
+    <string name="action_log_in_register"><b>Se connecter</b></string>
+    <string name="action_sign_in_short">Se connecter</string>
+    <string name="action_forgot_password">Récupérer le dernier mot de passe</string>
+    <string name="login_progress_signing_in">Connexion&#8230;</string>
+    <string name="error_invalid_username">Cet identifiant est trop court</string>
+    <string name="error_invalid_password">Ce mot de passe est trop court</string>
+    <string name="error_incorrect_password">L\'identifiant ou le mot de passe est incorrect</string>
+    <string name="error_generic_login">Une erreur s\'est produite pendant la connexion</string>
+    <string name="error_generic_conection">Une erreur s\'est produite pendant la connexion</string>
+    <string name="error_connection">La connection n\'est pas disponible</string>
+    <string name="error_field_required">Ce champ est requis</string>
+    <string name="message_login_before">Connectez-vous avant</string>
+    <string name="message_logout_ok">Vous êtes déconnecté</string>
+    <string name="message_login_ok">Vous êtes connectés</string>
+    <string name="message_logout_not_ok">La déconnexion a échoué</string>
+    <string name="message_logout_error">Erreur de déconnexion</string>
+    <string name="message_unknowhost_error">Erreur d\'hébergment inconnue. Le seveur est-il disponible?</string>
+    <string name="message_timeout_exception">Exception de temps d\'attente à la déconnection</string>
+
+</resources>

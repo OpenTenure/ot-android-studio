@@ -1,0 +1,69 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item android:id="@+id/action_change_map_mode"
+          android:icon="@android:drawable/ic_menu_manage"
+          android:title="@string/action_change_map_mode"
+          android:showAsAction="ifRoom" >
+        <menu>
+            <item android:id="@+id/action_add_boundary"
+                  android:title="@string/action_add_boundary" />
+            <item android:id="@+id/action_add_non_boundary"
+                  android:title="@string/action_add_non_boundary" />
+            <item android:id="@+id/action_measure"
+                  android:title="@string/action_measure" />
+            </menu>
+    </item>
+    <item android:id="@+id/action_add_from_gps"
+          android:icon="@android:drawable/ic_input_add"
+          android:title="@string/action_add_from_gps"
+          android:showAsAction="ifRoom" />    
+    <item android:id="@+id/action_rotate"
+          android:icon="@drawable/screenrotation"
+          android:title="@string/action_rotate"
+          android:showAsAction="ifRoom" />    
+	<item android:id="@+id/action_stop_rotating"
+          android:icon="@drawable/stop"
+          android:title="@string/action_stop_rotating"
+          android:showAsAction="ifRoom" />    
+    <item android:id="@+id/action_go_to"
+          android:icon="@drawable/position"
+          android:title="@string/action_go_to"
+          android:showAsAction="ifRoom" >
+        <menu>
+            <item android:id="@+id/action_center_and_follow"
+                  android:title="@string/action_center" />
+            <item android:id="@+id/action_select_bookmark"
+                  android:title="@string/action_select_bookmark" />
+            </menu>
+    </item>
+    <item android:id="@+id/action_new_picture"
+          android:icon="@drawable/screenshot"
+          android:title="@string/action_claim_map_snapshot"
+          android:showAsAction="ifRoom" />
+    <item android:id="@+id/map_provider_google_normal"
+          android:title="@string/map_provider_google_normal"
+          android:showAsAction="never" />
+    <item android:id="@+id/map_provider_google_hybrid"
+          android:title="@string/map_provider_google_hybrid"
+          android:showAsAction="never" />
+    <item android:id="@+id/map_provider_google_satellite"
+          android:title="@string/map_provider_google_satellite"
+          android:showAsAction="never" />
+    <item android:id="@+id/map_provider_google_terrain"
+          android:title="@string/map_provider_google_terrain"
+          android:showAsAction="never" />
+    <item android:id="@+id/map_provider_osm_mapnik"
+          android:title="@string/map_provider_osm_mapnik"
+          android:showAsAction="never" />
+    <item android:id="@+id/map_provider_osm_mapquest"
+          android:title="@string/map_provider_osm_mapquest"
+          android:showAsAction="never" />
+    <item android:id="@+id/map_provider_local_tiles"
+          android:title="@string/map_provider_local_tiles"
+          android:showAsAction="never" />
+    <item android:id="@+id/map_provider_geoserver"
+          android:title="@string/map_provider_geoserver"
+          android:showAsAction="never" />
+    <item android:id="@+id/action_export_geo"
+          android:title="@string/action_export_geo"
+          android:showAsAction="never" />
+</menu>

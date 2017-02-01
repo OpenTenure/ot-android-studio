@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <PreferenceCategory android:title="@string/general" >
+    <EditTextPreference
+        android:defaultValue="https://demo.opentenure.org"
+        android:dialogTitle="@string/cs_url_pref_dialog_title"
+        android:key="cs_url_pref"
+        android:summary="@string/cs_url_pref_summary"
+        android:title="@string/cs_url_pref_title" />
+	</PreferenceCategory>
+    
+    <PreferenceCategory android:title="@string/map_sources" >
+    <ListPreference
+        android:defaultValue="GeoServer"
+        android:dialogTitle="@string/tiles_provider_dialog_title"
+        android:entries="@array/tiles_provider_keys"
+        android:entryValues="@array/tiles_provider_values"
+        android:key="tiles_provider"
+        android:title="@string/tiles_provider" />
+    <EditTextPreference
+        android:defaultValue="http://demo.flossola.org:8080/geoserver/sola/wms"
+        android:dialogTitle="@string/geoserver_url_pref_dialog_title"
+        android:key="geoserver_url_pref"
+        android:summary="@string/geoserver_url_pref_summary"
+        android:title="@string/geoserver_url_pref_title" />
+    <EditTextPreference
+        android:defaultValue="sola:nz_orthophoto"
+        android:dialogTitle="@string/geoserver_layer_pref_dialog_title"
+        android:key="geoserver_layer_pref"
+        android:summary="@string/geoserver_layer_pref_summary"
+        android:title="@string/geoserver_layer_pref_title" />
+    <EditTextPreference
+        android:defaultValue="http://host/path&#63;x=%d&amp;y=%d&amp;z=%d"
+        android:dialogTitle="@string/tms_url_pref_dialog_title"
+        android:key="tms_url_pref"
+        android:summary="@string/tms_url_pref_summary"
+        android:title="@string/tms_url_pref_title" />
+    <EditTextPreference
+        android:defaultValue="http://host/path/%d/%d/%d.jpg"
+        android:dialogTitle="@string/wtms_url_pref_dialog_title"
+        android:key="wtms_url_pref"
+        android:summary="@string/wtms_url_pref_summary"
+        android:title="@string/wtms_url_pref_title" />
+    </PreferenceCategory>
+    
+    <PreferenceCategory android:title="@string/dynamic_form" >
+	    <EditTextPreference
+	        android:defaultValue=""
+	        android:dialogTitle="@string/form_template_url_pref_dialog_title"
+	        android:key="form_template_url_pref"
+	        android:summary="@string/form_template_url_pref_summary"
+	        android:title="@string/form_template_url_pref_title" />
+	</PreferenceCategory>
+    
+    <ListPreference
+        android:defaultValue="default_language"
+        android:dialogTitle="@string/language_dialog_title"
+        android:entries="@array/language_keys"
+        android:entryValues="@array/language_values"
+        android:key="language"
+        android:title="@string/language" />
+    
+	<PreferenceCategory android:title="@string/information" >
+		<EditTextPreference
+		    android:key="software_version_pref"
+		    android:title="@string/software_version_title"
+		    android:enabled="false" 
+		    android:selectable="false"
+		    android:persistent="false"
+		    android:shouldDisableView="false"/>
+	</PreferenceCategory>
+    
+	<PreferenceCategory android:title="@string/advanced_settings" >
+		<SwitchPreference
+		    android:key="form_validation_pref"
+		    android:title="@string/form_validation"
+	        android:defaultValue="true"
+	        android:switchTextOff="@string/form_validation_off"
+	        android:switchTextOn="@string/form_validation_on"
+		    android:summaryOff="@string/change_to_enable_form_validation"
+		    android:summaryOn="@string/change_to_disable_form_validation" />
+			</PreferenceCategory>
+    
+</PreferenceScreen>

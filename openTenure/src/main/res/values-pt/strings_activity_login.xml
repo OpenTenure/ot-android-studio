@@ -1,0 +1,27 @@
+<resources>
+
+    <string name="title_activity_login_activity_test">Login</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_username">Usuário</string>
+    <string name="prompt_password">Senha</string>
+    <string name="action_log_in_register"><b>Login</b></string>
+    <string name="action_sign_in_short">Login</string>
+    <string name="action_forgot_password">Recuperar senha perdida</string>
+    <string name="login_progress_signing_in">Fazendo o login&#8230;</string>
+    <string name="error_invalid_username">Nome de usuário muito curto</string>
+    <string name="error_invalid_password">Senha muito curta</string>
+    <string name="error_incorrect_password">Usuário ou senha incorretos</string>
+    <string name="error_generic_login">Ocorreu um erro durante o login</string>
+    <string name="error_generic_conection">Ocorreu um erro durante a conexão</string>
+    <string name="error_connection">A conexão não está disponível</string>
+    <string name="error_field_required">Este campo é obrigatório</string>
+    <string name="message_login_before">Fazer o login primeiro</string>
+    <string name="message_logout_ok">Você foi desconectado com sucesso</string>
+    <string name="message_login_ok">Você foi conectado com sucesso</string>
+    <string name="message_logout_not_ok">Falha na desconecção</string>
+    <string name="message_logout_error">Erro na desconecção</string>
+    <string name="message_unknowhost_error">Erro de Servidor Desconhecido. Verificar se a rede está disponível</string>
+    <string name="message_timeout_exception">Tempo limite excedido</string>
+
+</resources>

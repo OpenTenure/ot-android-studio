@@ -1,0 +1,12 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item android:id="@+id/action_settings"
+          android:title="@string/action_settings"
+          android:showAsAction="never" />
+     <item android:id="@+id/action_showcase"
+          android:title="@string/action_showcase"
+          android:showAsAction="never" />    
+     <item android:id="@+id/action_export_log"
+          android:title="@string/action_export_log"
+          android:showAsAction="never" />    
+     
+</menu>

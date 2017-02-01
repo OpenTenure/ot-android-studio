@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="title_activity_login_activity_test">تسجيل الدخول</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_username">إسم المستخدم</string>
+    <string name="prompt_password">كلمة المرور</string>
+    <string name="action_log_in_register"><b>تسجيل الدخول</b></string>
+    <string name="action_sign_in_short">تسجيل الدخول</string>
+    <string name="action_forgot_password">إسترجاع كلمة المرور الضائعة</string>
+    <string name="login_progress_signing_in">تسجيل الدخول &#8230;</string>
+    <string name="error_invalid_username">طول إسم المستخدم غير كاف</string>
+    <string name="error_invalid_password">طول كلمة المرور غير كاف</string>
+    <string name="error_incorrect_password">إسم المستخدم أو كلمة المرور غير صحيحة</string>
+    <string name="error_generic_login">حدث خطأ أثناء عملية تسجيل الدخول </string>
+    <string name="error_generic_conection">حدث خطأ أثناء عملية الأتصال</string>
+    <string name="error_connection">الأتصال غير متوفر </string>
+    <string name="error_field_required">هذا الحقل إجباري</string>
+    <string name="message_login_before">سجل الدخول أولا</string>
+    <string name="message_logout_ok">تم تسجيل خروجك بنجاح</string>
+    <string name="message_login_ok">تم تسجيل دخولك بنجاح</string>
+    <string name="message_logout_not_ok">تسجيل الخروج فشلت</string>
+    <string name="message_logout_error">خطأ أثناء تسجيل الخروج</string>
+    <string name="message_unknowhost_error">خطأ غير معروف على الخادم المضيف. هل الشبكة متوفرة؟</string>
+    <string name="message_timeout_exception">خطأ نتيجة نفاذ الوقت </string>
+
+</resources>

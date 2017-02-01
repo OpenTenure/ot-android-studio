@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="action_showcase">View Tutorial</string>
+    <string name="showcase_main_title">What is SOLA Open Tenure ?</string>
+    <string name="showcase_main_message">\n \n 
+        									\n Open Tenure is an open source software app, developed by UN-FAO, for the in-the-field recording of property rights.
+											\n The boundaries of a property can be mapped and property and ownership details can be captured as well as images of
+                                            \n supporting documents and photos of the property.
+											\n Open Tenure is used with a web based community server (such as SOLA Community Server) where existing property details
+                                            \n and map imagery can be downloaded before field capture and new details can be uploaded after field capture.
+
+     </string>
+    <string name="showcase_claim_title">Claim Details</string>
+    <string name="showcase_news_message">\n \n 
+        									The News Tab give you access to the FAO test SOLA Community Server web site where you can review uploaded property
+                                         \n details captured using Open Tenure.
+                                         \n It also provides access to the FLOSS SOLA Open Source Software Community web site where you can find out more about
+                                         \n SOLA open source software solutions</string>
+    
+    <string name="showcase_map_message">\n \n The Community Map Tab gives you access to the Open Tenure map viewer
+                                        
+    </string>
+    <string name="showcase_persons_message">\n
+        									 Shows the list of persons making the claim on behalf of others or themselves
+        									\n \n
+        									 Select one element of the list to edit details about the person  
+                                            \n including  name, date of birth, gender, ID details and photo
+											\n \n ....or.... 
+    </string>
+    <string name="showcase_claims_message">\n The List of Claims Tab displays a list of property claims that have been downloaded or recorded on your device along with their status
+                                           \n \n Status Types:
+                                           \n   •   L - Lodged
+                                           \n   •   U - Uploaded/Unmoderated
+                                           \n   *   C - Challenged
+                                           \n   •   M - Moderated
+                                           \n   •   R - Rejected
+                                           \n   •   W - Withdrawn
+    </string>
+    <string name="showcase_claim_select_message"> \n \n \n
+        										 Select a claim from the list to view or edit its details and map the property
+ 										      \n \n Use the blue Arrow Icon to upload a claim to the Community Server
+										      \n \n Use the red X Icon to remove a claim from the list locally
+    </string>
+    
+    <string name="showcase_claim_message"> \n Describe a property claim by entering details through a series of tabs
+                                           \n The first 6 tabs are fixed format tabs for describing LADM/STDM characterics.
+                                           \n The last 2 tabs are dynamic and the contents of these tabs are defined using the SOLA Web Admin application.
+                                           \n \n The Claim Tab has these fields:
+                                           \n* "Claim name" being the name or identifier that the property is commonly known as
+                                           \n* "Claim type" being the (LADM or SOLA extenstion) primary right for the property
+                                           \n* "Land Use" being the (SOLA extension) current primary land use for the property
+                                           \n* "Date claim applies from" being the date the primary right was first known to exist
+                                           \n* "Notes" being any additional details considered appropriate by the Community Recorder
+                                           \n \n At the bottom of the form are two buttons:
+                                           \n* "Add (or Modify) Claimant" to record the owner(s) of the property
+                                           \n* "Select Claim to Challenge" in the case of a property claim that is disputed and a challenge has been recorded. This allows that challenge to be linked to a previous property claim
+     </string>
+    
+    <string name="showcase_claim_map_message">\n \n Allows you to define the boundaries of the property claim using the map imagery as the base map for a reference
+                                             and, where necessary, the GPS position from the mobile device\'s built-in GPS.
+                                        	  \n \n Once all the boundaries have been defined, a map of the property claim can be generated and added as a supporting document to the property claim
+    </string>
+    
+    <string name="showcase_claim_mapdraw_message">\n \n A Long Press on the map creates a new boundary corner
+        										  \n \n A (light) Tap on a boundary corner puts that boundary corner in Edit Mode
+                                                  \n Edit Mode operations are:
+                                                  \n* the white X icon deletes the selected boundary corner
+                                                  \n* the white Compass icon provides precise spatial editing.Arrows in each cardinal direction display.
+                                                  \n Use these arrows for precise definition of boundary corners and then the white Dot icon when boundary corner is satisfactorily defined
+                                                  \n* the white Circle with a Diagonal icon exits Edit Mode
+                                           		  \n \n Long press on an existing marker to drag it around
+                                                  \n \n Open Tenure can snap to existing boundary corners or onto existing boundary lines
+    </string>
+    <string name="showcase_claim_document_message">\n \n \n 
+        										  Displays a list of documents attached to the property claim
+         										   \n \n 
+         										  A document can be selected from the list to view its details
+                                                  \n The red X icon deletes the document from the property claim
+         										    
+        										 
+        	                                        
+    </string>
+    <string name="showcase_claim_documentAttach_message">\n \n \n 
+        										  The Paperclip icon allows you to attach an existing file that has previously been stored on your device
+        										   \n \n
+        										  The Camera icon activates the camera on your device so that you can take a photo and for that image
+                                                  /n to be attached to the property claim
+        										    
+         										  
+        	                                        
+    </string>
+    
+    <string name="showcase_claim_adjacencies_message">\n \n \n 
+        										  Record the owner or property name of adjacent properties according to their location relative
+                                                  \n to the property claim being recorded (ie north, south, east and west)
+         										   \n \n 
+         										  Where there are adjacient property claims recorded by Open Tenure, these property claims will automatically be displayed as adjacent.
+         										  
+        										 
+        	                                        
+    </string>
+    
+    <string name="showcase_claim_challenges_message">\n \n \n 
+        										  Displays a list of any challenges made against this property claim
+                                                  \n \n To look at the details of a challenge, note the name of the challenged property or the claimant
+                                                  and search for it using one of those names in the List of Claims tab
+        										    
+    </string>
+    
+    <string name="showcase_claim_shares_message">
+        										  Lists the ownership shares recorded for the property claim
+         										   \n (Open Tenure assumes a simple (100 percent) ownership in the name of the claimant and this
+                                                    is what will be initially seen in this list. This simple 100 percent share arrangement can be modified using the following mechanisms)
+                                                    
+         										  \n A share can be selected from the list to look at the owner(s) associated with that share and to change the owner details or add
+                                                  further owners for the share
+                                                  
+												  \n The counter control allows the percentage associated with the share to be changed
+                                                  
+                                                  \n The red X icon allows a share to be deleted
+                                
+												  \n The green + icon allows you to add a new share to record a more complex ownership arrangement for the property claim
+                                                  
+                                                  \n Open Tenure will not allow you to record an ownership share arrangement that does not total 100 percent
+        										 
+        	                                        
+    </string>
+    <string name="showcase_actionNews_message"> \n \n The White Triangle enclosing an exclamation mark icon displays when Open Tenure is run for the first time. This function
+                                                \n must be used then to initialise Open Tenure for use with a particular Community Server
+                                                \n \n The Logon icon gives you access to the Community Server once you have entered your user name and password
+                                                \n (obtained by registering on the Community Server website)
+                                                \n \n The Lock icon encrypts the data captured using Open Tenure for when this data is submitted by email
+        										\n \n The List icon gives access to:
+        										\n• "Settings" to define the url values and map layer for the Community Server, Geoserver (map imagery) and survey form
+												\n•  "View Tutorial" to re-visit this tutorial
+           
+    </string>
+    <string name="showcase_actionMap_message"> \n Community Map Tab Icons:
+                                               \n* the File Download icon only displays when you are zoomed in at near maximum scale and starts the download of map imagery tiles
+                                               \n from the Geoserver imagery for the area currently displayed in the Open Tenure map viewer
+                                               \n* the Logon icon to display logon form (you must first register as a user on the Community Server)
+                                               \n* the (folded) Map icon centres the Open Tenure map display on the community\'s defined area of interest
+                                               \n* the Bulls-Eye target icon centres the Open Tenure map display on your current location
+        								  	   \n* the cloud Download icon starts the download of property claims details from the Community Server for the area currently
+                                               \n  displayed in the Open Tenure map viewer
+        									   \n* the List icon presents the Open Tenure base map layer options available for selection
+    </string>
+    <string name="showcase_actionPersons_message"> \n Click on the + icon to add a new person or group and record the applicable details:
+                                                \n \n Person
+                                                \n* "First name" (mandatory) - record first names
+                                                \n* "Last name" (mandatory) - family name
+                                                \n* "Date of birth" (mandatory) - use date control or enter manually in format YYYY-MM-DD
+                                                \n* "Gender" (mandatory)
+                                                \n* "ID Type " select value from list
+                                                \n* "ID Number" record from ID document
+                                                \n* "Postal Address"
+                                                \n* "Email Address" - this email address is where automated messages concerning the property claim will be sent
+                                                \n* "Mobile phone number"
+                                                \n* "Contact phone number"
+                                                \n \n Group
+                                                \n* "First name" (mandatory) - name of the group
+                                                \n* "Date of Establishment" (mandatory) - use date control or enter manually in format YYYY-MM-DD
+                                                \n* "ID Number" - may not exisit but for legally recognised entities, like companies, record their registration number
+                                                \n* "Postal Address"
+                                                \n* "Email Address" - this email address is where automated messages concerning the property claim will be sent
+                                                \n* "Mobile phone number"
+                                                \n* "Contact phone number"
+                                                
+                                                
+    </string>
+    <string name="showcase_actionClaims_message"> \n \n The Flag Person icon to record a new property claim
+                                                  \n \n The Logon icon to display the logon form that will then allow you to upload completed property claims
+                                                  \n \n The List icon gives access to:
+                                                  \n• "Settings" to define the url values and map layer for the Community Server, Geoserver (map imagery) and survey form
+                                                  \n•  "View Tutorial" to re-visit this tutorial
+                                                  \n•  "Backup local data" to backup property claim data recorded on your device
+    </string>
+    
+    <string name="showcase_actionClaimDetails_message"> \n \n  The Save icon saves all data describing this claim
+                                                        \n \n  The Export icon creates a compressed zip file of the claim (for emailing to the community server)
+                                                        \n once the property claim has been completely recorded and saved
+        												\n \n  The Print icon creates a summary of the property claim details
+                                                        \n once property claim has been mapped and property claim has been saved.
+                                                        \n \n The List icon contains a menu option of View Tutorial to re-visit this tutorial
+</string>
+    <string name="showcase_actionClaimMap_message"> \n \n  The wrench icon allows you to switch between different map editing modes such as: adding markers to the main boundary, adding
+                                                     markers which are not part of the main boundary or measuring the distance between markers.
+         											\n \n  The green + icon creates a new boundary corner at the current position as determined by the device\'s built-in GPS.
+                                                     Because of the accuracy constraints of the built-in GPS, this boundary corner should be repositioned (use a Long Press action on the map display)
+                                                     relative to the map imagery if the boundary position is clear on the map imagery. In such situations, Open Tenure records both
+                                                    the GPS position and the map imagery position.
+                                                    \n \n The white Rotate icon rotates the map and displays the device\'s compass. To stop the Rotate function, use the
+                                                      white Circle with a Diagonal icon. A two finger swirl motion will also rotate the map. Useful for in-the-field orientation
+        										    \n  The Bullseye Target icon centres the map on your current position (as determined by built-in GPS)
+        										    \n \n  The Device icon generates a map based on the current map display and automatically attaches this as a supporting
+                                                     document to the property claim. In the case of a previous map being stored as a supporting document it replaces the older map.
+    </string>
+    
+    
+    <string name="showcase_actionAlert1_message"> \n \n  You must now initialize the application.
+        
+    </string>
+    <string name="showcase_actionAlert_message"> \n   This icon initialises Open Tenure by configuring it for use with the test SOLA Community Server.
+                                                  \n  When you need to connect to the community server for your community you will need to clear any
+                                                  \n Open Tenure data on your device, change the url settings for the community server and re-initialise.
+                                                  \n \n  These steps are:
+                                                  \n  1) Using Android Settings - Apps - Open Tenure. Click on the Clear data button
+                                                  \n  2) Change the url values in Settings menu option available from the List of Claims Tab on the initial main Open Tenure form
+                                                  \n  3) Use the Triangle icon to (re) Initialise Open Tenure (available from the News Tab on the initial main Open Tenure form)
+    </string>
+    
+    <string name="showcase_end_message">\n \n 
+        									..and now..
+											\n \n Please try using Open Tenure. If you have any suggestions or you come across any issues
+                                            \n please contact us (neil.pullar@fao.org)
+											\n\n You can view this tutorial again at any time selecting "View Tutorial" from the List - View Tutorial menu option.
+     </string>
+    
+    
+    <string name="next">Next</string>
+    <string name="close">Close</string>
+    <string name="skip">Skip</string>
+    <string name="ok">OK</string>
+    
+</resources>

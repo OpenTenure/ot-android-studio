@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/light_background_opentenure"
+    android:orientation="vertical"
+    android:padding="10dp" >
+
+        <TextView
+            android:id="@+id/url"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/item_color"
+            android:gravity="left|center"
+            android:text="@string/title_item" />
+
+        <TextView
+            android:id="@+id/news_slogan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/item_color"
+            android:gravity="left|center"
+            android:text="@string/title_item" />
+</LinearLayout>

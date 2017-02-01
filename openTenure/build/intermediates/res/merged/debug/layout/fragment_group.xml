@@ -1,0 +1,184 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/fragment_person"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_weight="1"
+    android:background="@color/light_background_opentenure"
+    android:baselineAligned="false"
+    android:orientation="horizontal"
+    android:paddingBottom="10dp"
+    android:paddingEnd="16dp"
+    android:paddingStart="16dp" >
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:background="@color/light_background_opentenure"
+        android:gravity="top"
+        android:orientation="vertical"
+        android:textAppearance="?android:attr/textAppearanceMedium" >
+
+        <TextView
+            android:id="@+id/first_name_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="bottom"
+            android:paddingBottom="8dp"
+            android:text="@string/group_name"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <EditText
+            android:id="@+id/first_name_input_field"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.65"
+            android:background="@android:color/white"
+            android:hint="@string/group_name"
+            android:inputType="text"
+            android:textAppearance="?android:attr/textAppearanceMedium" >
+        </EditText>
+
+        <TextView
+            android:id="@+id/date_of_establishment_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.67"
+            android:gravity="bottom"
+            android:paddingBottom="8dp"
+            android:text="@string/date_of_establishment_label"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <EditText
+            android:id="@+id/date_of_establishment_input_field"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.65"
+            android:background="@android:color/white"
+            android:hint="@string/date_of_start"
+            android:inputType="date"
+            android:textAppearance="?android:attr/textAppearanceMedium" >
+        </EditText>
+
+        <TextView
+            android:id="@+id/id_number_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.65"
+            android:gravity="bottom"
+            android:paddingBottom="8dp"
+            android:text="@string/id_number"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <EditText
+            android:id="@+id/id_number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.65"
+            android:background="@android:color/white"
+            android:ems="10"
+            android:hint="@string/id_number"
+            android:inputType="text"
+            android:textAppearance="?android:attr/textAppearanceMedium" >
+        </EditText>
+
+        <TextView
+            android:id="@+id/postal_address_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.67"
+            android:gravity="bottom"
+            android:paddingBottom="8dp"
+            android:text="@string/postal_address"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <EditText
+            android:id="@+id/postal_address_input_field"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.65"
+            android:background="@android:color/white"
+            android:hint="@string/postal_address"
+            android:inputType="textPostalAddress" >
+        </EditText>
+
+        <TextView
+            android:id="@+id/email_address_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.72"
+            android:gravity="bottom"
+            android:paddingBottom="8dp"
+            android:text="@string/email_address"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <EditText
+            android:id="@+id/email_address_input_field"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.65"
+            android:background="@android:color/white"
+            android:hint="@string/email_address"
+            android:inputType="textEmailAddress"
+            android:textAppearance="?android:attr/textAppearanceMedium" >
+        </EditText>
+
+        <TextView
+            android:id="@+id/contact_phone_number_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.65"
+            android:gravity="bottom"
+            android:paddingBottom="8dp"
+            android:text="@string/contact_phone_number"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <EditText
+            android:id="@+id/contact_phone_number_input_field"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.65"
+            android:background="@android:color/white"
+            android:hint="@string/contact_phone_number"
+            android:inputType="phone"
+            android:textAppearance="?android:attr/textAppearanceMedium" >
+        </EditText>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="0.27"
+        android:background="@color/light_background_opentenure"
+        android:orientation="vertical"
+        android:paddingEnd="10dp"
+        android:paddingStart="10dp"
+        android:paddingTop="10dp" >
+
+        <ImageView
+            android:id="@+id/claimant_picture"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|top"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/claimant_picture"
+            android:src="@drawable/ic_contact_picture" />
+        <Button
+            android:id="@+id/fake_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="15dp"
+            android:text="@string/action_to_group"
+            android:visibility="invisible" />
+
+        <Button
+            android:id="@+id/change_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:paddingTop="15dp"
+            android:text="@string/action_to_group" />
+    </LinearLayout>
+
+</LinearLayout>

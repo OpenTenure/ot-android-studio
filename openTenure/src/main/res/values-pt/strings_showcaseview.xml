@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="action_showcase">Ver Tutorial</string>
+    <string name="showcase_main_title">O que é o SOLA Open Tenure?</string>
+    <string name="showcase_main_message">\n \n 
+        									\n Open Tenure é um aplicativo de código aberto, desenvolvido pela ONU-FAO, para o registro em campo dos direitos de propriedade.
+											\n Os limites de uma propriedade podem ser mapeados e os seus dados podem ser capturados, bem como imagens de 
+                                            \n documentos e fotos da propriedade.
+											\n Open Tenure é usado com base no servidor da comunidade (como o Servidor da Comunidade SOLA) onde dados de propriedades já existentes 
+                                            \n e imagens de mapa podem ser baixadas antes da caputura de campo e os novos dados podem ser enviados após a captura de campo.
+
+     </string>
+    <string name="showcase_claim_title">Dados do Requerimento</string>
+    <string name="showcase_news_message">\n \n 
+        									A Guia Novos dará acesso ao site de teste do Servidor da Comunidade SOLA, da FAO onde você poderá revisar os dados da propriedade
+                                         \n capturados usando o Open Tenure.
+                                         \n Também é possível acessar o site da Comunidade de Software de Código Aberto FLOSS SOLA onde poderá saber mais sobre
+                                         \n as soluções de código aberto SOLA</string>
+    
+    <string name="showcase_map_message">\n \n A Guia Mapa da Comunidade dará acesso ao visualizador Open Tenure de mapas
+                                        
+    </string>
+    <string name="showcase_persons_message">\n
+        									 Mostra a lista de pessoas que estão fazendo o requerimento em nome de outros ou de si próprios
+        									\n \n
+        									 Selecione um dos elementos da lista para editar os dados da pessoa  
+                                            \n incluindo nome, data de nascimento, sexo, dados de identificação e foto
+											\n \n ....ou.... 
+    </string>
+    <string name="showcase_claims_message">\n A Guia com a Lista de Requerimentos mostra a lista de propriedades questionadas que foram baixadas ou gravadas no seu dispositivo com o seu estado
+                                           \n \n Tipos de Estado:
+                                           \n   •   A - Apresentado
+                                           \n   •   C - Carregado/Não Moderado
+                                           \n   *   Q - Questionado
+                                           \n   •   M - Moderado
+                                           \n   •   E - Excluido
+                                           \n   •   R - Retirado
+    </string>
+    <string name="showcase_claim_select_message"> \n \n \n
+        										 Selecione um requerimento da lista para visualizar ou editar os dados e mapear a propriedade
+ 										      \n \n Use o ícone da Seta na cor azul para subir o requerimento ao Servidor da Comunidade
+										      \n \n Use o ícone X na cor vermelha para remover o requerimento da lista localmente
+    </string>
+    
+    <string name="showcase_claim_message"> \n Descreva o requerimento da propriedade inserindo os dados através das guias apresentadas
+                                           \n As 6 primeiras guias possuem um formato fixo para descrever as características LADM/STDM.
+                                           \n As 2 últimas guias são dinâmicas e o seu conteúdo é definido usando o aplicativo SOLA Web Admin.
+                                           \n \n A Guia Requerimento tem os campos:
+                                           \n* "Nome do Requerimento" nome ou identificador pelo qual a propriedade é conhecida
+                                           \n* "Tipo de Requerimento" (LADM ou extensão SOLA) direito fundamental da propriedade
+                                           \n* "Uso da Terra" (extensão SOLA) uso primário corrente da propriedade
+                                           \n* "Data do requerimento se aplica a partir de" data do primeiro direito fundamental conhecido
+                                           \n* "Notas" dados adicionais considerados apropriados pelo Usuário Registrado da Comunidade
+                                           \n \n Na parte inferior do formulário existem dois botões:
+                                           \n* "Adicionar (ou Modificar) Requerente" para registrar o proprietário(s) da propriedade
+                                           \n* "Selecionar Requerimento para Questionar" no caso de um requerimento de propriedade que é disputado e o questionamento registrado. Isto permite que o questionamento seja vinculado a um requerimento de propriedade prévio
+     </string>
+    
+    <string name="showcase_claim_map_message">\n \n Permite que você define os limites da propriedade requerida usando a imagem do mapa com base para a referência
+                                             e, quando necessário, o GPS do dispositivo móvel para encontrar a localização.
+                                        	  \n \n Quando os limites forem definidos, um mapa da propriedade requerida pode ser gerado e adicionado como documento de apoio para o requerimento
+    </string>
+    
+    <string name="showcase_claim_mapdraw_message">\n \n Pressionando o mapa por um tempo, permite a criação de uma novo canto de fronteira 
+        										  \n \n Um (leve) toque no canto da fronteira é acionado o Modo Editar
+                                                  \n As operações do Modo Editar são:
+                                                  \n* o ícone X com cor branca deleta o canto da fronteira selecionado
+                                                  \n* o ícone da Bússola na cor branca fornece uma edição espacial precisa.Setas em cada direção cardeal são exibidas.
+                                                  \n Use estas setas para precisar a definição dos cantos da fronteira e depois use o ícone de Ponto de cor branca quando o canto da fronteiro for satisfatoriamente definido
+                                                  \n* o Circulo branco com uma Diagonal sai do Modo de Edição
+                                           		  \n \n Pressione por um momento um marcador para arrastá-lo
+                                                  \n \n Open Tenure pode encaixar os cantos da fronteira em linhas de fronteiras existentes
+    </string>
+    <string name="showcase_claim_document_message">\n \n \n 
+        										  Mostra a lista de documentos anexados ao requerimento da propriedade
+         										   \n \n 
+         										  O documento pode ser selecionado de uma lista para possibilitar a visualização dos seus dados
+                                                  \n O ícone X na cor vermelha deleta os documentos do requerimento da propriedade
+         										          										 
+        	                                        
+    </string>
+    <string name="showcase_claim_documentAttach_message">\n \n \n 
+        										  O ícone do Clips permite anexar um arquivo que foi previamente guardado no seu dispositivo
+        										   \n \n
+        										  O ícone da Câmera ativa a câmara do seu dispositivo permitindo que possa fotografar e que a imagem
+                                                  /n seja anexada ao requerimento da propriedade
+        										    
+         										  
+        	                                        
+    </string>
+    
+    <string name="showcase_claim_adjacencies_message">\n \n \n 
+        										  Grave o proprietário ou nome das propriedades adjacentes de acordo com sua localização em relação a
+                                                  \n propriedade que o requerimento está sendo registrado (ou seja, norte, sul, leste e oeste)
+         										   \n \n 
+         										  Onde há propriedades adjacentes com requerimentos cadastrado pelo Open Tenure, estas serão automaticamente mostradas como adjacentes.
+         										  
+        										 
+        	                                        
+    </string>
+    
+    <string name="showcase_claim_challenges_message">\n \n \n 
+        										  Mostra a lista de todos os questionamentos feitos no requerimento da propriedade
+                                                  \n \n Para ver os detalhes dos questionamentos, anote o nome da propriedade questionada ou o requerente
+                                                  e localize-a usando um destes nomes na guia Lista de Requerimentos
+        										    
+    </string>
+    
+    <string name="showcase_claim_shares_message">
+        										  Lista as divisões da propriedade registrada pra o requerimento da propriedade
+         										   \n (Open Tenure assume uma propriedade simples (100 porcento) em nome do requerente e isto
+                                                    é o que será visualizado inicialmente nesta lista. Esta disposição de participação 100 porcento pode ser modificada utilizando os seguintes mecanismos)
+                                                    
+         										  \n A divisão pode ser selecionada a partir da lista para localizar o proprietário(s) associados à esta e, para modificar os dados do proprietário ou adicionar
+                                                  novos proprietários à divisão
+                                                  
+												  \n O controle do contador permite que a percentagem associada à divisão seja modificada
+                                                  
+                                                  \n O ícone X na cor vermelha permite que uma divisão seja deletada
+                                
+												  \n O ícone + na cor verde permite que sejam adicionadas novas divisões para gravar um arranjo mais complexo de propriedade no seu requerimento
+                                                  
+                                                  \n Open Tenure não permite que sejam gravadas propriedades onde o total das divisões não some 100 porcento
+        										 
+        	                                        
+    </string>
+    <string name="showcase_actionNews_message"> \n \n O ícone do Triângulo Branco com uma exclamação é mostrado quando o Open Tenure é executado pela primeira vez. Esta função
+                                                \n deve ser usada assim que o Open Tenure for inicializado usando o próprio Servidor da Comunidade
+                                                \n \n O ícone de login dará acesso ao Servidor da Comunidade uma vez que você tenha introduzido o usuário e a senha
+                                                \n (obtido através do registro no site do Servidor da Comunidade)
+                                                \n \n O ícone do Cadeado criptografa os dados capturados usando o Open Tenure quando estes forem enviado por e-mail
+        										\n \n O ícone Lista dará acesso a:
+        										\n• "Configurações" para definir os valores de url e camada do mapa para o Servidor da Comunidade, Geoserver (imagem do mapa) e formulário de levantamento
+												\n•  "Visualizar Tutorial" para re-visitar este tutorial
+           
+    </string>
+    <string name="showcase_actionMap_message"> \n Guia de ícones do Mapa da Comunidade:
+                                               \n* O ícone de Baixar Arquivo só aparece quando o zoom está próximo da escala máxima e inicia o download dos pedaços da imagem do mapa
+                                               \n a partir da imagem do Geoserver da área que está sendo exibida no visualizar de mapa do Open Tenure
+                                               \n* O ícone de inicio de sessão para mostrar o formulário de login (é preciso primeiramente está registrado como usuário no Servidor da Comunidade)
+                                               \n* o ícone do Mapa (dobrado) centraliza o mapa da comunidade\'s exibido pelo Open Tenure definido como área de interesse
+                                               \n* o ícone do Alvo centraliza o mapa exibido pelo Open Tenure na sua localização atual
+        								  	   \n* o ícone de Download da nuvem inicia o carregamento dos dados dos requerimentos da propriedade do Servidor da Comunidade da área que está sendo atualmente
+                                               \n  mostrada no visualizador de mapa do Open Tenure
+        									   \n* o ícone Lista apresenta as opções de camada do mapa básico do Open Tenure disponíveis para seleção
+    </string>
+    <string name="showcase_actionPersons_message"> \n Cique no ícone + para adicionar uma nova pessoa ou grupo e gravar os dados que se aplicam:
+                                                \n \n Pessoa
+                                                \n* "Nome" (obrigatório) - nome(s) do registro
+                                                \n* "Sobrenome" (obrigatório) - nome de família
+                                                \n* "Data de nascimento" (obrigatório) - use o controle de data ou insira manualmente no formato AAAA-MM-DD
+                                                \n* "Sexo" (obrigatório)
+                                                \n* "Tipo de Identificação" selecionar valor na lista
+                                                \n* "Número de Identificação" registrado no documento de Identificação
+                                                \n* "Endereço Postal"
+                                                \n* "E-mail" - este e-mail será utilizado para o envio de mensagens automáticas relativas ao requerimento da propriedade
+                                                \n* "Número de celular"
+                                                \n* "Telefone de contato"
+                                                \n \n Grupo
+                                                \n* "Nome" (obrigatório) - nome do grupo
+                                                \n* "Data de Estabelecimento" (obrigatório) - use o controle de data ou insira manualmente no formato AAAA-MM-DD
+                                                \n* "Número de Identificação" - pode não haver mas para entidades legalmente reconhecidas, como empresas, gravar o seu número de registro
+                                                \n* "Endereço Postal"
+                                                \n* "E-mail" - este e-mail será utilizado para o envio de mensagens automáticas relativas ao requerimento da propriedade
+                                                \n* "Número de celular"
+                                                \n* "Telefone de contato"
+                                                
+                                                
+    </string>
+    <string name="showcase_actionClaims_message"> \n \n O ícone da Pessoa com Bandeira grava um novo requerimento de propriedade
+                                                  \n \n O ícone de inicio de sessão para mostrar o formulário de login que permitirá subir os requerimentos das propriedade concluidos
+                                                  \n \n O ícone Lista dará acesso a:
+                                                  \n•  "Configurações" para definir os valores de url e camada do mapa para o Servidor da Comunidade, Geoserver (imagem do mapa) e formulário de levantamento
+                                                  \n•  "Visualizar Tutorial" para re-visitar este tutorial
+                                                  \n•  "Backup de dados locais" para realizar o backup dos dados dos requerimentos das propriedade gravados no dispositivo
+    </string>
+    
+    <string name="showcase_actionClaimDetails_message"> \n \n  O ícone Salvar salva todos os dados que descrevem este requerimento
+                                                        \n \n  O ícone Exportar cria um arquivo zip compactado do requerimento (será enviado por e-mail para o servidor da comunidade)
+                                                        \n quando o requerimento da propriedade for concluido e salvo
+        												\n \n  O ícone Imprimir cria um resumo dos dados do requerimento da propriedade
+                                                        \n quando o requerimento da propriedade foi mapeado e salvo.
+                                                        \n \n O ícone Lista contém um menu com a opção Visualizar Tutorial para re-visitar este tutorial
+</string>
+    <string name="showcase_actionClaimMap_message"> \n \n  O ícone + na cor verde cria uma nova esquina na fronteira na posição atual determinada pelo dispositivo\'s do GPS integrado.
+                                                     Devido às limitações de precisão do GPS integrado, este canto de fronteira deve ser reposicionado (pressionar por um tempo no mapa exibido)
+                                                     em relação à imagem do mapa se a posição da fronteira é clara na imagem do mapa. Nestas situações, o Open Tenure grava
+                                                    a posição do GPS e a posição da imagem do mapa.
+                                                    \n \n O ícone de Giro na cor branca faz a rotação do mapa e exibe a bússola. Para parar a função Rotar, use o
+                                                      o ícone do Circulo branco com uma Diagonal. Um momevimento com os dois dedos também realizará a rotação do mapa. Útil para orientação no campo
+        										    \n   O ícone do Alvo centraliza o mapa na sua localização atual (conforme determinado pelo GPS integrado)
+        										    \n \n  O ícone do Dispositivo gera um mapa com base na apresentação do mapa atual e automaticamente o anexa como um documento de 
+                                                     de apoio ao requerimento da propriedade. No caso de um mapa anterior ter sido armazenado como um documento de apoio, este substituirá o mapa antigo.
+    </string>
+    
+    
+    <string name="showcase_actionAlert1_message"> \n \n  Agora o aplicativo deve ser iniciado. 
+        
+    </string>
+    <string name="showcase_actionAlert_message"> \n   Este ícone inicializa o Open Tenure, configurando-o para uso com o Servidor da Comunidade SOLA de teste.
+                                                  \n  Quando você precisar se conectar com o servidor da sua comunidade você precisará limpar qualquer
+                                                  \n dado do Open Tenure no seu dispositivo, alterar as configurações de URL para o servidor da comunidade e reinicializar.
+                                                  \n \n  Estes passos são:
+                                                  \n  1) Usando Configurações do Android - Apps - Open Tenure. Clique no botão Limpar dados
+                                                  \n  2) Modificar os valores da url na opção Configurações do menu disponível na Guia da Lista de Requerimentos no inicio do formulário principal do Open Tenure
+                                                  \n  3) Use o ícone Triângulo para (re) Iniciar o Open Tenure (disponível na Guia Novos no inicio do formulário pricipal do Open Tenure)
+    </string>
+    
+    <string name="showcase_end_message">\n \n 
+        									..e agora..
+											\n \n Por favor, tente usar o Open Tenure. Se você tem alguma sugestão ou se encontrar qualquer problema
+                                            \n entre em contato conosco (neil.pullar@fao.org)
+											\n\n Você pode visualizar este tutorial novamente a qualquer momento selecionando "Visualizar Tutorial" na Lista - menu opção Visualizar Tutorial.
+     </string>
+    
+    
+    <string name="next">Próximo</string>
+    <string name="close">Fechar</string>
+    <string name="skip">Saltar</string>
+    <string name="ok">OK</string>
+    
+</resources>

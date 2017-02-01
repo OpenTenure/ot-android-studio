@@ -1,0 +1,15 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" 
+    xmlns:openTenure="http://schemas.android.com/apk/res-auto" >
+    <item android:id="@+id/action_new"
+          android:icon="@android:drawable/ic_input_add"
+          android:title="@string/action_new"
+          android:showAsAction="ifRoom" />
+    <item android:id="@+id/action_save"
+          android:icon="@drawable/save"
+          android:title="@string/action_save"
+          android:showAsAction="ifRoom" />    
+    <item android:id="@+id/action_submit"
+          android:icon="@android:drawable/ic_menu_send"
+          android:title="@string/action_submit"
+          android:showAsAction="ifRoom" />    
+</menu>

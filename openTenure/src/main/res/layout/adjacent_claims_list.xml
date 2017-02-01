@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/adjacent_claims_list"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/light_background_opentenure"
+    android:baselineAligned="false"
+    android:orientation="vertical"
+    android:padding="2dp"
+    android:textSize="20dp" >
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="5dp"
+            android:paddingStart="10dp" >
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="32dp"
+                android:layout_gravity="center_vertical"
+                android:background="@color/dark_background_opentenure"
+                android:text="@string/adjacencies"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@android:color/white"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/north_adjacency_label"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/light_background_opentenure"
+                android:paddingTop="6dp"
+                android:text="@string/north"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textSize="20dp" />
+
+            <EditText
+                android:id="@+id/north_adjacency"
+                android:layout_width="550dp"
+                android:layout_height="wrap_content"
+                android:background="@android:color/white"
+                android:hint="@string/north_adjacency"
+                android:inputType="text"
+                android:paddingStart="4dp"
+                android:paddingTop="4dp"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/south_adjacency_label"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/light_background_opentenure"
+                android:paddingTop="6dp"
+                android:text="@string/south"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textSize="20dp" />
+
+            <EditText
+                android:id="@+id/south_adjacency"
+                android:layout_width="550dp"
+                android:layout_height="wrap_content"
+                android:background="@android:color/white"
+                android:hint="@string/south_adjacency"
+                android:inputType="text"
+                android:paddingStart="4dp"
+                android:paddingTop="4dp"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/east_adjacency_label"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/light_background_opentenure"
+                android:paddingTop="6dp"
+                android:text="@string/east"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textSize="20dp" />
+
+            <EditText
+                android:id="@+id/east_adjacency"
+                android:layout_width="550dp"
+                android:layout_height="wrap_content"
+                android:background="@android:color/white"
+                android:hint="@string/east_adjacency"
+                android:inputType="text"
+                android:paddingStart="4dp"
+                android:paddingTop="4dp"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/west_adjacency_label"
+                android:layout_width="550dp"
+                android:layout_height="wrap_content"
+                android:background="@color/light_background_opentenure"
+                android:paddingTop="6dp"
+                android:text="@string/west"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textSize="20dp" />
+
+            <EditText
+                android:id="@+id/west_adjacency"
+                android:layout_width="550dp"
+                android:layout_height="wrap_content"
+                android:background="@android:color/white"
+                android:hint="@string/west_adjacency"
+                android:inputType="text"
+                android:paddingBottom="4dp"
+                android:paddingStart="4dp"
+                android:paddingTop="4dp"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textSize="20dp" />
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="10dp" >
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="32dp"
+            android:background="@color/dark_background_opentenure"
+            android:text="@string/calculated_adjacencies"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@android:color/white"
+            android:textSize="20dp" />
+    </LinearLayout>
+
+    <ListView
+        android:id="@android:id/list"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/light_background_opentenure"
+        android:drawSelectorOnTop="true"
+        android:paddingStart="10dp" >
+    </ListView>
+
+</LinearLayout>

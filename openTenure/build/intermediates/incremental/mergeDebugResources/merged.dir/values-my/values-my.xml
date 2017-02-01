@@ -1,0 +1,750 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="language_keys">
+        <item>ခမာ</item>
+        <item>အယ်လ်ဗေးနီးယန်း</item>
+        <item>အသင့်သတ်မှတ် ဘာသာစကား</item>
+        </string-array>
+    <string-array name="language_values">
+        <item>khmer_language</item>
+        <item>albanian_language</item>
+        <item>default_language</item>
+        </string-array>
+    <string-array name="share_values">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+        <item>16</item>
+        <item>17</item>
+        <item>18</item>
+        <item>19</item>
+        <item>20</item>
+        <item>21</item>
+        <item>22</item>
+        <item>23</item>
+        <item>24</item>
+        <item>25</item>
+        <item>26</item>
+        <item>27</item>
+        <item>28</item>
+        <item>29</item>
+        <item>30</item>
+        <item>31</item>
+        <item>32</item>
+        <item>33</item>
+        <item>34</item>
+        <item>35</item>
+        <item>36</item>
+        <item>37</item>
+        <item>38</item>
+        <item>39</item>
+        <item>40</item>
+        <item>41</item>
+        <item>42</item>
+        <item>43</item>
+        <item>44</item>
+        <item>45</item>
+        <item>46</item>
+        <item>47</item>
+        <item>48</item>
+        <item>49</item>
+        <item>50</item>
+        <item>51</item>
+        <item>52</item>
+        <item>53</item>
+        <item>54</item>
+        <item>55</item>
+        <item>56</item>
+        <item>57</item>
+        <item>58</item>
+        <item>59</item>
+        <item>60</item>
+        <item>61</item>
+        <item>62</item>
+        <item>63</item>
+        <item>64</item>
+        <item>65</item>
+        <item>66</item>
+        <item>67</item>
+        <item>68</item>
+        <item>69</item>
+        <item>70</item>
+        <item>71</item>
+        <item>72</item>
+        <item>73</item>
+        <item>74</item>
+        <item>75</item>
+        <item>76</item>
+        <item>77</item>
+        <item>78</item>
+        <item>79</item>
+        <item>80</item>
+        <item>81</item>
+        <item>82</item>
+        <item>83</item>
+        <item>84</item>
+        <item>85</item>
+        <item>86</item>
+        <item>87</item>
+        <item>88</item>
+        <item>89</item>
+        <item>90</item>
+        <item>91</item>
+        <item>92</item>
+        <item>93</item>
+        <item>94</item>
+        <item>95</item>
+        <item>96</item>
+        <item>97</item>
+        <item>98</item>
+        <item>99</item>
+        <item>100</item>
+        </string-array>
+    <string-array name="tiles_provider_keys">
+        <item>WTMS</item>
+        <item>TMS</item>
+        <item>GeoServer</item>
+        </string-array>
+    <string-array name="tiles_provider_values">
+        <item>WTMS</item>
+        <item>TMS</item>
+        <item>GeoServer</item>
+        </string-array>
+    <string name="action_add_boundary">နယ်နမိတ်စည်း တည်နေရာ အချက်အလက်ကို ဖြည့်ပါ</string>
+    <string name="action_add_claimant">အဆိုပြုသူ ထပ်ဖြည့်ရန်</string>
+    <string name="action_add_from_gps">GPS အချက်အလက်ကို ဖြည့်ပါ</string>
+    <string name="action_add_non_boundary">နယ်နမိတ်စည်း မဟုတ်သော အမှတ်အသား၏ တည်နေရာ အချက်အလက်ကို ဖြည့်ပါ</string>
+    <string name="action_backup_db">စက်မှ အချက်အလက်များကို အရံ backup အဖြစ် သိမ်းရန်</string>
+    <string name="action_camera">ကင်မရာ</string>
+    <string name="action_center">Center GPS</string>
+    <string name="action_change_map_mode">မြေပုံသုံးရန် ပြောင်းပါ</string>
+    <string name="action_claim_map_snapshot">အဆိုပြုမြေပုံ မှတ်တမ်းပုံကို ပူးတွဲရန်</string>
+    <string name="action_done">လုပ်ဆောင်ပြီးပါပြီ</string>
+    <string name="action_download_claims">မြေယာအဆိုပြုမှုကို download လုပ်ပါ</string>
+    <string name="action_download_file">ဖိုင်ကို download လုပ်ပါ</string>
+    <string name="action_download_tiles">အင်တာနက်မချိတ်ပဲ သုံးရန် ပုံဖိုင်ကို စက်အတွင်းသို့ download လုပ်ရန်</string>
+    <string name="action_export">ထုတ်ယူရန်</string>
+    <string name="action_export_geo">မြေမျက်နှာသွင်ပြင် အချက်အလက် ထုတ်ယူရန်</string>
+    <string name="action_export_log">လော့ဖိုင် ထုတ်ယူရန်</string>
+    <string name="action_forgot_password">စကားဝှက် ပြန်ဖော်ရန်</string>
+    <string name="action_go_to">သို့ သွားရန်</string>
+    <string name="action_import">တင်သွင်းရန်</string>
+    <string name="action_lock_db">အချက်အလက် လုံခြုံရေးဝှက်စာထည့်ရန်  ပုံစံသတ်မှတ်ပါ</string>
+    <string name="action_log_in_register"><b>စနစ်အတွင်းသို့ ဝင်ရန်</b></string>
+    <string name="action_login">စနစ်သို့ဝင်ရန်</string>
+    <string name="action_logout">စနစ်မှထွက်ရန်</string>
+    <string name="action_map">မြေပုံ</string>
+    <string name="action_measure">တိုင်းတာရန်</string>
+    <string name="action_modify_claimant">အဆိုပြုသူ ပြန်ပြင်ရန်</string>
+    <string name="action_new">အသစ်လုပ်ရန်</string>
+    <string name="action_new_additional_info">အချက်အလက် ထပ်ဖြည့်ရန်</string>
+    <string name="action_new_attachment">စာရွက်စာတမ်းအသစ် ပြုလုပ်ရန်</string>
+    <string name="action_new_picture">ပုံအသစ် ထည့်ရန်</string>
+    <string name="action_print">ပုံနှိပ်ရန်</string>
+    <string name="action_remove_additional_info">အချက်အလက် ဖယ်ရှားရန်</string>
+    <string name="action_remove_attachment">ပူးတွဲဖိုင် ဖယ်ရှားရန်</string>
+    <string name="action_remove_claim">အဆိုပြုမှု ဖယ်ရှားရန်</string>
+    <string name="action_remove_owner">ပိုင်ရှင် ဖယ်ရှားရန်</string>
+    <string name="action_remove_section_element">ကဏ္ဍအစိတ်အပိုင်း ဖယ်ရှားရန်</string>
+    <string name="action_rotate">စက်ရဲ့ အိမ်မြောင်သုံးပြီး မြေပုံကို လှည့်ပါ</string>
+    <string name="action_save">သိမ်းရန်</string>
+    <string name="action_search">ရှာရန်</string>
+    <string name="action_select_bookmark">အင်တာနက်လိပ်စာ မှတ်ရန်</string>
+    <string name="action_select_challenge">အဆိုပြုမှုကို အငြင်းပွားမှုအဖြစ် ရွေးရန်</string>
+    <string name="action_settings">အပြင်အဆင်</string>
+    <string name="action_showcase">အသုံးပြုနည်း</string>
+    <string name="action_sign_in_short">စနစ်အတွင်းသို့ ဝင်ရန်</string>
+    <string name="action_stop_rotating">မြေပုံ လှည့်နေခြင်းကို ရပ်ပါ</string>
+    <string name="action_submit">အဆိုပြုရန်</string>
+    <string name="action_to_group">အစုအဖွဲ့အဖြစ် ပြောင်းရန်</string>
+    <string name="action_to_person">လူပုဂ္ဂိုလ်အဖြစ် ပြောင်းရန်</string>
+    <string name="action_view_community_area">ရပ်ရွာဝန်းကျင် ဧရိယာ ကြည့်ရန်</string>
+    <string name="add_description">ရှင်းလင်းဖွင့်ဆိုချက်?</string>
+    <string name="add_key">Key?</string>
+    <string name="add_owner">ပိုင်ရှင် ထည့်ပါ </string>
+    <string name="add_value">တန်ဖိုး?</string>
+    <string name="additional_info">အချက်အလက် ထပ်ဖြည့်ရန်</string>
+    <string name="additional_info_removed">အချက်အလက်အား ဖယ်ထုတ်ပြီး ဖြစ်သည်</string>
+    <string name="adjacencies">ထိစပ်နယ်နိမိတ် ပိုင်ဆိုင်မှုများ</string>
+    <string name="adjacency">ထိစပ်နယ်နိမိတ်</string>
+    <string name="adjacent_claims">ထိစပ်နယ်နမိတ် မြေယာအဆိုပြုမှုများ</string>
+    <string name="adjacent_properties">ထိစပ်နယ်နမိတ် ပိုင်ဆိုင်မှုများ</string>
+    <string name="advanced_settings">အဆင့်မြင့် အပြင်အဆင် (ကျွမ်းကျင်မှုရှိမှ အသုံးပြုပါ)</string>
+    <string name="albanian_language">အယ်ဗေးနီးယန်း</string>
+    <string name="all_tiles_downloaded">download စာရင်းတွင် ပါသော အကွက်များ အားလုံး download ပြီးပါပြီ။</string>
+    <string name="app_name">Open Tenure</string>
+    <string name="attachment_removed">ပူးတွဲဖိုင်အား ဖယ်ထုတ်ပြီး ဖြစ်သည်</string>
+    <string name="attachment_updated">ပူးတွဲဖိုင်အား အဆင့်မြှင့်ပြီး ဖြစ်သည်</string>
+    <string name="burmese_language">Myanmar</string>
+    <string name="by">မှ</string>
+    <string name="calculated_adjacencies">ထိစပ်နယ်နမိတ် မြေယာအဆိုပြုမှုများ</string>
+    <string name="cancel">မလုပ်တော့ပါ</string>
+    <string name="cardinal_direction">အရပ်လေးမျက်နှာ မျှားခေါင်းပုံ ဦးတည်ရာ</string>
+    <string name="challenge_to">ငြင်းခုံမှုကို မည်သူနှင့်</string>
+    <string name="challenged_by">ငြင်းခုံမှုကို မည်သူမှ</string>
+    <string name="change_to_disable_form_validation">ဒိုင်းနမစ်ပုံစံများ သုံးရန် ခွင့်ပြုမှုကို ပိတ်ထားသည်</string>
+    <string name="change_to_enable_form_validation">ဒိုင်းနမစ်ပုံစံများ သုံးရန် ခွင့်ပြုမှုကို ဖွင့်ထားသည်</string>
+    <string name="check_location_service">တည်နေရာပြ အချက်အလက်ကို ဖော်ပြနိုင်ခြင်း မရှိပါ။ စက်၏ အပြင်အဆင် (Settings) နေရာတွင် တည်နေရာပြ ဝန်ဆောင်မှု (Location Service) ဖွင့်မထားလျှင် ဖွင့်ထားပေးပါ။ </string>
+    <string name="choose_file">ဖိုင်ကို ဘယ် အပ်ပလီကေးရှင်းနှင့် ရွေးပေးမလဲ</string>
+    <string name="claim">မြေယာအဆိုပြုမှု</string>
+    <string name="claim_area_label">ဧရိယာ</string>
+    <string name="claim_date">အဆိုပြုသည့် နေ့စွဲ</string>
+    <string name="claim_name">အဆိုပြုသည့် အမည်</string>
+    <string name="claim_name_label">အဆိုပြုသည့် အမည် *</string>
+    <string name="claim_notes">မှတ်စု</string>
+    <string name="claim_type">အဆိုပြုသည့် အမျိုးအစား *</string>
+    <string name="claim_type_no_star">အဆိုပြုသည့် အမျိုးအစား</string>
+    <string name="claimant">အဆိုပြုသူ *</string>
+    <string name="claimant_no_star">အဆိုပြုသူ</string>
+    <string name="claimant_picture">အဆိုပြုသူ ဓာတ်ပုံ</string>
+    <string name="close">ပိတ်ပါ</string>
+    <string name="community_recorder_name">မြေပြင်အချက်အလက် ကောက်ယူသူ အမည်</string>
+    <string name="confirm">အတည်ပြုခြင်း</string>
+    <string name="contact_phone_number">ဆက်သွယ်ရန် ဖုန်းနံပတ်</string>
+    <string name="created">ပြုလုပ်ပြီးပြီ</string>
+    <string name="cs_url_pref_dialog_title">OpenTenure ရပ်ရွာဆာဗာ၏ လိပ်စာ ဖြည့်ပါ</string>
+    <string name="cs_url_pref_summary">OpenTenure ရပ်ရွာဆာဗာ၏ လိပ်စာ</string>
+    <string name="cs_url_pref_title">ရပ်ရွာအဝန်းအဝိုင်း ဆာဗာလိပ်စာ URL</string>
+    <string name="date">နေ့စွဲ</string>
+    <string name="date_of_birth">မွေးနေ့ (YYYY-MM-DD)</string>
+    <string name="date_of_birth_label">မွေးနေ့ * (YYYY-MM-DD)</string>
+    <string name="date_of_birth_simple">မွေးနေ့</string>
+    <string name="date_of_establishment_label">စတင်တည်ထောင်သည့် နေ့စွဲ</string>
+    <string name="date_of_start">YYYY-MM-DD</string>
+    <string name="date_of_start_label">အဆိုပြုမှု စတင်သည့် နေ့စွဲ (YYYY-MM-DD)</string>
+    <string name="date_of_start_label_print">အဆိုပြုမှု စတင်သည့် နေ့စွဲ</string>
+    <string name="default_claim_name">အဆိုပြုမှု အသစ်</string>
+    <string name="default_language">အသင့်သတ်မှတ် ဘာသာစကား</string>
+    <string name="delete_locally">စက်အတွင်း ဖျက်မည်</string>
+    <string name="deleted">ဖျက်ပြီးပြီ</string>
+    <string name="description">ရှင်းလင်းဖွင့်ဆိုချက်</string>
+    <string name="down">အောက်ဖက်</string>
+    <string name="download_failed">download ဆွဲချမှု မအောင်မြင်ပါ</string>
+    <string name="download_incomplete">download ဆွဲချမှု မပြီးသေးပါ</string>
+    <string name="downloading">downloading ဆွဲချနေသည်</string>
+    <string name="draggable_marker">ဖိပြီးဆွဲနိုင်သော တည်နေရာအမှတ်အသား</string>
+    <string name="dynamic_form">ဒိုင်းနမစ် ပုံစံ</string>
+    <string name="east">အရှေ့</string>
+    <string name="east_adjacency">အဆိုပြုမှု အရှေ့ဖက်တွင်ရှိသော ပိုင်ဆိုင်မှုများကို ရေးသားပါ</string>
+    <string name="email_address">အီးမေးလ်လိပ်စာ</string>
+    <string name="error_connection">အင်တာနက် ဆက်သွယ်၍ မရပါ</string>
+    <string name="error_field_required">ယခု အကွက်ကို ဖြည့်ရန် လိုအပ်သည်</string>
+    <string name="error_generic_conection">အင်တာနက် ချိတ်ဆက်နေစဉ် မှားယွင်းမှု တခု ရှိသည် </string>
+    <string name="error_generic_login">စနစ်အတွင်းသို့ ဝင်စဉ် မှားယွင်းမှု တခု ရှိသည် </string>
+    <string name="error_incorrect_password">အဖွဲ့ဝင်အမည် သို့မဟုတ် စကားဝှက် စာသား မှားနေသည်</string>
+    <string name="error_invalid_password">စကားဝှက် စာသား တိုလွန်းသည်</string>
+    <string name="error_invalid_username">အဖွဲ့ဝင်အမည် စာသား တိုလွန်းသည်</string>
+    <string name="first_name">ပထမအမည်</string>
+    <string name="first_name_label">ပထမအမည် *</string>
+    <string name="form_template_url_pref_dialog_title">အချက်အလက်ကောက်ခံခြင်းပုံစံ URL ကို ဖြည့်ပါ</string>
+    <string name="form_template_url_pref_summary">အချက်အလက်ကောက်ယူခြင်းပုံစံ URL</string>
+    <string name="form_template_url_pref_title">URL ပုံစံ</string>
+    <string name="form_validation">ဒိုင်းနမစ်ံပုံစံများ သုံးရန် အတည်ပြုခြင်း</string>
+    <string name="form_validation_off">ပိတ်</string>
+    <string name="form_validation_on">ဖွင့်</string>
+    <string name="gender">ကျားမ အမျိုးအစား *</string>
+    <string name="gender_feminine">မ</string>
+    <string name="gender_masculine">ကျား</string>
+    <string name="general">အထွေထွေ</string>
+    <string name="generated_on"> တွင် ပြုလုပ်သည်</string>
+    <string name="geoserver_layer_pref_dialog_title">WMS အလွှာရဲ့ အမည်ကို ဖြည့်ပါ</string>
+    <string name="geoserver_layer_pref_summary">GeoServer မှ WMS အလွှာကို ထုတ်ယူရန် (ဆာဗာ ထိန်းသိမ်းသူ တာဝန်ခံကို ဆက်သွယ်ပါ)</string>
+    <string name="geoserver_layer_pref_title">GeoServer အလွှာ</string>
+    <string name="geoserver_tiles_provider">GeoServer Tiles အင်တာနက် မြေပုံဝန်ဆောင်မှု</string>
+    <string name="geoserver_tiles_provider_key">GeoServer</string>
+    <string name="geoserver_url_pref_dialog_title">GeoServer ၏ လိပ်စာ URL ကို ဖြည့်ပါ</string>
+    <string name="geoserver_url_pref_summary">အသုံးပြုမည့် GeoServer အင်တာနက် မြေပုံ ဝန်ဆောင်မှု၏ Base URL</string>
+    <string name="geoserver_url_pref_title">GeoServer URL</string>
+    <string name="group">အစုအဖွဲ့</string>
+    <string name="group_name">အမည်</string>
+    <string name="hint_type_to_filter">စာလုံး တလုံးနှစ်လုံး ရိုက်ထည့်ပြီး လိုချင်တဲ့ အကြောင်းအရာကို စစ်ထုတ်ပါ</string>
+    <string name="id_number">သက်သေခံလက်မှတ် အမှတ်</string>
+    <string name="id_type">သက်သေခံလက်မှတ် အမျိုးအစား</string>
+    <string name="information">အချက်အလက်</string>
+    <string name="insert_claim_notes">ယခု မြေယာအဆိုပြုမှုနှင့် ပတ်သက်သော ထပ်မံထည့်သွင်းလိုသော အချက်များအား ရေးသားပါ</string>
+    <string name="khmer_language">ခမာ</string>
+    <string name="land_use">မြေအသုံးပြုမှု</string>
+    <string name="language">ဘာသာစကား</string>
+    <string name="language_dialog_title">ဘာသာစကားတခု ရွေးပါ</string>
+    <string name="last_name">မျိုးရိုးအမည်</string>
+    <string name="last_name_label">မျိုးရိုးအမည်	 *</string>
+    <string name="left">ဘယ်ဖက်</string>
+    <string name="legal_person">ဥပဒေအရ ပိုင်ဆိုင်သူ</string>
+    <string name="login_progress_signing_in">စနစ်အတွင်းသို့ ဝင်နေသည် …</string>
+    <string name="map_provider_geoserver">GeoServer</string>
+    <string name="map_provider_google_hybrid">Google Hybrid - နှစ်မျိုးပြ မြေပုံ</string>
+    <string name="map_provider_google_normal">Google Maps − မြေပုံ</string>
+    <string name="map_provider_google_satellite">Google Earth − မြေပုံ</string>
+    <string name="map_provider_google_terrain">Google Terrain − မြေမျက်နှာသွင်ပြင်ပြ မြေပုံ </string>
+    <string name="map_provider_local_tiles">စက်အတွင်းမှ အချက်အလက်</string>
+    <string name="map_provider_osm_mapnik">Open Street Map MapNik − လမ်းမြေပုံ</string>
+    <string name="map_provider_osm_mapquest">Open Street Map MapQuest − လမ်းမြေပုံ</string>
+    <string name="map_sources">မြေပုံရင်းမြစ်</string>
+    <string name="markers_distance_label">အကွာအဝေး</string>
+    <string name="message_add_map_bookmark_marker">မြေပုံတည်နေရာ လိပ်စာ အမှတ်အသား မှတ်ခြင်း?</string>
+    <string name="message_add_marker">နယ်နမိတ် အမှတ်အသား ထည့်ခြင်း ဆိုသည်မှာ</string>
+    <string name="message_add_non_boundary_marker">နယ်နမိတ်စည်း မဟုတ်သော အမှတ်အသားကို ဖြည့်ပါ</string>
+    <string name="message_added_attachment">အဆိုပြုမှုတွင် ပူးတွဲဖိုင် ထည့်ထားသည်</string>
+    <string name="message_adding_attachment_not_ok">ပူးတွဲဖိုင် ထည့်ရာတွင် အမှားအယွင်း ရှိသည်</string>
+    <string name="message_adjacencies_not_saved">ထိစပ်နယ်နိမိတ် အချက်အလက်များ မသိမ်းနိုင်ပါ</string>
+    <string name="message_adjacencies_saved">ထိစပ်နယ်နိမိတ် အချက်အလက်များ သိမ်းပြီးပြီ</string>
+    <string name="message_already_owner">ယခု အဆိုပြုမှုကို ရွေးထားသော ပုဂ္ဂိုလ်မှ မျှဝေထားသည်</string>
+    <string name="message_app_initialized">ယခု app သည် OpenTenure ရပ်ရွာအဝန်းအဝိုင်းဆာဗာနှင့် ဆက်သွယ်ရန်၊ အလုပ် လုပ်ဆောင်ရန် အသင့်ဖြစ်သည် </string>
+    <string name="message_app_initialized_default">ယခု app သည် OpenTenure အခြေခံဆာဗာနှင့် ဆက်သွယ်ရန်၊ အလုပ် လုပ်ဆောင်ရန် အသင့်ဖြစ်သည်  </string>
+    <string name="message_app_initializing">ကျေးဇူးပြု၍ ခဏ စောင့်ပေးပါ …</string>
+    <string name="message_app_not_initialized">သင်သုံးမည့် OpenTenure ဆာဗာတွင် အပြင်အဆင်နေရာ အောက်တွင် \'အပြင်အဆင်များ\' ဆိုတာကို ရွေးထားမှသာ စနစ်ပြန်ဖွင့်သည့် အခါ စတင်လည်ပတ်ပုံ မှန်မည်ဖြစ်သည်</string>
+    <string name="message_app_not_initialized_network">အင်တာနက် အဆက်အသွယ် မရှိပါ</string>
+    <string name="message_app_not_yet_initialized">စနစ်ကို မစတင်နိုင်သေးပါ</string>
+    <string name="message_attachment_download_failed">ပူးတွဲဖိုင်ကို download လုပ်ရာမှာ %s အမှားအယွင်း ရှိသည် </string>
+    <string name="message_attachment_download_not_complete">ပူးတွဲဖိုင် download လုပ်ရာမှာ %s ပြီးစီးမှု မရှိပါ </string>
+    <string name="message_attachment_downloaded">ပူးတွဲဖိုင်ကို %s download လုပ်ပြီးပြီ</string>
+    <string name="message_attachment_downloading">ပူးတွဲဖိုင်ကို download လုပ်နေသည်မှာ %s ရှိပြီ </string>
+    <string name="message_available_shares">ဝေစုအားလုံးပေါင်းက 100% ထက် နည်းသည်</string>
+    <string name="message_cant_open_db">အချက်အလက် နေရာကို ဝင်ရောက်ခွင့် မရှိပါ</string>
+    <string name="message_claim_exported">အဆိုပြုမှု %s အား ထုတ်ယူပြီးပြီ</string>
+    <string name="message_claim_exported_error">အဆိုပြုမှု %s အား ထုတ်ယူ၍ မရပါ</string>
+    <string name="message_claim_import_already_present">အဆိုပြုမှုကို client ဖက်တွင် ဖော်ပြထားသည်</string>
+    <string name="message_claim_import_claim_not_belongs_to_community">ရပ်ရွာအဝန်းအဝိုင်းနှင့် ယခု အဆိုပြုမှု မရှိပါ</string>
+    <string name="message_claim_import_not_claim_archive">အထောက်အထား ပြည့်စုံသော အဆိုပြုမှု မဟုတ်ပါ"</string>
+    <string name="message_claim_import_not_compressed_claim">ယခု Zip ဖိုင်သည့် အဆိုပြုဖိုင် မဟုတ်ပါ</string>
+    <string name="message_claim_import_password_error">စကားဝှက် မှားနေသည်။ ထပ်ကြိုးစားပါ</string>
+    <string name="message_claim_import_preparing">အဆိုပြုမှုကို ထုတ်ယူရန် ပြင်ဆင်နေသည်</string>
+    <string name="message_claim_imported">အဆိုပြုမှု ကို ထည့်သွင်းပြီးပြီ </string>
+    <string name="message_claim_modified">အဆိုပြုမှုကို ပြန်လည်ပြုပြင်ရန်</string>
+    <string name="message_claim_not_imported">မှားယွင်းမှု − အဆိုပြုမှုကို မထုတ်ယူနိုင်ပါ </string>
+    <string name="message_claim_ready_to_import">အဆိုပြုမှုကို ထည့်သွင်းရန် အဆင်သင့် ဖြစ်ပြီ</string>
+    <string name="message_claim_ready_to_import_no_dynamic">အဆိုပြုမှုကို ထုတ်ယူနိုင်သော်လည်း၊ ဒိုင်းနမစ်ပုံစံ ဖြည့်သွင်းမှုများ ဆုံးရှုံးနိုင်ပါသည်</string>
+    <string name="message_claims_downloaded">အဆိုပြုမှုကို ပုံစံတကျ download လုပ်ပြီးပြီ</string>
+    <string name="message_confirm_new_db_password">စကားဝှက်ကို အတည်ပြုပါ</string>
+    <string name="message_connection_error">အင်တာနက်လိုင်း မရှိပါ</string>
+    <string name="message_create_before_edit">အဆိုပြုမှုတစ်ခုရဲ့ အကြောင်းအရာ အသေးစိတ်ကို တိကျသေချာအောင် ပြင်ဆင်ပြီးမှ အချက်အလက်ကို ဖြည့်ပါ။</string>
+    <string name="message_data_over_mobile">မိုဘိုင်းဖုန်းရဲ့ အင်တာနက်လိုင်းကို သုံးပြီး များပြားတဲ့ အချက်အလက် လွှဲယူမှု ပြုလျှင်၊ သုံးမည့် အချက်အလက် ပမာဏ ပေါ်မူတည်ပြီး ကုန်ကျစရိတ် ကြီးမြင့်နိုင်တယ်။ </string>
+    <string name="message_data_unencrypted">သတိပြုရန် − စက်အတွင်းမှ အချက်အလက်များကို ဝှက်စာဖြင့် ကာထားခြင်း မရှိပါ</string>
+    <string name="message_db_backed_up">စက်အတွင်းရှိ ဒေတာဗေ့စ် ဖိုင် မူပွားတခုကို ပြုလုပ်ပြီး ဖြစ်သည်</string>
+    <string name="message_db_locked">အချက်အလက် နေရာကို စကားဝှက်ဖြင့် ကာရံထားသည်</string>
+    <string name="message_db_password">စကားဝှက်ဖြင့်သာ အချက်အလက် နေရာကို ဝင်ရောက်နိုင်သည်</string>
+    <string name="message_default_initialization">အသုံးပြုမည့် စနစ်နှင့် အကျွမ်းဝင်စေရန် အခြေခံ ရပ်ရွာဆာဗာတွင် စတင် အသုံးပြုသင့်သည်။ အခြေခံ ရပ်ရွာဆာဗာဆာဗာတွင် စမ်းသပ်မှုများကို ပြုလုပ်သင့်သည်။ စနစ်နှင့် အကျွမ်းဝင်ပြီဆိုရင်ဖြင့်  သုံးမယ့် ရပ်ရွာဆာဗာ လိပ်စာ URL ကို ထည့်ပြီး စသုံးလို့ ရပါသည်။    </string>
+    <string name="message_deleted_claim">စက်အတွင်းရှိ အဆိုပြုမှုကို ပုံစံတကျ ဖျက်ပြီးပြီ</string>
+    <string name="message_discard_changes">စနစ်မှ မထွက်ခွာမီ ပြင်ဆင်ထားမှုများကို မသိမ်းဆည်းတော့ဘူးလား</string>
+    <string name="message_download_snapshot_before_printing">ပရင့်မထုတ်ခင် ဆာဗာပေါ်ရှိ မြေပုံမှတ်တမ်းပုံကို download လုပ်ပါ</string>
+    <string name="message_downloading_attachment">ပူးတွဲဖိုင်ကို download လုပ်နေသည်</string>
+    <string name="message_encryption_failed">စက်အတွင်းမှ အချက်အလက်ကို ဝှက်စာထည့်ခြင်း မပြုလုပ်နိုင်ပါ</string>
+    <string name="message_encryption_set">စက်အတွင်းရှိ အချက်အလက်ကို ဝှက်စာဖြင့် ဖွက်ပြီး ဖြစ်သည်။ နောက်တကြိမ်မှ စ၍ OpenTenure ကို ဖွင့်လျှင် ဝှက်စာဖွင့်သော စကားဝှက်ဖြင့်သာ ဖွင့်နိုင်သည်။</string>
+    <string name="message_enter_description">ရှင်းလင်းဖွင့်ဆိုချက်ကို ဖြည့်ပါ</string>
+    <string name="message_entity_type">ဘယ်လို ပိုင်ဆိုင်မှုအမျိုးအစားလဲ</string>
+    <string name="message_error_deleting_claim">စက်အတွင်းရှိ အဆိုပြုမှုကို ဖျက်ရာမှာ အမှားအယွင်း ရှိသည်</string>
+    <string name="message_error_downloading_claims">အဆိုပြုမှုများ %s download ပြီးပြီ။ အဆိုပြုမှု အားလုံး download လုပ်ရန် မပြီးသေးပါ။</string>
+    <string name="message_error_mandatory_birthdate">မွေးနေ့ အကွက်ကို ပုံစံတကျ မဖြည့်ပါ၊ လုံးလုံး မဖြည့်ထားပါ</string>
+    <string name="message_error_mandatory_field_first_name">မသိမ်းဆည်းခင် မဖြည့်မနေရ အမည် အကွက်ကို ဖြည့်ပါ</string>
+    <string name="message_error_mandatory_field_gender">မသိမ်းဆည်းခင် မဖြည့်မနေရ ကျားမအမျိုးအစား အကွက်ကို ဖြည့်ပါ</string>
+    <string name="message_error_mandatory_field_last_name">မသိမ်းဆည်းခင် မဖြည့်မနေရ မျိုးရိုးအမည် အကွက်ကို ဖြည့်ပါ</string>
+    <string name="message_error_mandatory_fields">မသိမ်းဆည်းခင် မဖြည့်မနေရ အကွက်များကို ပြီးအောင်ဖြည့်ပါ</string>
+    <string name="message_error_opening_file">ဖိုင် ဖွင့်စဉ် မှားယွင်းမှု ရှိ − </string>
+    <string name="message_error_remove_person">တစ်ဦးပိုင် %s မဖယ်ရှားနိုင်ပါ  </string>
+    <string name="message_error_startdate">စတင်သည့်နေ့စွဲ အကွက်ကို ပုံစံတကျ မဖြည့်ပါ၊ လုံးလုံး မဖြည့်ထားပါ</string>
+    <string name="message_error_withdraw_claim">အဆိုပြုမှု ရုပ်သိမ်းရာမှာ အမှားအယွင်း − </string>
+    <string name="message_exit_dialog">စနစ်မှ ထွက်ရန် သေချာသလား</string>
+    <string name="message_export">ထုတ်ယူနေသည်</string>
+    <string name="message_exported">ထုတ်ယူပြီးပြီ</string>
+    <string name="message_files_not_present">အဆိုပြု ဖိုင် ၁ ဖိုင် (သို့မဟုတ်) ဖိုင်များ မရှိပါ</string>
+    <string name="message_initialize_before"> အသုံးမည့်စနစ်ကို လက်တွေ့ အသုံးမပြုခင် အစပျိုးစမ်းသပ်နေရာတွင် လုပ်ကြည့်ပါ  </string>
+    <string name="message_invalid_url">ပြည့်စုံမှုမရှိသော URL</string>
+    <string name="message_log_exported">စက်အတွင်းရှိ စနစ်အသုံးပြုမှု မှတ်တမ်းဖိုင်ကို ထုတ်ယူပြီး ဖြစ်သည်</string>
+    <string name="message_login_before">စနစ်အတွင်းသို့ အရင် ဝင်ပါ</string>
+    <string name="message_login_no_more_valid">သတ်မှတ် ခွင့်ပြုချိန် ကျော်လွန်သွားပြီ ဖြစ်ပြီး၊ အကောင့် ပြန်ဝင်ရန် လိုအပ်သည်။</string>
+    <string name="message_login_ok">စနစ်အတွင်းသို့ ဝင်ပြီးပါပြီ</string>
+    <string name="message_logout_error">စနစ်မှ ထွက်ခြင်း မှားယွင်းမှု</string>
+    <string name="message_logout_not_ok">စနစ်မှ ထွက်ခြင်း မအောင်မြင်ပါ</string>
+    <string name="message_logout_ok">စနစ်အတွင်းမှ ထွက်ပြီးပါပြီ</string>
+    <string name="message_map_not_yet_draw">အဆိုပြု မြေပုံ အပြီးသပ်မှု မရှိသေးပါ</string>
+    <string name="message_map_snapshot_saved">မြေပုံမှတ်တမ်းပုံ သိမ်းပြီးပြီ</string>
+    <string name="message_new_db_password">စကားဝှက် အသစ် (ဝှက်စာ မသတ်မှတ်ချင်လျှင် ကွက်လပ်နေရာကို မဖြည့်ပါနှင့်)</string>
+    <string name="message_no_application">ဖိုင်ဖွင့်ရန် လိုအပ်သော အက်ပလီကေးရှင်းကို ရှာမတွေ့ပါ</string>
+    <string name="message_no_available_shares">ယခု အဆိုပြုမှုရဲ့ ဝေစုတန်ဖိုး ပြင်ဆင်မှု မလုပ်ခင် ဝေစု အချို့ကို လက်လွှတ်လိုက်ပါ။</string>
+    <string name="message_no_available_shares_adding_new">ယခု အဆိုပြုမှုရဲ့ ဝေစု အသစ် ထပ်မဖြည့်ခင် ဝေစု အချို့ကို လက်လွှတ်လိုက်ပါ။</string>
+    <string name="message_no_claim_to_download">download လုပ်ရန် မည်သည့် အဆိုပြုမှုမှ မရှိပါ</string>
+    <string name="message_no_connection_at_startup">အင်တာနက်လိုင်း မရှိပါ။ စနစ်၏ လုပ်ဆောင်ချက်ပုံစံများကို ပြင်ထားသော်လည်း အချက်အလက်များ ဆွဲတင်ခြင်း (upload)၊ ဆွဲချခြင်း (download) များကို လုပ်နိုင်မည် မဟုတ်ပါဘူး။ OpenTenure သုံးပြီး အချက်အလက်များ လွှဲပြောင်းရမည် ဆိုလျှင် အင်တာနက်လိုင်းနဲ့ ချိတ်ဆက် ရမည်။</string>
+    <string name="message_not_supported_on_this_device">ယခု စက်တွင် အသုံးပြု၍ မရပါ</string>
+    <string name="message_old_db_password">လက်ရှိသုံးနေသော စကားဝှက် ဟုတ်ပါရဲ့လား</string>
+    <string name="message_password_character_is_wrong">စကားဝှက်တွင် အက္ခရာနှင့် ဂဏန်းများသာ အသုံးပြုပါ</string>
+    <string name="message_password_dont_match">စကားဝှက်အသစ်ကို အတည်မပြုနိုင်ပါ။ ထပ်မံ ကြိုးစားကြည့်ပါ။</string>
+    <string name="message_password_too_short">စကားဝှက် တစ်ခုတွင် အက္ခရာဂဏန်းအမှတ်အသား %d ခု အနည်းဆုံး ပါဝင်ရမည် </string>
+    <string name="message_remaining_days">အဆိုအတွက် ငြင်းခုံမှု လုပ်မည့်ရက် ရောက်ရန် ရက်ပေါင်း − </string>
+    <string name="message_remove_additional_info">အချက်အလက်ကို ဖယ်ရှားခြင်း</string>
+    <string name="message_remove_attachment">ပူးတွဲဖိုင်ကို ဖယ်ရှားခြင်း</string>
+    <string name="message_remove_claim">စက်အတွင်းရှိ အဆိုပြုမှုကို ဖျက်ပစ်တော့မလား</string>
+    <string name="message_remove_marker">အမှတ်အသား ဖယ်ရှားခြင်း</string>
+    <string name="message_remove_owner">ပိုင်ရှင်ကို ဖယ်ရှားခြင်း</string>
+    <string name="message_remove_person">တစ်ဦးပိုင်ကို ဖယ်ရှားမှု %s</string>
+    <string name="message_remove_person_dialog">%s ကို အမှန်တကယ် ဖယ်ရှားလိုပါသလား</string>
+    <string name="message_remove_quest">အဆိုပြုမှုကို အမှန်တကယ် ရုပ်သိမ်းလိုပါသလား</string>
+    <string name="message_remove_section_element">အစိတ်အပိုင်းကို ဖယ်ရှာခြင်း</string>
+    <string name="message_restart_dialog">OpenTenure ပုံစံသတ်မှတ်ခြင်းတွင် ပြောင်းလဲသတ်မှတ်မှု တခုခု လုပ်ပြီးလျှင်၊ အက်ပလီကေးရှင်းကို ပိတ်ပြီး အစမှပြန်ဖွင့်ရန် လိုအပ်သည်။ ယခု အစမှ ပြန်ဖွင့်လိုပါသလား။</string>
+    <string name="message_save_changes">ယခုပြင်ဆင်ထားသည့် အတိုင်း သိမ်းဆည်းမလား</string>
+    <string name="message_save_claim_before_adding_content">အချက်အလက်များ မထည့်ခင် အဆိုပြုမှုကို အရင် သိမ်းပါ</string>
+    <string name="message_save_claim_before_submit">အဆိုပြုမှုကို အရင် သိမ်းပြီးမှ တင်းသွင်းမှုကို ပြုလုပ်ပါ</string>
+    <string name="message_save_person_before_adding_content">အချက်အလက်များ မထည့်ခင် တစ်ဦးပိုင် အရင် သိမ်းပါ</string>
+    <string name="message_save_snapshot_before_printing">ပရင့်မထုတ်ခင် မြေပုံမှတ်တမ်းပုံကို ပူးတွဲပါ</string>
+    <string name="message_saved">သိမ်းပြီးပြီ</string>
+    <string name="message_server_error_saving_claim">ဆာဗာ အတွင်းပိုင်း မှားယွင်းမှု</string>
+    <string name="message_service_not_available">ဝန်ဆောင်မှုလုပ်ငန်း မရှိပါ</string>
+    <string name="message_share_not_saved">ဝေစု သိမ်းရာမှာ အမှားအယွင်း ရှိသည်</string>
+    <string name="message_share_saved">ဝေစု သိမ်းပြီးပြီ</string>
+    <string name="message_submission_error">အဆိုပြုမှု တင်သွင်းရာတွင် အမှားအယွင်း ရှိသည်</string>
+    <string name="message_submitted">အဆိုပြုမှုကို တင်သွင်းပြီး ဖြစ်သည်</string>
+    <string name="message_timeout_exception">ဆာဗာနှင့် သက်မှတ် ဆက်သွယ်ချိန် ကုန်ဆုံးပြီ ဖြစ်သည်</string>
+    <string name="message_title_app_initialized">စနစ် စတင် အလုပ်လုပ်နိုင်ပါပြီ</string>
+    <string name="message_title_app_initializing">OpenTenure စနစ် စတင်ခြင်း</string>
+    <string name="message_title_app_not_initialized">စနစ်စတင်ခြင်း မလုပ်ဆောင်နိုင်ပါ</string>
+    <string name="message_touch_to_select_a_claim">အဆိုပြုမှု တစ်ခုနေရာကို နှိပ်ပြီး ရွေးပါ</string>
+    <string name="message_touch_to_select_a_person">လူပုဂ္ဂိုလ် တဦးနေရာကို နှိပ်ပြီး ရွေးပါ</string>
+    <string name="message_unable_to_save">သိမ်း မရပါ၊ အသေးစိတ် အချက်အလက်များ စစ်ဆေးပြီး ထပ်ကြိုးစားပါ</string>
+    <string name="message_unable_to_save_missing_claim_name">သိမ်း မရပါ၊ အဆိုပြုမှု အမည်မပါသောကြောင့် ဖြစ်သည်</string>
+    <string name="message_unable_to_save_missing_person">သိမ်း မရပါ၊ အဆိုပြုသူ မပါသောကြောင့် ဖြစ်သည်</string>
+    <string name="message_unknowhost_error">လက်ခံဆာဗာ ဖွင့်ရာတွင် မှားယွင်းမှု ရှိသည်။ အင်တာနက်လိုင်း ရှိမရှိ စစ်ပါ။ </string>
+    <string name="message_update_client">ယခု ဆာဗာ၏ ဆက်သွယ်ရေးစနစ်မှာ ဗားရှင်းအသစ် ဖြစ်သည်။ ယခုဆာဗာကို ဆက်သွယ်ရန် OpenTenure ကို အဆင့်မြှင့်တင်ခြင်းကို စောင့်ရန် လိုအပ်သည်</string>
+    <string name="message_update_server">ယခု ဆာဗာ၏ ဆက်သွယ်ရေးစနစ်မှာ ဗားရှင်းအဟောင်းပုံစံ ဖြစ်သည်။ ယခုဆာဗာကို ထိန်းသိမ်းသူ တာဝန်ခံမှ အဆင့်မြှင့်တင်ပေးခြင်းကို စောင့်ဆိုင်းရန် လိုအပ်သည်</string>
+    <string name="message_uploading">အဆိုပြုမှုကို စာမျက်နှာပေါ်သို့ တင်နေသည်</string>
+    <string name="message_uploading_attachment">ပူးတွဲဖိုင်ကို စာမျက်နှာပေါ်သို့ တင်နေသည်</string>
+    <string name="message_warnings">သတိပြုရန် − </string>
+    <string name="message_withdrawn_claim">အဆိုပြုမှုကို ပုံစံတကျ ရုပ်သိမ်းပြီးပြီ</string>
+    <string name="meters">m</string>
+    <string name="mobile_phone_number">မိုဘိုင်းဖုန်းနံပတ်</string>
+    <string name="moderated">ညှိနှိုင်းပြင်ဆင်ပြီး</string>
+    <string name="na">မဖော်ပြလိုပါ</string>
+    <string name="new_additional_info">ထပ်ပေါင်း အချက်အလက်</string>
+    <string name="new_entity">ပိုင်ဆိုင်မှု အမျိုးအစားသစ်</string>
+    <string name="new_file">ဖိုင် အသစ်</string>
+    <string name="new_multipage">စာမျက်နှာမျိုးစုံ ဖိုင် အသစ်</string>
+    <string name="new_snapshot">မှတ်တမ်းပုံ အသစ်</string>
+    <string name="next">နောက်တခု</string>
+    <string name="no">No</string>
+    <string name="north">မြောက်</string>
+    <string name="north_adjacency">အဆိုပြုမှု မြောက်ဖက်တွင်ရှိသော ပိုင်ဆိုင်မှုများကို ရေးသားပါ</string>
+    <string name="north_east">အရှေ့−မြောက်</string>
+    <string name="north_west">အနောက်−မြောက်</string>
+    <string name="not_all_tiles_downloaded">ယခု မြေပုံအတွက် download လုပ်ရာမှာ အချို့ဧရိယာများ မပါဝင်ပါ။ ရလာသမျှ ဖိုင်ကို ပြန်စစ်ဆေးပြီး၊ စိတ်တိုင်းကျမှု မရှိက ထပ်မံ ကြိုးစားနိုင်ပါတယ်။</string>
+    <string name="not_boundary">နယ်နမိတ်မျဥ်း မဟုတ်ပါ</string>
+    <string name="null_label">မရှိပါ</string>
+    <string name="ok">OK</string>
+    <string name="owner">ပိုင်ရှင်</string>
+    <string name="owner_removed">ပိုင်ရှင်အား ဖယ်ထုတ်ပြီး ဖြစ်သည်</string>
+    <string name="owners">ပိုင်ရှင်များ</string>
+    <string name="parcel">Parcel</string>
+    <string name="password">စကားဝှက်</string>
+    <string name="person">လူပုဂ္ဂိုလ်</string>
+    <string name="person_name">လူပုဂ္ဂိုလ် အမည်</string>
+    <string name="person_picture">လူပုဂ္ဂိုလ် ဓာတ်ပုံ</string>
+    <string name="person_type">လူပုဂ္ဂိုလ် အမျိုးအစား *</string>
+    <string name="physical_person">လက်ရှိပိုင်ဆိုင်သူ</string>
+    <string name="place_of_birth">မွေးဖွားရာ ဒေသ</string>
+    <string name="place_of_birth_label">မွေးဖွားရာ ဒေသ *</string>
+    <string name="postal_address">စာပို့ရန်လိပ်စာ</string>
+    <string name="preload">ပုံဖိုင်ကို ဖွင့်နေသည်</string>
+    <string name="prompt_password">စကားဝှက်</string>
+    <string name="prompt_username">အဖွဲ့ဝင်အမည်</string>
+    <string name="property">ပိုင်ဆိုင်မှု</string>
+    <string name="recorded_by">မှတ်တမ်းတင်သူ − </string>
+    <string name="rejected">ပယ်ချထားသည်</string>
+    <string name="reviewed">ပြန်ဆန်းစစ်သည်</string>
+    <string name="right">ညာဖက်</string>
+    <string name="section_element_removed">ကဏ္ဍအစိတ်အပိုင်းအား ဖယ်ထုတ်ပြီး ဖြစ်သည်</string>
+    <string name="share_value">ဝေစုရာခိုင်နှုန်း − </string>
+    <string name="shares_prompt">ဝေစုကို ရွေးပါ</string>
+    <string name="showcase_actionAlert1_message"> \n \n  အခု OT စနစ်ကို အသုံးပြုဖို့ စတင်ခြင်းကို လုပ်ဆောင်ပေးဖို့ လိုပါတယ်။
+        
+    </string>
+    <string name="showcase_actionAlert_message">  \n   အခု ရုပ်ပုံက Open Tenure အသုံးပြုမှု စတင်နိုင်ဖို့ ပုံစံသတ်မှတ်ရာမှာ SOLA အဝန်းအဝိုင်းဆာဗာဖြင့် စမ်းသပ်ကြည့်ရအောင်။
+                                                  \n  အကယ်၍ စမ်းသပ်သုံးနေရာကနေ မိမိအဝန်းအဝိုင်း ဆာဗာကို ပြောင်းသုံးမယ် ဆိုရင် ကိုယ့်ဖုန်းထဲ၊ ကိရိယာထဲက OT အချက်အလက်တွေကို 
+                                                  \n ရှင်းလင်းထားပါ။ ကိုယ်သုံးမယ့် အဝန်းအဝိုင်း ဆာဗာရဲ့  url သတ်မှတ်ချက်များ ဖြည့်ပြီး၊ စနစ်ကို ပြန်စတင်ပေးပါ။
+                                                  \n \n  အောက်က အဆင့်များအတိုင်း လုပ်ဆောင်ပါ။
+                                                  \n  1) Android ရဲ့ အပြင်အဆင်များ နေရာမှာ − Apps - Open Tenure ကို သွားပြီး၊ Clear data ဆိုတဲ့ ခလုတ်ကို နှိပ်ပြီး အချက်အလက်များ ရှင်းလင်းပါ။ 
+                                                  \n  2) OT ရဲ့ စနစ်ကို ဖွင့်ပြီး၊ ဖုန်းရဲ့ List ခလုတ်ကို နှိပ်ပါ။ အဲဒီမှာ အပြင်အဆင်များ အောက်မှာ url အချက်အလက်များ ပြန်ပြင်ပေးရပါမယ်။ 
+                                                  \n  3) OT ကို စဖွင့်တဲ့အခါ (သတင်း ခလုတ်ကို ပွင့်နေလျှင်) တြိဂံပုံ ခလုတ်ကို နှိပ်ပြီး စနစ်ကို (ပြန်)စတင်ခိုင်းပါ။ 
+
+    </string>
+    <string name="showcase_actionClaimDetails_message"> \n \n  သိမ်းရန် ရုပ်ပုံသည် အဆိုပြုမှုနှင့် ပတ်သက်သည့် အချက်အလက်အားလုံးကို သိမ်းဆည်းပေးရန် ဖြစ်သည်။
+                                                        \n \n  ပိုင်ဆိုင်မှု အဆိုပြုမှုကို မှတ်တမ်းပြီး၊ သိမ်းဆည်းပြီးနောက်တွင် ထုတ်ယူရန် ရုပ်ပုံခလုတ်ကို နှိပ်ပြီး 
+                                                        \n အဆိုပြုမှုကို ဇစ်ဖိုင်တခု အဖြစ် ပြုလုပ်ပေးသည် (အဝန်းအဝိုင်းဆာဗာကို အီးမေးလ်ပို့နိုင်သည်။)
+        												\n \n အဆိုပြုမှုနှင့် ပတ်သက်ပြီး မြေပုံတိုင်းခြင်း၊ သိမ်းဆည်းခြင်းတို့ ပြုလုပ်ပြီးသည့်အခါ ပရင့်ထုတ်ရန် (ပုံနှိပ်ရန်) အရုပ်သည် 
+                                                        \n အဆိုပြုမှုနှင့် ပတ်သက်သည့် အသေးစိတ်အချက်အလက်ကို အတိုချုပ်သဘောမျိုး ထုတ်ပေးရန်အတွက် ဖြစ်သည်။ 
+                                                        \n \n ဖုန်း၏ List ခလုတ်မှ အသုံးပြုနည်း ကိုဖွင့်ပြီး လက်တွေ့အသုံးပြုနည်းကို ဖတ်ရှုနိုင်သည်။
+</string>
+    <string name="showcase_actionClaimMap_message"> \n \n  မူလီဖြုတ်သည့် ဂွပုံ အရုပ်သည် မြေပုံကို တည်းဖြတ်ပုံစံ သုံးရန်ဖြစ်သည်။ အဓိက နယ်နမိတ်စည်းတွင် တည်နေရာအမှတ်များ မှတ်ခြင်း၊ အဓိကနယ်နမိတ်စည်းနှင့်
+                                                     မဆိုင်သော နေရာတွင် တည်နေရာအမှတ်များ မှတ်ခြင်း၊ သို့မဟုတ် တည်နေရာအမှတ်များ၏ အကွာအဝေးကို တိုင်းတာခြင်းတို့ အတွက် ဖြစ်သည်။
+         											\n \n  အစိမ်းရောင် + လက္ခဏာပုံ အရုပ်သည် လက်ရှိ ရောက်ရှိနေရာကို စက်အတွင်းပါ GPS ၏ သတ်မှတ်ချက်ဖြင့် နယ်နမိတ် အမှတ်သစ် တခုပြုလုပ်နိုင်သည်။ 
+                                                     imagery မြေပုံနှင့် နယ်နမိတ် တည်နေရာ သတ်မှတ်မှု ရှင်းလင်းရန်မှာ စက်အတွင်းပါ GPS ၏ တိကျသေချာမှုနှင့် သက်ဆိုင်သည်။ 
+                                                    သတ်မှတ်လိုက်သော တည်နေရာကို ပြန်နေရာချ သတ်မှတ်နိုင်သည်။ (မြေပုံပေါ်တွင် တည်နေရာပြလိုသော နေရာကို လက်ဖြင့်အချိန်ကြာကြာ ဖိထောက်ထားပြီး နေရာသတ်မှတ်နိုင်သည်။)
+                                                   မသေချာသည့် အခြေအနေမျိုးတွင် OT မှ GPS တည်နေရာပြမှုနှင့် imagery မြေပုံ တည်နေရာပြမှု နှစ်မျိုးလုံးကို မှတ်တမ်းတင်သည်။
+                                                    \n \n အဖြူရောင် ပုံလှည့်သည့် အရုပ်သည် မြေပုံနှင့် သုံးသည့် ကိရိယာမှ သံလိုက်အိမ်မြှောင်ကို လှည့်နိုင်ရန် အတွက် ဖြစ်သည်။ 
+                                                      ပုံကိုလှည့်နေခြင်းကို ရပ်လိုပါက အဖြူရောင် စက်ဝိုင်းအတွင်း၊ ကန့်လန့်ဖြတ်မျဉ်းပါသည့် ပုံကို နှိပ်ပါ။ လက်ချောင်းနှစ်ချောင်းဖြင့် ဖိပြီးလှည့်၍လည်း ရသည်။ မြေပြင်ကွင်းဆင်းသည့်အခါ အလွန်အသုံးဝင်သည်။
+        										    \n  ပစ်မှတ်ပုံ အရုပ်ကတော့ လက်ရှိ အသုံးပြုသူ ရောက်ရှိနေရာကို ဗဟိုပြု ညွှန်ပြပေးသည် (စက်အတွင်းပါ GPS မှ သတ်မှတ်ပေးခြင်း ဖြစ်သည်။)
+        										    \n \n  Device ပုံ အရုပ်သည် လက်ရှိ ပြထားသော မြေပုံနေရာကို မြေပုံတခု အဖြစ် ထုတ်ယူပြီး၊ သက်ဆိုင်ရာ အဆိုပြုမှုအောက်တွင် အထောက်အပံ့ 
+                                                     ပူးတွဲအချက်အလက် တခုအနေဖြင့် သွားရောက် သိမ်းဆည်းပေးသည်။ အကယ်၍ ယခင်တကြိမ်က သိမ်းထားသော မြေပုံအဟောင်း ရှိပါက ပုံအသစ်က အစားထိုး သိမ်းဆည်းပေးသည်။
+    </string>
+    <string name="showcase_actionClaims_message"> \n \n အလံနှင့်လူရုပ်ပုံ သည် ပိုင်ဆိုင်မှု အဆိုပြုမှု အသစ်တခု ပြုလုပ်နိုင်သည်။
+                                                  \n \n စနစ်အတွင်း ဝင်ရန် မှတဆင့် စနစ်အတွင်းသို့ ရောက်ရှိပြီး၊ ကိုယ့်ဖြည့်ထားပြီးသော ပိုင်ဆိုင်မှု အဆိုပြုမှု မှတ်တမ်းများကို ဆာဗာသို့ ပို့နိုင်သည်။ 
+                                                  \n \n ဖုန်း၏ List ခလုတ်မှ −
+                                                  \n• "အပြင်အဆင်များ" တွင် မိမိဆက်သွယ်မည့် အဝန်းအဝိုင်းဆာဗာတွင် သုံးထားသော မြေပုံ၏ url, layer, Geoserver (map imagery), survey form တို့ကို သတ်မှတ်ပေးရမည်။
+												  \n•  "အသုံးပြုနည်း" တွင် လက်တွေ့အသုံးပြုနည်းကို ဖတ်ရှုနိုင်သည်။
+                                                  \n•  "စက်ရှိ အချက်အလက် အရန်အဖြစ် သိမ်းခြင်း" ကိုယ့်ရဲ့ စက်အတွင်း မှတ်သားထားသော ပိုင်ဆိုင်မှု အဆိုပြုမှုများကို အရန်အဖြစ် သိမ်းဆည်းမှုကို ပြုလုပ်ရန်။
+    </string>
+    <string name="showcase_actionMap_message"> \n အဝန်းအဝိုင်း မြေပုံ −
+                                               \n* မြေပုံကြည့် မှန်ဘီလူးကို အကြီးဆုံးချဲ့ယူလျှင် ဖိုင်သိမ်းဆည်းခြင်း (File Download) ခလုတ်ပုံ ပေါ်လာမည်။ ယင်းခလုတ်ပုံကို နှိပ်ပြီး မြေပုံ အကွက်ငယ်များကို သိမ်းနိုင်သည်။
+											   \n OT မြေပုံနေရာ လက်ရှိ ဖော်ပြနေသော မြေပုံသည် Geoserver မှ imagery မြေပုံဖြစ်သည်။
+											   \n* စနစ်အတွင်း ဝင်ရန် တံခါးပုံ အရုပ်ကို နှိပ်လျှင် စနစ်ဝင်ရန် ပုံစံအကွက် ပေါ်လာမည် (ကိုယ်သုံးမည့် အဝန်းအဝိုင်းဆာဗာတွင် မှတ်ပုံတင်ထားသော အသုံးပြုသူဖြစ်ရမည်။)
+											   \n* မြေပုံစာရွက်ခေါက်ပုံ အရုပ်သည် OT အသုံးပြုမည့် သတ်မှတ်နေရာ တခုလုံးကို ဗဟိုထားပြီး ဖော်ပြပေးသည်။
+											   \n* ပစ်မှတ်ပုံ သည် လက်ရှိ အသုံးပြုသူ ရောက်ရှိတည်နေရာကို ညွှန်ပြပေးရန် သုံးသည်။
+											   \n* တိမ်ပုံ ဖိုင်သိမ်းခြင်း အရုပ်သည် မြေပုံပေါ်တွင် ဖော်ပြထားသော အဝန်းအဝိုင်းဆာဗာတွင် ရှိနေသော ပိုင်ဆိုင်မှု အဆိုပြုမှု အချက်အလက်များကို သိမ်းရန် အတွက် ဖြစ်သည်။
+											   \n* ဖုန်း၏ List ခလုတ်ကို နှိပ်လိုက်လျှင် OT တွင် လက်ရှိ တည်နေရာတွင် သုံးမည့် layer အမျိုးအစား ရွေးခြင်းနှင့် အခြားလုပ်ဆောင်ချက်များ ခိုင်းစေနိုင်သည်။ 
+    </string>
+    <string name="showcase_actionNews_message"> \n \n OT ကို စဖွင့်ချိန်တွင် အဖြူရောင် တြိဂံ အတွင်း !  အရုပ် ပေါ်နေမည်။ ယင်းသို့ ဖော်ပြခြင်းမှာ မိမိတွဲဖက် သုံးမည့် အဝန်းအဝိုင်း ဆာဗာနှင့် ချိတ်ဆက်ပြီး၊ 
+                                                \n OT စနစ်ကို စတင်ခိုင်းရန် လိုအပ်ကြောင်း အသိပေးခြင်း ဖြစ်သည်။
+												\n \n စနစ်အတွင်း ဝင်ရန် တံခါးပုံစံ အရုပ်ကတော့ အဝန်းအဝိုင်းဆာဗာနှင့် ချိတ်ဆက်နိုင်ရန် အသုံးပြုသူအမည်နှင့် စကားဝှက် ဖြည့်ပေးရန် လိုအပ်သည်။
+												\n (အသုံးပြုမည့် အဝန်းအဝိုင်းဆာဗာတွင် မှတ်ပုံတင်ရန် လိုအပ်သည်။)
+												\n \n သော့ပုံ အရုပ်မှာ OT ကို ဖုန်းအတွင်း တိုက်ရိုက် ဖွင့်မကြည့်နိုင်ရန်နှင့် အွန်လိုင်းနှင့် ချိတ်ဆက်သည့် အခါ အချက်အလက်များ လုံခြုံအောင် ဆောင်ရွက်ပေးသည်။ \n \n ဖုန်း၏ List ခလုတ် မှ တဆင့်−
+												\n• "အပြင်အဆင်များ" တွင် မိမိဆက်သွယ်မည့် အဝန်းအဝိုင်းဆာဗာတွင် သုံးထားသော မြေပုံ၏ url, layer, Geoserver (map imagery), survey form တို့ကို သတ်မှတ်ပေးရမည်။ 
+												\n• "အသုံးပြုနည်း" တွင် လက်တွေ့အသုံးပြုနည်းကို ဖတ်ရှုနိုင်သည်။
+                                                           
+    </string>
+    <string name="showcase_actionPersons_message"> \n အပေါင်းလက္ခဏာ + ပုံ အရုပ်သည် လူပုဂ္ဂိုလ် သို့မဟုတ် အစုအဖွဲ့ ၏ အချက်အလက် ဖြည့်ရန် ဖြစ်သည်။
+                                                \n \n လူပုဂ္ဂိုလ်
+                                                \n* "အမည်" (ဖြည့်ရန်လိုအပ်သည်) - အမည်
+                                                \n* "အမည်" (ဖြည့်ရန်လိုအပ်သည်) - အမည်၊ မျိုးရိုးအမည်
+                                                \n* "မွေးသက္ကရာဇ်" (ဖြည့်ရန်လိုအပ်သည်) - ပေးထားတဲ့ ပုံစံဖြင့် သို့မဟုတ် လက်ဖြင့် သတ်မှတ်ပုံစံ YYYY-MM-DD  အတိုင်း ဖြည့်ပါ
+                                                \n* "ကျားမအမျိုးအစား" (ဖြည့်ရန်လိုအပ်သည်)
+                                                \n* "ID အမျိုးအစား " ပေးထားတဲ့ စာရင်းထဲမှ ရွေးပေးပါ
+                                                \n* "ID အမှတ်" မိမိသက်သေခံ လက်မှတ် အမှတ်ကို ဖြည့်ပါ
+                                                \n* "စာပို့ရန် လိပ်စာ"
+                                                \n* "အီးမေးလိပ်စာ" - ပိုင်ဆိုင်မှု အဆိုပြုမှုနှင့် ပတ်သက်သော စာများအား ယခုအီးမေးလ်သို့ အလိုအလျောက် ပို့ဆောင်နိုင်ရန်
+                                                \n* "လက်ကိုင်ဖုန်းနံပတ်"
+                                                \n* "ဆက်သွယ်ရန် ဖုန်းနံပတ်"
+                                                \n \n အစုအဖွဲ့
+                                                \n* "အမည်" (ဖြည့်ရန်လိုအပ်သည်) - အစုအဖွဲ့၏ အမည်
+                                                \n* "စတင်ထူထောင်သည့် နေ့စွဲ" (ဖြည့်ရန်လိုအပ်သည်) - ပေးထားတဲ့ ပုံစံဖြင့် သို့မဟုတ် လက်ဖြင့် သတ်မှတ်ပုံစံ YYYY-MM-DD  အတိုင်း ဖြည့်ပါ
+                                                \n* "ID အမှတ်" - ရှိခဲ့ပါက တရားဝင် အသိအမှတ်ပြု ခံထားရသော ဥပမာ ကုမ္ပဏီ မှတ်ပုံတင်အမှတ်
+                                                \n* "စာပို့ရန် လိပ်စာ"
+                                                \n* "အီးမေးလိပ်စာ" - ပိုင်ဆိုင်မှု အဆိုပြုမှုနှင့် ပတ်သက်သော စာများအား ယခုအီးမေးလ်သို့ အလိုအလျောက် ပို့ဆောင်နိုင်ရန်
+                                                \n* "လက်ကိုင်ဖုန်းနံပတ်"
+                                                \n* "ဆက်သွယ်ရန် ဖုန်းနံပတ်"
+                                                
+                                                
+    </string>
+    <string name="showcase_claim_adjacencies_message">\n \n \n 
+        										  သတ်မှတ်နေရာ၏ ထိစပ်နယ်နိမိတ်ရှိ အခြားပိုင်ဆိုင်သူများ၏ နေရာများကို  အမည်၊ နေရာအမည်ကို နေရာအလိုက် 
+                                                  \n (အရှေ့၊ အနောက်၊ တောင်၊ မြောက် စသဖြင့်) မှတ်တမ်းတင်နိုင်ပါသည်။
+         										   \n \n 
+         										  OT ဖြင့် ထိစပ်နယ်နိမိတ် ပိုင်ဆိုင်မှုများကို ထည့်သွင်းလိုက်လျှင်၊ ယင်းထိစပ်နေရာများနှင့် ပတ်သက်သော ပိုင်ဆိုင်မှု မှတ်တမ်းများကို ဖော်ပြပေးနေလိမ့်မည်။
+         										  
+        										 
+        	                                        
+    </string>
+    <string name="showcase_claim_challenges_message">\n \n \n 
+        										  အဆိုပြုမှုရဲ့ ပိုင်ဆိုင်မှုနဲ့ ပတ်သက်ပြီး အငြင်းအခုံဖြစ်မှု စာရင်းကို ဖော်ပြနိုင်တယ်။
+												  \n \n အငြင်းအခုံဖြစ်နေတဲ့ ပိုင်ဆိုင်မှု၊ အဆိုပြုသူ တို့ရဲ့အမည်ကို အသုံးပြုပြီး၊ 
+												  အဆိုပြုမှုစာရင်း အောက်တွင် အငြင်းပွားမှု တခုရဲ့ အသေးစိတ်ကို ရှာဖွေကြည့်ရှုနိုင်တယ်။
+        										    
+    </string>
+    <string name="showcase_claim_documentAttach_message">\n \n \n 
+        										  စာရွက်ညှပ်ကလစ်ပုံက စက်ထဲရှိဖိုင်ကို ပူးတွဲဖိုင်အဖြစ် တွဲတင်ပေးရန်ပါ။
+        										   \n \n
+        										  ကင်မရာပုံက စက်တွင်ပါသော ကင်မရာဖြင့် ပိုင်ဆိုင်မှုနှင့် ပတ်သက်သော အထောက်အထားကို ဓာတ်ပုံရိုက်ပြီး ပူးတွဲမှတ်တမ်းဖိုင် အဖြစ် သိမ်းရန်ပါ။
+        										    
+         										  
+        	                                        
+    </string>
+    <string name="showcase_claim_document_message">\n \n \n 
+        										  မြေယာအဆိုပြုမှု တခုအောက်မှာ ပူးတွဲ အထောက်အထား ဖိုင်များ အောက်မှာ သိမ်းပါတယ်။
+         										   \n \n 
+         										  အထောက်အထား ဖိုင်စာရင်းမှ ဖွင့်လိုတဲ့ ဖိုင်ကို ရွေးပြီး အသေးစိတ် အချက်အလက်ကို ကြည့်နိုင်ပါတယ်။
+                                                  \n အနီရောင် ကြက်ခြေခတ် X ပုံက အထောက်အထားဖိုင်ကို ဖျက်လိုတဲ့အခါ သုံးရတယ်။
+         										    
+        										 
+        	                                        
+    </string>
+    <string name="showcase_claim_map_message">\n \n သတ်မှတ်လိုသော ပိုင်ဆိုင်မှု နယ်နမိတ်နှင့် ပတ်သက်ပြီး ထည့်သွင်းထားသော အောက်ခံ မြေပုံပေါ်တွင် မှတ်တမ်းတင်နိုင်သည်။ စက်တွင်ပါသော GPS ကို သုံး၍ GPS တည်နေရာများကို မှတ်သားရသည်။
+                                        	  \n \n ယင်း နယ်နမိတ် သတ်မှတ်မှု အားလုံး ပြီးစီးပါက၊ သက်ဆိုင်ရာ မြေယာအဆိုပြုမှု မြေပုံ ရရှိလာပြီး၊ ယင်းအဆိုပြုမှုနှင့် ပတ်သက်သည့် အချက်အလက်များ ရေးထည့်နိုင်သည်။
+    </string>
+    <string name="showcase_claim_mapdraw_message">\n \n မြေပုံပေါ်တွင် အချိန်အနည်းငယ် ကြာ ဖိထားပါက နယ်နမိတ် အမှတ်တခုကို မှတ်နိုင်သည်။
+        										  \n \n နယ်နမိတ် အမှတ်ပေါ် တချက်နှိပ်လိုက်လျှင် ယင်းနေရာကို ပြင်ဆင်ခြင်းပါ။
+                                                  \n ပြင်ဆင်ရာမှာ−
+                                                  \n* အဖြူရောင် ကြက်ခြေခတ် X ပုံက ယင်းနယ်နမိတ် အမှတ်ကို ဖျက်နိုင်သည်။
+                                                  \n* အဖြူရောင် သံလိုက်အိမ်မြှောင်ပုံက ကိုယ်ချချင်တဲ့ အမှတ်နေရာကို တိတိကျကျ ချနိုင်ဖို့ပါ။ အရပ်လေးမျက်နှာပြ မျှားခေါင်းများလည်း ပြနေပါလိမ့်မယ်။
+                                                  \n မျှားခေါင်းပုံတွေ သုံးပြီး ချချင်တဲ့ နေရာကို သတ်မှတ်ပြီး သေချာပြီဆိုတာနဲ့ သံလိုက်ပုံကို ပြန်နှိပ်လိုက်လျှင် အဖြူရောင် အစက်ပုံ အရုပ်ပေါ်လာလျှင် ချချင်တဲ့ နေရာကို သတ်မှတ်လိုက်တာပါ။
+                                                  \n* အဖြူရောင် ကွင်းမှာ ကန့်လန့်ဖြတ်မျဉ်းပုံ အရုပ်က ပြင်ဆင်မှုကနေ ပြန်ထွက်တာပါ။
+                                           		  \n \n ရှိပြီးသား နယ်နမိတ် အမှတ်နေရာပေါ် ခပ်ကြာကြာ နှိပ်ပြီး၊ ဖိဆွဲပါက နေရာရွှေ့နိုင်ပါတယ်။
+                                                  \n \n ချထားတဲ့ နယ်နမိတ်မျဉ်း၊ နယ်နမိတ်အမှတ်တွေ ပါတဲ့ မှတ်တမ်းပုံကို OT မှာ ပြုလုပ်လို့ရပါတယ်။
+    </string>
+    <string name="showcase_claim_message"> \n ပိုင်ဆိုင်မှု တခု အဆိုပြုရာမှာ တဗ်ခလုတ်များ သုံးရပြီး လိုအပ်တဲ့ အချက်အလက်များကို ဖြည့်ရန်လိုအပ်သည်။
+                                           \n ပထမ တဗ်ခလုတ် ၆ ခုက LADM/STDM စံတွေနှင့် ကိုက်ညီသော အချက်အလက်များ အတွက်ပါ။ သတ်မှတ် ပုံစံအသေပါ။
+                                           \n နောက်ဆုံး တဗ် ၂ ခုသည် SOLA Web Admin ကို ထိန်းချုပ်သူမှ စိတ်ကြိုက် ထည့်သွင်းနိုင်သော ဒိုင်းနမစ်ပုံစံ အချက်အလက်များ ဖြည့်ရန်ဖြစ်သည်။
+                                           \n \n အဆိုပြုမှု တဗ် အောက်တွင် ပါသော အပိုင်းများမှာ −
+                                           \n* "အဆိုပြုမြေအမည်" ဆိုသည်မှာ ပိုင်ဆိုင်မှုတခုကို ပေးထားသော၊ သတ်မှတ်ထားသော အမည်ကို ခေါ်သည်။
+                                           \n* "မြေယာပိုင်ဆိုင်မှု အမျိုးအစား" ဆိုသည်မှာ LADM သို့မဟုတ် (SOLA သတ်မှတ်ချက်) တွင် မူလ ပိုင်ဆိုင်ခွင့်နှင့် ပတ်သက်၍ ခွဲခြားပေးသော မြေအမျိုးအစားများကို ဆိုလိုသည်။ 
+                                           \n* "မြေအသုံးပြုမှု" ဆိုသည်မှာ လက်တလော မြေကို အသုံးချနေမှု (SOLA သတ်မှတ်ချက်) အခြေအနေကို ဆိုလိုသည်။
+                                           \n* "အဆိုပြုမှု စတင်သည့် ရက်စွဲ" ဆိုသည်မှာ ပိုင်ဆိုင်မှုနှင့် ပတ်သက်ပြီး အစောဆုံး သတ်မှတ်သည့် ရက်စွဲကို ဆိုလိုသည်။
+                                           \n* "မှတ်ချက်" ဆိုသည်မှာ မြေပြင်တိုင်းတာရေး ဆောင်ရွက်သူမှ ထပ်မံဖြည့်စွက်ထားသော အချက်အလက်များကို ဖြည့်သွင်းရန် အတွက် ဖြစ်သည်။
+                                           \n \n ယခု ပုံစံအောက်ရှိ ခလုတ် ၂ ခုမှာ−
+                                           \n* "ထပ်ဖြည့်ရန် (ပြင်ဆင်ရန်) အဆိုပြုသူ" ပိုင်ဆိုင်မှု အတွက် ပိုင်ဆိုင်သူ(များ) ကို ဖြည့်ရန်။
+                                           \n* "အဆိုပြုမှုကို အငြင်းပွားမှုအဖြစ် ရွေးရန်" မှာ ပိုင်ဆိုင်မှုတခုကို အဆိုပြုရာမှာ အငြင်းပွားမှု၊ သဘောမတူမှုမျိုး အတွက် မှတ်သားရန်ဖြစ်သည်။ ယင်း အငြင်းပွားမှုနှင့် ယခင် တင်ပြထားသော အဆိုပြုမှုကို ချိတ်ဆက်ပေးရန်ဖြစ်သည်။
+     </string>
+    <string name="showcase_claim_select_message"> \n \n \n
+        										 အဆိုပြုမှု တခုကို ကြည့်ချင်၊ ပြင်ချင်လျှင် ပေးထားသော အဆိုပြုမှုစာရင်းထဲမှ ယင်းစာရင်းကို နှိပ်လိုက်ပါ
+ 										      \n \n အဆိုပြုမှုတခုကို ရပ်ရွာဆာဗာမှာ တင်ချင်လျှင် အပြာရောင် (ညာဖက်လှည့်နေသော) မျှားပုံကို နှိပ်ပါ
+										      \n \n စက်ထဲရှိ အဆိုပြုမှုတခုကို ဖျက်ချင်လျှင် အနီရောင် ကြက်ခြေခတ် X ပုံကို နှိပ်ပါ
+    </string>
+    <string name="showcase_claim_shares_message">
+        										  အဆိုပြုမှုရဲ့ ပိုင်ဆိုင်မှုနဲ့ ပတ်သက်ပြီး ပိုင်ဆိုင်မှုဝေစု စာရင်းကို မှတ်ထားနိုင်တယ်။
+												  \n (OT တွင် အရှင်းဆုံး ပုံစံဖြင့် အဆိုပြုသူက ၁၀၀ ရာခိုင်နှုန်း ပိုင်ဆိုင်မှုအဖြစ် စာရင်းစသွင်းစဉ်တွင် မှတ်သည်။ နောက်ပိုင်းမှာတော့ 
+												  ပေးထားတဲ့ လုပ်ဆောင်နည်း အတိုင်း ၁၀၀ ရာနှုန်း ပိုင်ဆိုင်မှုကို ပြန်ပြင်ဆင်နိုင်တယ်။) 
+												  
+												  \n ဝေစု တခုကို ရွေးထားပြီး ပိုင်ဆိုင်သူ (ပိုင်ဆိုင်သူများ) က ယင်းဝေစုနှင့် သက်ဆိုင်ကြောင်းကို သိရှိနိုင်သည်။ 
+												  ပိုင်ဆိုင်သူ၏ အသေးစိတ် အချက်အလက် ပြင်ဆင်ခြင်း၊ သို့မဟုတ် အခြား ပိုင်ဆိုင်သူများကို ထပ်ဖြည့်ခြင်းများ ပြုလုပ်နိုင်သည်။
+												  
+												  \n ဝေစုရှယ်ယာ ရာခိုင်နှုန်း သတ်မှတ်မှုကို အသင့်ပေးထားတဲ့ နံပတ်ခလုတ်မှာ ရွေးပြီး ပြောင်းပေးနိုင်ပါတယ်။
+												  
+												  \n ဝေစုကို ဖျက်ချင်ရင် အနီရောင် X ပုံ ပေါ်ကို နှိပ်ပါ။
+												  
+												  \n အစိမ်းရောင် + ပုံ အရုပ်ကတော့ ပိုရှုပ်ထွေးတဲ့ ပိုင်ဆိုင်မှုပုံစံမျိုးဖြစ်တဲ့ ဝေစုရှယ်ယာ အသစ်တွေ ထပ်ဖြည့်နိုင်ရန် အတွက်ပါ။
+												  
+												  \n OT မှာ ပိုင်ဆိုင်မှု တခုရဲ့ ဝေစုများကို သတ်မှတ်ရာမှာ ဝေစု စုစုပေါင်းသည် ၁၀၀ ရာနှုန်းထက် နည်းပြီး သတ်မှတ်ခြင်း မပြုလုပ်နိုင်ပါ။
+        										 
+        	                                        
+    </string>
+    <string name="showcase_claim_title">မြေယာ အဆိုပြုမှု</string>
+    <string name="showcase_claims_message">\n အဆိုပြုမှုစာရင်း (List of Claims Tab) တွင် အဆိုပြုစာရင်း ရှိသည်။ ယင်းစာရင်းတွင် အဆိုပြု အခြေအနေကို ဖော်ပြထားပြီး၊ စက်ထဲ ဆွဲချသိမ်းဆည်းပါက ယင်းအခြေအနေပါ ပါဝင်သည်။
+                                           \n \n အဆိုပြုအခြေအနေ −
+                                           \n   •   L - Lodged တင်သွင်းထားသည်
+                                           \n   •   U - Uploaded/Unmoderated တင်ပို့ထားသည်/ညှိနှိုင်းပြင်ဆင်မှု မလုပ်ရသေးပါ
+                                           \n   *   C - Challenged အငြင်းပွားနေသည်
+                                           \n   •   M - Moderated ပြန်လည်ပြင်ဆင်ထားသည်
+                                           \n   •   R - Rejected ပယ်ချထားသည်
+                                           \n   •   W - Withdrawn ရုပ်သိမ်းထားသည်
+    </string>
+    <string name="showcase_end_message">\n \n 
+        									..အခု ဆက်ပြီးတော့ ..
+											\n \n Open Tenure ကို ဆက်ပြီး အသုံးပြုပေးပါ။ မြေယာ အဆိုပြုမှုနဲ့ ပတ်သက်တဲ့ ပေးစရာအကြံဉာဏ်များ ရှိခဲ့ရင်လည်း
+                                            \n ပေးထားတဲ့ (neil.pullar@fao.org) သို့မဟုတ် မြန်မာလို (info@ot4mm.org) သို့မဟုတ် (facebook.com/ot4mm) ကို ဆက်သွယ်ပါ။
+											\n\n ဖုန်းရဲ့  List  ခလုတ်ကနေ "အသုံးပြုနည်း" ခလုတ်ကို နှိပ်ပြီး၊ ယခု အသုံးပြုနည်းများကို အကြိမ်ကြိမ် ဖတ်ရှုနိုင်ပါတယ်။
+     </string>
+    <string name="showcase_main_message">\n \n 
+        									\n Open Tenure ဆိုသည်မှာ ကမ္ဘာ့ကုလသမဂ္ဂ၊ စားနပ်ရိက္ခာအဖွဲ့ (UN-FAO) မှ ရေးသားပြုလုပ်ထားသော open source software app တခုဖြစ်တယ်။ မြေယာပိုင်ဆိုင်ခွင့်နှင့် ပတ်သက်ပြီး မြေပြင် အချက်အလက် ကောက်ယူ မှတ်တမ်းတင်ရန် အတွက် ဖြစ်သည်။
+											\n (open source software − ရေးသားထားသော ပရိုဂရမ် တခု၊ ဆော့ဖ်ဝဲလ် တခု၏ ကွန်ပျူတာကုဒ်များကို ဖွင့်ထားပေးပြီး၊ မိမိကျွမ်းကျင်မှု၊ လိုအပ်ချက် ရှိမှု အပေါ်မူတည်ပြီး၊ ပြန်လည် ပြင်ဆင် သုံးစွဲခွင့်ရှိသော ဆော့ဖ်ဝဲလ်မျိုးကို ခေါ်သည်။)
+											\n မြေယာနယ်နမိတ်ကို မြေပုံပေါ် မှတ်သားခြင်း၊ မြေပေါ် အနေအထားကို ဓာတ်ပုံမှတ်တမ်းတင်ခြင်း၊ ပိုင်ဆိုင်မှု အထောက်အထားများကို ဓာတ်ပုံမှတ်တမ်းဖြင့် သိမ်းဆည်းခြင်း စသည်တို့ကို  စနစ်တကျ မှတ်တမ်းတင်နိုင်သည်။
+											\n ဝက်ဘ် ဘရောက်ဆာမှ တဆင့် အသုံးပြုရသော ဆာဗာစနစ်  ဖြစ်သည်။ နမူနာအားဖြင့် SOLA Community Server မှ ရှိသော ဒစ်ဂျစ်တယ် မြေပုံနှင့် အချက်အလက်များကို မြေပြင်မှတ်တမ်း မယူမီ ဆာဗာမှ ရယူပြီး၊ အချက်အလက် အသစ်များထည့်ရာတွင် သုံးနိုင်သည်။ ရလာသော အချက်အလက် သစ်များကို ဆာဗာတွင် ပြန်လည်ပေးပို့ ပြင်ဆင်နိုင်သည်။
+
+     </string>
+    <string name="showcase_main_title">SOLA Open Tenure ဆိုသည်မှာ</string>
+    <string name="showcase_map_message">\n \n ရပ်ရွာမြေပုံ တဗ် (Community Map Tab) ကို နှိပ်ပြီး Open Tenure ရဲ့ မြေပုံနေရာကို သွားနိုင်သည်။
+                                        
+    </string>
+    <string name="showcase_news_message">\n \n 
+        									FAO မှ SOLA Community Server နှင့် ပတ်သက်၍ စမ်းသပ်မှုများ၊ တိုးတက်မှုများကို နောက်ဆုံးရ သတင်းအနေဖြင့် ကြည့်ရန် OT အောက်ရှိ သတင်း (News Tab) တဗ်ခလုတ်မှ တဆင့်သွားနိုင်သည်။
+                                         \n FLOSS SOLA Open Source Software Community ဝက်ဘ်ဆိုက်မှလည်း ဆိုလာ ဆော့ဖ်ဝဲလ်နှင့် ပတ်သက်သော အခက်အခဲများ၊ ဖြေရှင်းနည်းများကို သွားရောက် ဖတ်ရှုနိုင်သည်။
+                                         </string>
+    <string name="showcase_persons_message">\n
+        									 မြေယာအဆိုပြုချက်ကို ကိုယ်တိုင် သို့မဟုတ် ကိုယ်စား ပြုလုပ်တင်ပြထားသူများ စာရင်းကို ဖော်ပြပေးထားသည်
+        									\n \n
+        									 ယင်းစာရင်းမှ ပုဂ္ဂိုလ်တဦးဦး၏   
+                                            \n ယင်းစာရင်းပါသူ တဦးဦး၏ အမည်၊ မွေးသက္ကရာဇ်၊ မှတ်ပုံတင် အမှတ်၊ ကျားမအမျိုးအစား၊ ဓာတ်ပုံ တခုခုကို ရွေးပြီး ပြင်နိုင်သည် 
+											\n \n ....သို့မဟုတ်.... 
+    </string>
+    <string name="signature">လက်မှတ်</string>
+    <string name="skip">ထွက်မည်</string>
+    <string name="software_version_title">ဆော့ဖ်ဝဲလ် ဗားရှင်းအဆင့်</string>
+    <string name="south">တောင်</string>
+    <string name="south_adjacency">အဆိုပြုမှု တောင်ဖက်တွင်ရှိသော ပိုင်ဆိုင်မှုများကို ရေးသားပါ</string>
+    <string name="south_east">အရှေ့−တောင်</string>
+    <string name="south_west">အနောက်−တောင်</string>
+    <string name="square_meters">m2</string>
+    <string name="status">အခြေအနေ − </string>
+    <string name="sticky_marker">နေရာမှတ် တည်နေရာအမှတ်အသား</string>
+    <string name="tiles_download_status">အကွက်များ download ပြုလုပ်ရာမှာ စုစုပေါင်း %2$d မှ %1$d ပြုလုပ်ပြီးပါပြီ</string>
+    <string name="tiles_provider">Tiles အင်တာနက် မြေပုံဝန်ဆောင်မှု</string>
+    <string name="tiles_provider_dialog_title">စက်အတွင်း အင်တာနက် မလိုပဲ သုံးမည့် tiles မြေပုံဝန်ဆောင်မှု အမျိုးအစားကို ရွေးပါ</string>
+    <string name="tiles_queued">download စာရင်းတွင် အကွက်များ %d ခု ရှိသည် </string>
+    <string name="title_activity_claim">Open Tenure − မြေယာအဆိုပြုမှု အသစ်</string>
+    <string name="title_activity_file_chooser">ဖိုင်တစ်ဖိုင်ကို ရွေးပါ</string>
+    <string name="title_activity_group">Open Tenure − အစုအဖွဲ့ အသစ်</string>
+    <string name="title_activity_login_activity_test">အကောင့်ဝင်မည်</string>
+    <string name="title_activity_person">Open Tenure − လူပုဂ္ဂိုလ် အသစ်</string>
+    <string name="title_activity_select_bookmark">Open Tenure − အင်တာနက်လိပ်စာ မှတ်ခြင်း ရွေးပါ</string>
+    <string name="title_activity_select_claim">Open Tenure − မြေယာအဆိုပြုမှု ရွေးပါ</string>
+    <string name="title_activity_select_person">Open Tenure − လူပုဂ္ဂိုလ် ရွေးပါ</string>
+    <string name="title_activity_settings">အပြင်အဆင်</string>
+    <string name="title_activity_share_details">Open Tenure − ဝေစု အချက်အလက်</string>
+    <string name="title_add_map_bookmark">မြေပုံ၏ အင်တာနက်လိပ်စာကို မှတ်ပါ</string>
+    <string name="title_add_non_boundary">နယ်နမိတ်စည်း မဟုတ်သော အမှတ်အသား နေရာထည့်ပါ</string>
+    <string name="title_bookmarks">အင်တာနက်လိပ်စာ မှတ်ခြင်း</string>
+    <string name="title_challenged_claim">အငြင်းပွားမှုရှိသော အဆိုပြုမှု −</string>
+    <string name="title_challenged_claims">အငြင်းပွားမှုရှိသော အဆိုပြုချက်များ</string>
+    <string name="title_claim">မြေယာအဆိုပြုမှု</string>
+    <string name="title_claim__downloading_map">အဆိုပြုမှုကို download လုပ်နေသည်</string>
+    <string name="title_claim_additional_info">ထပ်ဖြည့်ထားသော အချက်အလက်</string>
+    <string name="title_claim_adjacencies">ထိစပ်နယ်နိမိတ်များ</string>
+    <string name="title_claim_challenges">အငြင်းပွားမှု</string>
+    <string name="title_claim_documents">အထောက်အထား စာရွက်စာတမ်း</string>
+    <string name="title_claim_map">မြေပုံ</string>
+    <string name="title_claim_owners">ဝေစုများ</string>
+    <string name="title_claim_photos">အဆိုပြု ဓာတ်ပုံများ</string>
+    <string name="title_claims">မြေယာအဆိုပြုမှုစာရင်း</string>
+    <string name="title_confirm_data_transfer">အချက်အလက် ပြောင်းရွှေ့မှုကို အတည်ပြုပါ</string>
+    <string name="title_exit_dialog">ထွက်ပါ</string>
+    <string name="title_export">အဆိုပြုမှုကို zip ဖိုင်အဖြစ် သိမ်းဆည်နေသည်</string>
+    <string name="title_group_details">အစုအဖွဲ့ အသေးစိတ် အချက်အလက်</string>
+    <string name="title_i_m_here">လက်ရှိ ရောက်ရှိရာနေရာ</string>
+    <string name="title_import">အဆိုပြုမှု zip ဖိုင်ကို ထည့်သွင်းနေသည်</string>
+    <string name="title_initialization_process">စတင်လုပ်ဆောင်မှုများ</string>
+    <string name="title_item">အစိတ်အပိုင်း</string>
+    <string name="title_lock_db">စက်အတွင်းမှ အချက်အလက်ကို လုံခြုံရေးဝှက်စာ ထည့်ပါ</string>
+    <string name="title_map">ရပ်ရွာမြေပုံ</string>
+    <string name="title_news">သတင်း</string>
+    <string name="title_no_connection">အင်တာနက် ချိတ်ဆက်၍ မရပါ</string>
+    <string name="title_person_details">လူပုဂ္ဂိုလ် အသေးစိတ် အချက်အလက်</string>
+    <string name="title_persons">လူပုဂ္ဂိုလ်</string>
+    <string name="title_remove_person_dialog">လူပုဂ္ဂိုလ် ဖယ်ရှားရန်</string>
+    <string name="title_restart_dialog">အစမှပြန်ဖွင့်ရန် လိုအပ်သည်</string>
+    <string name="title_save_claim_dialog">မြေယာအဆိုပြုချက်ကို ပြန်လည်ပြင်ဆင်ပြီးပြီ</string>
+    <string name="title_save_group_dialog">အစုအဖွဲ့ အချက်အလက်ကို ပြန်လည်ပြင်ဆင်ပြီးပြီ</string>
+    <string name="title_save_person_dialog">လူပုဂ္ဂိုလ် အချက်အလက်ကို ပြန်လည်ပြင်ဆင်ပြီးပြီ</string>
+    <string name="title_section">ကဏ္ဍ</string>
+    <string name="title_share">ဝေစု</string>
+    <string name="tms_tiles_provider">TMS Tiles အင်တာနက် မြေပုံဝန်ဆောင်မှု</string>
+    <string name="tms_tiles_provider_key">TMS</string>
+    <string name="tms_url_pref_dialog_title">Tiles Map Server ၏ URL ကို ဖြည့်ပါ</string>
+    <string name="tms_url_pref_summary">Tiles Map Server ၏ URL</string>
+    <string name="tms_url_pref_title">TMS URL</string>
+    <string name="too_many_tiles_queued">download စာရင်းတွင် အကွက်များ %d ခု ရှိသည်။ အကွက်များ စာရင်းတွင် ထပ်ဖြည့်လိုလျှင် ပထမ အကွက်များ ပြည့်အောင် စောင့်ပေးရမည်။</string>
+    <string name="type">အမျိုးအစား</string>
+    <string name="unmoderated">ညှိနှိုင်းပြင်ဆင်မှု မပြုလုပ်ရသေးပါ</string>
+    <string name="up">အပေါ်ဖက်</string>
+    <string name="update_error">အဆင့်မြှင့်မှု အမှားအယွင်း</string>
+    <string name="update_incomplete">အဆင့်မြှင့်မှု မပြီးသေးပါ</string>
+    <string name="updating">အဆင့်မြှင့်နေသည်</string>
+    <string name="upload_error">upload ဆွဲတင်မှု အမှားအယွင်း</string>
+    <string name="upload_incomplete">upload ဆွဲတင်မှု မပြီးသေးပါ</string>
+    <string name="uploaded">upload ဆွဲတင်ပြီးပြီ</string>
+    <string name="uploading">uploading ဆွဲတင်နေသည်</string>
+    <string name="west">အနောက်</string>
+    <string name="west_adjacency">အဆိုပြုမှု အနောက်ဖက်တွင်ရှိသော ပိုင်ဆိုင်မှုများကို ရေးသားပါ</string>
+    <string name="withdraw_claim">အဆိုပြုမှုကို ရုပ်သိမ်းခြင်း</string>
+    <string name="wtms_tiles_provider">WTMS Tiles အင်တာနက် မြေပုံဝန်ဆောင်မှု</string>
+    <string name="wtms_tiles_provider_key">WTMS</string>
+    <string name="wtms_url_pref_dialog_title">Web Tiles Map Server ၏ URL ကို ဖြည့်ပါ</string>
+    <string name="wtms_url_pref_summary">Web Tiles Map Server ၏ URL</string>
+    <string name="wtms_url_pref_title">WTMS URL</string>
+    <string name="yes">Yes</string>
+    <string name="zoom_level_too_low">ဖော်ပြပါ ဧရိယာသည် ကျယ်လွန်းသည်။ စက်အတွင်း ထည့်သွင်းမယ့် မြေပုံနေရာကို download မလုပ်ခင် မှန်ဘီလူး အဆကို ချဲ့ထားပေးပါ။</string>
+</resources>

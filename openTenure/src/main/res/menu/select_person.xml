@@ -1,0 +1,7 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item android:id="@+id/action_done"
+          android:icon="@drawable/ic_cab_done_holo_light"
+          android:title="@string/action_done"
+          android:showAsAction="ifRoom" 
+          android:orderInCategory="1"/>    
+</menu>

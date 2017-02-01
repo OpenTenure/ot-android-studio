@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="action_showcase">Vedi il Tutorial</string>
+    <string name="showcase_main_title">Cosa é Open Tenure ?</string>
+    <string name="showcase_main_message">\n \n 
+        									\n• Facilita la registrazione di diritti territoriali di una comunitá utilizzando un approccio di "crowd sourcing"
+											\n• Software su apparecchi mobili per catturare e mostrare diritti territoriali e le associate mappe
+											\n• Community Server Web based per moderare richieste di diritti territoriali per una comunitá accessibile alla comunitá territoriale stessa     </string>
+    <string name="showcase_claim_title">Dettagli Richiesta</string>
+    <string name="showcase_news_message">\n \n 
+        									Home page con le ultime notizie e i link per accedere a
+                                         \n Open Tenure Community Web Site e FLOSS SOLA Web Site cosí come per accedere ai sit con le notizie</string>
+    
+    <string name="showcase_map_message">\n \n Map viewer che mostra i confini della Community area di interesse
+        								\n (notre che potrá esser fatto un upload al Community Server solo delle particelle digitalizzate all interno di tale area)
+                                        
+    </string>
+    <string name="showcase_persons_message">\n \n 
+        									 Mostra la lista delle persone che inoltrano una richiesta per conto proprio o altrui
+        									\n \n
+        									 selezionare uno degli elementi della lista per modificarne i dati  
+                                            \n incluso  nome, data di nascita, genere, dettagli identificativi e foto
+											\n \n ....oppure.... 
+    </string>
+    <string name="showcase_claims_message">\n \n Mostra la lista delle richieste
+										   \n \n Ogni richiesta ha un ciclo di vita e transita di stati differenti durante la lavorazione della richiesta
+	</string>
+    <string name="showcase_claim_select_message"> \n \n \n
+        										 Una richiesta puó essere selezionata dalla lista per modificarne o vederne i dettegli 
+        										 e per marcare lestensione geografica dei diritti territoriali 
+        									  \n \n il ciclo di vita della richiesta é riportato dalla legenda degli status:
+										      \n•   L = Iniziata
+										      \n•   U = Eseguito upload/Non ancora moderata
+										      \n•   C = Contrastata
+										      \n•   M = ModeratA
+										      \n•   R = Rigettata
+										      \n•   W = Ritirata
+										      \n \n Selezionare la freccia blu per effettuare lupload della richiesta verso Community Server
+										      \n \n Selezionare la croce rossa per rimuovere la richiesta dalla lista
+										      \n \n ....oppure.... 
+    </string>
+    <string name="showcase_claim_message"> \n Dettagli della Richiesta incluso il nome, 
+                                              diritto territoriale, destinazione di uso, data in cui il diritto ha avuto inizio ed ogni altra informazione utile
+    </string>
+    
+    <string name="showcase_claim_map_message">\n \n Mappa lestensione spaziale del diritto territoriale utilizzando lapparecchio mobile 
+                                           		 e le mappe scaricate con lassistenza del posizionamento GPS offerto dallapparecchio mobile. 
+                                        	  \n \n Quando una mappa é stata completata é possibile generarne una immagine ed allegarla alla richiesta
+    </string>
+    
+    <string name="showcase_claim_mapdraw_message">\n \n Premere a lungo sulla mappa per creare un nuovo marker
+        										  \n \n Selezionare un marker esistente per modificarlo 	 
+                                           		  \n \n Premere a lungo su un marker esistente per spostarlo allinterno nella mappa
+    </string>
+    <string name="showcase_claim_document_message">\n \n \n 
+        										  Lista dei documenti allegati alla richiesta
+         										   \n \n 
+         										  un documento puó essere selezionato dalla lista per vederne/modificarne i dettagli
+         										   
+        										 
+        	                                        
+    </string>
+    
+    <string name="showcase_claim_documentAttach_message">\n \n \n 
+        										  Selezionare icona con clip per allegare un file esistente
+        										   \n \n
+        										  Selezionare macchinetta fotografica per fare una foto da allegare alla richiesta
+    </string>
+    
+    <string name="showcase_claim_adjacencies_message">\n \n \n 
+        										  Informazioni sulle adiacenze possono essre specificate per ogni punto cardinale della particella richiesta
+         										   \n \n 
+         										  Informazioni su richieste adiacenti saranno ottenute e visualizzate automaticamente dallapplicazione
+         										  
+        										 
+        	                                        
+    </string>
+    
+    <string name="showcase_claim_challenges_message">\n \n \n 
+        										  Lista delle controversie relative alla richiesta
+        										    
+    </string>
+    
+    <string name="showcase_claim_shares_message">\n \n \n 
+        										  Mostra le diverse porzioni del diritto richiesto  
+         										   \n \n 
+         										  una porzione puó essere selezionata dalla lista per
+         										  \n
+												  modificarne/vederne il valore
+												  \n
+												  aggiungere/rimuovere titolari
+												  \n \n
+												  Selezionare licona + per aggiungere nuove porzioni del diritto		
+        										 
+        	                                        
+    </string>
+    <string 
+        name="showcase_actionNews_message"> 	\n \n Selezionare licona col lucchetto per criptare i dati l ocali
+        										\n \n Selezionare gli elementi della barra superiore per accedere a:
+        										\n• "Setting" per configurare URL del Community Server e del Geoserver 
+												\n•  "Vedi Tutorial" per vedere ancora questo tutorial 
+           
+    </string>
+    <string name="showcase_actionMap_message"> \n Selezionare licona "Centra" per centrare la mappa sulla vostra posizione
+        								  	   \n \n Selezionare licona "Download per effettuare il download dal Community Server
+        								  	   \n delle richieste inoltrate nella zona visualizzata
+        									   \n \n Selezionare il tipo di map viewer dalla barra superiore 
+    </string>
+    <string name="showcase_actionPersons_message"> \n Selezionare licona + per aggiungere una nuova persona e specificarne i dati
+        										
+    </string>
+    <string name="showcase_actionClaims_message"> \n \n Selezionare licona + per aggiungere una nuova richiesta e specificarne i dettagli
+                                                  \n \n Selezionare Login/Logout per essere abilitati/disabilitati a modificare i dati o effettuare upload della propria richiesta   
+    </string>
+    
+    <string name="showcase_actionClaimDetails_message"> \n \n  Selezionare icona salvataggio per salvare i dati della richiesta
+        											    \n \n  Selezionare icona di Export per creare un file compresso della richiesta
+        												\n \n  Selezionare icona di stampa per creare una versione stampabile della richiesta
+    </string>
+    <string name="showcase_actionClaimMap_message"> \n \n  Selezionare icona di rotazione per ruotare la mappa utilizzando la funzione compasso dellapparecchio mobile
+        										    \n \n  Selezionare licona "Centra" per centrare la mappa sulla vostra posizione
+        										    \n \n  Selezionare icona snapshot per allegare una foto della mappa della richiesta 
+    </string>
+	
+	<string name="showcase_actionAlert1_message"> \n \n  Ora bisogna inizializzare l\'applicazione.
+                                                   \n \n  ma come???   
+    </string>
+    <string name="showcase_actionAlert_message"> \n \n  Questa icona serve ad inizializzare l\'applicazione.
+                                                  \n \n Al momento, la configurazione permette di unirsi alla comunita\' dimostrativa di Open tenure .
+                                                  \n \n Se ci si vuole unire ad un\' altra comunita\' configurare propriamente l\'URL del community server nelle impostazioni di Open Tenure
+                                                  \n \n Ogni volta che si intende cambiare comunita\': 
+                                                  \n \n 1) cancellare i dati di Open Tenure nelle impostazion app di android
+                                                  \n \n 2) configurare propriamente l\'URL del community server nelle impostazioni di Open Tenure
+                                                  \n \n 3) inizializzare l\'applicazione   
+    </string>
+    
+    <string name="showcase_end_message">\n \n 
+        									..ed ora..
+											\n \n BUON DIVERTIMENTO CON OPEN TENURE!!
+											\n\n questo tutorial puó essere rivisto in ogni momento selezionando "Vedi Tutorial" dalla barra superiore
+     </string>
+    
+    
+    <string name="next">Successivo</string>
+    <string name="close">Chiudi</string>
+    <string name="skip">Salta</string>
+    <string name="ok">OK</string>
+    
+</resources>

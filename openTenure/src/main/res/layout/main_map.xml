@@ -1,0 +1,48 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/light_background_opentenure"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingStart="@dimen/activity_horizontal_margin"
+    android:paddingEnd="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".MainMapFragment" >
+
+    <fragment
+        android:id="@+id/main_map_provider_label"
+        class="org.fao.sola.clients.android.opentenure.MapLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="5sp"
+        tools:layout="@layout/map_label" />
+
+    <fragment
+        android:id="@+id/main_map_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="9"
+        class="com.androidmapsextensions.SupportMapFragment" />
+
+    <TextView
+        android:id="@+id/download_claim_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/item_color"
+        android:gravity="left|bottom"
+        android:text="@string/title_claim__downloading_map"
+        android:textColor="@color/status_created"
+        android:textSize="20sp"
+        android:visibility="gone" />
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:maxHeight="10sp"
+        android:minHeight="10sp"
+        android:visibility="gone" />
+
+</LinearLayout>

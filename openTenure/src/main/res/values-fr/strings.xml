@@ -1,0 +1,529 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Open Tenure</string>
+    <string name="preload">Ouverture de l\'image</string>
+    <string name="action_settings">Paramètres</string>
+    <string name="action_search">Recherche</string>
+    <string name="action_new">Nouveau</string>
+    <string name="action_import">Importation</string>
+    <string name="action_done">Terminé</string>
+    <string name="action_remove_attachment">Retirer l\'attachment</string>
+    <string name="action_remove_owner">Retirer le propriétaire des droits</string>
+    <string name="action_remove_additional_info">Retirer l\'information</string>
+    <string name="action_remove_claim">Retirer la déclaration</string>
+    <string name="action_remove_section_element">Retirer l\'élément</string>
+    <string name="action_camera">Appareil Photo</string>
+    <string name="action_map">Plan</string>
+    <string name="action_login">Connexion</string>
+    <string name="action_download_tiles">Télécharger les titres hors mis en ligne</string>
+    <string name="action_logout">Deconnexion</string>
+    <string name="action_print">Imprimer</string>
+    <string name="action_save">Sauvergarder</string>
+    <string name="action_center">Centrer</string>
+    <string name="action_submit">Soumettre</string>
+    <string name="action_download_file">Télécharger un fichier</string>
+    <string name="action_download_claims">Télécharger les déclarations</string>
+    <string name="action_new_picture">Nouvelle photo</string>
+    <string name="action_new_additional_info">Ajouter des informations</string>
+    <string name="action_new_attachment">Nouveau document</string>
+    <string name="action_lock_db">Configurer le cryptage des données</string>
+    <string name="action_export">Exporter</string>
+    <string name="action_rotate">Faire pivoter le plan selon boussole</string>
+    <string name="action_stop_rotating">Arrêter de faire pivoter le plan</string>
+    <string name="action_claim_map_snapshot">Attacher une capture d\'écran du plan de cette déclaration</string>
+    <string name="title_news">Actualités</string>
+    <string name="title_map">Plan de la Communauté</string>
+    <string name="title_claims">Liste des déclarations</string>
+    <string name="title_persons">Personnes</string>
+    <string name="title_challenged_claims">Déclarations contestées</string>
+    <string name="title_claim">Déclaration</string>
+    <string name="title_person_details">Données personnelles</string>
+    <string name="title_group_details">Données du groupe</string>
+    <string name="title_claim_additional_info">Informations supplémentaires</string>
+    <string name="title_claim_documents">Documents</string>
+    <string name="title_claim_photos">Photos de la déclaration</string>
+    <string name="title_claim_map">Plan</string>
+    <string name="title_claim__downloading_map">Téléchargement des déclarations</string>
+    <string name="title_claim_adjacencies">Contiguïtés</string>
+    <string name="title_claim_owners">Parts</string>
+    <string name="title_share">Part</string>
+    <string name="title_claim_challenges">Contestations</string>
+    <string name="title_export">Exportation de la déclaration au format comprimé</string>
+    <string name="title_section">Section</string>
+    <string name="title_item">Objet</string>
+    <string name="title_activity_settings">Paramètres</string>
+    <string name="title_activity_claim">Open Tenure: Nouvelle déclaration</string>
+    <string name="title_i_m_here">Votre position</string>
+    <string name="title_activity_person">Open Tenure: Nouvelle personne</string>
+    <string name="title_activity_group">Open Tenure: Nouveau groupe</string>
+    <string name="title_activity_select_claim">Open Tenure: Sélectionner la demande</string>
+    <string name="title_activity_select_person">Open Tenure: Sélectionner la personne</string>
+    <string name="title_activity_share_details">Open Tenure: Partager les informations</string>
+    <string name="title_activity_file_chooser">Choisir un fichier</string>
+    <string name="title_lock_db">Crypter les données locales</string>
+    <string name="title_add_non_boundary">Ajouter une position en dehors de la limite</string>
+    <string name="title_exit_dialog">Quitter</string>
+    <string name="title_remove_person_dialog">Supprimer la personne</string>
+    <string name="title_save_claim_dialog">La déclaration a été modifiée</string>
+    <string name="title_save_person_dialog">La personne a été modifiée</string>
+    <string name="title_save_group_dialog">Le groupe a été modifié</string>
+    <string name="choose_file">Choisir une application pour sélectionner un fichier</string>
+    <string name="person_name">Nom de la personne</string>
+    <string name="community_recorder_name">Collecteur de la commauté</string>
+    <string name="postal_address">Adresse postale</string>
+    <string name="email_address">Adresses Email</string>
+    <string name="gender_masculine">Homme</string>
+    <string name="gender_feminine">Femme</string>
+    <string name="physical_person">Personne physique</string>
+    <string name="legal_person">Personne morale</string>
+    <string name="gender">Genre *</string>
+    <string name="person_type">Type de personne *</string>
+    <string name="claim">Déclaration</string>
+    <string name="date">Date</string>
+    <string name="share_value">Valeur du pourcentage : </string>
+    <string name="additional_info">Informations supplémentaires</string>
+    <string name="adjacency">Contiguïté</string>
+    <string name="adjacencies">Contiguïtés</string>
+    <string name="cardinal_direction">Direction cardinale</string>
+    <string name="new_entity">Nouvelle entité</string>
+    <string name="by">Par</string>
+    <string name="type">Type</string>
+    <string name="na">N.A.</string>
+    <string name="group_name">Nom</string>
+    <string name="signature">Signature</string>
+    <string name="software_version_title">Version du Logiciel</string>
+    <string name="claim_date">Date de la déclaration</string>
+    <string name="claim_name">Nom de la déclaration</string>
+    <string name="claim_name_label">Date de la déclaration *</string>
+    <string name="claim_type">Type de déclaration *</string>
+    <string name="claim_type_no_star">Type de déclaration</string>
+    <string name="default_claim_name">Nouvelle déclaration</string>
+    <string name="first_name">Prénom</string>
+    <string name="first_name_label">Prénom *</string>
+    <string name="last_name">Nom</string>
+    <string name="last_name_label">Nom *</string>
+    <string name="date_of_birth">Date de naissance (AAAA-MM-JJ)</string>
+    <string name="date_of_birth_simple">Date de naissance</string>
+    <string name="date_of_birth_label">Date de naissance * (AAAA-MM-JJ)</string>
+    <string name="date_of_start_label">La date de la déclaration s\'applique à partir du (AAAA-MM-JJ)</string>
+    <string name="place_of_birth">Lieu de naissance</string>
+    <string name="place_of_birth_label">Lieu de naissance *</string>
+    <string name="date_of_establishment_label">Date d\'installation</string>
+    <string name="recorded_by">Enregistré par : </string>
+    <string name="mobile_phone_number">Numéro de téléphone mobile</string>
+    <string name="contact_phone_number">Numéro de téléphone à contacter</string>
+    <string name="password">Mot de passe</string>
+    <string name="attachment_removed">L\'attachment a été retiré</string>
+    <string name="owner_removed">Le propriétaire à été retiré</string>
+    <string name="section_element_removed">L\'élément a été retiré</string>
+    <string name="additional_info_removed">L\'information a été retirée</string>
+    <string name="message_password_too_short">Le mot de passe doit avoir au moins %d caractères</string>
+    <string name="message_password_character_is_wrong">Le mot de passe doit seulement contenir des lettres et des chiffres</string>
+    <string name="message_saved">Sauvergardé</string>
+    <string name="message_server_error_saving_claim">Erreur interne du serveur</string>
+    <string name="message_service_not_available">Service non disponible</string>
+    <string name="message_connection_error">Connexion non disponible</string>
+    <string name="message_attachment_downloaded">Télécharger l\'attachement %s</string>
+    <string name="message_attachment_downloading">Attachement %s déjà téléchargé</string>
+    <string name="message_attachment_download_failed">Le télécharger de l\'attachment %s a échoué </string>
+    <string name="message_attachment_download_not_complete">Le télécharger de l\'attachment %s n\'est pas terminé</string>
+    <string name="message_remove_person">Personne %s supprimée</string>
+    <string name="message_remove_person_dialog">Voulez-vous vraiment supprimer %s?</string>
+    <string name="message_error_remove_person">Personne %s non supprimée</string>
+    <string name="message_remaining_days">Jours restants pour contester la déclaration :  </string>
+    <string name="message_map_snapshot_saved">Capture d\'écran du plan sauvegardée</string>
+    <string name="message_adjacencies_saved">Contiguïtés sauvegardées</string>
+    <string name="message_adjacencies_not_saved">Contiguïtés non sauvegardées</string>
+    <string name="message_downloading_attachment">Téléchargement de l\'attachement</string>
+    <string name="message_uploading_attachment">Chargement de l\'attachement</string>
+    <string name="message_invalid_url">URL non valide</string>
+    <string name="message_unable_to_save">Impossible de sauvegarder. Vérifier les informations et ré-essayer.</string>
+    <string name="message_unable_to_save_missing_claim_name">Impossibilité de sauvegarder. Il manque le nom de la déclaration.</string>
+    <string name="message_unable_to_save_missing_person">Impossibilité de sauvegarder. Il manque le déclarant</string>
+    <string name="message_submitted">La déclaration a été soumise</string>
+    <string name="message_uploading">La déclaration est en téléchargement</string>
+    <string name="message_added_attachment">L\'attachement a été ajouté à la demande</string>
+    <string name="message_adding_attachment_not_ok">Une erreur s\'est produite pendant l\'ajout de l\'attachement</string>
+    <string name="message_submission_error">Une erreur s\'est produite pendant la soumission de la déclaration</string>
+    <string name="message_save_claim_before_submit">La déclaration doit être sauvegardée avant la soumission</string>
+    <string name="message_save_snapshot_before_printing">Attacher une capture d\'écran du plan avant impression</string>
+    <string name="message_save_claim_before_adding_content">La déclaration doit être sauvegardée avant d\'ajouter le contenu</string>
+    <string name="message_save_person_before_adding_content">La personne doit être sauvegardée avant d\'ajouter le contenu</string>
+    <string name="message_export">Exportation</string>
+    <string name="message_no_claim_to_download">Il n\'y a aucune déclaration à télécharger</string>
+    <string name="message_claims_downloaded">Déclarations correctement téléchargées</string>
+    <string name="message_error_downloading_claims">%s de déclarations téléchargées. Toutes les déclarations n\'ont pas été téléchargés.</string>
+    <string name="message_login_no_more_valid">La session a expiré. Reconnectez-vous.</string>
+    <string name="message_db_locked">Les données sont protégées par un mot de passe</string>
+    <string name="message_db_password">Mot de passe pour accéder aux données?</string>
+    <string name="message_cant_open_db">Impossible d\'accéder aux données</string>
+    <string name="message_no_application">Imposible de trouver l\'application pour ouvrir le fichier</string>
+    <string name="message_error_opening_file">Une erreur s\'est produite en ouvrant le fichier : </string>
+    <string name="message_old_db_password">Mot de passe actuel?</string>
+    <string name="message_new_db_password">Nouveau mot de passe (laisser blanc pour les données non cryptées)?</string>
+    <string name="message_password_dont_match">Nouveau mot de passe non confirmé. Merci de ré-essayer.</string>
+    <string name="message_encryption_failed">Impossible de crypter les données locales</string>
+    <string name="message_data_unencrypted">Alerte: vos données locales ne sont pas cryptées.</string>
+    <string name="message_encryption_set">Vos données locales sont cryptées. Fournir le mot de passe de cryptage à la prochaine utilisation d\'OpenTenure</string>
+    <string name="message_confirm_new_db_password">Confirmer le mot de passe</string>
+    <string name="message_enter_description">Entrer une description</string>
+    <string name="message_add_marker">Ajouter un repère à la limite?</string>
+    <string name="message_remove_marker">Enlever le repère?</string>
+    <string name="message_remove_attachment">Supprimer l\'attachement?</string>
+    <string name="message_remove_owner">Supprimer le propriétaire?</string>
+    <string name="message_remove_section_element">Supprimer l\'élément?</string>
+    <string name="message_remove_additional_info">Supprimer les informations?</string>
+    <string name="message_not_supported_on_this_device">Non permis sur cet appareil</string>
+    <string name="message_exit_dialog">Voulez-vous vraiment quitter l\'application?</string>
+    <string name="message_create_before_edit">Créer une déclaration en spécifiant ses détails avant d\'ajouter les informations</string>
+    <string name="message_map_not_yet_draw">Le plan de la déclaration n\'est pas encore terminé</string>
+    <string name="message_no_available_shares">Libérez des parts dans cette déclaration avant de modifier la valeur de la part</string>
+    <string name="message_no_available_shares_adding_new">Libérez des parts dans cette déclaration avant d\'ajouter une nouvelle part</string>
+    <string name="message_share_saved">Sauvegarder la part</string>
+    <string name="message_share_not_saved">Une erreur s\'est produite en sauvegardant la part</string>
+    <string name="message_already_owner">La personne sélectionnée partage déjà cette déclaration</string>
+    <string name="message_touch_to_select_a_person">Toucher pour sélectionner une personne</string>
+    <string name="message_touch_to_select_a_claim">Toucher pour sélectionner une déclaration</string>
+    <string name="message_error_mandatory_fields">Remplir tous les champs obligatoires avant de suavegarder</string>
+    <string name="message_error_mandatory_field_first_name">Remplir le champs obligatoire Prénom avant de sauvegarder</string>
+    <string name="message_error_mandatory_field_last_name">Remplir le champs obligatoire Nom avant de sauvegarder</string>
+    <string name="message_error_mandatory_field_gender">Remplir le champs obligatoire Genre avant de sauvegarder</string>
+    <string name="message_error_mandatory_birthdate">La date de naissance n\'est pas au bon format ou vide</string>
+    <string name="message_error_startdate">La date du début du droit n\'est pas au bon format ou vide</string>
+    <string name="message_remove_quest">Voulez-vous vraiment retirer la déclaration?</string>
+    <string name="message_remove_claim">Voulze-vous vraiment supprimer localement la déclaration?</string>
+    <string name="message_error_withdraw_claim">Une erreur s\'est produite en retirant la déclaration : </string>
+    <string name="message_withdrawn_claim">Déclaration correctement retirée</string>
+    <string name="message_deleted_claim">Déclaration correctement supprimée localement</string>
+    <string name="message_error_deleting_claim">Une erreur s\'est produite en supprimant la déclaration localement</string>
+    <string name="message_save_changes">Voulez-vous sauvegarder les chagements?</string>
+    <string name="message_discard_changes">Voulez-vous réellement quitter sans sauvergarder?</string>
+    <string name="message_claim_modified">Déclaration modifiée</string>
+    <string name="message_entity_type">Quelle sorte d\'entité?</string>
+    <string name="message_title_app_initializing">Initialisation d\'OpenTenure</string>
+    <string name="message_app_initializing">Merci d\'attendre&#8230;</string>
+    <string name="message_title_app_not_initialized">Cette application n\'est pas initialisée</string>
+    <string name="message_app_not_initialized_network">La connexion au réseau n\'est pas disponible</string>
+    <string name="message_app_not_yet_initialized">L\'application n\'est pas encore initialisée</string>
+    <string name="message_app_not_initialized">Vérifier que les paramètres de votre Serveur Communautaire Open Tenure soient corrects et procéder de nouveau à l\'initialisation</string>
+    <string name="message_title_app_initialized">L\'application est initialisée</string>
+    <string name="message_app_initialized_default">L\'application est prète à fonctionner et à communiquer avec le Serveur Communautaire Open Tenure par défaut</string>
+    <string name="message_app_initialized">L\'application est prète à fonctionner et à communiquer avec le Serveur Communautaire Open Tenure</string>
+    <string name="check_location_service">Information de positionnement indisponible. Vérifier que le service de positionnement est actif dans les paramètres</string>
+    <string name="tiles_queued">Il y a %d images du mosaiquage dans la liste de téléchargement</string>
+    <string name="too_many_tiles_queued">Il y a %d images du mosaiquage dans la liste des téléchargement. Merci d\'attendre avant de télécharger d\'autres images du mosaiquage.</string>
+    <string name="all_tiles_downloaded">Toutes les images du mosaiquage de la liste de téléchargement ont été téléchargées.</string>
+    <string name="tiles_download_status">Téléchargement tuile  %1$d de %2$d</string>
+    <string name="not_all_tiles_downloaded">%d images du mosaiquage pour ce plan ont été téléchargées. Vérifier que ce mosaiquage vous convienne ou recommencer le téléchargement.</string>
+    <string name="zoom_level_too_low">L\'étendue du plan est trop large. Augmenter le niveau de zoom avant de télécharger des données locales pour la plan</string>
+    <string name="yes">Oui</string>
+    <string name="person">Personne</string>
+    <string name="group">Groupe</string>
+    <string name="no">Non</string>
+    <string name="up">Au-dessus</string>
+    <string name="down">En-dessous</string>
+    <string name="left">Gauche</string>
+    <string name="right">Droite</string>
+    <string name="confirm">Confirmer</string>
+    <string name="cancel">Annuler</string>
+    <string name="not_boundary">N\'est pas une limite</string>
+    <string name="new_snapshot">Nouvelle capture d\'écran</string>
+    <string name="new_file">Nouveau fichier</string>
+    <string name="new_multipage">Nouveau fichier multipage</string>
+    <string name="withdraw_claim">Retirer la déclaration</string>
+    <string name="new_additional_info">Ajouter des informations</string>
+    <string name="add_description">Description?</string>
+    <string name="add_key">Clé?</string>
+    <string name="add_value">Valeur?</string>
+    <string name="draggable_marker">Repère déplaçable</string>
+    <string name="sticky_marker">Repère static</string>
+    <string name="claimant_picture">Photo du déclarant</string>
+    <string name="claimant">Déclarant *</string>
+    <string name="claimant_no_star">Déclarant</string>
+    <string name="delete_locally">Effacer localement</string>
+    <string name="owner">Propriétaire</string>
+    <string name="challenge_to">Contestation de</string>
+    <string name="challenged_by">Contestée par</string>
+    <string name="owners">Propriétaires</string>
+    <string name="claim_notes">Notes</string>
+    <string name="insert_claim_notes">Insérer des notes à la déclaration</string>
+    <string name="person_picture">Photo de la personne</string>
+    <string name="map_provider_google_normal">Google Maps</string>
+    <string name="map_provider_google_satellite">Google Earth</string>
+    <string name="map_provider_google_hybrid">Google Hybrid</string>
+    <string name="map_provider_google_terrain">Google Terrain</string>
+    <string name="map_provider_osm_mapnik">Open Street Map MapNik</string>
+    <string name="map_provider_osm_mapquest">Open Street Map MapQuest</string>
+    <string name="map_provider_local_tiles">Données locales</string>
+    <string name="map_provider_geoserver">GeoServer</string>
+    <string name="cs_url_pref_title">URL de Serveur Communautaire</string>
+    <string name="cs_url_pref_summary">L\'adresse Web du Serveur Communautaire OpenTenure</string>
+    <string name="cs_url_pref_dialog_title">Entrer l\'URL de votre Serveur Communautaire OpenTenure</string>
+    <string name="geoserver_url_pref_title">GeoServer URL</string>
+    <string name="geoserver_url_pref_summary">URL de base de votre fournisseur du plan web GeoServer privé</string>
+    <string name="geoserver_url_pref_dialog_title">Entrer l\'URL du GeoServer</string>
+    <string name="geoserver_layer_pref_title">Couche GeoServer</string>
+    <string name="geoserver_layer_pref_summary">La couche WMS doit être extraite du GeoServer (demandez à votre administrateur)</string>
+    <string name="geoserver_layer_pref_dialog_title">Entrer le nom de la couche WMS</string>
+    <string name="form_template_url_pref_title">URL du formulaire</string>
+    <string name="form_template_url_pref_summary">URL du formulaire d\'enquête</string>
+    <string name="form_template_url_pref_dialog_title">Entrer l\'URL du formulaire d\'enquête</string>
+    <string name="property">Propriété</string>
+    <string name="id_type">Type d\'identité</string>
+    <string name="id_number">Numéro d\'identité</string>
+    <string name="land_use">Utilisateur du terrain</string>
+    <string name="calculated_adjacencies">Déclarations adjacentes</string>
+    <string name="adjacent_claims">Déclarations adjacentes</string>
+    <string name="adjacent_properties">Propriétés adjacentes</string>
+    <string name="north_adjacency">Contiguïté Nord</string>
+    <string name="south_adjacency">Contiguïté Sud</string>
+    <string name="east_adjacency">Contiguïté Est</string>
+    <string name="west_adjacency">Contiguïté Ouest</string>
+    <string name="north">Nord</string>
+    <string name="south">Sud</string>
+    <string name="east">Est</string>
+    <string name="west">Ouest</string>
+    <string name="north_east">Nord-Est</string>
+    <string name="north_west">Nord-Ouest</string>
+    <string name="south_east">Sud-Est</string>
+    <string name="south_west">Sud-Ouest</string>
+    <string name="action_view_community_area">Voir l’étendue de la communauté</string>
+    <string name="title_initialization_process">Initialisation</string>
+    <string name="message_initialize_before"> Procéder d’abord à l’initialisation </string>
+    <string name="message_default_initialization">Vous êtes sur le point d’initialiser l’application avec le Serveur Communautaire par défaut. Ce serveur doit être utilise uniquement pour les démonstration. Voulez-vous continuer? Autrement appuyez sur annuler et ajouter un URL pour le serveur communautaire dans les paramètres.  </string>
+    <string name="title_no_connection">Pas de connexion</string>
+    <string name="message_no_connection_at_startup">Aucune connexion internet n’est disponible. La configuration ne reflète peut-être pas les récents changements et il vous sera impossible de télécharger ou vider les informations. Connectez-vous à internet si vous prévoyez de transférer des données en utilisant OpenTenure</string>
+    <string name="action_modify_claimant">Modifier le déclarant</string>
+    <string name="action_add_claimant">Ajouter un déclarant</string>
+    <string name="action_select_challenge">Sélectionner la declaration à contester</string>
+    <string name="date_of_start">AAAA-MM-JJ</string>
+    <string name="status">statut : </string>
+    <string name="add_owner">Ajouter le propriétaire </string>
+    <string name="khmer_language">Khmer</string>
+    <string name="albanian_language">Albanais</string>
+    <string name="default_language">Default</string>
+    <string name="tiles_provider">Fournisseur du mosaïquage</string>
+    <string name="tms_tiles_provider">Fournisseur du mosaïquage TMS</string>
+    <string name="geoserver_tiles_provider">Fournisseur du mosaïquage du GeoServer</string>
+    <string name="geoserver_tiles_provider_key">GeoServer</string>
+    <string name="action_backup_db">Backup des données locales</string>
+    <string name="title_challenged_claim">Déclaration contestée : </string>
+    <string name="title_confirm_data_transfer">Confirmer le transfert de données</string>
+    <string name="generated_on">Généré</string>
+    <string name="date_of_start_label_print">La date de validité de la déclaration s’applique à partir du</string>
+    <string name="attachment_updated">L’attachement a été mis à jour</string>
+    <string name="message_claim_exported_error">La déclaration %s n’a pas été exportée</string>
+    <string name="message_claim_exported">La déclaration %s a été exportée</string>
+    <string name="message_download_snapshot_before_printing">Télécharger la capture de la carte depuis le serveur avant d’imprimer</string>
+    <string name="message_data_over_mobile">Vous êtes sur le point de transférer un gros volume de données au moyen d’une connexion internet mobile. Le coût associé peut être élevé; ce coût dépend de votre abonnement.</string>
+    <string name="message_db_backed_up">Une copie de la base de données locale a été créée</string>
+    <string name="claim_area_label">Surface</string>
+    <string name="square_meters">m2</string>
+    <string name="parcel">Parcelle</string>
+    <string name="tms_url_pref_title">TMS URL</string>
+    <string name="tms_url_pref_summary">URL de base de votre serveur de mosaïquage</string>
+    <string name="tms_url_pref_dialog_title">Entrer l’URL de votre serveur de mosaïquage</string>
+    <string name="created">créé</string>
+    <string name="uploading">chargement</string>
+    <string name="updating">mise à jour</string>
+    <string name="uploaded">chargé</string>
+    <string name="deleted">supprimé</string>
+    <string name="description">Description</string>
+    <string name="upload_incomplete">chargement incomplet</string>
+    <string name="update_incomplete">update incomplete</string>
+    <string name="upload_error">erreur de chargement</string>
+    <string name="update_error">erreur de mise à jour</string>
+    <string name="download_incomplete">téléchargement incomplet</string>
+    <string name="download_failed">erreur de téléchargement</string>
+    <string name="downloading">téléchargement</string>
+    <string name="moderated">modéré</string>
+    <string name="unmoderated">non modéré</string>
+    <string name="rejected">rejeté</string>
+    <string name="reviewed">revu</string>
+    <string name="language">Langue</string>
+    <string name="map_sources">Sources des plans</string>
+    <string name="general">Général</string>
+    <string name="dynamic_form">Formulaire dynamique</string>
+    <string name="information">Information</string>
+    <string name="tiles_provider_dialog_title">Select the type of your offline map tiles provider</string>
+    <string name="hint_type_to_filter">Entrer des caractères pour filtrer la liste</string>
+    <string name="shares_prompt">Sélectionner les parts</string>
+    <string name="action_change_map_mode">Changer le mode du plan</string>
+    <string name="action_add_from_gps">Ajouter un repère à partir du point GPS</string>
+    <string name="action_add_boundary">Ajouter un repère de limite de propriété</string>
+    <string name="action_add_non_boundary">Ajouter un autre repère</string>
+    <string name="action_measure">Mesurer</string>
+    <string name="action_export_geo">Exporter les données géographiques</string>
+    <string name="tms_tiles_provider_key">TMS</string>
+    <string name="wtms_tiles_provider">Fournisseur de données WTMS</string>
+    <string name="wtms_tiles_provider_key">WTMS</string>
+    <string name="action_to_group">Changement dans le groupe</string>
+    <string name="action_to_person">Changement chez la personne</string>
+    <string name="title_import">Importation de déclaration compressée</string>
+    <string name="message_exported">Exportée</string>
+    <string name="message_claim_imported">Déclaration exportée</string>
+    <string name="message_claim_ready_to_import">Déclaration prête à être importée</string>
+    <string name="message_claim_ready_to_import_no_dynamic">La déclaration va être importée mais la partie dynamique va être perdue</string>
+    <string name="message_claim_import_password_error">Erreur du mot de passe. Essayez de nouveau</string>
+    <string name="message_claim_import_not_compressed_claim">Le fichier Zip n’est pas une déclaration compressée</string>
+    <string name="message_claim_import_not_claim_archive">Ce n’est pas une archive de déclaration valide"</string>
+    <string name="message_claim_import_already_present">La déclaration est déjà présente sur le serveur</string>
+    <string name="message_claim_import_claim_not_belongs_to_community">Cette déclaration n’appartient pas à cette communauté</string>
+    <string name="message_claim_import_preparing">Préparation de l’import de la déclaration</string>
+    <string name="message_claim_not_imported">Erreur, déclaration non importée</string>
+    <string name="message_add_non_boundary_marker">Ajouter un repère autre qu’un repère de limite ?</string>
+    <string name="message_available_shares">La somme des parts est inférieure à 100%</string>
+    <string name="message_files_not_present">Un ou plusieurs fichiers de la déclaration ne sont pas attachés</string>
+    <string name="message_warnings">Alerte : </string>
+    <string name="markers_distance_label">Distance</string>
+    <string name="meters">m</string>
+    <string name="wtms_url_pref_title">WTMS URL</string>
+    <string name="wtms_url_pref_summary">Base URL du serveur Web du plan</string>
+    <string name="wtms_url_pref_dialog_title">Entrer l’URL de votre serveur Web</string>
+    <string name="null_label">Aucun</string>
+    <string name="language_dialog_title">Sélectionner la langue</string>
+    <string name="title_restart_dialog">Redémarrage nécessaire</string>
+    <string name="message_restart_dialog">Un changement dans la configuration d’OpenTenure requiert un redémarrage pour devenir effectif. Voulez-vous redémarrer OpenTenure maintenant ?</string>
+
+    <string-array name="language_keys">
+        <item>Khmer</item>
+        <item>Albanais</item>
+        <item>Default</item>
+    </string-array>
+    <string-array name="language_values">
+        <item>khmer_language</item>
+        <item>albanian_language</item>
+        <item>default_language</item>
+    </string-array>
+    <string-array name="tiles_provider_keys">
+        <item >WTMS</item>
+        <item >TMS</item>
+        <item >GeoServer</item>
+    </string-array>
+    <string-array name="tiles_provider_values">
+        <item >WTMS</item>
+        <item >TMS</item>
+        <item >GeoServer</item>
+    </string-array>
+    <string-array name="share_values">
+        <item >1</item>
+        <item >2</item>
+        <item >3</item>
+        <item >4</item>
+        <item >5</item>
+        <item >6</item>
+        <item >7</item>
+        <item >8</item>
+        <item >9</item>
+        <item >10</item>
+        <item >11</item>
+        <item >12</item>
+        <item >13</item>
+        <item >14</item>
+        <item >15</item>
+        <item >16</item>
+        <item >17</item>
+        <item >18</item>
+        <item >19</item>
+        <item >20</item>
+        <item >21</item>
+        <item >22</item>
+        <item >23</item>
+        <item >24</item>
+        <item >25</item>
+        <item >26</item>
+        <item >27</item>
+        <item >28</item>
+        <item >29</item>
+        <item >30</item>
+        <item >31</item>
+        <item >32</item>
+        <item >33</item>
+        <item >34</item>
+        <item >35</item>
+        <item >36</item>
+        <item >37</item>
+        <item >38</item>
+        <item >39</item>
+        <item >40</item>
+        <item >41</item>
+        <item >42</item>
+        <item >43</item>
+        <item >44</item>
+        <item >45</item>
+        <item >46</item>
+        <item >47</item>
+        <item >48</item>
+        <item >49</item>
+        <item >50</item>
+        <item >51</item>
+        <item >52</item>
+        <item >53</item>
+        <item >54</item>
+        <item >55</item>
+        <item >56</item>
+        <item >57</item>
+        <item >58</item>
+        <item >59</item>
+        <item >60</item>
+        <item >61</item>
+        <item >62</item>
+        <item >63</item>
+        <item >64</item>
+        <item >65</item>
+        <item >66</item>
+        <item >67</item>
+        <item >68</item>
+        <item >69</item>
+        <item >70</item>
+        <item >71</item>
+        <item >72</item>
+        <item >73</item>
+        <item >74</item>
+        <item >75</item>
+        <item >76</item>
+        <item >77</item>
+        <item >78</item>
+        <item >79</item>
+        <item >80</item>
+        <item >81</item>
+        <item >82</item>
+        <item >83</item>
+        <item >84</item>
+        <item >85</item>
+        <item >86</item>
+        <item >87</item>
+        <item >88</item>
+        <item >89</item>
+        <item >90</item>
+        <item >91</item>
+        <item >92</item>
+        <item >93</item>
+        <item >94</item>
+        <item >95</item>
+        <item >96</item>
+        <item >97</item>
+        <item >98</item>
+        <item >99</item>
+        <item >100</item>
+    </string-array>
+    <string name="action_export_log">Export log</string>
+    <string name="action_go_to">Go to</string>
+    <string name="action_select_bookmark">Go to bookmark</string>
+    <string name="advanced_settings">Advanced settings (don\'t touch unless you know what you are doing)</string>
+    <string name="burmese_language">Myanmar</string>
+    <string name="change_to_disable_form_validation">Change to disable dynamic fields validation</string>
+    <string name="change_to_enable_form_validation">Change to enable dynamic fields validation</string>
+    <string name="form_validation">Dynamic fields validation on submit</string>
+    <string name="form_validation_off">Off</string>
+    <string name="form_validation_on">On</string>
+    <string name="message_add_map_bookmark_marker">Add map bookmark marker?</string>
+    <string name="message_log_exported">A copy of the application log has been exported</string>
+    <string name="message_update_client">The Community Server is using a new version of the communication protocol. Wait for an update of Open Tenure before proceeding</string>
+    <string name="message_update_server">The Community Server is using an old version of the communication protocol. Wait for your administrator to update the Community Server before proceeding</string>
+    <string name="title_activity_select_bookmark">Open Tenure: Select bookmark</string>
+    <string name="title_add_map_bookmark">Add map bookmark</string>
+    <string name="title_bookmarks">Bookmarks</string>
+
+</resources>

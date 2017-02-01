@@ -1,0 +1,531 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">نظام الحيازة المفتوح</string>
+    <string name="preload">الصورة الأفتتاحية</string>
+    <string name="action_settings">إعدادات</string>
+    <string name="action_search">البحث</string>
+    <string name="action_new">جديد</string>
+    <string name="action_import">استيراد</string>
+    <string name="action_done">منجز</string>
+    <string name="action_remove_attachment">إزالة مرفق</string>
+    <string name="action_remove_owner">إزالة حقوق مالك</string>
+    <string name="action_remove_additional_info">إزالة المعلومات الإضافية</string>
+    <string name="action_remove_claim">إزالة إدعاء</string>
+    <string name="action_remove_section_element">إزالة عنصر</string>
+    <string name="action_camera">كاميرا</string>
+    <string name="action_map">الخارطة</string>
+    <string name="action_login">تسجيل الدخول</string>
+    <string name="action_logout">تسجيل الخروج</string>
+    <string name="action_print">طباعة</string>
+    <string name="action_save">حفظ</string>
+    <string name="action_center">المركز</string>
+    <string name="action_submit">إرسال</string>
+    <string name="action_download_file">تنزيل ملف</string>
+    <string name="action_download_claims">تنزيل إدعاء</string>
+    <string name="action_new_picture">صورة جديدة</string>
+    <string name="action_new_additional_info">إضافة معلومات</string>
+    <string name="action_new_attachment">وثيقة جديدة</string>
+    <string name="action_lock_db">إعدادت تشفير البيانات</string>
+    <string name="action_export">تصدير</string>
+    <string name="action_rotate">تدوير الخارطة باستخدام بوصلة الجهاز</string>
+    <string name="action_stop_rotating">أوقف تدوير الخارطة</string>
+    <string name="action_claim_map_snapshot">إرفاق لقطة عن خريطة هذا الادعاء</string>
+    <string name="title_news">الأخبار</string>
+    <string name="title_map"> خارطة المجتمع</string>
+    <string name="title_claims">قائمة الادعاءات</string>
+    <string name="title_persons">الأشخاص</string>
+    <string name="title_challenged_claims">الأدعاءات المتحداة</string>
+    <string name="title_claim">الأدعاء</string>
+    <string name="title_person_details">تفاصيل الشخص</string>
+    <string name="title_group_details">تفاصيل المجموعة</string>
+    <string name="title_claim_additional_info">معلومات إضافية</string>
+    <string name="title_claim_documents">الوثائق</string>
+    <string name="title_claim_photos">صور الادعاء</string>
+    <string name="title_claim_map">الخارطة</string>
+    <string name="title_claim__downloading_map">تنزيل الادعاء</string>
+    <string name="title_claim_adjacencies">المجاورة</string>
+    <string name="title_claim_owners">الحصص</string>
+    <string name="title_share">حصة</string>
+    <string name="title_claim_challenges">التحديات</string>
+    <string name="title_export">تصدير الإدعاء كملف مضغوط</string>
+    <string name="title_section">قسم</string>
+    <string name="title_item">بند</string>
+    <string name="title_activity_settings">إعدادات</string>
+    <string name="title_activity_claim">الحيازة المفتوح: إدعاء جديد</string>
+    <string name="title_i_m_here">موقعك</string>
+    <string name="title_activity_person">الحيازة المفتوح: شخص جديد</string>
+    <string name="title_activity_group">الحيازة المفتوح: مجموعة جديدة</string>
+    <string name="title_activity_select_claim">الحيازة المفتوح:إختر الأدعاء</string>
+    <string name="title_activity_select_person">الحيازة المفتوح: إختر الشخص</string>
+    <string name="title_activity_share_details">الحيازة المفتوح: تفاصيل الحصص</string>
+    <string name="title_activity_file_chooser">إختر ملف</string>
+    <string name="title_lock_db">شفر البيانات المحلية</string>
+    <string name="title_add_non_boundary">أضف موقع بدون حدود</string>
+    <string name="title_exit_dialog">خروج</string>
+    <string name="title_remove_person_dialog">إزالة شخص</string>
+    <string name="title_save_claim_dialog">تم تعديل الإدعاء</string>
+    <string name="title_save_person_dialog">تم تعديل الشخص</string>
+    <string name="title_save_group_dialog">تم تعديل المجموعة</string>
+    <string name="choose_file">حدد التطبيق لاختيار ملف</string>
+    <string name="person_name">إسم الشخص</string>
+    <string name="community_recorder_name">مسجل المجتمع</string>
+    <string name="postal_address">العنوان البريدي</string>
+    <string name="email_address">البريد الالكتروني</string>
+    <string name="gender_masculine">ذكر</string>
+    <string name="gender_feminine">أنثى</string>
+    <string name="physical_person">شخص عادي</string>
+    <string name="legal_person">شخص قانوني</string>
+    <string name="gender">الجنس *</string>
+    <string name="person_type">نوع الشخص *</string>
+    <string name="claim">الأدعاء</string>
+    <string name="date">التاريخ</string>
+    <string name="share_value">نسبة القيمة: </string>
+    <string name="additional_info">معلومات إضافية</string>
+    <string name="adjacency">المجاورة</string>
+    <string name="cardinal_direction">الاتجاهات السماوية</string>
+    <string name="new_entity">كائن جديد</string>
+    <string name="by">بواسطة</string>
+    <string name="type">النوع</string>
+    <string name="na">N.A.</string>
+    <string name="group_name">الأسم</string>
+    <string name="signature">التوقيع</string>
+    <string name="software_version_title">نسخة البرنامج</string>
+    <string name="claim_date">تاريخ الأدعاء</string>
+    <string name="claim_name">إسم الأدعاء</string>
+    <string name="claim_name_label">إسم الأدعاء *</string>
+    <string name="claim_type">نوع الأدعاء *</string>
+    <string name="claim_type_no_star">نوع الأدعاء</string>
+    <string name="default_claim_name">إدعاء جديد</string>
+    <string name="first_name">الأسم الاول</string>
+    <string name="first_name_label">الأسم الأول *</string>
+    <string name="last_name">الأسم الأخير</string>
+    <string name="last_name_label">الأسم الأحير*</string>
+    <string name="date_of_birth">تاريخ الميلاد (DD-MM-YYYY)</string>
+    <string name="date_of_birth_simple">تاريخ الميلاد </string>
+    <string name="date_of_birth_label">تاريخ الميلاد (DD-MM-YYYY)*</string>
+    <string name="date_of_start">تاريخ الأدعاء فعال من (DD-MM-YYYY) </string>
+    <string name="date_of_start_label">تاريخ الأدعاء فعال من  (DD-MM-YYYY) </string>
+    <string name="date_of_start_label_print">تاريخ الأدعاء فعال من </string>
+    <string name="place_of_birth">مكان الولادة</string>
+    <string name="place_of_birth_label">مكان الولادة *</string>
+    <string name="date_of_establishment_label">تاريخ التأسيس</string>
+    <string name="recorded_by">سجلت بواسطة: </string>
+    <string name="mobile_phone_number">رقم الهاتف الجوال</string>
+    <string name="contact_phone_number">رقم تلفون شخص الاتصال</string>
+    <string name="password">كلمة المرور</string>
+    <string name="attachment_removed">تم إزالة المرفق</string>
+    <string name="attachment_updated">تم تعديل المرفق</string>
+    <string name="owner_removed">تم إزالة المالك</string>
+    <string name="section_element_removed">تم إزالة العنصر</string>
+    <string name="additional_info_removed">تم إزالة المعلومات</string>
+    <string name="message_password_too_short">يجب أن يكون طول كلمة المرور %d حرف </string>
+    <string name="message_password_character_is_wrong">يجب أن تحتوي كلمة المرور على أحرف وأرقام</string>
+    <string name="message_saved">تم الحفظ</string>
+    <string name="message_server_error_saving_claim">خطأ داخلي على الخادم الرئيسي</string>
+    <string name="message_service_not_available">الخدمة غير متوفرة</string>
+    <string name="message_connection_error">الاتصال غير متوفر</string>
+    <string name="message_attachment_downloaded">تم تنزيل المرفق %s</string>
+    <string name="message_attachment_downloading">جاري تنزيل المرفق %s </string>
+    <string name="message_attachment_download_failed">عملية تنزيل المرفق %d فشلت </string>
+    <string name="message_attachment_download_not_complete">عملية تنزيل المرفق %d لم تكتمل</string>
+    <string name="message_remove_person">تم إزالة الشخص %s</string>
+    <string name="message_remove_person_dialog">هل ترغب حقا في إزالة الشخص %s ?</string>
+    <string name="message_error_remove_person">لم يتم إزالة الشخص %s </string>
+    <string name="message_remaining_days">الأيام المتبقية لتحدي الأدعاء :  </string>
+    <string name="message_map_snapshot_saved">تم حفظ لقطة الخارطة</string>
+    <string name="message_adjacencies_saved">تم حفظ المجاورات</string>
+    <string name="message_adjacencies_not_saved">لم يتم حفظ المجاورات</string>
+    <string name="message_downloading_attachment">يتم تنزيل المرفق</string>
+    <string name="message_uploading_attachment">يتم تحميل المرفق</string>
+    <string name="message_invalid_url">URL غير صحيح</string>
+    <string name="message_unable_to_save">لا يمكن الحفظ. تاكد من التفاصيل </string>
+    <string name="message_unable_to_save_missing_claim_name">لا يمكن الحفظ.إسم الأدعاء غير موجود</string>
+    <string name="message_unable_to_save_missing_person">لا يمكن الحفظ. المدعي غير موجود</string>
+    <string name="message_submitted">تم حفظ الأدعاء</string>
+    <string name="message_uploading">يتم تحميل الأدعاء</string>
+    <string name="message_added_attachment">تم إضافة المرفق الى الأدعاء</string>
+    <string name="message_adding_attachment_not_ok">خطأ خلال إضافة المرفق</string>
+    <string name="message_submission_error">خطأ خلال إرسال الأدعاء</string>
+    <string name="message_save_claim_before_submit">يجب حفظ الأدعاء قبل إرساله</string>
+    <string name="message_save_snapshot_before_printing">أرفق لقطة عن الخارطة  قبل الطباعة</string>
+    <string name="message_save_claim_before_adding_content">يجب حفظ الأدعاء قبل إضافة المحتوى</string>
+    <string name="message_save_person_before_adding_content">يجب حفظ الشخص قبل  إضافة المحتوى</string>
+    <string name="message_export">تصدير</string>
+    <string name="message_no_claim_to_download">لا يوجد إدعاء للتنزيل</string>
+    <string name="message_claims_downloaded">تم تنزيل الإدعاءات بشكل صحيح</string>
+    <string name="message_error_downloading_claims">تم تنزيل الأدعاءات %s. لم يتم تنزيل جميع الأدعاءات</string>
+    <string name="message_login_no_more_valid">تم أنتهاء صلاحية الجلسة.قم بتسجيل الدخول</string>
+    <string name="message_db_locked">البيانات محمية بكلمة مرور</string>
+    <string name="message_db_password">كلمة المرور للوصول الى البيانات؟</string>
+    <string name="message_cant_open_db">لا يمكن الوصول الى البيانات</string>
+    <string name="message_no_application">لم يتم العثور على تطبيق لفتح الملف</string>
+    <string name="message_error_opening_file">خطأ أثناء فتح الملف: </string>
+    <string name="message_old_db_password">كلمة المرور الحالية؟</string>
+    <string name="message_new_db_password">كلمة المرور الجديدة(اتركها فارغة للبيانات غير المحمية)؟</string>
+    <string name="message_password_dont_match">لم يتم تأكيد كلمة المرور الجديدة. الرجاء حاول مجددا.</string>
+    <string name="message_encryption_failed">لا يستطيع تشفير البيانات </string>
+    <string name="message_data_unencrypted">تحذير: البيانات المحلية غير مشفرة</string>
+    <string name="message_encryption_set">بياناتك المحلية مشفرة. أدخل كلمة المرور للتشفير عند الدخول المرة القادمة للبرنامج</string>
+    <string name="message_confirm_new_db_password">أكد كلمة المرور</string>
+    <string name="message_enter_description">أدخل الوصف</string>
+    <string name="message_add_marker">أضف علامة للحدود؟</string>
+    <string name="message_remove_marker">أزالة العلامة؟</string>
+    <string name="message_remove_attachment"> إزالة المرفق؟</string>
+    <string name="message_remove_owner">إزالة المالك؟</string>
+    <string name="message_remove_section_element">إزالة العنصر؟</string>
+    <string name="message_remove_additional_info">أزالة المعلومات؟</string>
+    <string name="message_not_supported_on_this_device">غير مدعومة على هذا الجهاز</string>
+    <string name="message_exit_dialog">هل ترغب حقا بالخروج من البرنامج؟</string>
+    <string name="message_create_before_edit">أضف إدعاء عن طريق بيان تفاصيله قبل إضافة  المعلومات</string>
+    <string name="message_map_not_yet_draw">خريطة الأدعاء غير مكتملة</string>
+    <string name="message_no_available_shares">حرر بعض الحصص على هذا الأدعاء قبل تعديل قيمة الحصة</string>
+    <string name="message_no_available_shares_adding_new">حرر بعض الحصص على هذا الأدعاء قبل إضافة حصة جديدة</string>
+    <string name="message_share_saved">تم تخزين الحصة</string>
+    <string name="message_share_not_saved">خطأ خلال تخزين الحصة </string>
+    <string name="message_already_owner">الشخص الذي تم أختياره له حصة في هذا الأدعاء</string>
+    <string name="message_touch_to_select_a_person">إلمس لاختيار الشخص</string>
+    <string name="message_touch_to_select_a_claim">إلمس لاختيار الأدعاء</string>
+    <string name="message_error_mandatory_fields">أدخل جميع الحقول المطلوبة قبل التخزين</string>
+    <string name="message_error_mandatory_field_first_name">أدخل الاسم الاول  قبل التخزين</string>
+    <string name="message_error_mandatory_field_last_name">أدخل الاسم الأخير قبل التخزين</string>
+    <string name="message_error_mandatory_field_gender">أدخل الجنس في الحقل المطلوب قبل التخزين</string>
+    <string name="message_error_mandatory_birthdate">تاريخ الميلاد ليس بالصيغة الحيحة</string>
+    <string name="message_error_startdate">تاريخ بداية الحق ليس بالصيغة الحيحة او فارغ</string>
+    <string name="message_remove_quest">هل تريد حقا سحب الأدعاء؟</string>
+    <string name="message_remove_claim">هل تريد حقا إزالة الأدعاء؟</string>
+    <string name="message_error_withdraw_claim">خطأ أثناء سحب الأدعاء: </string>
+    <string name="message_withdrawn_claim">تم سحب الأدعاء بنجاح</string>
+    <string name="message_deleted_claim">تم حذف الأدعاء بنجاح من المحرك المحلي</string>
+    <string name="message_error_deleting_claim">خطأ أثناء حذف الأدعاء من المحرك المحلي</string>
+    <string name="message_save_changes">هل تريد تخزين التغييرات؟</string>
+    <string name="message_discard_changes">هل تريد حقا الخروج بدون تخزين؟</string>
+    <string name="message_claim_modified">تم تعديل الأدعاء</string>
+    <string name="message_entity_type">أي نوع من الكيان؟</string>
+    <string name="message_title_app_initializing">تهيئة نظام الحيازة المفتوح</string>
+    <string name="message_app_initializing">&#8230;الرجاء, أنتظر</string>
+    <string name="message_title_app_not_initialized">لم يتم تهيئة النظام</string>
+    <string name="message_app_not_initialized_network">الأتصال بالشبكة غير متوفر</string>
+    <string name="message_app_not_yet_initialized">النظام لم يهئ بعد</string>
+    <string name="message_app_not_initialized">أفحص  من شاشة الأعدادات إذا كانت إعدادتك  لخادم المجتمع في نظام الحيازة صحيحة ثم أعد  تشغيل إجراء التهيئة </string>
+    <string name="adjacencies">الأملاك المجاورة</string>
+    <string name="message_claim_exported_error">الأدعاء %s لم يتم تصديره</string>
+    <string name="message_claim_exported">تم تصدير الأدعاء  %s</string>
+    <string name="add_owner">إضافة مالك </string>
+    <string name="action_modify_claimant">عدل المدعي</string>
+    <string name="action_add_claimant">إضافة مدعي</string>
+    <string name="action_select_challenge">إختر إدعاء للتحدي:</string>
+    <string name="title_challenged_claim">الأدعاء المتحدى: </string>
+    <string name="status">الحالة : </string>
+    <string name="title_no_connection">لا يوجد إتصال</string>
+    <string name="message_no_connection_at_startup">شبكة الأنترنت غير متوفرة. قد لا  تعكس الأعدادت التغييرات النهائية وقد لا تستطيع تحميل او تنزيل  المعلومات. إتصل بالأنترنت  إذا كنت ترغب بنقل البيانات باستخدام  نظام الحيازة المفتوح</string>
+    <string name="title_initialization_process">إجراء التهيئة</string>
+    <string name="message_initialize_before"> قم أولا بعملية التهيئة</string>
+    <string name="message_download_snapshot_before_printing">نزل  لقطة الخارطة الفوتوغرافية من الخادم قبل الطباعة</string>
+    <string name="message_default_initialization">أنت على وشك تهيئة البرنامج بالقيم الإفتراضية لخادم المجتمع. القيم الإفتراضية لخادم المجتمع تستخدم فقط لأغراض العرض فقط. هل تريد الأستمرار؟غير ذلك إضغط على إلغاء وأدخل عنوان الوب لخادم المجتمع  </string>
+    <string name="action_backup_db">إعمل نسخة إحتياطية للبيانات المحلية</string>
+    <string name="message_db_backed_up">لقد تم عمل نسخة إحتياطية من قاعدة البيانات المحلية</string>
+    <string name="action_download_tiles">نزل الصور للبيانات المحلية للأستخدام بدون الشبكة</string>
+    <string name="title_confirm_data_transfer">أكد نقل البيانات</string>
+    <string name="message_data_over_mobile">أنت على وشك نقل كمية بيانات بحجم كبير من خلال الأنترنت.
+ قد تكون التكلفة عالية وذلك حسب طبيعة إشتراكك</string>
+    <string name="action_view_community_area">مشاهدة منطقة المجتمع</string>
+    <string name="message_title_app_initialized">لقد تمت عملية  تهيئة النظام</string>
+    <string name="message_app_initialized_default">التطبيق جاهز للعمل والأتصال مع خادم المجتمع الأولي في نظام الحيازة المفتوح </string>
+    <string name="message_app_initialized">التطبيق جاهز للعمل والأتصال مع خادم المجتمع في نظام الحيازة المفتوح</string>
+    <string name="check_location_service">معلومات الموقع غير متوفرة. إفحص ّ إذا كانت إعدادات الموقع مفعلة  </string>
+    <string name="tiles_queued">هناك %d قطع في قائمة التنزيل</string>
+    <string name="too_many_tiles_queued">هناك عدد %d قطع في قائمة التنزيل. الرجاء, الانتظار قبل تنزيل قطع أضافية</string>
+    <string name="all_tiles_downloaded">جميع القطع في قائمة التنزيل تم تنزيلها</string>
+    <string name="not_all_tiles_downloaded">%d قطع لم يتم تنزيلها لهذه المنطقة. إفحص اذا كنت  سعيدا بالنتائج او محاولة التنزيل</string>
+    <string name="zoom_level_too_low">مساحة المنطقة كبيرة. زد مستوى التكبير قبل تنزيل البيانات المحلية للخارطة </string>
+    <string name="yes">نعم</string>
+    <string name="person">شخص</string>
+    <string name="group">مجموعة</string>
+    <string name="no">لا</string>
+    <string name="up">أعلى</string>
+    <string name="down">أسفل</string>
+    <string name="left">يسار</string>
+    <string name="right">يمين</string>
+    <string name="confirm">تأكيد</string>
+    <string name="cancel">إلغاء</string>
+    <string name="not_boundary">ليس حدا</string>
+    <string name="new_snapshot">لقطة جديدة</string>
+    <string name="new_file">ملف جديد</string>
+    <string name="new_multipage">ملف متعدد الصفحات جديد</string>
+    <string name="withdraw_claim">سحب الأدعاء</string>
+    <string name="new_additional_info">إضافة معلومات</string>
+    <string name="add_description">وصف؟</string>
+    <string name="add_key">مفتاح؟</string>
+    <string name="add_value">قيمة؟</string>
+    <string name="draggable_marker">علامة قابلة للسحب</string>
+    <string name="sticky_marker">علامة  ملتصقة</string>
+    <string name="claimant_picture">صورة المدعي</string>
+    <string name="claimant">المدعي</string>
+    <string name="claimant_no_star">المدعي</string>
+    <string name="delete_locally">حذف محلي</string>
+    <string name="owner">المالك</string>
+    <string name="challenge_to">تحدي ل</string>
+    <string name="challenged_by">متحدى من قبل </string>
+    <string name="owners">المالكون</string>
+    <string name="claim_notes">ملاحظات</string>
+    <string name="insert_claim_notes">أدخل ملاحظات الأدعاء</string>
+    <string name="person_picture">صورة الشخص</string>
+    <string name="map_provider_google_normal">خرائط غوغل</string>
+    <string name="map_provider_google_satellite">غوغل أيرث</string>
+    <string name="map_provider_google_hybrid">غوغل هايبريد</string>
+    <string name="map_provider_google_terrain">غوغل تيران</string>
+    <string name="map_provider_osm_mapnik"> MapNik أوبن ستريت  </string>
+    <string name="map_provider_osm_mapquest"> MapQuest أوبن ستريت  </string>
+    <string name="map_provider_local_tiles">البيانات المحلية</string>
+    <string name="map_provider_geoserver">جيوسيرفر</string>
+    <string name="cs_url_pref_title">عنوان الوب لخادم المجتمع</string>
+    <string name="cs_url_pref_summary">عنوان الوب لخادم المجتمع في نظام الحيازة المفتوح</string>
+    <string name="cs_url_pref_dialog_title">أدخل عنوان الوب لخادم المجتمع الخاص بك </string>
+    <string name="geoserver_url_pref_title">عنوان الوب لخادم الجيوسيرفر</string>
+    <string name="geoserver_url_pref_summary"> عنوان الوب الأساسي  لنسخة مزود الخرائط الخاصة بك من خادم الجيوسيرفر</string>
+    <string name="geoserver_url_pref_dialog_title">أدخل عنوان الوب لخادم  الجيوسيرفر الخاص بك</string>
+    <string name="geoserver_layer_pref_title">طبقة جيوسيرفر</string>
+    <string name="geoserver_layer_pref_summary">طبقة WMS  التي سيتم إسترجاعها من خادم الجيوسيرفر - إسأل مدير النظام </string>
+    <string name="geoserver_layer_pref_dialog_title">أدخل  إسم طبقة WMS</string>
+    <string name="form_template_url_pref_title">عنوان الوب للنموذج</string>
+    <string name="form_template_url_pref_summary">عنوان الوب لنموذج المساحة</string>
+    <string name="form_template_url_pref_dialog_title">أدخل عنوان الوب لنموذج المساحة</string>
+    <string name="property">الملكية</string>
+    <string name="id_type">نوع بطاقة التعريف</string>
+    <string name="id_number">رقم بطاقة التعريف</string>
+    <string name="land_use">إستخدام الأرض</string>
+    <string name="calculated_adjacencies">الأدعاءات المجاورة</string>
+    <string name="adjacent_claims">الأدعاءات المجاورة</string>
+    <string name="adjacent_properties">الملكيات المجاورة</string>
+    <string name="north_adjacency">المجاورة من الشمال</string>
+    <string name="south_adjacency">المجاورة من الجنوب</string>
+    <string name="east_adjacency">المجاورة من الشرق</string>
+    <string name="west_adjacency">المجاورة من الغرب</string>
+    <string name="north">الشمال</string>
+    <string name="south">الجنوب</string>
+    <string name="east">الشرق</string>
+    <string name="west">الغرب</string>
+    <string name="north_east">شمال-شرق</string>
+    <string name="north_west">شمال-غرب</string>
+    <string name="south_east">حنوب-شرق</string>
+    <string name="south_west">جنوب-غرب</string>
+    <string name="hint_type_to_filter">أدخل بعض الأحرف لفلترة القائمة</string>
+    <string name="shares_prompt">إختر الحصص</string>
+    <string name="updating">جاري التعديل</string>
+    <string name="update_incomplete">التعديل لم يكتمل</string>
+    <string name="update_error">خطأ أثناء التعديل</string>
+    <string name="map_sources">مصادر الخارطة</string>
+    <string name="general">عام</string>
+    <string name="dynamic_form">نموذج ديناميكي</string>
+    <string name="information">المعلومات</string>
+    <string name="geoserver_tiles_provider_key">جيوسيرفر</string>
+    <string name="tiles_provider">مزود مربعات الخارطة </string>
+    <string name="tms_tiles_provider">TMS مزود خدمة مربعات الخارطة</string>
+    <string name="geoserver_tiles_provider">مزود مربعات الخارطة  لجيوسيرفر</string>
+    <string name="tms_url_pref_title">عنوان الوب لمزود خدمة مربعات الخارطة</string>
+    <string name="tms_url_pref_summary">عنوان الوب الأساسي لمزود خدمة مربعات الخارطة</string>
+    <string name="tms_url_pref_dialog_title">أدخل عنوان الوب لخادم مربعات الخارطة الخاص بك</string>
+    <string name="tiles_provider_dialog_title">أختر نوع مزود مربعات الخارطة بدون اتصال</string>
+    <string name="khmer_language">الخميرية</string>
+    <string name="tms_tiles_provider_key">TMS</string>
+    <string name="title_import">أستيراد  ملف الأدعاءات المضغوط </string>
+    <string name="message_claim_imported">تم أستيراد الادعاء</string>
+    <string name="message_claim_ready_to_import">الأدعاء جاهز للأستيراد</string>
+    <string name="message_claim_ready_to_import_no_dynamic">سوف يتم أستيراد الأدعاء ولكن  سيتم فقدان الجزء المتغير</string>
+    <string name="message_claim_import_password_error">خطأ في كلمة المرور. حاول مجددا</string>
+    <string name="message_claim_import_not_compressed_claim">الملف  لا يشكل ملف ادعاء مضغوط</string>
+    <string name="message_claim_import_not_claim_archive">هذا الملف  ليس ملف أرشيف  صالح للأدعاء </string>
+    <string name="message_claim_import_already_present">الأدعاء موجود مسبقا على جهاز العميل</string>
+    <string name="message_claim_import_claim_not_belongs_to_community">الأدعاء لا ينتمي الى مجموعة المجتمع</string>
+    <string name="message_claim_import_preparing">يتم التحضير لاستيراد الأدهاء</string>
+    <string name="message_claim_not_imported">خطأ.  لم يتم إستيراد الأدعاء </string>
+    <string name="message_available_shares">مجموع الحصص لا يساوي نسبة 100% </string>
+    <string name="message_files_not_present">لف أو أكثر من ملفات الأدعاء غير موجودة</string>
+    <string name="message_warnings">تحذيرات:: </string>
+    <string name="null_label">لا شيء</string>
+    <string name="language_dialog_title">إختر لغة</string>
+    <string name="title_restart_dialog">أعادة التشغيل مطلوبة</string>
+    <string name="message_restart_dialog">حتى يأخذ التغيير في إعدادت نظام الحيازة المفتوح أثره, يجب إعادة التشغيل. هل ترغب باعادة التسغيل</string>
+    <string name="action_change_map_mode">تغيير وضع الخريطة</string>
+    <string name="action_add_from_gps">إضافة علامة من GPS</string>
+    <string name="action_add_boundary">إضافة علامة حدودية</string>
+    <string name="action_add_non_boundary">إضافة علامة غير حدودية</string>
+    <string name="action_measure">قياس</string>
+    <string name="message_add_non_boundary_marker">إضافة علامة غير حدودية؟</string>
+    <string name="tiles_download_status"> محاولة تنزيل مربعات الخريطة %1$d من %2$d , تم تنزيل %3$d ولكن فشلت عملية التنزيل ل %4$d حتى الأن </string>
+    <string name="markers_distance_label">المسافة</string>
+    <string name="meters">م</string>
+    <string name="action_export_geo">تصدير البيانات الجغرافية</string>
+    <string name="wtms_tiles_provider">مزود WTMS لمربعات الخريطة</string>
+    <string name="wtms_tiles_provider_key">WTMS</string>
+    <string name="action_to_group"> تغيير في المجموعة</string>
+    <string name="action_to_person"> تغيير في الشخص</string>
+    <string name="message_exported">تم التصدير</string>
+    <string name="wtms_url_pref_title">WTMS رابط</string>
+    <string name="wtms_url_pref_summary">الرابط الأساسي لخادم الوب الخاص بمربعات الخريطة </string>
+    <string name="wtms_url_pref_dialog_title">أدخل رابط الوب لخادم مربعات الخريطة</string>
+
+    <string name="albanian_language">الألبانية</string>
+    <string name="default_language">القيمة الأفتراضية</string>
+    <string name="language">اللغة</string>
+    <string name="created">أنشئت</string>
+    <string name="uploading">جاري التحميل</string>
+    <string name="uploaded">تم التحميل</string>
+    <string name="deleted">حذفت</string>
+    <string name="upload_incomplete">أكتمل التحميل</string>
+    <string name="upload_error">خطأ أثناء التحميل</string>
+    <string name="download_incomplete">التنزيل لم يكتمل</string>
+    <string name="download_failed">التنزيل فشل</string>
+    <string name="downloading">جاري التنزيل</string>
+    <string name="unmoderated">غير معدل</string>
+    <string name="rejected">مرفوض</string>
+    <string name="reviewed">روجع</string>
+    <string name="moderated">معدل</string>
+    <string name="claim_area_label">المساحة</string>
+    <string name="square_meters">م2</string>
+    <string name="parcel">القطعة</string>
+    <string name="description">الوصف</string>
+    <string name="generated_on">انشئت في</string>
+
+    <string-array name="language_keys">
+        <item>Khmer</item>
+        <item>Albanian</item>
+        <item>Default</item>
+    </string-array>
+    <string-array name="language_values">
+        <item>khmer_language</item>
+        <item>albanian_language</item>
+        <item>default_language</item>
+    </string-array>
+    <string-array name="tiles_provider_keys">
+        <item >WTMS</item>
+        <item >TMS</item>
+        <item >GeoServer</item>
+    </string-array>
+    <string-array name="tiles_provider_values">
+        <item >WTMS</item>
+        <item >TMS</item>
+        <item >GeoServer</item>
+    </string-array>
+    <string-array name="share_values">
+        <item >1</item>
+        <item >2</item>
+        <item >3</item>
+        <item >4</item>
+        <item >5</item>
+        <item >6</item>
+        <item >7</item>
+        <item >8</item>
+        <item >9</item>
+        <item >10</item>
+        <item >11</item>
+        <item >12</item>
+        <item >13</item>
+        <item >14</item>
+        <item >15</item>
+        <item >16</item>
+        <item >17</item>
+        <item >18</item>
+        <item >19</item>
+        <item >20</item>
+        <item >21</item>
+        <item >22</item>
+        <item >23</item>
+        <item >24</item>
+        <item >25</item>
+        <item >26</item>
+        <item >27</item>
+        <item >28</item>
+        <item >29</item>
+        <item >30</item>
+        <item >31</item>
+        <item >32</item>
+        <item >33</item>
+        <item >34</item>
+        <item >35</item>
+        <item >36</item>
+        <item >37</item>
+        <item >38</item>
+        <item >39</item>
+        <item >40</item>
+        <item >41</item>
+        <item >42</item>
+        <item >43</item>
+        <item >44</item>
+        <item >45</item>
+        <item >46</item>
+        <item >47</item>
+        <item >48</item>
+        <item >49</item>
+        <item >50</item>
+        <item >51</item>
+        <item >52</item>
+        <item >53</item>
+        <item >54</item>
+        <item >55</item>
+        <item >56</item>
+        <item >57</item>
+        <item >58</item>
+        <item >59</item>
+        <item >60</item>
+        <item >61</item>
+        <item >62</item>
+        <item >63</item>
+        <item >64</item>
+        <item >65</item>
+        <item >66</item>
+        <item >67</item>
+        <item >68</item>
+        <item >69</item>
+        <item >70</item>
+        <item >71</item>
+        <item >72</item>
+        <item >73</item>
+        <item >74</item>
+        <item >75</item>
+        <item >76</item>
+        <item >77</item>
+        <item >78</item>
+        <item >79</item>
+        <item >80</item>
+        <item >81</item>
+        <item >82</item>
+        <item >83</item>
+        <item >84</item>
+        <item >85</item>
+        <item >86</item>
+        <item >87</item>
+        <item >88</item>
+        <item >89</item>
+        <item >90</item>
+        <item >91</item>
+        <item >92</item>
+        <item >93</item>
+        <item >94</item>
+        <item >95</item>
+        <item >96</item>
+        <item >97</item>
+        <item >98</item>
+        <item >99</item>
+        <item >100</item>
+    </string-array>
+    <string name="action_export_log">Export log</string>
+    <string name="action_go_to">Go to</string>
+    <string name="action_select_bookmark">Go to bookmark</string>
+    <string name="advanced_settings">Advanced settings (don\'t touch unless you know what you are doing)</string>
+    <string name="burmese_language">Myanmar</string>
+    <string name="change_to_disable_form_validation">Change to disable dynamic fields validation</string>
+    <string name="change_to_enable_form_validation">Change to enable dynamic fields validation</string>
+    <string name="form_validation">Dynamic fields validation on submit</string>
+    <string name="form_validation_off">Off</string>
+    <string name="form_validation_on">On</string>
+    <string name="message_add_map_bookmark_marker">Add map bookmark marker?</string>
+    <string name="message_log_exported">A copy of the application log has been exported</string>
+    <string name="message_update_client">The Community Server is using a new version of the communication protocol. Wait for an update of Open Tenure before proceeding</string>
+    <string name="message_update_server">The Community Server is using an old version of the communication protocol. Wait for your administrator to update the Community Server before proceeding</string>
+    <string name="title_activity_select_bookmark">Open Tenure: Select bookmark</string>
+    <string name="title_add_map_bookmark">Add map bookmark</string>
+    <string name="title_bookmarks">Bookmarks</string>
+
+</resources>

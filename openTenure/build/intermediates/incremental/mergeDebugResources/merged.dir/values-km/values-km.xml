@@ -1,0 +1,753 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="language_keys">
+        <item>ខ្មែរ</item>
+        <item>អាល់បានី</item>
+        <item>លំនាំដើម</item>
+    </string-array>
+    <string-array name="language_values">
+        <item>khmer_language</item>
+        <item>albanian_language</item>
+        <item>default_language</item>
+    </string-array>
+    <string-array name="share_values">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+        <item>16</item>
+        <item>17</item>
+        <item>18</item>
+        <item>19</item>
+        <item>20</item>
+        <item>21</item>
+        <item>22</item>
+        <item>23</item>
+        <item>24</item>
+        <item>25</item>
+        <item>26</item>
+        <item>27</item>
+        <item>28</item>
+        <item>29</item>
+        <item>30</item>
+        <item>31</item>
+        <item>32</item>
+        <item>33</item>
+        <item>34</item>
+        <item>35</item>
+        <item>36</item>
+        <item>37</item>
+        <item>38</item>
+        <item>39</item>
+        <item>40</item>
+        <item>41</item>
+        <item>42</item>
+        <item>43</item>
+        <item>44</item>
+        <item>45</item>
+        <item>46</item>
+        <item>47</item>
+        <item>48</item>
+        <item>49</item>
+        <item>50</item>
+        <item>51</item>
+        <item>52</item>
+        <item>53</item>
+        <item>54</item>
+        <item>55</item>
+        <item>56</item>
+        <item>57</item>
+        <item>58</item>
+        <item>59</item>
+        <item>60</item>
+        <item>61</item>
+        <item>62</item>
+        <item>63</item>
+        <item>64</item>
+        <item>65</item>
+        <item>66</item>
+        <item>67</item>
+        <item>68</item>
+        <item>69</item>
+        <item>70</item>
+        <item>71</item>
+        <item>72</item>
+        <item>73</item>
+        <item>74</item>
+        <item>75</item>
+        <item>76</item>
+        <item>77</item>
+        <item>78</item>
+        <item>79</item>
+        <item>80</item>
+        <item>81</item>
+        <item>82</item>
+        <item>83</item>
+        <item>84</item>
+        <item>85</item>
+        <item>86</item>
+        <item>87</item>
+        <item>88</item>
+        <item>89</item>
+        <item>90</item>
+        <item>91</item>
+        <item>92</item>
+        <item>93</item>
+        <item>94</item>
+        <item>95</item>
+        <item>96</item>
+        <item>97</item>
+        <item>98</item>
+        <item>99</item>
+        <item>100</item>
+    </string-array>
+    <string-array name="tiles_provider_keys">
+        <item>WTMS</item>
+        <item>TMS</item>
+        <item>GeoServer</item>
+    </string-array>
+    <string-array name="tiles_provider_values">
+        <item>WTMS</item>
+        <item>TMS</item>
+        <item>GeoServer</item>
+    </string-array>
+    <string name="action_add_boundary">បន្ថែមចំណុចសំគាល់ព្រំប្រទល់</string>
+    <string name="action_add_claimant">បញ្ចូលអ្នកទាមទា</string>
+    <string name="action_add_from_gps">បន្ថែមចំណុចសំគាល់ពីប្រព័ន្ធជីភីអេ</string>
+    <string name="action_add_non_boundary">បន្ថែមចំណុចសំគាល់ដែលមិនមែនជាព្រំប្រទល់</string>
+    <string name="action_backup_db">រក្សាទុកទិន្នន័យក្នុងស្រុក</string>
+    <string name="action_camera">កាមេរ៉ា</string>
+    <string name="action_center">កណ្តាល</string>
+    <string name="action_change_map_mode">ផ្លាស់ប្តូរទម្រង់ផែនទី</string>
+    <string name="action_claim_map_snapshot">ភ្ជាប់រូបភាពនៃផែនទីដែលទាមទា</string>
+    <string name="action_done">រួចរាល់</string>
+    <string name="action_download_claims">ទាញយកឯកសារដីទាមទា</string>
+    <string name="action_download_file">ទាញយកឯកសារ</string>
+    <string name="action_download_tiles">ទាញយករូបភាពទៅកាន់ទិន្នន័យក្នុងស្រុកសម្រាប់ប្រើនៅពេលគ្មានសេវា</string>
+    <string name="action_export">នាំចេញ</string>
+    <string name="action_export_geo"> នាំចេញទិន្នន័យភូមិសាស្រ្ត </string>
+    <string name="action_export_log">Export log</string>
+    <string name="action_forgot_password">ទាញយកលេខសំងាត់ដែលបានបាត់</string>
+    <string name="action_go_to">Go to</string>
+    <string name="action_import">នាំចូល</string>
+    <string name="action_lock_db">រៀបចំទិន្នន័យអោយមានលំដាប់លំដោយ</string>
+    <string name="action_log_in_register"><b>ចាក់សោរបញ្ចូល</b></string>
+    <string name="action_login">ចូលទៅក្នុង</string>
+    <string name="action_logout">ចាកចេញ</string>
+    <string name="action_map">ផែនទី</string>
+    <string name="action_measure">វាស់វែង</string>
+    <string name="action_modify_claimant">កែរប្រែអ្នកទាមទា</string>
+    <string name="action_new">ថ្មី</string>
+    <string name="action_new_additional_info">បញ្ជូលព័ត៌មាន</string>
+    <string name="action_new_attachment">ឯកសារថ្មី</string>
+    <string name="action_new_picture">រូបភាពថ្មី</string>
+    <string name="action_print">បោះពុម្ភ</string>
+    <string name="action_remove_additional_info">លុបព័ត៌មាន</string>
+    <string name="action_remove_attachment">លុបឯកសារដែលបានភ្ជាប់</string>
+    <string name="action_remove_claim">លុចការទាមទា</string>
+    <string name="action_remove_owner">លុបម្ចាស់កម្មសិទ្ធិ</string>
+    <string name="action_remove_section_element">លុបធាតុតូចៗ</string>
+    <string name="action_rotate">បង្វែរផែនទីដោយប្រើត្រីវិស័យ</string>
+    <string name="action_save">រក្សាទុក</string>
+    <string name="action_search">ស្វែងរក</string>
+    <string name="action_select_bookmark">Go to bookmark</string>
+    <string name="action_select_challenge">ជ្រើសរើសយកដីទាមទារដើម្បីប្តឹងតវ៉ា</string>
+    <string name="action_settings">ការរៀបចំទុកដាក់</string>
+    <string name="action_showcase">View Tutorial</string>
+    <string name="action_sign_in_short">ចាក់សោរបញ្ចូល</string>
+    <string name="action_stop_rotating">បញ្ឈប់ការបង្វែរផែនទី</string>
+    <string name="action_submit">ផ្ញើរ</string>
+    <string name="action_to_group"> ការផ្លាស់ប្តូរនៅក្នុងក្រុម </string>
+    <string name="action_to_person"> ការផ្លាស់ប្តូរនៅក្នុងមនុស្សម្នាក់ </string>
+    <string name="action_view_community_area">បង្ហាញតំបន់សហគមន៍</string>
+    <string name="add_description">ពិពណ៌នា?</string>
+    <string name="add_key">កូនសោរ?</string>
+    <string name="add_owner">បន្ថែមម្ចាស់កម្មសិទ្ធិ </string>
+    <string name="add_value">តំលៃ?</string>
+    <string name="additional_info">ព័ត៌មានបន្ថែម</string>
+    <string name="additional_info_removed">ព័ត៌មានបានលុបចោលរួចហើយ</string>
+    <string name="adjacencies">ភាពជិតគ្នា</string>
+    <string name="adjacency">ភាពជិគត្នា</string>
+    <string name="adjacent_claims">តំបន់ទាមទាដែរនៅក្បែរ</string>
+    <string name="adjacent_properties">របស់របដែលនៅក្បែរៗនោះ</string>
+    <string name="advanced_settings">Advanced settings (don\'t touch unless you know what you are doing)</string>
+    <string name="albanian_language">អាល់បានី</string>
+    <string name="all_tiles_downloaded">ទិន្នន័យទាំអស់ដែលមាននៅក្នុងបញ្ជីដែលបានទាញយករួចហើយ</string>
+    <string name="app_name">កម្មសិទ្ធិបើកបចំហរ </string>
+    <string name="attachment_removed">ឯកសារភ្ជាប់ត្រូវបានលុចចេញហើយ</string>
+    <string name="attachment_updated">ឯកសារភ្ជាប់ត្រូវបានធ្វើបច្ចុប្បន្នភាព</string>
+    <string name="burmese_language">Myanmar</string>
+    <string name="by">ដោយ</string>
+    <string name="calculated_adjacencies">តំបន់ទាមទាដែរនៅក្បែរ</string>
+    <string name="cancel">លុបចោល</string>
+    <string name="cardinal_direction">ទិនដៅសំខាន់</string>
+    <string name="challenge_to">បង្កជំលោះទៅកាន់</string>
+    <string name="challenged_by">បង្កជំលោះដោយ</string>
+    <string name="change_to_disable_form_validation">Change to disable dynamic fields validation</string>
+    <string name="change_to_enable_form_validation">Change to enable dynamic fields validation</string>
+    <string name="check_location_service">គ្មានព័ត៌មានទីតាំង។ ពិនិត្យថា សេវាទីតាំងជាកើលាក់ អាចអនុញ្ញាត្តិនៅក្នុងការរៀបចំរបស់អ្នក</string>
+    <string name="choose_file">ជ្រើសរើសកម្មវិធីមួយដើម្បីជ្រើសរើសឯកសារមួយ</string>
+    <string name="claim">ការទាមទា</string>
+    <string name="claim_area_label">ផ្ទៃដី</string>
+    <string name="claim_date">ការបរិច្ឆេទទាមទា</string>
+    <string name="claim_name">ឈ្មោះអ្នកទាមទា</string>
+    <string name="claim_name_label">ឈ្មោះអ្នកទាមទា*</string>
+    <string name="claim_notes">កំណត់ចំណាំ</string>
+    <string name="claim_type">ប្រភេទទាមទា *</string>
+    <string name="claim_type_no_star">ប្រភេទទាមទា </string>
+    <string name="claimant">អ្នកទាមទា *</string>
+    <string name="claimant_no_star">អ្នកទាមទា </string>
+    <string name="claimant_picture">រូបភាពអ្នកទាមទា</string>
+    <string name="close">បិទ</string>
+    <string name="community_recorder_name">អ្នកកត់ត្រាសហគមន៍</string>
+    <string name="confirm">បញ្ជាក់</string>
+    <string name="contact_phone_number">លេខទូរសព្ទទំនាក់ទំនង</string>
+    <string name="created">បង្កើត</string>
+    <string name="cs_url_pref_dialog_title">បញ្ចូល URL កន្លែងផ្ទុកទិន្នន័កម្មសិទ្ធិបើចំហររបស់សហគមន៍</string>
+    <string name="cs_url_pref_summary">អាស័យដ្ឋាននៃ កន្លែងផ្ទុកទិន្នន័កម្មសិទ្ធិបើចំហររបស់សហគមន៍</string>
+    <string name="cs_url_pref_title">កន្លែងផ្ទុកទិន្នន័កម្មសិទ្ធ Server URL</string>
+    <string name="date">ការបរិច្ឆេទ</string>
+    <string name="date_of_birth">ថ្ងៃខែឆ្នាំកំណើត (ឆ្នាំ-ខែ-ថ្ងៃ)</string>
+    <string name="date_of_birth_label">ថ្ងៃខែឆ្នាំកំណើត * (ឆ្នាំ-ខែ-ថ្ងៃ)</string>
+    <string name="date_of_birth_simple">ថ្ងៃខែឆ្នាំកំណើត </string>
+    <string name="date_of_establishment_label">ការបរិច្ឆេទនៃការបង្កើត</string>
+    <string name="date_of_start">ឆ្នាំ-ខែ-ថ្ងៃ</string>
+    <string name="date_of_start_label">ការបរិច្ឆេទនៃការទាមទាដែលគិចពី(ឆ្នាំ-ខែ-ថ្ងៃ)</string>
+    <string name="date_of_start_label_print">កាលបរិច្ឆេទការទាមទារដីគិតចាប់ពី</string>
+    <string name="default_claim_name">ការទាមទាថ្មី</string>
+    <string name="default_language">លំនាំដើម</string>
+    <string name="delete_locally">លុបព័ត៌មានខាងក្នុង</string>
+    <string name="deleted">បានលុប</string>
+    <string name="description">ការពិពណ៌នា</string>
+    <string name="down">ចុះក្រោម</string>
+    <string name="download_failed">ទាញយកឯកសារបានសារបរាជ័យ</string>
+    <string name="download_incomplete">ទាញយកឯកសារមិនបានបញ្ចប់</string>
+    <string name="downloading">កំពុងទាញយកឯកសារ</string>
+    <string name="draggable_marker">ទាញចេញកំណត់ចំណាំ</string>
+    <string name="dynamic_form">ទម្រង់បែបបទឌីណាមិច</string>
+    <string name="east">ទិសខាងកើត</string>
+    <string name="east_adjacency">តំបន់ក្បែរទិសខាងកើត</string>
+    <string name="email_address">អីម៉ែល</string>
+    <string name="error_connection">ការភ្ជាប់នេះមិនមានទេ</string>
+    <string name="error_field_required">ផ្នែកនេះត្រូវការជាចាំបាច់</string>
+    <string name="error_generic_conection">មានបញ្ហាកើតឡើងអំឡុងពេលតភ្ជាប់</string>
+    <string name="error_generic_login">មានបញ្ហាកើតឡើងអំឡុងពេលចាក់សោរបញ្ចូល</string>
+    <string name="error_incorrect_password">ឈ្មោះអ្នកប្រើប្រាស់ រឺ លេខសំងាត់នេះមិនត្រឹមត្រូវ</string>
+    <string name="error_invalid_password">លេខសំងាត់នេះខ្លីពេក</string>
+    <string name="error_invalid_username">ឈ្មោះអ្នកប្រើប្រាស់នេះខ្លីពេក</string>
+    <string name="first_name">ត្រកូល</string>
+    <string name="first_name_label">ត្រកូល *</string>
+    <string name="form_template_url_pref_dialog_title">បញ្ចូល URL សម្រាប់ទម្រង់សិក្សាស្រាវជ្រាវ</string>
+    <string name="form_template_url_pref_summary">URL សម្រាប់សិក្សាស្រាវជ្រាវ</string>
+    <string name="form_template_url_pref_title">ទម្រង់URL</string>
+    <string name="form_validation">Dynamic fields validation on submit</string>
+    <string name="form_validation_off">Off</string>
+    <string name="form_validation_on">On</string>
+    <string name="gender">ភេទ *</string>
+    <string name="gender_feminine">ស្រី</string>
+    <string name="gender_masculine">ប្រុស</string>
+    <string name="general">ស្ថានភាពទូទៅ</string>
+    <string name="generated_on">បានបង្កើតនៅលើ</string>
+    <string name="geoserver_layer_pref_dialog_title">បញ្ចូលឈ្មោះនៃស្រទាប់ WMS</string>
+    <string name="geoserver_layer_pref_summary">ស្រទាប់ WMS នឹងត្រូវបានមកវិញពី GeoServer (សួររដ្ឋបាលរបស់អ្នក)</string>
+    <string name="geoserver_layer_pref_title">ស្រទាប់ GeoServer</string>
+    <string name="geoserver_tiles_provider">GeoServer Tiles Provider</string>
+    <string name="geoserver_tiles_provider_key">ប្រព័ន្ធផ្ទុកពត៌មានជីអូ</string>
+    <string name="geoserver_url_pref_dialog_title">បញ្ចូល​ URL នៃ GeoServer របស់អ្នក</string>
+    <string name="geoserver_url_pref_summary">ផ្អែកលើ URL នៃ GeoServer ឯកជនរបស់អ្នក web map នឹងផ្តល់អោយអ្នកជំនួយវិញ</string>
+    <string name="geoserver_url_pref_title">GeoServer URL</string>
+    <string name="group">ក្រុម</string>
+    <string name="group_name">ឈ្មោះក្រុម</string>
+    <string name="hint_type_to_filter">សរសេរអក្សរដើម្បីបំពេញនៅក្នុងបញ្ជី</string>
+    <string name="id_number">លេខសំគាល់</string>
+    <string name="id_type">ប្រភេទលេខសំគាល់</string>
+    <string name="information">ពត៌មាន</string>
+    <string name="insert_claim_notes">បញ្ចូលតំបន់ទាមទា\'s កំណត់ចំណាំ</string>
+    <string name="khmer_language">ខ្មែរ</string>
+    <string name="land_use">ការប្រើប្រាស់ដី</string>
+    <string name="language">ភាសា</string>
+    <string name="language_dialog_title"> ជ្រើសភាសា </string>
+    <string name="last_name">ឈ្មោះបុគ្គល</string>
+    <string name="last_name_label">ឈ្មោះបុគ្គល *</string>
+    <string name="left">ស្តាំ</string>
+    <string name="legal_person">ភាពស្របច្បាប់នៃបុគ្គល</string>
+    <string name="login_progress_signing_in">ចាក់សោរបញ្ចូល និង#៨២៣០;</string>
+    <string name="map_provider_geoserver">GeoServer</string>
+    <string name="map_provider_google_hybrid">Google Hybrid</string>
+    <string name="map_provider_google_normal">ផែនទី Google</string>
+    <string name="map_provider_google_satellite">ផែនដី Google</string>
+    <string name="map_provider_google_terrain">តំបន់លើដី Google</string>
+    <string name="map_provider_local_tiles">ទិន្នន័យក្នុងស្រុក</string>
+    <string name="map_provider_osm_mapnik">បើកផែនទីផ្លូវ​ MapNik</string>
+    <string name="map_provider_osm_mapquest">បើកផែនទីផ្លូវ​​ MapQuest</string>
+    <string name="map_sources">ប្រភពផែនទី</string>
+    <string name="markers_distance_label">ចំងាយ</string>
+    <string name="message_add_map_bookmark_marker">Add map bookmark marker?</string>
+    <string name="message_add_marker">តើចង់លុបបន្ថែ​​មកំណត់ចំណាំទៅលើព្រំប្រទល់ទេ?</string>
+    <string name="message_add_non_boundary_marker">បន្ថែមចំណុចសំគាល់ដែលមិនមែនជាព្រំប្រទល់?</string>
+    <string name="message_added_attachment">ឯកសារភ្ជាប់ត្រូវបានគេបន្ថែមទៅលើការទាមទា</string>
+    <string name="message_adding_attachment_not_ok">មានកំហុសនៅអំឡុងពេលបន្ថែមឯកសារភ្ជាប់ជូន</string>
+    <string name="message_adjacencies_not_saved">កន្លែងដែលនៅជិតៗនៅមិនទាន់បានរក្សាទុកទេ</string>
+    <string name="message_adjacencies_saved">កន្លែងដែលនៅជិតៗបានរក្សាទុកហើយ</string>
+    <string name="message_already_owner">ជ្រើសរើសបុគ្គលដែលបានចូលរួមចែករំលែកការទាមទានេះ</string>
+    <string name="message_app_initialized">កម្មវិធី គឺរួចរាល់សម្រាប់ធ្វើការ និងទំនាក់ទំនងទៅកាន់កន្លែងផ្ទុកទិន្ន័យកម្មសិទ្ធិសហគមន៍បើកចំហរ</string>
+    <string name="message_app_initialized_default">កម្មវិធី គឺរួចរាល់សម្រាប់ធ្វើការ និងទំនាក់ទំនងទៅកាន់កន្លែងផ្ទុកទទិន្នន័យយកម្មសិទ្ធិសហគមន៍បើកចំហរដែលបានកំណត់ទុកមុន</string>
+    <string name="message_app_initializing">សូម, រងចាំ…</string>
+    <string name="message_app_not_initialized">ត្រួតពិនិត្យចូល \'ការរៀបចំ\' ដែរការរៀបចំនៃកន្លែងផ្ទុកនិន្នន័យកម្មសិទ្ធិបើចំហររបស់សហគមន៍ គឺត្រឹមត្រូវ និងចាប់ផ្តើមដំណើការម្តងទៀត</string>
+    <string name="message_app_not_initialized_network">ប្រព័ន្ធ\'s តភ្ជាប់នៅមិនទាន់បានចាប់ផ្តើម</string>
+    <string name="message_app_not_yet_initialized">កម្មវិធីនៅមិនទាន់ចាប់ផ្តើមនៅឡើយទេ</string>
+    <string name="message_attachment_download_failed">ការទាញយកឯកសារដែលជូនភ្ជាប់%sមិនបានសម្រេច</string>
+    <string name="message_attachment_download_not_complete">ការទាញយកឯកសារដែលជូនភ្ជាប់%sនៅមិនទាន់បានបញ្ជប់</string>
+    <string name="message_attachment_downloaded">ទាញយកសារដែលបានភ្ជាប់%s</string>
+    <string name="message_attachment_downloading">ឯកសាភ្ជាប់%sបានទាញយកតួចហើយ</string>
+    <string name="message_available_shares">សរុបការចំណែកនៃទាមទារគឺតិចជាង១០០%</string>
+    <string name="message_cant_open_db">មិនអាចចូលទៅទទួលទិន្នន័យបានទេ</string>
+    <string name="message_claim_exported">បណ្តឹងតវ៉ា%បាននាំយកចេញ</string>
+    <string name="message_claim_exported_error">បណ្តឹងតវ៉ា%គឺមិនទាន់បាននាំយកចេញ</string>
+    <string name="message_claim_import_already_present">ការទាមទារគឺត្រូវបានបង្ហាញបង្ហាញនៅលើម៉ាសុីន</string>
+    <string name="message_claim_import_claim_not_belongs_to_community">ការទាមទារនេះមិនមែនជារបស់សហគមន៍ទេ</string>
+    <string name="message_claim_import_not_claim_archive">នេះមិនមែនជាឯកសារការទាមទារដែលមានសុពលភាពទេ"</string>
+    <string name="message_claim_import_not_compressed_claim">ឯកសារZipមិនបានជាឯកសារដីទាមទារដែលបង្រួមទេ</string>
+    <string name="message_claim_import_password_error">លេខសំងាត់សខុស. សូមព្យាមយាមម្តង់ទៀត</string>
+    <string name="message_claim_import_preparing">រៀបចំការនាំចូលឯកសារដីទាមទារ</string>
+    <string name="message_claim_imported">នាំចូលឯកសារដីទាមទារ </string>
+    <string name="message_claim_modified">ការផ្លាស់ប្តូរការទាមទា</string>
+    <string name="message_claim_not_imported">មានកំហុស, មិនបាននាំចូលឯកសារដីទាមទារ</string>
+    <string name="message_claim_ready_to_import">ឯកសារដីទាមទាររួចរាល់ដើម្បីនាំចូល</string>
+    <string name="message_claim_ready_to_import_no_dynamic">ឯកសារដីទាមទារនឹងត្រូវបាននាំចូល​ បន្តែផែ្នកនៃឌីណាមិកនឹងត្រូវបាត់បង់</string>
+    <string name="message_claims_downloaded">ការទាមទាត្រូវបានទាញយកមកប្រើប្រាស់ត្រឹមត្រូវ</string>
+    <string name="message_confirm_new_db_password">បញ្ជាក់ពីលេខសំងាត់ថ្មី</string>
+    <string name="message_connection_error">ការតភ្ជាប់នៅមិនទាន់មាន</string>
+    <string name="message_create_before_edit">បង្កើតការទាមទាមួយដោយបញ្ជាក់ព័ត៌មានលំអិតរបស់វាមុនពេលបន្ថែមព័ត៌មាន</string>
+    <string name="message_data_over_mobile">អ្នកអាចផ្ទេរទិន្នន័យដែលមានទំហំធំ តាមរយៈការភ្ជាប់អឺធឺនេតចល័ត។ ទាក់ទងការចំណាយអាចថ្លៃអាស្រ័យលើទិនន័យជាក់ស្តែង</string>
+    <string name="message_data_unencrypted">ការព្រមាន៖ ទិន្នន័យក្នុងស្រុករបស់អ្នកមិនត្រូវបានបញ្ចូល</string>
+    <string name="message_db_backed_up">ទិន្នន័យគ្រឹះថតចំលងបានបង្កើតហើយ</string>
+    <string name="message_db_locked">ទិន្នន័យត្រូវការពារដោយលេសំងាត់</string>
+    <string name="message_db_password">តើចង់បានលេខសំងាត់ដើម្បីចូលទៅទទួលទិន្នន័យទេ?</string>
+    <string name="message_default_initialization">អ្នកគួរចាប់ផ្តើមកម្មវិធីដោយ​ ការកំណត់យកន្លែងផ្ទុកឯកសារសហគមន៍។ ការកំណត់យកន្លែងផ្ទុកឯកសារសហគមន៍គួរតែត្រូវបានប្រើ សម្រាប់គោលបំណងបង្ហាញប៉ុណ្ណោះ។ តើអ្នកចង់បន្តទេ? បើមិនចង់អញ្ចឹងទេ សូមចុងលុចចោល និងដាក់កន្លែងផ្ទុកឯកសារ URLនៅក្នុងការរៀបចំមួយ </string>
+    <string name="message_deleted_claim">ការទាមទា បានលុបយ៉ាងត្រឹមត្រូវ</string>
+    <string name="message_discard_changes">តើអ្នកចង់ចាកចេញ ដោយមិនចង់រក្សាទុកទិន្នន័យ?</string>
+    <string name="message_download_snapshot_before_printing">សូមទាញយករូបភាពផែនទីចេញពីប្រព័ន្ធផ្ទុកពត៌មានមុនពេលព្រីនឯកសារចេញ</string>
+    <string name="message_downloading_attachment">កំពុងទាញយក៝កសារដែលមានភ្ជាប់</string>
+    <string name="message_encryption_failed">មិនអាចបញ្ចូលទិន្នន័យក្នុងស្រុក</string>
+    <string name="message_encryption_set">ទិន្នន័យក្នុងស្រុករបស់អ្នកត្រូវបានបញ្ចូល។ សូមផ្តល់លេខសំងាត់នៃការបញ្ជូលទិន្នន័យពេលបន្ទាប់ទៀតអ្នកអាចចាប់ផ្តើមកម្មវិធី កម្មសិទ្ធិបើកចំហរ</string>
+    <string name="message_enter_description">ការបញ្ចូលការពិព៍ណនា</string>
+    <string name="message_entity_type">តើប្រភេទ ផ្នែកមួយណា ?</string>
+    <string name="message_error_deleting_claim">មានកំហុសនៅក្នុងលុបការទាមទា</string>
+    <string name="message_error_downloading_claims">បានទាញយកការទាមទា%s។ ការទាមទាទាំងអស់មិនត្រូវបានទាញយកមកទាំងអស់ទេ</string>
+    <string name="message_error_mandatory_birthdate">ការបរិច្ឆេទថ្ងៃកំណើតមិនត្រូវតាមទម្រង់ ឬទទេ</string>
+    <string name="message_error_mandatory_field_first_name">សូមបំពេញនូវឈ្មោះមេដឹកនាំទីវាលមុនរក្សាទុក</string>
+    <string name="message_error_mandatory_field_gender">សូមបំពេញនូវ តួនាទីមេដឹកនាំនៅទីវាលមុនធ្វើការរក្សាទុក</string>
+    <string name="message_error_mandatory_field_last_name">សូមបំពេញនូវឈ្មោះមេដឹកនាំទីវាលមុនរក្សាទុក</string>
+    <string name="message_error_mandatory_fields">សូមបំពេញនូវឈ្មោះមេដឹកនាំទីវាលទាំងអស់មុនរក្សាទុក</string>
+    <string name="message_error_opening_file">មានកំហុសពេលបើកឯកសារ: </string>
+    <string name="message_error_remove_person">%sនៃបុគ្គលនៅមិនទាន់បានលុប</string>
+    <string name="message_error_startdate">ការបរិច្ឆេទនៃសិទ្ធិកាន់កាប់\'s ចាប់ផើ្តមដោយមិនត្រឹមត្រូវតាមទម្រង់ ឬ ទទេរ</string>
+    <string name="message_error_withdraw_claim">មានកំហុស ដោយមិនបានដកនូវការទាមទាចេញ: </string>
+    <string name="message_exit_dialog">តើអ្នកចង់ចាកចេញពីកម្មវិធីនេះទេ?</string>
+    <string name="message_export">ការនាំចេញទៅខាងក្រៅ</string>
+    <string name="message_exported"> នាំចេញ </string>
+    <string name="message_files_not_present">ឯកសារការទាមទារមួយឬច្រើនមិនបានបង្ហាញ</string>
+    <string name="message_initialize_before">សូមធ្វើការផ្តួចផ្តើមជាមុន</string>
+    <string name="message_invalid_url">URLមិនមានសុពលភាព</string>
+    <string name="message_log_exported">A copy of the application log has been exported</string>
+    <string name="message_login_before">សូមធ្វើកាតចាក់បញ្ចូលជាមុន</string>
+    <string name="message_login_no_more_valid">ផ្នែកនេះហួសសុពលភាព។ ធ្វើការចូលសាជាថ្មី</string>
+    <string name="message_login_ok">អ្នកបានចាក់សោរបញ្ចូលបានជោគជ័យ</string>
+    <string name="message_logout_error">មានបញ្ហាពេលចាកចេញ</string>
+    <string name="message_logout_not_ok">ចាកចេញបានបរាជ័យ</string>
+    <string name="message_logout_ok">អ្នកបានចាក់ចេញបានជោគជ័យ</string>
+    <string name="message_map_not_yet_draw">ផែនទីនៃការទាមទាគឺមិនទាន់បំពេញរួចរាល់ទេ</string>
+    <string name="message_map_snapshot_saved">រូបភាពផែនទីបានរក្សាទុកហើយ</string>
+    <string name="message_new_db_password">លេខសំងាត់ថ្មី (ទុកកន្លែងចន្លោះសម្រាប់បញ្ចូលទិន្នន័យទេ)?</string>
+    <string name="message_no_application">មិនអាចស្វែងរកកម្មវិធីដើម្បីបើកឯកសារ</string>
+    <string name="message_no_available_shares">ទុកកន្លែងទំនេរសម្រាប់ការការចូលរួមចំណែកចំពោះការទាមទានេះមុននឹងថ្វើការផ្លាស់ប្តូតំលៃនៃការចូលរួមចំណែក នេះ</string>
+    <string name="message_no_available_shares_adding_new">ទុកកន្លែងទំនេរសម្រាប់ការការចូលរួមចំណែកចំពោះការទាមទានេះមុននឹងបន្ថែមការចូលរួមចំណែកថ្មី</string>
+    <string name="message_no_claim_to_download">មិនមានការទាមទាដើម្បីទាញយកប្រើបានឡើយ</string>
+    <string name="message_no_connection_at_startup">គ្មានការភ្ជាប់អីធឺនេត។ ដំណើការមិនអាចបញ្ជាក់ពីការផ្លាស់ ប្តូរ​ និងអ្នកមិនអាចបញ្ជូល ឬទាញយកព័ត៌មាន។ ភ្ជាប់អីនធឺនេតប្រសិនបើអ្នកចង់ផ្ទេទរិន្នន័យប្រើប្រាស់ក្នុងកម្មវិធីកម្មសិទ្ធិបើកចំហរ</string>
+    <string name="message_not_supported_on_this_device">មិនស្គាល់កម្មវិធីនេះទេ</string>
+    <string name="message_old_db_password">តើប្រើលេខសំងាត់បច្ចុប្បន្នឬ?</string>
+    <string name="message_password_character_is_wrong">លេខសំងាត់ត្រូវតែមានជាតួរលេខ និងតួរអក្ស</string>
+    <string name="message_password_dont_match">លេខសំងាត់ថ្មីមិនត្រឹមត្រូវ។ សូមព្យាយាមម្តងទៀត</string>
+    <string name="message_password_too_short">លេខសំងាត់ត្រូវតែមានយ៉ាងហោចណាស់ %d តួរអក្ស</string>
+    <string name="message_remaining_days">ចំនួនថ្ងៃដែលនៅសេសសល់ចំពោះជំលោះទាមទា:</string>
+    <string name="message_remove_additional_info">តើចង់លុបព័ត៌មានទេ?</string>
+    <string name="message_remove_attachment">តើចង់លុបដែលបានភ្ជាប់ទេ?</string>
+    <string name="message_remove_claim">តើអ្នកចង់លុចចោលការទាមទាទេ?</string>
+    <string name="message_remove_marker">តើចង់លុបកំណត់ចំណាំទេ?</string>
+    <string name="message_remove_owner">តើចង់លុបម្ចាស់កម្មសិទ្ធិចេញទេ?</string>
+    <string name="message_remove_person">%s នៃបុគ្គលបានលុបរួចរាល់ហើយ</string>
+    <string name="message_remove_person_dialog">តើអ្នកចង់លុប%sឬទេ?</string>
+    <string name="message_remove_quest">តើអ្នកចង់លុបចោលការទាមទាទេ?</string>
+    <string name="message_remove_section_element">តើចង់លុបធាតុតូចៗចេញទេ?</string>
+    <string name="message_restart_dialog"> ផ្លាស់ប្តូរក្នុងការកំណត់រចនាសម្ព័ន្ធ OpenTenure មួយតម្រូវឱ្យចាប់ផ្ដើមឡើងវិញដើម្បីឱ្យមានប្រសិទ្ធិភាព។ តើអ្នកចង់ចាប់ផ្ដើមឡើងវិញ OpenTenure ឥឡូវនេះ? </string>
+    <string name="message_save_changes">តើអ្នកចង់ផ្លាស់ប្តូការរក្សាទុកទេ?</string>
+    <string name="message_save_claim_before_adding_content">ការទាមទាត្រូវតែរក្សាទុកមុនពេលដាក់បន្ថែមមាតិការថ្មីៗ  </string>
+    <string name="message_save_claim_before_submit">ការទាមទាត្រូវតែរក្សាទុកមុនពេលបញ្ជូនចេញ</string>
+    <string name="message_save_person_before_adding_content">បុគ្គលត្រូវបានគេរក្សាទុកមុនពេលបន្ថែមមាតិការថ្មី</string>
+    <string name="message_save_snapshot_before_printing">សូមភ្ជាប់រូបភាពផែនទីមុនពេលធ្វើការបោះពុម្ពចេញ</string>
+    <string name="message_saved">បានរក្សាទុក</string>
+    <string name="message_server_error_saving_claim">មានកំហុសនៅកន្លែងផ្ទុកឯកសារ</string>
+    <string name="message_service_not_available">មិនទាន់មានសេវា</string>
+    <string name="message_share_not_saved">មានកំហុសនៅពេលរក្សាការចូលរួមចែករំលែក</string>
+    <string name="message_share_saved">ការចូលរួមចែករំលែកបានរក្សាទុក</string>
+    <string name="message_submission_error">មានកំហុសនៅអំឡុងពេលបញ្ជូនការទាមទា</string>
+    <string name="message_submitted">ការទាមទាត្រូវបានដាក់បញ្ជូនហើយ</string>
+    <string name="message_timeout_exception">អស់ពេលវេលាលើកលែង</string>
+    <string name="message_title_app_initialized">កម្មវិធីកំពុងផ្តួចផ្តើម</string>
+    <string name="message_title_app_initializing">កម្មវិធី កម្មសិទ្ធិបើកចំហររបស់សហគមន៍ កំពុងចាប់ផ្តើម</string>
+    <string name="message_title_app_not_initialized">កម្មវិធីនៅមិនទាន់បានតភ្ជាប់</string>
+    <string name="message_touch_to_select_a_claim">សូមចុចជ្រើសរើសការទាមទា</string>
+    <string name="message_touch_to_select_a_person">សូមចុចជ្រើសរើសបុគ្គល</string>
+    <string name="message_unable_to_save">មិនអាចរក្សាទុក។ សូមពិនិត្យ និងព្យាយាមម្តងទៀត</string>
+    <string name="message_unable_to_save_missing_claim_name">មិនអាចរក្សាទុក។ មានការបាត់ការទាមទា</string>
+    <string name="message_unable_to_save_missing_person">មិនអាចរក្សាទុក។ មានការបាត់ឈ្មោះអ្នកទាមទា</string>
+    <string name="message_unknowhost_error">មានបញ្ហាកន្លែងទទួលមិនស្គាល់។ តើមានបណ្តាញនេះទេ?</string>
+    <string name="message_update_client">The Community Server is using a new version of the communication protocol. Wait for an update of Open Tenure before proceeding</string>
+    <string name="message_update_server">The Community Server is using an old version of the communication protocol. Wait for your administrator to update the Community Server before proceeding</string>
+    <string name="message_uploading">ការទាមទាគឺនៅក្នុងឯកសារដាក់បញ្ជូល</string>
+    <string name="message_uploading_attachment">កំពុងដាក់បញ្ចូលដែលសារដែលបានភ្ជាប់</string>
+    <string name="message_warnings">ព្រមាន: </string>
+    <string name="message_withdrawn_claim">ការទាមទាត្រូវបានដកចេញយ៉ាងត្រឹមត្រូវ</string>
+    <string name="meters">m</string>
+    <string name="mobile_phone_number">លេខទូរសព្ទដៃរ</string>
+    <string name="moderated">បានផ្សះផ្សាររួច</string>
+    <string name="na">មិនទាន់មាន</string>
+    <string name="new_additional_info">បញចូលព័ត៌មាន</string>
+    <string name="new_entity">អង្គភាពថ្មី</string>
+    <string name="new_file">ឯកសារថ្មី</string>
+    <string name="new_multipage">ឯកសារនៃទំព័រថ្មីចម្រុះ</string>
+    <string name="new_snapshot">រូបថថ្មី</string>
+    <string name="next">បន្ទាប់</string>
+    <string name="no">ទេ</string>
+    <string name="north">ទិសខាងជើង</string>
+    <string name="north_adjacency">តំបន់ក្បែរទិសខាងជើង</string>
+    <string name="north_east">ទិសឥសាន</string>
+    <string name="north_west">ទិសពាយព្យ</string>
+    <string name="not_all_tiles_downloaded">ភាគរយ d ទិន្នន័យសម្រាប់ផែនតំបន់នេះមិនទាន់បានទាញយក ។ ពិនិត្យ ថាតើអ្នកទទួលយកលទ្ធផល ឬធ្វើការទាញយកម្តងទៀត</string>
+    <string name="not_boundary">មិនមែនព្រំប្រទល់</string>
+    <string name="null_label"> គ្មាន </string>
+    <string name="ok">យល់ព្រម</string>
+    <string name="owner">ម្ចាស់កម្មសិទ្ធិ</string>
+    <string name="owner_removed">ម្ខាស់កម្មសិទ្ធិត្រូវបានលុបចេញហើយ</string>
+    <string name="owners">ម្ចាស់កម្មសិទ្ធិ</string>
+    <string name="parcel">ក្បាលដី</string>
+    <string name="password">លេខសំងាត់</string>
+    <string name="person">បុគ្គល</string>
+    <string name="person_name">ឈ្មោះបុគ្គល</string>
+    <string name="person_picture">រូបភាពបុគ្គល</string>
+    <string name="person_type">ប្រភេទបុគ្គល *</string>
+    <string name="physical_person">រូបរាងបុគ្គល</string>
+    <string name="place_of_birth">ទីកន្លែងកំណើត</string>
+    <string name="place_of_birth_label">ទីកន្លែងកំណើត *</string>
+    <string name="postal_address">អាស័យដ្ឋាន</string>
+    <string name="preload">បើករូបភាព</string>
+    <string name="prompt_password">លេខសំងាត់</string>
+    <string name="prompt_username">ឈ្មោះអ្នកប្រើប្រាស់</string>
+    <string name="property">របស់របប</string>
+    <string name="recorded_by">កត់ត្រាដោយ : </string>
+    <string name="rejected">លុបចោល</string>
+    <string name="reviewed">បានពិនិត្យឡើងវិញ</string>
+    <string name="right">ធ្វេង</string>
+    <string name="section_element_removed">ធាតុតូចៗបានលុចបោលរួចហើយ</string>
+    <string name="share_value">តំលៃគិតជាភាគរយ : </string>
+    <string name="shares_prompt">ជ្រើរើសរូបរាង</string>
+    <string name="showcase_actionAlert1_message"> \n \n  អ្នកឥឡូវត្រូវតែចាប់ផ្តើមកម្មវិធី
+        
+    </string>
+    <string name="showcase_actionAlert_message"> \n \n  បូតុងនេះចាប់ផ្តើម កម្មវិធីកម្មសិទ្ធិបើកចំហរដោយដំណើការវាសម្រាប់ប្រើប្រាស់ជាមួយការសាកល្បងកន្លែងផ្ទុកទិន្នន័យសហគមន៍ SOLA
+                                                  \n \n នៅពេលអ្នកត្រូវការភ្ជាប់កន្លែងផ្ទុកទិន្នន័យសហគមន៍សម្រាប់សហគមន៍របស់អ្នកអ្នកត្រូវតែសំអាតទិន្នន័យកម្មសិទ្ធិបើចំហរ
+                                                  \n ទិន្នន័យកម្មសិទ្ធិបើចំហរនៅក្នុងកម្មវិធីរបស់អ្នក។ ផ្លាស់ប្តូ url សម្រាប់កន្លែងផ្ទុកទិន្នន័យសហគមន៍ និងចាប់ផ្តើមវាសាជាថ្មី។​
+                                                  \n \n ជំហ៊ានទាំងនេះមាន:
+                                                  \n \n 1) ប្រើប្រាស់ Android កម្មវិធីកម្មសិទ្ធិបើកចំហរ។ ចុចលើបូតុងសំអាតទិន្នន័យ
+                                                  \n \n 2) ផ្លាស់ប្តូតំលែ url នៅក្នុងមេញូ ដែលមានចេញពីបញ្ជីស្លាកសញ្ញាបណ្តឹងទាមទា សនៅក្នុងទម្រង់ចាប់ផ្តើមកម្មសិទ្ធិបើចំហរ
+                                                  \n \n 3) ប្រើប្រាស់បុតុងត្រីកោណដើម្បីចាប់ផ្តើមកម្មវិធីកម្មសិទ្ធិបើកចំហរ(ដែលមានពី News Tabនៅក្នុងទម្រង់កម្មសិទ្ធិបើកចំហរ)
+    </string>
+    <string name="showcase_actionClaimDetails_message"> \n \n  បូតុងSave គឺដើម្បីរក្សាទុកទិន្នន័យដែលបានពិពណ៌នាក្នុងបណ្តឹងទាមទានេះ
+                                                        \n \n  បុតុង Export ដើម្បីបង្កើតឯកសារដែលពង្រួមនៃបណ្តឹងទាមទា(សម្រាប់បញ្ជូនទៅកន្លៃងផ្ទុកទិន្នន័យសហគមន៍)
+                                                        \n នៅពេលដែលការកត់ត្រាបណ្តឹងទាមទាទ្រព្យសម្បត្តិបានបញ្ជប់ និងរក្សាទុក
+        												\n \n  បូតុង Print បង្កើតការសង្ខេបនៃព៌តមានបណ្តឹងទាមទាទ្រព្យសម្បត្តិ
+                                                        \n នៅពេលដែលបណ្តឹងទាមទាទ្រព្យសម្បត្តិបានធ្វើការកំណត់ដោយផែនទី និងបណ្តឹងទាមទាទ្រព្យសម្បត្តិបានរក្សាទុក 
+                                                        \n \n បូតុង List មានជំរឿសទំព័រដើម្បីពិនិត្យមើលការគូសបង្ហាញឡើងវិញ
+</string>
+    <string name="showcase_actionClaimMap_message"> \n \n  បូតុង+ព៌ណបែតងបង្កើតជ្រុងព្រំប្រទល់ថ្មីនៅទីតាំងជាក់លាក់ដូចដែលកំណត់ដោយជីភីអេស
+														ពីព្រោះដោយសារតែបញ្ហាភាពសុក្រិតនៃជីភីអេស។ ជ្រុងព្រំប្រទល់នេះគួរតែត្រូវប្តូទីតាំង (ប្រើ Long Pressនៅលើការបង្ហាញផែនទី)
+														ទាក់ទងនឹងរូបភាពផែនទីប្រសិនបើទីតាំងព្រំប្រទល់គឺច្បាស់នៅលើរូបភាពផែនទី។ នៅក្នុងស្ថានភាពនេះ កម្មវិធីកម្មសិទ្ធិបើចំហរនឹងកត់ត្រាទាំង
+														ទីតាំងជីភីអេស និងទីតាំងរូបភាពផែនទី។
+                                                    \n \n បូតុងព៌ណស បង្វិល គឺដើម្បីធ្វើការផ្លាស់ប្តូផែនទី និងបង្ហាញត្រីវិស័យ។ ដើម្បីបញ្ឍប់មុខងាផ្លាស់ប្តូ ។ ប្រើ
+														រង្វង់ព៌ណសជាមួយនឹងបូតុង Diagonal។ ប្រើម្រៀមដែពីរដើម្បីបង្វិលផែនទី។ មានសារៈសំខាន់សម្រាប់ការបង្ហាញនៅទីវាល
+        										    \n  បូតុង Bullseye Target កណ្តាលផែនទីនៅទីតាមជាក់ស្តែងរបស់អ្នក(ដូចបានកំណត់ពីជីភីអេស)
+        										    \n \n  បូតុង Device បង្កើតផែនទីដោយផ្អែកលើការបង្ហាញផែនទី និងភ្ជាប់ដោយស្វ័យប្រវត្តិ ឯកសារនេះប្រើប្រាស់ជាឯកសារគាំទ្រ
+														ចំពោះបណ្តឹងទាមទាទ្រព្យសម្បត្តិ។ ក្នុងករណីដែលផែនទីពីមុនបានរក្សាទុកដូចជាឯកសាគាំទ្រវានឹងជំនួយផែនទីចាស់
+    </string>
+    <string name="showcase_actionClaims_message"> \n \n បូតុង Flag Person ដើម្បីធ្វើការកត់ត្រានូវបណ្តឹងទាមទាទ្រព្តសម្បត្តិថ្មីៗ
+                                                  \n \n បូតុង Logon ដើម្បីបង្ហាញ ទម្រង់តួអក្សដែលនឹងអោយអ្នកធ្វលការបញ្ចូលទិន្នន័យបណ្តឹងទាមទាទ្រព្យសម្បត្តិ
+                                                  \n \n បញ្ញីបូតុងអនុញ្ញាតអោយយើងអាច:
+                                                  \n• "ការរៀបចំ" ដើម្បីកំណត់តំលៃ url និងស្រទាប់ផែនទីសម្រាប់កន្លែងផ្ទុកទិន្នន័យសហគមន៍, Geoserver (រូបភាពផែនទី) និង ទម្រង់សិក្សាស្រាវជ្រាវ
+                                                  \n•  "គូសបង្ហាញ" ដើម្បីពិនិត្យមើលការគូសបង្ហាញឡើងវិញ
+                                                  \n•  "រក្សាទុកទិន្នន័យក្នុងស្រុក" ដើម្បីរក្សាទុកទិន្នន័យដែលបានកត់ត្រាទុកក្នុងកម្មវិធីរបស់អ្នក
+    </string>
+    <string name="showcase_actionMap_message"> \n បូតុងផែនទីសហគមន៍:
+                                               \n* បូតុង​ឯកសារដែលបានទាញយកង្ហាញតែនីពេលណាដែលអ្នកពង្រីកធំនៅក្នុងជិតទំហំធំបំផុត និងចាប់ផ្តើមទាញយកឯកសាររូបភាពផែនទី
+                                               \n ពីរូបភាព Geoserver សម្រាប់តំបន់ដែលបង្ហាញថ្មីនេះនៅក្នុងកន្លែងមើលផែនទីកម្មសិទ្ធិបើកចំហរ
+                                               \n* បូតុងLogonដើម្បីបង្ហាញទម្រង់តួរអក្ស(អ្នកត្រូវតែចុះបញ្ជីជាដំបូងដូចដែលដែលអ្នកប្រើប្រាស់នៅក្នុងកន្លែងផ្ទុកទិន្នន័យរបស់សហគមន៍)
+                                               \n*  (folded) បូតុងផែនទីនៅកណ្តាលផែនទីកម្មសិទ្ធិបើកចំហរបង្ហាញនៅលើតំបន់ដែលសហគមន៍មានការកំណត់ចាប់អារម្មណ៍
+                                               \n*  បូតុង Bulls-Eye target នីកណ្តាលផែនទីកម្មសិទ្ធិបើចំហរបង្ហាញនៅលើទីតាំងបច្ចប្បរបស់អ្នក
+        								  	   \n* បូតុងទាញរូបភាពពពកcloud Download ចាប់ផ្តើមទាញយករូបភាពនៃបណ្តឹងទាមទាពីកន្លែងផ្ទុកទិន្នន័យសហគមន៍សម្រាបតំបន់ថ្មីៗ
+                                               \n  បង្ហាញនៅក្នុងផ្នែកផែនទីកម្មសិទ្ធិបើកចំហរ
+        									   \n* បញ្ជីឈ្មោះបុតុងបង្ហាញកម្មវិធីកម្មសិទ្ធិបើចំហរផ្អែកលើជំរឿសស្រទាប់ផែនទីដែលមាន
+    </string>
+    <string name="showcase_actionNews_message"> \n \n ត្រីកោណព៌ណសបង្ហាញពីបូតុងឧទានសព្ទនឹងបង្ហាញនៅពេលណាដែលកម្មវិធីកម្មសិទ្ធិបើចំហរដំណើការលើកទី១។ មុខងានេះ
+                                                \n ត្រូវបានគេប្រើប្រាស់បន្ទាប់ដើម្បីផ្តួចផ្តើមកម្មវិធីកម្មសិទ្ធបើកចំហរសម្រាប់ប្រើជាមួយកន្លែងផ្ទុកទិន្នន័យសហគមន៍ជាក់លាក់មួយ
+                                                \n \n បូតុង Logon អោយយើងអាចចូលទៅក្នុងកន្លែងផ្ទុកទិន្នន័យសហគមន៍នៅពេលណាអ្នកបានពញ្ចូលលេខកូដឈ្មោះ និងលេខសំងាត់
+                                                \n (នៅពេលទទួលបានការចុះចូលទៅក្នុងគេហទំព័រកន្លែងទុកទិន្នន័យសហគមន៍)
+                                                \n \n បូតុងចាក់សោ lock គឺធ្វើការក្តោបយកទិន្នន័យដោយប្រើកម្មវិធីកម្មសិទ្ធិបើកចំហរនៅពេលណាទិន្នន័យទាំងនេះត្រូវបានគេដាក់ជូនដោយអីមែល
+        										\n \n បូតុង Listអនុញ្ញាតអោយយើងអាចចូល:
+        										\n• "ការរៀបចំ" ដើម្បីកំណត់តំលៃ url និងស្រទាប់ផែនទីសម្រាប់កន្លែងផ្ទុកទិន្នន័យសហគមន៍, Geoserver (រូបភាពផែនទី) និង ទម្រង់សិក្សាស្រាវជ្រាវ
+												\n•  "គូសបង្ហាញ" ដើម្បីពិនិត្យមើលការគូសបង្ហាញឡើងវិញ
+           
+    </string>
+    <string name="showcase_actionPersons_message"> \n ចុចលើបូតុង + ដើម្បីបន្ថែមនុស្សថ្មីម្នាក់ឬក្រុមថ្មី និងកតើត្រាព័ត៌មានលំអិត:
+                                                \n \n បុគ្គល
+                                                \n* "ត្រកូល" (ដែលចាំចាច់) - កត់ត្រាត្រកូល
+                                                \n* "ឈ្មោះខ្លួន" (ដែលចាំចាច់) - ឈ្មោះខ្លួន
+                                                \n* "កាលបរិឆ្ឆេទកំណើត" (ដែលចាំបាច់) - ប្រើការបរិច្ឆេទ ឬ បញ្ចូលតាមទម្រង់ឆ្នាំ-ខែ-ថ្ងៃ
+                                                \n* "ភេទ" (ដេលចាំបាច់)
+                                                \n* "ប្រភេទអត្តសញ្ញាណ " ជ្រើសរើសតំលែចេញពីតារាង
+                                                \n* "លេខអត្តសញ្ញាណ" កត់ត្រាចេញពីបញ្ញីលេខអត្តសញ្ញាណ
+                                                \n* "អាស័យដ្ឋានតាមប៉ស្តិ៍"
+                                                \n* "អាស័យដ្ឋានអីមែល" - អាស័យដ្ឋានអីមែលនេះគឺនៅកន្លែងណាដែលសារអូតូជាប់ពាក់ព័ន្ធជាមួយនឹងបណ្តឹងទាមទានឹងត្រូវបានគេផ្ញើជូន
+                                                \n* "លេខទូរសព្ទចល័ត"
+                                                \n* "លេខទូរសព្ទទំនាក់ទំនង"
+                                                \n \n ក្រុម
+                                                \n* "ត្រកូល" (ដែលចាំបាច់) - ឈ្មោះនៃក្រុម
+                                                \n* "កាលបរិច្ឆេទបង្កើត" (ដែលចាំបាច់) - ប្រើកាលបរិច្ឆេទឬ បញ្ចូលតាមទម្រង់ឆ្នាំ-ខែ-ថ្ងៃ
+                                                \n* "លេខអត្តសញ្ញាណ" - ប្រហែលជាមិនមានប៉ុន្តែមានការទទួលស្គាល់ផ្លូវច្បាប់។ ដូចជាក្រុមហ៊ុន កត់ត្រាលេខចុះបញ្ញីរបស់ពួកគេ
+                                                \n* "អាស័យដ្ឋានតាមប៉ស្តិ៍"
+                                                \n* "អាស័យដ្ឋានអីមែល" - អាស័យដ្ឋានអីមែលនេះគឺនៅកន្លែងណាដែលសារអូតូជាប់ពាក់ព័ន្ធជាមួយនឹងបណ្តឹងទាមទានឹងត្រូវបានគេផ្ញើជូន
+                                                \n* "លេខទូរសព្ទចល័ត"
+                                                \n* "លេខទូរសព្ទទំនាក់ទំនង"
+                                                
+                                                
+    </string>
+    <string name="showcase_claim_adjacencies_message">\n \n \n 
+        										  កត់ត្រាមឈ្មោះម្ចាស់ឫឈ្មោះទ្រព្យសម្បត្តិនៃទ្រព្យសម្បត្តិដែលនៅក្បែរយោងទៅតាមទីតាំងដែលជាប់ពាក់ព័ន្ធ
+                                                  \n នឹងបណ្តេងទាមទាទ្រព្យសម្បត្តិដែលកំពុងកត់ត្រា(ឧទាហរន៍ ខាងជ់ង ខាងត្បូង ខាងកើត ខាងលិច)
+         										   \n \n 
+         										  ដែលជាកន្លែងមានបណ្តឹងទាមទាទ្រព្យសម្បត្តិបានកត់ត្រាទុកសោយកម្មវិធីកម្មសិទ្ធិបើចំហរ បណ្តឹងទាមទាទ្រព្យសម្បត្តិទាំងនេះនិងបង្ហាញដោយអូតូដូចដែលនៅក្បែរនោះ។
+         										  
+        										 
+        	                                        
+    </string>
+    <string name="showcase_claim_challenges_message">\n \n \n 
+        										  បង្ហាញនូវបញ្ញីនៃដំណោះស្រាយទាំងអស់ដែលបានធ្វើផ្ទៀតផ្ទាត់នឹងបណ្តឹងទាមទាទព្រព្យសម្បត្តិ
+                                                  \n \n ដើម្បីមើលព័ត៌មានដំណោះស្រាយលំអិត។ កត់សម្គាល់ឈ្មោះនៃទ្រព្យដែលបានដំណោះស្រាយឬអ្នកទាមទា
+													និង ស្វែងរកវាដោយប្រើប្រាស់ឈ្មោះមួយក្នុងចំណោមឈ្មោះទាំងនេះនៅក្នុងបញ្ញីឈ្មោះនៃស្លាកសញ្ញា អ្នកបណ្តឹងទាមទា
+        										    
+    </string>
+    <string name="showcase_claim_documentAttach_message">\n \n \n 
+        										  បូតុងរូបកៀបក្រដាស់អនុញ្ញាតអោយយើងដើម្បីភ្ជាប់នូវឯកសារដែលមានស្រាប់ដែលរក្សាទុកពីមុននៅក្នុងកម្មវិធីរបស់អ្នក
+        										   \n \n
+        										  បួតុងរូមកាមេរ៉ាអ្នកអាចធ្វើអោយវាដំណើការនៅក្នុងកម្មវិធីរបស់អ្នកអញ្ជឹងអ្នកអាចថតរូបបាន និងសម្រាប់រូបភាព
+                                                  /n ដែលនឹងភ្ជាប់ចំពោះបណ្តឹងទាមទា
+        										    
+         										  
+        	                                        
+    </string>
+    <string name="showcase_claim_document_message">\n \n \n 
+        										  បង្ហាញបញ្ញីឯកសារដែលបានភ្ជាប់ចំពោះបណ្តឹងទាមទាទ្រព្យសម្បត្តិ
+         										   \n \n 
+         										  ឯកសារមួយអាចត្រូវបានជ្រើសរើសពីបញ្ញីដើម្បីបង្ហាញព័ត៌មានរបស់វាលំអិត
+                                                  \n បួតុងXព៌ណក្រហមគឺលុបឯកសារពីបណ្តឹងទាមទាទ្រព្យសម្បត្តិ 
+         										    
+        										 
+        	                                        
+    </string>
+    <string name="showcase_claim_map_message">\n \n អនុញ្ញាតអោយអ្នកធ្វើការកំណត់ព្រំប្រទល់នៃបណ្តឹងទាមទទ្រព្យសម្បត្តិដោយប្រើប្រាស់រូបភាពផែនទីជាផែនទីគោលសម្រាប់យោង
+												នឹងនៅពេលណាដែលចាំបាច់  ទីតាំងជីភីអេសពី កម្មវិធីចល័តបានតម្ត់ងនៅក្នុងជីភីអេស។
+                                        	  \n \n នៅពេលព្រំប្រទល់ទាំងអស់បានកំណត់។ ផែនទីនៃបណ្តឹងទាមទាអាចត្រូវបានគេបង្កើត និងបន្ថែមដើម្បីប្រើជាព័ត៌មានគាំទ្រដល់បណ្តឹងទាមទាញទ្រព្យសម្បត្តិ
+    </string>
+    <string name="showcase_claim_mapdraw_message">\n \n ចុចអោយួរ នៅលើផែនទីអាចបង្កើតជ្រុងព្រំប្រទល់ថ្មីមួយ
+        										  \n \n ស្លាកសញ្ញាសខាងស្តាំនៅលើជ្រុងព្រំប្រទល់ដាក់អោយកាច់ជ្រុងព្រំប្រទល់ស្ថិតនៅក្នុងស្ថាពដែលអាចកែសម្រួលបាន
+                                                  \n ស្ថាពដែលអាចកែសម្រួលបានប្រតិបត្តិការដូចជា:
+                                                  \n* បូតុង X គឺលុបជ្រុងព្រំប្រទល់ដែលបានជ្រើសរើសរួច
+                                                  \n* បូតុងរូបត្រីវិស័យព័ណសផ្តល់អោយយើងនូវការកែសម្រួលជាក់លាក់មួយ។ សញ្ញាព្រួញនៅក្នុង ទិសដៅសំខាន់នីមួយៗបង្ហាញ។
+                                                  \n ប្រើប្រាស់សញ្ញាព្រួញទាំនេះសម្រាប់ការកំណត់ជាក់ច្បាស់នៃជ្រុងព្រំប្រទល់ និងបន្ទាប់មកទៀតបូតុងចំណុចព័ណសនៅពេលណាជ្រុងព្រំប្រទល់ត្រូវបានគេពេញចិត្ត
+                                                  \n* រង្វង់ព័ណសជាមួយបូតុង Diagonal សម្រាប់ចាកចេញពីស្ថានភាពកែសម្រួល
+                                           		  \n \n ចុចអោយយូរ លើកំណត់ចំណាំដែលមានស្រាប់ដើម្បីអូសវាអោយមានជុំវិញ
+                                                  \n \n កម្មសិទ្ធិបើចំហរអាច បង្ហាញពីជ្រុងព្រំប្រទល់ដែលមានស្រាប់ឬខ្សែរព្រំប្រទល់ដែលមានស្រាប់
+    </string>
+    <string name="showcase_claim_message"> \n ពិព៌ណនាពីបណ្តឹងតវ៉ាពីទ្រព្យសម្បត្តិដោយបញ្ចូលព័ត៌មានលំអិតតាមរយៈស្លាកសញ្ញា
+                                           \n ស្លាកសញ្ញា៦ដំបូងគឺជាស្លាសញ្ញាដែលកំណត់ហើយសម្រាប់ពិព័ណនារចរិកលក្ខណៈ LADM/STDM។
+                                           \n ស្លាកសញ្ញា២ចុងក្រោយគឺ dynamic និងមាតិការរបស់ស្លាកសញ្ញាទាំងនេះគឺកំណត់ដោយប្រើកម្មវិធីលើគេហទៅព័រ SOLA។
+                                           \n \n ស្លាកសញ្ញាទាមទាបណ្តឹងមានផ្នែកទាំងនេះ:
+                                           \n* "ឈ្មោះបណ្តឹងទាមទា" ឬអ្នកកត់សម្គាល់ដែលទ្រព្យសម្បត្តិត្រូវបានគេស្គាល់
+                                           \n* "ប្រភេទនៃបណ្តឹងទាមទា" គឺស្ថិតនៅក្នុង(LADM or SOLA extenstion)កម្មសិទ្ធដំបូងគេសម្រាប់ទ្រព្យសម្បត្តិ
+                                           \n* "ការប្រើប្រាស់ដី" ជា (SOLA extension) ការប្រើប្រាស់ដីដំបូងគេនាពេលបច្ចុប្បន្នសម្រាប់ទ្រព្យសម្បត្តិ
+                                           \n* "ការបរិច្ឆេទនៃបណ្តឹងដែលបានដាក់ស្នើពី" ជាការបរិច្ឆេទសិទ្ធិដំបូងគេ គឺត្រូវបានគេស្គាល់ជាលើដំបូងដែលមានស្រាប់
+                                           \n* "កំណត់ចំណាំ" ជាព័ត៌មានលំងិតបន្ថែមដែលត្រូវបានគេពិចារណាថាសមរម្យដោយអ្នកកត់ត្រាសហគមន៍ 
+                                           \n \n នៅខាងក្រោមបំផុតនៃទម្រង់គឺមានបូតុងចំនួន២:
+                                           \n* "បន្ថែម (ឬកែសម្រួល) អ្នកបណ្តឹងទាមទា" ដើម្បីកត់ត្រាអ្នកដែលជាម្ចាស់នៃទ្រព្យសម្បត្តិ
+                                           \n* "ជ្រើសរើសបណ្តឹងទាមទាដើម្បីដោះស្រាយ" នៅក្នុងករណីដែលបណ្តឹងទាមទាទ្រព្យសម្បត្តិវាគឺជាជំលោះ និងដំណោះស្រាយដែលបានកត់ត្រាទុក។ នេះវាអនុញ្ញាតអោយដំណោះស្រាយនេះភ្ជាប់ទៅនឹងបណ្តឹងទាមទាទ្រព្យសម្បត្តិពីមុន
+     </string>
+    <string name="showcase_claim_select_message"> \n \n \n
+        										 ជ្រើសរើសបណ្តឹងពីបញ្ញីដើម្បីមើលឬកែសម្រួលវាលំអិត និងកំណត់ផែនទ្រព្យសម្បត្តិ
+ 										      \n \n ប្រើសញ្ញាព្រួញព៌ណខៀវដើម្បីដាក់បញ្ចូលបណ្តឹងតវ៉ានៅក្នុងកម្មវិធីសហគមន៍
+										      \n \n ប្រើសញ្ញា X ព៌ណក្រហមដើម្បីដកចេញបណ្តឹងតវ៉ាពីបញ្ជីក្នុងស្រុក
+    </string>
+    <string name="showcase_claim_shares_message">
+        										  រាយឈ្មោះអ្នកជាម្ចាស់ដែលចែករំលែកបានកត់ត្រាសម្រាប់បព្តឹងទាមទាទ្រព្យសម្បត្តិ
+         										   \n (កម្មសិទ្ធិបើចំហរសន្មតថា​សាមញ្(១០០ ភាគរយ) ម្ចាសើកម្មសិទ្ធិនីក្នុងឈ្មោះនៃអ្នកបណ្តឹងទាមទា និងនេះ
+														ជាអ្វីដែលនឹងផ្តយតផ្តើមដែលអាចមើលឃើញនៅក្នុងបញ្ជោះឈ្មោះ។ នេះងាយស្រួ ១០០ភាគរយ ចែករំលែកការរៀបចំអាចកែរសម្រួលដោយប្រើយន្តការដូចខាងក្រោម)
+                                                    
+         										  \n ការចែករំលែកអាចជាការជ្រើសរើសពីបញ្ជីឈ្មោះដើម្បីមើលម្ចាស់កម្មសិទ្ធិដែលទាក់ទងនឹងការចែករំលែក និងដើម្បីផ្លាស់ប្តូម្ចាសើកម្មសិទ្្ធលំអិត ឬបន្ថែម
+													ម្ចាសកម្មសិទ្ធិបន្ថែមទៀតសម្រាប់ចែករំលែក
+                                                  
+												  \n អ្នកត្រួតពិនិត្យអាចអោយភាគរយដែលទាក់ទងនឹងការចែករំលែកនឹងអាចផ្លាស់ប្តូបាន
+                                                  
+                                                  \n បូតុង Xពណ៌ក្រហមអាចអោយចែករំលែកនឹងអាចត្រូវបានគេលុបចោល
+                                
+												  \n បូតុង +បែតងអាចអោយអ្នកបន្ថែមការចែករំលែកថ្មីដើម្បីធ្វើការកត់ត្រាការរៀបចំម្ចាស់កម្មសិទ្ធិដ៍ស្មុកស្មាញបន្ថែមទៀតសម្រាប់បណ្តឹងទាមទាទ្រព្យសម្បត្តិ 
+                                                  
+                                                  \n កម្មវិធីកម្មសិទ្ធិបើចំហរនឹងមិនអនុញ្ញាតអោយអ្នកធ្វើការកត់ត្រាការរៀបចំចែករំលែកម្ចាស់កម្មសិទ្ធិដែលមិនសរុម១០០ភាគរយ
+        										 
+        	                                        
+    </string>
+    <string name="showcase_claim_title">បណ្តឹងតវ៉ាលំអិត</string>
+    <string name="showcase_claims_message">\n បញ្ញីឈ្មោះបណ្តឹងតវ៉ាបង្ហាញពីបញ្ញីទ្រព្យសម្បត្តិដែលទាមទាដែលបានទាញយកមកឬកត់ត្រាទុកក្នុងកម្មវិធីជាមួយស្ានភាពរបស់វា
+                                           \n \n ប្រផេទស្ថានភាព:
+                                           \n   •   L - បានបណ្តឹង
+                                           \n   •   U - បញ្ចូលព័ត៌មាន
+                                           \n   *   C - ឧបសគ្គ
+                                           \n   •   M - ពាក់កណ្តាល
+                                           \n   •   R - ច្រានចោល
+                                           \n   •   W - ដកចេញ
+    </string>
+    <string name="showcase_end_message">\n \n 
+        									..នឹងឥឡូវ..
+											\n \n សូមព្យាយាមប្រើកម្មវិធីកម្មសិទ្ធិបើចំហរ។ ប្រសិនបើអ្នកមានសំណូមពរឬអ្នកមានបញ្ហា
+                                            \n សូមទំនាក់ទំនងយើងខ្ញុំ(neil.pullar@fao.org)
+											\n\n អ្នកអាចមើលការបង្ហាញម្តងទៀតបានគ្រប់ពេលណាក៍បាន "គំនូសបង្ហាញ" ពីបញ្ញី- គំនូសបង្ហាញ.
+     </string>
+    <string name="showcase_main_message">\n \n 
+        									\n កម្មសិទ្ធិបើកចំហរគឺជាប្រភេទកម្មវិធីដែលអាចមើលឃើញប្រភពព័ត៌មានជាចំហរ កម្មវិធីនេះរៀបចំដោយ UN-FAO។ សម្រាប់កត់ត្រាសិទ្ធិលើទ្រព្យសម្បត្តិ។
+											\n ព្រំប្រទល់នៃទ្រព្យសម្បត្តិអាចធ្វើការកំណត់ដោយផែនទីបាន ហើយព័ត៌មានពីទ្រព្យសម្បត្តិ និងកម្មសិទ្ធិលំអិតអាចធ្វើការថតបានព្រមទាំងអាចបង្ហាញជារូបភាព
+                                            \n នៃឯកសារ និងរូបភាពរបស់ទ្រព្យសម្បត្តិ។
+											\n កម្មសិទ្ធិបើកចំហគេអាចប្រើវាបានជាមយគេហគេហទំព័ត៌ផ្អែកលើសហគមន៍( ដូចជា កន្លែងផ្ទុកទិន្នន័យសហគមន៍ SOLA) ដែលអ្វីលំអិតមានស្រាប់រួចហើយ
+                                            \n និង រូបភាពផែនទីអាចទាញយកមុនពេលចុះថតនៅទីវាល ហើយព័ត៌មានលំអិតថ្មីអាចទាញយកមកមុនចុះទៅទីវាល។
+
+     </string>
+    <string name="showcase_main_title">តើអ្វីទៅជា SOLA កម្មសិទ្ធិបើកចំហរ ?</string>
+    <string name="showcase_map_message">\n \n ផែនទីសហគមន៍អាចអនុញ្ញាតអោយអ្នកចូលទៅក្នុងកម្មវិធីកម្មសិទ្ធិបើកចំហរដើម្បីមើលផែនទី
+                                        
+    </string>
+    <string name="showcase_news_message">\n \n 
+        									News Tabអាចអនុញ្ញាត្តិអោយយើងអាចចូលទៅប្រើ FAO test SOLA គេហទំព័រកន្លែងផ្ទុកទិន្នន័យសហគមន៍ ដែលអ្នកអាចត្រួតពិនិត្យទ្រព្យសម្បត្តិដែលបានទាញយកមកប្រើ
+                                         \n ថតរូបលំអិតដោយប្រើកម្មវិធីកម្មសិទ្ធិបើកចំហរ។
+                                         \n វាក៍ផ្តល់ក៍អនុញ្ញាតអោយយើងចូលទៅក្នង FLOSS SOLA Open Source Software គេហទំព័រសហកមន៍​ដែលជាកន្លែងដែលអ្នកអាចស្វែងរកព័ត៌មានលំអិតពី
+                                         \n ដំណោះស្រាយកម្មវិធីប្រភពព័ត៌មានបើកចំហរ SOLA</string>
+    <string name="showcase_persons_message">\n
+        									 បង្ហាញបញ្ជីឈ្មោះអ្នកដែលបណ្តឹងទាមទាជំនួសអោយអ្នកដទៃ រឺ ពួកគេផ្ទាល់ 
+        									\n \n
+        									 ជ្រើសរើសសមាសភាពមួយពីបញ្ញីឈ្មោះដើម្បីធ្វើការកែសម្រួលអំពីមនុស្ស  
+                                            \n រួមទាំង ឈ្មោះ  កាកបរិច្ឆេទនៃថ្ងៃកំណើត  ភេទ  អត្តសញ្ញាណលំអិត និងរូបភាព
+											\n \n ....ឬ.... 
+    </string>
+    <string name="signature">ហត្ថលេខា</string>
+    <string name="skip">បិទចោល</string>
+    <string name="software_version_title">សេរីកម្មវិធី</string>
+    <string name="south">ទិសខាងត្បូង</string>
+    <string name="south_adjacency">តំបន់ក្បែរទិសខាងត្បូង</string>
+    <string name="south_east">ទិសទក្សិណ</string>
+    <string name="south_west">ទិសនារតី</string>
+    <string name="square_meters">ម៉ែតការេ​​</string>
+    <string name="status">ស្ថានភាព : </string>
+    <string name="sticky_marker">បិទរូបចំណាំ</string>
+    <string name="tiles_download_status">ការប៉ុនបង់ទាញយកឯកសារក្រឡា tile %1$d of %2$d, %3$d ទាញយកឯកសាររួចហើយ និង %4$d ទទួលបរាជ័យ</string>
+    <string name="tiles_provider">Tiles Provider</string>
+    <string name="tiles_provider_dialog_title">ជ្រើសរើសប្រភេទអ្នកផ្តល់ផែនទីដែលមិនភ្ជាប់ប្រព័ន្ធអិុនធើណែត</string>
+    <string name="tiles_queued">មាន ទិន្នន័យ %d នៅក្នុងបញ្ជីដែលបានទាញយករួចហើយ</string>
+    <string name="title_activity_claim">កម្មសិទ្ធិបើចំហរ: ការទាមទាថ្មី</string>
+    <string name="title_activity_file_chooser">ជ្រើរើសឯកសារ</string>
+    <string name="title_activity_group">កម្មសិទ្ធិបើចំហរ: ក្រុមថ្មី</string>
+    <string name="title_activity_login_activity_test">ចាក់សោរបញ្ចូល</string>
+    <string name="title_activity_person">កម្មសិទ្ធិបើចំហរ: បុគ្គលថ្មី</string>
+    <string name="title_activity_select_bookmark">Open Tenure: Select bookmark</string>
+    <string name="title_activity_select_claim">កម្មសិទ្ធិបើចំហរ: ជ្រើសរើសការទាមទា</string>
+    <string name="title_activity_select_person">កម្មសិទ្ធិបើចំហរ: ជ្រើសរើសបុគ្គល</string>
+    <string name="title_activity_settings">ការរៀបចំ</string>
+    <string name="title_activity_share_details">កម្មសិទ្ធិបើចំហរ: ចែងរំលែកព័ត៌មានលំអិត</string>
+    <string name="title_add_map_bookmark">Add map bookmark</string>
+    <string name="title_add_non_boundary">បន្ថែមទីតាំងដែលគ្មានព្រំប្រទល់</string>
+    <string name="title_bookmarks">Bookmarks</string>
+    <string name="title_challenged_claim">ដីទាមទាដែលមានការប្តឹងតវ៉ា : </string>
+    <string name="title_challenged_claims">ដីទាមទាដែលមានការប្តឹងតវ៉ា</string>
+    <string name="title_claim">ទាមទា</string>
+    <string name="title_claim__downloading_map">ទាញយកឯសារដីទាមទា</string>
+    <string name="title_claim_additional_info">បន្ថែមព័ត៌មាន</string>
+    <string name="title_claim_adjacencies">នៅក្បែរៗ</string>
+    <string name="title_claim_challenges">ការប្តឹងតវ៉ា</string>
+    <string name="title_claim_documents">ឯកសារ</string>
+    <string name="title_claim_map">ផែនទី</string>
+    <string name="title_claim_owners">ចែករំលែក</string>
+    <string name="title_claim_photos">រូបភាពទាមទា</string>
+    <string name="title_claims">បញ្ជីឈ្មោះទាមទា</string>
+    <string name="title_confirm_data_transfer">បញ្ជាក់ពីការផ្ទេរទិន្នន័យ</string>
+    <string name="title_exit_dialog">ចាកចេញ</string>
+    <string name="title_export">ការនាំទិន្នន័យទាមទាចេញ ទម្រង់ជាឯកសារបង្រួម</string>
+    <string name="title_group_details">ព័ត៌មានលំអិតរបស់ក្រុម</string>
+    <string name="title_i_m_here">ទីតាំងរបស់លោកអ្នក</string>
+    <string name="title_import">នាំចូលឯកសារដីទាមទារដែលបង្រួមរួច</string>
+    <string name="title_initialization_process">ដំណើការកំពុងចាប់ផ្តើម</string>
+    <string name="title_item">មុខ</string>
+    <string name="title_lock_db">បញ្ជូលលេខកូដទិន្នន័យ</string>
+    <string name="title_map">ផែនទីសហគមន៍</string>
+    <string name="title_news">ព័ត៌មាន</string>
+    <string name="title_no_connection">គ្មាការភត្ជាប់</string>
+    <string name="title_person_details">ព័ត៌មានលំអិតរបស់បុគ្គល</string>
+    <string name="title_persons">បុគ្គល</string>
+    <string name="title_remove_person_dialog">លុបចោលបុគ្គល</string>
+    <string name="title_restart_dialog"> ចាប់ផ្តើមឡើងវិញ </string>
+    <string name="title_save_claim_dialog">ការទាមទាមត្រូវបានផ្លាស់ប្តូរ</string>
+    <string name="title_save_group_dialog">ក្រុមត្រូវបានផ្លាស់ប្តូរ</string>
+    <string name="title_save_person_dialog">បុគ្គលត្រូវបានផ្លាស់ប្តូរ</string>
+    <string name="title_section">ផ្នែក</string>
+    <string name="title_share">ចែករំលែក</string>
+    <string name="tms_tiles_provider">TMS Tiles Provider</string>
+    <string name="tms_tiles_provider_key">TMS</string>
+    <string name="tms_url_pref_dialog_title">បញ្ចូល URL នៃប្រព័ន្ធផ្ទុកពត៌មានផែនទីរបស់អ្នក</string>
+    <string name="tms_url_pref_summary">កន្លែងគោល URL នៃប្រព័ន្ធផ្ទុកពត៌មានផែនទី</string>
+    <string name="tms_url_pref_title">TMS URL</string>
+    <string name="too_many_tiles_queued">មាន ទិន្នន័យ %d នៅក្នងបណ្ជីដែលបានទាញយក។ សូម រងចាំមុនពេលទាញយកទិន្នន័បន្ថែម</string>
+    <string name="type">ប្រភេទ</string>
+    <string name="unmoderated">មិនបានផ្សះផ្សារ</string>
+    <string name="up">ឡើងលើ</string>
+    <string name="update_error">ការដាក់បញ្ចូលឯកសារមិនបានត្រឹមត្រូវupdate error</string>
+    <string name="update_incomplete">ការដាក់បញ្ចូលឯកសារមិនទាន់បញ្ចប់</string>
+    <string name="updating">កំពុងធ្វើបច្ចុប្បន្នភាព</string>
+    <string name="upload_error">បញ្ចូលឯកសារមានបញ្ហា</string>
+    <string name="upload_incomplete">ការដាក់បញ្ចូលឯកសារមិនទាន់បញ្ចប់</string>
+    <string name="uploaded">បានបញ្ចូលឯកសារ</string>
+    <string name="uploading">កំពុងបញ្ចូលឯកសារ</string>
+    <string name="west">ទិសខាងលិច</string>
+    <string name="west_adjacency">តំបន់ក្បែរទិសខាងលិច</string>
+    <string name="withdraw_claim">អ្នកការទាមទាចេញ</string>
+    <string name="wtms_tiles_provider"> អ្នកផ្ដល់ WTMS ក្បឿង </string>
+    <string name="wtms_tiles_provider_key"> WTMS </string>
+    <string name="wtms_url_pref_dialog_title"> បញ្ចូល URL របស់បណ្ដាញរបស់ម៉ាស៊ីនបម្រើផែនទីក្បឿង </string>
+    <string name="wtms_url_pref_summary"> មូលដ្ឋាន URL របស់បណ្ដាញរបស់ម៉ាស៊ីនបម្រើផែនទីក្បឿង </string>
+    <string name="wtms_url_pref_title"> WTMS URL ដែល </string>
+    <string name="yes">បាទ</string>
+    <string name="zoom_level_too_low">តំបន់ធំពេក។ បង្កើនកម្រិតទំហំមុនទាញយកទិន្នន័យក្នុងស្រុកសម្រាប់ផែនទី</string>
+</resources>

@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="action_showcase">Shiko Tutorialin</string>
+    <string name="showcase_main_title">Çfarë është SOLA Open Tenure ?</string>
+    <string name="showcase_main_message">\n \n 
+        									\n Open Tenure është një program me kod të hapur, i zhvilluar nga FAO-UN, për regjistrimin e të drejtave të pasurive nga terreni.
+											\n Mund të maten kufijtë e pronës, mund të mbahen detajet e pronës dhe pronësisë, 
+											\n gjithashtu të regjistrohen të gjithë fotot dhe dokumentet e pronës.
+											\n Open Tenure përdoret me një server të komunitetit të bazuar në ueb (si Komuniteti SOLA Server) ku të dhënat ekzistuese për pasuritë dhe imazhet e hartës 
+											\n mund të shkarkohen përpara se të fillojë puna në terren dhe detajet e reja mund të ngarkohen pas punës në terren.
+
+     </string>
+    <string name="showcase_claim_title">Detajet e Pretendimeve</string>
+    <string name="showcase_news_message">\n \n 
+        									Tabi Lajme ju jep akses tek Komuniteti SOLA Server test i FAO-s ku ju mund të rishikoni detajet e pasurive 
+										 \n të ngarkuara duke përdorur Open Tenure
+                                         \n Gjithashtu që aty keni akses për tek ueb-site i FLOSS SOLA Open Source Software Community ku mund të gjeni 
+										 \n më shumë rreth zgjidhjeve me kod të hapur të SOLA</string>
+    
+    <string name="showcase_map_message">\n \n Tabi Harta e Komunitetit ju jep akses të shikoni hartën e Open Tenure
+                                        
+    </string>
+    <string name="showcase_persons_message">\n
+        									 Tregon listën e personave qe hedhin një pretendim në emër të vetes ose të të tjerëve
+        									\n \n
+        									 Zgjidhni një element të listës për të ndryshuar detajet e personit  
+                                            \n duke përfshire emrin, datëlindjen, gjininë, detajet e ID dhe fotografinë
+											\n \n ....ose.... 
+    </string>
+    <string name="showcase_claims_message">\n Lista e tabit Pretendimet shfaq listën e pretendimeve mbi një pasuri që është shkarkuar ose regjistruar ne pajisjen tuaj bashkë me statusin e tyre
+                                           \n \n Tipet e Statuseve:
+                                           \n   •   L - Paraqitur
+                                           \n   •   U - Ngarkuar/I pa moderuar
+                                           \n   *   C - Kundërshtuar
+                                           \n   •   M - Moderuar
+                                           \n   •   R - Refuzuar
+                                           \n   •   W - Tërhequr
+    </string>
+    <string name="showcase_claim_select_message"> \n \n \n
+        										 Zgjidh një pretendim nga lista për ta parë ose ndryshuar detajet e tij dhe hartën e pronës												 
+ 										      \n \n Përdor ikonën me shigjetën Blu për të ngarkuar një pretendim tek Serveri i Komunitetit
+										      \n \n Përdor ikonën me X të Kuq për të fshirë një pretendim nga lista lokale
+    </string>
+    
+    <string name="showcase_claim_message"> \n Përshkruani pretendimin mbi pasurinë duke futur detajet në një seri tabesh 
+                                           \n 6 tabet e para kane formate fikse për të përshkruar karakteristikat e LADM/STDM.
+                                           \n Dy tabet e fundit janë dinamike dhe përmbajtja e tyre përcaktohet duke përdorur aplikacionin web Admin Sola.										   
+                                           \n \n Tabi i Pretendimeve ka këto fusha:
+                                           \n* "Emri i Pretendimit" emri ose identifikuesi me të cilin prona njihet me se shumti
+                                           \n* "Tipi i Pretendimit" është  (shtese e LADM ose SOLA) e drejta kryesore për pasurinë
+                                           \n* "Përdorimi i tokës" është (shtese e SOLA) përdorimi korrent i përdorimit të tokës së pasurisë
+                                           \n* "Data e pretendimit vlen nga" është data e të drejtës mbi pasurinë qe u njoh për here të parë
+                                           \n* "Shënime" është çdo informacion shtese i konsideruar i përshtatshëm nga Regjistruesi i Komunitetit
+                                           \n \n Në fund të formës janë dy butona:
+                                           \n* "Shto (ose Modifiko) Pretenduesin" të regjistrojë pronarin(pronaret) e pasurisë
+                                           \n* "Zgjidh Pretendimin për ta kundërshtuar" në rastin e një pasurie të diskutueshme qe ka një kundërshtim të regjistruar. Kjo lejon që ky kundërshtim të lidhet me një pretendim të mëparshëm të pronës
+     </string>
+    
+    <string name="showcase_claim_map_message">\n \n Ju lejon të përcaktoni kufijtë e pronës së pretenduar duke përdorur imazhet e hartës si hartë bazë për referencë 
+                                             dhe, aty ku është e nevojshme, pozicionin me GPS duke përdorur GPS e pajisjes mobile.
+                                        	  \n \n Pasi të jenë përcaktuar të gjithë kufijtë, një hartë e pretendimit mund të shtohet si dokument shtesë tek pretendimi i pasurisë											  
+    </string>
+    
+    <string name="showcase_claim_mapdraw_message">\n \n Një pikë e kufirit krijohet duke mbajtur shtypur hartën
+        										  \n \n Një ndriçim i lehte i pikës së kufirit tregon që ajo pikë e kufirit mund të ndryshohet
+                                                  \n Operacionet e ndryshimit janë:
+                                                  \n* ikona X e bardhe fshin pikën e zgjedhur të kufirit
+                                                  \n* ikona e bardhe e Kompasit mundëson redaktimin e sakte hapësinor. Shfaqen shigjetat në të gjitha drejtimet.
+												  \n Përdorni këto shigjeta për përcaktimin e saktë të qoshet kufitare dhe pastaj ikonën Pikë(Dot) të bardhë kur këndi i kufirit është i definuar në mënyrë të kënaqshme
+                                                  \n* Rrethi i bardhe me një ikonë Diagonale të nxjerr nga ndryshimi(Editimi)
+                                           		  \n \n Mbaje shtypur një shënjues për ta lëvizur
+                                                  \n \n Open Tenure mund të hedhë të dhëna ngjitur me qoshet ose vijat e kufirit ekzistues
+    </string>
+    <string name="showcase_claim_document_message">\n \n \n 
+        										  Shfaq listën e dokumenteve të ngjitur me pretendimin e pasurisë
+         										   \n \n 
+         										  Një dokument mund të zgjidhet nga lista për të parë detajet e tij
+                                                  \n Ikona X e kuqe fshin dokumentin tek pretendimet e pasurisë
+         										    
+        										 
+        	                                        
+    </string>
+    <string name="showcase_claim_documentAttach_message">\n \n \n 
+        										  Ikona si kapëse letrash ju lejon të ngarkoni një skedar që më përpara është ruajtur ne pajisjen tuaj
+        										   \n \n
+        										  Ikona e kamerës aktivizon kamerën tek padisja që të mund të bëni një foto dhe të njëjtin imazh 
+												  /n ta ngjisni tek pretendimi i pasurisë
+        										    
+         										  
+        	                                        
+    </string>
+    
+    <string name="showcase_claim_adjacencies_message">\n \n \n 
+        										  Regjistro pronarin ose emrin e pronës, së pronave ngjitur me vendndodhjen hapësinore 
+												  \n të pasurisë që pretendohet (veri, jug, lindje, perëndim)
+         										   \n \n 
+												  Aty ku ka pretendime ngjitur të hedhura nga Open Tenure, këto pretendime të pasurive do të shfaqen automatikisht si kufitare.         										  
+         										  
+        										 
+        	                                        
+    </string>
+    
+    <string name="showcase_claim_challenges_message">\n \n \n 
+        										  Shfaq listën e kundërshtime që janë bërë kundrejt këtij pretendimi												 
+                                                  \n \n Për të pare detajet e një kundërshtimi, mbani mend emrin e pasurisë së kundërshtuar ose pretenduesit
+                                                  dhe kërkoni me njërin pret tyre tek tabi i Pretendimeve
+        										    
+    </string>
+    
+    <string name="showcase_claim_shares_message">
+        										  Liston pjesën e pronësisë të riregjistruar për pretendimin e pasurisë
+         										   \n (Open Tenure prezumon (100 për qind) një pronësi të thjeshtë tek emri i pretenduesit dhe kjo do të shihet fillimisht në listë.
+                                                    Kjo ndarje e përqindjes (100) mund të rregullohet duke përdorur mekanizmat më poshtë)
+                                                    
+         										  \n Një pjesë mund të zgjidhet nga lista për të parë tek pronari(pronarët) bashkëlidhur me ketë pjesë 
+												  dhe për të ndryshuar detajet e pronarit ose shtuar pronarë të tjerë për ketë pjesë
+												                                                    
+												  \n Kontrolli i numrit lejon që përqindja e lidhur me atë pjesë, të ndryshohet
+                                                  
+                                                  \n Ikona X e kuqe lejon që pjesa të fshihet
+                                
+												  \n Ikona + jeshile, shton një pjesë të re për të regjistruar një pronësi më komplekse për ketë pretendim pronësie												  
+                                                  
+                                                  \n Open Tenure nuk do t\'ju lejojë të regjistroni një pjesë që në total nuk është 100 për qind												 
+        										 
+        	                                        
+    </string>
+    <string name="showcase_actionNews_message"> \n \n Ikona me trekëndësh të bardhë me një pike çuditëse shfaqet kur Open Tenure është hapur për herë të parë.
+												\n Ky funksion duhet përdorur për të inicializuar Open Tenure qe të punojë me një Komunitet Server të caktuar
+                                                \n \n Ikona e Hyrjes ju jep akses tek Komuniteti Server sapo të keni futur përdoruesin dhe fjalëkalimin
+                                                \n (që e keni marrë kur jeni regjistruar tek faqja e Komunitetit Server)
+                                                \n \n Ikona Kyç kodon të dhënat e Open Tenure kur ato janë marrë me email												
+        										\n \n Ikona e Listës jep akses për:
+        										\n• "Parametrat" për të përcaktuar vlerat e url-së dhe shtresat e hartës për Komunitetin Server, Geoserver (imazhet e hartave) dhe formën e të dhënave
+												\n•  "Shiko Tutorialin" të rihapni ketë tutorial
+           
+    </string>
+    <string name="showcase_actionMap_message"> \n Ikonat e Tabit Harta e Komunitetit:
+                                               \n* ikona Shkarko Skedarin shfaqet vetëm kur të jeni zmadhuar afër shkallës maksimale dhe fillon shkarkimin e imazheve
+                                               \n nga Geoserver për sipërfaqen e shfaqur në atë moment në hartën e Open Tenure                                               
+                                               \n* ikona e Hyrjes për të shfaqur formën e hyrjes(fillimisht duhet të regjistroheni si përdorues tek Komuniteti Server)                                               
+                                               \n* ikona e Hartës (e palosur) qendërzon hartën e Open Tenure tek zona e interesit të komunitetit											  
+                                               \n* ikona Sy-Demi qendërzon hartën e Open Tenure tek vendndodhja juaj aktuale											   
+        								  	   \n* ikona si re, Shkarko, fillon shkarkimin e detajeve të pretendimeve të pasurive nga Komuniteti Server për zonën
+											   \n që është shfaqur aktualisht ne ekran
+        									   \n* ikona Liste shfaq shtresat bazë të Open Tenure të gatshme për tu zgjedhur
+    </string>
+    <string name="showcase_actionPersons_message"> \n Klikoni mbi ikonën + për të shtuar një person të ri ose grup dhe të regjistroni të dhënat:
+                                                \n \n Personi
+                                                \n* "Emër" (e detyrueshme) - regjistro emrin
+                                                \n* "Mbiemër" (e detyrueshme) - mbiemri
+                                                \n* "Datëlindje" (e detyrueshme) - përdorni kontrollin e datës ose futeni në mënyrë manuale sipas formatit VVVV-MM-DD
+                                                \n* "Gjinia" (e detyrueshme)
+                                                \n* "ID Tipi" zgjidh vlerën nga lista
+                                                \n* "ID Numër" e dhëne nga dokumenti identifikimit
+                                                \n* "Adresa Postare"
+                                                \n* "Adresa Email" - tek kjo adresë do të dërgohen mesazhe që lidhen me pretendimin e pasurisë												
+                                                \n* "Celular"
+                                                \n* "Numër kontakti"
+                                                \n \n Grupi
+                                                \n* "Emër" (e detyrueshme) - emri i grupit
+                                                \n* "Data e themelimit" (e detyrueshme) - përdorni kontrollin e datës ose futeni në mënyrë manuale sipas formatit VVVV-MM-DD
+                                                \n* "ID Numër" - mund dhe të mos ekzistoje por për entitete legale si kompanitë, vendosni numrin e regjistrimit (NIPT,NUIS)												
+                                                \n* "Adresa Postare"
+                                                \n* "Adresa Email" - tek kjo adresë do të dërgohen mesazhe që lidhen me pretendimin e pasurisë	
+                                                \n* "Celular"
+                                                \n* "Numër kontakti"
+                                                
+                                                
+    </string>
+    <string name="showcase_actionClaims_message"> \n \n Ikona Flamur e Personit regjistron një pretendim të ri
+                                                  \n \n Ikona Kyçje shfaq formën që më pas do t\'ju lejojë të ngarkoni pretendimet e pasurisë së plotësuar
+                                                  \n \n Ikona e Listës jep akses për:
+												  \n• "Parametrat" për të përcaktuar vlerat e url-së dhe shtresat e hartës për Komunitetin Server, Geoserver (imazhet e hartave) dhe formën e të dhënave
+												  \n•  "Shiko Tutorialin" të rihapni ketë tutorial
+                                                  \n•  "Backup të dhenat lokalisht" ruan një kopje të të dhënave të riregjistruara nga pajisja juaj
+    </string>
+    
+    <string name="showcase_actionClaimDetails_message"> \n \n  Ikona Ruaj, ruan të gjitha të dhënat që përshkruajnë pretendimin
+                                                        \n \n  Ikona Eksport krijon një skedar të ngjeshur të pretendimit (për ta çuar me email tek komuniteti)														
+                                                        \n sapo pretendimi i pasurisë të jetë regjistruar dhe ruajtur
+        												\n \n Ikona Print krijon një përmbledhje të detajeve të pretendimit të pasurisë														
+                                                        \n sapo pretendimi i pasurisë është hedhur në hartë dhe është ruajtur.
+                                                        \n \n Ikona Liste ka një menu me opsionin për të ri-Parë Tutorialin
+</string>
+    <string name="showcase_actionClaimMap_message"> \n \n  Ikona + jeshile krijon një qoshe të re tek pozicioni aktual i përcaktuar nga GPS i pajisjes.												
+                                                     Për shkak të saktësisë të GPS në pajisjen tuaj, kjo pikë duhet ri pozicionuar (Mbajeni shtypur pikën në hartë)
+													 duke përdorur imazhin e hartës nëse kufiri dhe qoshet janë të dukshme në imazh. Në këto raste, Open Tenure i regjistron të dyja, 
+													 si pozicionin e GPS ashtu dhe atë të hartës.
+                                                    \n \n Ikona e bardhe Rrotullo, rrotullon hartën dhe shfaq kompasin e pajisjes. Për të ndaluar funksionin Rrotullo,
+													perdor Rrethin e bardhe me nje ikone diagonale. Nje levizje si vorbull me dy gishta gjithashtu do të rrotullonte harten. I dobishem per orentimin ne terren
+        										    \n  Ikona SyDemi qendërzon hartën tek pozicioni juaj aktual (të përcaktuar nga GPS i pajisjes)
+        										    \n \n  Ikona Pajisje gjeneron një hartë të ekranit aktual dhe e bashkëngjit automatikisht si dokument tek pretendimi i pasurisë.
+													Në rast se një dokument i tillë është krijuar dhe më përpara atëherë ai mbivendoset.
+    </string>
+    
+    
+    <string name="showcase_actionAlert1_message"> \n \n  Ju duhet të inicializoni aplikacionin tani.
+        
+    </string>
+    <string name="showcase_actionAlert_message"> \n   Kjo ikone inicializon Open Tenure duke e konfiguruar për përdorim me Serverin e Komunitetit SOLA.
+                                                  \n  Kur t\'ju duhet të lidheni me serverin e komunitetit tuaj ju duhet të fshini të dhënat e												  
+                                                  \n Open Tenure nga pajisja juaj dhe të ndryshoni parametrat e url për komunitetin server dhe ta ri-inicializoni.												  
+                                                  \n \n  Hapat janë:
+                                                  \n  1) Duke përdorur Parametrat tek Andorid - Apps - Open Tenure. Klikoni tek butoni i fshirjes të të dhënave												  
+                                                  \n  2) Ndryshoni të dhënat e url-së tek menuja e Parametrave që ndodhet tek Lista e Tabit të Pretendimeve tek forma kryesore e Open Tenure												  
+                                                  \n  3) Përdorni ikonën Trekëndore për ri-inicializmin e Open Tenure (e gjeni tek tabi Lajme tek forma kryesore e Open Tenure)												  
+    </string>
+    
+    <string name="showcase_end_message">\n \n 
+        									..dhe tani..
+											\n \n Provoni të përdorni Open Tenure. Nëse keni ndonjë sugjerim apo ndonjë vështirësi
+                                            \n ju lutem na kontaktoni (neil.pullar@fao.org)
+											\n\n Këtë tutorial mund ta rishikoni në çdo kohë duke zgjedhur "Shiko Tutorialin" nga lista - menuja Shiko Tutorialin.											
+     </string>
+    
+    
+    <string name="next">Tjetra</string>
+    <string name="close">Mbyll</string>
+    <string name="skip">Kalo</string>
+    <string name="ok">OK</string>
+    
+</resources>

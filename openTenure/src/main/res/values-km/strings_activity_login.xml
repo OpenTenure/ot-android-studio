@@ -1,0 +1,28 @@
+
+<resources>
+
+    <string name="title_activity_login_activity_test">ចាក់សោរបញ្ចូល</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_username">ឈ្មោះអ្នកប្រើប្រាស់</string>
+    <string name="prompt_password">លេខសំងាត់</string>
+    <string name="action_log_in_register"><b>ចាក់សោរបញ្ចូល</b></string>
+    <string name="action_sign_in_short">ចាក់សោរបញ្ចូល</string>
+    <string name="action_forgot_password">ទាញយកលេខសំងាត់ដែលបានបាត់</string>
+    <string name="login_progress_signing_in">ចាក់សោរបញ្ចូល និង#៨២៣០;</string>
+    <string name="error_invalid_username">ឈ្មោះអ្នកប្រើប្រាស់នេះខ្លីពេក</string>
+    <string name="error_invalid_password">លេខសំងាត់នេះខ្លីពេក</string>
+    <string name="error_incorrect_password">ឈ្មោះអ្នកប្រើប្រាស់ រឺ លេខសំងាត់នេះមិនត្រឹមត្រូវ</string>
+    <string name="error_generic_login">មានបញ្ហាកើតឡើងអំឡុងពេលចាក់សោរបញ្ចូល</string>
+    <string name="error_generic_conection">មានបញ្ហាកើតឡើងអំឡុងពេលតភ្ជាប់</string>
+    <string name="error_connection">ការភ្ជាប់នេះមិនមានទេ</string>
+    <string name="error_field_required">ផ្នែកនេះត្រូវការជាចាំបាច់</string>
+    <string name="message_login_before">សូមធ្វើកាតចាក់បញ្ចូលជាមុន</string>
+    <string name="message_logout_ok">អ្នកបានចាក់ចេញបានជោគជ័យ</string>
+    <string name="message_login_ok">អ្នកបានចាក់សោរបញ្ចូលបានជោគជ័យ</string>
+    <string name="message_logout_not_ok">ចាកចេញបានបរាជ័យ</string>
+    <string name="message_logout_error">មានបញ្ហាពេលចាកចេញ</string>
+    <string name="message_unknowhost_error">មានបញ្ហាកន្លែងទទួលមិនស្គាល់។ តើមានបណ្តាញនេះទេ?</string>
+    <string name="message_timeout_exception">អស់ពេលវេលាលើកលែង</string>
+
+</resources>

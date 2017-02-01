@@ -1,0 +1,18 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/action_alert"
+          android:icon="@android:drawable/ic_dialog_alert"
+          android:title="@string/action_search"
+          android:showAsAction="ifRoom" />
+    <item android:id="@+id/action_login"
+          android:icon="@drawable/login"
+          android:title="@string/action_login"
+          android:showAsAction="ifRoom" />
+    <item android:id="@+id/action_logout"
+          android:icon="@drawable/logout"
+          android:title="@string/action_logout"          
+          android:showAsAction="ifRoom" />
+    <item android:id="@+id/action_lock"
+          android:icon="@drawable/lock"
+          android:title="@string/action_lock_db"
+          android:showAsAction="ifRoom" />
+</menu>
