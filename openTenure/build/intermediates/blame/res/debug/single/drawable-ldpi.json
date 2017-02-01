@@ -1,0 +1,78 @@
+[
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-ldpi/ic_menu_goto.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/drawable-ldpi/ic_menu_goto.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-ldpi/upload_blue.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/drawable-ldpi/upload_blue.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-ldpi/ic_submit_big.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/drawable-ldpi/ic_submit_big.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-ldpi/ic_menu_login.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/drawable-ldpi/ic_menu_login.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-ldpi/ot_blue_marker.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/drawable-ldpi/ot_blue_marker.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-ldpi/logout.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/drawable-ldpi/logout.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-ldpi/ic_menu_add.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/drawable-ldpi/ic_menu_add.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-ldpi/ic_print.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/drawable-ldpi/ic_print.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-ldpi/ic_find_next_holo_dark.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/drawable-ldpi/ic_find_next_holo_dark.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-ldpi/ic_action_move.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/drawable-ldpi/ic_action_move.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-ldpi/ot_orange_marker.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/drawable-ldpi/ot_orange_marker.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-ldpi/ic_lock_idle_lock.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/drawable-ldpi/ic_lock_idle_lock.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-ldpi/ic_contact_picture.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/drawable-ldpi/ic_contact_picture.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-ldpi/ic_menu_mylocation.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/drawable-ldpi/ic_menu_mylocation.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-ldpi/ic_menu_close_clear_cancel.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/drawable-ldpi/ic_menu_close_clear_cancel.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-ldpi/ic_menu_block.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/drawable-ldpi/ic_menu_block.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-ldpi/ic_menu_attachment.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/drawable-ldpi/ic_menu_attachment.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-ldpi/login.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/drawable-ldpi/login.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-ldpi/ic_menu_forward.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/drawable-ldpi/ic_menu_forward.png"
+    }
+]

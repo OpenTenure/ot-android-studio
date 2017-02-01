@@ -1,0 +1,98 @@
+[
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/menu/persons.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/menu/persons.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/menu/local_claims.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/menu/local_claims.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/menu/login_activity.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/menu/login_activity.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/menu/field_group.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/menu/field_group.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/menu/open_tenure.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/menu/open_tenure.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/menu/challenged_claims.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/menu/challenged_claims.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/menu/select_claim.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/menu/select_claim.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/menu/file_chooser.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/menu/file_chooser.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/menu/claim_photos.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/menu/claim_photos.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/menu/map.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/menu/map.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/menu/news.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/menu/news.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/menu/claim_documents.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/menu/claim_documents.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/menu/claim.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/menu/claim.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/menu/claim_details.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/menu/claim_details.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/menu/claim_metadata.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/menu/claim_metadata.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/menu/share_details.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/menu/share_details.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/menu/select_person.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/menu/select_person.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/menu/multiple_field_group.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/menu/multiple_field_group.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/menu/owners.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/menu/owners.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/menu/map_editor.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/menu/map_editor.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/menu/adjacencies.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/menu/adjacencies.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/menu/person.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/menu/person.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/menu/claim_map.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/menu/claim_map.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/menu/form.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/menu/form.xml"
+    }
+]

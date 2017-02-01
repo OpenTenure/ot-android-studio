@@ -1,0 +1,698 @@
+[
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/abc_list_selector_disabled_holo_dark.9.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/drawable-xhdpi/abc_list_selector_disabled_holo_dark.9.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/import_zip.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/drawable-xhdpi/import_zip.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/ot_blue_marker.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/drawable-xhdpi/ot_blue_marker.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/ic_media_play.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.android.support/mediarouter-v7/22.2.0/res/drawable-xhdpi/ic_media_play.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/common_google_signin_btn_icon_light_focused.9.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/8.3.0/res/drawable-xhdpi/common_google_signin_btn_icon_light_focused.9.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/powered_by_google_light.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.google.android.gms/play-services-location/8.3.0/res/drawable-xhdpi/powered_by_google_light.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/ab_transparent_opentenure.9.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/drawable-xhdpi/ab_transparent_opentenure.9.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/spinner_ab_pressed_opentenure.9.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/drawable-xhdpi/spinner_ab_pressed_opentenure.9.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/common_google_signin_btn_text_light_pressed.9.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/8.3.0/res/drawable-xhdpi/common_google_signin_btn_text_light_pressed.9.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/map_bookmark.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/drawable-xhdpi/map_bookmark.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/btn_cab_done_focused_opentenure.9.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/drawable-xhdpi/btn_cab_done_focused_opentenure.9.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/common_plus_signin_btn_icon_light_disabled.9.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/8.3.0/res/drawable-xhdpi/common_plus_signin_btn_icon_light_disabled.9.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/sola_logo.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/drawable-xhdpi/sola_logo.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/ic_cast_on_light.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.android.support/mediarouter-v7/22.2.0/res/drawable-xhdpi/ic_cast_on_light.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/ic_setting_dark.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.android.support/mediarouter-v7/22.2.0/res/drawable-xhdpi/ic_setting_dark.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/common_google_signin_btn_text_dark_focused.9.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/8.3.0/res/drawable-xhdpi/common_google_signin_btn_text_dark_focused.9.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/ic_action_new_attachment.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/drawable-xhdpi/ic_action_new_attachment.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/powered_by_google_dark.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.google.android.gms/play-services-location/8.3.0/res/drawable-xhdpi/powered_by_google_dark.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/common_google_signin_btn_icon_light_disabled.9.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/8.3.0/res/drawable-xhdpi/common_google_signin_btn_icon_light_disabled.9.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/abc_ic_clear_mtrl_alpha.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/drawable-xhdpi/abc_ic_clear_mtrl_alpha.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/ic_plusone_standard_off_client.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.google.android.gms/play-services-plus/8.3.0/res/drawable-xhdpi/ic_plusone_standard_off_client.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/abc_list_divider_mtrl_alpha.9.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/drawable-xhdpi/abc_list_divider_mtrl_alpha.9.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/ic_action_move.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/drawable-xhdpi/ic_action_move.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/cling_bleached.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/drawable-xhdpi/cling_bleached.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/common_plus_signin_btn_icon_dark_pressed.9.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/8.3.0/res/drawable-xhdpi/common_plus_signin_btn_icon_dark_pressed.9.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/ic_cast_dark.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.android.support/mediarouter-v7/22.2.0/res/drawable-xhdpi/ic_cast_dark.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/common_plus_signin_btn_icon_light_pressed.9.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/8.3.0/res/drawable-xhdpi/common_plus_signin_btn_icon_light_pressed.9.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/ic_media_route_disabled_mono_dark.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.android.support/mediarouter-v7/22.2.0/res/drawable-xhdpi/ic_media_route_disabled_mono_dark.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/abc_spinner_mtrl_am_alpha.9.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/drawable-xhdpi/abc_spinner_mtrl_am_alpha.9.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/common_plus_signin_btn_text_light_disabled.9.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/8.3.0/res/drawable-xhdpi/common_plus_signin_btn_text_light_disabled.9.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/cling.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/drawable-xhdpi/cling.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/common_google_signin_btn_icon_dark_focused.9.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/8.3.0/res/drawable-xhdpi/common_google_signin_btn_icon_dark_focused.9.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/ic_cab_done_holo_light.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/drawable-xhdpi/ic_cab_done_holo_light.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/cast_ic_notification_0.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.google.android.gms/play-services-cast/8.3.0/res/drawable-xhdpi/cast_ic_notification_0.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/common_google_signin_btn_text_dark_normal.9.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/8.3.0/res/drawable-xhdpi/common_google_signin_btn_text_dark_normal.9.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/common_plus_signin_btn_icon_light_normal.9.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/8.3.0/res/drawable-xhdpi/common_plus_signin_btn_icon_light_normal.9.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/abc_ic_menu_cut_mtrl_alpha.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/drawable-xhdpi/abc_ic_menu_cut_mtrl_alpha.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/abc_btn_radio_to_on_mtrl_000.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/drawable-xhdpi/abc_btn_radio_to_on_mtrl_000.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/btn_cab_done_default_opentenure.9.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/drawable-xhdpi/btn_cab_done_default_opentenure.9.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/tab_selected_focused_opentenure.9.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/drawable-xhdpi/tab_selected_focused_opentenure.9.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/common_google_signin_btn_text_dark_pressed.9.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/8.3.0/res/drawable-xhdpi/common_google_signin_btn_text_dark_pressed.9.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/ic_menu_mylocation.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/drawable-xhdpi/ic_menu_mylocation.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/cast_ic_notification_on.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.google.android.gms/play-services-cast/8.3.0/res/drawable-xhdpi/cast_ic_notification_on.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/common_plus_signin_btn_icon_light_focused.9.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/8.3.0/res/drawable-xhdpi/common_plus_signin_btn_icon_light_focused.9.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/ic_menu_forward.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/drawable-xhdpi/ic_menu_forward.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/abc_ic_ab_back_mtrl_am_alpha.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/drawable-xhdpi/abc_ic_ab_back_mtrl_am_alpha.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/map_bookmark_selected.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/drawable-xhdpi/map_bookmark_selected.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/ic_cast_on_2_light.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.android.support/mediarouter-v7/22.2.0/res/drawable-xhdpi/ic_cast_on_2_light.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/common_full_open_on_phone.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.3.0/res/drawable-xhdpi/common_full_open_on_phone.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/abc_ab_share_pack_mtrl_alpha.9.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/drawable-xhdpi/abc_ab_share_pack_mtrl_alpha.9.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/sola_logo_blue.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/drawable-xhdpi/sola_logo_blue.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/ic_pause_light.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.android.support/mediarouter-v7/22.2.0/res/drawable-xhdpi/ic_pause_light.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/common_google_signin_btn_icon_light_normal.9.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/8.3.0/res/drawable-xhdpi/common_google_signin_btn_icon_light_normal.9.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/ab_texture_tile_opentenure.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/drawable-xhdpi/ab_texture_tile_opentenure.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/ic_download_document.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/drawable-xhdpi/ic_download_document.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/common_plus_signin_btn_text_dark_focused.9.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/8.3.0/res/drawable-xhdpi/common_plus_signin_btn_text_dark_focused.9.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/abc_btn_check_to_on_mtrl_015.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/drawable-xhdpi/abc_btn_check_to_on_mtrl_015.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/position.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/drawable-xhdpi/position.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/abc_ic_commit_search_api_mtrl_alpha.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/drawable-xhdpi/abc_ic_commit_search_api_mtrl_alpha.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/common_plus_signin_btn_icon_dark_normal.9.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/8.3.0/res/drawable-xhdpi/common_plus_signin_btn_icon_dark_normal.9.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/ic_action_camera.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/drawable-xhdpi/ic_action_camera.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/ic_cast_on_1_light.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.android.support/mediarouter-v7/22.2.0/res/drawable-xhdpi/ic_cast_on_1_light.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/common_plus_signin_btn_text_dark_normal.9.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/8.3.0/res/drawable-xhdpi/common_plus_signin_btn_text_dark_normal.9.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/abc_popup_background_mtrl_mult.9.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/drawable-xhdpi/abc_popup_background_mtrl_mult.9.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/menu_dropdown_panel_opentenure.9.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/drawable-xhdpi/menu_dropdown_panel_opentenure.9.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/cab_background_top_opentenure.9.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/drawable-xhdpi/cab_background_top_opentenure.9.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/ic_download_tiles.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/drawable-xhdpi/ic_download_tiles.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/ic_action_new.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/drawable-xhdpi/ic_action_new.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/ic_media_route_on_mono_dark.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.android.support/mediarouter-v7/22.2.0/res/drawable-xhdpi/ic_media_route_on_mono_dark.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/spinner_ab_focused_opentenure.9.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/drawable-xhdpi/spinner_ab_focused_opentenure.9.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/ic_contact_picture.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/drawable-xhdpi/ic_contact_picture.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/ic_media_pause.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.android.support/mediarouter-v7/22.2.0/res/drawable-xhdpi/ic_media_pause.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/common_google_signin_btn_icon_dark_normal.9.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/8.3.0/res/drawable-xhdpi/common_google_signin_btn_icon_dark_normal.9.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/ic_menu_close_clear_cancel.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/drawable-xhdpi/ic_menu_close_clear_cancel.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/ic_media_route_on_0_mono_dark.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.android.support/mediarouter-v7/22.2.0/res/drawable-xhdpi/ic_media_route_on_0_mono_dark.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/ic_cast_on_0_light.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.android.support/mediarouter-v7/22.2.0/res/drawable-xhdpi/ic_cast_on_0_light.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/ic_menu_add.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/drawable-xhdpi/ic_menu_add.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/ic_menu_goto.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/drawable-xhdpi/ic_menu_goto.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/abc_list_pressed_holo_dark.9.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/drawable-xhdpi/abc_list_pressed_holo_dark.9.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/ic_cast_disabled_light.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.android.support/mediarouter-v7/22.2.0/res/drawable-xhdpi/ic_cast_disabled_light.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/ic_action_new_picture.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/drawable-xhdpi/ic_action_new_picture.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/abc_ic_search_api_mtrl_alpha.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/drawable-xhdpi/abc_ic_search_api_mtrl_alpha.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/abc_textfield_search_default_mtrl_alpha.9.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/drawable-xhdpi/abc_textfield_search_default_mtrl_alpha.9.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/abc_textfield_search_activated_mtrl_alpha.9.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/drawable-xhdpi/abc_textfield_search_activated_mtrl_alpha.9.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/ic_menu_attachment.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/drawable-xhdpi/ic_menu_attachment.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/abc_switch_track_mtrl_alpha.9.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/drawable-xhdpi/abc_switch_track_mtrl_alpha.9.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/abc_list_longpressed_holo.9.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/drawable-xhdpi/abc_list_longpressed_holo.9.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/ic_plusone_small_off_client.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.google.android.gms/play-services-plus/8.3.0/res/drawable-xhdpi/ic_plusone_small_off_client.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/abc_ic_menu_selectall_mtrl_alpha.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/drawable-xhdpi/abc_ic_menu_selectall_mtrl_alpha.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/abc_ic_voice_search_api_mtrl_alpha.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/drawable-xhdpi/abc_ic_voice_search_api_mtrl_alpha.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/tab_unselected_opentenure.9.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/drawable-xhdpi/tab_unselected_opentenure.9.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/ic_action_save.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/drawable-xhdpi/ic_action_save.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/abc_ic_go_search_api_mtrl_alpha.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/drawable-xhdpi/abc_ic_go_search_api_mtrl_alpha.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/ab_stacked_solid_opentenure.9.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/drawable-xhdpi/ab_stacked_solid_opentenure.9.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/abc_btn_rating_star_off_mtrl_alpha.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/drawable-xhdpi/abc_btn_rating_star_off_mtrl_alpha.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/abc_text_cursor_mtrl_alpha.9.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/drawable-xhdpi/abc_text_cursor_mtrl_alpha.9.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/ab_solid_opentenure.9.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/drawable-xhdpi/ab_solid_opentenure.9.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/btn_cling_pressed.9.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/drawable-xhdpi/btn_cling_pressed.9.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/cast_ic_notification_2.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.google.android.gms/play-services-cast/8.3.0/res/drawable-xhdpi/cast_ic_notification_2.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/ic_media_route_on_2_mono_dark.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.android.support/mediarouter-v7/22.2.0/res/drawable-xhdpi/ic_media_route_on_2_mono_dark.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/spinner_ab_disabled_opentenure.9.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/drawable-xhdpi/spinner_ab_disabled_opentenure.9.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/ic_print.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/drawable-xhdpi/ic_print.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/abc_btn_rating_star_on_mtrl_alpha.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/drawable-xhdpi/abc_btn_rating_star_on_mtrl_alpha.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/abc_ic_menu_paste_mtrl_am_alpha.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/drawable-xhdpi/abc_ic_menu_paste_mtrl_am_alpha.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/cab_background_bottom_opentenure.9.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/drawable-xhdpi/cab_background_bottom_opentenure.9.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/ic_action_map.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/drawable-xhdpi/ic_action_map.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/ic_plusone_medium_off_client.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.google.android.gms/play-services-plus/8.3.0/res/drawable-xhdpi/ic_plusone_medium_off_client.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/spinner_ab_default_opentenure.9.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/drawable-xhdpi/spinner_ab_default_opentenure.9.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/common_plus_signin_btn_icon_dark_disabled.9.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/8.3.0/res/drawable-xhdpi/common_plus_signin_btn_icon_dark_disabled.9.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/preload.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/drawable-xhdpi/preload.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/abc_textfield_activated_mtrl_alpha.9.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/drawable-xhdpi/abc_textfield_activated_mtrl_alpha.9.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/abc_btn_switch_to_on_mtrl_00001.9.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/drawable-xhdpi/abc_btn_switch_to_on_mtrl_00001.9.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/common_plus_signin_btn_text_light_focused.9.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/8.3.0/res/drawable-xhdpi/common_plus_signin_btn_text_light_focused.9.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/ic_find_next_holo_dark.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/drawable-xhdpi/ic_find_next_holo_dark.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/common_google_signin_btn_text_dark_disabled.9.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/8.3.0/res/drawable-xhdpi/common_google_signin_btn_text_dark_disabled.9.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/tab_selected_pressed_opentenure.9.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/drawable-xhdpi/tab_selected_pressed_opentenure.9.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/abc_btn_check_to_on_mtrl_000.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/drawable-xhdpi/abc_btn_check_to_on_mtrl_000.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/abc_btn_switch_to_on_mtrl_00012.9.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/drawable-xhdpi/abc_btn_switch_to_on_mtrl_00012.9.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/btn_cab_done_pressed_opentenure.9.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/drawable-xhdpi/btn_cab_done_pressed_opentenure.9.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/abc_textfield_default_mtrl_alpha.9.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/drawable-xhdpi/abc_textfield_default_mtrl_alpha.9.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/ic_plusone_tall_off_client.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.google.android.gms/play-services-plus/8.3.0/res/drawable-xhdpi/ic_plusone_tall_off_client.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/ab_bottom_solid_opentenure.9.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/drawable-xhdpi/ab_bottom_solid_opentenure.9.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/hand.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/drawable-xhdpi/hand.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/abc_ic_menu_moreoverflow_mtrl_alpha.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/drawable-xhdpi/abc_ic_menu_moreoverflow_mtrl_alpha.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/ic_media_route_off_mono_dark.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.android.support/mediarouter-v7/22.2.0/res/drawable-xhdpi/ic_media_route_off_mono_dark.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/progress_secondary_opentenure.9.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/drawable-xhdpi/progress_secondary_opentenure.9.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/ic_cast_light.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.android.support/mediarouter-v7/22.2.0/res/drawable-xhdpi/ic_cast_light.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/upload_blue.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/drawable-xhdpi/upload_blue.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/ic_menu_block.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/drawable-xhdpi/ic_menu_block.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/ic_media_route_on_1_mono_dark.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.android.support/mediarouter-v7/22.2.0/res/drawable-xhdpi/ic_media_route_on_1_mono_dark.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/abc_ic_menu_share_mtrl_alpha.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/drawable-xhdpi/abc_ic_menu_share_mtrl_alpha.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/common_plus_signin_btn_icon_dark_focused.9.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/8.3.0/res/drawable-xhdpi/common_plus_signin_btn_icon_dark_focused.9.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/btn_cling_normal.9.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/drawable-xhdpi/btn_cling_normal.9.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/list_focused_opentenure.9.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/drawable-xhdpi/list_focused_opentenure.9.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/common_plus_signin_btn_text_light_pressed.9.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/8.3.0/res/drawable-xhdpi/common_plus_signin_btn_text_light_pressed.9.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/common_plus_signin_btn_text_light_normal.9.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/8.3.0/res/drawable-xhdpi/common_plus_signin_btn_text_light_normal.9.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/abc_ic_menu_copy_mtrl_am_alpha.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/drawable-xhdpi/abc_ic_menu_copy_mtrl_am_alpha.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/ic_setting_light.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.android.support/mediarouter-v7/22.2.0/res/drawable-xhdpi/ic_setting_light.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/mr_ic_audio_vol.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.android.support/mediarouter-v7/22.2.0/res/drawable-xhdpi/mr_ic_audio_vol.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/ic_pause_dark.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.android.support/mediarouter-v7/22.2.0/res/drawable-xhdpi/ic_pause_dark.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/common_plus_signin_btn_text_dark_pressed.9.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/8.3.0/res/drawable-xhdpi/common_plus_signin_btn_text_dark_pressed.9.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/tab_unselected_focused_opentenure.9.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/drawable-xhdpi/tab_unselected_focused_opentenure.9.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/progress_primary_opentenure.9.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/drawable-xhdpi/progress_primary_opentenure.9.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/common_google_signin_btn_text_light_normal.9.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/8.3.0/res/drawable-xhdpi/common_google_signin_btn_text_light_normal.9.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/ic_play_dark.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.android.support/mediarouter-v7/22.2.0/res/drawable-xhdpi/ic_play_dark.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/abc_btn_radio_to_on_mtrl_015.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/drawable-xhdpi/abc_btn_radio_to_on_mtrl_015.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/abc_tab_indicator_mtrl_alpha.9.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/drawable-xhdpi/abc_tab_indicator_mtrl_alpha.9.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/abc_list_pressed_holo_light.9.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/drawable-xhdpi/abc_list_pressed_holo_light.9.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/ic_action_attachment.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/drawable-xhdpi/ic_action_attachment.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/list_pressed_opentenure.9.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/drawable-xhdpi/list_pressed_opentenure.9.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/common_google_signin_btn_text_light_focused.9.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/8.3.0/res/drawable-xhdpi/common_google_signin_btn_text_light_focused.9.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/abc_cab_background_top_mtrl_alpha.9.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/drawable-xhdpi/abc_cab_background_top_mtrl_alpha.9.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/progress_bg_opentenure.9.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/drawable-xhdpi/progress_bg_opentenure.9.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/ic_lock_idle_lock.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/drawable-xhdpi/ic_lock_idle_lock.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/common_google_signin_btn_text_light_disabled.9.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/8.3.0/res/drawable-xhdpi/common_google_signin_btn_text_light_disabled.9.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/ic_action_search.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/drawable-xhdpi/ic_action_search.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/common_google_signin_btn_icon_dark_disabled.9.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/8.3.0/res/drawable-xhdpi/common_google_signin_btn_icon_dark_disabled.9.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/common_plus_signin_btn_text_dark_disabled.9.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/8.3.0/res/drawable-xhdpi/common_plus_signin_btn_text_dark_disabled.9.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/cast_ic_notification_1.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.google.android.gms/play-services-cast/8.3.0/res/drawable-xhdpi/cast_ic_notification_1.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/ic_launcher.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/drawable-xhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/common_google_signin_btn_icon_dark_pressed.9.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/8.3.0/res/drawable-xhdpi/common_google_signin_btn_icon_dark_pressed.9.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/abc_menu_hardkey_panel_mtrl_mult.9.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/drawable-xhdpi/abc_menu_hardkey_panel_mtrl_mult.9.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/common_google_signin_btn_icon_light_pressed.9.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/8.3.0/res/drawable-xhdpi/common_google_signin_btn_icon_light_pressed.9.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/tab_selected_opentenure.9.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/drawable-xhdpi/tab_selected_opentenure.9.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/abc_list_selector_disabled_holo_light.9.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/drawable-xhdpi/abc_list_selector_disabled_holo_light.9.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/ic_find_next_holo_light.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/drawable-xhdpi/ic_find_next_holo_light.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/ic_action_submit.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/drawable-xhdpi/ic_action_submit.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/ic_play_light.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.android.support/mediarouter-v7/22.2.0/res/drawable-xhdpi/ic_play_light.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/ic_cast_off_light.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.android.support/mediarouter-v7/22.2.0/res/drawable-xhdpi/ic_cast_off_light.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/ic_menu_login.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/drawable-xhdpi/ic_menu_login.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/tab_unselected_pressed_opentenure.9.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/drawable-xhdpi/tab_unselected_pressed_opentenure.9.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/ic_save_document.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/drawable-xhdpi/ic_save_document.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/ot_orange_marker.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/drawable-xhdpi/ot_orange_marker.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-xhdpi/abc_list_focused_holo.9.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/drawable-xhdpi/abc_list_focused_holo.9.png"
+    }
+]

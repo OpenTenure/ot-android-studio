@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-hdpi-v4/icon_download2.jpg",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/drawable-hdpi/icon_download2.jpg"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_chooser.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/ot-android/aFileChooser/unspecified/res/drawable-hdpi-v4/ic_chooser.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_folder.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/ot-android/aFileChooser/unspecified/res/drawable-hdpi-v4/ic_folder.png"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/drawable-hdpi-v4/ic_provider.png",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/ot-android/aFileChooser/unspecified/res/drawable-hdpi-v4/ic_provider.png"
+    }
+]

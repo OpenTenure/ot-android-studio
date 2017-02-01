@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/xml/mimetypes.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/ot-android/aFileChooser/unspecified/res/xml/mimetypes.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/xml/preferences.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/xml/preferences.xml"
+    }
+]

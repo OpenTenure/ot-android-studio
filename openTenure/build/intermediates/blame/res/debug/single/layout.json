@@ -1,0 +1,410 @@
+[
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/layout/metadata_dialog.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/layout/metadata_dialog.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/layout/fragment_person.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/layout/fragment_person.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/layout/abc_action_bar_up_container.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/layout/abc_action_bar_up_container.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/layout/showcase_skip_button.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/layout/showcase_skip_button.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/layout/abc_search_dropdown_item_icons_2line.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/layout/abc_search_dropdown_item_icons_2line.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/layout/abc_simple_dropdown_hint.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/layout/abc_simple_dropdown_hint.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/layout/abc_action_menu_layout.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/layout/abc_action_menu_layout.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/layout/notification_template_big_media.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/layout/notification_template_big_media.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/layout/notification_template_lines.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/layout/notification_template_lines.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/layout/activity_person.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/layout/activity_person.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/layout/file.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/ot-android/aFileChooser/unspecified/res/layout/file.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/layout/marker_popup.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/layout/marker_popup.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/layout/showcase_button.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/layout/showcase_button.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/layout/fragment_claim_dummy.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/layout/fragment_claim_dummy.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/layout/activity_login.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/layout/activity_login.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/layout/bookmarks_list_item.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/layout/bookmarks_list_item.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/layout/abc_activity_chooser_view_list_item.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/layout/abc_activity_chooser_view_list_item.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/layout/fragment_challenged_claims.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/layout/fragment_challenged_claims.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/layout/activity_field_group.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/layout/activity_field_group.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/layout/my_selector.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/layout/my_selector.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/layout/fragment_claim_documents.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/layout/fragment_claim_documents.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/layout/challenged_claims_list.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/layout/challenged_claims_list.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/layout/abc_popup_menu_item_layout.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/layout/abc_popup_menu_item_layout.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/layout/abc_screen_content_include.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/layout/abc_screen_content_include.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/layout/map_label.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/layout/map_label.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/layout/multiple_field_group_list.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/layout/multiple_field_group_list.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/layout/abc_screen_toolbar.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/layout/abc_screen_toolbar.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/layout/row_section.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/layout/row_section.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/layout/select_dialog_singlechoice_material.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/layout/select_dialog_singlechoice_material.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/layout/persons_list_item.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/layout/persons_list_item.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/layout/code_types.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/layout/code_types.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/layout/abc_action_menu_item_layout.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/layout/abc_action_menu_item_layout.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/layout/activity_splash.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/layout/activity_splash.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/layout/multiple_field_group_list_item.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/layout/multiple_field_group_list_item.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/layout/abc_action_bar_view_list_nav_layout.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/layout/abc_action_bar_view_list_nav_layout.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/layout/activity_share_details.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/layout/activity_share_details.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/layout/notification_template_media.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/layout/notification_template_media.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/layout/share_list_item.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/layout/share_list_item.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/layout/amu_webview.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.google.maps.android/android-maps-utils/0.4.4/res/layout/amu_webview.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/layout/my_progress_bar.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/layout/my_progress_bar.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/layout/persons_list.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/layout/persons_list.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/layout/notification_template_part_chronometer.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/layout/notification_template_part_chronometer.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/layout/adjacent_claims_list_item.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/layout/adjacent_claims_list_item.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/layout/select_dialog_item_material.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/layout/select_dialog_item_material.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/layout/news_list_item.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/layout/news_list_item.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/layout/abc_screen_simple.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/layout/abc_screen_simple.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/layout/custom_add_multipage.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/layout/custom_add_multipage.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/layout/support_simple_spinner_dropdown_item.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/layout/support_simple_spinner_dropdown_item.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/layout/activity_open_tenure.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/layout/activity_open_tenure.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/layout/fragment_claim_map.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/layout/fragment_claim_map.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/layout/fragment_field_group.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/layout/fragment_field_group.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/layout/claims_list_item.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/layout/claims_list_item.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/layout/initialization_activity.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/layout/initialization_activity.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/layout/notification_template_big_media_narrow.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/layout/notification_template_big_media_narrow.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/layout/abc_list_menu_item_layout.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/layout/abc_list_menu_item_layout.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/layout/abc_expanded_menu_layout.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/layout/abc_expanded_menu_layout.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/layout/abc_activity_chooser_view.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/layout/abc_activity_chooser_view.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/layout/abc_list_menu_item_radio.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/layout/abc_list_menu_item_radio.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/layout/bookmarks_list.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/layout/bookmarks_list.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/layout/document_spinner.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/layout/document_spinner.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/layout/abc_action_mode_bar.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/layout/abc_action_mode_bar.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/layout/custom_remove_claim.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/layout/custom_remove_claim.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/layout/notification_template_part_time.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/layout/notification_template_part_time.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/layout/row_item.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/layout/row_item.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/layout/abc_dialog_title_material.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/layout/abc_dialog_title_material.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/layout/share_details.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/layout/share_details.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/layout/claim_additional_info_list_item.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/layout/claim_additional_info_list_item.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/layout/claim_documents_list.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/layout/claim_documents_list.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/layout/fragment_group.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/layout/fragment_group.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/layout/claim_attachments_list_item.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/layout/claim_attachments_list_item.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/layout/notification_media_action.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/layout/notification_media_action.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/layout/handy.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/layout/handy.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/layout/amu_info_window.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.google.maps.android/android-maps-utils/0.4.4/res/layout/amu_info_window.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/layout/activity_bookmark.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/layout/activity_bookmark.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/layout/abc_action_mode_close_item_material.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/layout/abc_action_mode_close_item_material.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/layout/adjacent_claims_list.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/layout/adjacent_claims_list.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/layout/mr_media_route_controller_material_dialog_b.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.android.support/mediarouter-v7/22.2.0/res/layout/mr_media_route_controller_material_dialog_b.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/layout/share_list.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/layout/share_list.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/layout/notification_media_cancel_action.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/layout/notification_media_cancel_action.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/layout/select_dialog_multichoice_material.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/layout/select_dialog_multichoice_material.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/layout/abc_select_dialog_material.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/layout/abc_select_dialog_material.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/layout/fragment_news.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/layout/fragment_news.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/layout/amu_text_bubble.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.google.maps.android/android-maps-utils/0.4.4/res/layout/amu_text_bubble.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/layout/abc_list_menu_item_icon.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/layout/abc_list_menu_item_icon.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/layout/activity_claim.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/layout/activity_claim.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/layout/main_map.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/layout/main_map.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/layout/owner_list_item.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/layout/owner_list_item.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/layout/fragment_claim_details.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/layout/fragment_claim_details.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/layout/my_spinner.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/layout/my_spinner.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/layout/local_claims_list.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/layout/local_claims_list.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/layout/challenging_claims_list.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/layout/challenging_claims_list.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/layout/abc_screen_simple_overlay_action_mode.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/layout/abc_screen_simple_overlay_action_mode.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/layout/abc_alert_dialog_material.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/layout/abc_alert_dialog_material.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/layout/abc_list_menu_item_checkbox.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/layout/abc_list_menu_item_checkbox.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/layout/custom_add_document.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/layout/custom_add_document.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/layout/abc_search_view.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/layout/abc_search_view.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/layout/mr_media_route_chooser_dialog.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.android.support/mediarouter-v7/22.2.0/res/layout/mr_media_route_chooser_dialog.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/layout/fragment_claim_photos.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/layout/fragment_claim_photos.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/layout/multipage_file_list_item.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/layout/multipage_file_list_item.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/layout/claim_photos_list.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/layout/claim_photos_list.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/layout/activity_form.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/src/main/res/layout/activity_form.xml"
+    },
+    {
+        "merged": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/res/merged/debug/layout/abc_action_bar_title_item.xml",
+        "source": "/home/administrator/StudioProjects/ot-android/openTenure/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/res/layout/abc_action_bar_title_item.xml"
+    }
+]

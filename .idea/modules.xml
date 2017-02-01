@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/aFileChooser/aFileChooser.iml" filepath="$PROJECT_DIR$/aFileChooser/aFileChooser.iml" />
+      <module fileurl="file://$PROJECT_DIR$/openTenure/openTenure.iml" filepath="$PROJECT_DIR$/openTenure/openTenure.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ot-android.iml" filepath="$PROJECT_DIR$/ot-android.iml" />
+    </modules>
+  </component>
+</project>
