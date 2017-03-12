@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="action_showcase">Lihat tutorial</string>
+    <string name="showcase_main_title">Apakah SOLA Open Tenure ?</string>
+    <string name="showcase_main_message">\n \n 
+        									\n Open Tenure is adalah aplikasi perangkat lunak terbuka, yang di kembangkan oleh FAO-PBB, untuk pencatatan hak kepemilikan di lapangan.
+											\n Batas dari kepemilikan lahan dapat dipetakan dan detil informasi kepemilikan dapat di rekam dan dilengkapi dengan gambar dari 
+                                            \n supporting dokumen dokumen dan foto dari properti.
+											\n Open Tenure menggunakan server komunitas berbasis web (seperti  SOLA Community Server) dimana informasi detil properti eksisting 
+                                            \n dan citra satelit dapat diunduh sebelum turun ke lapangan dan informasi detil yang baru dapat diunggah setelah perekaman dilapangan.
+
+     </string>
+    <string name="showcase_claim_title">Detil klaim</string>
+    <string name="showcase_news_message">\n \n 
+        									Tab yang baru memberikan akses untuk menguji situs Server komunitas SOLA  FAO dimana anda dapat mengkaji properti yang diunggah  
+                                         \n detil menggunakan Open Tenure.
+                                         \n Hal ini juga memberikan akses ke situs perangkat lunak komunitas terbuka FLOSS SOLA dimana anda dapat menemukan lebih tentang
+                                         \n solusi perangkat lunak terbuka SOLA</string>
+    
+    <string name="showcase_map_message">\n \n Tab peta komunitas memberikan anda akses pada viewer peta Open Tenure 
+                                        
+    </string>
+    <string name="showcase_persons_message">\n
+        									 Menunjukkan daftar nama orang-orang yang mengklaim atas nama mereka sendiri atau orang lain 
+        									\n \n
+        									 Memilih satu unsur dari daftar untuk mengedit tentang data sesorang   
+                                            \n termasuk nama, tanggal lahir, jenis kelamin, detil ID dan foto 
+											\n \n ....or.... 
+    </string>
+    <string name="showcase_claims_message">\n Daftar dari klaim menggambarkan daftar dari klaim properti yang telah diunduh atau dicatat pada perangkat anda berikut statusnya 
+                                           \n \n Tipe status:
+                                           \n   •   L - Lodged
+                                           \n   •   U - Uploaded/Unmoderated
+                                           \n   *   C - Challenged
+                                           \n   •   M - Moderated
+                                           \n   •   R - Rejected
+                                           \n   •   W - Withdrawn
+    </string>
+    <string name="showcase_claim_select_message"> \n \n \n
+        										 Pilih klaim dari daftar untuk menampilkan atau mengedit informasi detil dan memetakan properti
+ 										      \n \n Gunakan tanda panah biru untuk mengunggah suatu klaim ke dalam server komunitas 
+										      \n \n Gunakan tanda X merah untuk menghapus klaim dari daftar secara lokal 
+    </string>
+    
+    <string name="showcase_claim_message"> \n Jelaskan klaim properti dengan memasukkan informasi detil melalui serangkaian tab 
+                                           \n 6 tab pertama merupakan format fix untuk menjelaskan karkteristik LADM/STDM.
+                                           \n 2 tab terakhir merupakan dinamik dan berisikan penjelasan penggunaan aplikasi admin situs SOLA.
+                                           \n \n Tab klaim memiliki kolom:
+                                           \n* "Nama klaim" nama atau pengenal bahwa properti ini umumnya dikenal sebagai 
+                                           \n* "Tipe klaim" merupakan hak utama untuk properti(ekstensi LADM atau SOLA extenstion)
+                                           \n* "Penggunaan lahan" merupakan(ekstensi SOLA) penggunaan lahan utama saat ini untuk properti 
+                                           \n* "Tanggal klaim berlaku dari" adalah tanggal hak utama yang pertama kali dikenali keberadaannya 
+                                           \n* "Catatan" adalah tambahan detil yang dipertimbangkan perlu oleh Pencatat komunitas 
+                                           \n \n Di bawah tombol dari formulir terdapat dua tombol:
+                                           \n* "Tambahkan(atau modif) Pengklaim" mencatat pemilik dari properti 
+                                           \n* "Pilih klaim untuk menguji" dalam kasus klaim properti yang dalam sengketa dan pengujian telah dicatat. Pengujian di hubungkan dengan klaim prperti sebelumnya.  
+
+     </string>
+    
+    <string name="showcase_claim_map_message">\n \n Memungkinkan Anda untuk menentukan batas-batas klaim properti menggunakan citra peta sebagai peta dasar untuk referensi
+                                             dan, jika
+perlu, posisi GPS dari peralatan mobil\ GPS bawaan.
+                                        	  \n \n Setelah semua batas-batas yang ditetapkan, peta klaim properti dapat dihasilkan dan ditambahkan sebagai dokumen pendukung untuk klaim properti
+
+    </string>
+    
+    <string name="showcase_claim_mapdraw_message">\n \n Tekan pada peta untuk membuat pojok batas baru
+        										  \n \n A (light) Tap pada pojokan batas agar batas dalam Mode edit 
+                                                  \n Edit Mode Operasinya adalah:
+                                                  \n* Ikon X putih menghapus batas yang terpilih
+                                                  \n* Ikon kompas putih untuk mengedit spasial secara tepat. Arahkan pada setiap arah yang ditampilkan.
+                                                  \n Gunaka panah-panah ini untuk membuat batas pada setiap pojok yang tepat dan kemudian ikon titikjika pojok telah ditetapkan secara tepat 
+                                                  \n* Lingkaran putih dengan ikon diagonal digunakan untuk keluar dari Mode Edit
+                                           		  \n \n Long press on an existing marker to drag it around
+                                                  \n \n Open Tenure dapat juga di snap dengan pojok batas eksisting atau pada garis batas baru 
+    </string>
+    <string name="showcase_claim_document_message">\n \n \n 
+        										  Tampilkan daftar dokumen sebagai lampiran klaim properti          										   \n \n 
+         										  Sebuah dokumen dapat dipilih dari daftar untuk menampilkan info detinya 
+                                                  \n Ikon X merah menghapus klaim properti 
+         										    
+        										 
+        	                                        
+    </string>
+    <string name="showcase_claim_documentAttach_message">\n \n \n 
+        										  Ikon klip kertas digunakan untuk melampirkan berkas eksisting yang sebelumnya disimpan dalam perangkat anda 
+        										   \n \n
+        										  Ikon kamera untuk mengkatifkan kamera pada perangkat anda sehingga anda dapat mengambil foto untuk gambar yang diinginkan 
+                                                  /n to be dan melampirkan pada klaim properti
+        										    
+         										  
+        	                                        
+    </string>
+    
+    <string name="showcase_claim_adjacencies_message">\n \n \n 
+        										  Merekam pemilik atau  nama properti yang berdekatan sesuai dengan lokasi relatif 
+                                                  \n dari klaim properti yang dikrekam (yatu utara, selatan, timur dan barat) 
+         										   \n \n 
+         										  dimana klaim properti yang berdekatan direkam oleh Open Tenure, properti yang diklaim ini akan secara otomatis ditampilkan sebagai tetangga berdekatan.
+         										  
+        										 
+        	                                        
+    </string>
+    
+    <string name="showcase_claim_challenges_message">\n \n \n 
+        										  Menampilkan daftar dari para penantang yang juga mengklaim properti yang sama 
+                                                  \n \n Untuk melihat detil dari properti yang ditantang untuk diuji , catat nama dari penantang atau pengklaim,
+                                                  dan cari dengan menggunakan nama dari tab daftar klaim 
+        										    
+    </string>
+    
+    <string name="showcase_claim_shares_message">
+        										  Daftar dari kepemilikan memberikan perekaman dari klaim properti 
+         										   \n (Open Tenure menganggap sederhana (100 persen) kepemilikan dari nama pengklaim dan ini 
+                                                    yang akan terlihat diawal dalam daftar.  100 persen ini juga memberikan peluang pengaturan untuk dapat dimodifikasi  melalui mekanisme sbb)
+                                                    
+         										  \n Suatu bidang lahan dapat dipilih dari daftar untuk melihat para pemilik yang berhubungan dengan bidang tersebut dan mengubah detil kepemilikan atau menambah 
+                                                  kepemilikan informasi lebih lanjut untuk bidang yang sama.
+                                                  
+												  \n Pengklaim lainnya juga dapat mengatur persentase yang berhubungan dengan bidang lahan yang diubah tersebut 
+                                                  
+                                                  \n Ikon X merah dapat mengapus bidang yang diinginkan 
+                                
+												  \n Ikon + hijau memberikan anda akses untuk menambahkan pada  bidang baru pengaturan kepemilikan yang lebih kompleks atas suatu klaim properti
+                                                  
+                                                  \n Open Tenure tidak akan merekam kepemilikan dari bidang yang di share jika tidak berjumlah 100 persen 
+        										 
+        	                                        
+    </string>
+    <string name="showcase_actionNews_message"> \n \n Segitiga putih menampilkan tanda seru jika Open tenure dijalankan untuk pertam kalinya. Fungsi ini 
+                                                \n must be useharus digunakan untuk menginisialisasi Open tenure ketika digunakan server komunitas tertentu 
+                                                \n \n Logo masuk memberikan anda akses ke server komunitas ketika anda memasukkan nama pengguna dan kata sandi 
+                                                \n (yang didapat saat pendaftaran pada situs server komunitas)
+                                                \n \n Ikon kunci mengenkripsi data yang diambil dengan Open Tenure ketika data ini dikirimkan lewat email 
+        										\n \n Daftar ikon memberikan akses pada: 
+        										\n• "Pengaturan" untuk menentukan pilihan URL dan layer peta pada server komunitas, geoserver (citra satelit) dan formulir survei 
+												\n•  "Lihat Tutorial" untuk melihat kembali tutorial 
+           
+    </string>
+    <string name="showcase_actionMap_message"> \n Ikon tab Peta Komunitas:
+                                               \n* Ikon unduh berkas hanya tampil jika anda memperbesar mendekati skala besar dan mulai mengunduh lembar citra 
+                                               \n dari geoserver citra untuk areal yang saat ini ditampilkan pada viewer peta  Open Tenure 
+                                               \n* Ikon Masuk untuk menampilkan formulir Log on (anda harus mendaftar lebih dulu sebagai pengguna Server komunitas) 
+                                               \n* Ikon peta (terlipat) menengahkan tampilan peta pada Open Tenure pada areal yang diinginkan (area of interest)
+                                               \n* Ikon target meletakkan peta Open Tenure persis ditengah dari lokasi anda saat ini 
+        								  	   \n* ikon unduh cloud memulai mengunduh detil klaim properti dari server komunitas untuk areal saat 
+                                               \n  ditampilkan pada viewer peta  Open Tenure
+        									   \n* ikon daftar memperlihatkan opsi pemilihan layer peta dasar Open Tenure 
+    </string>
+    <string name="showcase_actionPersons_message"> \n Klik pada ikon + untuk menambahkan orang yang baru atau grup dan isikan aplikasi detil sbb:  
+                                                \n \n Orang
+                                                \n* "Nama pertama" (wajib diisi) - isi nama pertama
+                                                \n* "Nama terakhir" (wajib diisi) - nama keluarga
+                                                \n* "Tanggal lahir" (wajib diisi) - gunakan kontrol tanggal atau masukkan sevara manual dengan format YYYY-MM-DD
+                                                \n* "Jenis kelamin" (wajib diisi)
+                                                \n* "Jenis ID" pilih dari daftar
+                                                \n* "Nomor ID" catat dari kartu identitas
+                                                \n* "Alamat pos"
+                                                \n* "Alamat email" - alamat email ini yang nantinya akan secara otomatis menerima klaim properti 
+                                                \n* "Nomor HP"
+                                                \n* "Nomor telepon"
+                                                \n \n Grup
+                                                \n* "Nama pertama" (wajib diisi) - nama dari grup
+                                                \n* "Tanggal dibentuk" (wajib diisi) - Gunakan kontrol atau masukkan sevara manual dengan format YYYY-MM-DD
+                                                \n* "Nomor ID" - mungkin tidak ada tetapi yang secara legal entitasnya dikenali, misal perusahaan, catat nomor registrasinya 
+                                                \n* "Alamat pos"
+                                                \n* "Alamat Email" - alamat email ini yang nantinya akan secara otomatis menerima klaim properti 
+                                                \n* "Nomor HP"
+                                                \n* "Nomor telepon"
+                                                
+                                                
+    </string>
+    <string name="showcase_actionClaims_message"> \n \n Ikon orang dengan bendera untuk mencatat klaim properti baru 
+                                                  \n \n Ikon masuk (logon) untuk menampilkan formulir Logon yang akan memungkinkan anda untuk mengunggah klaim properti yang sudah lengkap  
+                                                  \n \n Ikon daftar memberikan anda akses untuk: 
+                                                  \n• "Pengaturan" untuk menetapkan pilihan URL dan layer peta pada server komunitas, Geoserver (peta citra) dan formulir survai 
+                                                  \n•  "Tampilkan Tutorial" untuk melihat ulang tutorial
+                                                  \n•  "Backup data lokal" untuk mem-backup data klaim propert yang direkam dalam perangkat anda 
+    </string>
+    
+    <string name="showcase_actionClaimDetails_message"> \n \n  Ikon simpan untuk menyimpan semua data dari klaim 
+                                                        \n \n  Ikon ekspor akan menghasilkan berkas zip file terkompresi dari suatu klaim (untuk diemail ke server komunitas) 
+                                                        \n Ketika klaim properti telah dicatat secara lengkap dan disimpan 
+        												\n \n  Ikon cetak (print) membuat ringkasan detil dari klaim properti 
+                                                        \n ketika klaim properti sudah dipetakan dan klaim properti telah disimpan.
+                                                        \n \n Ikon daftar memiliki opsi menu untuk menampilkan  dan melihat kembali tutorial 
+</string>
+    <string name="showcase_actionClaimMap_message"> \n \n  Ikon kunci inggris memberikan anda untuk mengganti mode yang berbeda editing peta seperti : menambahkan penanda untuk batas utama, menambahkan  
+                                                     penanda yang bukan merupakan bagian dari batas utama atau mengukur jarak antar tanda.
+         											\n \n  Ikon + hijau untuk membuat pojok batas baru pada posisi saat ini sebagaimana ditentukan oleh GPS pada perangkat anda. 
+                                                     Oleh karena akurasi dari GPS diperangkat sering menjadi masalah, maka pojok batas i i perlu di re-posisi (dengan cara menekan lama pada displai peta) 
+                                                     relatif pada peta citra jika posisi batas sudah jelas pada peta. Dalam situasi ini, Open Tenure merekam baik  
+                                                    untuk posisi GPS maupun posisi dari peta citra. 
+                                                    \n \n Ikon rotasi putih adalah untuk memutar peta dan menampilkan kompas dari perangkat. Untuk menghentikan fungsi rotasi, yaitu dengan menggunakan 
+                                                      lingkaran putih dengan garis diagonal.  Dengan memutar dua jari akan memutar peta. Kegunaan untuk orientasi lapangan 
+        										    \n  Ikon terget sasaran akan men centerkan peta pada posisi anda saat ini (sebagaimana ditentukan oleh GPS perangkat)
+        										    \n \n  Ikon Perangkat menghasilkan peta berdasarkan tampilan peta saat ini dan secara otomatis melampirkan ini sebagai dokumen 
+                                                     pendukung untuk klaim properti. Dalam kasus peta sebelumnya sudah disimpan sebagai dokumen pendukung maka peta yang baru akan menggantikan peta yang lama. 
+    </string>
+    
+    
+    <string name="showcase_actionAlert1_message"> \n \n  Anda harus menginisialisasi aplikasinya sekarang.
+        
+    </string>
+    <string name="showcase_actionAlert_message"> \n   Ikon ini menginisialisasi Open Tenure dengan cara mengkonfigurasi penggunaannya dengan mencoba server SOLA community.
+                                                  \n  Jika anda ingin terhubung dengan server komunitas, anda perlu menutup semua 
+                                                  \n data Open Tenure di perangkat anda, ganti pengaturan URL untu server komunitas dan lakukan re-inisialisasi.
+                                                  \n \n  Langkah-langkahnya adalah: 
+                                                  \n  1) Dengan menggunakan pengaturan android Pengaturan - Apps - Open Tenure. Klik pada tombol bersihkan data
+                                                  \n  2) Ganti URL dalam menu dari tab daftar klaim pada form inisial Open Tenure 
+                                                  \n  3) Gunakan ikon segitiga untuk me (re) inisialisasi Open Tenure (tersedia dari tab baru pada form inisial utama Open Tenure) 
+    </string>
+    
+    <string name="showcase_end_message">\n \n 
+        									..dan sekarang..
+											\n \n PSilahkan coba menggunakan Open Tenure. Jika anda memunyai saran atau menemui masalah 
+                                            \n silahkan hubungi kami (neil.pullar@fao.org)
+											\n\n Anda dapat menampilkan tutorial ini kembali setiap saat dengan memilih "tampilkan tutorial" dari daftar - Menu opsi Tampilkan Tutorial You can view this tutorial again at any time selecting "View Tutorial" from the List - View Tutorial menu option.
+     </string>
+    
+    
+    <string name="next">Next</string>
+    <string name="close">Close</string>
+    <string name="skip">Skip</string>
+    <string name="ok">OK</string>
+    
+</resources>

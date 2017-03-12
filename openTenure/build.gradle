@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 21
-    buildToolsVersion "21.1.2"
+    buildToolsVersion '25.0.0'
 
     defaultConfig {
         applicationId "org.fao.sola.clients.android.opentenure"
@@ -28,11 +28,14 @@ android {
     dexOptions {
         javaMaxHeapSize "4g"
     }
+    lintOptions {
+        disable 'MissingTranslation'
+    }
 }
 
 dependencies {
     compile project(':aFileChooser')
-    compile 'com.google.maps.android:android-maps-utils:0.4+'
+    compile 'com.google.maps.android:android-maps-utils:0.4.4'
     compile 'com.android.support:support-v4:21.0.3'
     compile 'com.google.code.gson:gson:2.4'
     compile 'com.google.android.gms:play-services:8.3.0'
