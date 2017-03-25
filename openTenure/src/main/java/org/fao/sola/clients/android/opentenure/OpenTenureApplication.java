@@ -51,12 +51,13 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.http.AndroidHttpClient;
 import android.preference.PreferenceManager;
+import android.support.multidex.MultiDexApplication;
 import android.support.v4.app.FragmentActivity;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.View;
 
-public class OpenTenureApplication extends Application {
+public class OpenTenureApplication extends MultiDexApplication {
 	private static final String VERSION_NOT_FOUND = "Not found";
 	private static OpenTenureApplication sInstance;
 	private Database database;
