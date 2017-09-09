@@ -22,6 +22,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 class ClusterMarker implements Marker {
@@ -54,16 +55,16 @@ class ClusterMarker implements Marker {
         int count = markers.size();
         if (count == 0) {
             removeVirtual();
-        } else if (count == 1) {
+        } else if (count < strategy.getMinMarkersCount()) {
             removeVirtual();
-            markers.get(0).changeVisible(true);
-        } else {
-            LatLngBounds.Builder builder = LatLngBounds.builder();
             for (DelegatingMarker m : markers) {
-                builder.include(m.getPosition());
+                m.changeVisible(true);
+            }
+        } else {
+            for (DelegatingMarker m : markers) {
                 m.changeVisible(false);
             }
-            LatLng position = builder.build().getCenter();
+            LatLng position = calculateClusterPosition();
             if (virtual == null || lastCount != count) {
                 removeVirtual();
                 lastCount = count;
@@ -74,14 +75,22 @@ class ClusterMarker implements Marker {
         }
     }
 
-    Marker getDisplayedMarker() {
+    private LatLng calculateClusterPosition() {
+        LatLngBounds.Builder builder = LatLngBounds.builder();
+        for (DelegatingMarker m : markers) {
+            builder.include(m.getPosition());
+        }
+        return builder.build().getCenter();
+    }
+
+    List<? extends Marker> getDisplayedMarkers() {
         int count = markers.size();
         if (count == 0) {
             return null;
-        } else if (count == 1) {
-            return markers.get(0);
+        } else if (count < strategy.getMinMarkersCount()) {
+            return markers;
         } else {
-            return this;
+            return Collections.singletonList(this);
         }
     }
 
@@ -159,11 +168,7 @@ class ClusterMarker implements Marker {
         if (virtual != null) {
             return virtual.getPosition();
         }
-        LatLngBounds.Builder builder = LatLngBounds.builder();
-        for (DelegatingMarker m : markers) {
-            builder.include(m.getPosition());
-        }
-        LatLng position = builder.build().getCenter();
+        LatLng position = calculateClusterPosition();
         return position;
     }
 
@@ -263,7 +268,9 @@ class ClusterMarker implements Marker {
 
     @Override
     public void setIcon(BitmapDescriptor icon) {
-        throw new UnsupportedOperationException();
+        if (virtual != null) {
+            virtual.setIcon(icon);
+        }
     }
 
     @Override
@@ -303,17 +310,6 @@ class ClusterMarker implements Marker {
         }
         if (virtual != null) {
             virtual.showInfoWindow();
-        }
-    }
-
-    void setVirtualPosition(LatLng position) {
-        int count = markers.size();
-        if (count == 0) {
-            // no op
-        } else if (count == 1) {
-            markers.get(0).setVirtualPosition(position);
-        } else {
-            virtual.setPosition(position);
         }
     }
 }

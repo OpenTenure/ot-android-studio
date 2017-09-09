@@ -28,6 +28,8 @@
  */
 package org.fao.sola.clients.android.opentenure.maps;
 
+import java.io.IOException;
+import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -39,6 +41,7 @@ import org.fao.sola.clients.android.opentenure.R;
 import org.fao.sola.clients.android.opentenure.model.Adjacency.CardinalDirection;
 import org.fao.sola.clients.android.opentenure.model.Claim;
 import org.fao.sola.clients.android.opentenure.model.ClaimType;
+import org.fao.sola.clients.android.opentenure.model.HoleVertex;
 import org.fao.sola.clients.android.opentenure.model.PropertyLocation;
 import org.fao.sola.clients.android.opentenure.model.Vertex;
 
@@ -50,49 +53,54 @@ import android.graphics.Paint;
 import android.graphics.Paint.Align;
 import android.graphics.Rect;
 import android.graphics.Typeface;
+import android.util.Log;
 
+import com.androidmapsextensions.ClusterGroup;
 import com.androidmapsextensions.GoogleMap;
 import com.androidmapsextensions.Marker;
 import com.androidmapsextensions.MarkerOptions;
-import com.androidmapsextensions.Polyline;
-import com.androidmapsextensions.PolylineOptions;
+import com.androidmapsextensions.PolygonOptions;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
-import com.google.maps.android.SphericalUtil;
 import com.vividsolutions.jts.geom.Coordinate;
 import com.vividsolutions.jts.geom.Geometry;
 import com.vividsolutions.jts.geom.GeometryFactory;
+import com.vividsolutions.jts.geom.LinearRing;
 import com.vividsolutions.jts.geom.Polygon;
 
 public class BasePropertyBoundary {
 
-	protected static final float BOUNDARY_Z_INDEX = 2.0f;
-	public static final double SNAP_THRESHOLD = 0.00005;
+	static final float BOUNDARY_Z_INDEX = 2.0f;
+	static final double SNAP_THRESHOLD = 0.00005;
 
 	protected String name;
+	protected Claim claim;
 	protected String claimId;
-	protected String claimSlogan;
-	protected String claimType;
-	protected List<Vertex> vertices = new ArrayList<Vertex>();
-	protected Map<Marker, PropertyLocation> propertyLocationsMap = new HashMap<Marker, PropertyLocation>();
-	protected boolean propertyLocationsVisible = false;
+	List<Vertex> vertices = new ArrayList<Vertex>();
+	List<List<HoleVertex>> holesVertices = new ArrayList<List<HoleVertex>>();
+	Map<Marker, PropertyLocation> locationsMap = new HashMap<Marker, PropertyLocation>();
+	private boolean locationsVisible = false;
 
-	public boolean isPropertyLocationsVisible() {
-		return propertyLocationsVisible;
+	public boolean isLocationsVisible() {
+		return locationsVisible;
 	}
 
-	public List<Vertex> getVertices() {
-		return vertices;
-	}
+    List<Vertex> getVertices() {
+        return vertices;
+    }
 
-	protected Context context;
-	protected Polyline polyline = null;
+    List<List<HoleVertex>> getHolesVertices() {
+        return holesVertices;
+    }
+
+    protected Context context;
+	private com.androidmapsextensions.Polygon displayPolygon = null;
 	protected Polygon polygon = null;
 	protected GoogleMap map;
 	protected LatLng center = null;
 	protected double area = 0.0;
-	protected Marker propertyMarker = null;
+	Marker propertyMarker = null;
 	protected LatLngBounds bounds = null;
 	protected int color = Color.BLUE;
 
@@ -122,68 +130,70 @@ public class BasePropertyBoundary {
 
 	protected void reload() {
 		if (claimId != null) {
-			Claim claim = Claim.getClaim(claimId);
-			loadClaim(claim, false);
+			loadClaim(false);
 		}
 	}
 
-	protected void loadClaim(Claim claim, boolean updateArea) {
-		vertices = claim.getVertices();
-		name = claim.getName() == null || claim.getName().equalsIgnoreCase("") ? context
-				.getResources().getString(R.string.default_claim_name) : claim
-				.getName();
+	protected void loadClaim(boolean updateArea) {
+		claim = Claim.getClaim(claimId);
+		if(claim != null){
+			vertices = claim.getVertices();
+			holesVertices = claim.getHolesVertices();
+			name = claim.getName() == null || claim.getName().equalsIgnoreCase("") ? context
+					.getResources().getString(R.string.default_claim_name) : claim
+					.getName();
 
-		String status = claim.getStatus();
-		claimId = claim.getClaimId();
-		claimSlogan = claim.getSlogan(context);
-		claimType = claim.getType();
+			String status = claim.getStatus();
+			claimId = claim.getClaimId();
 
-		if (status != null) {
+			if (status != null) {
 
-			switch (Claim.Status.valueOf(status)) {
+				switch (Claim.Status.valueOf(status)) {
 
-			case unmoderated:
-				color = context.getResources().getColor(
-						R.color.status_unmoderated);
-				break;
-			case withdrawn:
-				color = context.getResources().getColor(
-						R.color.status_withdrawn);
-				break;
-			case moderated:
-				color = context.getResources().getColor(
-						R.color.status_moderated);
-				break;
-			case reviewed:
-				color = context.getResources()
-						.getColor(R.color.status_reviewed);
-				break;
+					case unmoderated:
+						color = context.getResources().getColor(
+								R.color.status_unmoderated);
+						break;
+					case withdrawn:
+						color = context.getResources().getColor(
+								R.color.status_withdrawn);
+						break;
+					case moderated:
+						color = context.getResources().getColor(
+								R.color.status_moderated);
+						break;
+					case reviewed:
+						color = context.getResources()
+								.getColor(R.color.status_reviewed);
+						break;
 
-			case challenged:
-				color = context.getResources().getColor(
-						R.color.status_challenged);
-				break;
-			default:
-				color = context.getResources().getColor(R.color.status_created);
-				break;
+					case challenged:
+						color = context.getResources().getColor(
+								R.color.status_challenged);
+						break;
+					default:
+						color = context.getResources().getColor(R.color.status_created);
+						break;
+				}
 			}
-		}
 
-		if (vertices != null && vertices.size() > 0) {
-			calculateGeometry(claim, updateArea);
+			if (vertices != null && vertices.size() > 0) {
+				calculateGeometry(updateArea);
+			}
 		}
 	}
 
 	public BasePropertyBoundary(final Context context, final GoogleMap map,
-			final Claim claim, boolean updateArea) {
+			String claimId, boolean updateArea) {
 		this.context = context;
 		this.map = map;
-		if (claim != null) {
-			loadClaim(claim, updateArea);
+		if (claimId != null) {
+            this.claimId = claimId;
+			loadClaim(updateArea);
 		}
 	}
 
-	protected void calculateGeometry(Claim claim, boolean updateArea) {
+	protected void calculateGeometry(boolean updateArea) {
 
 		if (vertices == null || vertices.size() <= 0) {
 			return;
@@ -202,11 +212,9 @@ public class BasePropertyBoundary {
 
 		int i = 0;
 
-		List<LatLng> coordList = new ArrayList<LatLng>();
 		for (Vertex vertex : vertices) {
 			coords[i++] = new Coordinate(vertex.getMapPosition().longitude,
 					vertex.getMapPosition().latitude);
-			coordList.add(vertex.getMapPosition());
 		}
 
 		if (vertices.size() == 2) {
@@ -215,7 +223,6 @@ public class BasePropertyBoundary {
 			coords[i++] = new Coordinate(
 					vertices.get(1).getMapPosition().longitude, vertices.get(1)
 							.getMapPosition().latitude);
-			coordList.add(vertices.get(1).getMapPosition());
 		}
 
 		// then we close the polygon
@@ -223,10 +230,10 @@ public class BasePropertyBoundary {
 		coords[coords.length - 1] = new Coordinate(vertices.get(0)
 				.getMapPosition().longitude,
 				vertices.get(0).getMapPosition().latitude);
-		coordList.add(vertices.get(0).getMapPosition());
 
 		polygon = gf.createPolygon(coords);
 		polygon.setSRID(Constants.SRID);
+		validateGeometry();
 
 		if ((claim != null)
 				&& updateArea
@@ -234,8 +241,7 @@ public class BasePropertyBoundary {
 				&& (OpenTenureApplication.getClaimId().equals(claim
 						.getClaimId()))) {
 
-			area = SphericalUtil.computeArea(coordList);
-			area = (long) Math.round(area);
+			area = (long) Math.round(Vertex.getArea(vertices) - HoleVertex.getArea(holesVertices));
 
 			int digit = 0;
 
@@ -321,7 +327,50 @@ public class BasePropertyBoundary {
 		}
 	}
 
-	protected Marker createPropertyMarker(LatLng position, String title) {
+	protected boolean validateGeometry(){
+		GeometryFactory gf = new GeometryFactory();
+
+		Geometry shell = Vertex.mapShell(vertices);
+		LinearRing[] holes = HoleVertex.mapHoles(holesVertices);
+		Geometry geometry;
+		if(shell instanceof LinearRing){
+			if(holes != null && holes.length > 0){
+				boolean hasHoles = false;
+				for(LinearRing hole:holes){
+					try {
+						gf.createLinearRing(hole.getCoordinates());
+						if(hole.getNumPoints() > 0){
+							hasHoles = true;
+							break;
+						}
+					}catch (Exception e){
+						continue;
+					}
+				}
+				if(hasHoles){
+					geometry = gf.createPolygon((LinearRing)shell, holes);
+				}else{
+					geometry = gf.createPolygon(shell.getCoordinates());
+				}
+			}else{
+				geometry = gf.createPolygon(shell.getCoordinates());
+			}
+			geometry.setSRID(Constants.SRID);
+		}else{
+			geometry = shell;
+		}
+		boolean isValid;
+		if(geometry != null){
+			isValid = geometry.isValid();
+		}else{
+			isValid = false;
+
+		}
+		Log.d(this.getClass().getName(), "Calculated polygon isValid: " + isValid);
+		return isValid;
+	}
+
+	private Marker createPropertyMarker(LatLng position, String title) {
 		Rect boundsText = new Rect();
 		Paint tf = new Paint();
 		tf.setTypeface(Typeface.create((String) null, Typeface.NORMAL));
@@ -334,8 +383,7 @@ public class BasePropertyBoundary {
 		} catch (Exception e) {
 			name = context.getResources()
 					.getString(R.string.default_claim_name);
-			if (name != null)
-				tf.getTextBounds(name, 0, name.length(), boundsText);
+			tf.getTextBounds(name, 0, name.length(), boundsText);
 		}
 
 		Bitmap.Config conf = Bitmap.Config.ARGB_8888;
@@ -353,38 +401,55 @@ public class BasePropertyBoundary {
 		return marker;
 	}
 
-	public void hideBoundary() {
-		if (polyline != null) {
-			polyline.remove();
+	void hideProperty() {
+		if (displayPolygon != null) {
+			displayPolygon.remove();
 		}
 		if (propertyMarker != null) {
 			propertyMarker.remove();
 		}
 	}
 
-	public void redrawBoundary() {
-		hideBoundary();
-		showBoundary();
+	void
+    redrawProperty() {
+		hideProperty();
+		showProperty();
 	}
 
-	public void showBoundary() {
+	void showProperty() {
 
 		if (vertices.size() <= 0) {
 			return;
 		}
 
-		PolylineOptions polylineOptions = new PolylineOptions();
-		for (int i = 0; i < vertices.size(); i++) {
-			polylineOptions.add(vertices.get(i).getMapPosition());
+		PolygonOptions polygonOptions = new PolygonOptions();
+		Log.d(this.getClass().getName(), "Adding boundary with "
+				+ vertices.size() + " vertices");
+		for (Vertex vertex:vertices) {
+			polygonOptions.add(vertex.getMapPosition());
 		}
-		polylineOptions.add(vertices.get(0).getMapPosition()); // Needed in
-																// order to
-																// close the
-																// polyline
-		polylineOptions.zIndex(BOUNDARY_Z_INDEX);
-		polylineOptions.width(4);
-		polylineOptions.color(color);
-		polyline = map.addPolyline(polylineOptions);
+		if(holesVertices != null && holesVertices.size() >0){
+			Log.d(this.getClass().getName(), "Adding "
+					+ holesVertices.size() + " holes");
+			for(List<HoleVertex> holeVertices:holesVertices){
+				if(holeVertices != null && holeVertices.size()>0){
+					Log.d(this.getClass().getName(), "Adding hole with "
+							+ holeVertices.size() + " vertices");
+					List<LatLng> hole = new ArrayList<LatLng>();
+					for(HoleVertex holeVertex:holeVertices){
+						hole.add(holeVertex.getMapPosition());
+					}
+					polygonOptions.addHole(hole);
+				}
+			}
+		}
+
+		polygonOptions.zIndex(BOUNDARY_Z_INDEX);
+		polygonOptions.strokeColor(color);
+		polygonOptions.strokeWidth(4);
+		polygonOptions.fillColor(color & 0x0fffffff); // 50% transparency
+		displayPolygon = map.addPolygon(polygonOptions);
+
 		ClaimType ct = new ClaimType();
 		String areaString = null;
 
@@ -399,28 +464,19 @@ public class BasePropertyBoundary {
 				+ OpenTenureApplication.getContext().getString(
 						R.string.square_meters);
 
-		// if (area < 10000) {
-		// areaString = String.format(Locale.US, ", Area: %.2f m2", area);
-		// } else if (area >= 10000 && area < 1000000) {
-		// areaString = String.format(Locale.US, ", Area: %.2f ha",
-		// area / 10000);
-		// } else {
-		// areaString = String.format(Locale.US, ", Area: %.2f km2",
-		// area / 1000000);
-		// }
 		propertyMarker = createPropertyMarker(
 				center,
-				claimSlogan
+				claim.getSlogan(context)
 						+ ", "
 						+ context.getString(R.string.type)
 						+ ": "
 						+ dnl.getLocalizedDisplayName(ct
-								.getDisplayValueByType(claimType)) + ", "
+								.getDisplayValueByType(claim.getType())) + ", "
 						+ areaString);
 
 	}
 
-	public void showPropertyLocations() {
+	void showLocations() {
 
 		if (claimId == null) {
 			return;
@@ -430,9 +486,9 @@ public class BasePropertyBoundary {
 				.getPropertyLocations(claimId)) {
 			Marker marker = createLocationMarker(location.getMapPosition(),
 					location.getDescription());
-			propertyLocationsMap.put(marker, location);
+			locationsMap.put(marker, location);
 		}
-		propertyLocationsVisible = true;
+		locationsVisible = true;
 	}
 
 	protected Marker createLocationMarker(LatLng position, String description) {
@@ -441,26 +497,12 @@ public class BasePropertyBoundary {
 				.title(description)
 				.icon(BitmapDescriptorFactory
 						.fromResource(R.drawable.ot_blue_marker)));
-		marker.setClusterGroup(Constants.BASE_PROPERTY_LOCATION_MARKERS_GROUP
-				+ propertyLocationsMap.size());
+		marker.setClusterGroup(ClusterGroup.NOT_CLUSTERED);
 		return marker;
 
 	}
 
-	public void hidePropertyLocations() {
-
-		if (propertyLocationsMap != null) {
-			for (Marker marker : propertyLocationsMap.keySet()) {
-				// Just hiding the marker, no need to delete the location from
-				// DB
-				marker.remove();
-			}
-			propertyLocationsMap = new HashMap<Marker, PropertyLocation>();
-		}
-		propertyLocationsVisible = false;
-	}
-
-	public CardinalDirection getCardinalDirection(BasePropertyBoundary dest) {
+	CardinalDirection getCardinalDirection(BasePropertyBoundary dest) {
 		double deltaX = dest.getCenter().longitude - center.longitude;
 		double deltaY = dest.getCenter().latitude - center.latitude;
 		if (deltaX == 0) {

@@ -51,6 +51,7 @@ import org.fao.sola.clients.android.opentenure.model.Attachment;
 import org.fao.sola.clients.android.opentenure.model.Claim;
 import org.fao.sola.clients.android.opentenure.model.ClaimStatus;
 import org.fao.sola.clients.android.opentenure.model.ClaimType;
+import org.fao.sola.clients.android.opentenure.model.HoleVertex;
 import org.fao.sola.clients.android.opentenure.model.LandUse;
 import org.fao.sola.clients.android.opentenure.model.Owner;
 import org.fao.sola.clients.android.opentenure.model.Person;
@@ -255,7 +256,9 @@ public class ClaimDetailsFragment extends Fragment {
 		if (OpenTenureApplication.getInstance().getLocalization()
 				.startsWith("ar")) {
 			((View) rootView.findViewById(R.id.claimant_slogan))
-					.setTextAlignment(View.TEXT_DIRECTION_LOCALE);
+					.setTextDirection(View.TEXT_DIRECTION_LOCALE);
+			((View) rootView.findViewById(R.id.claimant_slogan))
+					.setTextAlignment(View.TEXT_ALIGNMENT_GRAVITY);
 		}
 		if (claimantId != null && !claimantId.trim().equals(""))
 			((View) rootView.findViewById(R.id.claimant_slogan))
@@ -612,10 +615,12 @@ public class ClaimDetailsFragment extends Fragment {
 
 		if (claimant != null) {
 			if (OpenTenureApplication.getInstance().getLocale().toString()
-					.startsWith("ar"))
+					.startsWith("ar")) {
 				((View) rootView.findViewById(R.id.claimant_slogan))
-						.setTextAlignment(View.TEXT_DIRECTION_LOCALE);
-
+						.setTextDirection(View.TEXT_DIRECTION_LOCALE);
+				((View) rootView.findViewById(R.id.claimant_slogan))
+						.setTextAlignment(View.TEXT_ALIGNMENT_GRAVITY);
+			}
 			((TextView) rootView.findViewById(R.id.claimant_button))
 					.setText(getResources().getText(
 							R.string.action_modify_claimant));
@@ -681,10 +686,12 @@ public class ClaimDetailsFragment extends Fragment {
 					.getStatus().equals(ClaimStatus._UPLOAD_INCOMPLETE));
 
 			if (OpenTenureApplication.getInstance().getLocale().toString()
-					.startsWith("ar"))
+					.startsWith("ar")) {
 				((EditText) rootView.findViewById(R.id.claim_name_input_field))
-						.setTextAlignment(View.TEXT_DIRECTION_LOCALE);
-
+						.setTextAlignment(View.TEXT_ALIGNMENT_GRAVITY);
+				((EditText) rootView.findViewById(R.id.claim_name_input_field))
+						.setTextDirection(View.TEXT_DIRECTION_LOCALE);
+			}
 			((EditText) rootView.findViewById(R.id.claim_name_input_field))
 					.setText(claim.getName());
 			((Spinner) rootView.findViewById(R.id.claimTypesSpinner))
@@ -874,6 +881,23 @@ public class ClaimDetailsFragment extends Fragment {
 		// save them again
 		Vertex.createVertices(copiedVertices);
 
+		// delete eventually existing holes vertices
+		HoleVertex.deleteVertices(challengingClaimId);
+		// get vertices from the challenged claim
+		List<List<HoleVertex>> holes = HoleVertex.getHoles(challengedClaimId);
+		List<List<HoleVertex>> copiedHoles = new ArrayList<List<HoleVertex>>();
+		for(List<HoleVertex> hole:holes){
+			List<HoleVertex> copiedHole = new ArrayList<HoleVertex>();
+			for (HoleVertex vertex : hole) {
+				HoleVertex copiedVertex = new HoleVertex(vertex);
+				// associate it to the challenging claim id
+				copiedVertex.setClaimId(challengingClaimId);
+				copiedHole.add(copiedVertex);
+			}
+			copiedHoles.add(copiedHole);
+		}
+		// save them again
+		HoleVertex.createVertices(copiedHoles);
 	}
 
 	public int updateClaim() {
@@ -882,10 +906,12 @@ public class ClaimDetailsFragment extends Fragment {
 				.findViewById(R.id.claimant_id)).getText().toString());
 
 		if (OpenTenureApplication.getInstance().getLocale().toString()
-				.startsWith("ar"))
+				.startsWith("ar")) {
 			((View) rootView.findViewById(R.id.claimant_slogan))
-					.setTextAlignment(View.TEXT_DIRECTION_LOCALE);
-
+					.setTextDirection(View.TEXT_DIRECTION_LOCALE);
+			((View) rootView.findViewById(R.id.claimant_slogan))
+					.setTextAlignment(View.TEXT_ALIGNMENT_GRAVITY);
+		}
 		if (person != null)
 			((View) rootView.findViewById(R.id.claimant_slogan))
 					.setVisibility(View.VISIBLE);

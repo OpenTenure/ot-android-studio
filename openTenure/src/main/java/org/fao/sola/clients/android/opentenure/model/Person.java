@@ -727,19 +727,22 @@ public class Person {
 		File image = getPersonPictureFile(personId);
 		if(image != null && image.exists()){
 
-		Attachment att = new Attachment();
-		att.setAttachmentId(personId);
-		att.setClaimId(claimId);
-		att.setDescription("person photo");
-		att.setFileName(image.getName());
-		att.setFileType("personPhoto");
-		att.setMD5Sum(MD5.calculateMD5(image));
-		att.setMimeType("image/jpeg");
-		att.setSize(image.length());
-		att.setPath(image.getPath());
-		att.setStatus("created");
-		
-		att.create();
+			Attachment att = new Attachment();
+			att.setAttachmentId(personId);
+			att.setClaimId(claimId);
+			att.setDescription("person photo");
+			att.setFileName(image.getName());
+			att.setFileType("personPhoto");
+			att.setMD5Sum(MD5.calculateMD5(image));
+			att.setMimeType("image/jpeg");
+			att.setSize(image.length());
+			att.setPath(image.getPath());
+			att.setStatus("created");
+
+			// this is to avoid getting duplicate key error since the attachment id matches the person id
+			att.delete();
+
+			att.create();
 		}
 		return true;
 	}

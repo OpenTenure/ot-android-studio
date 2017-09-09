@@ -528,5 +528,11 @@
     <string name="upload_incomplete">upload incompleto</string>
     <string name="uploaded">upload completo</string>
     <string name="uploading">in upload</string>
+    <string name="message_add_hole_marker">Aggiungere un vertice ad una lacuna?</string>
+    <string name="title_add_hole">Aggiunta di una lacuna</string>
+    <string name="message_invalid_marker_position">La posizione del vertice invaliderebbe la geometria</string>
+    <string name="new_hole">Nuova lacuna</string>
+    <string name="action_add_hole">Aggiungi a lacuna</string>
+    <string name="title_select_hole">Scegli una lacuna</string>
 
 </resources>

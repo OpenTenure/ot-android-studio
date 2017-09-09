@@ -41,7 +41,9 @@ import org.fao.sola.clients.android.opentenure.maps.MainMapFragment.MapType;
 import org.fao.sola.clients.android.opentenure.model.Bookmark;
 import org.fao.sola.clients.android.opentenure.model.Claim;
 import org.fao.sola.clients.android.opentenure.model.Configuration;
+import org.fao.sola.clients.android.opentenure.model.HoleVertex;
 
+import com.androidmapsextensions.ClusterGroup;
 import com.androidmapsextensions.ClusteringSettings;
 import com.androidmapsextensions.GoogleMap;
 import com.androidmapsextensions.GoogleMap.CancelableCallback;
@@ -72,7 +74,9 @@ import com.vividsolutions.jts.geom.MultiPolygon;
 import com.vividsolutions.jts.geom.Polygon;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -87,6 +91,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.text.InputType;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -94,12 +99,13 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.Toast;
 
 public class ClaimMapFragment extends Fragment implements OnCameraChangeListener, SensorEventListener, ClaimListener {
 
-	public enum MapMode {
-		add_boundary, add_non_boundary, measure
+	enum MapMode {
+		add_boundary, add_non_boundary, measure, edit_hole
 	};
 
 	private static final int MAP_LABEL_FONT_SIZE = 16;
@@ -107,8 +113,6 @@ public class ClaimMapFragment extends Fragment implements OnCameraChangeListener
 	private static final String OSM_MAPQUEST_BASE_URL = "http://otile1.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png";
 	private static final float CUSTOM_TILE_PROVIDER_Z_INDEX = 1.0f;
 	protected static final float MEASURE_Z_INDEX = 3.0f;
-	private static int CLAIM_MAP_SIZE = 800;
-	private static int CLAIM_MAP_PADDING = 50;
 	private static final int BOOKMARK_RESULT = 100;
 
 	private MapMode mapMode = MapMode.add_boundary;
@@ -117,6 +121,7 @@ public class ClaimMapFragment extends Fragment implements OnCameraChangeListener
 	private MapLabel label;
 	private GoogleMap map;
 	private EditablePropertyBoundary currentProperty;
+	private EditablePropertyBoundary currentHole;
 	private List<BasePropertyBoundary> visibleProperties;
 	private List<Claim> allClaims;
 	private MultiPolygon visiblePropertiesMultiPolygon;
@@ -131,7 +136,6 @@ public class ClaimMapFragment extends Fragment implements OnCameraChangeListener
 	private boolean isRotating = false;
 	private boolean isFollowing = false;
 	private Marker myLocation;
-	private CameraPosition oldCameraPosition;
 	private CameraPosition newCameraPosition;
 	private boolean adjacenciesReset = false;
 	private Marker distanceStart;
@@ -195,6 +199,7 @@ public class ClaimMapFragment extends Fragment implements OnCameraChangeListener
 			menu.removeItem(R.id.action_add_from_gps);
 			menu.findItem(R.id.action_change_map_mode).getSubMenu().removeItem(R.id.action_add_boundary);
 			menu.findItem(R.id.action_change_map_mode).getSubMenu().removeItem(R.id.action_add_non_boundary);
+			menu.findItem(R.id.action_change_map_mode).getSubMenu().removeItem(R.id.action_edit_hole);
 			mapMode = MapMode.measure;
 
 		}
@@ -262,6 +267,10 @@ public class ClaimMapFragment extends Fragment implements OnCameraChangeListener
 
 	private void centerMapOnCurrentProperty(CancelableCallback callback) {
 		if (currentProperty.getCenter() != null) {
+			final int CLAIM_MAP_SIZE = 800;
+			final int CLAIM_MAP_PADDING = 50;
+			CameraPosition oldCameraPosition;
+
 			// A property exists for the claim
 			// so we center on it
 			LatLngBounds llb = currentProperty.getBounds();
@@ -317,7 +326,7 @@ public class ClaimMapFragment extends Fragment implements OnCameraChangeListener
 	private Marker createMapBookmarkMarker(LatLng position, String description) {
 		Marker marker;
 		marker = map.addMarker(new MarkerOptions().position(position).title(description)
-				.clusterGroup(Constants.BASE_MAP_BOOKMARK_MARKERS_GROUP)
+				.clusterGroup(ClusterGroup.NOT_CLUSTERED)
 				.icon(BitmapDescriptorFactory.fromResource(R.drawable.map_bookmark)));
 		return marker;
 	}
@@ -367,9 +376,9 @@ public class ClaimMapFragment extends Fragment implements OnCameraChangeListener
 		}
 
 		hideVisibleProperties();
-
+        Claim currentClaim = Claim.getClaim(claimActivity.getClaimId());
 		currentProperty = new EditablePropertyBoundary(mapView.getContext(), map,
-				Claim.getClaim(claimActivity.getClaimId()), claimActivity, visibleProperties, modeActivity.getMode());
+                claimActivity.getClaimId(), claimActivity, visibleProperties, modeActivity.getMode());
 
 		centerMapOnCurrentProperty(null);
 		reloadVisibleProperties(true);
@@ -431,7 +440,8 @@ public class ClaimMapFragment extends Fragment implements OnCameraChangeListener
 			public boolean onMarkerClick(final Marker mark) {
 				switch (mapMode) {
 				case add_boundary:
-				case add_non_boundary:
+                case add_non_boundary:
+                case edit_hole:
 					return currentProperty.handleMarkerClick(mark, mapMode);
 				case measure:
 					return handleDistanceMarkerClick(mark);
@@ -446,7 +456,8 @@ public class ClaimMapFragment extends Fragment implements OnCameraChangeListener
 			public void onMapClick(final LatLng position) {
 				switch (mapMode) {
 				case add_boundary:
-				case add_non_boundary:
+                case add_non_boundary:
+                case edit_hole:
 					break;
 				case measure:
 					cancelDistance();
@@ -457,6 +468,8 @@ public class ClaimMapFragment extends Fragment implements OnCameraChangeListener
 			}
 		});
 		mSensorManager = (SensorManager) mapView.getContext().getSystemService(Context.SENSOR_SERVICE);
+        currentProperty.calculateGeometry(true);
+        currentProperty.redrawProperty();
 		return mapView;
 
 	}
@@ -515,7 +528,7 @@ public class ClaimMapFragment extends Fragment implements OnCameraChangeListener
 					.anchor(0.5f, 1.0f));
 			distanceMarker.setAlpha(0.0f);
 			distanceMarker.setInfoWindowAnchor(.5f, 1.0f);
-			distanceMarker.setClusterGroup(Constants.MARKER_DOWNLOAD_STATUS_GROUP);
+			distanceMarker.setClusterGroup(ClusterGroup.NOT_CLUSTERED);
 			String title = String.format(OpenTenureApplication.getInstance().getLocale(), "%s: %.1f %s",
 					getResources().getString(R.string.markers_distance_label), distance,
 					getResources().getString(R.string.meters));
@@ -569,7 +582,7 @@ public class ClaimMapFragment extends Fragment implements OnCameraChangeListener
 		visibleProperties = new ArrayList<BasePropertyBoundary>();
 		for (Claim claim : allClaims) {
 			if (!claim.getClaimId().equalsIgnoreCase(claimActivity.getClaimId())) {
-				BasePropertyBoundary bpb = new BasePropertyBoundary(mapView.getContext(), map, claim, updateArea);
+				BasePropertyBoundary bpb = new BasePropertyBoundary(mapView.getContext(), map, claim.getClaimId(), updateArea);
 				Polygon claimPoly = bpb.getPolygon();
 				if (claimPoly != null && claimPoly.intersects(boundsPoly)) {
 					visibleProperties.add(bpb);
@@ -601,48 +614,63 @@ public class ClaimMapFragment extends Fragment implements OnCameraChangeListener
 
 		switch (mapMode) {
 		case add_boundary:
-			mode = getResources().getString(R.string.action_add_boundary);
+			mode = ": " + getResources().getString(R.string.action_add_boundary);
 			break;
 		case add_non_boundary:
-			mode = getResources().getString(R.string.action_add_non_boundary);
+			mode = ": " + getResources().getString(R.string.action_add_non_boundary);
+			break;
+		case edit_hole:
+            mode = ": " + getResources().getString(R.string.action_add_hole) ;
+		    if(currentProperty.getSelectedHoleNumber() == -1){
+				List<List<HoleVertex>> holesVertices = currentProperty.getHolesVertices();
+				int holeNumber;
+				if(holesVertices == null){
+					holeNumber = 0;
+				}else{
+					holeNumber = holesVertices.size();
+				}
+                mode += " " + holeNumber;
+            }else{
+                mode += " " + currentProperty.getSelectedHoleNumber();
+            }
 			break;
 		case measure:
-			mode = getResources().getString(R.string.action_measure);
+			mode = ": " + getResources().getString(R.string.action_measure);
 			break;
 		}
 
 		switch (mapType) {
 		case map_provider_google_normal:
 			label.changeTextProperties(MAP_LABEL_FONT_SIZE,
-					getResources().getString(R.string.map_provider_google_normal) + ": " + mode);
+					getResources().getString(R.string.map_provider_google_normal) + mode);
 			break;
 		case map_provider_google_satellite:
 			label.changeTextProperties(MAP_LABEL_FONT_SIZE,
-					getResources().getString(R.string.map_provider_google_satellite) + ": " + mode);
+					getResources().getString(R.string.map_provider_google_satellite) + mode);
 			break;
 		case map_provider_google_hybrid:
 			label.changeTextProperties(MAP_LABEL_FONT_SIZE,
-					getResources().getString(R.string.map_provider_google_hybrid) + ": " + mode);
+					getResources().getString(R.string.map_provider_google_hybrid) + mode);
 			break;
 		case map_provider_google_terrain:
 			label.changeTextProperties(MAP_LABEL_FONT_SIZE,
-					getResources().getString(R.string.map_provider_google_terrain) + ": " + mode);
+					getResources().getString(R.string.map_provider_google_terrain) + mode);
 			break;
 		case map_provider_osm_mapnik:
 			label.changeTextProperties(MAP_LABEL_FONT_SIZE,
-					getResources().getString(R.string.map_provider_osm_mapnik) + ": " + mode);
+					getResources().getString(R.string.map_provider_osm_mapnik) + mode);
 			break;
 		case map_provider_osm_mapquest:
 			label.changeTextProperties(MAP_LABEL_FONT_SIZE,
-					getResources().getString(R.string.map_provider_osm_mapquest) + ": " + mode);
+					getResources().getString(R.string.map_provider_osm_mapquest) + mode);
 			break;
 		case map_provider_local_tiles:
 			label.changeTextProperties(MAP_LABEL_FONT_SIZE,
-					getResources().getString(R.string.map_provider_local_tiles) + ": " + mode);
+					getResources().getString(R.string.map_provider_local_tiles) + mode);
 			break;
 		case map_provider_geoserver:
 			label.changeTextProperties(MAP_LABEL_FONT_SIZE,
-					getResources().getString(R.string.map_provider_geoserver) + ": " + mode);
+					getResources().getString(R.string.map_provider_geoserver) + mode);
 			break;
 		default:
 			break;
@@ -709,7 +737,7 @@ public class ClaimMapFragment extends Fragment implements OnCameraChangeListener
 	}
 
 	private void redrawProperties() {
-		currentProperty.redrawBoundary();
+		currentProperty.redrawProperty();
 		redrawVisibleProperties();
 		drawAreaOfInterest();
 
@@ -718,7 +746,7 @@ public class ClaimMapFragment extends Fragment implements OnCameraChangeListener
 	private void showVisibleProperties() {
 		if (visibleProperties != null) {
 			for (BasePropertyBoundary visibleProperty : visibleProperties) {
-				visibleProperty.showBoundary();
+				visibleProperty.showProperty();
 			}
 		}
 
@@ -738,7 +766,7 @@ public class ClaimMapFragment extends Fragment implements OnCameraChangeListener
 	private void hideVisibleProperties() {
 		if (visibleProperties != null) {
 			for (BasePropertyBoundary visibleProperty : visibleProperties) {
-				visibleProperty.hideBoundary();
+				visibleProperty.hideProperty();
 			}
 		}
 	}
@@ -767,6 +795,38 @@ public class ClaimMapFragment extends Fragment implements OnCameraChangeListener
 			currentProperty.deselect();
 			cancelDistance();
 			setMapLabel();
+			return true;
+		case R.id.action_edit_hole:
+			mapMode = MapMode.edit_hole;
+			currentProperty.deselect();
+			cancelDistance();
+            List<List<HoleVertex>> holesVertices =  currentProperty.getHolesVertices();
+            final CharSequence[] options;
+            if(holesVertices != null){
+                options = new CharSequence[holesVertices.size()+1];
+                for(int i = 0 ; i < holesVertices.size() ; i++){
+                    options[i] = i+"";
+                }
+            }else{
+                options = new CharSequence[1];
+            }
+            options[options.length-1] = getResources().getString(R.string.new_hole);
+			AlertDialog.Builder selectHoleDialog = new AlertDialog.Builder(
+					mapView.getContext()).setTitle(getResources().getString(R.string.title_select_hole)).setItems(options,new DialogInterface.OnClickListener() {
+
+                @Override
+                public void onClick(
+                        DialogInterface dialog,
+                        int which) {
+                    if(which==options.length-1){
+                        currentProperty.setSelectedHoleNumber(-1);
+                    }else{
+                        currentProperty.setSelectedHoleNumber(which);
+                    }
+                    setMapLabel();
+                }
+            });
+			selectHoleDialog.show();
 			return true;
 		case R.id.map_provider_google_normal:
 			mapType = MapType.map_provider_google_normal;
@@ -866,7 +926,7 @@ public class ClaimMapFragment extends Fragment implements OnCameraChangeListener
 				Toast.makeText(getActivity().getBaseContext(), "onOptionsItemSelected - " + newLocation,
 						Toast.LENGTH_SHORT).show();
 
-				currentProperty.addMarker(newLocation, newLocation, mapMode);
+                currentProperty.addMarker(newLocation, newLocation, mapMode);
 
 			} else {
 				Toast.makeText(getActivity().getBaseContext(), R.string.check_location_service, Toast.LENGTH_LONG)
@@ -924,7 +984,7 @@ public class ClaimMapFragment extends Fragment implements OnCameraChangeListener
 		hideVisibleProperties();
 		reloadVisibleProperties(false);
 		showVisibleProperties();
-		currentProperty.redrawBoundary();
+		currentProperty.redrawProperty();
 		currentProperty.refreshMarkerEditControls();
 		newCameraPosition = cameraPosition;
 		if (!adjacenciesReset) {

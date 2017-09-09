@@ -33,6 +33,7 @@ import org.fao.sola.clients.android.opentenure.maps.Constants;
 import android.content.Context;
 import android.graphics.Point;
 
+import com.androidmapsextensions.ClusterGroup;
 import com.androidmapsextensions.GoogleMap;
 import com.google.android.gms.maps.Projection;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
@@ -73,7 +74,7 @@ public class LeftMarker extends TargetMoverMarker {
 		.title(context.getString(R.string.left))
 		.icon(BitmapDescriptorFactory
 				.fromResource(R.drawable.ic_menu_forward)).rotation(LEFT_INITIAL_ROTATION));
-		marker.setClusterGroup(Constants.MARKER_RELATIVE_EDIT_LEFT_GROUP);
+		marker.setClusterGroup(ClusterGroup.NOT_CLUSTERED);
 	}
 
 	private Point getControlLeftPosition(Point markerScreenPosition, int markerWidth, int markerHeight){

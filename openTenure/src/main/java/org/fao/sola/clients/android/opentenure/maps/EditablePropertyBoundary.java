@@ -49,6 +49,7 @@ import org.fao.sola.clients.android.opentenure.maps.markers.UpMarker;
 import org.fao.sola.clients.android.opentenure.model.Adjacency;
 import org.fao.sola.clients.android.opentenure.model.Attachment;
 import org.fao.sola.clients.android.opentenure.model.Claim;
+import org.fao.sola.clients.android.opentenure.model.HoleVertex;
 import org.fao.sola.clients.android.opentenure.model.MD5;
 import org.fao.sola.clients.android.opentenure.model.PropertyLocation;
 import org.fao.sola.clients.android.opentenure.model.Vertex;
@@ -65,6 +66,7 @@ import android.util.Log;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.androidmapsextensions.ClusterGroup;
 import com.androidmapsextensions.GoogleMap;
 import com.androidmapsextensions.GoogleMap.SnapshotReadyCallback;
 import com.androidmapsextensions.Marker;
@@ -80,10 +82,11 @@ import com.vividsolutions.jts.geom.LineSegment;
 public class EditablePropertyBoundary extends BasePropertyBoundary {
 
 	public static final String DEFAULT_MAP_FILE_NAME = "_map_.jpg";
-	public static final String DEFAULT_GEOM_FILE_NAME = "_geom_.csv";
+	private static final String DEFAULT_GEOM_FILE_NAME = "_geom_.csv";
 	public static final String DEFAULT_MAP_FILE_TYPE = "cadastralMap";
 	public static final String DEFAULT_MAP_MIME_TYPE = "image/jpeg";
 	private Map<Marker, Vertex> verticesMap;
+	private Map<Marker, HoleVertex> holesVerticesMap;
 	private List<BasePropertyBoundary> otherProperties;
 	private ClaimDispatcher claimActivity;
 	private ActiveMarkerRegistrar amr;
@@ -99,16 +102,30 @@ public class EditablePropertyBoundary extends BasePropertyBoundary {
 	private Marker cancel;
 	private Marker target;
 	private Marker add;
-	private Marker selectedMarker;
+    private Marker selectedMarker;
+	private Vertex draggedVertex;
+	private HoleVertex draggedHoleVertex;
 
-	public boolean handleMarkerClick(final Marker mark, MapMode mapMode){
+    public int getSelectedHoleNumber() {
+        return selectedHoleNumber;
+    }
+
+    public void setSelectedHoleNumber(int selectedHoleNumber) {
+        this.selectedHoleNumber = selectedHoleNumber;
+    }
+
+    private int selectedHoleNumber;
+
+	boolean handleMarkerClick(final Marker mark, MapMode mapMode){
 		if(handleMarkerEditClick(mark, mapMode)){
 			return true;
 		}else if(handleRelativeMarkerEditClick(mark, mapMode)){
 			return true;
-		}else if(handlePropertyBoundaryMarkerClick(mark, mapMode)){
-			return true;
-		}else if(handlePropertyLocationMarkerClick(mark, mapMode)){
+        }else if(handleBoundaryMarkerClick(mark, mapMode)){
+            return true;
+        }else if(handleHoleMarkerClick(mark, mapMode)){
+            return true;
+		}else if(handleLocationMarkerClick(mark, mapMode)){
 			return true;
 		}else{
 			return handleClick(mark, mapMode);
@@ -166,8 +183,8 @@ public class EditablePropertyBoundary extends BasePropertyBoundary {
 		}
 		return false;
 	}
-	
-	private boolean handlePropertyBoundaryMarkerClick(final Marker mark, MapMode mapMode){
+
+	private boolean handleBoundaryMarkerClick(final Marker mark, MapMode mapMode){
 		if (verticesMap.containsKey(mark)) {
 			if(mode.compareTo(ModeDispatcher.Mode.MODE_RW) == 0){
 				deselect();
@@ -182,11 +199,29 @@ public class EditablePropertyBoundary extends BasePropertyBoundary {
 			}
 		}
 		return false;
-		
+
 	}
 
-	private boolean handlePropertyLocationMarkerClick(final Marker mark, MapMode mapMode){
-		if (propertyLocationsMap.containsKey(mark)) {
+	private boolean handleHoleMarkerClick(final Marker mark, MapMode mapMode){
+		if (holesVerticesMap.containsKey(mark)) {
+			if(mode.compareTo(ModeDispatcher.Mode.MODE_RW) == 0){
+				deselect();
+				selectedMarker = mark;
+				selectedMarker.setIcon(BitmapDescriptorFactory.defaultMarker());
+				selectedMarker.showInfoWindow();
+				showMarkerEditControls();
+				return true;
+			}else{
+				mark.showInfoWindow();
+				return true;
+			}
+		}
+		return false;
+
+	}
+
+	private boolean handleLocationMarkerClick(final Marker mark, MapMode mapMode){
+		if (locationsMap.containsKey(mark)) {
 			if(mode.compareTo(ModeDispatcher.Mode.MODE_RW) == 0){
 				deselect();
 				selectedMarker = mark;
@@ -225,62 +260,79 @@ public class EditablePropertyBoundary extends BasePropertyBoundary {
 		return false;
 	}
 
-	public void onMarkerDragStart(Marker mark) {
+	void onMarkerDragStart(Marker mark) {
 		if(verticesMap.containsKey(mark)){
-			onPropertyBoundaryMarkerDragStart(mark);
-		}else if(propertyLocationsMap.containsKey(mark)){
-			onPropertyLocationMarkerDragStart(mark);
+			onBoundaryMarkerDragStart(mark);
+		}else if(holesVerticesMap.containsKey(mark)){
+			onHoleMarkerDragStart(mark);
+		}else if(locationsMap.containsKey(mark)){
+			onLocationMarkerDragStart(mark);
 		}
 	}
 
-	public void onMarkerDragEnd(Marker mark) {
+	void onMarkerDragEnd(Marker mark) {
 		if(verticesMap.containsKey(mark)){
-			onPropertyBoundaryMarkerDragEnd(mark);
-		}else if(propertyLocationsMap.containsKey(mark)){
-			onPropertyLocationMarkerDragEnd(mark);
+			onBoundaryMarkerDragEnd(mark);
+		}else if(holesVerticesMap.containsKey(mark)){
+			onHoleMarkerDragEnd(mark);
+		}else if(locationsMap.containsKey(mark)){
+			onLocationMarkerDragEnd(mark);
 		}
 	}
 
-	public void onMarkerDrag(Marker mark) {
+	void onMarkerDrag(Marker mark) {
 		if(verticesMap.containsKey(mark)){
-			onPropertyBoundaryMarkerDrag(mark);
-		}else if(propertyLocationsMap.containsKey(mark)){
-			onPropertyLocationMarkerDrag(mark);
+			onBoundaryMarkerDrag(mark);
+		}else if(holesVerticesMap.containsKey(mark)){
+			onHoleMarkerDrag(mark);
+		}else if(locationsMap.containsKey(mark)){
+			onLocationMarkerDrag(mark);
 		}
 	}
 
 	private boolean removeSelectedMarker(){
 
 		if (verticesMap.containsKey(selectedMarker)) {
-			return removeSelectedPropertyBoundaryVertex();
-		}else if (propertyLocationsMap.containsKey(selectedMarker)) {
-			return removeSelectedPropertyLocation();
+			return removeSelectedBoundaryVertex();
+		}else if (holesVerticesMap.containsKey(selectedMarker)) {
+			return removeSelectedHoleVertex();
+		}else if (locationsMap.containsKey(selectedMarker)) {
+			return removeSelectedLocation();
 		}
 		return false;
 		
 	}
 	
-	private boolean removeSelectedPropertyLocation(){
-		PropertyLocation loc = propertyLocationsMap.remove(selectedMarker);
-		removePropertyLocationMarker(selectedMarker);
+	private boolean removeSelectedLocation(){
+		PropertyLocation loc = locationsMap.remove(selectedMarker);
+		removeLocationMarker(selectedMarker);
 		loc.delete();
 		hideMarkerEditControls();
 		selectedMarker = null;
 		return true;
 	}
-	
-	private boolean removeSelectedPropertyBoundaryVertex(){
-		removePropertyBoundaryMarker(selectedMarker);
-		redrawBoundary();
+
+	private boolean removeSelectedBoundaryVertex(){
+		removeBoundaryVertexAndMarker(selectedMarker);
 		updateVertices();
 		resetAdjacency(otherProperties);
 		hideMarkerEditControls();
-		calculateGeometry(Claim.getClaim(claimId), true);
-		redrawBoundary();
+		calculateGeometry(true);
+		redrawProperty();
 		selectedMarker = null;
 		return true;
 	}
-	
+
+	private boolean removeSelectedHoleVertex(){
+		removeHoleVertexAndMarker(selectedMarker);
+		updateHolesVertices();
+		hideMarkerEditControls();
+		calculateGeometry(true);
+		redrawProperty();
+		selectedMarker = null;
+		return true;
+	}
+
 	private boolean addMarker(MapMode mapMode){
 		
 		addMarker(target.getPosition(), mapMode);
@@ -288,50 +340,80 @@ public class EditablePropertyBoundary extends BasePropertyBoundary {
 		return true;
 	}
 
-	private boolean movePropertyLocationMarker(){
+	private boolean moveLocationMarker(){
 		Marker newMark = createLocationMarker(target.getPosition(), selectedMarker.getTitle());
-		PropertyLocation loc = propertyLocationsMap.remove(selectedMarker);
+		PropertyLocation loc = locationsMap.remove(selectedMarker);
 		loc.setMapPosition(target.getPosition());
 		loc.update();
 		hideMarkerEditControls();
 		selectedMarker.remove();
 		selectedMarker = null;
-		propertyLocationsMap.put(newMark, loc);
+		locationsMap.put(newMark, loc);
 		return true;
 	}
-	
-	private boolean movePropertyBoundaryMarker(){
-		insertVertex(target.getPosition(), verticesMap.get(selectedMarker).getGPSPosition());
-		removePropertyBoundaryMarker(selectedMarker);
-		hideMarkerEditControls();
-		selectedMarker = null;
-		redrawBoundary();
-		updateVertices();
-		resetAdjacency(otherProperties);
-		calculateGeometry(Claim.getClaim(claimId), true);
-		return true;
-	}
-	
-	private boolean moveMarker(){
+
+    private boolean moveBoundaryMarker(){
+        Marker mark = insertBoundaryMarker(target.getPosition(), verticesMap.get(selectedMarker).getGPSPosition());
+        Vertex vertex = removeBoundaryVertexAndMarker(selectedMarker);
+        if(validateGeometry()){
+            hideMarkerEditControls();
+            selectedMarker = null;
+            updateVertices();
+            resetAdjacency(otherProperties);
+            calculateGeometry(true);
+            redrawProperty();
+            return true;
+        }else{
+            hideMarkerEditControls();
+            vertices.remove(verticesMap.remove(mark));
+			insertBoundaryMarker(selectedMarker.getPosition(), vertex.getGPSPosition());
+            redrawProperty();
+			selectedMarker = null;
+            return false;
+        }
+    }
+
+    private boolean moveMarker(){
 
 		// Insert a marker at target position and remove the selected
 
 		if (verticesMap.containsKey(selectedMarker)) {
-			return movePropertyBoundaryMarker();
-		}else if (propertyLocationsMap.containsKey(selectedMarker)) {
-			return movePropertyLocationMarker();
+            if(moveBoundaryMarker()){
+                return true;
+            }else{
+                Toast toast = Toast.makeText(context,
+                        R.string.message_invalid_marker_position,
+                        Toast.LENGTH_SHORT);
+                toast.show();
+                return false;
+            }
+        }else if (holesVerticesMap.containsKey(selectedMarker)) {
+            if(moveHoleMarker()){
+                return true;
+            }else{
+                Toast toast = Toast.makeText(context,
+                        R.string.message_invalid_marker_position,
+                        Toast.LENGTH_SHORT);
+                toast.show();
+                return false;
+            }
+        }else if (locationsMap.containsKey(selectedMarker)) {
+			return moveLocationMarker();
 		}
 		return false;
 		
 	}
 
-	public void deselect(){
+	void deselect(){
 		hideMarkerEditControls();
 		if(selectedMarker != null){
 			if(verticesMap.containsKey(selectedMarker)){
 				selectedMarker.setIcon(BitmapDescriptorFactory
 						.fromResource(R.drawable.ot_blue_marker));
-			}else{
+			}else if(holesVerticesMap.containsKey(selectedMarker)){
+                selectedMarker.setIcon(BitmapDescriptorFactory
+                        .fromResource(R.drawable.ot_blue_marker));
+            }else{
 				selectedMarker.setIcon(BitmapDescriptorFactory
 						.fromResource(R.drawable.ot_orange_marker));
 			}
@@ -470,20 +552,20 @@ public class EditablePropertyBoundary extends BasePropertyBoundary {
 		.anchor(0.5f, 0.5f)
 		.icon(BitmapDescriptorFactory
 				.fromResource(R.drawable.ic_menu_close_clear_cancel)));
-		remove.setClusterGroup(Constants.MARKER_EDIT_REMOVE_GROUP);
+		remove.setClusterGroup(ClusterGroup.NOT_CLUSTERED);
 		relativeEdit = map.addMarker(new MarkerOptions()
 		.position(projection.fromScreenLocation(getControlRelativeEditPosition(markerScreenPosition, markerWidth, markerHeight)))
 		.anchor(0.5f, 0.5f)
 		.title("0.0 m")
 		.icon(BitmapDescriptorFactory
 				.fromResource(R.drawable.ic_action_move)));
-		relativeEdit.setClusterGroup(Constants.MARKER_EDIT_RELATIVE_EDIT_GROUP);
+		relativeEdit.setClusterGroup(ClusterGroup.NOT_CLUSTERED);
 		cancel = map.addMarker(new MarkerOptions()
 		.position(projection.fromScreenLocation(getControlCancelPosition(markerScreenPosition, markerWidth, markerHeight)))
 		.anchor(0.5f, 0.5f)
 		.icon(BitmapDescriptorFactory
 				.fromResource(R.drawable.ic_menu_block)));
-		cancel.setClusterGroup(Constants.MARKER_EDIT_CANCEL_GROUP);
+		cancel.setClusterGroup(ClusterGroup.NOT_CLUSTERED);
 	}
 
 	private void showRelativeMarkerEditControls() {
@@ -504,26 +586,26 @@ public class EditablePropertyBoundary extends BasePropertyBoundary {
 		.title("0.0 m")
 		.icon(BitmapDescriptorFactory
 				.fromResource(R.drawable.ic_menu_mylocation)));
-		target.setClusterGroup(Constants.TARGET_MARKERS_GROUP);
+		target.setClusterGroup(ClusterGroup.NOT_CLUSTERED);
 
 		add = map.addMarker(new MarkerOptions()
 		.position(projection.fromScreenLocation(getControlAddPosition(markerScreenPosition, markerWidth, markerHeight)))
 		.anchor(0.5f, 0.5f)
 		.icon(BitmapDescriptorFactory
 				.fromResource(R.drawable.ic_menu_add)));
-		add.setClusterGroup(Constants.MARKER_RELATIVE_EDIT_ADD_GROUP);
+		add.setClusterGroup(ClusterGroup.NOT_CLUSTERED);
 		moveTo = map.addMarker(new MarkerOptions()
 		.position(projection.fromScreenLocation(getControlMoveToPosition(markerScreenPosition, markerWidth, markerHeight)))
 		.anchor(0.5f, 0.5f)
 		.icon(BitmapDescriptorFactory
 				.fromResource(R.drawable.ic_menu_goto)));
-		moveTo.setClusterGroup(Constants.MARKER_RELATIVE_EDIT_MOVE_TO_GROUP);
+		moveTo.setClusterGroup(ClusterGroup.NOT_CLUSTERED);
 		cancel = map.addMarker(new MarkerOptions()
 		.position(projection.fromScreenLocation(getControlCancelPosition(markerScreenPosition, markerWidth, markerHeight)))
 		.anchor(0.5f, 0.5f)
 		.icon(BitmapDescriptorFactory
 				.fromResource(R.drawable.ic_menu_block)));
-		cancel.setClusterGroup(Constants.MARKER_RELATIVE_EDIT_CANCEL_GROUP);
+		cancel.setClusterGroup(ClusterGroup.NOT_CLUSTERED);
 
 		up = new UpMarker(context,selectedMarker,target, map);
 		up.show(projection, markerScreenPosition, markerWidth, markerHeight);
@@ -544,25 +626,36 @@ public class EditablePropertyBoundary extends BasePropertyBoundary {
 
 	}
 
-	public EditablePropertyBoundary(final Context context, final GoogleMap map, final Claim claim,
+	EditablePropertyBoundary(final Context context, final GoogleMap map, String claimId,
 			final ClaimDispatcher claimActivity, final List<BasePropertyBoundary> existingProperties, ModeDispatcher.Mode mode) {
-		super(context, map, claim, true);
+		super(context, map, claimId, true);
 		this.claimActivity = claimActivity;
 		this.mode = mode;
 		this.selectedMarker = null;
 		this.otherProperties = existingProperties;
 		this.amr = new ActiveMarkerRegistrar();
-		verticesMap = new HashMap<Marker, Vertex>();
-		if (vertices != null && vertices.size() > 0) {
-			for (Vertex vertex : vertices) {
-				Marker mark = createMarker(vertex.getSequenceNumber(), vertex.getMapPosition());
-				verticesMap.put(mark, vertex);
-			}
-		}
-		showPropertyLocations();
+        verticesMap = new HashMap<Marker, Vertex>();
+        if (vertices != null && vertices.size() > 0) {
+            for (Vertex vertex : vertices) {
+                Marker mark = createBoundaryMarker(vertex.getSequenceNumber(), vertex.getMapPosition());
+                verticesMap.put(mark, vertex);
+            }
+        }
+        holesVerticesMap = new HashMap<Marker, HoleVertex>();
+        if (holesVertices != null && holesVertices.size() > 0) {
+            for (List<HoleVertex> holeVertices : holesVertices) {
+                if (holeVertices != null && holeVertices.size() > 0) {
+                    for (HoleVertex holeVertex : holeVertices) {
+                        Marker mark = createHoleMarker(holeVertex.getHoleNumber(), holeVertex.getSequenceNumber(), holeVertex.getMapPosition());
+                        holesVerticesMap.put(mark, holeVertex);
+                    }
+                }
+            }
+        }
+		showLocations();
 	}
 	
-	public void setOtherProperties(List<BasePropertyBoundary> otherProperties) {
+	void setOtherProperties(List<BasePropertyBoundary> otherProperties) {
 		this.otherProperties = otherProperties;
 	}
 
@@ -592,157 +685,359 @@ public class EditablePropertyBoundary extends BasePropertyBoundary {
 		verticesMap = new HashMap<Marker, Vertex>();
 		if (vertices != null && vertices.size() > 0) {
 			for (Vertex vertex : vertices) {
-				Marker mark = createMarker(vertex.getSequenceNumber(), vertex.getMapPosition());
+				Marker mark = createBoundaryMarker(vertex.getSequenceNumber(), vertex.getMapPosition());
 				verticesMap.put(mark, vertex);
 			}
 		}
-	}
-	
-	public void updateVertices() {
-
-		Vertex.deleteVertices(claimActivity.getClaimId());
-
-		for (int i = 0; i < vertices.size(); i++) {
-			Vertex vertex = vertices.get(i);
-			vertex.setSequenceNumber(i);
-			Vertex.createVertex(vertex);
+		for(Marker mark:holesVerticesMap.keySet()){
+			mark.remove();
 		}
-		calculateGeometry(Claim.getClaim(claimId), true);
-		redrawBoundary();
-
+        holesVerticesMap = new HashMap<Marker, HoleVertex>();
+        if (holesVertices != null && holesVertices.size() > 0) {
+            for (List<HoleVertex> holeVertices : holesVertices) {
+                if (holeVertices != null && holeVertices.size() > 0) {
+                    for (HoleVertex holeVertex : holeVertices) {
+                        Marker mark = createHoleMarker(holeVertex.getHoleNumber(), holeVertex.getSequenceNumber(), holeVertex.getMapPosition());
+                        holesVerticesMap.put(mark, holeVertex);
+                    }
+                }
+            }
+        }
 	}
 
-	public void updatePropertyLocations() {
+    private void updateVertices() {
+
+        Vertex.deleteVertices(claimActivity.getClaimId());
+
+        for (int i = 0; i < vertices.size(); i++) {
+            Vertex vertex = vertices.get(i);
+            vertex.setSequenceNumber(i);
+            Vertex.createVertex(vertex);
+        }
+    }
+
+    private void updateHolesVertices() {
+        HoleVertex.deleteVertices(claimActivity.getClaimId());
+
+        int i=0;
+        for (List<HoleVertex> hole:holesVertices) {
+            int j=0;
+            for (HoleVertex vertex:hole) {
+                vertex.setHoleNumber(i);
+                vertex.setSequenceNumber(j);
+                HoleVertex.createVertex(vertex);
+                j++;
+            }
+            i++;
+        }
+    }
+
+    private void updatePropertyLocations() {
 
 		PropertyLocation.deletePropertyLocations(claimActivity.getClaimId());
 
-		for (PropertyLocation location : propertyLocationsMap.values()) {
+		for (PropertyLocation location : locationsMap.values()) {
 			location.create();
 		}
 
 	}
-	protected void resetAdjacency(List<BasePropertyBoundary> existingProperties) {
+	void resetAdjacency(List<BasePropertyBoundary> existingProperties) {
 
-		List<BasePropertyBoundary> adjacentProperties = findAdjacentProperties(existingProperties);
-		Adjacency.deleteAdjacencies(claimId);
+        if(claim != null){
+            List<BasePropertyBoundary> adjacentProperties = findAdjacentProperties(existingProperties);
+            Adjacency.deleteAdjacencies(claim.getClaimId());
 
-		if (adjacentProperties != null) {
+            if (adjacentProperties != null) {
 
-			for (BasePropertyBoundary adjacentProperty : adjacentProperties) {
+                for (BasePropertyBoundary adjacentProperty : adjacentProperties) {
 
-				Adjacency adj = new Adjacency();
-				adj.setSourceClaimId(claimId);
-				adj.setDestClaimId(adjacentProperty.getClaimId());
-				adj.setCardinalDirection(getCardinalDirection(adjacentProperty));
-				adj.create();
-			}
-		}
+                    Adjacency adj = new Adjacency();
+                    adj.setSourceClaimId(claim.getClaimId());
+                    adj.setDestClaimId(adjacentProperty.getClaimId());
+                    adj.setCardinalDirection(getCardinalDirection(adjacentProperty));
+                    adj.create();
+                }
+            }
+        }
 	}
 
-	private void onPropertyLocationMarkerDragStart(Marker mark) {
-		dragPropertyLocationMarker(mark);
+	private void onLocationMarkerDragStart(Marker mark) {
+		dragLocationMarker(mark);
 	}
 
-	private void onPropertyLocationMarkerDragEnd(Marker mark) {
-		dragPropertyLocationMarker(mark);
+	private void onLocationMarkerDragEnd(Marker mark) {
+		dragLocationMarker(mark);
 		updatePropertyLocations();
 	}
 
-	private void onPropertyLocationMarkerDrag(Marker mark) {
-		dragPropertyLocationMarker(mark);
+	private void onLocationMarkerDrag(Marker mark) {
+		dragLocationMarker(mark);
 	}
 
-	private void onPropertyBoundaryMarkerDragStart(Marker mark) {
-		dragPropertyBoundaryMarker(mark);
+	private void onBoundaryMarkerDragStart(Marker mark) {
+		draggedVertex = new Vertex(verticesMap.get(mark));
+		updateVertexPosition(mark);
+		redrawProperty();
 	}
 
-	private void onPropertyBoundaryMarkerDragEnd(Marker mark) {
-		dragPropertyBoundaryMarker(mark);
-		updateVertices();
-		resetAdjacency(otherProperties);
-	}
-
-	private void onPropertyBoundaryMarkerDrag(Marker mark) {
-		dragPropertyBoundaryMarker(mark);
-	}
-
-	private void dragPropertyBoundaryMarker(Marker mark) {
-		verticesMap.get(mark).setMapPosition(mark.getPosition());
-		redrawBoundary();
-	}
-
-	private void dragPropertyLocationMarker(Marker mark) {
-		propertyLocationsMap.get(mark).setMapPosition(mark.getPosition());
-	}
-
-	private void removePropertyLocationMarker(Marker mark) {
-		propertyLocationsMap.remove(mark);
-		mark.remove();
-	}
-
-	private void removePropertyBoundaryMarker(Marker mark) {
-		vertices.remove(verticesMap.remove(mark));
-		mark.remove();
-	}
-
-	public void insertVertex(LatLng mapPosition, LatLng gpsPosition) {
-
-		if (claimActivity.getClaimId() == null) {
-			// Useless to add markers without a claim
-			Toast toast = Toast.makeText(context,
-					R.string.message_save_claim_before_adding_content,
+	private void onBoundaryMarkerDragEnd(Marker mark) {
+		updateVertexPosition(mark);
+		if(validateGeometry()){
+			updateVertices();
+			calculateGeometry(true);
+			redrawProperty();
+			resetAdjacency(otherProperties);
+		}else{
+			Toast toast = Toast.makeText(
+					context,
+					R.string.message_invalid_marker_position,
 					Toast.LENGTH_SHORT);
 			toast.show();
-			return;
+			updateVertexPosition(mark, draggedVertex);
+			redrawProperty();
 		}
-
-		Marker mark = createMarker(vertices.size(), mapPosition);
-		Vertex newVertex = new Vertex(mapPosition, gpsPosition);
-		newVertex.setClaimId(claimActivity.getClaimId());
-		verticesMap.put(mark, newVertex);
-
-		if (vertices.size() < 2) {
-			// no need to calculate the insertion point
-			vertices.add(newVertex);
-			return;
-		}
-
-		double minDistance = Double.MAX_VALUE;
-		int insertIndex = 0;
-
-		// calculate the insertion point
-		for (int i = 0; i < vertices.size(); i++) {
-
-			Vertex from = vertices.get(i);
-			Vertex to = null;
-
-			if (i == vertices.size() - 1) {
-				to = vertices.get(0);
-			} else {
-				to = vertices.get(i + 1);
-			}
-
-			PointPairDistance ppd = new PointPairDistance();
-			DistanceToPoint.computeDistance(
-					new LineSegment(from.getMapPosition().longitude, from
-							.getMapPosition().latitude,
-							to.getMapPosition().longitude,
-							to.getMapPosition().latitude),
-					new Coordinate(newVertex.getMapPosition().longitude,
-							newVertex.getMapPosition().latitude), ppd);
-
-			double currDistance = ppd.getDistance();
-
-			if (currDistance < minDistance) {
-				minDistance = currDistance;
-				insertIndex = i + 1;
-			}
-
-		}
-		vertices.add(insertIndex, newVertex);
+		draggedVertex = null;
 	}
 
-	public void addMarker(final LatLng mapPosition, MapMode mapMode){
+	private void onBoundaryMarkerDrag(Marker mark) {
+		updateVertexPosition(mark);
+		redrawProperty();
+	}
+
+	private void updateHoleVertexPosition(Marker mark) {
+		holesVerticesMap.get(mark).setMapPosition(mark.getPosition());
+	}
+
+	private void updateHoleVertexPosition(Marker mark, HoleVertex vertex) {
+		mark.setPosition(vertex.getMapPosition());
+		holesVerticesMap.get(mark).setMapPosition(vertex.getMapPosition());
+	}
+
+	private void onHoleMarkerDragStart(Marker mark) {
+		draggedHoleVertex = new HoleVertex(holesVerticesMap.get(mark));
+		updateHoleVertexPosition(mark);
+		redrawProperty();
+	}
+
+	private boolean moveHoleMarker(){
+		Marker mark = insertHoleMarker(target.getPosition(), holesVerticesMap.get(selectedMarker).getGPSPosition());
+		HoleVertex vertex = removeHoleVertexAndMarker(selectedMarker);
+		if(validateGeometry()){
+			hideMarkerEditControls();
+			selectedMarker = null;
+			updateHolesVertices();
+			calculateGeometry(true);
+			redrawProperty();
+			return true;
+		}else{
+			hideMarkerEditControls();
+			HoleVertex newVertex = removeHoleVertexAndMarker(mark);
+			insertHoleMarker(selectedMarker.getPosition(), vertex.getGPSPosition());
+			redrawProperty();
+			selectedMarker = null;
+			return false;
+		}
+	}
+
+	private void onHoleMarkerDragEnd(Marker mark) {
+		updateHoleVertexPosition(mark);
+		if(validateGeometry()){
+			updateHolesVertices();
+			calculateGeometry(true);
+			redrawProperty();
+		}else{
+			Toast toast = Toast.makeText(
+					context,
+					R.string.message_invalid_marker_position,
+					Toast.LENGTH_SHORT);
+			toast.show();
+			updateHoleVertexPosition(mark, draggedHoleVertex);
+			redrawProperty();
+		}
+		draggedHoleVertex = null;
+	}
+
+	private void onHoleMarkerDrag(Marker mark) {
+		updateHoleVertexPosition(mark);
+		redrawProperty();
+	}
+
+	private void updateVertexPosition(Marker mark) {
+		verticesMap.get(mark).setMapPosition(mark.getPosition());
+	}
+
+	private void updateVertexPosition(Marker mark, Vertex vertex) {
+		mark.setPosition(vertex.getMapPosition());
+		verticesMap.get(mark).setMapPosition(vertex.getMapPosition());
+	}
+
+	private void dragLocationMarker(Marker mark) {
+		locationsMap.get(mark).setMapPosition(mark.getPosition());
+	}
+
+	private void removeLocationMarker(Marker mark) {
+		locationsMap.remove(mark);
+		mark.remove();
+	}
+
+	private HoleVertex removeHoleVertexAndMarker(Marker mark) {
+        HoleVertex vertex = holesVerticesMap.remove(mark);
+        List<HoleVertex> hole = null;
+		if(vertex != null){
+            for(int i = 0; i < holesVertices.size(); i++){
+                if(holesVertices.get(i).remove(vertex)){
+                    hole = holesVertices.get(i);
+                    break;
+                }
+            }
+        }
+        if(hole != null && hole.isEmpty()){
+            holesVertices.remove(hole);
+        }
+		mark.remove();
+        return vertex;
+	}
+
+	private Vertex removeBoundaryVertexAndMarker(Marker mark) {
+        Vertex vertex = verticesMap.remove(mark);
+		vertices.remove(vertex);
+		mark.remove();
+        return vertex;
+	}
+
+    private Marker insertBoundaryMarker(LatLng mapPosition, LatLng gpsPosition) {
+
+        if (claimActivity.getClaimId() == null) {
+            // Useless to add markers without a claim
+            Toast toast = Toast.makeText(context,
+                    R.string.message_save_claim_before_adding_content,
+                    Toast.LENGTH_SHORT);
+            toast.show();
+            return null;
+        }
+
+        Marker mark = createBoundaryMarker(vertices.size(), mapPosition);
+        Vertex newVertex = new Vertex(mapPosition, gpsPosition);
+        newVertex.setClaimId(claimActivity.getClaimId());
+        verticesMap.put(mark, newVertex);
+
+        if (vertices.size() < 2) {
+            // no need to calculate the insertion point
+            vertices.add(newVertex);
+            return mark;
+        }
+
+        double minDistance = Double.MAX_VALUE;
+        int insertIndex = 0;
+
+        // calculate the insertion point
+        for (int i = 0; i < vertices.size(); i++) {
+
+            Vertex from = vertices.get(i);
+            Vertex to = null;
+
+            if (i == vertices.size() - 1) {
+                to = vertices.get(0);
+            } else {
+                to = vertices.get(i + 1);
+            }
+
+            PointPairDistance ppd = new PointPairDistance();
+            DistanceToPoint.computeDistance(
+                    new LineSegment(from.getMapPosition().longitude, from
+                            .getMapPosition().latitude,
+                            to.getMapPosition().longitude,
+                            to.getMapPosition().latitude),
+                    new Coordinate(newVertex.getMapPosition().longitude,
+                            newVertex.getMapPosition().latitude), ppd);
+
+            double currDistance = ppd.getDistance();
+
+            if (currDistance < minDistance) {
+                minDistance = currDistance;
+                insertIndex = i + 1;
+            }
+
+        }
+        vertices.add(insertIndex, newVertex);
+        return mark;
+    }
+
+    private Marker insertHoleMarker(LatLng mapPosition, LatLng gpsPosition) {
+
+        if (claimActivity.getClaimId() == null) {
+            // Useless to add markers without a claim
+            Toast toast = Toast.makeText(context,
+                    R.string.message_save_claim_before_adding_content,
+                    Toast.LENGTH_SHORT);
+            toast.show();
+            return null;
+        }
+
+		List<HoleVertex> selectedHole;
+
+		if(holesVertices == null){
+			holesVertices = new ArrayList<List<HoleVertex>>();
+		}
+		if(selectedHoleNumber < 0 || selectedHoleNumber > holesVertices.size() - 1){
+			selectedHole = new ArrayList<HoleVertex>();
+            selectedHoleNumber = holesVertices.size();
+			holesVertices.add(selectedHole);
+		}else{
+			selectedHole = holesVertices.get(selectedHoleNumber);
+		}
+
+        Marker mark = createHoleMarker(selectedHoleNumber, selectedHole.size(), mapPosition);
+        HoleVertex newVertex = new HoleVertex(mapPosition, gpsPosition);
+        newVertex.setClaimId(claimActivity.getClaimId());
+        newVertex.setHoleNumber(selectedHoleNumber);
+        holesVerticesMap.put(mark, newVertex);
+
+
+        if (selectedHole.size() < 2) {
+            // no need to calculate the insertion point
+            selectedHole.add(newVertex);
+            return mark;
+        }
+
+        double minDistance = Double.MAX_VALUE;
+        int insertIndex = 0;
+
+        // calculate the insertion point
+        for (int i = 0; i < selectedHole.size(); i++) {
+
+            HoleVertex from = selectedHole.get(i);
+            HoleVertex to = null;
+
+            if (i == selectedHole.size() - 1) {
+                to = selectedHole.get(0);
+            } else {
+                to = selectedHole.get(i + 1);
+            }
+
+            PointPairDistance ppd = new PointPairDistance();
+            DistanceToPoint.computeDistance(
+                    new LineSegment(from.getMapPosition().longitude, from
+                            .getMapPosition().latitude,
+                            to.getMapPosition().longitude,
+                            to.getMapPosition().latitude),
+                    new Coordinate(newVertex.getMapPosition().longitude,
+                            newVertex.getMapPosition().latitude), ppd);
+
+            double currDistance = ppd.getDistance();
+
+            if (currDistance < minDistance) {
+                minDistance = currDistance;
+                insertIndex = i + 1;
+            }
+
+        }
+        newVertex.setSequenceNumber(insertIndex);
+        selectedHole.add(insertIndex, newVertex);
+        return mark;
+    }
+
+    public void addMarker(final LatLng mapPosition, MapMode mapMode){
 		addMarker(mapPosition, Vertex.INVALID_POSITION, mapMode);
 	}
 	
@@ -759,114 +1054,90 @@ public class EditablePropertyBoundary extends BasePropertyBoundary {
 		}
 		
 		if(mapMode == MapMode.add_boundary){
-
-			AlertDialog.Builder dialog = new AlertDialog.Builder(
-					context);
-			dialog.setTitle(R.string.message_add_marker);
-			dialog.setMessage("Lon: " + mapPosition.longitude + ", lat: "
-					+ mapPosition.latitude);
-
-			dialog.setPositiveButton(R.string.confirm,
-					new OnClickListener() {
-
-						@Override
-						public void onClick(DialogInterface dialog,
-								int which) {
-
-							insertVertex(mapPosition, gpsPosition);
-							updateVertices();
-							redrawBoundary();
-							resetAdjacency(otherProperties);
-							calculateGeometry(Claim.getClaim(claimId), true);
-							redrawBoundary();
-						}
-					});
-			dialog.setNegativeButton(R.string.cancel,
-					new OnClickListener() {
-
-						@Override
-						public void onClick(DialogInterface dialog,
-								int which) {
-						}
-					});
-
-			dialog.show();
-			
+            Marker mark = insertBoundaryMarker(mapPosition, gpsPosition);
+            if(mark != null){
+                if(validateGeometry()){
+                    updateVertices();
+                    resetAdjacency(otherProperties);
+                    calculateGeometry(true);
+                    redrawProperty();
+                }else{
+                    vertices.remove(verticesMap.remove(mark));
+                    redrawProperty();
+                    Toast toast = Toast.makeText(
+                            context,
+                            R.string.message_invalid_marker_position,
+                            Toast.LENGTH_SHORT);
+                    toast.show();
+                }
+            }
 		}else if(mapMode == MapMode.add_non_boundary){
-			
-			AlertDialog.Builder dialog = new AlertDialog.Builder(
-					context);
-			dialog.setTitle(R.string.message_add_non_boundary_marker);
-			dialog.setMessage("Lon: " + mapPosition.longitude + ", lat: "
-					+ mapPosition.latitude);
-			dialog.setPositiveButton(R.string.confirm,
-					new OnClickListener() {
+            AlertDialog.Builder locationDescriptionDialog = new AlertDialog.Builder(
+                    context);
+            locationDescriptionDialog
+                    .setTitle(R.string.title_add_non_boundary);
+            final EditText locationDescriptionInput = new EditText(
+                    context);
+            locationDescriptionInput
+                    .setInputType(InputType.TYPE_CLASS_TEXT);
+            locationDescriptionDialog
+                    .setView(locationDescriptionInput);
+            locationDescriptionDialog
+                    .setMessage(context.getResources()
+                            .getString(
+                                    R.string.message_enter_description));
 
-				@Override
-				public void onClick(DialogInterface dialog,
-						int which) {
-					AlertDialog.Builder locationDescriptionDialog = new AlertDialog.Builder(
-							context);
-					locationDescriptionDialog
-							.setTitle(R.string.title_add_non_boundary);
-					final EditText locationDescriptionInput = new EditText(
-							context);
-					locationDescriptionInput
-							.setInputType(InputType.TYPE_CLASS_TEXT);
-					locationDescriptionDialog
-							.setView(locationDescriptionInput);
-					locationDescriptionDialog
-							.setMessage(context.getResources()
-									.getString(
-											R.string.message_enter_description));
+            locationDescriptionDialog
+                    .setPositiveButton(
+                            R.string.confirm,
+                            new OnClickListener() {
 
-					locationDescriptionDialog
-							.setPositiveButton(
-									R.string.confirm,
-									new OnClickListener() {
+                                @Override
+                                public void onClick(
+                                        DialogInterface dialog,
+                                        int which) {
+                                    String locationDescription = locationDescriptionInput
+                                            .getText()
+                                            .toString();
+                                    addLocation(mapPosition, gpsPosition, locationDescription);
+                                }
+                            });
+            locationDescriptionDialog
+                    .setNegativeButton(
+                            R.string.cancel,
+                            new OnClickListener() {
 
-										@Override
-										public void onClick(
-												DialogInterface dialog,
-												int which) {
-											String locationDescription = locationDescriptionInput
-													.getText()
-													.toString();
-											addPropertyLocation(mapPosition, gpsPosition, locationDescription);
-										}
-									});
-					locationDescriptionDialog
-							.setNegativeButton(
-									R.string.cancel,
-									new OnClickListener() {
+                                @Override
+                                public void onClick(
+                                        DialogInterface dialog,
+                                        int which) {
+                                }
+                            });
 
-										@Override
-										public void onClick(
-												DialogInterface dialog,
-												int which) {
-										}
-									});
+            locationDescriptionDialog.show();
 
-					locationDescriptionDialog.show();
+		}else if(mapMode == MapMode.edit_hole){
 
+            Marker mark = insertHoleMarker(mapPosition, gpsPosition);
+			if(mark != null){
+				if(validateGeometry()){
+					updateHolesVertices();
+					calculateGeometry(true);
+					redrawProperty();
+				}else{
+					HoleVertex newVertex = removeHoleVertexAndMarker(mark);
+					redrawProperty();
+					Toast toast = Toast.makeText(
+							context,
+							R.string.message_invalid_marker_position,
+							Toast.LENGTH_SHORT);
+					toast.show();
 				}
-			});
-			dialog.setNegativeButton(R.string.cancel,
-					new OnClickListener() {
-
-						@Override
-						public void onClick(DialogInterface dialog,
-								int which) {
-						}
-					});
-
-			dialog.show();
-		}
-
-	
+			}
+        }
 	}
 
-	public void addPropertyLocation(LatLng mapPosition, LatLng gpsPosition, String description) {
+	private void addLocation(LatLng mapPosition, LatLng gpsPosition, String description) {
 
 		if (claimActivity.getClaimId() == null) {
 			// Useless to add markers without a claim
@@ -882,28 +1153,50 @@ public class EditablePropertyBoundary extends BasePropertyBoundary {
 		loc.setClaimId(claimActivity.getClaimId());
 		loc.setDescription(description);
 		loc.create();
-		propertyLocationsMap.put(mark, loc);
+		locationsMap.put(mark, loc);
 	}
 
-	private Marker createMarker(int index, LatLng position) {
+	private Marker createBoundaryMarker(int sequenceNumber, LatLng position) {
 		Marker marker;
 		if(mode.compareTo(ModeDispatcher.Mode.MODE_RW) == 0){
 			marker = map.addMarker(new MarkerOptions()
-			.position(position)
-			.title(index + ", Lat: " + position.latitude + ", Lon: " + position.longitude)
-			.draggable(true)
-			.icon(BitmapDescriptorFactory
-					.fromResource(R.drawable.ot_blue_marker)));
+					.position(position)
+					.title(sequenceNumber + ", Lat: " + position.latitude + ", Lon: " + position.longitude)
+					.draggable(true)
+					.icon(BitmapDescriptorFactory
+							.fromResource(R.drawable.ot_blue_marker)));
 		}else{
 			marker = map.addMarker(new MarkerOptions()
-			.position(position)
-			.title(index + ", Lat: " + position.latitude + ", Lon: " + position.longitude)
-			.icon(BitmapDescriptorFactory
-					.fromResource(R.drawable.ot_blue_marker)));
+					.position(position)
+					.title(sequenceNumber + ", Lat: " + position.latitude + ", Lon: " + position.longitude)
+					.icon(BitmapDescriptorFactory
+							.fromResource(R.drawable.ot_blue_marker)));
 		}
 		// To prevent vertices to cluster when they are too close
 		// assign each vertex to its own group
-		marker.setClusterGroup(Constants.BASE_PROPERTY_BOUNDARY_MARKERS_GROUP + verticesMap.size());
+		marker.setClusterGroup(ClusterGroup.NOT_CLUSTERED);
+		return marker;
+	}
+
+	private Marker createHoleMarker(int holeNumber, int sequenceNumber, LatLng position) {
+		Marker marker;
+		if(mode.compareTo(ModeDispatcher.Mode.MODE_RW) == 0){
+			marker = map.addMarker(new MarkerOptions()
+					.position(position)
+					.title("(" + holeNumber + ", " + sequenceNumber + "), Lat: " + position.latitude + ", Lon: " + position.longitude)
+					.draggable(true)
+					.icon(BitmapDescriptorFactory
+							.fromResource(R.drawable.ot_blue_marker)));
+		}else{
+			marker = map.addMarker(new MarkerOptions()
+					.position(position)
+					.title("(" + holeNumber + ", " + sequenceNumber + "), Lat: " + position.latitude + ", Lon: " + position.longitude)
+					.icon(BitmapDescriptorFactory
+							.fromResource(R.drawable.ot_blue_marker)));
+		}
+		// To prevent vertices to cluster when they are too close
+		// assign each vertex to its own group
+		marker.setClusterGroup(ClusterGroup.NOT_CLUSTERED);
 		return marker;
 	}
 
@@ -924,11 +1217,11 @@ public class EditablePropertyBoundary extends BasePropertyBoundary {
 			.icon(BitmapDescriptorFactory
 					.fromResource(R.drawable.ot_orange_marker)));
 		}
-		marker.setClusterGroup(Constants.BASE_PROPERTY_LOCATION_MARKERS_GROUP + propertyLocationsMap.size());
+		marker.setClusterGroup(ClusterGroup.NOT_CLUSTERED);
 		return marker;
 	}
 	
-	public void saveGeometry(){
+	void saveGeometry(){
 		String claimId = claimActivity.getClaimId();
 
 		if (claimId != null) {
@@ -943,35 +1236,62 @@ public class EditablePropertyBoundary extends BasePropertyBoundary {
 				bw = new BufferedWriter(new FileWriter(path));
 				
 				bw.write(
-						"SEQUENCE_NUMBER" + FileSystemUtilities._CSV_FIELD_SEPARATOR
+						"HOLE_NUMBER" + FileSystemUtilities._CSV_FIELD_SEPARATOR
+						+ "SEQUENCE_NUMBER" + FileSystemUtilities._CSV_FIELD_SEPARATOR
 						+ "GPS_LAT" + FileSystemUtilities._CSV_FIELD_SEPARATOR
 						+ "GPS_LON" + FileSystemUtilities._CSV_FIELD_SEPARATOR
 						+ "MAP_LAT" + FileSystemUtilities._CSV_FIELD_SEPARATOR
 						+ "MAP_LON" + FileSystemUtilities._CSV_REC_TERMINATOR
 						);
 				bw.flush();
-				
+
 				for(Vertex vertex:claim.getVertices()){
+					bw.write("-1" + FileSystemUtilities._CSV_FIELD_SEPARATOR);
 					bw.write(vertex.getSequenceNumber() + FileSystemUtilities._CSV_FIELD_SEPARATOR);
-							LatLng gpsPosition = vertex.getGPSPosition();
-							if(gpsPosition != null){
-								bw.write(gpsPosition.latitude + FileSystemUtilities._CSV_FIELD_SEPARATOR
+					LatLng gpsPosition = vertex.getGPSPosition();
+					if(gpsPosition != null){
+						bw.write(gpsPosition.latitude + FileSystemUtilities._CSV_FIELD_SEPARATOR
 								+ gpsPosition.longitude + FileSystemUtilities._CSV_FIELD_SEPARATOR);
-							}	
-							else{
-								bw.write("null" + FileSystemUtilities._CSV_FIELD_SEPARATOR
+					}
+					else{
+						bw.write("null" + FileSystemUtilities._CSV_FIELD_SEPARATOR
 								+ "null" + FileSystemUtilities._CSV_FIELD_SEPARATOR);
-							}
-							LatLng mapPosition = vertex.getMapPosition();
-							if(mapPosition != null){
-								bw.write(mapPosition.latitude + FileSystemUtilities._CSV_FIELD_SEPARATOR
+					}
+					LatLng mapPosition = vertex.getMapPosition();
+					if(mapPosition != null){
+						bw.write(mapPosition.latitude + FileSystemUtilities._CSV_FIELD_SEPARATOR
 								+ mapPosition.longitude + FileSystemUtilities._CSV_REC_TERMINATOR);
-							}	
-							else{
-								bw.write("null" + FileSystemUtilities._CSV_FIELD_SEPARATOR
+					}
+					else{
+						bw.write("null" + FileSystemUtilities._CSV_FIELD_SEPARATOR
 								+ "null" + FileSystemUtilities._CSV_REC_TERMINATOR);
-							}
-							bw.flush();
+					}
+					bw.flush();
+				}
+				for(List<HoleVertex> hole:claim.getHolesVertices()){
+					for(HoleVertex vertex:hole){
+						bw.write(vertex.getHoleNumber() + FileSystemUtilities._CSV_FIELD_SEPARATOR);
+						bw.write(vertex.getSequenceNumber() + FileSystemUtilities._CSV_FIELD_SEPARATOR);
+						LatLng gpsPosition = vertex.getGPSPosition();
+						if(gpsPosition != null){
+							bw.write(gpsPosition.latitude + FileSystemUtilities._CSV_FIELD_SEPARATOR
+									+ gpsPosition.longitude + FileSystemUtilities._CSV_FIELD_SEPARATOR);
+						}
+						else{
+							bw.write("null" + FileSystemUtilities._CSV_FIELD_SEPARATOR
+									+ "null" + FileSystemUtilities._CSV_FIELD_SEPARATOR);
+						}
+						LatLng mapPosition = vertex.getMapPosition();
+						if(mapPosition != null){
+							bw.write(mapPosition.latitude + FileSystemUtilities._CSV_FIELD_SEPARATOR
+									+ mapPosition.longitude + FileSystemUtilities._CSV_REC_TERMINATOR);
+						}
+						else{
+							bw.write("null" + FileSystemUtilities._CSV_FIELD_SEPARATOR
+									+ "null" + FileSystemUtilities._CSV_REC_TERMINATOR);
+						}
+						bw.flush();
+					}
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -987,7 +1307,7 @@ public class EditablePropertyBoundary extends BasePropertyBoundary {
 
 	}
 
-	public void saveSnapshot() {
+	void saveSnapshot() {
 
 		if (claimActivity.getClaimId() != null) {
 			map.snapshot(new SnapshotReadyCallback() {

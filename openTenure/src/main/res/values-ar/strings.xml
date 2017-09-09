@@ -353,7 +353,7 @@
     <string name="action_add_non_boundary">إضافة علامة غير حدودية</string>
     <string name="action_measure">قياس</string>
     <string name="message_add_non_boundary_marker">إضافة علامة غير حدودية؟</string>
-    <string name="tiles_download_status"> محاولة تنزيل مربعات الخريطة %1$d من %2$d , تم تنزيل %3$d ولكن فشلت عملية التنزيل ل %4$d حتى الأن </string>
+    <string name="tiles_download_status">" محاولة تنزيل مربعات الخريطة %1$d من %2$d"</string>
     <string name="markers_distance_label">المسافة</string>
     <string name="meters">م</string>
     <string name="action_export_geo">تصدير البيانات الجغرافية</string>

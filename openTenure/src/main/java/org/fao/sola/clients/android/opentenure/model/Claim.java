@@ -27,7 +27,9 @@
  */
 package org.fao.sola.clients.android.opentenure.model;
 
+import java.io.IOException;
 import java.io.StringReader;
+import java.io.StringWriter;
 import java.sql.Clob;
 import java.sql.Connection;
 import java.sql.Date;
@@ -47,11 +49,20 @@ import org.fao.sola.clients.android.opentenure.R;
 import org.fao.sola.clients.android.opentenure.filesystem.FileSystemUtilities;
 import org.fao.sola.clients.android.opentenure.filesystem.json.JsonUtilities;
 import org.fao.sola.clients.android.opentenure.form.FormPayload;
+import org.fao.sola.clients.android.opentenure.maps.Constants;
+import org.fao.sola.clients.android.opentenure.maps.WKTWriter;
 
 import android.content.Context;
 import android.util.Log;
 
 import com.google.android.gms.maps.model.LatLng;
+import com.vividsolutions.jts.geom.Geometry;
+import com.vividsolutions.jts.geom.GeometryFactory;
+import com.vividsolutions.jts.geom.LineString;
+import com.vividsolutions.jts.geom.LinearRing;
+import com.vividsolutions.jts.geom.Point;
+import com.vividsolutions.jts.geom.Polygon;
+import com.vividsolutions.jts.geom.util.GeometryTransformer;
 
 public class Claim {
 
@@ -174,6 +185,121 @@ public class Claim {
 
 	public void setVertices(List<Vertex> vertices) {
 		this.vertices = vertices;
+	}
+
+	public List<List<HoleVertex>> getHolesVertices() {
+		if (claimId != null && holesVertices == null) {
+			holesVertices = HoleVertex.getHoles(claimId);
+		}
+		return holesVertices;
+	}
+
+	public void setHolesVertices(List<List<HoleVertex>> vertices) {
+		this.holesVertices = vertices;
+	}
+
+    public Geometry getMapShell(){
+        return Vertex.mapShell(getVertices());
+    }
+
+    public LinearRing[] getMapHoles(){
+        return HoleVertex.mapHoles(getHolesVertices());
+    }
+
+    public com.vividsolutions.jts.geom.Geometry getGpsShell(){
+        return Vertex.gpsShell(getVertices());
+    }
+
+    public LinearRing[] getGpsHoles(){
+        return HoleVertex.gpsHoles(getHolesVertices());
+    }
+
+    public String getMapWKT(){
+		WKTWriter ww = new WKTWriter(2);
+		StringWriter sw = new StringWriter();
+		GeometryFactory gf = new GeometryFactory();
+
+		Geometry shell = Vertex.mapShell(getVertices());
+		LinearRing[] holes = HoleVertex.mapHoles(getHolesVertices());
+		Geometry geometry;
+		if(shell instanceof LinearRing){
+			if(holes != null && holes.length > 0){
+				boolean hasHoles = false;
+				for(LinearRing hole:holes){
+					try {
+						gf.createLinearRing(hole.getCoordinates());
+						if(hole.getNumPoints() > 0){
+							hasHoles = true;
+							break;
+						}
+					}catch (Exception e){
+						continue;
+					}
+				}
+				if(hasHoles){
+					geometry = gf.createPolygon((LinearRing)shell, holes);
+				}else{
+					geometry = gf.createPolygon(shell.getCoordinates());
+				}
+			}else{
+				geometry = gf.createPolygon(shell.getCoordinates());
+			}
+			geometry.setSRID(Constants.SRID);
+		}else{
+			geometry = shell;
+		}
+
+		try {
+			ww.write(geometry, sw);
+		} catch (IOException e) {
+		}
+
+		Log.d(Claim.class.getName(), "MAP WKT: " + sw.toString());
+		return sw.toString();
+	}
+
+	public String getGPSWKT(){
+		WKTWriter ww = new WKTWriter(2);
+		StringWriter sw = new StringWriter();
+		GeometryFactory gf = new GeometryFactory();
+
+		Geometry shell = Vertex.gpsShell(getVertices());
+		LinearRing[] holes = HoleVertex.gpsHoles(getHolesVertices());
+		Geometry geometry;
+		if(shell instanceof LinearRing){
+			if(holes != null && holes.length > 0){
+				boolean hasHoles = false;
+				for(LinearRing hole:holes){
+					try {
+						gf.createLinearRing(hole.getCoordinates());
+						if(hole.getNumPoints() > 0){
+							hasHoles = true;
+							break;
+						}
+					}catch (Exception e){
+						continue;
+					}
+				}
+				if(hasHoles){
+					geometry = gf.createPolygon((LinearRing)shell, holes);
+				}else{
+					geometry = gf.createPolygon(shell.getCoordinates());
+				}
+			}else{
+				geometry = gf.createPolygon(shell.getCoordinates());
+			}
+			geometry.setSRID(Constants.SRID);
+		}else{
+			geometry = shell;
+		}
+
+		try {
+			ww.write(geometry, sw);
+			Log.d(Claim.class.getName(), "GPS WKT: " + sw.toString());
+		} catch (IOException e) {
+		}
+
+		return sw.toString();
 	}
 
 	public List<PropertyLocation> getPropertyLocations() {
@@ -1242,6 +1368,7 @@ public class Claim {
 
 			ShareProperty.deleteShares(claimId, localConnection);
 			Vertex.deleteVertices(claimId, localConnection);
+			HoleVertex.deleteVertices(claimId, localConnection);
 			Attachment.deleteAttachments(claimId, localConnection);
 			PropertyLocation.deletePropertyLocations(claimId, localConnection);
 			Adjacency.deleteAdjacencies(claimId, localConnection);
@@ -1399,6 +1526,7 @@ public class Claim {
 	private String challengedClaimId;
 	private AdjacenciesNotes adjacenciesNotes;
 	private List<Vertex> vertices;
+	private List<List<HoleVertex>> holesVertices;
 	private List<PropertyLocation> propertyLocations;
 	private List<AdditionalInfo> additionalInfo;
 	private List<Claim> challengingClaims;

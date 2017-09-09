@@ -30,6 +30,7 @@ package org.fao.sola.clients.android.opentenure.print;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -73,40 +74,56 @@ import android.util.Log;
 // Suppressions needed to allow compiling for API level 17
 public class PDFClaimExporter {
 
-	public static final int A4_PAGE_WIDTH = 595;
-	public static final int A4_PAGE_HEIGHT = 842;
-	public static final int LETTER_PAGE_WIDTH = 612;
-	public static final int LETTER_PAGE_HEIGHT = 792;
-	public static final int DEFAULT_HORIZONTAL_MARGIN = 40;
-	public static final int DEFAULT_VERTICAL_MARGIN = 40;
-	public static final int DEFAULT_VERTICAL_SPACE = 5;
-	public static final int DEFAULT_HORIZONTAL_SPACE = 5;
-	public static final String FONT_SANS_SERIF = "sans-serif";
-	public static final String DEFAULT_CERTIFICATE_MIME_TYPE = "application/pdf";
+	public enum PageType{A4,LETTER};
+	private static final int A4_PAGE_WIDTH = 595;
+	private static final int A4_PAGE_HEIGHT = 842;
+	private static final int LETTER_PAGE_WIDTH = 612;
+	private static final int LETTER_PAGE_HEIGHT = 792;
+	private static final int APPROX_ONE_INCH = 75;
+	private static final int DEFAULT_HORIZONTAL_MARGIN = 40;
+	private static final int DEFAULT_VERTICAL_MARGIN = 40;
+	private static final int DEFAULT_VERTICAL_SPACE = 5;
+	private static final int DEFAULT_HORIZONTAL_SPACE = 5;
+    private static final int NORMAL_TYPEFACE_SIZE = 15;
+    private static final int ARABIC_LINE_START = 430;
+    private static final int ARABIC_MID_PAGE = 130;
+	private static final String FONT_SANS_SERIF = "sans-serif";
+	private static final String DEFAULT_CERTIFICATE_MIME_TYPE = "application/pdf";
 	public static final String DEFAULT_CERTIFICATE_DOCUMENT_TYPE = "claimSummary";
 
-	static PdfDocument document;
 	private String filePath;
 	private String fileName;
-	private String mapFileName;
 	private int horizontalMargin = DEFAULT_HORIZONTAL_MARGIN;
-	private int verticalMargin = DEFAULT_VERTICAL_MARGIN;
 	private int horizontalSpace = DEFAULT_HORIZONTAL_SPACE;
-	private int verticalSpace = DEFAULT_VERTICAL_SPACE;
 	private int currentPageIndex = 1;
 	private Page currentPage = null;
 	private Paint typeface = null;
 	private int currentX = 0;
 	private int currentLineHeight = 0;
 	private int currentY = 0;
-	private int pageWidth = A4_PAGE_WIDTH;
-	private int pageHeight = A4_PAGE_HEIGHT;
-
-	DisplayNameLocalizer dnl = new DisplayNameLocalizer(OpenTenureApplication
-			.getInstance().getLocalization());
+	private int pageWidth;
+	private int pageHeight;
 
 	public PDFClaimExporter(Context context, Claim claim, boolean asAttachment) {
+		this(context, claim, asAttachment, PageType.A4);
+	}
 
+	public PDFClaimExporter(Context context, Claim claim, boolean asAttachment, PageType pageType) {
+
+
+		if(pageType == PageType.LETTER){
+			pageWidth = LETTER_PAGE_WIDTH;
+			pageHeight = LETTER_PAGE_HEIGHT;
+		}else{
+			pageWidth = A4_PAGE_WIDTH;
+			pageHeight = A4_PAGE_HEIGHT;
+		}
+
+        int midPage = pageWidth/2;
+		PdfDocument document;
+		String mapFileName;
+		DisplayNameLocalizer dnl = new DisplayNameLocalizer(OpenTenureApplication
+				.getInstance().getLocalization());
 		try {
 			String baseDir = null;
 			
@@ -259,30 +276,24 @@ public class PDFClaimExporter {
 										R.string.first_name)
 										+ " :", 16);
 
-						newLine();
-
-						newLine();
+						newLine(2);
 						writeText(claim.getPerson().getFirstName());
 
-						newLine();
-						newLine();
+						newLine(2);
 						writeBoldText(
 								context.getResources().getString(
 										R.string.last_name)
 										+ " :", 16);
 
-						newLine();
-						newLine();
+						newLine(2);
 						writeText(claim.getPerson().getLastName());
 
-						newLine();
-						newLine();
+						newLine(2);
 						writeBoldText(
 								context.getResources().getString(
 										R.string.date_of_birth_simple)
 										+ ": ", 16);
-						newLine();
-						newLine();
+						newLine(2);
 						if (claim.getPerson().getDateOfBirth() != null)
 							writeText(sdf.format(claim.getPerson()
 									.getDateOfBirth()));
@@ -297,7 +308,7 @@ public class PDFClaimExporter {
 								context.getResources().getString(
 										R.string.group_name)
 										+ " :", 16);
-						setX(300);
+						setX(midPage);
 						writeBoldText(
 								context.getResources().getString(
 										R.string.date_of_establishment_label)
@@ -315,40 +326,29 @@ public class PDFClaimExporter {
 										R.string.group_name)
 										+ " :", 16);
 
-						newLine();
-						newLine();
-						newLine();
-
+						newLine(3);
 						writeText(claim.getPerson().getFirstName());
 
-						newLine();
-						newLine();
+						newLine(2);
 						writeBoldText(
 								context.getResources().getString(
 										R.string.date_of_establishment_label)
 										+ " :", 16);
-						newLine();
-						newLine();
-						newLine();
+						newLine(3);
 
 						if (claim.getPerson().getDateOfBirth() != null)
 							writeText(sdf.format(claim.getPerson()
 									.getDateOfBirth()));
-						newLine();
-						newLine();
-						newLine();
-						newLine();
-						newLine();
+						newLine(5);
 					}
 				}
 
-				newLine();
-				newLine();
+				newLine(2);
 
 				if (claim.getPerson().getPersonType().equals(Person._GROUP)) {
 					if (picture == null) {
 						writeText(claim.getPerson().getFirstName());
-						setX(300);
+						setX(midPage);
 						if (claim.getPerson().getDateOfBirth() != null)
 							writeText(sdf.format(claim.getPerson()
 									.getDateOfBirth()));
@@ -364,13 +364,12 @@ public class PDFClaimExporter {
 									.getDateOfBirth()));
 					}
 				}
-				newLine();
-				newLine();
+				newLine(2);
 				writeBoldText(
 						context.getResources().getString(
 								R.string.postal_address)
 								+ ": ", 16);
-				setX(300);
+				setX(midPage);
 				writeBoldText(
 						context.getResources().getString(
 								R.string.contact_phone_number)
@@ -378,15 +377,14 @@ public class PDFClaimExporter {
 				newLine();
 				if (claim.getPerson().getPostalAddress() != null)
 					writeText(claim.getPerson().getPostalAddress());
-				setX(300);
+				setX(midPage);
 				if (claim.getPerson().getContactPhoneNumber() != null)
 					writeText(" " + claim.getPerson().getContactPhoneNumber());
-				newLine();
-				newLine();
+				newLine(2);
 
 				writeBoldText(context.getResources()
 						.getString(R.string.id_type) + ": ", 16);
-				setX(300);
+				setX(midPage);
 
 				writeBoldText(
 						context.getResources().getString(R.string.id_number)
@@ -396,11 +394,10 @@ public class PDFClaimExporter {
 					writeText(dnl.getLocalizedDisplayName(new IdType()
 							.getDisplayValueByType(claim.getPerson()
 									.getIdType())));
-				setX(300);
+				setX(midPage);
 				if (claim.getPerson().getIdNumber() != null)
 					writeText(claim.getPerson().getIdNumber());
-				newLine();
-				newLine();
+				newLine(2);
 				drawHorizontalLine();
 				newLine();
 
@@ -409,7 +406,7 @@ public class PDFClaimExporter {
 				Bitmap picture = Person.getPersonPictureForPdf(context, claim
 						.getPerson().getPersonId(), 200);
 
-				setX(430);
+				setX(ARABIC_LINE_START);
 				writeBoldText(OpenTenureApplication.getContext().getResources()
 						.getString(R.string.claimant_no_star), 18);
 
@@ -418,18 +415,17 @@ public class PDFClaimExporter {
 				if (claim.getPerson().getPersonType().equals(Person._PHYSICAL)) {
 					if (picture == null) {
 
-						newLine();
-						setX(430);
+                        newLine();
 						writeBoldText(
 								context.getResources().getString(
 										R.string.first_name)
 										+ " :", 16);
-						setX(250);
+						setX(ARABIC_MID_PAGE);
 						writeBoldText(
 								context.getResources().getString(
 										R.string.last_name)
 										+ " :", 16);
-						setX(70);
+                        newLine();
 						writeBoldText(
 								context.getResources().getString(
 										R.string.date_of_birth_simple)
@@ -438,42 +434,31 @@ public class PDFClaimExporter {
 						setX(40);
 						drawBitmap(picture);
 
-						newLine();
-						setX(430);
+                        newLine();
 						moveY(-135);
 						writeBoldText(
 								context.getResources().getString(
 										R.string.first_name)
 										+ " :", 16);
 
-						newLine();
-						newLine();
-						setX(430);
+                        newLine(2);
 						writeText(claim.getPerson().getFirstName());
 
-						newLine();
-						newLine();
-						setX(430);
+                        newLine(2);
 						writeBoldText(
 								context.getResources().getString(
 										R.string.last_name)
 										+ " :", 16);
 
-						newLine();
-						newLine();
-						setX(430);
+                        newLine(2);
 						writeText(claim.getPerson().getLastName());
 
-						newLine();
-						newLine();
-						setX(430);
+                        newLine(2);
 						writeBoldText(
 								context.getResources().getString(
 										R.string.date_of_birth_simple)
 										+ ": ", 16);
-						newLine();
-						newLine();
-						setX(430);
+                        newLine(2);
 						if (claim.getPerson().getDateOfBirth() != null)
 							writeText(sdf.format(claim.getPerson()
 									.getDateOfBirth()));
@@ -481,13 +466,12 @@ public class PDFClaimExporter {
 					}
 				} else {
 					if (picture == null) {
-						newLine();
-						setX(430);
+                        newLine();
 						writeBoldText(
 								context.getResources().getString(
 										R.string.group_name)
 										+ " :", 16);
-						setX(130);
+						setX(ARABIC_MID_PAGE);
 						writeBoldText(
 								context.getResources().getString(
 										R.string.date_of_establishment_label)
@@ -497,42 +481,28 @@ public class PDFClaimExporter {
 						setX(40);
 						drawBitmap(picture);
 
-						newLine();
-						setX(430);
+                        newLine();
 						moveY(-120);
 						writeBoldText(
 								context.getResources().getString(
 										R.string.group_name)
 										+ " :", 16);
 
-						newLine();
-						newLine();
-						newLine();
-						setX(430);
+                        newLine(3);
 
 						writeText(claim.getPerson().getFirstName());
 
-						newLine();
-						newLine();
-						setX(430);
+                        newLine(2);
 						writeBoldText(
 								context.getResources().getString(
 										R.string.date_of_establishment_label)
 										+ " :", 16);
-						newLine();
-						newLine();
-						newLine();
-						setX(430);
+                        newLine(3);
 
 						if (claim.getPerson().getDateOfBirth() != null)
 							writeText(sdf.format(claim.getPerson()
 									.getDateOfBirth()));
-						newLine();
-						newLine();
-						newLine();
-						newLine();
-						newLine();
-
+						newLine(5);
 					}
 				}
 
@@ -540,19 +510,19 @@ public class PDFClaimExporter {
 
 				if (picture == null) {
 					if (claim.getPerson().getPersonType().equals(Person._GROUP)) {
-						setX(430);
+						setX(ARABIC_LINE_START);
 						writeText(claim.getPerson().getFirstName());
-						setX(130);
+						setX(ARABIC_MID_PAGE);
 						if (claim.getPerson().getDateOfBirth() != null)
 							writeText(sdf.format(claim.getPerson()
 									.getDateOfBirth()));
 					} else {
 
-						setX(430);
+						setX(ARABIC_LINE_START);
 						writeText(claim.getPerson().getFirstName());
-						setX(250);
+						setX(ARABIC_MID_PAGE);
 						writeText(claim.getPerson().getLastName());
-						setX(70);
+                        newLine();
 						if (claim.getPerson().getDateOfBirth() != null)
 							writeText(sdf.format(claim.getPerson()
 									.getDateOfBirth()));
@@ -560,48 +530,39 @@ public class PDFClaimExporter {
 					}
 				}
 
-				newLine();
-				newLine();
-				setX(430);
+                newLine(2);
 				writeBoldText(
 						context.getResources().getString(
 								R.string.postal_address)
 								+ ": ", 16);
-				setX(130);
+				setX(ARABIC_MID_PAGE);
 				writeBoldText(
 						context.getResources().getString(
 								R.string.contact_phone_number)
 								+ ": ", 16);
-				newLine();
-				newLine();
-				setX(430);
+                newLine(2);
 				if (claim.getPerson().getPostalAddress() != null)
 					writeText(claim.getPerson().getPostalAddress());
-				setX(130);
+				setX(ARABIC_MID_PAGE);
 				if (claim.getPerson().getContactPhoneNumber() != null)
 					writeText(" " + claim.getPerson().getContactPhoneNumber());
-				newLine();
-				newLine();
-				setX(430);
+                newLine(2);
 				writeBoldText(context.getResources()
 						.getString(R.string.id_type) + ": ", 16);
-				setX(130);
+				setX(ARABIC_MID_PAGE);
 
 				writeBoldText(
 						context.getResources().getString(R.string.id_number)
 								+ ": ", 16);
-				newLine();
-				newLine();
-				setX(430);
+                newLine(2);
 				if (claim.getPerson().getIdType() != null)
 					writeText(dnl.getLocalizedDisplayName(new IdType()
 							.getDisplayValueByType(claim.getPerson()
 									.getIdType())));
-				setX(130);
+				setX(ARABIC_MID_PAGE);
 				if (claim.getPerson().getIdNumber() != null)
 					writeText(claim.getPerson().getIdNumber());
-				newLine();
-				newLine();
+				newLine(2);
 				drawHorizontalLine();
 				newLine();
 
@@ -610,7 +571,7 @@ public class PDFClaimExporter {
 
 			if (OpenTenureApplication.getInstance().getLocale().toString()
 					.startsWith("ar"))
-				setX(430);
+				setX(ARABIC_LINE_START);
 			writeBoldText(context.getResources().getString(R.string.owners), 16);
 
 			List<ShareProperty> shares = claim.getShares();
@@ -620,10 +581,7 @@ public class PDFClaimExporter {
 					addPage(document, context, claim.getClaimId());
 
 				++i;
-				newLine();
-				newLine();
-				newLine();
-				newLine();
+				newLine(4);
 				drawHorizontalLine();
 				newLine();
 				if (!OpenTenureApplication.getInstance().getLocale().toString()
@@ -655,56 +613,52 @@ public class PDFClaimExporter {
 									context.getResources().getString(
 											R.string.first_name)
 											+ " :", 16);
-							setX(200);
+							setX(midPage);
 							writeBoldText(
 									context.getResources().getString(
 											R.string.last_name)
 											+ " :", 16);
-							setX(400);
-							writeBoldText(
-									context.getResources().getString(
-											R.string.date_of_birth_simple)
-											+ ": ", 16);
+							newLine();
+							writeText(person.getFirstName());
+							setX(midPage);
+							writeText(person.getLastName());
+							if (person.getDateOfBirth() != null) {
+								newLine();
+								writeBoldText(
+										context.getResources().getString(
+												R.string.date_of_birth_simple)
+												+ ": ", 16);
+								newLine();
+								writeText(sdf.format(claim.getPerson()
+										.getDateOfBirth()));
+							}
 						} else {
 							newLine();
 							writeBoldText(
 									context.getResources().getString(
 											R.string.group_name)
 											+ " :", 16);
-							setX(300);
+							setX(midPage);
 							writeBoldText(
 									context.getResources()
 											.getString(
 													R.string.date_of_establishment_label)
 											+ " :", 16);
-						}
-
-						newLine();
-
-						if (person.getPersonType().equals(Person._GROUP)) {
-
+							newLine();
 							writeText(person.getFirstName());
-							setX(300);
-							if (person.getDateOfBirth() != null)
+							if (person.getDateOfBirth() != null){
+								setX(midPage);
 								writeText(sdf.format(claim.getPerson()
 										.getDateOfBirth()));
-						} else {
-							writeText(person.getFirstName());
-							setX(200);
-							writeText(person.getLastName());
-							setX(400);
-							if (person.getDateOfBirth() != null)
-								writeText(sdf.format(claim.getPerson()
-										.getDateOfBirth()));
-
+							}
 						}
-						newLine();
-						newLine();
+
+						newLine(2);
 						writeBoldText(
 								context.getResources().getString(
 										R.string.postal_address)
 										+ ": ", 16);
-						setX(300);
+						setX(midPage);
 						writeBoldText(
 								context.getResources().getString(
 										R.string.contact_phone_number)
@@ -712,19 +666,18 @@ public class PDFClaimExporter {
 						newLine();
 						if (person.getPostalAddress() != null)
 							writeText(claim.getPerson().getPostalAddress());
-						setX(300);
+						setX(midPage);
 
 						if (person.getContactPhoneNumber() != null)
 							writeText(" "
 									+ claim.getPerson().getContactPhoneNumber());
-						newLine();
-						newLine();
+						newLine(2);
 
 						writeBoldText(
 								context.getResources().getString(
 										R.string.id_type)
 										+ ": ", 16);
-						setX(300);
+						setX(midPage);
 
 						writeBoldText(
 								context.getResources().getString(
@@ -736,18 +689,17 @@ public class PDFClaimExporter {
 									.getDisplayValueByType(claim.getPerson()
 											.getIdType())));
 
-						setX(300);
+						setX(midPage);
 						if (person.getIdNumber() != null)
 							writeText(claim.getPerson().getIdNumber());
-						newLine();
-						newLine();
+						newLine(2);
 
 					}
 				} else {
 
 					ShareProperty shareProperty = (ShareProperty) iterator
 							.next();
-					setX(430);
+					setX(ARABIC_LINE_START);
 					writeBoldText(
 							context.getResources().getString(
 									R.string.title_share)
@@ -755,8 +707,7 @@ public class PDFClaimExporter {
 									+ i
 									+ " :"
 									+ shareProperty.getShares() + " %", 16);
-					newLine();
-					setX(430);
+                    newLine();
 					List<Owner> owners = Owner.getOwners(shareProperty.getId());
 					for (Iterator<Owner> iterator2 = owners.iterator(); iterator2
 							.hasNext();) {
@@ -768,30 +719,28 @@ public class PDFClaimExporter {
 						Person person = Person.getPerson(owner.getPersonId());
 
 						if (person.getPersonType().equals(Person._PHYSICAL)) {
-							newLine();
-							setX(430);
+                            newLine();
 							writeBoldText(
 									context.getResources().getString(
 											R.string.first_name)
 											+ " :", 16);
-							setX(250);
+							setX(ARABIC_MID_PAGE);
 							writeBoldText(
 									context.getResources().getString(
 											R.string.last_name)
 											+ " :", 16);
-							setX(70);
+                            newLine();
 							writeBoldText(
 									context.getResources().getString(
 											R.string.date_of_birth_simple)
 											+ ": ", 16);
 						} else {
-							newLine();
-							setX(430);
+                            newLine();
 							writeBoldText(
 									context.getResources().getString(
 											R.string.group_name)
 											+ " :", 16);
-							setX(130);
+							setX(ARABIC_MID_PAGE);
 							writeBoldText(
 									context.getResources()
 											.getString(
@@ -799,72 +748,64 @@ public class PDFClaimExporter {
 											+ " :", 16);
 						}
 
-						newLine();
-						setX(430);
+                        newLine();
 						if (person.getPersonType().equals(Person._GROUP)) {
 
 							writeText(person.getFirstName());
-							setX(130);
+							setX(ARABIC_MID_PAGE);
 							if (person.getDateOfBirth() != null)
 								writeText(sdf.format(claim.getPerson()
 										.getDateOfBirth()));
 						} else {
 							writeText(person.getFirstName());
-							setX(250);
+							setX(ARABIC_MID_PAGE);
 							writeText(person.getLastName());
-							setX(70);
+                            newLine();
 							if (person.getDateOfBirth() != null)
 								writeText(sdf.format(claim.getPerson()
 										.getDateOfBirth()));
 
 						}
-						newLine();
-						newLine();
-						setX(430);
+                        newLine(2);
 						writeBoldText(
 								context.getResources().getString(
 										R.string.postal_address)
 										+ ": ", 16);
-						setX(130);
+						setX(ARABIC_MID_PAGE);
 						writeBoldText(
 								context.getResources().getString(
 										R.string.contact_phone_number)
 										+ ": ", 16);
-						newLine();
-						setX(430);
+                        newLine();
 						if (person.getPostalAddress() != null)
 							writeText(claim.getPerson().getPostalAddress());
-						setX(130);
+						setX(ARABIC_MID_PAGE);
 
 						if (person.getContactPhoneNumber() != null)
 							writeText(" "
 									+ claim.getPerson().getContactPhoneNumber());
-						newLine();
-						newLine();
-						setX(430);
+                        newLine(2);
 
 						writeBoldText(
 								context.getResources().getString(
 										R.string.id_type)
 										+ ": ", 16);
-						setX(130);
+						setX(ARABIC_MID_PAGE);
 
 						writeBoldText(
 								context.getResources().getString(
 										R.string.id_number)
 										+ ": ", 16);
-						newLine();
-						setX(430);
+                        newLine();
 						if (person.getIdType() != null)
 							writeText(dnl.getLocalizedDisplayName(new IdType()
 									.getDisplayValueByType(claim.getPerson()
 											.getIdType())));
 
-						setX(130);
+						setX(ARABIC_MID_PAGE);
 						if (person.getIdNumber() != null)
 							writeText(claim.getPerson().getIdNumber());
-						newLine();
-						newLine();
+						newLine(2);
 
 					}
 				}
@@ -877,15 +818,14 @@ public class PDFClaimExporter {
 				if (isPageEnding())
 					addPage(document, context, claim.getClaimId());
 				drawHorizontalLine();
-				newLine();
-				newLine();
+				newLine(2);
 				writeBoldText(
 						context.getResources().getString(
 								R.string.title_claim_documents), 18);
 				newLine();
 				writeBoldText(context.getResources().getString(R.string.type),
 						16);
-				setX(300);
+				setX(midPage);
 				writeBoldText(
 						context.getResources().getString(R.string.description),
 						16);
@@ -899,10 +839,9 @@ public class PDFClaimExporter {
 					writeText(dnl.getLocalizedDisplayName((new DocumentType())
 							.getDisplayVauebyType(attachment.getFileType())));
 
-					setX(300);
+					setX(midPage);
 					writeText(attachment.getDescription());
-					newLine();
-					newLine();
+					newLine(2);
 				}
 			} else {
 
@@ -911,23 +850,18 @@ public class PDFClaimExporter {
 				if (isPageEnding())
 					addPage(document, context, claim.getClaimId());
 				drawHorizontalLine();
-				newLine();
-				newLine();
-				setX(430);
+                newLine(2);
 				writeBoldText(
 						context.getResources().getString(
 								R.string.title_claim_documents), 18);
-				newLine();
-				newLine();
-				setX(430);
+                newLine(2);
 				writeBoldText(context.getResources().getString(R.string.type),
 						16);
-				setX(130);
+				setX(ARABIC_MID_PAGE);
 				writeBoldText(
 						context.getResources().getString(R.string.description),
 						16);
-				newLine();
-				setX(430);
+                newLine();
 				List<Attachment> attachments = claim.getAttachments();
 
 				for (Iterator<Attachment> iterator = attachments.iterator(); iterator
@@ -937,11 +871,9 @@ public class PDFClaimExporter {
 					writeText(dnl.getLocalizedDisplayName((new DocumentType())
 							.getDisplayVauebyType(attachment.getFileType())));
 
-					setX(130);
+					setX(ARABIC_MID_PAGE);
 					writeText(attachment.getDescription());
-					newLine();
-					newLine();
-					setX(430);
+                    newLine(2);
 
 				}
 
@@ -955,31 +887,21 @@ public class PDFClaimExporter {
 			if (!OpenTenureApplication.getInstance().getLocale().toString()
 					.startsWith("ar")) {
 
-				newLine();
-				newLine();
-				newLine();
+				newLine(3);
 				writeBoldText(
 						context.getResources().getString(R.string.claim_notes),
 						18);
-				newLine();
-				newLine();
-				newLine();
+				newLine(3);
 				writeText(claim.getNotes());
 				if (isPageEnding())
 					addPage(document, context, claim.getClaimId());
 			} else {
 
-				newLine();
-				newLine();
-				newLine();
-				setX(430);
+                newLine(3);
 				writeBoldText(
 						context.getResources().getString(R.string.claim_notes),
 						18);
-				newLine();
-				newLine();
-				newLine();
-				setX(430);
+                newLine(3);
 				writeText(claim.getNotes());
 				if (isPageEnding())
 					addPage(document, context, claim.getClaimId());
@@ -993,17 +915,14 @@ public class PDFClaimExporter {
 
 			if (!OpenTenureApplication.getInstance().getLocale().toString()
 					.startsWith("ar")) {
-				newLine();
-				newLine();
-				newLine();
+				newLine(3);
 				writeBoldText(
 						context.getResources().getString(R.string.parcel), 18);
-				newLine();
-				newLine();
+				newLine(2);
 				writeBoldText(
 						context.getResources().getString(
 								R.string.claim_area_label), 16);
-				setX(300);
+				setX(midPage);
 				writeBoldText(
 						context.getResources().getString(
 								R.string.claim_type_no_star), 16);
@@ -1012,13 +931,13 @@ public class PDFClaimExporter {
 						+ " "
 						+ context.getResources().getString(
 								R.string.square_meters));
-				setX(300);
+				setX(midPage);
 				writeText(dnl.getLocalizedDisplayName(new ClaimType()
 						.getDisplayValueByType(claim.getType())));
 				newLine();
 				writeBoldText(
 						context.getResources().getString(R.string.land_use), 16);
-				setX(300);
+				setX(midPage);
 				writeBoldText(
 						context.getResources().getString(
 								R.string.date_of_start_label_print), 16);
@@ -1026,65 +945,54 @@ public class PDFClaimExporter {
 				newLine();
 				writeText(dnl.getLocalizedDisplayName(new LandUse()
 						.getDisplayValueByType(claim.getLandUse())));
-				setX(300);
+				setX(midPage);
 				sdf.applyPattern("dd/MM/yyyy");
 				if (claim.getDateOfStart() != null)
 					writeText(sdf.format(claim.getDateOfStart()));
 			} else {
 
-				newLine();
-				newLine();
-				newLine();
-				setX(430);
+                newLine(3);
 				writeBoldText(
 						context.getResources().getString(R.string.parcel), 18);
-				newLine();
-				newLine();
-				setX(430);
+                newLine(2);
 				writeBoldText(
 						context.getResources().getString(
 								R.string.claim_area_label), 16);
-				setX(130);
+				setX(ARABIC_MID_PAGE);
 				writeBoldText(
 						context.getResources().getString(
 								R.string.claim_type_no_star), 16);
-				newLine();
-				setX(430);
+                newLine();
 				writeText(claim.getClaimArea()
 						+ " "
 						+ context.getResources().getString(
 								R.string.square_meters));
-				setX(130);
+				setX(ARABIC_MID_PAGE);
 				writeText(dnl.getLocalizedDisplayName(new ClaimType()
 						.getDisplayValueByType(claim.getType())));
-				newLine();
-				setX(430);
+                newLine();
 				writeBoldText(
 						context.getResources().getString(R.string.land_use), 16);
-				setX(130);
+				setX(ARABIC_MID_PAGE);
 				writeBoldText(
 						context.getResources().getString(
 								R.string.date_of_start_label_print), 16);
 
-				newLine();
-				setX(430);
+                newLine();
 				writeText(dnl.getLocalizedDisplayName(new LandUse()
 						.getDisplayValueByType(claim.getLandUse())));
-				setX(130);
+				setX(ARABIC_MID_PAGE);
 				sdf.applyPattern("dd/MM/yyyy");
 				if (claim.getDateOfStart() != null)
 					writeText(sdf.format(claim.getDateOfStart()));
 
 			}
-			newLine();
-			newLine();
+			newLine(2);
 			drawHorizontalLine();
 			// ---------------------------------------------------- Adjacent
 			// claims section -------------------------//
 
-			newLine();
-			newLine();
-			newLine();
+			newLine(3);
 
 			if (isPageEnding())
 				addPage(document, context, claim.getClaimId());
@@ -1109,8 +1017,7 @@ public class PDFClaimExporter {
 								Adjacency.getReverseCardinalDirection(adj
 										.getCardinalDirection()));
 					}
-					newLine();
-					newLine();
+					newLine(2);
 					writeText(context.getResources().getString(
 							R.string.cardinal_direction)
 							+ ": "
@@ -1126,62 +1033,50 @@ public class PDFClaimExporter {
 							+ adjacentClaim.getPerson().getFirstName()
 							+ " " + adjacentClaim.getPerson().getLastName());
 				}
-				newLine();
-				newLine();
-				newLine();
+				newLine(3);
 				drawHorizontalLine();
 				if (isPageEnding())
 					addPage(document, context, claim.getClaimId());
-				newLine();
-				newLine();
-				newLine();
-				newLine();
+				newLine(4);
 				writeBoldText(
 						context.getResources().getString(
 								R.string.adjacent_properties), 18);
-				newLine();
-				newLine();
-				newLine();
+				newLine(3);
 				writeBoldText(context.getResources().getString(R.string.north),
 						16);
-				setX(300);
+				setX(midPage);
 				writeBoldText(context.getResources().getString(R.string.south),
 						16);
-				newLine();
-				newLine();
+				newLine(2);
 
 				AdjacenciesNotes adNotes = AdjacenciesNotes
 						.getAdjacenciesNotes(claim.getClaimId());
 
 				if (adNotes != null) {
 					writeText(adNotes.getNorthAdjacency());
-					setX(300);
+					setX(midPage);
 					writeText(adNotes.getSouthAdjacency());
 				}
-				newLine();
-				newLine();
-				newLine();
+				newLine(3);
 
 				writeBoldText(context.getResources().getString(R.string.east),
 						16);
-				setX(300);
+				setX(midPage);
 				writeBoldText(context.getResources().getString(R.string.west),
 						16);
-				newLine();
-				newLine();
+				newLine(2);
 				if (adNotes != null) {
 					writeText(adNotes.getEastAdjacency());
-					setX(300);
+					setX(midPage);
 					writeText(adNotes.getWestAdjacency());
 				}
 			} else {
 
-				setX(430);
+				setX(ARABIC_LINE_START);
 				writeBoldText(
 						context.getResources().getString(
 								R.string.adjacent_claims), 18);
-				newLine();
-				setX(430);
+                newLine();
 
 				List<Adjacency> adjList = Adjacency.getAdjacencies(claim.getClaimId());
 				for (Adjacency adj : adjList) {
@@ -1197,9 +1092,8 @@ public class PDFClaimExporter {
 								Adjacency.getReverseCardinalDirection(adj
 										.getCardinalDirection()));
 					}
-					newLine();
-					newLine();
-					setX(130);
+					newLine(2);
+					setX(ARABIC_MID_PAGE);
 					writeText(context.getResources().getString(
 							R.string.cardinal_direction)
 							+ ": "
@@ -1215,58 +1109,42 @@ public class PDFClaimExporter {
 							+ adjacentClaim.getPerson().getFirstName()
 							+ " " + adjacentClaim.getPerson().getLastName());
 				}
-				newLine();
-				newLine();
-				newLine();
+				newLine(3);
 
 				drawHorizontalLine();
 				if (isPageEnding())
 					addPage(document, context, claim.getClaimId());
-				newLine();
-				newLine();
-				newLine();
-				newLine();
-				setX(430);
+                newLine(4);
 				writeBoldText(
 						context.getResources().getString(
 								R.string.adjacent_properties), 18);
-				newLine();
-				newLine();
-				newLine();
-				setX(430);
+                newLine(3);
 				writeBoldText(context.getResources().getString(R.string.north),
 						16);
-				setX(130);
+				setX(ARABIC_MID_PAGE);
 				writeBoldText(context.getResources().getString(R.string.south),
 						16);
-				newLine();
-				newLine();
-				setX(430);
+                newLine(2);
 
 				AdjacenciesNotes adNotes = AdjacenciesNotes
 						.getAdjacenciesNotes(claim.getClaimId());
 
 				if (adNotes != null) {
 					writeText(adNotes.getNorthAdjacency());
-					setX(130);
+					setX(ARABIC_MID_PAGE);
 					writeText(adNotes.getSouthAdjacency());
 				}
-				newLine();
-				newLine();
-				newLine();
-				setX(430);
+                newLine(3);
 
 				writeBoldText(context.getResources().getString(R.string.east),
 						16);
-				setX(130);
+				setX(ARABIC_MID_PAGE);
 				writeBoldText(context.getResources().getString(R.string.west),
 						16);
-				newLine();
-				newLine();
-				setX(430);
+                newLine(2);
 				if (adNotes != null) {
 					writeText(adNotes.getEastAdjacency());
-					setX(130);
+					setX(ARABIC_MID_PAGE);
 					writeText(adNotes.getWestAdjacency());
 				}
 
@@ -1277,78 +1155,72 @@ public class PDFClaimExporter {
 
 			if (!OpenTenureApplication.getInstance().getLocale().toString()
 					.startsWith("ar")) {
-				FormPayload formPayload = claim.getDynamicForm();
+				FormPayload df = claim.getDynamicForm();
 
-				List<SectionPayload> list = formPayload.getSectionPayloadList();
+				List<SectionPayload> spl = df.getSectionPayloadList();
 
-				for (Iterator<SectionPayload> iterator = list.iterator(); iterator.hasNext();) {
-					SectionPayload sectionPayload = (SectionPayload) iterator
+				for (Iterator<SectionPayload> spli = spl.iterator(); spli.hasNext();) {
+					SectionPayload sp = (SectionPayload) spli
 							.next();
 
 					addPage(document, context, claim.getClaimId());
 					newLine();
 					drawHorizontalLine();
-					newLine();
-					newLine();
+					newLine(2);
 
 					writeBoldText(
 							context.getResources().getString(
 									R.string.title_section), 18);
 					writeBoldText(
 							" : "
-									+ dnl.getLocalizedDisplayName(sectionPayload
+									+ dnl.getLocalizedDisplayName(sp
 											.getDisplayName()), 18);
 
-					newLine();
-					newLine();
-					newLine();
-					newLine();
+					newLine(4);
 
-					List<SectionElementPayload> sePayload = sectionPayload
+					List<SectionElementPayload> sepl = sp
 							.getSectionElementPayloadList();
 
-					for (Iterator<SectionElementPayload> iterator2 = sePayload.iterator(); iterator2
+					for (Iterator<SectionElementPayload> sepli = sepl.iterator(); sepli
 							.hasNext();) {
-						SectionElementPayload sectionElementPayload = (SectionElementPayload) iterator2
+						SectionElementPayload sep = (SectionElementPayload) sepli
 								.next();
-						List<FieldPayload> fieldPayloadList = sectionElementPayload
+						List<FieldPayload> fpl = sep
 								.getFieldPayloadList();
 
-						int x = horizontalMargin;
+                        int columnStart = horizontalMargin;
+                        int columnEnd = midPage;
 
-						for (Iterator<FieldPayload> iterator3 = fieldPayloadList.iterator(); iterator3
+						for (Iterator<FieldPayload> fpli = fpl.iterator(); fpli
 								.hasNext();) {
-							FieldPayload fieldPayload = (FieldPayload) iterator3
+							FieldPayload fp = (FieldPayload) fpli
 									.next();
 
 							String load = null;
 
-							switch (fieldPayload.getFieldType()) {
+							switch (fp.getFieldType()) {
 							case DATE:
 
-								setX(x);
-								writeBoldText(
-										dnl.getLocalizedDisplayName(fieldPayload
+								setX(columnStart);
+								writeLongBoldTextInColumn(
+										dnl.getLocalizedDisplayName(fp
 												.getDisplayName())
-												+ " :", 16);
-								load = fieldPayload.getStringPayload();
+												+ " :", 16, columnStart, columnEnd);
+								load = fp.getStringPayload();
 								newLine();
 								if (load != null) {
-									setX(x);
+									setX(columnStart);
 									writeText(dnl.getLocalizedDisplayName(load));
 
 								} else
 									newLine();
-								if (x == 300) {
+								if (columnStart == midPage) {
 
-									newLine();
-									newLine();
-									newLine();
-									newLine();
+									newLine(4);
 
 								} else {
 
-									if (fieldPayload.getStringPayload() != null)
+									if (fp.getStringPayload() != null)
 										moveY(-20);
 									else
 										moveY(-25);
@@ -1357,26 +1229,23 @@ public class PDFClaimExporter {
 								break;
 							case TIME:
 
-								setX(x);
-								writeBoldText(
-										dnl.getLocalizedDisplayName(fieldPayload
+								setX(columnStart);
+								writeLongBoldTextInColumn(
+										dnl.getLocalizedDisplayName(fp
 												.getDisplayName())
-												+ " :", 16);
-								load = fieldPayload.getStringPayload();
+												+ " :", 16, columnStart, columnEnd);
+								load = fp.getStringPayload();
 								newLine();
 								if (load != null) {
-									setX(x);
+									setX(columnStart);
 									writeText(dnl.getLocalizedDisplayName(load));
 								} else
 									newLine();
-								if (x == 300) {
+								if (columnStart == midPage) {
 
-									newLine();
-									newLine();
-									newLine();
-									newLine();
+									newLine(4);
 								} else {
-									if (fieldPayload.getStringPayload() != null)
+									if (fp.getStringPayload() != null)
 										moveY(-20);
 									else
 										moveY(-25);
@@ -1387,26 +1256,23 @@ public class PDFClaimExporter {
 							case GEOMETRY:
 							case TEXT:
 
-								setX(x);
-								writeBoldText(
-										dnl.getLocalizedDisplayName(fieldPayload
+								setX(columnStart);
+								writeLongBoldTextInColumn(
+										dnl.getLocalizedDisplayName(fp
 												.getDisplayName())
-												+ " :", 16);
-								load = fieldPayload.getStringPayload();
+												+ " :", 16, columnStart, columnEnd);
+								load = fp.getStringPayload();
 								newLine();
 								if (load != null) {
-									setX(x);
-									writeText(dnl.getLocalizedDisplayName(load));
+									setX(columnStart);
+									writeLongTextInColumn(dnl.getLocalizedDisplayName(load), columnStart, columnEnd);
 								} else
 									newLine();
-								if (x == 300) {
+								if (columnStart == midPage) {
 
-									newLine();
-									newLine();
-									newLine();
-									newLine();
+									newLine(4);
 								} else {
-									if (fieldPayload.getStringPayload() != null)
+									if (fp.getStringPayload() != null)
 										moveY(-20);
 									else
 										moveY(-25);
@@ -1414,27 +1280,24 @@ public class PDFClaimExporter {
 								break;
 							case DECIMAL:
 
-								setX(x);
-								writeBoldText(
-										dnl.getLocalizedDisplayName(fieldPayload
+								setX(columnStart);
+								writeLongBoldTextInColumn(
+										dnl.getLocalizedDisplayName(fp
 												.getDisplayName())
-												+ " :", 16);
+												+ " :", 16, columnStart, columnEnd);
 
 								newLine();
-								if (fieldPayload.getBigDecimalPayload() != null) {
-									setX(x);
-									writeText(fieldPayload
+								if (fp.getBigDecimalPayload() != null) {
+									setX(columnStart);
+									writeText(fp
 											.getBigDecimalPayload() + "");
 								} else
 									newLine();
-								if (x == 300) {
+								if (columnStart == midPage) {
 
-									newLine();
-									newLine();
-									newLine();
-									newLine();
+									newLine(4);
 								} else {
-									if (fieldPayload.getBigDecimalPayload() != null)
+									if (fp.getBigDecimalPayload() != null)
 										moveY(-20);
 									else
 										moveY(-25);
@@ -1442,27 +1305,24 @@ public class PDFClaimExporter {
 								break;
 							case INTEGER:
 
-								setX(x);
-								writeBoldText(
-										dnl.getLocalizedDisplayName(fieldPayload
+								setX(columnStart);
+								writeLongBoldTextInColumn(
+										dnl.getLocalizedDisplayName(fp
 												.getDisplayName())
-												+ " :", 16);
+												+ " :", 16, columnStart, columnEnd);
 								;
 								newLine();
-								if (fieldPayload.getBigDecimalPayload() != null) {
-									setX(x);
-									writeText(fieldPayload
+								if (fp.getBigDecimalPayload() != null) {
+									setX(columnStart);
+									writeText(fp
 											.getBigDecimalPayload() + "");
 								} else
 									newLine();
-								if (x == 300) {
+								if (columnStart == midPage) {
 
-									newLine();
-									newLine();
-									newLine();
-									newLine();
+									newLine(4);
 								} else {
-									if (fieldPayload.getBigDecimalPayload() != null)
+									if (fp.getBigDecimalPayload() != null)
 										moveY(-20);
 									else
 										moveY(-25);
@@ -1470,26 +1330,24 @@ public class PDFClaimExporter {
 								break;
 							case BOOL:
 
-								writeBoldText(
-										dnl.getLocalizedDisplayName(fieldPayload
+								setX(columnStart);
+								writeLongBoldTextInColumn(
+										dnl.getLocalizedDisplayName(fp
 												.getDisplayName())
-												+ " :", 16);
+												+ " :", 16, columnStart, columnEnd);
 
 								newLine();
-								if (fieldPayload.getBooleanPayload() != null) {
-									setX(x);
-									writeText(fieldPayload.getBooleanPayload()
+								if (fp.getBooleanPayload() != null) {
+									setX(columnStart);
+									writeText(fp.getBooleanPayload()
 											+ "");
 								} else
 									newLine();
-								if (x == 300) {
+								if (columnStart == midPage) {
 
-									newLine();
-									newLine();
-									newLine();
-									newLine();
+									newLine(4);
 								} else {
-									if (fieldPayload.getBooleanPayload() != null)
+									if (fp.getBooleanPayload() != null)
 										moveY(-20);
 									else
 										moveY(-25);
@@ -1499,109 +1357,98 @@ public class PDFClaimExporter {
 								break;
 							}
 
-							if (x == horizontalMargin)
-								x = 300;
-							else
-								x = horizontalMargin;
+							if (columnStart == horizontalMargin){
+                                columnStart = midPage;
+                                columnEnd = pageWidth - horizontalMargin;
+                            }
+							else{
+                                columnStart = horizontalMargin;
+                                columnEnd = midPage;
+                            }
 
 						}
 
-						newLine();
-						newLine();
-						newLine();
-						newLine();
-						newLine();
-						newLine();
-						newLine();
-						newLine();
+						newLine(8);
 						drawHorizontalLine();
 
-						newLine();
-						newLine();
+						newLine(2);
 
 						if (isPageEnding())
 							addPage(document, context, claim.getClaimId());
 
-						newLine();
-						newLine();
+						newLine(2);
 					}
 
 				}
 
 			} else {
 
-				FormPayload payLoad = claim.getDynamicForm();
-				List<SectionPayload> list = payLoad.getSectionPayloadList();
+				FormPayload df = claim.getDynamicForm();
+				List<SectionPayload> spl = df.getSectionPayloadList();
 
-				for (Iterator<SectionPayload> iterator = list.iterator(); iterator.hasNext();) {
-					SectionPayload sectionPayload = (SectionPayload) iterator
+				for (Iterator<SectionPayload> spli = spl.iterator(); spli.hasNext();) {
+					SectionPayload sp = (SectionPayload) spli
 							.next();
 
 					addPage(document, context, claim.getClaimId());
 
 					newLine();
 					drawHorizontalLine();
-					newLine();
-					newLine();
+					newLine(2);
 
 					writeBoldText(
 							context.getResources().getString(
 									R.string.title_section), 18);
 					writeBoldText(
 							" : "
-									+ dnl.getLocalizedDisplayName(sectionPayload
+									+ dnl.getLocalizedDisplayName(sp
 											.getDisplayName()), 18);
 
-					newLine();
-					newLine();
-					newLine();
-					newLine();
+					newLine(4);
 
-					List<SectionElementPayload> fuffa = sectionPayload
+					List<SectionElementPayload> sepl = sp
 							.getSectionElementPayloadList();
 
-					for (Iterator<SectionElementPayload> iterator2 = fuffa.iterator(); iterator2
+					for (Iterator<SectionElementPayload> sepli = sepl.iterator(); sepli
 							.hasNext();) {
-						SectionElementPayload sectionElementPayload = (SectionElementPayload) iterator2
+						SectionElementPayload sep = (SectionElementPayload) sepli
 								.next();
-						List<FieldPayload> pizzaq = sectionElementPayload
+						List<FieldPayload> fpl = sep
 								.getFieldPayloadList();
 
-						int x = horizontalMargin;
+						int columnStart = horizontalMargin;
+                        int columnEnd = midPage;
 
-						for (Iterator<FieldPayload> iterator3 = pizzaq.iterator(); iterator3
+						for (Iterator<FieldPayload> fpli = fpl.iterator(); fpli
 								.hasNext();) {
-							FieldPayload fieldPayload = (FieldPayload) iterator3
+							FieldPayload fp = (FieldPayload) fpli
 									.next();
 
 							String load = null;
 
-							switch (fieldPayload.getFieldType()) {
+							switch (fp.getFieldType()) {
 							case DATE:
 
-								setX(x);
-								writeBoldText(
-										dnl.getLocalizedDisplayName(fieldPayload
+								setX(columnStart);
+								writeLongBoldTextInColumn(
+										dnl.getLocalizedDisplayName(fp
 												.getDisplayName())
-												+ " :", 16);
-								load = fieldPayload.getStringPayload();
+												+ " :", 16, columnStart, columnEnd);
+								load = fp.getStringPayload();
 								newLine();
 								if (load != null) {
-									setX(x);
+									setX(columnStart);
 									writeText(dnl.getLocalizedDisplayName(load));
 
 								} else
 									newLine();
-								if (x == 300) {
+								if (columnStart == midPage) {
 
-									newLine();
-									newLine();
-									newLine();
-									newLine();
+									newLine(4);
 
 								} else {
 
-									if (fieldPayload.getStringPayload() != null)
+									if (fp.getStringPayload() != null)
 										moveY(-20);
 									else
 										moveY(-25);
@@ -1610,25 +1457,22 @@ public class PDFClaimExporter {
 								break;
 							case TIME:
 
-								setX(x);
-								writeBoldText(
-										dnl.getLocalizedDisplayName(fieldPayload
+								setX(columnStart);
+								writeLongBoldTextInColumn(
+										dnl.getLocalizedDisplayName(fp
 												.getDisplayName())
-												+ " :", 16);
-								load = fieldPayload.getStringPayload();
+												+ " :", 16, columnStart, columnEnd);
+								load = fp.getStringPayload();
 								newLine();
 								if (load != null) {
-									setX(x);
+									setX(columnStart);
 									writeText(dnl.getLocalizedDisplayName(load));
 								} else
 									newLine();
-								if (x == 300) {
-									newLine();
-									newLine();
-									newLine();
-									newLine();
+								if (columnStart == midPage) {
+									newLine(4);
 								} else {
-									if (fieldPayload.getStringPayload() != null)
+									if (fp.getStringPayload() != null)
 										moveY(-20);
 									else
 										moveY(-25);
@@ -1639,26 +1483,23 @@ public class PDFClaimExporter {
 							case GEOMETRY:
 							case TEXT:
 
-								setX(x);
-								writeBoldText(
-										dnl.getLocalizedDisplayName(fieldPayload
+								setX(columnStart);
+								writeLongBoldTextInColumn(
+										dnl.getLocalizedDisplayName(fp
 												.getDisplayName())
-												+ " :", 16);
-								load = fieldPayload.getStringPayload();
+												+ " :", 16, columnStart, columnEnd);
+								load = fp.getStringPayload();
 								newLine();
 								if (load != null) {
-									setX(x);
-									writeText(dnl.getLocalizedDisplayName(load));
+									setX(columnStart);
+									writeLongTextInColumn(dnl.getLocalizedDisplayName(load), columnStart, columnEnd);
 								} else
 									newLine();
-								if (x == 300) {
+								if (columnStart == midPage) {
 
-									newLine();
-									newLine();
-									newLine();
-									newLine();
+									newLine(4);
 								} else {
-									if (fieldPayload.getStringPayload() != null)
+									if (fp.getStringPayload() != null)
 										moveY(-20);
 									else
 										moveY(-25);
@@ -1666,27 +1507,24 @@ public class PDFClaimExporter {
 								break;
 							case DECIMAL:
 
-								setX(x);
+								setX(columnStart);
 								writeBoldText(
-										dnl.getLocalizedDisplayName(fieldPayload
+										dnl.getLocalizedDisplayName(fp
 												.getDisplayName())
 												+ " :", 16);
 
 								newLine();
-								if (fieldPayload.getBigDecimalPayload() != null) {
-									setX(x);
-									writeText(fieldPayload
+								if (fp.getBigDecimalPayload() != null) {
+									setX(columnStart);
+									writeText(fp
 											.getBigDecimalPayload() + "");
 								} else
 									newLine();
-								if (x == 300) {
+								if (columnStart == midPage) {
 
-									newLine();
-									newLine();
-									newLine();
-									newLine();
+									newLine(4);
 								} else {
-									if (fieldPayload.getBigDecimalPayload() != null)
+									if (fp.getBigDecimalPayload() != null)
 										moveY(-20);
 									else
 										moveY(-25);
@@ -1694,27 +1532,24 @@ public class PDFClaimExporter {
 								break;
 							case INTEGER:
 
-								setX(x);
-								writeBoldText(
-										dnl.getLocalizedDisplayName(fieldPayload
+								setX(columnStart);
+								writeLongBoldTextInColumn(
+										dnl.getLocalizedDisplayName(fp
 												.getDisplayName())
-												+ " :", 16);
+												+ " :", 16, columnStart, columnEnd);
 								;
 								newLine();
-								if (fieldPayload.getBigDecimalPayload() != null) {
-									setX(x);
-									writeText(fieldPayload
+								if (fp.getBigDecimalPayload() != null) {
+									setX(columnStart);
+									writeText(fp
 											.getBigDecimalPayload() + "");
 								} else
 									newLine();
-								if (x == 300) {
+								if (columnStart == midPage) {
 
-									newLine();
-									newLine();
-									newLine();
-									newLine();
+									newLine(4);
 								} else {
-									if (fieldPayload.getBigDecimalPayload() != null)
+									if (fp.getBigDecimalPayload() != null)
 										moveY(-20);
 									else
 										moveY(-25);
@@ -1722,26 +1557,24 @@ public class PDFClaimExporter {
 								break;
 							case BOOL:
 
-								writeBoldText(
-										dnl.getLocalizedDisplayName(fieldPayload
+								setX(columnStart);
+								writeLongBoldTextInColumn(
+										dnl.getLocalizedDisplayName(fp
 												.getDisplayName())
-												+ " :", 16);
+												+ " :", 16, columnStart, columnEnd);
 
 								newLine();
-								if (fieldPayload.getBooleanPayload() != null) {
-									setX(x);
-									writeText(fieldPayload.getBooleanPayload()
+								if (fp.getBooleanPayload() != null) {
+									setX(columnStart);
+									writeText(fp.getBooleanPayload()
 											+ "");
 								} else
 									newLine();
-								if (x == 300) {
+								if (columnStart == midPage) {
 
-									newLine();
-									newLine();
-									newLine();
-									newLine();
+									newLine(4);
 								} else {
-									if (fieldPayload.getBooleanPayload() != null)
+									if (fp.getBooleanPayload() != null)
 										moveY(-20);
 									else
 										moveY(-25);
@@ -1751,31 +1584,26 @@ public class PDFClaimExporter {
 								break;
 							}
 
-							if (x == horizontalMargin)
-								x = 300;
-							else
-								x = horizontalMargin;
+                            if (columnStart == horizontalMargin){
+                                columnStart = midPage;
+                                columnEnd = pageWidth - horizontalMargin;
+                            }
+                            else{
+                                columnStart = horizontalMargin;
+                                columnEnd = midPage;
+                            }
 
 						}
 
-						newLine();
-						newLine();
-						newLine();
-						newLine();
-						newLine();
-						newLine();
-						newLine();
-						newLine();
+						newLine(8);
 						drawHorizontalLine();
 
-						newLine();
-						newLine();
+						newLine(2);
 
 						if (isPageEnding())
 							addPage(document, context, claim.getClaimId());
 
-						newLine();
-						newLine();
+						newLine(2);
 					}
 				}
 
@@ -1785,6 +1613,7 @@ public class PDFClaimExporter {
 			// MAP screenshot section
 			addPage(document, context, claim.getClaimId());
 			newLine();
+			setX(horizontalMargin); // the map covers the entire width regardless of arabic orientation
 			drawBitmap(getMapPicture(mapFileName, 515));
 
 			/*------------------ SIGNATURE -------------------------------------*/
@@ -1801,9 +1630,7 @@ public class PDFClaimExporter {
 						18);
 				drawHorizontalLine(pageWidth - horizontalMargin);
 			} else {
-				newLine();
-				newLine();
-				newLine();
+				newLine(3);
 				drawHorizontalLine(pageWidth - horizontalMargin);
 				moveY(100);
 				newLine();
@@ -1855,10 +1682,35 @@ public class PDFClaimExporter {
 
 		setFont(FONT_SANS_SERIF, Typeface.BOLD, size);
 		writeText(text);
-		setFont(FONT_SANS_SERIF, Typeface.NORMAL, 15);
+		setFont(FONT_SANS_SERIF, Typeface.NORMAL, NORMAL_TYPEFACE_SIZE);
 	}
 
-	private void writeText(String text) {
+    private void writeLongBoldTextInColumn(String text, int size, int columStart, int columnEnd) {
+
+        setFont(FONT_SANS_SERIF, Typeface.BOLD, size);
+        writeLongTextInColumn(text, columStart, columnEnd);
+        setFont(FONT_SANS_SERIF, Typeface.NORMAL, NORMAL_TYPEFACE_SIZE);
+    }
+
+    private void writeLongTextInColumn(String text, int columnStart, int columnEnd) {
+        String[] tokens = text.split("\\s+");
+        Iterator<String> iter = Arrays.asList(tokens).iterator();
+        while (iter.hasNext()) {
+            String token = iter.next();
+            if(iter.hasNext()){
+                writeText(token);
+                if(isLineEnding(columnEnd)){
+                    newColumnLine(columnStart);
+                }else{
+                    writeText(" ");
+                }
+            }else{
+                writeText(token);
+            }
+        }
+    }
+
+    private void writeText(String text) {
 		if (text != null) {
 			Rect bounds = new Rect();
 
@@ -1870,10 +1722,39 @@ public class PDFClaimExporter {
 		}
 	}
 
-	private void newLine() {
-		currentX = horizontalMargin;
-		currentY += currentLineHeight + verticalSpace;
-		currentLineHeight = 0;
+    private void newColumnLine(int howMany, int columnStart) {
+        if(howMany < 1){
+            return;
+        }
+        for(int i = 0; i < howMany; i++){
+            newColumnLine(columnStart);
+        }
+    }
+
+    private void newColumnLine(int columnStart) {
+        currentX = columnStart;
+        currentY += currentLineHeight + DEFAULT_VERTICAL_SPACE;
+        currentLineHeight = 0;
+    }
+
+    private void newLine() {
+        if (!OpenTenureApplication.getInstance().getLocale().toString()
+                .startsWith("ar")) {
+            currentX = horizontalMargin;
+        }else{
+            currentX = ARABIC_LINE_START;
+        }
+        currentY += currentLineHeight + DEFAULT_VERTICAL_SPACE;
+        currentLineHeight = 0;
+    }
+
+    private void newLine(int howMany) {
+		if(howMany < 1){
+			return;
+		}
+		for(int i = 0; i < howMany; i++){
+			newLine();
+		}
 	}
 
 	private void drawBitmap(Bitmap bmp) {
@@ -1917,7 +1798,6 @@ public class PDFClaimExporter {
 	}
 
 	private void addPage(PdfDocument document, Context context, String claimId) {
-
 		if (currentPage != null) {
 			document.finishPage(currentPage);
 		}
@@ -1928,16 +1808,20 @@ public class PDFClaimExporter {
 		// start a page
 		currentPage = document.startPage(pageInfo);
 		currentX = horizontalMargin;
-		currentY = verticalMargin;
+		currentY = DEFAULT_VERTICAL_MARGIN;
 
 	}
 
-	public boolean isPageEnding() {
+	private boolean isPageEnding() {
 
-		if ((pageHeight - currentY) < 150)
-			return true;
+		return (pageHeight - currentY) < 2*APPROX_ONE_INCH;
 
-		return false;
+	}
+
+	private boolean isLineEnding(int columnEnd) {
+
+		return (columnEnd - currentX) < APPROX_ONE_INCH;
+
 	}
 
 	private Bitmap bitmapFromResource(Context context, int resId, int width,

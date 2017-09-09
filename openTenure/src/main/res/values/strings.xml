@@ -527,4 +527,10 @@
         <item >99</item>
         <item >100</item>
         </string-array>
+    <string name="message_add_hole_marker">Add hole marker?</string>
+    <string name="title_add_hole">Add hole</string>
+    <string name="message_invalid_marker_position">The marker position would invalidate the geometry</string>
+    <string name="new_hole">New hole</string>
+    <string name="action_add_hole">Add hole marker</string>
+    <string name="title_select_hole">Select hole</string>
 </resources>

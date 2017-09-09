@@ -49,22 +49,19 @@ public class CommunityArea {
 		if(communityAreaClob == null)
 			return;
 		
-		List<Vertex> communityAreaVertics = Vertex.verticesFromWKT(
+		List<Vertex> communityAreaVertices = Vertex.shellFromWKT(
 				communityAreaClob, null);
 
-		if (communityAreaVertics.size() <= 0) {
+		if (communityAreaVertices.size() <= 0) {
 			return;
 		}
 
 		PolylineOptions polylineOptions = new PolylineOptions();
-		for (int i = 0; i < communityAreaVertics.size(); i++) {
-			polylineOptions.add(communityAreaVertics.get(i).getMapPosition());
+		for (int i = 0; i < communityAreaVertices.size(); i++) {
+			polylineOptions.add(communityAreaVertices.get(i).getMapPosition());
 		}
-		polylineOptions.add(communityAreaVertics.get(0).getMapPosition()); // Needed
-																			// in
-		// order to
-		// close the
-		// polyline
+		polylineOptions.add(communityAreaVertices.get(0).getMapPosition());
+        // Needed in order to close the polyline
 		polylineOptions.zIndex(BasePropertyBoundary.BOUNDARY_Z_INDEX);
 		polylineOptions.width(4);
 		polylineOptions.color(OpenTenureApplication.getContext().getResources()

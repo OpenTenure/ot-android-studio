@@ -373,7 +373,7 @@
     <string name="action_add_non_boundary">Adicionar marcador de não fronteira</string>
     <string name="action_measure">Medida</string>
     <string name="message_add_non_boundary_marker">Adicionar marcador de não fronteira?</string>
-    <string name="tiles_download_status">Preparando para baixar %1$d of %2$d, %3$d foram baixados e %4$d falharam</string>
+    <string name="tiles_download_status">Preparando para baixar %1$d of %2$d</string>
     <string name="markers_distance_label">Distância</string>
     <string name="meters">m</string>
     <string name="action_export_geo">Exportar dados geográficos</string>

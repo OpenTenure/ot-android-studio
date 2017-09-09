@@ -44,9 +44,13 @@ import org.fao.sola.clients.android.opentenure.maps.Constants;
 import android.util.Log;
 
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.maps.android.SphericalUtil;
 import com.vividsolutions.jts.geom.Coordinate;
+import com.vividsolutions.jts.geom.Geometry;
 import com.vividsolutions.jts.geom.GeometryFactory;
 import com.vividsolutions.jts.geom.LineString;
+import com.vividsolutions.jts.geom.LinearRing;
 import com.vividsolutions.jts.geom.Point;
 import com.vividsolutions.jts.geom.Polygon;
 import com.vividsolutions.jts.io.ParseException;
@@ -462,7 +466,7 @@ public class Vertex {
 	public static void storeWKT(String claimId, String mapWKT, String gpsWKT) {
 		deleteVertices(claimId);
 
-		List<Vertex> vertices = verticesFromWKT(mapWKT, gpsWKT);
+		List<Vertex> vertices = shellFromWKT(mapWKT, gpsWKT);
 		int i = 0;
 
 		for (Vertex vertex : vertices) {
@@ -470,49 +474,60 @@ public class Vertex {
 			vertex.setSequenceNumber(i++);
 			vertex.create();
 		}
+		HoleVertex.storeHolesFromWKT(claimId, mapWKT, gpsWKT);
 	}
 
-	public static String mapWKTFromVertices(List<Vertex> vertices) {
+	public static double getArea(List<Vertex> vertices){
+
+		if (vertices == null || vertices.size() <= 1) {
+			return 0;
+		}
+
+		List<LatLng> coordList = new ArrayList<LatLng>();
+
+		int i = 0;
+
+		for (Vertex vertex : vertices) {
+			coordList.add(vertex.getMapPosition());
+		}
+
+		if (vertices.size() == 2) {
+			// the source is a line segment so we replicate the second vertex to
+			// create a three vertices polygon
+			coordList.add(vertices.get(1).getMapPosition());
+		}
+
+		// then we close the polygon
+
+		coordList.add(vertices.get(0).getMapPosition());
+
+		double area = SphericalUtil.computeArea(coordList);
+		return (long) Math.round(area);
+	}
+
+	public static Geometry mapShell(List<Vertex> vertices) {
 		if (vertices == null || vertices.size() == 0) {
 			return null;
 		}
 		GeometryFactory gf = new GeometryFactory();
 		Coordinate[] coordinates;
-		StringWriter writer = new StringWriter();
-		WKTWriter wktWriter = new WKTWriter(2);
+		Geometry shell;
 		int i = 0;
-		
 		switch(vertices.size()){
 			case 1:
-				Point point = gf.createPoint(new Coordinate(
+				shell = gf.createPoint(new Coordinate(
 						vertices.get(0).getMapPosition().longitude, vertices.get(0)
 						.getMapPosition().latitude));
-				point.setSRID(Constants.SRID);
-
-				try {
-					wktWriter.write(point, writer);
-				} catch (IOException e) {
-				}
-
-				return writer.toString();
+				break;
 			case 2:
 				coordinates = new Coordinate[vertices.size()];
-
 				for (Vertex vertex : vertices) {
 					coordinates[i] = new Coordinate(vertex.getMapPosition().longitude,
 							vertex.getMapPosition().latitude);
 					i++;
 				}
-				LineString linestring = gf.createLineString(coordinates);
-				linestring.setSRID(Constants.SRID);
-
-
-				try {
-					wktWriter.write(linestring, writer);
-				} catch (IOException e) {
-				}
-
-				return writer.toString();
+				shell = gf.createLineString(coordinates);
+				break;
 			default:
 				coordinates = new Coordinate[vertices.size() + 1];
 
@@ -523,126 +538,90 @@ public class Vertex {
 				}
 				coordinates[i] = new Coordinate(
 						vertices.get(0).getMapPosition().longitude, vertices.get(0)
-								.getMapPosition().latitude);
+						.getMapPosition().latitude);
 
-				Polygon polygon = gf.createPolygon(coordinates);
-				polygon.setSRID(Constants.SRID);
-
-				try {
-					wktWriter.write(polygon, writer);
-				} catch (IOException e) {
-				}
-
-				return writer.toString();
+				shell = gf.createLinearRing(coordinates);
+				break;
 		}
+		shell.setSRID(Constants.SRID);
+		return shell;
 	}
-
-	public static String gpsWKTFromVertices(List<Vertex> vertices) {
+	public static Geometry gpsShell(List<Vertex> vertices) {
 		if (vertices == null || vertices.size() == 0) {
 			return null;
 		}
-		
+
 		boolean noGPSData = true;
-		StringWriter writer = new StringWriter();
 		GeometryFactory gf = new GeometryFactory();
-		WKTWriter wktWriter = new WKTWriter(2);
-		
+		Geometry shell;
 
 		for (Vertex vertex : vertices) {
-			
+
 			if(INVALID_POSITION.equals(vertex.getGPSPosition())){
 			}else{
 				noGPSData = false;
+				break;
 			}
 		}
 
-		if (noGPSData) {			
-			
-			
-			Point point = gf.createPoint(new Coordinate(
+		if (noGPSData) {
+			shell = gf.createPoint(new Coordinate(
 					vertices.get(0).getMapPosition().longitude, vertices.get(0)
 					.getMapPosition().latitude));
-			point.setSRID(Constants.SRID);
+		}else{
+			Coordinate[] coordinates;
+			int i = 0;
 
+			switch(vertices.size()){
+				case 1:
 
-			try {
-				wktWriter.write(point, writer);
-			} catch (IOException e) {
+					if(INVALID_POSITION.equals(vertices.get(0).getGPSPosition())){
+						shell = gf.createPoint(new Coordinate(vertices.get(0).getMapPosition().longitude, vertices.get(0).getMapPosition().latitude));
+					}else{
+						shell = gf.createPoint(new Coordinate(vertices.get(0).getGPSPosition().longitude, vertices.get(0).getGPSPosition().latitude));
+					}
+					break;
+				case 2:
+					coordinates = new Coordinate[vertices.size()];
+
+					for (Vertex vertex : vertices) {
+
+						if(INVALID_POSITION.equals(vertex.getGPSPosition())){
+							coordinates[i] = new Coordinate(vertex.getMapPosition().longitude, vertex.getMapPosition().latitude);
+						}else{
+							coordinates[i] = new Coordinate(vertex.getGPSPosition().longitude, vertex.getGPSPosition().latitude);
+						}
+						i++;
+					}
+					shell = gf.createLineString(coordinates);
+					break;
+				default:
+					coordinates = new Coordinate[vertices.size() + 1];
+
+					for (Vertex vertex : vertices) {
+						if(INVALID_POSITION.equals(vertex.getGPSPosition())){
+							coordinates[i] = new Coordinate(vertex.getMapPosition().longitude, vertex.getMapPosition().latitude);
+						}else{
+							coordinates[i] = new Coordinate(vertex.getGPSPosition().longitude, vertex.getGPSPosition().latitude);
+						}
+						i++;
+					}
+					if(INVALID_POSITION.equals(vertices.get(0).getGPSPosition())){
+						coordinates[i] = new Coordinate(vertices.get(0).getMapPosition().longitude, vertices.get(0).getMapPosition().latitude);
+					}else{
+						coordinates[i] = new Coordinate(vertices.get(0).getGPSPosition().longitude, vertices.get(0).getGPSPosition().latitude);
+					}
+
+					shell = gf.createLinearRing(coordinates);
+					break;
 			}
-			return writer.toString();
 		}
-		
-		Coordinate[] coordinates;
-		int i = 0;
-		
-		switch(vertices.size()){
-			case 1:
-				Point point;
-				
-				if(INVALID_POSITION.equals(vertices.get(0).getGPSPosition())){
-					point = gf.createPoint(new Coordinate(vertices.get(0).getMapPosition().longitude, vertices.get(0).getMapPosition().latitude));
-				}else{
-					point = gf.createPoint(new Coordinate(vertices.get(0).getGPSPosition().longitude, vertices.get(0).getGPSPosition().latitude));
-				}
-				point.setSRID(Constants.SRID);
 
-				try {
-					wktWriter.write(point, writer);
-				} catch (IOException e) {
-				}
-
-				return writer.toString();
-			case 2:
-				coordinates = new Coordinate[vertices.size()];
-
-				for (Vertex vertex : vertices) {
-
-					if(INVALID_POSITION.equals(vertex.getGPSPosition())){
-						coordinates[i] = new Coordinate(vertex.getMapPosition().longitude, vertex.getMapPosition().latitude);
-					}else{
-						coordinates[i] = new Coordinate(vertex.getGPSPosition().longitude, vertex.getGPSPosition().latitude);
-					}
-					i++;
-				}
-				LineString linestring = gf.createLineString(coordinates);
-				linestring.setSRID(Constants.SRID);
-
-				try {
-					wktWriter.write(linestring, writer);
-				} catch (IOException e) {
-				}
-
-				return writer.toString();
-			default:
-				coordinates = new Coordinate[vertices.size() + 1];
-
-				for (Vertex vertex : vertices) {
-					if(INVALID_POSITION.equals(vertex.getGPSPosition())){
-						coordinates[i] = new Coordinate(vertex.getMapPosition().longitude, vertex.getMapPosition().latitude);
-					}else{
-						coordinates[i] = new Coordinate(vertex.getGPSPosition().longitude, vertex.getGPSPosition().latitude);
-					}
-					i++;
-				}
-				if(INVALID_POSITION.equals(vertices.get(0).getGPSPosition())){
-					coordinates[i] = new Coordinate(vertices.get(0).getMapPosition().longitude, vertices.get(0).getMapPosition().latitude);
-				}else{
-					coordinates[i] = new Coordinate(vertices.get(0).getGPSPosition().longitude, vertices.get(0).getGPSPosition().latitude);
-				}
-
-				Polygon polygon = gf.createPolygon(coordinates);
-				polygon.setSRID(Constants.SRID);
-
-				try {
-					wktWriter.write(polygon, writer);
-				} catch (IOException e) {
-				}
-
-				return writer.toString();
-		}
+		shell.setSRID(Constants.SRID);
+		return shell;
 	}
 
-	public static List<Vertex> verticesFromWKT(String mapWKT, String gpsWKT) {
+	public static List<Vertex> shellFromWKT(String mapWKT, String gpsWKT) {
 		List<Vertex> vertices = new ArrayList<Vertex>();
 		GeometryFactory geometryFactory = new GeometryFactory();
 
@@ -658,22 +637,25 @@ public class Vertex {
 				gpsPolygon.setSRID(Constants.SRID);
 			}
 		} catch (ParseException e) {
+			Log.e(Vertex.class.getName(), "Exception: " + e.getLocalizedMessage()
+					+ " while parsing map WKT " + mapWKT + " and gps WKT " + gpsWKT);
 			return null;
 		}
 
-		if (gpsPolygon != null && mapPolygon.getNumPoints() != gpsPolygon.getNumPoints()) {
+		if (gpsPolygon != null
+				&& mapPolygon.getExteriorRing().getNumPoints() != gpsPolygon.getExteriorRing().getNumPoints()) {
 			Log.e(Vertex.class.getName(), mapWKT + " and " + gpsWKT
 					+ " have a different number of vertices");
 			return null;
 		}
 
-		for (int i = 0; i < mapPolygon.getNumPoints(); i++) {
-			Coordinate mapCoordinate = mapPolygon.getCoordinates()[i];
+		for (int i = 0; i < mapPolygon.getExteriorRing().getNumPoints() - 1; i++) {
+			Coordinate mapCoordinate = mapPolygon.getExteriorRing().getCoordinates()[i];
 			Vertex vertex = new Vertex(new LatLng(
 					mapCoordinate.getOrdinate(Coordinate.Y),
 					mapCoordinate.getOrdinate(Coordinate.X)));
 			if (gpsPolygon != null) {
-				Coordinate gpsCoordinate = gpsPolygon.getCoordinates()[i];
+				Coordinate gpsCoordinate = gpsPolygon.getExteriorRing().getCoordinates()[i];
 				vertex.setGPSPosition(new LatLng(gpsCoordinate
 						.getOrdinate(Coordinate.Y), gpsCoordinate
 						.getOrdinate(Coordinate.X)));

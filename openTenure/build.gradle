@@ -35,7 +35,7 @@ android {
 
 dependencies {
     compile project(':aFileChooser')
-    compile 'com.google.maps.android:android-maps-utils:0.4.4'
+    compile 'com.google.maps.android:android-maps-utils:0.5+'
     compile 'com.android.support:support-v4:21.0.3'
     compile 'com.google.code.gson:gson:2.4'
     compile 'com.google.android.gms:play-services:8.3.0'
@@ -46,6 +46,6 @@ dependencies {
     compile files('libs/jackson-annotations-2.4.2.jar')
     compile files('libs/jackson-core-2.4.2.jar')
     compile files('libs/jackson-databind-2.4.2.jar')
-    compile files('libs/jts-1.13.jar')
+    compile files('libs/jts-1.14.jar')
     compile files('libs/zip4j_1.3.2.jar')
 }

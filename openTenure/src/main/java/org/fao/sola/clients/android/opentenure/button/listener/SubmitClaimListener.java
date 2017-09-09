@@ -43,6 +43,7 @@ import org.fao.sola.clients.android.opentenure.model.Claim;
 import org.fao.sola.clients.android.opentenure.model.ClaimStatus;
 import org.fao.sola.clients.android.opentenure.model.Configuration;
 import org.fao.sola.clients.android.opentenure.model.DocumentType;
+import org.fao.sola.clients.android.opentenure.model.HoleVertex;
 import org.fao.sola.clients.android.opentenure.model.Person;
 import org.fao.sola.clients.android.opentenure.model.Vertex;
 import org.fao.sola.clients.android.opentenure.network.SaveClaimTask;
@@ -184,11 +185,6 @@ public class SubmitClaimListener implements OnClickListener {
 			}
 
 			JsonUtilities.createClaimJson(claimId);
-
-			Log.d(this.getClass().getName(),
-					"mapGeometry: " + Vertex.mapWKTFromVertices(vertices));
-			Log.d(this.getClass().getName(),
-					"gpsGeometry: " + Vertex.gpsWKTFromVertices(vertices));
 
 			FormPayload payload = claim.getDynamicForm();
 			SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(v.getContext());

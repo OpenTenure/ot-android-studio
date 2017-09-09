@@ -369,7 +369,7 @@
     <string name="message_available_shares">សរុបការចំណែកនៃទាមទារគឺតិចជាង១០០%</string>
     <string name="message_files_not_present">ឯកសារការទាមទារមួយឬច្រើនមិនបានបង្ហាញ</string>
     <string name="message_warnings">ព្រមាន: </string>
-    <string name="tiles_download_status">ការប៉ុនបង់ទាញយកឯកសារក្រឡា tile %1$d of %2$d, %3$d ទាញយកឯកសាររួចហើយ និង %4$d ទទួលបរាជ័យ</string>
+    <string name="tiles_download_status">ការប៉ុនបង់ទាញយកឯកសារក្រឡា tile %1$d of %2$d</string>
     <string name="markers_distance_label">ចំងាយ</string>
     <string name="meters">m</string>
     <string name="action_export_geo"> នាំចេញទិន្នន័យភូមិសាស្រ្ត </string>

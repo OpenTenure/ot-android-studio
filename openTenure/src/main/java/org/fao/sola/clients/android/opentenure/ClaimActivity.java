@@ -51,6 +51,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.NavUtils;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.util.SparseArray;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -197,7 +198,9 @@ public class ClaimActivity extends FragmentActivity implements ClaimDispatcher,
 
 		// Setup the form before creating the section adapter
 
+		long start = System.currentTimeMillis();
 		setupDynamicSections();
+		Log.d(this.getClass().getName(), "Dynamic sections were set up in " + (System.currentTimeMillis() - start) + "ms");
 
 		tabs = (PagerSlidingTabStrip) findViewById(R.id.tabs);
 		mViewPager = (ViewPager) findViewById(R.id.claim_pager);

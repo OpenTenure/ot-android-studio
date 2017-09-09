@@ -18,12 +18,11 @@ package com.androidmapsextensions;
 import android.content.Context;
 import android.util.AttributeSet;
 
-import com.androidmapsextensions.impl.ExtendedMapFactory;
 import com.google.android.gms.maps.GoogleMapOptions;
 
-public class MapView extends com.google.android.gms.maps.MapView {
+public class MapView extends com.google.android.gms.maps.MapView implements MapHolder.Delegate {
 
-    private GoogleMap map;
+    private final MapHolder mapHolder = new MapHolder(this);
 
     public MapView(Context context) {
         super(context);
@@ -42,12 +41,10 @@ public class MapView extends com.google.android.gms.maps.MapView {
     }
 
     public GoogleMap getExtendedMap() {
-        if (map == null) {
-            com.google.android.gms.maps.GoogleMap realMap = super.getMap();
-            if (realMap != null) {
-                map = ExtendedMapFactory.create(realMap, getContext());
-            }
-        }
-        return map;
+        return mapHolder.getExtendedMap();
+    }
+
+    public void getExtendedMapAsync(OnMapReadyCallback callback) {
+        mapHolder.getExtendedMapAsync(callback);
     }
 }

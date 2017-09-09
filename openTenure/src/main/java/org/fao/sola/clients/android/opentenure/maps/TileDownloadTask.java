@@ -40,6 +40,7 @@ import org.fao.sola.clients.android.opentenure.R;
 import org.fao.sola.clients.android.opentenure.model.Task;
 import org.fao.sola.clients.android.opentenure.model.Tile;
 
+import com.androidmapsextensions.ClusterGroup;
 import com.androidmapsextensions.GoogleMap;
 import com.androidmapsextensions.Marker;
 import com.androidmapsextensions.MarkerOptions;
@@ -238,8 +239,7 @@ public class TileDownloadTask extends AsyncTask<Void, Integer, Integer> {
 		String message = String.format(
 				context.getResources()
 						.getString(R.string.tiles_download_status),
-				downloadStatus[ATTEMPTED_INDEX], downloadStatus[TOTAL_INDEX],
-				downloadStatus[SUCCEEDED_INDEX], downloadStatus[FAILED_INDEX]);
+				downloadStatus[ATTEMPTED_INDEX], downloadStatus[TOTAL_INDEX]);
 		downloadStatusMarker.setPosition(getMarkerPosition());
 		downloadStatusMarker.setTitle(message);
 		downloadStatusMarker.showInfoWindow();
@@ -258,7 +258,7 @@ public class TileDownloadTask extends AsyncTask<Void, Integer, Integer> {
 		downloadStatusMarker.setAlpha(0.0f);
 		downloadStatusMarker.setInfoWindowAnchor(.5f,1.0f);
 		downloadStatusMarker
-		.setClusterGroup(Constants.MARKER_DOWNLOAD_STATUS_GROUP);
+		.setClusterGroup(ClusterGroup.NOT_CLUSTERED);
 		return downloadStatusMarker;
 	}
 
@@ -271,10 +271,8 @@ public class TileDownloadTask extends AsyncTask<Void, Integer, Integer> {
 		if (failures > 0) {
 			Toast.makeText(
 					context,
-					String.format(
 							context.getResources().getString(
-									R.string.not_all_tiles_downloaded),
-							failures), Toast.LENGTH_LONG).show();
+									R.string.not_all_tiles_downloaded),Toast.LENGTH_LONG).show();
 		} else {
 			Toast.makeText(
 					context,

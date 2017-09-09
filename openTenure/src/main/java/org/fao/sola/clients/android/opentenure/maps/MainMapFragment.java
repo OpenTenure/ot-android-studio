@@ -46,6 +46,7 @@ import org.fao.sola.clients.android.opentenure.network.GetAllClaimsTask;
 import org.fao.sola.clients.android.opentenure.network.LoginActivity;
 import org.fao.sola.clients.android.opentenure.network.LogoutTask;
 
+import com.androidmapsextensions.ClusterGroup;
 import com.androidmapsextensions.ClusteringSettings;
 import com.androidmapsextensions.GoogleMap;
 import com.androidmapsextensions.GoogleMap.OnCameraChangeListener;
@@ -229,13 +230,13 @@ public class MainMapFragment extends SupportMapFragment implements OnCameraChang
 		.anchor(0.5f, 0.5f)
 		.icon(BitmapDescriptorFactory
 				.fromResource(R.drawable.ic_menu_close_clear_cancel)));
-		remove.setClusterGroup(Constants.MARKER_EDIT_REMOVE_GROUP);
+		remove.setClusterGroup(ClusterGroup.NOT_CLUSTERED);
 		cancel = map.addMarker(new MarkerOptions()
 		.position(projection.fromScreenLocation(getControlCancelPosition(markerScreenPosition, markerWidth, markerHeight)))
 		.anchor(0.5f, 0.5f)
 		.icon(BitmapDescriptorFactory
 				.fromResource(R.drawable.ic_menu_block)));
-		cancel.setClusterGroup(Constants.MARKER_EDIT_CANCEL_GROUP);
+		cancel.setClusterGroup(ClusterGroup.NOT_CLUSTERED);
 	}
 
 	private Point getControlRemovePosition(Point markerScreenPosition, int markerWidth, int markerHeight){
@@ -515,7 +516,7 @@ public class MainMapFragment extends SupportMapFragment implements OnCameraChang
 	protected Marker createMapBookmarkMarker(LatLng position, String description) {
 		Marker marker;
 		marker = map.addMarker(new MarkerOptions().position(position).title(description)
-				.clusterGroup(Constants.BASE_MAP_BOOKMARK_MARKERS_GROUP + mapBookmarksMap.size())
+				.clusterGroup(ClusterGroup.NOT_CLUSTERED)
 				.icon(BitmapDescriptorFactory.fromResource(R.drawable.map_bookmark)));
 		return marker;
 	}
@@ -524,7 +525,7 @@ public class MainMapFragment extends SupportMapFragment implements OnCameraChang
 
 		if (visibleProperties != null) {
 			for (BasePropertyBoundary visibleProperty : visibleProperties) {
-				visibleProperty.showBoundary();
+				visibleProperty.showProperty();
 			}
 		}
 	}
@@ -538,7 +539,7 @@ public class MainMapFragment extends SupportMapFragment implements OnCameraChang
 
 		if (visibleProperties != null) {
 			for (BasePropertyBoundary visibleProperty : visibleProperties) {
-				visibleProperty.hideBoundary();
+				visibleProperty.hideProperty();
 			}
 		}
 	}
@@ -1063,7 +1064,7 @@ public class MainMapFragment extends SupportMapFragment implements OnCameraChang
 		}
 		visibleProperties = new ArrayList<BasePropertyBoundary>();
 		for (Claim claim : allClaims) {
-			BasePropertyBoundary bpb = new BasePropertyBoundary(mapView.getContext(), map, claim, false);
+			BasePropertyBoundary bpb = new BasePropertyBoundary(mapView.getContext(), map, claim.getClaimId(), false);
 			Polygon claimPoly = bpb.getPolygon();
 			if (claimPoly != null && claimPoly.intersects(boundsPoly)) {
 				visibleProperties.add(bpb);
@@ -1123,12 +1124,11 @@ public class MainMapFragment extends SupportMapFragment implements OnCameraChang
 		allClaims = Claim.getSimplifiedClaimsForMap();
 		visibleProperties = new ArrayList<BasePropertyBoundary>();
 		for (Claim claim : allClaims) {
-			visibleProperties.add(new BasePropertyBoundary(mapView.getContext(), map, claim, false));
+			visibleProperties.add(new BasePropertyBoundary(mapView.getContext(), map, claim.getClaimId(), false));
 		}
 
 		showVisibleProperties();
 		drawAreaOfInterest();
-		// redrawVisibleProperties();
 
 		return;
 	}

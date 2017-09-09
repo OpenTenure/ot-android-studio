@@ -360,11 +360,9 @@ public class JsonUtilities {
 				// }
 
 				tempClaim
-						.setGpsGeometry(org.fao.sola.clients.android.opentenure.model.Vertex
-								.gpsWKTFromVertices(claim.getVertices()));
+						.setGpsGeometry(claim.getGPSWKT());
 				tempClaim
-						.setMappedGeometry(org.fao.sola.clients.android.opentenure.model.Vertex
-								.mapWKTFromVertices(claim.getVertices()));
+						.setMappedGeometry(claim.getMapWKT());
 				tempClaim.setAttachments(attachments);
 
 				tempClaim.setLocations(locations);

@@ -373,7 +373,7 @@
     <string name="action_add_non_boundary">Добавить маркер вне границы</string>
     <string name="action_measure">Измерить</string>
     <string name="message_add_non_boundary_marker">Добавить маркер вне границы?</string>
-    <string name="tiles_download_status">Попытка загрузить тайл %1$d из %2$d, %3$d загружено и %4$d не удалось загрузить</string>
+    <string name="tiles_download_status">Попытка загрузить тайл %1$d из %2$d</string>
     <string name="markers_distance_label">Дистанция</string>
     <string name="meters">м</string>
     <string name="action_export_geo">Экспортировать гео данные</string>
