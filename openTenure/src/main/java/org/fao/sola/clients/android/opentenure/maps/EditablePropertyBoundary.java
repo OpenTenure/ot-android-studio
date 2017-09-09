@@ -366,6 +366,7 @@ public class EditablePropertyBoundary extends BasePropertyBoundary {
         }else{
             hideMarkerEditControls();
             vertices.remove(verticesMap.remove(mark));
+			mark.remove();
 			insertBoundaryMarker(selectedMarker.getPosition(), vertex.getGPSPosition());
             redrawProperty();
 			selectedMarker = null;
