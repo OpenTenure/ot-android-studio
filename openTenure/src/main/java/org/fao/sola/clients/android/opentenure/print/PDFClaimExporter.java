@@ -174,7 +174,7 @@ public class PDFClaimExporter {
 
 				moveX(45);
 				moveY(30);
-
+				sdf.applyPattern("dd/MM/yyyy HH:MM");
 				String dataStr = sdf.format(new Date());
 
 				int x = currentX;
@@ -199,6 +199,7 @@ public class PDFClaimExporter {
 				setX(40);
 				moveY(25);
 
+				sdf.applyPattern("dd/MM/yyyy HH:MM");
 				String dataStr = sdf.format(new Date());
 				writeText(dataStr);
 
@@ -294,9 +295,11 @@ public class PDFClaimExporter {
 										R.string.date_of_birth_simple)
 										+ ": ", 16);
 						newLine(2);
-						if (claim.getPerson().getDateOfBirth() != null)
+						if (claim.getPerson().getDateOfBirth() != null){
+							sdf.applyPattern("dd/MM/yyyy");
 							writeText(sdf.format(claim.getPerson()
 									.getDateOfBirth()));
+						}
 
 					}
 
@@ -336,9 +339,11 @@ public class PDFClaimExporter {
 										+ " :", 16);
 						newLine(3);
 
-						if (claim.getPerson().getDateOfBirth() != null)
+						if (claim.getPerson().getDateOfBirth() != null){
+							sdf.applyPattern("dd/MM/yyyy");
 							writeText(sdf.format(claim.getPerson()
 									.getDateOfBirth()));
+						}
 						newLine(5);
 					}
 				}
@@ -349,9 +354,11 @@ public class PDFClaimExporter {
 					if (picture == null) {
 						writeText(claim.getPerson().getFirstName());
 						setX(midPage);
-						if (claim.getPerson().getDateOfBirth() != null)
+						if (claim.getPerson().getDateOfBirth() != null){
+							sdf.applyPattern("dd/MM/yyyy");
 							writeText(sdf.format(claim.getPerson()
 									.getDateOfBirth()));
+						}
 					}
 				} else {
 					if (picture == null) {
@@ -359,9 +366,11 @@ public class PDFClaimExporter {
 						setX(200);
 						writeText(claim.getPerson().getLastName());
 						setX(400);
-						if (claim.getPerson().getDateOfBirth() != null)
+						if (claim.getPerson().getDateOfBirth() != null){
+							sdf.applyPattern("dd/MM/yyyy");
 							writeText(sdf.format(claim.getPerson()
 									.getDateOfBirth()));
+						}
 					}
 				}
 				newLine(2);
@@ -459,10 +468,11 @@ public class PDFClaimExporter {
 										R.string.date_of_birth_simple)
 										+ ": ", 16);
                         newLine(2);
-						if (claim.getPerson().getDateOfBirth() != null)
+						if (claim.getPerson().getDateOfBirth() != null){
+							sdf.applyPattern("dd/MM/yyyy");
 							writeText(sdf.format(claim.getPerson()
 									.getDateOfBirth()));
-
+						}
 					}
 				} else {
 					if (picture == null) {
@@ -499,9 +509,11 @@ public class PDFClaimExporter {
 										+ " :", 16);
                         newLine(3);
 
-						if (claim.getPerson().getDateOfBirth() != null)
+						if (claim.getPerson().getDateOfBirth() != null){
+							sdf.applyPattern("dd/MM/yyyy");
 							writeText(sdf.format(claim.getPerson()
 									.getDateOfBirth()));
+						}
 						newLine(5);
 					}
 				}
@@ -513,9 +525,11 @@ public class PDFClaimExporter {
 						setX(ARABIC_LINE_START);
 						writeText(claim.getPerson().getFirstName());
 						setX(ARABIC_MID_PAGE);
-						if (claim.getPerson().getDateOfBirth() != null)
+						if (claim.getPerson().getDateOfBirth() != null){
+							sdf.applyPattern("dd/MM/yyyy");
 							writeText(sdf.format(claim.getPerson()
 									.getDateOfBirth()));
+						}
 					} else {
 
 						setX(ARABIC_LINE_START);
@@ -523,10 +537,11 @@ public class PDFClaimExporter {
 						setX(ARABIC_MID_PAGE);
 						writeText(claim.getPerson().getLastName());
                         newLine();
-						if (claim.getPerson().getDateOfBirth() != null)
+						if (claim.getPerson().getDateOfBirth() != null){
+							sdf.applyPattern("dd/MM/yyyy");
 							writeText(sdf.format(claim.getPerson()
 									.getDateOfBirth()));
-
+						}
 					}
 				}
 
@@ -623,12 +638,13 @@ public class PDFClaimExporter {
 							setX(midPage);
 							writeText(person.getLastName());
 							if (person.getDateOfBirth() != null) {
-								newLine();
+								newLine(2);
 								writeBoldText(
 										context.getResources().getString(
 												R.string.date_of_birth_simple)
 												+ ": ", 16);
 								newLine();
+								sdf.applyPattern("dd/MM/yyyy");
 								writeText(sdf.format(claim.getPerson()
 										.getDateOfBirth()));
 							}
@@ -648,6 +664,7 @@ public class PDFClaimExporter {
 							writeText(person.getFirstName());
 							if (person.getDateOfBirth() != null){
 								setX(midPage);
+								sdf.applyPattern("dd/MM/yyyy");
 								writeText(sdf.format(claim.getPerson()
 										.getDateOfBirth()));
 							}
@@ -753,18 +770,21 @@ public class PDFClaimExporter {
 
 							writeText(person.getFirstName());
 							setX(ARABIC_MID_PAGE);
-							if (person.getDateOfBirth() != null)
+							if (person.getDateOfBirth() != null){
+								sdf.applyPattern("dd/MM/yyyy");
 								writeText(sdf.format(claim.getPerson()
 										.getDateOfBirth()));
+							}
 						} else {
 							writeText(person.getFirstName());
 							setX(ARABIC_MID_PAGE);
 							writeText(person.getLastName());
                             newLine();
-							if (person.getDateOfBirth() != null)
+							if (person.getDateOfBirth() != null){
+								sdf.applyPattern("dd/MM/yyyy");
 								writeText(sdf.format(claim.getPerson()
 										.getDateOfBirth()));
-
+							}
 						}
                         newLine(2);
 						writeBoldText(
@@ -946,9 +966,10 @@ public class PDFClaimExporter {
 				writeText(dnl.getLocalizedDisplayName(new LandUse()
 						.getDisplayValueByType(claim.getLandUse())));
 				setX(midPage);
-				sdf.applyPattern("dd/MM/yyyy");
-				if (claim.getDateOfStart() != null)
+				if (claim.getDateOfStart() != null){
+					sdf.applyPattern("dd/MM/yyyy");
 					writeText(sdf.format(claim.getDateOfStart()));
+				}
 			} else {
 
                 newLine(3);
@@ -982,9 +1003,10 @@ public class PDFClaimExporter {
 				writeText(dnl.getLocalizedDisplayName(new LandUse()
 						.getDisplayValueByType(claim.getLandUse())));
 				setX(ARABIC_MID_PAGE);
-				sdf.applyPattern("dd/MM/yyyy");
-				if (claim.getDateOfStart() != null)
+				if (claim.getDateOfStart() != null){
+					sdf.applyPattern("dd/MM/yyyy");
 					writeText(sdf.format(claim.getDateOfStart()));
+				}
 
 			}
 			newLine(2);

@@ -9,10 +9,14 @@
     android:paddingStart="16dp"
     android:paddingEnd="16dp" >
 
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="3"
+                android:fillViewport="true" >
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_weight="3"
         android:background="@color/light_background_opentenure"
         android:orientation="vertical" >
 
@@ -261,6 +265,7 @@
             android:textAppearance="?android:attr/textAppearanceMedium" >
         </EditText>
     </LinearLayout>
+    </ScrollView>
 
     <LinearLayout
         android:layout_width="wrap_content"
