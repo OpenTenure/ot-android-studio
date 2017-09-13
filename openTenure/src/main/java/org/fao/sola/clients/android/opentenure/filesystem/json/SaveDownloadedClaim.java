@@ -438,8 +438,8 @@ public class SaveDownloadedClaim {
 
 					personDB2.setContactPhoneNumber(person2.getPhone());
 
-					if (claimant.getBirthDate() != null) {
-						Calendar cal = JsonUtilities.toCalendar(claimant
+					if (person2.getBirthDate() != null) {
+						Calendar cal = JsonUtilities.toCalendar(person2
 								.getBirthDate());
 						birth = cal.getTime();
 					}
@@ -455,7 +455,7 @@ public class SaveDownloadedClaim {
 					personDB2.setPersonId(person2.getId());
 					// personDB2.setPlaceOfBirth(person2.get);
 
-					if (claimant.isPhysicalPerson())
+					if (person2.isPhysicalPerson())
 						personDB2.setPersonType(Person._PHYSICAL);
 					else
 						personDB2.setPersonType(Person._GROUP);
