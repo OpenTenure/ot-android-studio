@@ -624,6 +624,7 @@ public class PersonFragment extends Fragment {
 		if (person.create() == 1) {
 
 			personActivity.setPersonId(person.getPersonId());
+			personActivity.setEntityType(person.getPersonType());
 			personPictureFile = Person.getPersonPictureFile(person
 					.getPersonId());
 
@@ -677,6 +678,7 @@ public class PersonFragment extends Fragment {
 		if (person.create() == 1) {
 
 			personActivity.setPersonId(person.getPersonId());
+			personActivity.setEntityType(person.getPersonType());
 			personPictureFile = Person.getPersonPictureFile(person
 					.getPersonId());
 
@@ -739,6 +741,7 @@ public class PersonFragment extends Fragment {
 		if (person.update() == 1) {
 
 			this.personActivity.setPersonId(person.getPersonId());
+			this.personActivity.setEntityType(person.getPersonType());
 			personPictureFile = Person.getPersonPictureFile(person
 					.getPersonId());
 
