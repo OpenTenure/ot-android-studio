@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
     <string name="action_showcase">Lihat tutorial</string>
@@ -129,7 +129,7 @@ perlu, posisi GPS dari peralatan mobil\ GPS bawaan.
         	                                        
     </string>
     <string name="showcase_actionNews_message"> \n \n Segitiga putih menampilkan tanda seru jika Open tenure dijalankan untuk pertam kalinya. Fungsi ini 
-                                                \n must be useharus digunakan untuk menginisialisasi Open tenure ketika digunakan server komunitas tertentu 
+                                                \n harus digunakan untuk menginisialisasi Open tenure ketika digunakan server komunitas tertentu 
                                                 \n \n Logo masuk memberikan anda akses ke server komunitas ketika anda memasukkan nama pengguna dan kata sandi 
                                                 \n (yang didapat saat pendaftaran pada situs server komunitas)
                                                 \n \n Ikon kunci mengenkripsi data yang diambil dengan Open Tenure ketika data ini dikirimkan lewat email 

@@ -1117,304 +1117,168 @@ public class ClaimDetailsFragment extends Fragment {
 		}
 	}
 
-	// public int createPersonAsOwner(Person claimant, String oldClaimantId) {
-	// try {
-	// int share = 0;
-	//
-	// ShareProperty toDelete =
-	// ShareProperty.getOwner(claimActivity.getClaimId(),
-	// oldClaimantId);
-	//
-	// if (toDelete != null) {
-	// share = toDelete.getShares();
-	//
-	// toDelete.delete();
-	// } else {
-	//
-	// List<ShareProperty> owners = Claim.getClaim(claimActivity.getClaimId())
-	// .getOwners();
-	// int sum = 0;
-	//
-	// for (Iterator iterator = owners.iterator(); iterator.hasNext();) {
-	//
-	// ShareProperty owner = (ShareProperty) iterator.next();
-	// sum = sum + owner.getShares();
-	// }
-	//
-	// share = 100 - sum;
-	// }
-	//
-	// ShareProperty owner = new ShareProperty(true);
-	//
-	// owner.setClaimId(claimActivity.getClaimId());
-	// owner.setPersonId(claimant.getPersonId());
-	// owner.setShares(share);
-	//
-	// owner.create();
-	//
-	// return 1;
-	//
-	// } catch (Exception e) {
-	// Log.d("Details", "An error " + e.getMessage());
-	//
-	// e.printStackTrace();
-	//
-	// return 0;
-	// }
-	//
-	// }
+	public boolean isClaimChanged(Claim claim){
 
-	public boolean checkChanges() {
+		if (!claim.getName().equalsIgnoreCase(
+				((EditText) rootView
+						.findViewById(R.id.claim_name_input_field))
+						.getText().toString())){
+			Log.d(this.getClass().getName(), "Claim name has changed");
+			return true;
+		}
 
-		boolean changed = false;
+		Person person = Person.getPerson(((TextView) rootView
+				.findViewById(R.id.claimant_id)).getText().toString());
+		if (!claim.getPerson().getPersonId().equalsIgnoreCase(person.getPersonId())){
+			Log.d(this.getClass().getName(), "Claimant has changed");
+			return true;
+		}
 
-		Claim claim = Claim.getClaim(claimActivity.getClaimId());
+		Claim challengedClaim = Claim.getClaim(((TextView) rootView
+				.findViewById(R.id.challenge_to_claim_id))
+				.getText().toString());
+		if ((challengedClaim == null && claim.getChallengedClaim() != null)
+				|| (challengedClaim != null && claim.getChallengedClaim() == null)
+				|| (challengedClaim != null && claim.getChallengedClaim() != null
+				&& !claim.getChallengedClaim().getClaimId().equalsIgnoreCase(challengedClaim.getClaimId()))){
+			Log.d(this.getClass().getName(), "Challenged claim has changed");
+			return true;
+		}
 
-		if (claim != null) {
+		String claimType = (String) ((Spinner) rootView
+				.findViewById(R.id.claimTypesSpinner))
+				.getSelectedItem();
 
-			if (!claim.getName().equals(
-					((EditText) rootView
-							.findViewById(R.id.claim_name_input_field))
-							.getText().toString())){
-				Log.d(this.getClass().getName(), "Claim name has changed");
-				changed = true;
-			}
-			else {
+		if (!claim.getType().equalsIgnoreCase(valueKeyClaimTypesMap.get(claimType))){
+			Log.d(this.getClass().getName(), "Claim type has changed");
+			return true;
+		}
 
-				Person person = Person.getPerson(((TextView) rootView
-						.findViewById(R.id.claimant_id)).getText().toString());
-				if (!claim.getPerson().getPersonId()
-						.equals(person.getPersonId())){
-					Log.d(this.getClass().getName(), "Claimant has changed");
-					changed = true;
+		String landUseDispValue = (String) ((Spinner) rootView
+				.findViewById(R.id.landUseSpinner))
+				.getSelectedItem();
+		if ((claim.getLandUse() == null && valueKeyMapLandUse.get(landUseDispValue) != null)
+				|| (!claim.getLandUse().equals(valueKeyMapLandUse.get(landUseDispValue)))){
+			Log.d(this.getClass().getName(), "Land use has changed");
+			return true;
+		}
+
+		String notes = ((EditText) rootView
+				.findViewById(R.id.claim_notes_input_field))
+				.getText().toString();
+
+		if (claim.getNotes() != null && !claim.getNotes().equals(notes)){
+			Log.d(this.getClass().getName(), "Claim notes have changed");
+			return true;
+		}
+		String startDate = ((EditText) rootView
+				.findViewById(R.id.date_of_start_input_field))
+				.getText().toString();
+
+		if (claim.getDateOfStart() == null ^ startDate.trim().equalsIgnoreCase("")) {
+
+			Log.d(this.getClass().getName(), "Rights start date has changed");
+			return true;
+
+		}
+		if (!startDate.trim().equalsIgnoreCase("")) {
+
+			try {
+				java.util.Date dos = new SimpleDateFormat(
+						"yyyy-MM-dd", Locale.US)
+						.parse(startDate);
+
+				Date date = new Date(
+						dos.getTime());
+
+				if (claim.getDateOfStart()
+						.compareTo(date) != 0) {
+					Log.d(this.getClass().getName(), "Rights start date has changed");
+					return true;
 				}
-				else {
-
-					Claim challengedClaim = Claim.getClaim(((TextView) rootView
-							.findViewById(R.id.challenge_to_claim_id))
-							.getText().toString());
-					if (challengedClaim == null
-							&& claim.getChallengedClaim() != null){
-						Log.d(this.getClass().getName(), "Challenged claim has changed");
-						changed = true;
-					}
-					else if (challengedClaim != null
-
-							&& claim.getChallengedClaim() == null){
-						Log.d(this.getClass().getName(), "Challenged claim has changed");
-						changed = true; 
-					}
-
-					else if (challengedClaim != null
-							&& claim.getChallengedClaim() != null
-							&& !claim.getChallengedClaim().getClaimId()
-									.equals(challengedClaim.getClaimId())){
-						Log.d(this.getClass().getName(), "Challenged claim has changed");
-						changed = true;
-					}
-					else {
-						String claimType = (String) ((Spinner) rootView
-								.findViewById(R.id.claimTypesSpinner))
-								.getSelectedItem();
-
-						if (!claim.getType().equals(
-								valueKeyClaimTypesMap.get(claimType))){
-							Log.d(this.getClass().getName(), "Claim type has changed");
-							changed = true;
-						}
-						else {
-
-							String landUseDispValue = (String) ((Spinner) rootView
-									.findViewById(R.id.landUseSpinner))
-									.getSelectedItem();
-							if (claim.getLandUse() == null
-									&& valueKeyMapLandUse.get(landUseDispValue) != null){
-								Log.d(this.getClass().getName(), "Land use has changed");
-								changed = true;
-							}
-							else if (!claim.getLandUse().equals(
-									valueKeyMapLandUse.get(landUseDispValue))){
-								Log.d(this.getClass().getName(), "Land use has changed");
-								changed = true;
-							}
-							else {
-
-								String notes = ((EditText) rootView
-										.findViewById(R.id.claim_notes_input_field))
-										.getText().toString();
-
-								if (claim.getNotes() != null
-										&& !claim.getNotes().equals(notes)){
-									Log.d(this.getClass().getName(), "Claim notes have changed");
-									changed = true;
-								}
-								else {
-
-									String startDate = ((EditText) rootView
-											.findViewById(R.id.date_of_start_input_field))
-											.getText().toString();
-
-									if (claim.getDateOfStart() == null
-											|| claim.getDateOfStart()
-													.equals("")) {
-
-										if (startDate != null
-												&& !startDate.equals("")){
-											Log.d(this.getClass().getName(), "Rights start date has changed");
-											changed = true;
-										}
-
-									} else {
-
-										java.util.Date dob = null;
-
-										if (startDate != null
-												&& !startDate.trim().equals("")) {
-
-											try {
-												dob = new SimpleDateFormat(
-														"yyyy-MM-dd", Locale.US)
-														.parse(startDate);
-
-												Date date = new Date(
-														dob.getTime());
-
-												if (claim.getDateOfStart()
-														.compareTo(date) != 0){
-													Log.d(this.getClass().getName(), "Rights start date has changed");
-													changed = true;
-												}
-												else {
-													changed = isFormChanged();
-												}
-
-											} catch (ParseException e) {
-												e.printStackTrace();
-												dob = null;
-
-											}
-
-										}
-
-									}
-
-								}
-
-							}
-
-						}
-
-					}
-
-				}
-			}
-
-			if (changed) {
-
-				AlertDialog.Builder saveChangesDialog = new AlertDialog.Builder(
-						this.getActivity());
-				saveChangesDialog.setTitle(R.string.title_save_claim_dialog);
-				String dialogMessage = OpenTenureApplication.getContext()
-						.getString(R.string.message_save_changes);
-
-				saveChangesDialog.setMessage(dialogMessage);
-
-				saveChangesDialog.setPositiveButton(R.string.confirm,
-						new SaveDetailsListener(this));
-
-				saveChangesDialog.setNegativeButton(R.string.cancel,
-						new SaveDetailsNegativeListener(this));
-				saveChangesDialog.show();
-
-			}
-		} else {
-
-			String claimName = ((EditText) rootView
-					.findViewById(R.id.claim_name_input_field)).getText()
-					.toString();
-			if (claimName != null && !claimName.trim().equals("")){
-				Log.d(this.getClass().getName(), "Claim name has changed");
-				changed = true;
-			}
-			else {
-
-				String person = ((TextView) rootView
-						.findViewById(R.id.claimant_id)).getText().toString();
-				if (person != null && !person.trim().equals("")){
-					Log.d(this.getClass().getName(), "Claimant has changed");
-					changed = true;
-				}
-				else {
-
-					String challengedClaim = ((TextView) rootView
-							.findViewById(R.id.challenge_to_claim_id))
-							.getText().toString();
-					if (challengedClaim != null
-							&& !challengedClaim.trim().equals("")){
-						Log.d(this.getClass().getName(), "Challenged claim has changed");
-						changed = true;
-					}
-					else {
-
-						String notes = ((EditText) rootView
-								.findViewById(R.id.claim_notes_input_field))
-								.getText().toString();
-
-						if (notes != null && !notes.trim().equals("")){
-							Log.d(this.getClass().getName(), "Claim notes have changed");
-							changed = true;
-						}
-						else {
-
-							String startDate = ((EditText) rootView
-									.findViewById(R.id.date_of_start_input_field))
-									.getText().toString();
-
-							if (startDate != null
-									&& !startDate.trim().equals("")){
-								Log.d(this.getClass().getName(), "Rights start date has changed");
-								changed = true;
-							}
-							else {
-								changed = isFormChanged();
-							}
-
-						}
-
-					}
-
-				}
-
-			}
-			if (changed) {
-
-				AlertDialog.Builder saveChangesDialog = new AlertDialog.Builder(
-						this.getActivity());
-				saveChangesDialog.setTitle(R.string.title_save_claim_dialog);
-				String dialogMessage = OpenTenureApplication.getContext()
-						.getString(R.string.message_discard_changes);
-
-				saveChangesDialog.setMessage(dialogMessage);
-
-				saveChangesDialog.setNegativeButton(R.string.cancel,
-						new DialogInterface.OnClickListener() {
-
-							@Override
-							public void onClick(DialogInterface dialog,
-									int which) {
-								return;
-							}
-						});
-
-				saveChangesDialog.setPositiveButton(R.string.confirm,
-						new SaveDetailsNegativeListener(this));
-				saveChangesDialog.show();
+			} catch (ParseException e) {
+				e.printStackTrace();
+				return true;
 			}
 		}
-		return changed;
+
+		return isFormChanged();
+	}
+
+	public boolean hasFragmentValues(){
+
+		if (!((EditText) rootView
+				.findViewById(R.id.claim_name_input_field)).getText()
+				.toString().trim().equals("")){
+			Log.d(this.getClass().getName(), "Claim name has value");
+			return true;
+		}
+
+		String person = ((TextView) rootView
+				.findViewById(R.id.claimant_id)).getText().toString();
+		if (person != null && !person.trim().equals("")){
+			Log.d(this.getClass().getName(), "Claimant has value");
+			return true;
+		}
+
+		String challengedClaim = ((TextView) rootView
+				.findViewById(R.id.challenge_to_claim_id))
+				.getText().toString();
+		if (challengedClaim != null
+				&& !challengedClaim.trim().equals("")){
+			Log.d(this.getClass().getName(), "Challenged claim has value");
+			return true;
+		}
+
+		if (!((EditText) rootView
+				.findViewById(R.id.claim_notes_input_field))
+				.getText().toString().trim().equals("")){
+			Log.d(this.getClass().getName(), "Claim notes have value");
+			return true;
+		}
+
+		if (!((EditText) rootView
+				.findViewById(R.id.date_of_start_input_field))
+				.getText().toString().trim().equals("")){
+			Log.d(this.getClass().getName(), "Rights start date has value");
+			return true;
+		}
+
+		return isFormChanged();
 
 	}
 
+	public boolean checkChanges() {
+
+		Claim claim = Claim.getClaim(claimActivity.getClaimId());
+
+		if ((claim != null && isClaimChanged(claim)) || (claim == null && hasFragmentValues())) {
+
+			AlertDialog.Builder saveChangesDialog = new AlertDialog.Builder(
+					this.getActivity());
+			saveChangesDialog.setTitle(R.string.title_save_claim_dialog);
+			String dialogMessage = OpenTenureApplication.getContext()
+					.getString(R.string.message_discard_changes);
+
+			saveChangesDialog.setMessage(dialogMessage);
+
+			saveChangesDialog.setPositiveButton(R.string.confirm,
+					new SaveDetailsNegativeListener(this));
+
+			saveChangesDialog.setNegativeButton(R.string.cancel,
+					new DialogInterface.OnClickListener() {
+
+						@Override
+						public void onClick(DialogInterface dialog,
+											int which) {
+							return;
+						}
+					});
+			saveChangesDialog.show();
+			return true;
+		}
+		return false;
+	}
 	@Override
 	public void onResume() {
 		Claim claim = Claim.getClaim(claimActivity.getClaimId());
