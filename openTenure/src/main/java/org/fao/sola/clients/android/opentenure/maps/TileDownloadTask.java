@@ -36,6 +36,9 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.List;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.fao.sola.clients.android.opentenure.OpenTenureApplication;
 import org.fao.sola.clients.android.opentenure.R;
 import org.fao.sola.clients.android.opentenure.model.Task;
 import org.fao.sola.clients.android.opentenure.model.Tile;
@@ -49,6 +52,7 @@ import com.google.android.gms.maps.model.LatLngBounds;
 
 import android.content.Context;
 import android.graphics.BitmapFactory;
+import android.net.http.AndroidHttpClient;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
@@ -166,16 +170,11 @@ public class TileDownloadTask extends AsyncTask<Void, Integer, Integer> {
 						
 						try {
 
-							URL url = new URL(tile.getUrl());
-							HttpURLConnection c = (HttpURLConnection) url
-									.openConnection();
-							c.setRequestMethod("GET");
-							c.setDoOutput(true);
-							c.setConnectTimeout(TIMEOUT);
-							c.setReadTimeout(TIMEOUT);
-							c.connect();
+							HttpGet request = new HttpGet(tile.getUrl());
+							AndroidHttpClient client = OpenTenureApplication.getHttpClient();
 							fos = new FileOutputStream(outputFile);
-							is = c.getInputStream();
+							HttpResponse response = client.execute(request);
+							is = response.getEntity().getContent();
 							byte[] buffer = new byte[1024];
 							int len1 = 0;
 							while ((len1 = is.read(buffer)) != -1) {

@@ -160,7 +160,9 @@ public class ClaimActivity extends FragmentActivity implements ClaimDispatcher,
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		System.out.println("onCreate()");
+		Log.d(this.getClass().getName(), "Starting onCreate");
+		long start = System.currentTimeMillis();
+
 		OpenTenure.setLocale(this);
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 		super.onCreate(savedInstanceState);
@@ -198,19 +200,26 @@ public class ClaimActivity extends FragmentActivity implements ClaimDispatcher,
 
 		// Setup the form before creating the section adapter
 
-		long start = System.currentTimeMillis();
+		Log.d(this.getClass().getName(), "Initial set up in " + (System.currentTimeMillis() - start) + "ms");
+		start = System.currentTimeMillis();
 		setupDynamicSections();
-		Log.d(this.getClass().getName(), "Dynamic sections were set up in " + (System.currentTimeMillis() - start) + "ms");
-
+		Log.d(this.getClass().getName(), "Dynamic sections set up in " + (System.currentTimeMillis() - start) + "ms");
+		start = System.currentTimeMillis();
 		tabs = (PagerSlidingTabStrip) findViewById(R.id.tabs);
 		mViewPager = (ViewPager) findViewById(R.id.claim_pager);
+		Log.d(this.getClass().getName(), "Two views found in " + (System.currentTimeMillis() - start) + "ms");
+		start = System.currentTimeMillis();
 		mSectionsPagerAdapter = new SectionsPagerAdapter(
 				getSupportFragmentManager());
 
 		mViewPager.setAdapter(mSectionsPagerAdapter);
+		Log.d(this.getClass().getName(), "View pager set up in " + (System.currentTimeMillis() - start) + "ms");
+		start = System.currentTimeMillis();
 		tabs.setIndicatorColor(getResources().getColor(
 				R.color.ab_tab_indicator_opentenure));
 		tabs.setViewPager(mViewPager);
+		Log.d(this.getClass().getName(), "Tabs set up in " + (System.currentTimeMillis() - start) + "ms");
+		start = System.currentTimeMillis();
 
 		// ShowCase Main
 		if (getFirstRun().contentEquals("True")) {
@@ -230,7 +239,7 @@ public class ClaimActivity extends FragmentActivity implements ClaimDispatcher,
 					.getTabsContainer().getChildAt(4), tabs.getTabsContainer()
 					.getChildAt(5), mViewPager);
 		}
-
+		Log.d(this.getClass().getName(), "Remaining part of onCreate completed in " + (System.currentTimeMillis() - start) + "ms");
 	}
 
 	private void setAlpha(float alpha, View... views) {
