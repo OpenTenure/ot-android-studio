@@ -182,16 +182,11 @@ public class SaveDownloadedClaim {
 					person.setDateOfBirth(new java.sql.Date(birth.getTime()));
 				else
 					person.setDateOfBirth(new java.sql.Date(2000, 2, 3));
-
 			}
 
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
-
-			Log.d("CommunityServerAPI", "ERROR SAVING  CLAIM "
-					+ downloadedClaim.getId());
-
+			Log.d("CommunityServerAPI", "ERROR SAVING  CLAIM "	+ downloadedClaim.getId());
 			return false;
 		}
 
@@ -221,6 +216,7 @@ public class SaveDownloadedClaim {
 			claimDB.setLandUse(downloadedClaim.getLandUseCode());
 			claimDB.setNotes(downloadedClaim.getNotes());
 			claimDB.setRecorderName(downloadedClaim.getRecorderName());
+			claimDB.setBoundaryId(downloadedClaim.getBoundaryId());
 			claimDB.setVersion(downloadedClaim.getVersion());
 
 			if (downloadedClaim.getStartDate() != null) {

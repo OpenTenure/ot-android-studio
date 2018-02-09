@@ -75,53 +75,7 @@ public class UpdateLandUsesTask extends AsyncTask<String, Void, List<LandUse>> {
 			}
 
 			OpenTenureApplication.getInstance().setCheckedLandUses(true);
-
-			synchronized (OpenTenureApplication.getInstance()) {
-
-				if (OpenTenureApplication.getInstance()
-						.isCheckedCommunityArea()
-						&& OpenTenureApplication.getInstance().isCheckedTypes()
-						&& OpenTenureApplication.getInstance()
-								.isCheckedIdTypes()
-						&& OpenTenureApplication.getInstance()
-								.isCheckedDocTypes()
-						&& OpenTenureApplication.getInstance()
-								.isCheckedLanguages()
-						&& OpenTenureApplication.getInstance()
-								.isCheckedForm()
-
-						&& OpenTenureApplication.getInstance()
-								.isCheckedGeometryRequired()
-				)
-
-				{
-
-
-					OpenTenureApplication.getInstance().setInitialized(true);
-
-					Configuration conf = Configuration
-							.getConfigurationByName("isInitialized");
-					conf.setValue("true");
-					conf.update();
-
-					FragmentActivity fa = (FragmentActivity) OpenTenureApplication
-							.getNewsFragment();
-					if (fa != null)
-						fa.invalidateOptionsMenu();
-
-					Configuration latitude = Configuration
-							.getConfigurationByName(MainMapFragment.MAIN_MAP_LATITUDE);
-					if (latitude != null)
-						latitude.delete();
-
-					MainMapFragment mapFrag = OpenTenureApplication
-							.getMapFragment();
-
-					mapFrag.boundCameraToInterestArea();
-
-				}
-			}
-
+			OpenTenureApplication.getInstance().setSettingsSynchronized();
 		}
 
 	}

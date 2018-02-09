@@ -1,0 +1,3 @@
+# Referenced at C:\SOLA\Project\GIT\SOLA\open_tenure\ot-android-studio\openTenure\build\intermediates\manifests\full\debug\AndroidManifest.xml:30
+-keep class org.fao.sola.clients.android.opentenure.OpenTenureApplication { <init>(...); }
+

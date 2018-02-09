@@ -65,6 +65,7 @@ import org.fao.sola.clients.android.opentenure.model.ClaimStatus;
 import org.fao.sola.clients.android.opentenure.model.Owner;
 import org.fao.sola.clients.android.opentenure.model.ShareProperty;
 import org.fao.sola.clients.android.opentenure.model.PropertyLocation;
+import org.fao.sola.clients.android.opentenure.network.response.Boundary;
 
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
@@ -93,8 +94,7 @@ public class JsonUtilities {
 			if (claim != null) {
 
 				TimeZone tz = TimeZone.getTimeZone("UTC");
-				SimpleDateFormat sdf = new SimpleDateFormat(
-						"yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US);
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US);
 				sdf.setTimeZone(tz);
 
 				Calendar c = Calendar.getInstance();
@@ -144,6 +144,7 @@ public class JsonUtilities {
 				else
 					tempClaim.setStatusCode(claim.getStatus());
 				tempClaim.setLandUseCode(claim.getLandUse());
+				tempClaim.setBoundaryId(claim.getBoundaryId());
 				tempClaim.setNotes(claim.getNotes());
 				tempClaim.setClaimArea(claim.getClaimArea());
 				if (claim.getRecorderName() != null
@@ -403,6 +404,21 @@ public class JsonUtilities {
 			return null;
 		}
 
+	}
+
+	public static String boundaryToJson(Boundary boundary) {
+		try {
+			Gson gson = new GsonBuilder()
+					.setPrettyPrinting()
+					.serializeNulls()
+					.excludeFieldsWithModifiers(Modifier.TRANSIENT)
+					.create();
+			return gson.toJson(boundary);
+		} catch (Throwable e) {
+			Log.d("CreateClaimJson",	"An error has occurred" + e.getMessage());
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	private static boolean writeJsonTofile(String claimID, String json) {

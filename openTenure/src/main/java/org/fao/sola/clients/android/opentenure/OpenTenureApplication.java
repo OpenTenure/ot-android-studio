@@ -39,6 +39,7 @@ import org.apache.http.protocol.HttpContext;
 import org.fao.sola.clients.android.opentenure.filesystem.FileSystemUtilities;
 import org.fao.sola.clients.android.opentenure.maps.MainMapFragment;
 import org.fao.sola.clients.android.opentenure.model.ClaimType;
+import org.fao.sola.clients.android.opentenure.model.Configuration;
 import org.fao.sola.clients.android.opentenure.model.Database;
 
 import android.app.Activity;
@@ -69,6 +70,9 @@ public class OpenTenureApplication extends MultiDexApplication {
 	private boolean checkedLandUses = false;
 	private boolean checkedLanguages = false;
 	private boolean checkedGeometryRequired = false;
+	private boolean checkedBoundaryTypes = false;
+	private boolean checkedBoundaryStatus = false;
+	private boolean checkedBoundaries = false;
 
 	private boolean checkedCommunityArea = false;
 	private boolean checkedForm = false;
@@ -216,16 +220,13 @@ public class OpenTenureApplication extends MultiDexApplication {
 		} catch (NameNotFoundException e) {
 			version = VERSION_NOT_FOUND;
 		}
-		SharedPreferences preferences = PreferenceManager
-				.getDefaultSharedPreferences(getContext());
+		SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
 		// Use new version as default for new one
 		String currentVersion = preferences.getString(
 				OpenTenurePreferencesActivity.SOFTWARE_VERSION_PREF,
 				VERSION_NOT_FOUND);
-		OpenTenurePreferencesMigrator.migratePreferences(preferences,
-				currentVersion, version);
+		OpenTenurePreferencesMigrator.migratePreferences(preferences, currentVersion, version);
 		super.onCreate();
-
 	}
 
 	protected void initializeInstance() {
@@ -353,6 +354,30 @@ public class OpenTenureApplication extends MultiDexApplication {
 
 	public void setCheckedIdTypes(boolean checkedIdTypes) {
 		this.checkedIdTypes = checkedIdTypes;
+	}
+
+	public boolean isCheckedBoundaryTypes() {
+		return checkedBoundaryTypes;
+	}
+
+	public void setCheckedBoundaryTypes(boolean checkedBoundaryTypes) {
+		this.checkedBoundaryTypes = checkedBoundaryTypes;
+	}
+
+	public boolean isCheckedBoundaryStatus() {
+		return checkedBoundaryStatus;
+	}
+
+	public void setCheckedBoundaryStatus(boolean checkedBoundaryStatus) {
+		this.checkedBoundaryStatus = checkedBoundaryStatus;
+	}
+
+	public boolean isCheckedBoundaries() {
+		return checkedBoundaries;
+	}
+
+	public void setCheckedBoundaries(boolean checkedBoundaries) {
+		this.checkedBoundaries = checkedBoundaries;
 	}
 
 	public boolean isCheckedLandUses() {
@@ -563,8 +588,7 @@ public class OpenTenureApplication extends MultiDexApplication {
 
 	}
 
-	public static void setLocalClaimsFragment(
-			LocalClaimsFragment localClaimsFragment) {
+	public static void setLocalClaimsFragment(LocalClaimsFragment localClaimsFragment) {
 		OpenTenureApplication.localClaimsFragment = localClaimsFragment;
 	}
 
@@ -620,6 +644,38 @@ public class OpenTenureApplication extends MultiDexApplication {
 				changingClaims = new ArrayList<String>();
 			return this.changingClaims;
 
+		}
+	}
+
+	public synchronized void setSettingsSynchronized() {
+		if (OpenTenureApplication.getInstance().isCheckedCommunityArea()
+				&& OpenTenureApplication.getInstance().isCheckedTypes()
+				&& OpenTenureApplication.getInstance().isCheckedDocTypes()
+				&& OpenTenureApplication.getInstance().isCheckedLandUses()
+				&& OpenTenureApplication.getInstance().isCheckedLanguages()
+				&& OpenTenureApplication.getInstance().isCheckedBoundaryStatus()
+				&& OpenTenureApplication.getInstance().isCheckedBoundaryTypes()
+				&& OpenTenureApplication.getInstance().isCheckedBoundaries()
+				&& OpenTenureApplication.getInstance().isCheckedForm()
+				&& OpenTenureApplication.getInstance().isCheckedGeometryRequired()
+				) {
+			OpenTenureApplication.getInstance().setInitialized(true);
+			Configuration conf = Configuration.getConfigurationByName("isInitialized");
+			conf.setValue("true");
+			conf.update();
+
+			FragmentActivity fa = (FragmentActivity) OpenTenureApplication.getNewsFragment();
+			if (fa != null)
+				fa.invalidateOptionsMenu();
+
+			Configuration latitude = Configuration.getConfigurationByName(MainMapFragment.MAIN_MAP_LATITUDE);
+			if (latitude != null)
+				latitude.delete();
+
+			MainMapFragment mapFrag = OpenTenureApplication.getMapFragment();
+			if(mapFrag != null) {
+				mapFrag.boundCameraToInterestArea();
+			}
 		}
 	}
 }

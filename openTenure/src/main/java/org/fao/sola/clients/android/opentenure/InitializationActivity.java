@@ -32,6 +32,9 @@ import org.fao.sola.clients.android.opentenure.model.Claim;
 import org.fao.sola.clients.android.opentenure.model.Configuration;
 import org.fao.sola.clients.android.opentenure.model.Database;
 import org.fao.sola.clients.android.opentenure.model.Task;
+import org.fao.sola.clients.android.opentenure.network.BoundaryStatusTask;
+import org.fao.sola.clients.android.opentenure.network.BoundaryTask;
+import org.fao.sola.clients.android.opentenure.network.BoundaryTypeTask;
 import org.fao.sola.clients.android.opentenure.network.UpdateClaimTypesTask;
 import org.fao.sola.clients.android.opentenure.network.UpdateCommunityArea;
 import org.fao.sola.clients.android.opentenure.network.UpdateDocumentTypesTask;
@@ -99,7 +102,6 @@ public class InitializationActivity extends Activity {
 					});
 			dbPasswordDialog.setNegativeButton(R.string.cancel,
 					new OnClickListener() {
-
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
 							Log.d(this.getClass().getName(),
@@ -119,10 +121,8 @@ public class InitializationActivity extends Activity {
 	}
 	
 	private void createInitializationConfig(){
-		Configuration conf = Configuration
-				.getConfigurationByName("isInitialized");
+		Configuration conf = Configuration.getConfigurationByName("isInitialized");
 		if (conf == null) {
-
 			conf = new Configuration();
 			conf.setName("isInitialized");
 			conf.setValue("false");
@@ -132,13 +132,11 @@ public class InitializationActivity extends Activity {
 
 	private void checkPerformDbUpgrades() {
 		// Check for pending upgrades
-		if (OpenTenureApplication.getInstance().getDatabase().getUpgradePath()
-				.size() > 0) {
+		if (OpenTenureApplication.getInstance().getDatabase().getUpgradePath().size() > 0) {
 			OpenTenureApplication.getInstance().getDatabase().performUpgrade();
 			Log.d(this.getClass().getName(), "DB upgraded to version: "
 					+ Configuration.getConfigurationValue("DBVERSION"));
 		}
-
 	}
 
 	public class StartOpenTenure extends AsyncTask<Void, Void, Void> {
@@ -152,7 +150,6 @@ public class InitializationActivity extends Activity {
 		@Override
 		protected void onPreExecute() {
 			super.onPreExecute();
-
 		}
 
 		@Override
@@ -168,85 +165,92 @@ public class InitializationActivity extends Activity {
 			
 			OpenTenureApplication.getInstance().setNetworkError(false);
 
-			if (Boolean.parseBoolean(Configuration.getConfigurationByName(
-					"isInitialized").getValue())) {
+			if (Boolean.parseBoolean(Configuration.getConfigurationByName("isInitialized").getValue())) {
 
-				Log.d(this.getClass().getName(),
-						"starting tasks for static data download");
+				Log.d(this.getClass().getName(),"starting tasks for static data download");
 
 				if (!OpenTenureApplication.getInstance().isCheckedTypes()) {
-					Log.d(this.getClass().getName(),
-							"starting tasks for claim type download");
+					Log.d(this.getClass().getName(),"starting tasks for claim type download");
 
 					UpdateClaimTypesTask updateCT = new UpdateClaimTypesTask();
 					updateCT.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-
 				}
 
 				if (!OpenTenureApplication.getInstance().isCheckedDocTypes()) {
-					Log.d(this.getClass().getName(),
-							"starting tasks for document type download");
+					Log.d(this.getClass().getName(),"starting tasks for document type download");
 
 					UpdateDocumentTypesTask updateCT = new UpdateDocumentTypesTask();
 					updateCT.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-
 				}
 
 				if (!OpenTenureApplication.getInstance().isCheckedIdTypes()) {
-					Log.d(this.getClass().getName(),
-							"starting tasks for ID type download");
+					Log.d(this.getClass().getName(),"starting tasks for ID type download");
 
 					UpdateIdTypesTask updateIdType = new UpdateIdTypesTask();
-					updateIdType
-							.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+					updateIdType.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 				}
+
 				if (!OpenTenureApplication.getInstance().isCheckedLandUses()) {
-					Log.d(this.getClass().getName(),
-							"starting tasks for land use type download");
+					Log.d(this.getClass().getName(),"starting tasks for land use type download");
 
 					UpdateLandUsesTask updateLu = new UpdateLandUsesTask();
 					updateLu.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 				}
+
 				if (!OpenTenureApplication.getInstance().isCheckedLanguages()) {
-					Log.d(this.getClass().getName(),
-							"starting tasks for languages download");
+					Log.d(this.getClass().getName(),"starting tasks for languages download");
 
 					UpdateLanguagesTask updateLang = new UpdateLanguagesTask();
 					updateLang.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 				}
-				if (!OpenTenureApplication.getInstance()
-						.isCheckedCommunityArea()) {
-					Log.d(this.getClass().getName(),
-							"starting tasks for community area download");
+
+				if (!OpenTenureApplication.getInstance().isCheckedCommunityArea()) {
+					Log.d(this.getClass().getName(),"starting tasks for community area download");
 
 					UpdateCommunityArea updateArea = new UpdateCommunityArea();
-					updateArea
-							.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+					updateArea.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 				}
 				
 				if (!OpenTenureApplication.getInstance().isCheckedGeometryRequired()) {
-					Log.d(this.getClass().getName(),
-							"starting tasks for parcel geometry setting download");
+					Log.d(this.getClass().getName(),"starting tasks for parcel geometry setting download");
 
 					UpdateParcelGeoRequiredTask updateGeo = new UpdateParcelGeoRequiredTask();
 					updateGeo.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 				}
 				
 				if (!OpenTenureApplication.getInstance().isCheckedForm()) {
-					Log.d(this.getClass().getName(),
-							"starting tasks for form retrieval");
+					Log.d(this.getClass().getName(),"starting tasks for form retrieval");
 
 					FormRetriever formRetriever = new FormRetriever(context);
-					formRetriever
-							.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+					formRetriever.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+				}
+
+				if (!OpenTenureApplication.getInstance().isCheckedBoundaryStatus()) {
+					Log.d(this.getClass().getName(),"starting tasks for boundary statuses download");
+
+					BoundaryStatusTask updateBoundaryStatus = new BoundaryStatusTask();
+					updateBoundaryStatus.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+				}
+
+				if (!OpenTenureApplication.getInstance().isCheckedBoundaryStatus()) {
+					Log.d(this.getClass().getName(),"starting tasks for boundary types download");
+
+					BoundaryTypeTask updateBoundaryType = new BoundaryTypeTask();
+					updateBoundaryType.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+				}
+
+				if (!OpenTenureApplication.getInstance().isCheckedBoundaries()) {
+					Log.d(this.getClass().getName(),"starting tasks for boundaries download");
+
+					BoundaryTask updateBoundaries = new BoundaryTask();
+					updateBoundaries.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 				}
 			}
 			
 			int setted = Claim.resetClaimUploading();
 			
 			System.out.println("Claim cambiati in created : " + setted);
-			
-			
+
 			String serverProtoVersion = CommunityServerAPI.getServerProtoVersion();
 			String expectedProtoVersion = Configuration.getConfigurationValue(Configuration.PROTOVERSION_NAME);
 			Toast toast;
@@ -254,12 +258,10 @@ public class InitializationActivity extends Activity {
 			if(expectedProtoVersion != null && serverProtoVersion != null){
 
 				if(expectedProtoVersion.compareTo(serverProtoVersion) > 0){
-					toast = Toast.makeText(getBaseContext(),
-							R.string.message_update_server, Toast.LENGTH_LONG);
+					toast = Toast.makeText(getBaseContext(), R.string.message_update_server, Toast.LENGTH_LONG);
 					toast.show();
 				}else if(expectedProtoVersion.compareTo(serverProtoVersion) < 0){
-					toast = Toast.makeText(getBaseContext(),
-							R.string.message_update_client, Toast.LENGTH_LONG);
+					toast = Toast.makeText(getBaseContext(), R.string.message_update_client, Toast.LENGTH_LONG);
 					toast.show();
 				}
 			}
@@ -269,6 +271,5 @@ public class InitializationActivity extends Activity {
 			startActivity(i);
 			finish();
 		}
-
 	}
 }

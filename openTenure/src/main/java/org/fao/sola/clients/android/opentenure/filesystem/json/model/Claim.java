@@ -51,6 +51,9 @@ public class Claim {
 	@SerializedName("landUseCode")
 	String landUseCode;
 
+	@SerializedName("boundaryId")
+	String boundaryId;
+
 	@SerializedName("description")
 	String description;
 
@@ -127,14 +130,6 @@ public class Claim {
 		this.id = id;
 	}
 
-	// public List<AdditionalInfo> getAdditionaInfo() {
-	// return additionaInfo;
-	// }
-	//
-	// public void setAdditionaInfo(List<AdditionalInfo> additionaInfo) {
-	// this.additionaInfo = additionaInfo;
-	// }
-
 	public String getNr() {
 		return nr;
 	}
@@ -197,6 +192,14 @@ public class Claim {
 
 	public void setGpsGeometry(String gpsGeometry) {
 		this.gpsGeometry = gpsGeometry;
+	}
+
+	public String getBoundaryId() {
+		return boundaryId;
+	}
+
+	public void setBoundaryId(String boundaryId) {
+		this.boundaryId = boundaryId;
 	}
 
 	public String getChallengedClaimId() {

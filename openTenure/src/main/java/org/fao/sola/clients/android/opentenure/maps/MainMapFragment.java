@@ -292,14 +292,15 @@ public class MainMapFragment extends SupportMapFragment implements OnCameraChang
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
+		if(mapView != null){
+			return mapView;
+		}
 		super.onCreateView(inflater, container, savedInstanceState);
 		mapView = inflater.inflate(R.layout.main_map, container, false);
 		setHasOptionsMenu(true);
 		label = (MapLabel) getChildFragmentManager().findFragmentById(R.id.main_map_provider_label);
 //		label = (MapLabel) getActivity().getSupportFragmentManager().findFragmentById(R.id.main_map_provider_label);
-		label.changeTextProperties(MAP_LABEL_FONT_SIZE,
-				getActivity().getResources().getString(R.string.map_provider_google_normal));
+		label.changeTextProperties(MAP_LABEL_FONT_SIZE,	getActivity().getResources().getString(R.string.map_provider_google_normal));
 //		map = ((SupportMapFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.main_map_fragment))
 //				.getExtendedMap();
 		map = ((SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.main_map_fragment))

@@ -35,6 +35,9 @@ import org.fao.sola.clients.android.opentenure.model.Configuration;
 import org.fao.sola.clients.android.opentenure.model.DatabasePasswordTextWatcher;
 import org.fao.sola.clients.android.opentenure.model.Link;
 import org.fao.sola.clients.android.opentenure.network.AlertInitializationTask;
+import org.fao.sola.clients.android.opentenure.network.BoundaryStatusTask;
+import org.fao.sola.clients.android.opentenure.network.BoundaryTask;
+import org.fao.sola.clients.android.opentenure.network.BoundaryTypeTask;
 import org.fao.sola.clients.android.opentenure.network.LoginActivity;
 import org.fao.sola.clients.android.opentenure.network.LogoutTask;
 import org.fao.sola.clients.android.opentenure.network.UpdateClaimTypesTask;
@@ -652,6 +655,27 @@ public class NewsFragment extends ListFragment {
 					"starting tasks for form retrieval");
 			FormRetriever formRetriever = new FormRetriever(getActivity());
 			formRetriever.execute();
+		}
+
+		if (!OpenTenureApplication.getInstance().isCheckedBoundaryStatus()) {
+			Log.d(this.getClass().getName(),"starting tasks for boundary statuses download");
+
+			BoundaryStatusTask updateBoundaryStatus = new BoundaryStatusTask();
+			updateBoundaryStatus.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		}
+
+		if (!OpenTenureApplication.getInstance().isCheckedBoundaryStatus()) {
+			Log.d(this.getClass().getName(),"starting tasks for boundary types download");
+
+			BoundaryTypeTask updateBoundaryType = new BoundaryTypeTask();
+			updateBoundaryType.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		}
+
+		if (!OpenTenureApplication.getInstance().isCheckedBoundaries()) {
+			Log.d(this.getClass().getName(),"starting tasks for boundaries download");
+
+			BoundaryTask updateBoundaries = new BoundaryTask();
+			updateBoundaries.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 		}
 
 		String serverProtoVersion = CommunityServerAPI.getServerProtoVersion();

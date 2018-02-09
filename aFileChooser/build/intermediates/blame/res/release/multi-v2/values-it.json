@@ -1,0 +1,48 @@
+{
+    "logs": [
+        {
+            "outputFile": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\aFileChooser\\build\\intermediates\\incremental\\mergeReleaseResources\\merged.dir\\values-it\\values-it.xml",
+            "map": [
+                {
+                    "source": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\aFileChooser\\src\\main\\res\\values-it\\strings.xml",
+                    "from": {
+                        "startLines": "5,3,6,4",
+                        "startColumns": "2,2,2,2",
+                        "startOffsets": "245,88,304,147",
+                        "endColumns": "57,57,77,96",
+                        "endOffsets": "300,143,379,241"
+                    },
+                    "to": {
+                        "startLines": "2,3,4,5",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "55,115,175,255",
+                        "endColumns": "59,59,79,98",
+                        "endOffsets": "110,170,250,349"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\aFileChooser\\build\\intermediates\\res\\merged\\release\\values-it\\values-it.xml",
+            "map": [
+                {
+                    "source": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\aFileChooser\\src\\main\\res\\values-it\\strings.xml",
+                    "from": {
+                        "startLines": "5,3,6,4",
+                        "startColumns": "2,2,2,2",
+                        "startOffsets": "245,88,304,147",
+                        "endColumns": "57,57,77,96",
+                        "endOffsets": "300,143,379,241"
+                    },
+                    "to": {
+                        "startLines": "2,3,4,5",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "55,115,175,255",
+                        "endColumns": "59,59,79,98",
+                        "endOffsets": "110,170,250,349"
+                    }
+                }
+            ]
+        }
+    ]
+}

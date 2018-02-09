@@ -1,0 +1,154 @@
+{
+    "logs": [
+        {
+            "outputFile": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\aFileChooser\\build\\intermediates\\res\\merged\\release\\values\\values.xml",
+            "map": [
+                {
+                    "source": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\aFileChooser\\src\\main\\res\\values\\strings.xml",
+                    "from": {
+                        "startLines": "19,17,20,21,18",
+                        "startColumns": "4,4,4,4,4",
+                        "startOffsets": "815,675,870,941,736",
+                        "endColumns": "53,59,69,61,77",
+                        "endOffsets": "864,730,935,998,809"
+                    },
+                    "to": {
+                        "startLines": "6,7,8,9,10",
+                        "startColumns": "4,4,4,4,4",
+                        "startOffsets": "232,286,346,416,478",
+                        "endColumns": "53,59,69,61,77",
+                        "endOffsets": "281,341,411,473,551"
+                    }
+                },
+                {
+                    "source": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\aFileChooser\\src\\main\\res\\values\\dimens.xml",
+                    "from": {
+                        "startLines": "18,17",
+                        "startColumns": "1,1",
+                        "startOffsets": "770,729",
+                        "endColumns": "45,39",
+                        "endOffsets": "814,767"
+                    },
+                    "to": {
+                        "startLines": "4,5",
+                        "startColumns": "4,4",
+                        "startOffsets": "140,189",
+                        "endColumns": "48,42",
+                        "endOffsets": "184,227"
+                    }
+                },
+                {
+                    "source": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\aFileChooser\\src\\main\\res\\values\\bool.xml",
+                    "from": {
+                        "startLines": "3,4",
+                        "startColumns": "4,4",
+                        "startOffsets": "59,102",
+                        "endColumns": "41,42",
+                        "endOffsets": "96,140"
+                    },
+                    "to": {
+                        "startLines": "2,3",
+                        "startColumns": "4,4",
+                        "startOffsets": "55,97",
+                        "endColumns": "41,42",
+                        "endOffsets": "92,135"
+                    }
+                },
+                {
+                    "source": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\aFileChooser\\src\\main\\res\\values\\styles.xml",
+                    "from": {
+                        "startLines": "18",
+                        "startColumns": "4",
+                        "startOffsets": "734",
+                        "endLines": "26",
+                        "endColumns": "12",
+                        "endOffsets": "1252"
+                    },
+                    "to": {
+                        "startLines": "11",
+                        "startColumns": "4",
+                        "startOffsets": "556",
+                        "endLines": "19",
+                        "endColumns": "12",
+                        "endOffsets": "1066"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\aFileChooser\\build\\intermediates\\incremental\\mergeReleaseResources\\merged.dir\\values\\values.xml",
+            "map": [
+                {
+                    "source": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\aFileChooser\\src\\main\\res\\values\\strings.xml",
+                    "from": {
+                        "startLines": "19,17,20,21,18",
+                        "startColumns": "4,4,4,4,4",
+                        "startOffsets": "815,675,870,941,736",
+                        "endColumns": "53,59,69,61,77",
+                        "endOffsets": "864,730,935,998,809"
+                    },
+                    "to": {
+                        "startLines": "6,7,8,9,10",
+                        "startColumns": "4,4,4,4,4",
+                        "startOffsets": "232,286,346,416,478",
+                        "endColumns": "53,59,69,61,77",
+                        "endOffsets": "281,341,411,473,551"
+                    }
+                },
+                {
+                    "source": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\aFileChooser\\src\\main\\res\\values\\dimens.xml",
+                    "from": {
+                        "startLines": "18,17",
+                        "startColumns": "1,1",
+                        "startOffsets": "770,729",
+                        "endColumns": "45,39",
+                        "endOffsets": "814,767"
+                    },
+                    "to": {
+                        "startLines": "4,5",
+                        "startColumns": "4,4",
+                        "startOffsets": "140,189",
+                        "endColumns": "48,42",
+                        "endOffsets": "184,227"
+                    }
+                },
+                {
+                    "source": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\aFileChooser\\src\\main\\res\\values\\bool.xml",
+                    "from": {
+                        "startLines": "3,4",
+                        "startColumns": "4,4",
+                        "startOffsets": "59,102",
+                        "endColumns": "41,42",
+                        "endOffsets": "96,140"
+                    },
+                    "to": {
+                        "startLines": "2,3",
+                        "startColumns": "4,4",
+                        "startOffsets": "55,97",
+                        "endColumns": "41,42",
+                        "endOffsets": "92,135"
+                    }
+                },
+                {
+                    "source": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\aFileChooser\\src\\main\\res\\values\\styles.xml",
+                    "from": {
+                        "startLines": "18",
+                        "startColumns": "4",
+                        "startOffsets": "734",
+                        "endLines": "26",
+                        "endColumns": "12",
+                        "endOffsets": "1252"
+                    },
+                    "to": {
+                        "startLines": "11",
+                        "startColumns": "4",
+                        "startOffsets": "556",
+                        "endLines": "19",
+                        "endColumns": "12",
+                        "endOffsets": "1066"
+                    }
+                }
+            ]
+        }
+    ]
+}

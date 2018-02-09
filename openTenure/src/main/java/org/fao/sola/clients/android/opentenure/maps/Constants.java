@@ -33,4 +33,5 @@ public class Constants {
 	public static final int SRID=3857;
 	public static final int PROPERTY_LABEL_MARKERS_GROUP = 0;
 	public static final int MY_LOCATION_MARKERS_GROUP = PROPERTY_LABEL_MARKERS_GROUP + 1;
+	public static final int BOUNDARY_MARKERS_GROUP = MY_LOCATION_MARKERS_GROUP + 1;
 }

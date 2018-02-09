@@ -51,6 +51,9 @@ public class CommunityServerAPIUtilities {
 	public static final String HTTPS_SAVECLAIM = "%s/ws/%s/claim/saveClaim";
 	public static final String HTTP_SAVECLAIM = "%s/ws/%s/claim/saveClaim";
 
+	public static final String HTTPS_SAVE_BOUNDARY = "%s/ws/%s/claim/saveBoundary";
+	public static final String HTTP_SAVE_BOUNDARY = "%s/ws/%s/claim/saveBoundary";
+
 	public static final String HTTPS_SAVEATTACHMENT = "%s/ws/%s/claim/saveAttachment";
 	public static final String HTTP_SAVEATTACHMENT = "%s/ws/%s/claim/saveAttachment";
 
@@ -67,6 +70,12 @@ public class CommunityServerAPIUtilities {
 	
 	public static final String HTTPS_GETDOCUMENTYPES = "%s/ws/ref/getdocumenttypes";
 	
+	public static final String HTTPS_GET_BOUNDARY_TYPES = "%s/ws/ref/getAdministrativeBoundaryTypes";
+
+	public static final String HTTPS_GET_BOUNDARY_STATUSES = "%s/ws/ref/getAdministrativeBoundaryStatuses";
+
+	public static final String HTTPS_GET_BOUNDARIES = "%s/ws/%s/claim/getApprovedAdministrativeBoundaries";
+
 	public static final String HTTPS_GETIDTYPES = "%s/ws/ref/getidtypes";
 	
 	public static final String HTTPS_GETLANDUSE = "%s/ws/ref/getlanduses";

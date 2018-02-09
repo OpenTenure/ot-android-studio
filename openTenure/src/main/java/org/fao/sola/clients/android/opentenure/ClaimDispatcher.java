@@ -30,5 +30,4 @@ package org.fao.sola.clients.android.opentenure;
 public interface ClaimDispatcher {
 	public void setClaimId(String claimId);
 	public String getClaimId();
-
 }

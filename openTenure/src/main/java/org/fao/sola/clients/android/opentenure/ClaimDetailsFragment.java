@@ -48,6 +48,7 @@ import org.fao.sola.clients.android.opentenure.form.FormPayload;
 import org.fao.sola.clients.android.opentenure.form.FormTemplate;
 import org.fao.sola.clients.android.opentenure.maps.EditablePropertyBoundary;
 import org.fao.sola.clients.android.opentenure.model.Attachment;
+import org.fao.sola.clients.android.opentenure.model.Boundary;
 import org.fao.sola.clients.android.opentenure.model.Claim;
 import org.fao.sola.clients.android.opentenure.model.ClaimStatus;
 import org.fao.sola.clients.android.opentenure.model.ClaimType;
@@ -58,6 +59,7 @@ import org.fao.sola.clients.android.opentenure.model.Person;
 import org.fao.sola.clients.android.opentenure.model.ShareProperty;
 import org.fao.sola.clients.android.opentenure.model.Vertex;
 import org.fao.sola.clients.android.opentenure.print.PDFClaimExporter;
+import org.h2.util.StringUtils;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -102,6 +104,7 @@ public class ClaimDetailsFragment extends Fragment {
 	private Map<String, String> valueKeyClaimTypesMap;
 	private boolean challengedJustLoaded = false;
 	private final Calendar localCalendar = Calendar.getInstance();
+	private List<Boundary> boundaries;
 
 	private static final int PERSON_RESULT = 100;
 
@@ -448,33 +451,31 @@ public class ClaimDetailsFragment extends Fragment {
 		spinner.setAdapter(dataAdapter);
 
 		// Land Uses Spinner
-		Spinner spinnerLU = (Spinner) rootView
-				.findViewById(R.id.landUseSpinner);
+		Spinner spinnerLU = (Spinner) rootView.findViewById(R.id.landUseSpinner);
 
 		LandUse lu = new LandUse();
-		keyValueMapLandUse = lu.getKeyValueMap(OpenTenureApplication
-				.getInstance().getLocalization(), onlyActiveValues);
-		valueKeyMapLandUse = lu.getValueKeyMap(OpenTenureApplication
-				.getInstance().getLocalization(), onlyActiveValues);
+		keyValueMapLandUse = lu.getKeyValueMap(OpenTenureApplication.getInstance().getLocalization(), onlyActiveValues);
+		valueKeyMapLandUse = lu.getValueKeyMap(OpenTenureApplication.getInstance().getLocalization(), onlyActiveValues);
 
 		List<String> landUseslist = new ArrayList<String>();
 		keys = new TreeSet<String>(keyValueMapLandUse.keySet());
 		for (String key : keys) {
 			String value = keyValueMapLandUse.get(key);
 			landUseslist.add(value);
-
-			// do something
 		}
 
-		// java.util.Collections.sort(landUseslist);
-
 		ArrayAdapter<String> dataAdapterLU = new ArrayAdapter<String>(
-				OpenTenureApplication.getContext(), R.layout.my_spinner,
-				landUseslist) {
+				OpenTenureApplication.getContext(), R.layout.my_spinner, landUseslist) {
 		};
 		dataAdapterLU.setDropDownViewResource(R.layout.my_spinner);
 
 		spinnerLU.setAdapter(dataAdapterLU);
+
+		// Boundary
+		boundaries = Boundary.getFormattedBoundariesAll(true);
+		Spinner spinnerBoundaries = (Spinner) rootView.findViewById(R.id.boundarySpinner);
+		spinnerBoundaries.setAdapter(new ArrayAdapter(OpenTenureApplication.getContext(), R.layout.my_spinner, boundaries));
+		((ArrayAdapter) spinnerBoundaries.getAdapter()).setDropDownViewResource(R.layout.my_spinner);
 
 		// Claimant
 		((TextView) rootView.findViewById(R.id.claimant_id)).setTextSize(8);
@@ -702,6 +703,15 @@ public class ClaimDetailsFragment extends Fragment {
 					.setSelection(new LandUse().getIndexByCodeType(
 							claim.getLandUse(), onlyActiveValues));
 
+			if(claim.getBoundaryId() != null && boundaries != null){
+				for(int i = 0; i < boundaries.size(); i++){
+					if(claim.getBoundaryId().equals(boundaries.get(i).getId())){
+						((Spinner) rootView.findViewById(R.id.boundarySpinner)).setSelection(i);
+						break;
+					}
+				}
+			}
+
 			((EditText) rootView.findViewById(R.id.claim_notes_input_field))
 					.setText(claim.getNotes());
 
@@ -799,6 +809,13 @@ public class ClaimDetailsFragment extends Fragment {
 		String landUseDispValue = (String) ((Spinner) rootView
 				.findViewById(R.id.landUseSpinner)).getSelectedItem();
 		claim.setLandUse(valueKeyMapLandUse.get(landUseDispValue));
+
+		String boundaryId = ((Boundary)((Spinner) rootView.findViewById(R.id.boundarySpinner)).getSelectedItem()).getId();
+		if(boundaryId == null || boundaryId.equals("")){
+			claim.setBoundaryId(null);
+		} else {
+			claim.setBoundaryId(boundaryId);
+		}
 
 		String notes = ((EditText) rootView
 				.findViewById(R.id.claim_notes_input_field)).getText()
@@ -938,6 +955,13 @@ public class ClaimDetailsFragment extends Fragment {
 		String landUseDispValue = (String) ((Spinner) rootView
 				.findViewById(R.id.landUseSpinner)).getSelectedItem();
 		claim.setLandUse(valueKeyMapLandUse.get(landUseDispValue));
+
+		String boundaryId = ((Boundary)((Spinner) rootView.findViewById(R.id.boundarySpinner)).getSelectedItem()).getId();
+		if(boundaryId == null || boundaryId.equals("")){
+			claim.setBoundaryId(null);
+		} else {
+			claim.setBoundaryId(boundaryId);
+		}
 
 		String notes = ((EditText) rootView
 				.findViewById(R.id.claim_notes_input_field)).getText()
@@ -1163,6 +1187,12 @@ public class ClaimDetailsFragment extends Fragment {
 			return true;
 		}
 
+		String boundaryId = ((Boundary)((Spinner) rootView.findViewById(R.id.boundarySpinner)).getSelectedItem()).getId();
+		if (!StringUtils.equals(claim.getBoundaryId(), boundaryId)){
+			Log.d(this.getClass().getName(), "Boundary has changed");
+			return true;
+		}
+
 		String notes = ((EditText) rootView
 				.findViewById(R.id.claim_notes_input_field))
 				.getText().toString();
@@ -1377,9 +1407,7 @@ public class ClaimDetailsFragment extends Fragment {
 	}
 
 	private void updateDoB() {
-
-		EditText dateOfBirth = (EditText) getView().findViewById(
-				R.id.date_of_start_input_field);
+		EditText dateOfBirth = (EditText) getView().findViewById(R.id.date_of_start_input_field);
 		String myFormat = "yyyy-MM-dd";
 		SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
 

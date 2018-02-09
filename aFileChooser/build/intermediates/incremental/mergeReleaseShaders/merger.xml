@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merger version="3"><dataSet config="main"><source path="/home/administrator/StudioProjects/ot-android/aFileChooser/src/main/shaders"/></dataSet><dataSet config="release"><source path="/home/administrator/StudioProjects/ot-android/aFileChooser/src/release/shaders"/></dataSet></merger>
+<merger version="3"><dataSet config="main"><source path="C:\SOLA\Project\GIT\SOLA\open_tenure\ot-android-studio\aFileChooser\src\main\shaders"/></dataSet><dataSet config="release"><source path="C:\SOLA\Project\GIT\SOLA\open_tenure\ot-android-studio\aFileChooser\src\release\shaders"/></dataSet></merger>

@@ -34,17 +34,9 @@ import org.fao.sola.clients.android.opentenure.ViewHolder;
 
 public class SaveClaimResponse extends ApiResponse{	
 
-
 	String challengeExpiryDate;
 	String nr;
-//	ViewHolder vh;
-//	
-//	public ViewHolder getVh() {
-//		return vh;
-//	}
-//	public void setVh(ViewHolder vh) {
-//		this.vh = vh;
-//	}
+
 	public String getChallengeExpiryDate() {
 		return challengeExpiryDate;
 	}
@@ -66,9 +58,4 @@ public class SaveClaimResponse extends ApiResponse{
 	public void setNr(String nr) {
 		this.nr = nr;
 	}
-
-	
-	
-
-
 }

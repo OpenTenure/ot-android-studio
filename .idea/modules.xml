@@ -4,7 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/aFileChooser/aFileChooser.iml" filepath="$PROJECT_DIR$/aFileChooser/aFileChooser.iml" />
       <module fileurl="file://$PROJECT_DIR$/openTenure/openTenure.iml" filepath="$PROJECT_DIR$/openTenure/openTenure.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ot-android.iml" filepath="$PROJECT_DIR$/ot-android.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ot-android-studio.iml" filepath="$PROJECT_DIR$/ot-android-studio.iml" />
     </modules>
   </component>
 </project>

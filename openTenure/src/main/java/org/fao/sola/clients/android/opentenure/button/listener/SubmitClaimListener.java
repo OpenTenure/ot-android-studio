@@ -77,21 +77,17 @@ public class SubmitClaimListener implements OnClickListener {
 	private void doIt(final View v) {
 
 		if (!OpenTenureApplication.isLoggedin()) {
-			Toast toast = Toast.makeText(v.getContext(),
-					R.string.message_login_before, Toast.LENGTH_LONG);
+			Toast toast = Toast.makeText(v.getContext(), R.string.message_login_before, Toast.LENGTH_LONG);
 			toast.show();
 			return;
 
 		} else {
-			if (OpenTenureApplication.getInstance().isConnectedWifi(
-					v.getContext())) {
+			if (OpenTenureApplication.getInstance().isConnectedWifi(v.getContext())) {
 				submitClaim(v);
 			} else {
 				// Avoid to automatically download claims over mobile data
-				AlertDialog.Builder confirmDownloadBuilder = new AlertDialog.Builder(
-						v.getContext());
-				confirmDownloadBuilder
-						.setTitle(R.string.title_confirm_data_transfer);
+				AlertDialog.Builder confirmDownloadBuilder = new AlertDialog.Builder(v.getContext());
+				confirmDownloadBuilder.setTitle(R.string.title_confirm_data_transfer);
 				confirmDownloadBuilder.setMessage(v.getResources().getString(
 						R.string.message_data_over_mobile));
 
@@ -113,8 +109,7 @@ public class SubmitClaimListener implements OnClickListener {
 							}
 						});
 
-				final AlertDialog confirmDownloadDialog = confirmDownloadBuilder
-						.create();
+				final AlertDialog confirmDownloadDialog = confirmDownloadBuilder.create();
 				confirmDownloadDialog.show();
 			}
 			return;

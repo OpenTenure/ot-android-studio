@@ -62,8 +62,7 @@ import android.widget.Toast;
  * that claim ,
  * 
  * **/
-public class SaveClaimTask extends
-		AsyncTask<Object, ViewHolderResponse, ViewHolderResponse> {
+public class SaveClaimTask extends AsyncTask<Object, ViewHolderResponse, ViewHolderResponse> {
 
 	@Override
 	protected ViewHolderResponse doInBackground(Object... params) {

@@ -531,17 +531,14 @@ public class FileSystemUtilities {
 
 	public static String getJsonClaim(String claimId) {
 		try {
-
 			File folder = getClaimFolder(claimId);
 			FileInputStream fis = new FileInputStream(folder + File.separator + "claim.json");
 			return CommunityServerAPIUtilities.Slurp(fis, 100);
-
 		} catch (Exception e) {
 			Log.d("FileSystemUtilities", "Error reading claim.json :" + e.getMessage());
 			e.printStackTrace();
 			return null;
 		}
-
 	}
 
 	public static String getJsonAttachment(String attachmentId) {

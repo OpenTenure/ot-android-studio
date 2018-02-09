@@ -45,7 +45,4 @@ public class ViewHolderResponse {
 		this.res = res;
 	}
 	ApiResponse res;
-	
-	
-
 }

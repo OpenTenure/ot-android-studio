@@ -254,49 +254,7 @@ public class FormRetriever extends AsyncTask<Void, Integer, Integer> {
 
 		if (result > 0) {
 			OpenTenureApplication.getInstance().setCheckedForm(true);
-
-			synchronized (OpenTenureApplication.getInstance()) {
-
-				if (OpenTenureApplication.getInstance()
-						.isCheckedCommunityArea()
-						&& OpenTenureApplication.getInstance()
-								.isCheckedDocTypes()
-						&& OpenTenureApplication.getInstance()
-								.isCheckedIdTypes()
-						&& OpenTenureApplication.getInstance()
-								.isCheckedLandUses()
-						&& OpenTenureApplication.getInstance()
-								.isCheckedLanguages()
-						&& OpenTenureApplication.getInstance().isCheckedTypes()
-						&& OpenTenureApplication.getInstance()
-								.isCheckedGeometryRequired()
-
-				) {
-
-					OpenTenureApplication.getInstance().setInitialized(true);
-
-					Configuration conf = Configuration
-							.getConfigurationByName("isInitialized");
-					conf.setValue("true");
-					conf.update();
-
-					FragmentActivity fa = (FragmentActivity) OpenTenureApplication
-							.getNewsFragment();
-					if (fa != null)
-						fa.invalidateOptionsMenu();
-
-					Configuration latitude = Configuration
-							.getConfigurationByName(MainMapFragment.MAIN_MAP_LATITUDE);
-					if (latitude != null)
-						latitude.delete();
-
-					MainMapFragment mapFrag = OpenTenureApplication
-							.getMapFragment();
-
-					mapFrag.boundCameraToInterestArea();
-
-				}
-			}
+			OpenTenureApplication.getInstance().setSettingsSynchronized();
 		}
 	}
 }

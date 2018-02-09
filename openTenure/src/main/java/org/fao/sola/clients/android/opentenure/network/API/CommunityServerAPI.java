@@ -55,9 +55,13 @@ import org.fao.sola.clients.android.opentenure.OpenTenurePreferencesActivity;
 import org.fao.sola.clients.android.opentenure.filesystem.json.model.Claim;
 import org.fao.sola.clients.android.opentenure.network.LoginActivity;
 import org.fao.sola.clients.android.opentenure.network.response.ApiResponse;
+import org.fao.sola.clients.android.opentenure.network.response.Boundary;
+import org.fao.sola.clients.android.opentenure.network.response.BoundaryStatus;
+import org.fao.sola.clients.android.opentenure.network.response.BoundaryType;
 import org.fao.sola.clients.android.opentenure.network.response.GeoRequired;
 import org.fao.sola.clients.android.opentenure.network.response.GetAttachmentResponse;
 import org.fao.sola.clients.android.opentenure.network.response.GetCommunityAreaResponse;
+import org.fao.sola.clients.android.opentenure.network.response.ResultResponse;
 import org.fao.sola.clients.android.opentenure.network.response.SaveAttachmentResponse;
 import org.fao.sola.clients.android.opentenure.network.response.SaveClaimResponse;
 
@@ -981,6 +985,190 @@ public class CommunityServerAPI {
 
 	}
 
+	public static List<BoundaryStatus> getBoundaryStatuses() {
+		SharedPreferences OpenTenurePreferences = PreferenceManager.getDefaultSharedPreferences(OpenTenureApplication.getContext());
+		String csUrl = OpenTenurePreferences.getString(
+				OpenTenurePreferencesActivity.CS_URL_PREF,
+				OpenTenureApplication._DEFAULT_COMMUNITY_SERVER);
+
+		if (csUrl.trim().equals(""))
+			csUrl = OpenTenureApplication._DEFAULT_COMMUNITY_SERVER;
+
+		String url = String.format(CommunityServerAPIUtilities.HTTPS_GET_BOUNDARY_STATUSES, csUrl);
+		HttpGet request = new HttpGet(url);
+		AndroidHttpClient client = OpenTenureApplication.getHttpClient();
+
+		try {
+
+			HttpResponse response = client.execute(request);
+			setServerProtoVersion(response);
+			String json = CommunityServerAPIUtilities.Slurp(response.getEntity().getContent(), 1024);
+
+			if (response.getStatusLine().getStatusCode() == (HttpStatus.SC_OK)) {
+				Log.d("CommunityServerAPI", "GET ALL BOUNDARY STATUSES JSON RESPONSE " + json);
+
+				Type listType = new TypeToken<ArrayList<BoundaryStatus>>() {}.getType();
+				List<BoundaryStatus> statuses = new Gson().fromJson(json, listType);
+
+				if (statuses != null)
+					Log.d("CommunityServerAPI", "RETRIEVED BOUNDARY STATUSES " + statuses.size());
+
+				return statuses;
+			} else {
+
+				Log.d("CommunityServerAPI",
+						"GET ALL BOUNDARY STATUSES NOT SUCCEDED : HTTP STATUS "
+								+ response.getStatusLine().getStatusCode()
+								+ "  "
+								+ response.getStatusLine().getReasonPhrase());
+				return null;
+			}
+		} catch (java.net.SocketException se) {
+			Log.d("CommunityServerAPI", "GET ALL BOUNDARY STATUSES NETWORK ERROR SE " + se.getMessage());
+			se.printStackTrace();
+			OpenTenureApplication.getInstance().setNetworkError(true);
+			return null;
+		} catch (java.net.SocketTimeoutException stoe) {
+			Log.d("CommunityServerAPI", "GET ALL BOUNDARY STATUSES NETWORK ERROR STOE "	+ stoe.getMessage());
+			stoe.printStackTrace();
+			OpenTenureApplication.getInstance().setNetworkError(true);
+			return null;
+		} catch (javax.net.ssl.SSLException ssle) {
+			Log.d("CommunityServerAPI", "GET ALL BOUNDARY STATUSES NETWORK ERROR SSLE "	+ ssle.getMessage());
+			ssle.printStackTrace();
+			OpenTenureApplication.getInstance().setNetworkError(true);
+			return null;
+		}
+		catch (Exception ex) {
+			Log.d("CommunityServerAPI","GET ALL BOUNDARY STATUSES ERROR " + ex.getMessage());
+			ex.printStackTrace();
+			return null;
+		}
+	}
+
+	public static List<BoundaryType> getBoundaryTypes() {
+		SharedPreferences OpenTenurePreferences = PreferenceManager.getDefaultSharedPreferences(OpenTenureApplication.getContext());
+		String csUrl = OpenTenurePreferences.getString(
+				OpenTenurePreferencesActivity.CS_URL_PREF,
+				OpenTenureApplication._DEFAULT_COMMUNITY_SERVER);
+
+		if (csUrl.trim().equals(""))
+			csUrl = OpenTenureApplication._DEFAULT_COMMUNITY_SERVER;
+
+		String url = String.format(CommunityServerAPIUtilities.HTTPS_GET_BOUNDARY_TYPES, csUrl);
+		HttpGet request = new HttpGet(url);
+		AndroidHttpClient client = OpenTenureApplication.getHttpClient();
+
+		try {
+
+			HttpResponse response = client.execute(request);
+			setServerProtoVersion(response);
+			String json = CommunityServerAPIUtilities.Slurp(response.getEntity().getContent(), 1024);
+
+			if (response.getStatusLine().getStatusCode() == (HttpStatus.SC_OK)) {
+				Log.d("CommunityServerAPI", "GET ALL BOUNDARY TYPES JSON RESPONSE " + json);
+
+				Type listType = new TypeToken<ArrayList<BoundaryType>>() {}.getType();
+				List<BoundaryType> types = new Gson().fromJson(json, listType);
+
+				if (types != null)
+					Log.d("CommunityServerAPI", "RETRIEVED BOUNDARY TYPES " + types.size());
+
+				return types;
+			} else {
+
+				Log.d("CommunityServerAPI",
+						"GET ALL BOUNDARY TYPES NOT SUCCEDED : HTTP STATUS "
+								+ response.getStatusLine().getStatusCode()
+								+ "  "
+								+ response.getStatusLine().getReasonPhrase());
+				return null;
+			}
+		} catch (java.net.SocketException se) {
+			Log.d("CommunityServerAPI", "GET ALL BOUNDARY TYPES NETWORK ERROR SE " + se.getMessage());
+			se.printStackTrace();
+			OpenTenureApplication.getInstance().setNetworkError(true);
+			return null;
+		} catch (java.net.SocketTimeoutException stoe) {
+			Log.d("CommunityServerAPI", "GET ALL BOUNDARY TYPES NETWORK ERROR STOE "	+ stoe.getMessage());
+			stoe.printStackTrace();
+			OpenTenureApplication.getInstance().setNetworkError(true);
+			return null;
+		} catch (javax.net.ssl.SSLException ssle) {
+			Log.d("CommunityServerAPI", "GET ALL BOUNDARY TYPES NETWORK ERROR SSLE "	+ ssle.getMessage());
+			ssle.printStackTrace();
+			OpenTenureApplication.getInstance().setNetworkError(true);
+			return null;
+		}
+		catch (Exception ex) {
+			Log.d("CommunityServerAPI","GET ALL BOUNDARY TYPES ERROR " + ex.getMessage());
+			ex.printStackTrace();
+			return null;
+		}
+	}
+
+	public static List<Boundary> getBoundaries() {
+		SharedPreferences OpenTenurePreferences = PreferenceManager.getDefaultSharedPreferences(OpenTenureApplication.getContext());
+		String csUrl = OpenTenurePreferences.getString(
+				OpenTenurePreferencesActivity.CS_URL_PREF,
+				OpenTenureApplication._DEFAULT_COMMUNITY_SERVER);
+
+		if (csUrl.trim().equals(""))
+			csUrl = OpenTenureApplication._DEFAULT_COMMUNITY_SERVER;
+
+		String url = String.format(CommunityServerAPIUtilities.HTTPS_GET_BOUNDARIES, csUrl,
+				OpenTenureApplication.getInstance().getLocalization());
+		HttpGet request = new HttpGet(url);
+		AndroidHttpClient client = OpenTenureApplication.getHttpClient();
+
+		try {
+
+			HttpResponse response = client.execute(request);
+			setServerProtoVersion(response);
+			String json = CommunityServerAPIUtilities.Slurp(response.getEntity().getContent(), 1024);
+
+			if (response.getStatusLine().getStatusCode() == (HttpStatus.SC_OK)) {
+				Log.d("CommunityServerAPI", "GET ALL BOUNDARIES JSON RESPONSE " + json);
+
+				Type listType = new TypeToken<ArrayList<Boundary>>() {}.getType();
+				List<Boundary> types = new Gson().fromJson(json, listType);
+
+				if (types != null)
+					Log.d("CommunityServerAPI", "RETRIEVED BOUNDARIES " + types.size());
+
+				return types;
+			} else {
+
+				Log.d("CommunityServerAPI",
+						"GET ALL BOUNDARIES NOT SUCCEDED : HTTP STATUS "
+								+ response.getStatusLine().getStatusCode()
+								+ "  "
+								+ response.getStatusLine().getReasonPhrase());
+				return null;
+			}
+		} catch (java.net.SocketException se) {
+			Log.d("CommunityServerAPI", "GET ALL BOUNDARIES NETWORK ERROR SE " + se.getMessage());
+			se.printStackTrace();
+			OpenTenureApplication.getInstance().setNetworkError(true);
+			return null;
+		} catch (java.net.SocketTimeoutException stoe) {
+			Log.d("CommunityServerAPI", "GET ALL BOUNDARIES NETWORK ERROR STOE "	+ stoe.getMessage());
+			stoe.printStackTrace();
+			OpenTenureApplication.getInstance().setNetworkError(true);
+			return null;
+		} catch (javax.net.ssl.SSLException ssle) {
+			Log.d("CommunityServerAPI", "GET ALL BOUNDARIES NETWORK ERROR SSLE "	+ ssle.getMessage());
+			ssle.printStackTrace();
+			OpenTenureApplication.getInstance().setNetworkError(true);
+			return null;
+		}
+		catch (Exception ex) {
+			Log.d("CommunityServerAPI","GET ALL BOUNDARIES ERROR " + ex.getMessage());
+			ex.printStackTrace();
+			return null;
+		}
+	}
+
 	public static String getCommunityArea() {
 
 		SharedPreferences OpenTenurePreferences = PreferenceManager
@@ -1407,8 +1595,7 @@ public class CommunityServerAPI {
 			Log.d("CommunityServerAPI",
 					"saveClaim status line " + response.getStatusLine());
 
-			String json = CommunityServerAPIUtilities.Slurp(response
-					.getEntity().getContent(), 1024);
+			String json = CommunityServerAPIUtilities.Slurp(response.getEntity().getContent(), 1024);
 
 			Log.d("CommunityServerAPI", "SAVE CLAIM JSON RESPONSE " + json);
 
@@ -1424,7 +1611,6 @@ public class CommunityServerAPI {
 			return saveResponse;
 
 		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 
 			SaveClaimResponse saveResponse = new SaveClaimResponse();
@@ -1470,7 +1656,93 @@ public class CommunityServerAPI {
 
 			return saveResponse;
 		}
+	}
 
+	public static ResultResponse saveBoundary(String boundaryJson) {
+
+		SharedPreferences OpenTenurePreferences = PreferenceManager.getDefaultSharedPreferences(OpenTenureApplication.getContext());
+
+		String csUrl = OpenTenurePreferences.getString(
+				OpenTenurePreferencesActivity.CS_URL_PREF,
+				OpenTenureApplication._DEFAULT_COMMUNITY_SERVER);
+
+		if (csUrl.trim().equals(""))
+			csUrl = OpenTenureApplication._DEFAULT_COMMUNITY_SERVER;
+
+		String url = String.format(CommunityServerAPIUtilities.HTTPS_SAVE_BOUNDARY,
+				csUrl, OpenTenureApplication.getInstance().getLocalization());
+
+		HttpPost request = new HttpPost(url);
+
+		StringEntity entity;
+		try {
+			entity = new StringEntity(boundaryJson, HTTP.UTF_8);
+			entity.setContentType("application/json");
+			request.setEntity(entity);
+
+			AndroidHttpClient client = OpenTenureApplication.getHttpClient();
+
+			CookieStore CS = OpenTenureApplication.getCoockieStore();
+
+			HttpContext context = new BasicHttpContext();
+			context.setAttribute(ClientContext.COOKIE_STORE, CS);
+
+			/* Calling the Server.... */
+			HttpResponse response = client.execute(request, context);
+
+			setServerProtoVersion(response);
+			String json = CommunityServerAPIUtilities.Slurp(response.getEntity().getContent(), 1024);
+
+			Gson gson = new Gson();
+			ResultResponse saveResponse = gson.fromJson(json, ResultResponse.class);
+			saveResponse.setHttpStatusCode(response.getStatusLine().getStatusCode());
+
+			return saveResponse;
+
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+
+			ResultResponse saveResponse = new ResultResponse();
+			saveResponse.setHttpStatusCode(110);
+			saveResponse.setMessage(e.getMessage());
+
+			return saveResponse;
+
+		} catch (UnknownHostException uhe) {
+
+			uhe.printStackTrace();
+
+			ResultResponse saveResponse = new ResultResponse();
+			saveResponse.setHttpStatusCode(100);
+			saveResponse.setMessage("Unknown Host Exception : Network failure");
+
+			return saveResponse;
+		} catch (java.net.SocketException se) {
+
+			se.printStackTrace();
+
+			ResultResponse saveResponse = new ResultResponse();
+			saveResponse.setHttpStatusCode(100);
+			saveResponse.setMessage("Socket Exception : Network failure");
+
+			return saveResponse;
+		} catch (IOException e) {
+			e.printStackTrace();
+
+			ResultResponse saveResponse = new ResultResponse();
+			saveResponse.setHttpStatusCode(100);
+			saveResponse.setMessage("IOException Exception : Network failure");
+
+			return saveResponse;
+		} catch (Exception e) {
+			e.printStackTrace();
+
+			ResultResponse saveResponse = new ResultResponse();
+			saveResponse.setHttpStatusCode(400);
+			saveResponse.setMessage("Exception : " + e.getMessage());
+
+			return saveResponse;
+		}
 	}
 
 	public static SaveAttachmentResponse saveAttachment(String attachment,

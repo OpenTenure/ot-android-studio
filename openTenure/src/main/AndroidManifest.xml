@@ -32,7 +32,7 @@
         <uses-library android:name="com.google.android.maps" />
 		<meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="_PLACE_YOUR_GOOGLE_MAPS_API_KEY_HERE_BEFORE_COMPILING_" />
+            android:value="AIzaSyCv5m-nb3O6A9yDDtNNkRTWX37B9yBPvmA" />
 		<meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
@@ -72,10 +72,22 @@
             android:icon="@drawable/sola_logo"
             >
          <!-- Parent activity meta-data to support 4.0 and lower -->
-        <meta-data
-            android:name="android.support.PARENT_ACTIVITY"
-            android:value="org.fao.sola.clients.android.opentenure.OpenTenure" />
-    </activity>
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="org.fao.sola.clients.android.opentenure.OpenTenure" />
+        </activity>
+        <activity
+            android:name="org.fao.sola.clients.android.opentenure.BoundaryActivity"
+            android:theme="@style/Theme.Opentenure"
+            android:label="@string/title_activity_boundary"
+            android:windowSoftInputMode="stateVisible|adjustResize|adjustPan"
+            android:icon="@drawable/sola_logo"
+            >
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="org.fao.sola.clients.android.opentenure.OpenTenure" />
+        </activity>
         <activity
             android:name="org.fao.sola.clients.android.opentenure.PersonActivity"
             android:theme="@style/Theme.Opentenure"
