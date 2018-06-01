@@ -42,5 +42,4 @@ public class ClaimStatus {
 	public static String _WITHDRAWN = "withdrawn";
 	public static String _REJECTED = "rejected";
 	public static String _REVIEWED = "reviewed";
-		
 }

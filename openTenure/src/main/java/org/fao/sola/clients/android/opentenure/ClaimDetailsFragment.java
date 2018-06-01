@@ -378,8 +378,7 @@ public class ClaimDetailsFragment extends Fragment {
 
 						@Override
 						public void onClick(View v) {
-							Intent intent = new Intent(rootView.getContext(),
-									SelectClaimActivity.class);
+							Intent intent = new Intent(rootView.getContext(), SelectClaimActivity.class);
 							// Excluding from the list of claims that can be
 							// challenged
 							ArrayList<String> excludeList = new ArrayList<String>();
@@ -388,13 +387,9 @@ public class ClaimDetailsFragment extends Fragment {
 								// Challenges and local claims not yet
 								// uploaded
 								if (claim.getChallengedClaim() != null
-										|| claim.getStatus()
-												.equalsIgnoreCase(
-														Claim.Status.created
-																.toString())
-										|| claim.getStatus().equalsIgnoreCase(
-												Claim.Status.uploading
-														.toString())
+										|| claim.isDeleted()
+										|| claim.getStatus().equalsIgnoreCase(Claim.Status.created.toString())
+										|| claim.getStatus().equalsIgnoreCase(Claim.Status.uploading.toString())
 										|| !claim.isUploadable()) {
 									excludeList.add(claim.getClaimId());
 								}

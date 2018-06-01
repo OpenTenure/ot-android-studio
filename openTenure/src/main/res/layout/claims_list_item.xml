@@ -158,6 +158,15 @@
         android:visibility="visible" />
 
     <ImageView
+        android:id="@+id/action_undo_delete"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="2"
+        android:contentDescription="@string/action_undo_delete"
+        android:src="@drawable/arrow_undo" />
+
+    <ImageView
         android:id="@+id/action_remove_claim"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

@@ -102,12 +102,21 @@ public class ClaimListTO implements Serializable {
 		this.personId = personId;
 	}
 
+	public boolean isDeleted() {
+		return deleted;
+	}
+
+	public void setDeleted(boolean deleted) {
+		this.deleted = deleted;
+	}
+
 	private String number;
 	private String id;
 	private String slogan;
 	private String status;
 	private String remaingDays;
 	private String personId;
+	private boolean deleted;
 	private List<Attachment> attachments;
 	private boolean isModifiable;
 

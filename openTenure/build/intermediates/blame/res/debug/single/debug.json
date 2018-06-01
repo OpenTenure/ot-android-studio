@@ -40,44 +40,44 @@
         "source": "C:\\Users\\solov\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-22.2.0.aar\\96ce092b480ca8013bfad2e6a85e8452\\res\\drawable-hdpi\\ic_cast_off_light.png"
     },
     {
-        "merged": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi_ic_contact_picture.png.flat",
-        "source": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\src\\main\\res\\drawable-ldpi\\ic_contact_picture.png"
-    },
-    {
-        "merged": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\build\\intermediates\\res\\merged\\debug\\drawable-tvdpi_common_plus_signin_btn_icon_light_normal.9.png.flat",
-        "source": "C:\\Users\\solov\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-8.3.0.aar\\af7964eb5c98c240375704668f67fc45\\res\\drawable-tvdpi\\common_plus_signin_btn_icon_light_normal.9.png"
+        "merged": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\build\\intermediates\\res\\merged\\debug\\drawable_abc_switch_thumb_material.xml.flat",
+        "source": "C:\\Users\\solov\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-22.2.0.aar\\02f31d5693fa186b332fc9a02db73d7f\\res\\drawable\\abc_switch_thumb_material.xml"
     },
     {
         "merged": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi_ic_menu_attachment.png.flat",
         "source": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\src\\main\\res\\drawable-ldpi\\ic_menu_attachment.png"
     },
     {
-        "merged": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\build\\intermediates\\res\\merged\\debug\\drawable_abc_switch_thumb_material.xml.flat",
-        "source": "C:\\Users\\solov\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-22.2.0.aar\\02f31d5693fa186b332fc9a02db73d7f\\res\\drawable\\abc_switch_thumb_material.xml"
+        "merged": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\build\\intermediates\\res\\merged\\debug\\drawable-tvdpi_common_plus_signin_btn_icon_light_normal.9.png.flat",
+        "source": "C:\\Users\\solov\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-8.3.0.aar\\af7964eb5c98c240375704668f67fc45\\res\\drawable-tvdpi\\common_plus_signin_btn_icon_light_normal.9.png"
     },
     {
-        "merged": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\build\\intermediates\\res\\merged\\debug\\raw_amu_multiple_placemarks.kml.flat",
-        "source": "C:\\Users\\solov\\.gradle\\caches\\transforms-1\\files-1.1\\android-maps-utils-0.5.aar\\75918ee644f566fe678aa1a5f9805775\\res\\raw\\amu_multiple_placemarks.kml"
-    },
-    {
-        "merged": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi_ic_action_map.png.flat",
-        "source": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\src\\main\\res\\drawable-mdpi\\ic_action_map.png"
+        "merged": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi_ic_contact_picture.png.flat",
+        "source": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\src\\main\\res\\drawable-ldpi\\ic_contact_picture.png"
     },
     {
         "merged": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\build\\intermediates\\res\\merged\\debug\\layout_news_list_item.xml.flat",
         "source": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\src\\main\\res\\layout\\news_list_item.xml"
     },
     {
-        "merged": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_common_google_signin_btn_text_dark_disabled.9.png.flat",
-        "source": "C:\\Users\\solov\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-8.3.0.aar\\af7964eb5c98c240375704668f67fc45\\res\\drawable-xhdpi\\common_google_signin_btn_text_dark_disabled.9.png"
+        "merged": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi_ic_action_map.png.flat",
+        "source": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\src\\main\\res\\drawable-mdpi\\ic_action_map.png"
+    },
+    {
+        "merged": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\build\\intermediates\\res\\merged\\debug\\raw_amu_multiple_placemarks.kml.flat",
+        "source": "C:\\Users\\solov\\.gradle\\caches\\transforms-1\\files-1.1\\android-maps-utils-0.5.aar\\75918ee644f566fe678aa1a5f9805775\\res\\raw\\amu_multiple_placemarks.kml"
+    },
+    {
+        "merged": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_abc_list_selector_disabled_holo_dark.9.png.flat",
+        "source": "C:\\Users\\solov\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-22.2.0.aar\\02f31d5693fa186b332fc9a02db73d7f\\res\\drawable-xxhdpi\\abc_list_selector_disabled_holo_dark.9.png"
     },
     {
         "merged": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\build\\intermediates\\res\\merged\\debug\\drawable_mr_ic_play_dark.xml.flat",
         "source": "C:\\Users\\solov\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-22.2.0.aar\\96ce092b480ca8013bfad2e6a85e8452\\res\\drawable\\mr_ic_play_dark.xml"
     },
     {
-        "merged": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_abc_list_selector_disabled_holo_dark.9.png.flat",
-        "source": "C:\\Users\\solov\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-22.2.0.aar\\02f31d5693fa186b332fc9a02db73d7f\\res\\drawable-xxhdpi\\abc_list_selector_disabled_holo_dark.9.png"
+        "merged": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_common_google_signin_btn_text_dark_disabled.9.png.flat",
+        "source": "C:\\Users\\solov\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-8.3.0.aar\\af7964eb5c98c240375704668f67fc45\\res\\drawable-xhdpi\\common_google_signin_btn_text_dark_disabled.9.png"
     },
     {
         "merged": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi_common_plus_signin_btn_text_dark_normal.9.png.flat",
@@ -108,12 +108,12 @@
         "source": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\src\\main\\res\\menu\\file_chooser.xml"
     },
     {
-        "merged": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_abc_btn_rating_star_on_mtrl_alpha.png.flat",
-        "source": "C:\\Users\\solov\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-22.2.0.aar\\02f31d5693fa186b332fc9a02db73d7f\\res\\drawable-xxhdpi\\abc_btn_rating_star_on_mtrl_alpha.png"
-    },
-    {
         "merged": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_ic_cast_on_0_light.png.flat",
         "source": "C:\\Users\\solov\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-22.2.0.aar\\96ce092b480ca8013bfad2e6a85e8452\\res\\drawable-xhdpi\\ic_cast_on_0_light.png"
+    },
+    {
+        "merged": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_abc_btn_rating_star_on_mtrl_alpha.png.flat",
+        "source": "C:\\Users\\solov\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-22.2.0.aar\\02f31d5693fa186b332fc9a02db73d7f\\res\\drawable-xxhdpi\\abc_btn_rating_star_on_mtrl_alpha.png"
     },
     {
         "merged": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_ic_action_new_attachment.png.flat",
@@ -152,6 +152,10 @@
         "source": "C:\\Users\\solov\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-8.3.0.aar\\af7964eb5c98c240375704668f67fc45\\res\\drawable-hdpi\\common_plus_signin_btn_icon_light_normal.9.png"
     },
     {
+        "merged": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi_arrow_undo.png.flat",
+        "source": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\src\\main\\res\\drawable-ldpi\\arrow_undo.png"
+    },
+    {
         "merged": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_tab_selected_focused_opentenure.9.png.flat",
         "source": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\src\\main\\res\\drawable-hdpi\\tab_selected_focused_opentenure.9.png"
     },
@@ -172,12 +176,12 @@
         "source": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\src\\main\\res\\drawable\\cling_button_bg.xml"
     },
     {
-        "merged": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_spinner_ab_disabled_opentenure.9.png.flat",
-        "source": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\src\\main\\res\\drawable-hdpi\\spinner_ab_disabled_opentenure.9.png"
-    },
-    {
         "merged": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi_ic_save_document.png.flat",
         "source": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\src\\main\\res\\drawable-mdpi\\ic_save_document.png"
+    },
+    {
+        "merged": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_spinner_ab_disabled_opentenure.9.png.flat",
+        "source": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\src\\main\\res\\drawable-hdpi\\spinner_ab_disabled_opentenure.9.png"
     },
     {
         "merged": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi_ic_menu_mylocation.png.flat",
@@ -208,24 +212,24 @@
         "source": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\src\\main\\res\\drawable-hdpi\\upload.png"
     },
     {
-        "merged": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi_menu_dropdown_panel_opentenure.9.png.flat",
-        "source": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\src\\main\\res\\drawable-mdpi\\menu_dropdown_panel_opentenure.9.png"
-    },
-    {
         "merged": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\build\\intermediates\\res\\merged\\debug\\raw_amu_ground_overlay.kml.flat",
         "source": "C:\\Users\\solov\\.gradle\\caches\\transforms-1\\files-1.1\\android-maps-utils-0.5.aar\\75918ee644f566fe678aa1a5f9805775\\res\\raw\\amu_ground_overlay.kml"
+    },
+    {
+        "merged": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi_menu_dropdown_panel_opentenure.9.png.flat",
+        "source": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\src\\main\\res\\drawable-mdpi\\menu_dropdown_panel_opentenure.9.png"
     },
     {
         "merged": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_common_google_signin_btn_text_light_focused.9.png.flat",
         "source": "C:\\Users\\solov\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-8.3.0.aar\\af7964eb5c98c240375704668f67fc45\\res\\drawable-hdpi\\common_google_signin_btn_text_light_focused.9.png"
     },
     {
-        "merged": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_ab_stacked_solid_opentenure.9.png.flat",
-        "source": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\src\\main\\res\\drawable-hdpi\\ab_stacked_solid_opentenure.9.png"
-    },
-    {
         "merged": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\build\\intermediates\\res\\merged\\debug\\drawable_selectable_background_opentenure.xml.flat",
         "source": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\src\\main\\res\\drawable\\selectable_background_opentenure.xml"
+    },
+    {
+        "merged": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_ab_stacked_solid_opentenure.9.png.flat",
+        "source": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\src\\main\\res\\drawable-hdpi\\ab_stacked_solid_opentenure.9.png"
     },
     {
         "merged": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_ic_action_move.png.flat",
@@ -248,12 +252,12 @@
         "source": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\src\\main\\res\\layout\\share_details.xml"
     },
     {
-        "merged": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_common_google_signin_btn_icon_dark_disabled.9.png.flat",
-        "source": "C:\\Users\\solov\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-8.3.0.aar\\af7964eb5c98c240375704668f67fc45\\res\\drawable-hdpi\\common_google_signin_btn_icon_dark_disabled.9.png"
-    },
-    {
         "merged": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\build\\intermediates\\res\\merged\\debug\\drawable_common_google_signin_btn_text_light.xml.flat",
         "source": "C:\\Users\\solov\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-8.3.0.aar\\af7964eb5c98c240375704668f67fc45\\res\\drawable\\common_google_signin_btn_text_light.xml"
+    },
+    {
+        "merged": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_common_google_signin_btn_icon_dark_disabled.9.png.flat",
+        "source": "C:\\Users\\solov\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-8.3.0.aar\\af7964eb5c98c240375704668f67fc45\\res\\drawable-hdpi\\common_google_signin_btn_icon_dark_disabled.9.png"
     },
     {
         "merged": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_btn_cab_done_focused_opentenure.9.png.flat",
@@ -304,12 +308,12 @@
         "source": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\src\\main\\res\\drawable-mdpi\\ic_action_move.png"
     },
     {
-        "merged": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_abc_btn_check_to_on_mtrl_000.png.flat",
-        "source": "C:\\Users\\solov\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-22.2.0.aar\\02f31d5693fa186b332fc9a02db73d7f\\res\\drawable-xxhdpi\\abc_btn_check_to_on_mtrl_000.png"
-    },
-    {
         "merged": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_common_full_open_on_phone.png.flat",
         "source": "C:\\Users\\solov\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-basement-8.3.0.aar\\1af3bc1cc859c43b1d0079d8723de892\\res\\drawable-hdpi\\common_full_open_on_phone.png"
+    },
+    {
+        "merged": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_abc_btn_check_to_on_mtrl_000.png.flat",
+        "source": "C:\\Users\\solov\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-22.2.0.aar\\02f31d5693fa186b332fc9a02db73d7f\\res\\drawable-xxhdpi\\abc_btn_check_to_on_mtrl_000.png"
     },
     {
         "merged": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_abc_ic_voice_search_api_mtrl_alpha.png.flat",
@@ -324,16 +328,16 @@
         "source": "C:\\Users\\solov\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-22.2.0.aar\\02f31d5693fa186b332fc9a02db73d7f\\res\\drawable-xxhdpi\\abc_btn_radio_to_on_mtrl_000.png"
     },
     {
-        "merged": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_spinner_ab_pressed_opentenure.9.png.flat",
-        "source": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\src\\main\\res\\drawable-xhdpi\\spinner_ab_pressed_opentenure.9.png"
+        "merged": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\build\\intermediates\\res\\merged\\debug\\drawable-tvdpi_common_plus_signin_btn_text_dark_disabled.9.png.flat",
+        "source": "C:\\Users\\solov\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-8.3.0.aar\\af7964eb5c98c240375704668f67fc45\\res\\drawable-tvdpi\\common_plus_signin_btn_text_dark_disabled.9.png"
     },
     {
         "merged": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_upload_blue.png.flat",
         "source": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\src\\main\\res\\drawable-xhdpi\\upload_blue.png"
     },
     {
-        "merged": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\build\\intermediates\\res\\merged\\debug\\drawable-tvdpi_common_plus_signin_btn_text_dark_disabled.9.png.flat",
-        "source": "C:\\Users\\solov\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-8.3.0.aar\\af7964eb5c98c240375704668f67fc45\\res\\drawable-tvdpi\\common_plus_signin_btn_text_dark_disabled.9.png"
+        "merged": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_spinner_ab_pressed_opentenure.9.png.flat",
+        "source": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\src\\main\\res\\drawable-xhdpi\\spinner_ab_pressed_opentenure.9.png"
     },
     {
         "merged": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\build\\intermediates\\res\\merged\\debug\\layout_abc_action_menu_item_layout.xml.flat",
@@ -344,12 +348,12 @@
         "source": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\src\\main\\res\\menu\\multiple_field_group.xml"
     },
     {
-        "merged": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_progress_primary_opentenure.9.png.flat",
-        "source": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\src\\main\\res\\drawable-xxhdpi\\progress_primary_opentenure.9.png"
-    },
-    {
         "merged": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\build\\intermediates\\res\\merged\\debug\\menu_login_activity.xml.flat",
         "source": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\src\\main\\res\\menu\\login_activity.xml"
+    },
+    {
+        "merged": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_progress_primary_opentenure.9.png.flat",
+        "source": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\src\\main\\res\\drawable-xxhdpi\\progress_primary_opentenure.9.png"
     },
     {
         "merged": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\build\\intermediates\\res\\merged\\debug\\drawable-ldrtl-xhdpi_abc_ic_menu_copy_mtrl_am_alpha.png.flat",
@@ -500,12 +504,12 @@
         "source": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\src\\main\\res\\drawable-hdpi\\map_bookmark_selected.png"
     },
     {
-        "merged": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_preload.png.flat",
-        "source": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\src\\main\\res\\drawable-xhdpi\\preload.png"
-    },
-    {
         "merged": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\build\\intermediates\\res\\merged\\debug\\drawable_mr_ic_media_route_connecting_mono_light.xml.flat",
         "source": "C:\\Users\\solov\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-22.2.0.aar\\96ce092b480ca8013bfad2e6a85e8452\\res\\drawable\\mr_ic_media_route_connecting_mono_light.xml"
+    },
+    {
+        "merged": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_preload.png.flat",
+        "source": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\src\\main\\res\\drawable-xhdpi\\preload.png"
     },
     {
         "merged": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\build\\intermediates\\res\\merged\\debug\\color_common_plus_signin_btn_text_light.xml.flat",
@@ -576,6 +580,10 @@
         "source": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\src\\main\\res\\drawable-xhdpi\\position.png"
     },
     {
+        "merged": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\build\\intermediates\\res\\merged\\debug\\drawable_arrow_undo.png.flat",
+        "source": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\src\\main\\res\\drawable\\arrow_undo.png"
+    },
+    {
         "merged": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_abc_textfield_search_activated_mtrl_alpha.9.png.flat",
         "source": "C:\\Users\\solov\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-22.2.0.aar\\02f31d5693fa186b332fc9a02db73d7f\\res\\drawable-xhdpi\\abc_textfield_search_activated_mtrl_alpha.9.png"
     },
@@ -624,12 +632,12 @@
         "source": "C:\\Users\\solov\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-22.2.0.aar\\02f31d5693fa186b332fc9a02db73d7f\\res\\drawable-mdpi\\abc_list_pressed_holo_light.9.png"
     },
     {
-        "merged": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\build\\intermediates\\res\\merged\\debug\\drawable_crosshair.png.flat",
-        "source": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\src\\main\\res\\drawable\\crosshair.png"
-    },
-    {
         "merged": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_common_google_signin_btn_text_light_focused.9.png.flat",
         "source": "C:\\Users\\solov\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-8.3.0.aar\\af7964eb5c98c240375704668f67fc45\\res\\drawable-xxhdpi\\common_google_signin_btn_text_light_focused.9.png"
+    },
+    {
+        "merged": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\build\\intermediates\\res\\merged\\debug\\drawable_crosshair.png.flat",
+        "source": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\src\\main\\res\\drawable\\crosshair.png"
     },
     {
         "merged": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_common_google_signin_btn_icon_dark_pressed.9.png.flat",
@@ -648,12 +656,12 @@
         "source": "C:\\Users\\solov\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-22.2.0.aar\\02f31d5693fa186b332fc9a02db73d7f\\res\\drawable-xxhdpi\\abc_ic_voice_search_api_mtrl_alpha.png"
     },
     {
-        "merged": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\build\\intermediates\\res\\merged\\debug\\layout_local_claims_list.xml.flat",
-        "source": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\src\\main\\res\\layout\\local_claims_list.xml"
-    },
-    {
         "merged": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi_abc_btn_switch_to_on_mtrl_00001.9.png.flat",
         "source": "C:\\Users\\solov\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-22.2.0.aar\\02f31d5693fa186b332fc9a02db73d7f\\res\\drawable-mdpi\\abc_btn_switch_to_on_mtrl_00001.9.png"
+    },
+    {
+        "merged": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\build\\intermediates\\res\\merged\\debug\\layout_local_claims_list.xml.flat",
+        "source": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\src\\main\\res\\layout\\local_claims_list.xml"
     },
     {
         "merged": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_common_google_signin_btn_text_dark_disabled.9.png.flat",
@@ -732,20 +740,20 @@
         "source": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\src\\main\\res\\drawable-mdpi\\ic_action_new_attachment.png"
     },
     {
-        "merged": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_mr_ic_audio_vol.png.flat",
-        "source": "C:\\Users\\solov\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-22.2.0.aar\\96ce092b480ca8013bfad2e6a85e8452\\res\\drawable-xxhdpi\\mr_ic_audio_vol.png"
-    },
-    {
         "merged": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_cab_background_bottom_opentenure.9.png.flat",
         "source": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\src\\main\\res\\drawable-xxhdpi\\cab_background_bottom_opentenure.9.png"
     },
     {
-        "merged": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_tab_unselected_opentenure.9.png.flat",
-        "source": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\src\\main\\res\\drawable-xhdpi\\tab_unselected_opentenure.9.png"
+        "merged": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_mr_ic_audio_vol.png.flat",
+        "source": "C:\\Users\\solov\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-22.2.0.aar\\96ce092b480ca8013bfad2e6a85e8452\\res\\drawable-xxhdpi\\mr_ic_audio_vol.png"
     },
     {
         "merged": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\build\\intermediates\\res\\merged\\debug\\layout_activity_share_details.xml.flat",
         "source": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\src\\main\\res\\layout\\activity_share_details.xml"
+    },
+    {
+        "merged": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_tab_unselected_opentenure.9.png.flat",
+        "source": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\src\\main\\res\\drawable-xhdpi\\tab_unselected_opentenure.9.png"
     },
     {
         "merged": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi_ic_submit_big.png.flat",
@@ -832,12 +840,12 @@
         "source": "C:\\Users\\solov\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-22.2.0.aar\\02f31d5693fa186b332fc9a02db73d7f\\res\\drawable-mdpi\\abc_tab_indicator_mtrl_alpha.9.png"
     },
     {
-        "merged": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\build\\intermediates\\res\\merged\\debug\\layout_adjacent_claims_list_item.xml.flat",
-        "source": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\src\\main\\res\\layout\\adjacent_claims_list_item.xml"
-    },
-    {
         "merged": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_abc_ic_menu_cut_mtrl_alpha.png.flat",
         "source": "C:\\Users\\solov\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-22.2.0.aar\\02f31d5693fa186b332fc9a02db73d7f\\res\\drawable-xhdpi\\abc_ic_menu_cut_mtrl_alpha.png"
+    },
+    {
+        "merged": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\build\\intermediates\\res\\merged\\debug\\layout_adjacent_claims_list_item.xml.flat",
+        "source": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\src\\main\\res\\layout\\adjacent_claims_list_item.xml"
     },
     {
         "merged": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\build\\intermediates\\res\\merged\\debug\\layout_my_progress_bar.xml.flat",
@@ -880,16 +888,16 @@
         "source": "C:\\Users\\solov\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-22.2.0.aar\\02f31d5693fa186b332fc9a02db73d7f\\res\\drawable-mdpi\\abc_btn_radio_to_on_mtrl_000.png"
     },
     {
-        "merged": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_ic_action_move.png.flat",
-        "source": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\src\\main\\res\\drawable-xxhdpi\\ic_action_move.png"
+        "merged": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi_common_plus_signin_btn_icon_light_normal.9.png.flat",
+        "source": "C:\\Users\\solov\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-8.3.0.aar\\af7964eb5c98c240375704668f67fc45\\res\\drawable-mdpi\\common_plus_signin_btn_icon_light_normal.9.png"
     },
     {
         "merged": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\build\\intermediates\\res\\merged\\debug\\layout_bookmarks_list_item.xml.flat",
         "source": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\src\\main\\res\\layout\\bookmarks_list_item.xml"
     },
     {
-        "merged": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi_common_plus_signin_btn_icon_light_normal.9.png.flat",
-        "source": "C:\\Users\\solov\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-8.3.0.aar\\af7964eb5c98c240375704668f67fc45\\res\\drawable-mdpi\\common_plus_signin_btn_icon_light_normal.9.png"
+        "merged": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_ic_action_move.png.flat",
+        "source": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\src\\main\\res\\drawable-xxhdpi\\ic_action_move.png"
     },
     {
         "merged": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_ab_bottom_solid_opentenure.9.png.flat",
@@ -974,6 +982,10 @@
     {
         "merged": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\build\\intermediates\\res\\merged\\debug\\layout_custom_add_document.xml.flat",
         "source": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\src\\main\\res\\layout\\custom_add_document.xml"
+    },
+    {
+        "merged": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi_arrow_undo.png.flat",
+        "source": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\src\\main\\res\\drawable-mdpi\\arrow_undo.png"
     },
     {
         "merged": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4_ic_chooser.png.flat",
@@ -4068,6 +4080,10 @@
         "source": "C:\\Users\\solov\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-plus-8.3.0.aar\\b6c61314ca960a8bbfc4c3d5a6361df9\\res\\drawable-xxhdpi\\ic_plusone_small_off_client.png"
     },
     {
+        "merged": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_arrow_undo.png.flat",
+        "source": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\src\\main\\res\\drawable-xhdpi\\arrow_undo.png"
+    },
+    {
         "merged": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_ic_media_route_disabled_mono_dark.png.flat",
         "source": "C:\\Users\\solov\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-22.2.0.aar\\96ce092b480ca8013bfad2e6a85e8452\\res\\drawable-hdpi\\ic_media_route_disabled_mono_dark.png"
     },
@@ -4164,6 +4180,10 @@
         "source": "C:\\Users\\solov\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-22.2.0.aar\\02f31d5693fa186b332fc9a02db73d7f\\res\\drawable-xhdpi\\abc_popup_background_mtrl_mult.9.png"
     },
     {
+        "merged": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_arrow_undo.png.flat",
+        "source": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\src\\main\\res\\drawable-xxhdpi\\arrow_undo.png"
+    },
+    {
         "merged": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\build\\intermediates\\res\\merged\\debug\\layout_file.xml.flat",
         "source": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\aFileChooser\\build\\intermediates\\bundles\\debug\\res\\layout\\file.xml"
     },
@@ -4210,6 +4230,10 @@
     {
         "merged": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_ic_menu_attachment.png.flat",
         "source": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\src\\main\\res\\drawable-xhdpi\\ic_menu_attachment.png"
+    },
+    {
+        "merged": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_arrow_undo.png.flat",
+        "source": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\src\\main\\res\\drawable-hdpi\\arrow_undo.png"
     },
     {
         "merged": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_abc_ic_clear_mtrl_alpha.png.flat",

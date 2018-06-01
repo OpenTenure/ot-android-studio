@@ -561,4 +561,10 @@
     <string name="message_remove_boundary">Are you sure you want to delete boundary?</string>
     <string name="action_remove_boundary">Boundary removal</string>
     <string name="polygon_not_enough_points">Map at least 3 points for the boundary</string>
+    <string name="action_show_deleted">Show deleted</string>
+    <string name="action_undo_delete">Undo Delete</string>
+    <string name="message_undo_delete">Are you sure?</string>
+    <string name="message_remove_permanently">Are you sure? This will delete the claim permanently.</string>
+    <string name="soft_delete">Soft delete of claims</string>
+    <string name="soft_delete_details">Allows claims restoration after deletion</string>
 </resources>

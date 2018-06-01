@@ -48,6 +48,7 @@ public class ViewHolder {
 	ImageView iconChallenged;
 	ImageView iconWithdrawn;
 	ImageView iconReviewed;
+	ImageView undoDelete;
 	int position;
 	
 	
@@ -148,11 +149,12 @@ public class ViewHolder {
 	public void setIconReviewed(ImageView iconReviewed) {
 		this.iconReviewed = iconReviewed;
 	}
-	
-	
-	
-	
-	
-	
-	
+
+	public ImageView getUndoDelete() {
+		return undoDelete;
+	}
+
+	public void setUndoDelete(ImageView undoDelete) {
+		this.undoDelete = undoDelete;
+	}
 }

@@ -2,18 +2,18 @@
  * ******************************************************************************************
  * Copyright (C) 2014 - Food and Agriculture Organization of the United Nations (FAO).
  * All rights reserved.
- *
+ * <p>
  * Redistribution and use in source and binary forms, with or without modification,
  * are permitted provided that the following conditions are met:
- *
- *    1. Redistributions of source code must retain the above copyright notice,this list
- *       of conditions and the following disclaimer.
- *    2. Redistributions in binary form must reproduce the above copyright notice,this list
- *       of conditions and the following disclaimer in the documentation and/or other
- *       materials provided with the distribution.
- *    3. Neither the name of FAO nor the names of its contributors may be used to endorse or
- *       promote products derived from this software without specific prior written permission.
- *
+ * <p>
+ * 1. Redistributions of source code must retain the above copyright notice,this list
+ * of conditions and the following disclaimer.
+ * 2. Redistributions in binary form must reproduce the above copyright notice,this list
+ * of conditions and the following disclaimer in the documentation and/or other
+ * materials provided with the distribution.
+ * 3. Neither the name of FAO nor the names of its contributors may be used to endorse or
+ * promote products derived from this software without specific prior written permission.
+ * <p>
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY
  * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
  * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT
@@ -36,6 +36,8 @@ import org.fao.sola.clients.android.opentenure.network.WithdrawClaimTask;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -44,228 +46,165 @@ import android.widget.Toast;
 
 public class ClaimDeleteListener implements OnClickListener {
 
-	String claimId;
-	ViewHolder vh;
+    String claimId;
+    ViewHolder vh;
 
-	public ClaimDeleteListener(String claimId, ViewHolder vh) {
+    public ClaimDeleteListener(String claimId, ViewHolder vh) {
+        this.claimId = claimId;
+        this.vh = vh;
+    }
 
-		this.claimId = claimId;
-		this.vh = vh;
-	}
+    @Override
+    public void onClick(final View v) {
 
-	@Override
-	public void onClick(final View v) {
+        final Claim claim = Claim.getClaim(claimId);
+        boolean onlyLocal = true;
 
-		final Claim claim = Claim.getClaim(claimId);
-		boolean onlyLocal = true;
+        if (!claim.isDeleted() && (claim.getStatus().equals(ClaimStatus._UNMODERATED)
+                || claim.getStatus().equals(ClaimStatus._CHALLENGED)
+                || claim.getStatus().equals(ClaimStatus._UPDATE_INCOMPLETE)
+                || claim.getStatus().equals(ClaimStatus._UPDATE_ERROR))) {
 
-		if (claim.getStatus().equals(ClaimStatus._UNMODERATED)
-				|| claim.getStatus().equals(ClaimStatus._CHALLENGED)
-				|| claim.getStatus().equals(ClaimStatus._UPDATE_INCOMPLETE)
-				|| claim.getStatus().equals(ClaimStatus._UPDATE_ERROR)) {
-			if (!OpenTenureApplication.isLoggedin()) {
+            if (!OpenTenureApplication.isLoggedin()) {
+                Toast toast = Toast.makeText(v.getContext(), R.string.message_login_before, Toast.LENGTH_SHORT);
+                toast.show();
+                return;
+            } else if (OpenTenureApplication.getUsername().equals(claim.getRecorderName()) && claim.isUploadable()) {
+                onlyLocal = false;
+            }
+        }
 
-				Toast toast = Toast.makeText(v.getContext(),
-						R.string.message_login_before, Toast.LENGTH_SHORT);
-				toast.show();
-				return;
+        if (!onlyLocal) {
+            if (claimId != null) {
 
-			} else if (OpenTenureApplication.getUsername().equals(
-					claim.getRecorderName()) && claim.isUploadable() ) {
-				onlyLocal = false;
+                // Here the withdrawn case
+                // custom dialog
+                final Dialog dialog = new Dialog(v.getContext());
+                dialog.setContentView(R.layout.custom_remove_claim);
+                dialog.setTitle(R.string.withdraw_claim);
 
-			}
-		}
-		
-		if (!onlyLocal) {
-			if (claimId != null) {
+                // Confirm Dialog
+                TextView message = (TextView) dialog.findViewById(R.id.remove_quest);
+                message.setTextSize(20);
 
-				// Here the withdrawn case
-				// custom dialog
-				final Dialog dialog = new Dialog(v.getContext());
-				dialog.setContentView(R.layout.custom_remove_claim);
-				dialog.setTitle(R.string.withdraw_claim);
+                // Confirm Button
+                final Button confirmButton = (Button) dialog.findViewById(R.id.ClaimWithdrawnConfirm);
+                confirmButton.setText(R.string.confirm);
 
-				// Confirm Dialog
-				TextView message = (TextView) dialog
-						.findViewById(R.id.remove_quest);
-				message.setTextSize(20);
+                confirmButton.setOnClickListener(new View.OnClickListener() {
 
-				// Confirm Button
+                    @Override
+                    public void onClick(View v) {
+                        // Here the community server call
+                        WithdrawClaimTask wdc = new WithdrawClaimTask();
+                        wdc.execute(claimId);
+                        dialog.dismiss();
+                    }
+                });
 
-				final Button confirmButton = (Button) dialog
-						.findViewById(R.id.ClaimWithdrawnConfirm);
-				confirmButton.setText(R.string.confirm);
+                // Delete locally Button
+                final Button deleteLocally = (Button) dialog.findViewById(R.id.ClaimDeleteLocally);
+                deleteLocally.setText(R.string.delete_locally);
 
-				confirmButton.setOnClickListener(new View.OnClickListener() {
+                deleteLocally.setOnClickListener(new View.OnClickListener() {
 
-					@Override
-					public void onClick(View v) {
-						// Here the community server call
+                    @Override
+                    public void onClick(View v) {
+                        deleteClaim(claim, dialog);
+                    }
+                });
 
-						WithdrawClaimTask wdc = new WithdrawClaimTask();
-						wdc.execute(claimId);
+                final Button cancelButton = (Button) dialog.findViewById(R.id.ClaimWithdrawnDelete);
+                cancelButton.setText(R.string.cancel);
 
-						dialog.dismiss();
+                cancelButton.setOnClickListener(new View.OnClickListener() {
 
-					}
-				});
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
 
-				// Delete locally Button
+                dialog.show();
+            } else {
+                Toast toast = Toast.makeText(v.getContext(),
+                        R.string.message_save_claim_before_submit,
+                        Toast.LENGTH_SHORT);
+                toast.show();
+            }
 
-				
-				final Button deleteLocally = (Button) dialog
-						.findViewById(R.id.ClaimDeleteLocally);
-				deleteLocally.setText(R.string.delete_locally);
+        } else {
 
-				deleteLocally.setOnClickListener(new View.OnClickListener() {
+            AlertDialog.Builder dialog = new AlertDialog.Builder(v.getContext());
 
-					@Override
-					public void onClick(View v) {
+            dialog.setTitle(R.string.action_remove_claim);
+            if(claim.isDeleted()) {
+                dialog.setMessage(R.string.message_remove_permanently);
+            } else {
+                dialog.setMessage(R.string.message_remove_claim);
+            }
 
-						Person claimant = claim.getPerson();
+            dialog.setPositiveButton(R.string.confirm,
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            deleteClaim(claim, dialog);
+                        }
+                    });
 
-						if (Claim.deleteCascade(claim.getClaimId()) != 0) {
+            dialog.setNegativeButton(R.string.cancel,
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
 
-							dialog.dismiss();
+                        }
+                    });
+            dialog.show();
+        }
+    }
 
-							/*
-							 * Finally delete the claimant if is the case
-							 */
+    private void deleteClaim(Claim claim, DialogInterface dialog) {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(OpenTenureApplication.getContext());
+        boolean softDelete = preferences.getBoolean(OpenTenurePreferencesActivity.SOFT_DELETE, true);
 
-							if (!claim.getStatus().equals(ClaimStatus._CREATED)
-									&& !claim.getStatus().equals(
-											ClaimStatus._UPLOAD_INCOMPLETE)
-									&& !claim.getStatus().equals(
-											ClaimStatus._UPLOAD_ERROR))
-								claimant.delete();
-							
-							OpenTenureApplication.getLocalClaimsFragment()
-							.refresh();
+        if (claim.isDeleted() || !softDelete){
+            // Make real delete
+            Person claimant = claim.getPerson();
 
+            if (Claim.deleteCascade(claim.getClaimId()) != 0) {
 
-							Toast toast = Toast.makeText(
-									OpenTenureApplication.getContext(),
-									OpenTenureApplication
-											.getContext()
-											.getResources()
-											.getString(
-													R.string.message_deleted_claim),
-									Toast.LENGTH_SHORT);
-							toast.show();
-							
-							
-						} else {
+                dialog.dismiss();
 
-							Toast toast = Toast.makeText(
-									OpenTenureApplication.getContext(),
-									OpenTenureApplication
-											.getContext()
-											.getResources()
-											.getString(
-													R.string.message_error_deleting_claim),
-									Toast.LENGTH_SHORT);
-							toast.show();
+                if (!claim.getStatus().equals(ClaimStatus._CREATED)
+                        && !claim.getStatus().equals(ClaimStatus._UPLOAD_INCOMPLETE)
+                        && !claim.getStatus().equals(ClaimStatus._UPLOAD_ERROR))
+                    claimant.delete();
 
-						}
+                OpenTenureApplication.getLocalClaimsFragment().refresh();
 
-					}
-				});
-
-				// Cancel Button
-
-				final Button cancelButton = (Button) dialog
-						.findViewById(R.id.ClaimWithdrawnDelete);
-				cancelButton.setText(R.string.cancel);
-
-				cancelButton.setOnClickListener(new View.OnClickListener() {
-
-					@Override
-					public void onClick(View v) {
-						dialog.dismiss();
-					}
-				});
-
-				dialog.show();
-			} else {
-				Toast toast = Toast.makeText(v.getContext(),
-						R.string.message_save_claim_before_submit,
-						Toast.LENGTH_SHORT);
-				toast.show();
-			}
-
-		}
-
-		else {
-
-			AlertDialog.Builder dialog = new AlertDialog.Builder(v.getContext());
-
-			dialog.setTitle(R.string.action_remove_claim);
-			dialog.setMessage(R.string.message_remove_claim);
-
-			dialog.setPositiveButton(R.string.confirm,
-					new DialogInterface.OnClickListener() {
-
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							Person claimant = claim.getPerson();
-
-							if (Claim.deleteCascade(claim.getClaimId()) != 0) {
-
-								dialog.dismiss();
-
-								/* Finally delete claimant if is the case */
-								if (!claim.getStatus().equals(ClaimStatus._CREATED)
-										&& !claim.getStatus().equals(
-												ClaimStatus._UPLOAD_INCOMPLETE)
-										&& !claim.getStatus().equals(
-												ClaimStatus._UPLOAD_ERROR))
-									claimant.delete();
-								
-								OpenTenureApplication.getLocalClaimsFragment()
-								.refresh();
-
-
-								Toast toast = Toast.makeText(
-										OpenTenureApplication.getContext(),
-										OpenTenureApplication
-												.getContext()
-												.getResources()
-												.getString(
-														R.string.message_deleted_claim),
-										Toast.LENGTH_SHORT);
-								toast.show();
-
-							} else {
-
-								Toast toast = Toast.makeText(
-										OpenTenureApplication.getContext(),
-										OpenTenureApplication
-												.getContext()
-												.getResources()
-												.getString(
-														R.string.message_error_deleting_claim
-														),
-										Toast.LENGTH_SHORT);
-								toast.show();
-
-							}
-
-						}
-					});
-
-			dialog.setNegativeButton(R.string.cancel,
-					new DialogInterface.OnClickListener() {
-
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-
-						}
-					});
-
-			dialog.show();
-
-		}
-
-	}
+                Toast toast = Toast.makeText(
+                        OpenTenureApplication.getContext(),
+                        OpenTenureApplication
+                                .getContext()
+                                .getResources()
+                                .getString(R.string.message_deleted_claim),
+                        Toast.LENGTH_SHORT);
+                toast.show();
+            } else {
+                Toast toast = Toast.makeText(
+                        OpenTenureApplication.getContext(),
+                        OpenTenureApplication
+                                .getContext()
+                                .getResources()
+                                .getString(R.string.message_error_deleting_claim),
+                        Toast.LENGTH_SHORT);
+                toast.show();
+            }
+        } else {
+            // Mark claim as deleted
+            claim.markDeleted(true);
+            OpenTenureApplication.getLocalClaimsFragment().refresh();
+            OpenTenureApplication.getMapFragment().refreshMap();
+        }
+    }
 }

@@ -46,6 +46,7 @@ public class OpenTenurePreferencesActivity extends PreferenceActivity implements
 	public static final String FORM_URL_PREF = "form_template_url_pref";
 	public static final String SOFTWARE_VERSION_PREF = "software_version_pref";
 	public static final String FORM_VALIDATION_PREF = "form_validation_pref";
+	public static final String SOFT_DELETE = "soft_delete_pref";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

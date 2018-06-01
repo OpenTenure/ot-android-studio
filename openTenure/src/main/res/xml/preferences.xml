@@ -8,6 +8,14 @@
         android:key="cs_url_pref"
         android:summary="@string/cs_url_pref_summary"
         android:title="@string/cs_url_pref_title" />
+	<SwitchPreference
+		android:key="soft_delete_pref"
+		android:title="@string/soft_delete"
+		android:defaultValue="true"
+		android:switchTextOff="@string/form_validation_off"
+		android:switchTextOn="@string/form_validation_on"
+		android:summaryOff="@string/soft_delete_details"
+		android:summaryOn="@string/soft_delete_details" />
 	</PreferenceCategory>
     
     <PreferenceCategory android:title="@string/map_sources" >

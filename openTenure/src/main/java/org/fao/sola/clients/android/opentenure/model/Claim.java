@@ -80,6 +80,14 @@ public class Claim {
 		this.dynamicForm = dynamicForm;
 	}
 
+	public boolean isDeleted() {
+		return deleted;
+	}
+
+	public void setDeleted(boolean deleted) {
+		this.deleted = deleted;
+	}
+
 	public String getName() {
 		return name;
 	}
@@ -679,6 +687,41 @@ public class Claim {
 		return result;
 	}
 
+	public int markDeleted(boolean isDeleted) {
+		return markDeleted(getClaimId(), isDeleted);
+	}
+
+	public static int markDeleted(String claimId, boolean isDeleted) {
+		int result = 0;
+		PreparedStatement statement = null;
+		Connection conn = OpenTenureApplication.getInstance().getDatabase().getConnection();
+
+		try {
+			statement = conn.prepareStatement("UPDATE CLAIM SET DELETED=? WHERE CLAIM_ID=?");
+			statement.setBoolean(1, isDeleted);
+			statement.setString(2, claimId);
+			result = statement.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (Exception exception) {
+			exception.printStackTrace();
+		} finally {
+			if (statement != null) {
+				try {
+					statement.close();
+				} catch (SQLException e) {
+				}
+			}
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+				}
+			}
+		}
+		return result;
+	}
+
 	public static Claim getClaim(String claimId) {
 		Claim claim = null;
 		Connection localConnection = null;
@@ -690,7 +733,7 @@ public class Claim {
 			localConnection = OpenTenureApplication.getInstance().getDatabase()
 					.getConnection();
 			statement = localConnection
-					.prepareStatement("SELECT STATUS, CLAIM_NUMBER, NAME, PERSON_ID, TYPE, CHALLENGED_CLAIM_ID, CHALLANGE_EXPIRY_DATE, DATE_OF_START, LAND_USE, NOTES, RECORDER_NAME, VERSION, CLAIM_AREA, SURVEY_FORM, BOUNDARY_ID FROM CLAIM WHERE CLAIM_ID=?");
+					.prepareStatement("SELECT STATUS, CLAIM_NUMBER, NAME, PERSON_ID, TYPE, CHALLENGED_CLAIM_ID, CHALLANGE_EXPIRY_DATE, DATE_OF_START, LAND_USE, NOTES, RECORDER_NAME, VERSION, CLAIM_AREA, SURVEY_FORM, BOUNDARY_ID, DELETED FROM CLAIM WHERE CLAIM_ID=?");
 			statement.setString(1, claimId);
 			rs = statement.executeQuery();
 			while (rs.next()) {
@@ -717,6 +760,7 @@ public class Claim {
 					claim.setDynamicForm(new FormPayload());
 				}
 				claim.setBoundaryId(rs.getString(15));
+				claim.setDeleted(rs.getBoolean(16));
 			}
 
 		} catch (SQLException e) {
@@ -752,7 +796,7 @@ public class Claim {
 		try {
 
 			statement = externalConnection
-					.prepareStatement("SELECT STATUS, CLAIM_NUMBER, NAME, PERSON_ID, TYPE, CHALLENGED_CLAIM_ID, CHALLANGE_EXPIRY_DATE, DATE_OF_START, LAND_USE, NOTES, RECORDER_NAME, VERSION, CLAIM_AREA, SURVEY_FORM, BOUNDARY_ID FROM CLAIM WHERE CLAIM_ID=?");
+					.prepareStatement("SELECT STATUS, CLAIM_NUMBER, NAME, PERSON_ID, TYPE, CHALLENGED_CLAIM_ID, CHALLANGE_EXPIRY_DATE, DATE_OF_START, LAND_USE, NOTES, RECORDER_NAME, VERSION, CLAIM_AREA, SURVEY_FORM, BOUNDARY_ID, DELETED FROM CLAIM WHERE CLAIM_ID=?");
 			statement.setString(1, claimId);
 			ResultSet rs = statement.executeQuery();
 			while (rs.next()) {
@@ -779,6 +823,7 @@ public class Claim {
 					claim.setDynamicForm(new FormPayload());
 				}
 				claim.setBoundaryId(rs.getString(15));
+				claim.setDeleted(rs.getBoolean(16));
 			}
 
 		} catch (SQLException e) {
@@ -803,7 +848,7 @@ public class Claim {
 		try {
 
 			statement = externalConnection
-					.prepareStatement("SELECT CLAIM_ID, STATUS, CLAIM_NUMBER, NAME, PERSON_ID, TYPE, CHALLENGED_CLAIM_ID, CHALLANGE_EXPIRY_DATE, DATE_OF_START, LAND_USE, NOTES, RECORDER_NAME, VERSION, CLAIM_AREA, SURVEY_FORM, BOUNDARY_ID FROM CLAIM");
+					.prepareStatement("SELECT CLAIM_ID, STATUS, CLAIM_NUMBER, NAME, PERSON_ID, TYPE, CHALLENGED_CLAIM_ID, CHALLANGE_EXPIRY_DATE, DATE_OF_START, LAND_USE, NOTES, RECORDER_NAME, VERSION, CLAIM_AREA, SURVEY_FORM, BOUNDARY_ID, DELETED FROM CLAIM");
 			ResultSet rs = statement.executeQuery();
 			while (rs.next()) {
 				String claimId = rs.getString(1);
@@ -824,6 +869,7 @@ public class Claim {
 				claim.setClaimArea(rs.getInt(14));
 				Clob clob = rs.getClob(15);
 				claim.setBoundaryId(rs.getString(16));
+				claim.setDeleted(rs.getBoolean(17));
 				if (clob != null) {
 					claim.setDynamicForm(FormPayload.fromJson(clob
 							.getSubString(1L, (int) clob.length())));
@@ -866,7 +912,7 @@ public class Claim {
 		try {
 
 			statement = externalConnection
-					.prepareStatement("SELECT CLAIM_ID, STATUS, CLAIM_NUMBER, NAME, TYPE, CHALLANGE_EXPIRY_DATE, DATE_OF_START, LAND_USE, NOTES, RECORDER_NAME, VERSION, CLAIM_AREA, BOUNDARY_ID FROM CLAIM");
+					.prepareStatement("SELECT CLAIM_ID, STATUS, CLAIM_NUMBER, NAME, TYPE, CHALLANGE_EXPIRY_DATE, DATE_OF_START, LAND_USE, NOTES, RECORDER_NAME, VERSION, CLAIM_AREA, BOUNDARY_ID, DELETED FROM CLAIM");
 			ResultSet rs = statement.executeQuery();
 			while (rs.next()) {
 				String claimId = rs.getString(1);
@@ -884,6 +930,7 @@ public class Claim {
 				claim.setVersion(rs.getString(11));
 				claim.setClaimArea(rs.getInt(12));
 				claim.setBoundaryId(rs.getString(13));
+				claim.setDeleted(rs.getBoolean(14));
 				claim.setAdditionalInfo(new ArrayList<AdditionalInfo>());
 
 				allClaims.add(claim);
@@ -955,7 +1002,7 @@ public class Claim {
 					+ "VERTEX.MAP_LAT, " + "VERTEX.MAP_LON "
 					+ "FROM CLAIM, PERSON, VERTEX "
 					+ "WHERE CLAIM.PERSON_ID=PERSON.PERSON_ID "
-					+ "AND CLAIM.CLAIM_ID=VERTEX.CLAIM_ID "
+					+ "AND CLAIM.CLAIM_ID=VERTEX.CLAIM_ID AND CLAIM.DELETED=FALSE "
 					+ "ORDER BY CLAIM_ID, VERTEX.SEQUENCE_NUMBER");
 			ResultSet rs = statement.executeQuery();
 			List<Vertex> vertices = null;
@@ -1056,7 +1103,8 @@ public class Claim {
 							+ "CP.LAST_NAME, "
 							+ "ATTACHMENT.ATTACHMENT_ID, "
 							+ "ATTACHMENT.STATUS, "
-							+ "ATTACHMENT.SIZE "
+							+ "ATTACHMENT.SIZE, "
+							+ "CP.DELETED "
 							+ "FROM (SELECT "
 							+ "CLAIM.CLAIM_ID, "
 							+ "CLAIM.STATUS, "
@@ -1065,6 +1113,7 @@ public class Claim {
 							+ "CLAIM.CLAIM_NUMBER, "
 							+ "CLAIM.CHALLANGE_EXPIRY_DATE, "
 							+ "CLAIM.RECORDER_NAME, "
+							+ "CLAIM.DELETED, "
 							+ "PERSON.PERSON_ID, "
 							+ "PERSON.FIRST_NAME, "
 							+ "PERSON.LAST_NAME "
@@ -1100,6 +1149,7 @@ public class Claim {
 					claim.setClaimNumber((rs.getString(5)));
 					claim.setChallengeExpiryDate((rs.getDate(6)));
 					claim.setRecorderName((rs.getString(7)));
+					claim.setDeleted(rs.getBoolean(14));
 					String personId = rs.getString(8);
 					Person person = new Person();
 					person.setPersonId(personId);
@@ -1445,7 +1495,7 @@ public class Claim {
 
 	public boolean isModifiable() {
 
-		if (getChallengeExpiryDate() == null)
+		if (getChallengeExpiryDate() == null && !isDeleted())
 			return true;
 		else
 			return false;
@@ -1556,5 +1606,5 @@ public class Claim {
 	private String version;
 	private long claimArea;
 	private FormPayload dynamicForm;
-
+	private boolean deleted;
 }

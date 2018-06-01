@@ -39,7 +39,11 @@ import org.fao.sola.clients.android.opentenure.model.Claim;
 import org.fao.sola.clients.android.opentenure.model.ClaimStatus;
 import org.fao.sola.clients.android.opentenure.model.Person;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -81,10 +85,8 @@ public class LocalClaimsListAdapter extends ArrayAdapter<ClaimListTO> implements
 
 				filteredClaims = new ArrayList<ClaimListTO>();
 				for (ClaimListTO cto : originalClaims) {
-					String lcase = cto.getSlogan().toLowerCase(
-							Locale.getDefault());
-					if (lcase.contains(filterString.toLowerCase(Locale
-							.getDefault()))) {
+					String lcase = cto.getSlogan().toLowerCase(Locale.getDefault());
+					if (lcase.contains(filterString.toLowerCase(Locale.getDefault()))) {
 						filteredClaims.add(cto);
 					}
 				}
@@ -116,40 +118,63 @@ public class LocalClaimsListAdapter extends ArrayAdapter<ClaimListTO> implements
 	}
 
 	@Override
-	public View getView(int position, View convertView, ViewGroup parent) {
+	public View getView(final int position, View convertView, ViewGroup parent) {
 		ViewHolder vh;
 
 		if (convertView == null) {
-			convertView = inflater.inflate(R.layout.claims_list_item, parent,
-					false);
+			convertView = inflater.inflate(R.layout.claims_list_item, parent,false);
 			vh = new ViewHolder();
 			vh.slogan = (TextView) convertView.findViewById(R.id.claim_slogan);
+			if(claims.get(position).isDeleted()){
+				vh.slogan.setTextColor(Color.rgb(200, 0, 0));
+				vh.slogan.setPaintFlags(vh.slogan.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+			}
+
 			vh.number = (TextView) convertView.findViewById(R.id.claim_number);
 			vh.id = (TextView) convertView.findViewById(R.id.claim_id);
 			vh.status = (TextView) convertView.findViewById(R.id.claim_status);
-			vh.iconUnmoderated = (ImageView) convertView
-					.findViewById(R.id.status_unmoderated);
-			vh.iconLocal = (ImageView) convertView
-					.findViewById(R.id.status_local);
-			vh.iconModerated = (ImageView) convertView
-					.findViewById(R.id.status_moderated);
-			vh.iconChallenged = (ImageView) convertView
-					.findViewById(R.id.status_challenged);
-			vh.iconWithdrawn = (ImageView) convertView
-					.findViewById(R.id.status_withdrawn);
-			vh.iconReviewed = (ImageView) convertView
-					.findViewById(R.id.status_reviewed);
-			vh.challengeExpiryDate = (TextView) convertView
-					.findViewById(R.id.claim_challenging_time);
-			vh.picture = (ImageView) convertView
-					.findViewById(R.id.claimant_picture);
-			vh.send = (ImageView) convertView
-					.findViewById(R.id.action_submit_to_server);
-			vh.export = (ImageView) convertView
-					.findViewById(R.id.action_export_to_server);
-			vh.remove = (ImageView) convertView
-					.findViewById(R.id.action_remove_claim);
+			vh.iconUnmoderated = (ImageView) convertView.findViewById(R.id.status_unmoderated);
+			vh.iconLocal = (ImageView) convertView.findViewById(R.id.status_local);
+			vh.iconModerated = (ImageView) convertView.findViewById(R.id.status_moderated);
+			vh.iconChallenged = (ImageView) convertView.findViewById(R.id.status_challenged);
+			vh.iconWithdrawn = (ImageView) convertView.findViewById(R.id.status_withdrawn);
+			vh.iconReviewed = (ImageView) convertView.findViewById(R.id.status_reviewed);
+			vh.challengeExpiryDate = (TextView) convertView.findViewById(R.id.claim_challenging_time);
+			vh.picture = (ImageView) convertView.findViewById(R.id.claimant_picture);
+			vh.send = (ImageView) convertView.findViewById(R.id.action_submit_to_server);
+			vh.export = (ImageView) convertView.findViewById(R.id.action_export_to_server);
+			vh.remove = (ImageView) convertView.findViewById(R.id.action_remove_claim);
 
+			vh.undoDelete = (ImageView) convertView.findViewById(R.id.action_undo_delete);
+			vh.undoDelete.setVisibility(View.GONE);
+			vh.undoDelete.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View view) {
+					AlertDialog.Builder dialog = new AlertDialog.Builder(view.getContext());
+
+					dialog.setTitle(R.string.action_undo_delete);
+					dialog.setMessage(R.string.message_undo_delete);
+
+					dialog.setPositiveButton(R.string.confirm,
+							new DialogInterface.OnClickListener() {
+								@Override
+								public void onClick(DialogInterface dialog, int which) {
+									// Mark claim as deleted
+									Claim.markDeleted(claims.get(position).getId(), false);
+									OpenTenureApplication.getLocalClaimsFragment().refresh();
+									OpenTenureApplication.getMapFragment().refreshMap();
+								}
+							});
+
+					dialog.setNegativeButton(R.string.cancel,
+							new DialogInterface.OnClickListener() {
+								@Override
+								public void onClick(DialogInterface dialog, int which) {
+								}
+							});
+					dialog.show();
+				}
+			});
 			convertView.setTag(vh);
 		} else {
 			vh = (ViewHolder) convertView.getTag();
@@ -160,22 +185,16 @@ public class LocalClaimsListAdapter extends ArrayAdapter<ClaimListTO> implements
 			vh.iconWithdrawn.setVisibility(View.GONE);
 			vh.iconReviewed.setVisibility(View.GONE);
 		}
+
 		vh.slogan.setText(claims.get(position).getSlogan());
 
-		vh.remove.setOnClickListener(new ClaimDeleteListener(claims.get(
-				position).getId(), vh));
-		vh.send.setOnClickListener(new SubmitClaimListener(claims.get(position)
-				.getId(), vh));
-
-		vh.export.setOnClickListener(new PreExportClaimListener(claims.get(
-				position).getId()));
+		vh.remove.setOnClickListener(new ClaimDeleteListener(claims.get(position).getId(), vh));
+		vh.send.setOnClickListener(new SubmitClaimListener(claims.get(position).getId(), vh));
+		vh.export.setOnClickListener(new PreExportClaimListener(claims.get(position).getId()));
 
 		String realStatus = "";
-		if (OpenTenureApplication.getInstance().getChangingClaims()
-				.contains(claims.get(position).getId())) {
-			realStatus = Claim.getClaim(claims.get(position).getId())
-					.getStatus();
-
+		if (OpenTenureApplication.getInstance().getChangingClaims().contains(claims.get(position).getId())) {
+			realStatus = Claim.getClaim(claims.get(position).getId()).getStatus();
 		} else
 			realStatus = claims.get(position).getStatus();
 
@@ -290,12 +309,10 @@ public class LocalClaimsListAdapter extends ArrayAdapter<ClaimListTO> implements
 			vh.number.setTextSize(8);
 			if (claims.get(position).getNumber() != null)
 				vh.number.setText(claims.get(position).getNumber());
-			vh.status.setTextColor(context.getResources().getColor(
-					R.color.status_created));
+			vh.status.setTextColor(context.getResources().getColor(R.color.status_created));
 
 			int progress = FileSystemUtilities.getUploadProgress(
-					claims.get(position).getId(), claims.get(position)
-							.getStatus());
+					claims.get(position).getId(), claims.get(position).getStatus());
 			// Setting the update value in the progress bar
 			vh.bar = (ProgressBar) convertView.findViewById(R.id.progress_bar);
 			vh.bar.setVisibility(View.VISIBLE);
@@ -413,6 +430,13 @@ public class LocalClaimsListAdapter extends ArrayAdapter<ClaimListTO> implements
 			vh.id.setGravity(View.TEXT_DIRECTION_LOCALE);
 			vh.challengeExpiryDate.setGravity(View.TEXT_DIRECTION_LOCALE);
 		}
+
+		if(claims.get(position).isDeleted()){
+			vh.send.setVisibility(View.GONE);
+			vh.export.setVisibility(View.GONE);
+			vh.undoDelete.setVisibility(View.VISIBLE);
+		}
+
 		return convertView;
 	}
 }
