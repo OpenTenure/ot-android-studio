@@ -517,7 +517,9 @@ public class LocalClaimsFragment extends ListFragment {
     @Override
     public void onSaveInstanceState(Bundle outState) {
         outState.putString(FILTER_KEY, filter);
-        outState.putBoolean(SHOW_DELETED_KEY, showDeletedMenuItem.isChecked());
+        if(showDeletedMenuItem != null) {
+            outState.putBoolean(SHOW_DELETED_KEY, showDeletedMenuItem.isChecked());
+        }
         super.onSaveInstanceState(outState);
     }
 

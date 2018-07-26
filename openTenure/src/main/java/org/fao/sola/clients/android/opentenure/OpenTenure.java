@@ -218,6 +218,7 @@ public class OpenTenure extends FragmentActivity implements ModeDispatcher,
 
         tabs = (PagerSlidingTabStrip) findViewById(R.id.tabs);
         mViewPager = (ViewPager) findViewById(R.id.open_tenure_pager);
+
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
         mViewPager.setAdapter(mSectionsPagerAdapter);

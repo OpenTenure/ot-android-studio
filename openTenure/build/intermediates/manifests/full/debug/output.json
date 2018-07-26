@@ -1,1 +1,1 @@
-[{"outputType":{"type":"MERGED_MANIFESTS"},"apkInfo":{"type":"MAIN","splits":[],"versionCode":25},"path":"AndroidManifest.xml","properties":{"packageId":"org.fao.sola.clients.android.opentenure","split":"","minSdkVersion":"17"}}]
+[{"outputType":{"type":"MERGED_MANIFESTS"},"apkInfo":{"type":"MAIN","splits":[],"versionCode":26},"path":"AndroidManifest.xml","properties":{"packageId":"org.fao.sola.clients.android.opentenure","split":"","minSdkVersion":"17"}}]

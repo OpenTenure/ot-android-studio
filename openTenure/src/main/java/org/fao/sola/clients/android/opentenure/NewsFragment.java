@@ -664,7 +664,7 @@ public class NewsFragment extends ListFragment {
 			updateBoundaryStatus.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 		}
 
-		if (!OpenTenureApplication.getInstance().isCheckedBoundaryStatus()) {
+		if (!OpenTenureApplication.getInstance().isCheckedBoundaryTypes()) {
 			Log.d(this.getClass().getName(),"starting tasks for boundary types download");
 
 			BoundaryTypeTask updateBoundaryType = new BoundaryTypeTask();

@@ -46,7 +46,7 @@ public class BoundaryTask extends AsyncTask<String, Void, List<Boundary>> {
 
 	@Override
 	protected void onPostExecute(List<Boundary> boundaries) {
-		if (boundaries != null && (boundaries.size() > 0)) {
+		if (boundaries != null) {
 			org.fao.sola.clients.android.opentenure.model.Boundary.updateBoundariesFromResponse(boundaries);
 			OpenTenureApplication.getInstance().setCheckedBoundaries(true);
 			OpenTenureApplication.getInstance().setSettingsSynchronized();

@@ -43,7 +43,7 @@ INJECTED from C:\SOLA\Project\GIT\SOLA\open_tenure\ot-android-studio\openTenure\
 		INJECTED from C:\SOLA\Project\GIT\SOLA\open_tenure\ot-android-studio\openTenure\src\main\AndroidManifest.xml
 		INJECTED from C:\SOLA\Project\GIT\SOLA\open_tenure\ot-android-studio\openTenure\src\main\AndroidManifest.xml
 	android:versionName
-		ADDED from C:\SOLA\Project\GIT\SOLA\open_tenure\ot-android-studio\openTenure\src\main\AndroidManifest.xml:5:5-32
+		ADDED from C:\SOLA\Project\GIT\SOLA\open_tenure\ot-android-studio\openTenure\src\main\AndroidManifest.xml:5:5-31
 		INJECTED from C:\SOLA\Project\GIT\SOLA\open_tenure\ot-android-studio\openTenure\src\main\AndroidManifest.xml
 		INJECTED from C:\SOLA\Project\GIT\SOLA\open_tenure\ot-android-studio\openTenure\src\main\AndroidManifest.xml
 	xmlns:android
