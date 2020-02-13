@@ -82,12 +82,13 @@ public class OpenTenureApplication extends MultiDexApplication {
 	private static final String _ALBANIAN_LOCALIZATION = "sq-AL";
 	private static final String _ARABIC_LOCALIZATION = "ar-JO";
 	private static final String _BURMESE_LOCALIZATION = "my-MM";
-
+	private static final String _SAMOAN_LOCALIZATION = "sm-WS";
 	private String localization;
 	private Locale locale;
 	private boolean khmer = false;
 	private boolean albanian = false;
 	private boolean burmese = false;
+	private boolean samoan = false;
 	private static boolean loggedin;
 	private static String username;
 	private static Activity activity;
@@ -105,7 +106,7 @@ public class OpenTenureApplication extends MultiDexApplication {
 	private static View personsView;
 	private static LocalClaimsFragment localClaimsFragment;
 	private static FragmentActivity newsFragmentActivity;
-	public static String _DEFAULT_COMMUNITY_SERVER = "https://demo.opentenure.org";
+	public static String _DEFAULT_COMMUNITY_SERVER = "http://smsmcl.opentenure.org:8080";
 
 	private static volatile int claimsToDownload = 0;
 	private static volatile int initialClaimsToDownload = 0;
@@ -555,6 +556,14 @@ public class OpenTenureApplication extends MultiDexApplication {
 		this.burmese = burmese;
 	}
 
+	public boolean isSamoan() {
+		return samoan;
+	}
+
+	public void setSamoan(boolean samoan) {
+		this.samoan = samoan;
+	}
+
 	public void setLocalization(Locale locale) {
 
 		Resources.getSystem().getConfiguration().setLocale(locale);
@@ -570,6 +579,11 @@ public class OpenTenureApplication extends MultiDexApplication {
 		} else if (isBurmese()) {
 
 			localization = OpenTenureApplication._BURMESE_LOCALIZATION;
+
+		} else if (isSamoan()) {
+
+			localization = OpenTenureApplication._SAMOAN_LOCALIZATION;
+
 
 		} else if (locale.getLanguage().toLowerCase(locale).equals("ar")) {
 

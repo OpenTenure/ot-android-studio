@@ -84,10 +84,10 @@ public class WmsMapTileProvider extends UrlTileProvider{
 	    super(width, height);
 		String baseURL = preferences.getString(
 				OpenTenurePreferencesActivity.GEOSERVER_URL_PREF,
-				"http://demo.flossola.org:8080/geoserver/sola/wms");
+				"http://demo.opentenure.org:8085/geoserver/opentenure/wms");
 		String layer = preferences.getString(
 				OpenTenurePreferencesActivity.GEOSERVER_LAYER_PREF,
-				"sola:nz_orthophoto");
+				"opentenure:imagery");
 		URL_STRING = baseURL + 
 	            "/wms?layers=" + layer + 
 	            "&version=" + version + 
