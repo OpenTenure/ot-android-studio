@@ -128,7 +128,7 @@ public class ShareDetailsActivity extends FragmentActivity implements
 			if (!claim.getStatus().equals(ClaimStatus._CREATED)
 					&& !claim.getStatus().equals(ClaimStatus._UPLOAD_ERROR)
 					&& !claim.getStatus()
-							.equals(ClaimStatus._UPLOAD_INCOMPLETE)) {
+					.equals(ClaimStatus._UPLOAD_INCOMPLETE)) {
 
 				spinner.setFocusable(false);
 				spinner.setEnabled(false);
@@ -152,12 +152,26 @@ public class ShareDetailsActivity extends FragmentActivity implements
 			@Override
 			public void onClick(View v) {
 				Claim claim = Claim.getClaim(claimId);
-				
-				
-				
-				
-				if (claim.getAvailableShares() >= 0) {
 
+
+
+
+				if (claim.getAvailableShares() >= 0) {
+					Intent intent = new Intent(v.getContext(),
+							SelectPersonActivity.class);
+					intent.putExtra(
+							PersonActivity.PERSON_ID_KEY,
+							PersonActivity.CREATE_PERSON_ID);
+					//intent.putExtra(
+					//			PersonActivity.ENTIY_TYPE,
+					//			PersonActivity.TYPE_PERSON);
+					intent.putExtra(
+							PersonActivity.MODE_KEY,
+							mode.toString());
+					startActivityForResult(intent,
+							PERSON_RESULT);
+
+					/*
 					AlertDialog.Builder dialog = new AlertDialog.Builder(
 							((ViewGroup) getWindow().getDecorView())
 									.getContext());
@@ -179,7 +193,7 @@ public class ShareDetailsActivity extends FragmentActivity implements
 									intent.putExtra(
 											PersonActivity.PERSON_ID_KEY,
 											PersonActivity.CREATE_PERSON_ID);
-									intent.putExtra(PersonActivity.ENTIY_TYPE,
+									intent.putExtra(PersonActivity.ENTITY_TYPE,
 											PersonActivity.TYPE_PERSON);
 									intent.putExtra(PersonActivity.MODE_KEY,
 											mode);
@@ -202,7 +216,7 @@ public class ShareDetailsActivity extends FragmentActivity implements
 									intent.putExtra(
 											PersonActivity.PERSON_ID_KEY,
 											PersonActivity.CREATE_PERSON_ID);
-									intent.putExtra(PersonActivity.ENTIY_TYPE,
+									intent.putExtra(PersonActivity.ENTITY_TYPE,
 											PersonActivity.TYPE_GROUP);
 									intent.putExtra(PersonActivity.MODE_KEY,
 											mode);
@@ -213,7 +227,7 @@ public class ShareDetailsActivity extends FragmentActivity implements
 							});
 
 					dialog.show();
-
+					*/
 				} else {
 
 					Toast toast = Toast.makeText(
@@ -256,13 +270,13 @@ public class ShareDetailsActivity extends FragmentActivity implements
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
-		case R.id.action_save:
+			case R.id.action_save:
 
-			save();
-			return true;
+				save();
+				return true;
 
-		default:
-			return super.onOptionsItemSelected(item);
+			default:
+				return super.onOptionsItemSelected(item);
 		}
 
 	}
@@ -273,26 +287,26 @@ public class ShareDetailsActivity extends FragmentActivity implements
 		if (data != null) { // No selection has been done
 
 			switch (requestCode) {
-			case SelectPersonActivity.SELECT_PERSON_ACTIVITY_RESULT:
+				case SelectPersonActivity.SELECT_PERSON_ACTIVITY_RESULT:
 
-				String personId = data
-						.getStringExtra(PersonActivity.PERSON_ID_KEY);
+					String personId = data
+							.getStringExtra(PersonActivity.PERSON_ID_KEY);
 
-				if (claimId != null) {
+					if (claimId != null) {
 
-					if (Owner.getOwner(personId, share.getId()) != null
-							|| ownerList.contains(personId)) {
+						if (Owner.getOwner(personId, share.getId()) != null
+								|| ownerList.contains(personId)) {
 
-						Toast.makeText(OpenTenureApplication.getContext(),
-								R.string.message_already_owner,
-								Toast.LENGTH_LONG).show();
-					} else {
-						ownerList.add(personId);
+							Toast.makeText(OpenTenureApplication.getContext(),
+									R.string.message_already_owner,
+									Toast.LENGTH_LONG).show();
+						} else {
+							ownerList.add(personId);
+						}
 					}
-				}
 
-				update();
-				break;
+					update();
+					break;
 			}
 		}
 
@@ -328,7 +342,7 @@ public class ShareDetailsActivity extends FragmentActivity implements
 			int value = Integer.parseInt(spinner.getSelectedItem().toString());
 
 			int delta = value - share.getShares();
-			
+
 			if (delta > 0
 					&& Claim.getClaim(claimId).getAvailableShares() < delta) {
 

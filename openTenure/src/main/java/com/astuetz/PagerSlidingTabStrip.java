@@ -38,11 +38,9 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import java.util.Locale;
-
 import org.fao.sola.clients.android.opentenure.R;
-import org.fao.sola.clients.android.opentenure.R.drawable;
-import org.fao.sola.clients.android.opentenure.R.styleable;
+
+import java.util.Locale;
 
 public class PagerSlidingTabStrip extends HorizontalScrollView {
 
@@ -528,8 +526,8 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 	public int getTabPaddingLeftRight() {
 		return tabPadding;
 	}
-	
-	
+
+
 	public LinearLayout getTabsContainer() {
 		return tabsContainer;
 	}
@@ -568,7 +566,7 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 			dest.writeInt(currentPosition);
 		}
 
-		public static final Parcelable.Creator<SavedState> CREATOR = new Parcelable.Creator<SavedState>() {
+		public static final Creator<SavedState> CREATOR = new Creator<SavedState>() {
 			@Override
 			public SavedState createFromParcel(Parcel in) {
 				return new SavedState(in);

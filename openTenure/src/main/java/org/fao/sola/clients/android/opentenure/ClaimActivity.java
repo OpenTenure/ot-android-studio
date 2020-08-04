@@ -258,10 +258,10 @@ public class ClaimActivity extends FragmentActivity implements ClaimDispatcher,
 			counter = 0;
 			sv.hide();
 			setAlpha(1.0f, tabs.getTabsContainer().getChildAt(0), tabs
-					.getTabsContainer().getChildAt(1), tabs.getTabsContainer()
-					.getChildAt(2), tabs.getTabsContainer().getChildAt(3), tabs
-					.getTabsContainer().getChildAt(4), tabs.getTabsContainer()
-					.getChildAt(5), tabs.getTabsContainer().getChildAt(6),
+							.getTabsContainer().getChildAt(1), tabs.getTabsContainer()
+							.getChildAt(2), tabs.getTabsContainer().getChildAt(3), tabs
+							.getTabsContainer().getChildAt(4), tabs.getTabsContainer()
+							.getChildAt(5), tabs.getTabsContainer().getChildAt(6),
 					tabs, mViewPager);
 			mViewPager.setCurrentItem(0);
 			counter = 0;
@@ -269,99 +269,99 @@ public class ClaimActivity extends FragmentActivity implements ClaimDispatcher,
 		}
 
 		switch (counter) {
-		// case 0:
-		// sv.setShowcase(
-		// new ViewTarget(tabs.getTabsContainer().getChildAt(0)), true);
-		// sv.setContentTitle(getString(R.string.title_claim).toUpperCase());
-		// sv.setContentText(getString(R.string.showcase_claim_message));
-		// mViewPager.setCurrentItem(0);
-		// setAlpha(1.0f, tabs.getTabsContainer().getChildAt(0));
-		// break;
+			// case 0:
+			// sv.setShowcase(
+			// new ViewTarget(tabs.getTabsContainer().getChildAt(0)), true);
+			// sv.setContentTitle(getString(R.string.title_claim).toUpperCase());
+			// sv.setContentText(getString(R.string.showcase_claim_message));
+			// mViewPager.setCurrentItem(0);
+			// setAlpha(1.0f, tabs.getTabsContainer().getChildAt(0));
+			// break;
 
-		// case 0:
-		// sv.setScrollContainer(true);
-		// sv.setShowcase(new ViewTarget(findViewById(R.id.action_export)),
-		// true);
-		// sv.setContentTitle("  ");
-		// sv.setContentText(getString(R.string.showcase_actionClaimDetails_message));
-		// break;
-		case 0:
-			sv.setShowcase(
-					new ViewTarget(tabs.getTabsContainer().getChildAt(1)), true);
-			sv.setContentTitle(getString(R.string.owners).toUpperCase(
-					Locale.getDefault()));
-			sv.setContentText(getString(R.string.showcase_claim_shares_message));
-			setAlpha(1.0f, tabs.getTabsContainer().getChildAt(1));
-			mViewPager.setCurrentItem(1);
-			break;
-		case 1:
-			sv.setShowcase(
-					new ViewTarget(tabs.getTabsContainer().getChildAt(2)), true);
-			sv.setContentTitle(getString(R.string.title_claim_documents)
-					.toUpperCase(Locale.getDefault()));
-			sv.setContentText(getString(R.string.showcase_claim_document_message));
-			setAlpha(1.0f, tabs.getTabsContainer().getChildAt(2));
-			mViewPager.setCurrentItem(2);
-			break;
-		case 2:
-			sv.setShowcase(
-					new ViewTarget(tabs.getTabsContainer().getChildAt(3)), true);
-			sv.setContentTitle(getString(R.string.title_claim_adjacencies)
-					.toUpperCase(Locale.getDefault()));
-			sv.setContentText(getString(R.string.showcase_claim_adjacencies_message));
-			setAlpha(1.0f, tabs.getTabsContainer().getChildAt(3));
-			mViewPager.setCurrentItem(3);
-			break;
-		case 3:
-			sv.setShowcase(
-					new ViewTarget(tabs.getTabsContainer().getChildAt(4)), true);
-			sv.setContentTitle(getString(R.string.title_claim_map).toUpperCase(
-					Locale.getDefault()));
-			sv.setContentText(getString(R.string.showcase_claim_map_message));
-			setAlpha(1.0f, tabs.getTabsContainer().getChildAt(4));
-			mViewPager.setCurrentItem(4);
-			break;
-		case 4:
-			sv.setShowcase(new ViewTarget(mViewPager), true);
-			sv.setContentTitle("  ");
-			sv.setContentText(getString(R.string.showcase_claim_mapdraw_message));
-			mViewPager.setCurrentItem(4);
-			break;
+			// case 0:
+			// sv.setScrollContainer(true);
+			// sv.setShowcase(new ViewTarget(findViewById(R.id.action_export)),
+			// true);
+			// sv.setContentTitle("  ");
+			// sv.setContentText(getString(R.string.showcase_actionClaimDetails_message));
+			// break;
+			case 0:
+				sv.setShowcase(
+						new ViewTarget(tabs.getTabsContainer().getChildAt(1)), true);
+				sv.setContentTitle(getString(R.string.owners).toUpperCase(
+						Locale.getDefault()));
+				sv.setContentText(getString(R.string.showcase_claim_shares_message));
+				setAlpha(1.0f, tabs.getTabsContainer().getChildAt(1));
+				mViewPager.setCurrentItem(1);
+				break;
+			case 1:
+				sv.setShowcase(
+						new ViewTarget(tabs.getTabsContainer().getChildAt(2)), true);
+				sv.setContentTitle(getString(R.string.title_claim_documents)
+						.toUpperCase(Locale.getDefault()));
+				sv.setContentText(getString(R.string.showcase_claim_document_message));
+				setAlpha(1.0f, tabs.getTabsContainer().getChildAt(2));
+				mViewPager.setCurrentItem(2);
+				break;
+			case 2:
+				sv.setShowcase(
+						new ViewTarget(tabs.getTabsContainer().getChildAt(3)), true);
+				sv.setContentTitle(getString(R.string.title_claim_adjacencies)
+						.toUpperCase(Locale.getDefault()));
+				sv.setContentText(getString(R.string.showcase_claim_adjacencies_message));
+				setAlpha(1.0f, tabs.getTabsContainer().getChildAt(3));
+				mViewPager.setCurrentItem(3);
+				break;
+			case 3:
+				sv.setShowcase(
+						new ViewTarget(tabs.getTabsContainer().getChildAt(4)), true);
+				sv.setContentTitle(getString(R.string.title_claim_map).toUpperCase(
+						Locale.getDefault()));
+				sv.setContentText(getString(R.string.showcase_claim_map_message));
+				setAlpha(1.0f, tabs.getTabsContainer().getChildAt(4));
+				mViewPager.setCurrentItem(4);
+				break;
+			case 4:
+				sv.setShowcase(new ViewTarget(mViewPager), true);
+				sv.setContentTitle("  ");
+				sv.setContentText(getString(R.string.showcase_claim_mapdraw_message));
+				mViewPager.setCurrentItem(4);
+				break;
 
-		case 5:
-			sv.setShowcase(new ViewTarget(
-					findViewById(R.id.action_center_and_follow)), true);
-			sv.setContentTitle("  ");
-			sv.setContentText(getString(R.string.showcase_actionClaimMap_message));
-			break;
-		case 6:
-			sv.setShowcase(
-					new ViewTarget(tabs.getTabsContainer().getChildAt(5)), true);
-			sv.setContentTitle(getString(R.string.title_claim_challenges)
-					.toUpperCase(Locale.getDefault()));
-			sv.setContentText(getString(R.string.showcase_claim_challenges_message));
-			setAlpha(1.0f, tabs.getTabsContainer().getChildAt(5));
-			mViewPager.setCurrentItem(5);
-			break;
+			case 5:
+				sv.setShowcase(new ViewTarget(
+						findViewById(R.id.action_center_and_follow)), true);
+				sv.setContentTitle("  ");
+				sv.setContentText(getString(R.string.showcase_actionClaimMap_message));
+				break;
+			case 6:
+				sv.setShowcase(
+						new ViewTarget(tabs.getTabsContainer().getChildAt(5)), true);
+				sv.setContentTitle(getString(R.string.title_claim_challenges)
+						.toUpperCase(Locale.getDefault()));
+				sv.setContentText(getString(R.string.showcase_claim_challenges_message));
+				setAlpha(1.0f, tabs.getTabsContainer().getChildAt(5));
+				mViewPager.setCurrentItem(5);
+				break;
 
-		case 7:
-			sv.setShowcase(
-					new ViewTarget(tabs.getTabsContainer().getChildAt(0)), true);
-			sv.setContentTitle(("  "));
-			sv.setContentText(getString(R.string.showcase_end_message));
-			setAlpha(0.6f, tabs.getTabsContainer().getChildAt(0), tabs
-					.getTabsContainer().getChildAt(1), tabs.getTabsContainer()
-					.getChildAt(2), tabs.getTabsContainer().getChildAt(3), tabs
-					.getTabsContainer().getChildAt(4), tabs.getTabsContainer()
-					.getChildAt(5), tabs);
-			sv.setButtonText(getString(R.string.close));
-			mViewPager.setCurrentItem(0);
-			break;
-		case 8:
-			sv.hide();
-			setAlpha(1.0f, tabs, mViewPager);
-			counter = 0;
-			break;
+			case 7:
+				sv.setShowcase(
+						new ViewTarget(tabs.getTabsContainer().getChildAt(0)), true);
+				sv.setContentTitle(("  "));
+				sv.setContentText(getString(R.string.showcase_end_message));
+				setAlpha(0.6f, tabs.getTabsContainer().getChildAt(0), tabs
+						.getTabsContainer().getChildAt(1), tabs.getTabsContainer()
+						.getChildAt(2), tabs.getTabsContainer().getChildAt(3), tabs
+						.getTabsContainer().getChildAt(4), tabs.getTabsContainer()
+						.getChildAt(5), tabs);
+				sv.setButtonText(getString(R.string.close));
+				mViewPager.setCurrentItem(0);
+				break;
+			case 8:
+				sv.hide();
+				setAlpha(1.0f, tabs, mViewPager);
+				counter = 0;
+				break;
 		}
 
 		counter++;
@@ -390,46 +390,58 @@ public class ClaimActivity extends FragmentActivity implements ClaimDispatcher,
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
-		case R.id.action_claim_showcase:
-			// ShowCase Tutorial
-			counter = 0;
-			sv = new ShowcaseView.Builder(this, true)
-					.setTarget(
-							new ViewTarget(tabs.getTabsContainer()
-									.getChildAt(0)))
-					.setContentTitle(getString(R.string.showcase_claim_title))
-					.setContentText(getString(R.string.showcase_claim_message))
-					.setStyle(R.style.CustomShowcaseTheme)
-					.setOnClickListener(this).build();
-			sv.setButtonText(getString(R.string.next));
-			sv.setSkipButtonText(getString(R.string.skip));
-			setAlpha(0.2f, tabs.getTabsContainer().getChildAt(0), tabs
-					.getTabsContainer().getChildAt(1), tabs.getTabsContainer()
-					.getChildAt(2), tabs.getTabsContainer().getChildAt(3), tabs
-					.getTabsContainer().getChildAt(4), tabs.getTabsContainer()
-					.getChildAt(5), mViewPager);
-			return true;
+			case R.id.action_claim_showcase:
+				// ShowCase Tutorial
+				counter = 0;
+				sv = new ShowcaseView.Builder(this, true)
+						.setTarget(
+								new ViewTarget(tabs.getTabsContainer()
+										.getChildAt(0)))
+						.setContentTitle(getString(R.string.showcase_claim_title))
+						.setContentText(getString(R.string.showcase_claim_message))
+						.setStyle(R.style.CustomShowcaseTheme)
+						.setOnClickListener(this).build();
+				sv.setButtonText(getString(R.string.next));
+				sv.setSkipButtonText(getString(R.string.skip));
+				setAlpha(0.2f, tabs.getTabsContainer().getChildAt(0), tabs
+						.getTabsContainer().getChildAt(1), tabs.getTabsContainer()
+						.getChildAt(2), tabs.getTabsContainer().getChildAt(3), tabs
+						.getTabsContainer().getChildAt(4), tabs.getTabsContainer()
+						.getChildAt(5), mViewPager);
+				return true;
 			// Respond to the action bar's Up/Home button
-		case android.R.id.home:
-			// This is called when the Home (Up) button is pressed in the action
-			// bar.
+			case android.R.id.home:
+				// This is called when the Home (Up) button is pressed in the action
+				// bar.
 
-			final ClaimDetailsFragment fragment = (ClaimDetailsFragment) fragmentReferences
-					.get(0);
+				final ClaimDetailsFragment fragment = (ClaimDetailsFragment) fragmentReferences
+						.get(0);
 
-			if (fragment != null) {
-				if (fragment.checkChanges()) {
+				if (fragment != null) {
+					if (fragment.checkChanges()) {
 
-					// Intent upIntent;
-					//
-					// upIntent = NavUtils.getParentActivityIntent(this);
-					// upIntent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP
-					// | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-					// startActivity(upIntent);
-					// finish();
+						// Intent upIntent;
+						//
+						// upIntent = NavUtils.getParentActivityIntent(this);
+						// upIntent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP
+						// | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+						// startActivity(upIntent);
+						// finish();
 
-					return true;
+						return true;
+					} else {
+						Intent upIntent;
+
+						upIntent = NavUtils.getParentActivityIntent(this);
+						upIntent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP
+								| Intent.FLAG_ACTIVITY_CLEAR_TOP);
+						startActivity(upIntent);
+						finish();
+
+						return true;
+					}
 				} else {
+
 					Intent upIntent;
 
 					upIntent = NavUtils.getParentActivityIntent(this);
@@ -440,20 +452,8 @@ public class ClaimActivity extends FragmentActivity implements ClaimDispatcher,
 
 					return true;
 				}
-			} else {
-
-				Intent upIntent;
-
-				upIntent = NavUtils.getParentActivityIntent(this);
-				upIntent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP
-						| Intent.FLAG_ACTIVITY_CLEAR_TOP);
-				startActivity(upIntent);
-				finish();
-
-				return true;
-			}
-		default:
-			return super.onOptionsItemSelected(item);
+			default:
+				return super.onOptionsItemSelected(item);
 		}
 	}
 
@@ -474,7 +474,7 @@ public class ClaimActivity extends FragmentActivity implements ClaimDispatcher,
 
 		@Override
 		public void destroyItem(android.view.ViewGroup container, int position,
-				Object object) {
+								Object object) {
 
 			// fragmentReferences.remove(position);
 
@@ -486,68 +486,68 @@ public class ClaimActivity extends FragmentActivity implements ClaimDispatcher,
 			Fragment fragment;
 			int sectionPosition = position - NUMBER_OF_STATIC_SECTIONS;
 			switch (position) {
-			case 0:
-				fragment = new ClaimDetailsFragment();
-				break;
-			case 1:
-				fragment = new OwnersFragment();
-				break;
-			case 2:
-				fragment = new ClaimDocumentsFragment();
-				break;
-			case 3:
-				fragment = new AdjacentClaimsFragment();
-				break;
-			case 4:
-				fragment = new ClaimMapFragment();
-				break;
-			case 5:
-				fragment = new ChallengingClaimsFragment();
-				break;
-			default:
-				List<SectionTemplate> sectionTemplateList = formTemplate
-						.getSectionTemplateList();
-				if (sectionTemplateList == null
-						|| sectionTemplateList.size() <= 0
-						|| sectionTemplateList.size() <= sectionPosition) {
-					SectionElementFragment sef = new SectionElementFragment();
-					sef.setTemplate(new SectionTemplate());
-					sef.setPayload(new SectionElementPayload());
-					sef.setMode(mode);
-					return sef;
-				}
-				SectionTemplate sectionTemplate = sectionTemplateList
-						.get(sectionPosition);
-				if (sectionTemplate == null) {
-					SectionElementFragment sef = new SectionElementFragment();
-					sef.setTemplate(new SectionTemplate());
-					sef.setPayload(new SectionElementPayload());
-					sef.setMode(mode);
-					return sef;
-				}
-				if (sectionTemplate.getMaxOccurrences() > 1) {
-					fragment = new SectionFragment();
-					((SectionFragment)fragment).setTemplate(sectionTemplate);
-					((SectionFragment)fragment).setPayload(editedFormPayload
-							.getSectionPayloadList().get(sectionPosition));
-					((SectionFragment)fragment).setMode(mode);
-				} else {
-					if (editedFormPayload.getSectionPayloadList()
-							.get(sectionPosition)
-							.getSectionElementPayloadList().size() == 0) {
-						editedFormPayload
-								.getSectionPayloadList()
-								.get(sectionPosition)
-								.getSectionElementPayloadList()
-								.add(new SectionElementPayload(sectionTemplate));
+				case 0:
+					fragment = new ClaimDetailsFragment();
+					break;
+				case 1:
+					fragment = new OwnersFragment();
+					break;
+				case 2:
+					fragment = new ClaimDocumentsFragment();
+					break;
+				case 3:
+					fragment = new AdjacentClaimsFragment();
+					break;
+				case 4:
+					fragment = new ClaimMapFragment();
+					break;
+				case 5:
+					fragment = new ChallengingClaimsFragment();
+					break;
+				default:
+					List<SectionTemplate> sectionTemplateList = formTemplate
+							.getSectionTemplateList();
+					if (sectionTemplateList == null
+							|| sectionTemplateList.size() <= 0
+							|| sectionTemplateList.size() <= sectionPosition) {
+						SectionElementFragment sef = new SectionElementFragment();
+						sef.setTemplate(new SectionTemplate());
+						sef.setPayload(new SectionElementPayload());
+						sef.setMode(mode);
+						return sef;
 					}
-					fragment = new SectionElementFragment();
-					((SectionElementFragment)fragment).setTemplate(sectionTemplate);
-					((SectionElementFragment)fragment).setPayload(editedFormPayload
-							.getSectionPayloadList().get(sectionPosition)
-							.getSectionElementPayloadList().get(0));
-					((SectionElementFragment)fragment).setMode(mode);
-				}
+					SectionTemplate sectionTemplate = sectionTemplateList
+							.get(sectionPosition);
+					if (sectionTemplate == null) {
+						SectionElementFragment sef = new SectionElementFragment();
+						sef.setTemplate(new SectionTemplate());
+						sef.setPayload(new SectionElementPayload());
+						sef.setMode(mode);
+						return sef;
+					}
+					if (sectionTemplate.getMaxOccurrences() > 1) {
+						fragment = new SectionFragment();
+						((SectionFragment)fragment).setTemplate(sectionTemplate);
+						((SectionFragment)fragment).setPayload(editedFormPayload
+								.getSectionPayloadList().get(sectionPosition));
+						((SectionFragment)fragment).setMode(mode);
+					} else {
+						if (editedFormPayload.getSectionPayloadList()
+								.get(sectionPosition)
+								.getSectionElementPayloadList().size() == 0) {
+							editedFormPayload
+									.getSectionPayloadList()
+									.get(sectionPosition)
+									.getSectionElementPayloadList()
+									.add(new SectionElementPayload(sectionTemplate));
+						}
+						fragment = new SectionElementFragment();
+						((SectionElementFragment)fragment).setTemplate(sectionTemplate);
+						((SectionElementFragment)fragment).setPayload(editedFormPayload
+								.getSectionPayloadList().get(sectionPosition)
+								.getSectionElementPayloadList().get(0));
+						((SectionElementFragment)fragment).setMode(mode);
+					}
 			}
 			fragmentReferences.put(position, fragment);
 			return fragment;
@@ -595,22 +595,22 @@ public class ClaimActivity extends FragmentActivity implements ClaimDispatcher,
 			int sectionPosition = position - NUMBER_OF_STATIC_SECTIONS;
 
 			switch (position) {
-			case 0:
-				return getString(R.string.title_claim).toUpperCase(l);
-			case 1:
-				return getString(R.string.owners).toUpperCase(l);
-			case 2:
-				return getString(R.string.title_claim_documents).toUpperCase(l);
-			case 3:
-				return getString(R.string.title_claim_adjacencies).toUpperCase(
-						l);
-			case 4:
-				return getString(R.string.title_claim_map).toUpperCase(l);
-			case 5:
-				return getString(R.string.title_claim_challenges)
-						.toUpperCase(l);
-			default:
-				return getSectionTitle(sectionPosition);
+				case 0:
+					return getString(R.string.title_claim).toUpperCase(l);
+				case 1:
+					return getString(R.string.owners).toUpperCase(l);
+				case 2:
+					return getString(R.string.title_claim_documents).toUpperCase(l);
+				case 3:
+					return getString(R.string.title_claim_adjacencies).toUpperCase(
+							l);
+				case 4:
+					return getString(R.string.title_claim_map).toUpperCase(l);
+				case 5:
+					return getString(R.string.title_claim_challenges)
+							.toUpperCase(l);
+				default:
+					return getSectionTitle(sectionPosition);
 			}
 		}
 	}

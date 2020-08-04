@@ -1,7 +1,0 @@
-#Thu Jul 26 12:27:42 ALMT 2018
-base.0=C\:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\build\\intermediates\\transforms\\dex\\release\\0
-path.1=classes2.dex
-renamed.1=classes2.dex
-path.0=classes.dex
-renamed.0=classes.dex
-base.1=C\:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\build\\intermediates\\transforms\\dex\\release\\0

@@ -59,6 +59,8 @@ import android.util.Log;
 import android.view.View;
 
 public class OpenTenureApplication extends MultiDexApplication {
+
+
 	private static final String VERSION_NOT_FOUND = "Not found";
 	private static OpenTenureApplication sInstance;
 	private Database database;
@@ -163,36 +165,36 @@ public class OpenTenureApplication extends MultiDexApplication {
 			return "TYPE_WIFI";
 		} else if (type == ConnectivityManager.TYPE_MOBILE) {
 			switch (subType) {
-			case TelephonyManager.NETWORK_TYPE_UNKNOWN:
-				return "TYPE_UNKNOWN";
-			case TelephonyManager.NETWORK_TYPE_1xRTT:
-				return "TYPE_1XRTT"; // ~ 50-100 kbps
-			case TelephonyManager.NETWORK_TYPE_CDMA:
-				return "TYPE_CDMA"; // ~ 14-64 kbps
-			case TelephonyManager.NETWORK_TYPE_EDGE:
-				return "TYPE_EDGE"; // ~ 50-100 kbps
-			case TelephonyManager.NETWORK_TYPE_EVDO_0:
-				return "TYPE_EVDO_0"; // ~ 400-1000 kbps
-			case TelephonyManager.NETWORK_TYPE_EVDO_A:
-				return "TYPE_EVDO_A"; // ~ 600-1400 kbps
-			case TelephonyManager.NETWORK_TYPE_GPRS:
-				return "TYPE_GPRS"; // ~ 100 kbps
-			case TelephonyManager.NETWORK_TYPE_HSDPA:
-				return "TYPE_HSDPA"; // ~ 2-14 Mbps
-			case TelephonyManager.NETWORK_TYPE_HSPA:
-				return "TYPE_HSPA"; // ~ 700-1700 kbps
-			case TelephonyManager.NETWORK_TYPE_HSUPA:
-				return "TYPE_HSUPA"; // ~ 1-23 Mbps
-			case TelephonyManager.NETWORK_TYPE_LTE:
-				return "TYPE_LTE"; // ~ 50-1000 Mbps
-			case TelephonyManager.NETWORK_TYPE_UMTS:
-				return "TYPE_UMTS"; // ~ 400-7000 kbps
-			case TelephonyManager.NETWORK_TYPE_IDEN: // API level 8
-				return "TYPE_IDEN"; // ~25 kbps
+				case TelephonyManager.NETWORK_TYPE_UNKNOWN:
+					return "TYPE_UNKNOWN";
+				case TelephonyManager.NETWORK_TYPE_1xRTT:
+					return "TYPE_1XRTT"; // ~ 50-100 kbps
+				case TelephonyManager.NETWORK_TYPE_CDMA:
+					return "TYPE_CDMA"; // ~ 14-64 kbps
+				case TelephonyManager.NETWORK_TYPE_EDGE:
+					return "TYPE_EDGE"; // ~ 50-100 kbps
+				case TelephonyManager.NETWORK_TYPE_EVDO_0:
+					return "TYPE_EVDO_0"; // ~ 400-1000 kbps
+				case TelephonyManager.NETWORK_TYPE_EVDO_A:
+					return "TYPE_EVDO_A"; // ~ 600-1400 kbps
+				case TelephonyManager.NETWORK_TYPE_GPRS:
+					return "TYPE_GPRS"; // ~ 100 kbps
+				case TelephonyManager.NETWORK_TYPE_HSDPA:
+					return "TYPE_HSDPA"; // ~ 2-14 Mbps
+				case TelephonyManager.NETWORK_TYPE_HSPA:
+					return "TYPE_HSPA"; // ~ 700-1700 kbps
+				case TelephonyManager.NETWORK_TYPE_HSUPA:
+					return "TYPE_HSUPA"; // ~ 1-23 Mbps
+				case TelephonyManager.NETWORK_TYPE_LTE:
+					return "TYPE_LTE"; // ~ 50-1000 Mbps
+				case TelephonyManager.NETWORK_TYPE_UMTS:
+					return "TYPE_UMTS"; // ~ 400-7000 kbps
+				case TelephonyManager.NETWORK_TYPE_IDEN: // API level 8
+					return "TYPE_IDEN"; // ~25 kbps
 
 				// Unknown
-			default:
-				return "TYPE_UNKNOWN";
+				default:
+					return "TYPE_UNKNOWN";
 			}
 		} else {
 			return "TYPE UNKNOWN";
@@ -595,7 +597,7 @@ public class OpenTenureApplication extends MultiDexApplication {
 					.getLanguage()
 					+ "-"
 					+ Resources.getSystem().getConfiguration().locale
-							.getCountry();
+					.getCountry();
 		}
 		setLocale(locale);
 		System.out.println("Localization is now: " + localization);
@@ -672,7 +674,7 @@ public class OpenTenureApplication extends MultiDexApplication {
 				&& OpenTenureApplication.getInstance().isCheckedBoundaries()
 				&& OpenTenureApplication.getInstance().isCheckedForm()
 				&& OpenTenureApplication.getInstance().isCheckedGeometryRequired()
-				) {
+		) {
 			OpenTenureApplication.getInstance().setInitialized(true);
 			Configuration conf = Configuration.getConfigurationByName("isInitialized");
 			conf.setValue("true");

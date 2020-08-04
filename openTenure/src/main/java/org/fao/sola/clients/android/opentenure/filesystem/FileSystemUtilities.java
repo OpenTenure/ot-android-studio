@@ -35,6 +35,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.file.Files;
 import java.util.Iterator;
 import java.util.List;
 
@@ -403,7 +404,7 @@ public class FileSystemUtilities {
 
 		} catch (Exception e) {
 			// TODO: handle exception
-			Log.e("org.fao.sola.clients.android.opentenure.filesystem", e.getMessage());
+			Log.e("opentenure.filesystem", e.getMessage());
 		}
 
 		if (multiFolder.exists() && multiFolder.isDirectory()) {
@@ -425,19 +426,18 @@ public class FileSystemUtilities {
 		return new File(getOpentenureFolder(), _CERTIFICATES);
 	}
 
-	public static File copyFileInAttachFolder(String claimID, File source) {
-
+	public static File copyStreamInAttachFolder(String claimID, InputStream reader, String fileName) {
 		File dest = null;
 
 		try {
 
-			dest = new File(getAttachmentFolder(claimID), source.getName());
+			dest = new File(getAttachmentFolder(claimID), fileName);
 			dest.createNewFile();
 
 			Log.d("FileSystemUtilities", dest.getAbsolutePath());
 			byte[] buffer = new byte[1024];
 
-			FileInputStream reader = new FileInputStream(source);
+
 			FileOutputStream writer = new FileOutputStream(dest);
 
 			BufferedInputStream br = new BufferedInputStream(reader);
@@ -457,6 +457,14 @@ public class FileSystemUtilities {
 		}
 
 		return dest;
+	}
+	public static File copyFileInAttachFolder(String claimID, File source) {
+		try (FileInputStream reader = new FileInputStream(source)) {
+			return copyStreamInAttachFolder(claimID, reader, source.getName());
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	public static File copyFileInClaimantFolder(String personId, File source) {
@@ -531,8 +539,9 @@ public class FileSystemUtilities {
 
 	public static String getJsonClaim(String claimId) {
 		try {
-			File folder = getClaimFolder(claimId);
-			FileInputStream fis = new FileInputStream(folder + File.separator + "claim.json");
+			File claimFile = new File(getClaimFolder(claimId)+ File.separator + "claim.json");
+			boolean isFileExists = claimFile.exists();
+			FileInputStream fis = new FileInputStream(claimFile);
 			return CommunityServerAPIUtilities.Slurp(fis, 100);
 		} catch (Exception e) {
 			Log.d("FileSystemUtilities", "Error reading claim.json :" + e.getMessage());
@@ -709,6 +718,60 @@ public class FileSystemUtilities {
 		return progress;
 
 	}
+
+	/*
+	public static File reduceJpeg(InputStream in, long size) {
+		OutputStream out = null;
+		File dir = file.getParentFile();
+		String cmpFileName = file.getName().replace(".jpg", "_cmp.jpg");
+
+		/-* 100 = max quality, 0 = max compression *-/
+
+		int quality = 0;
+
+		if (size < 1000000) {
+			quality = 80;
+		} else if (size >= 1000000 && size < 2000000) {
+			quality = 60;
+		}	else if (size >= 2000000) {
+			quality = 40;
+
+
+		try {
+			Log.d(FileSystemUtilities.class.getName(), "Compressing " + file.getName() + " to " + cmpFileName+ " with " + quality + " quality hint");
+			in = new FileInputStream(file);
+
+			Bitmap bitmap = BitmapFactory.decodeStream(in);
+			File cmpFile = new File(dir, cmpFileName);
+			out = new FileOutputStream(cmpFile);
+			if (bitmap.compress(CompressFormat.JPEG, quality, out)) {
+				out.flush();
+				out.close();
+				in.close();
+				return cmpFile;
+
+			} else {
+				throw new Exception("Failed to save the image as a JPEG");
+			}
+		} catch (Exception e) {
+			Log.e(FileSystemUtilities.class.getName(), "Failed to compress image :" + e.getMessage());
+			e.printStackTrace();
+		} finally {
+			try {
+				if (out != null) {
+					out.close();
+				}
+				if (in != null) {
+					in.close();
+				}
+			} catch (IOException e) {
+				Log.e(FileSystemUtilities.class.getName(), "Failed to release streams :" + e.getMessage());
+				e.printStackTrace();
+			}
+		}
+		return null;
+	}
+		*/
 
 	public static File reduceJpeg(File file) {
 

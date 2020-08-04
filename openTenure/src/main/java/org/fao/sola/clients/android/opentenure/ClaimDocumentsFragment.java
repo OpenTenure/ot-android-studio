@@ -27,7 +27,15 @@
  */
 package org.fao.sola.clients.android.opentenure;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -36,6 +44,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.TreeSet;
 
+import org.fao.sola.clients.android.opentenure.filesystem.FilePathUtilities;
 import org.fao.sola.clients.android.opentenure.filesystem.FileSystemUtilities;
 import org.fao.sola.clients.android.opentenure.model.Attachment;
 import org.fao.sola.clients.android.opentenure.model.Claim;
@@ -43,14 +52,22 @@ import org.fao.sola.clients.android.opentenure.model.ClaimStatus;
 import org.fao.sola.clients.android.opentenure.model.DocumentType;
 import org.fao.sola.clients.android.opentenure.model.MD5;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.ActivityNotFoundException;
+import android.content.ContentResolver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ListFragment;
+import android.support.v4.content.FileProvider;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -58,6 +75,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.MimeTypeMap;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -72,6 +90,7 @@ public class ClaimDocumentsFragment extends ListFragment {
 
 	private static final int REQUEST_CHOOSER = 1234;
 	private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
+
 	public static final int MEDIA_TYPE_IMAGE = 1;
 	public static final int MEDIA_TYPE_VIDEO = 2;
 	public static final String URI_KEY = "__URI__";
@@ -136,21 +155,17 @@ public class ClaimDocumentsFragment extends ListFragment {
 		setRetainInstance(true);
 	}
 
-	public File getOutputMediaFile(int type) {
-		// To check that the sdcard is mounted use
-		// Environment.getExternalStorageState()
+	public Uri getOutputMediaUri(int type) {
 		String fileName;
-
-		File mediaStorageDir = FileSystemUtilities.getAttachmentFolder(claimActivity.getClaimId());
 
 		// Create a file name
 		String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.US).format(new Date());
 		if (type == MEDIA_TYPE_IMAGE) {
-			fileName = mediaStorageDir.getPath() + File.separator + "IMG_" + timeStamp + ".jpg";
+			fileName = "IMG_" + timeStamp + ".jpg";
 			fileType = "image";
 			mimeType = "image/jpeg";
 		} else if (type == MEDIA_TYPE_VIDEO) {
-			fileName = mediaStorageDir.getPath() + File.separator + "VID_" + timeStamp + ".mp4";
+			fileName = "VID_" + timeStamp + ".mp4";
 			fileType = "video";
 			mimeType = "video/mp4";
 		} else {
@@ -158,220 +173,294 @@ public class ClaimDocumentsFragment extends ListFragment {
 		}
 		Log.d(this.getClass().getName(), "File name is: " + fileName);
 
-		return new File(fileName);
+		try {
+			File basePath = new File(OpenTenureApplication.getContext().getExternalFilesDir(null), "claims/claim_" + claimActivity.getClaimId() + "/attachments");
+			if (!basePath.exists()) {
+				new File(basePath.getPath()).mkdirs();
+			}
+			File image = new File(basePath, fileName);
+			if (!image.exists()) {
+				image.createNewFile();
+			}
+			Uri contentUri = FileProvider.getUriForFile(this.getContext(), BuildConfig.APPLICATION_ID, image);
+			Log.d(this.getClass().getName(), "File uri is "+contentUri+". File path is "+image.getPath());
+			return contentUri;
+		} catch (IOException e) {
+			Log.e(this.getClass().getName(), "Error creating file for image capture. " + e.getMessage());
+			return null;
+		}
 	}
 
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		switch (requestCode) {
-		case CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE:
-			if (resultCode == Activity.RESULT_OK) {
-				final String filePath = FileUtils.getPath(rootView.getContext(), uri);
-				Log.d(this.getClass().getName(), "Captured image: " + filePath);
+			case CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE:
+				if (resultCode == Activity.RESULT_OK) {
+					Log.d(this.getClass().getName(), "Captured image: " + uri.getPath());
 
-				// custom dialog
-				final Dialog dialog = new Dialog(rootView.getContext());
-				dialog.setContentView(R.layout.custom_add_document);
-				dialog.setTitle(R.string.new_file);
+					// custom dialog
+					final Dialog dialog = new Dialog(rootView.getContext());
+					dialog.setContentView(R.layout.custom_add_document);
+					dialog.setTitle(R.string.new_file);
 
-				// Attachment Description
-				final EditText fileDescription = (EditText) dialog.findViewById(R.id.fileDocumentDescription);
-				fileDescription.setHint(R.string.add_description);
+					// Attachment Description
+					final EditText fileDescription = (EditText) dialog.findViewById(R.id.fileDocumentDescription);
+					fileDescription.setHint(R.string.add_description);
 
-				// Code Types Spinner
+					// Code Types Spinner
 
-				/* Mapping id type localization */
-				DocumentType dt = new DocumentType();
+					/* Mapping id type localization */
+					DocumentType dt = new DocumentType();
 
-				keyValueDocTypes = dt.getKeyValueMap(OpenTenureApplication.getInstance().getLocalization(), onlyActive);
-				valueKeyDocTypes = dt.getValueKeyMap(OpenTenureApplication.getInstance().getLocalization(), onlyActive);
+					keyValueDocTypes = dt.getKeyValueMap(OpenTenureApplication.getInstance().getLocalization(), onlyActive);
+					valueKeyDocTypes = dt.getValueKeyMap(OpenTenureApplication.getInstance().getLocalization(), onlyActive);
 
-				final Spinner spinner = (Spinner) dialog.findViewById(R.id.documentTypesSpinner);
+					final Spinner spinner = (Spinner) dialog.findViewById(R.id.documentTypesSpinner);
 
-				List<String> list = new ArrayList<String>();
-				TreeSet<String> keys = new TreeSet<String>(keyValueDocTypes.keySet());
-				for (String key : keys) {
-					String value = keyValueDocTypes.get(key);
-					list.add(value);
-					// do something
-				}
+					List<String> list = new ArrayList<String>();
+					TreeSet<String> keys = new TreeSet<String>(keyValueDocTypes.keySet());
+					for (String key : keys) {
+						String value = keyValueDocTypes.get(key);
+						list.add(value);
+						// do something
+					}
 
-				// List<String> list =
-				// dt.getDocumentTypesDisplayValues(OpenTenureApplication.getInstance().getLocalization());
+					// List<String> list =
+					// dt.getDocumentTypesDisplayValues(OpenTenureApplication.getInstance().getLocalization());
 
-				ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(OpenTenureApplication.getContext(),
-						android.R.layout.simple_spinner_item, list) {
-				};
-				dataAdapter.setDropDownViewResource(R.layout.document_spinner);
+					ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(OpenTenureApplication.getContext(),
+							android.R.layout.simple_spinner_item, list) {
+					};
+					dataAdapter.setDropDownViewResource(R.layout.document_spinner);
 
-				spinner.setAdapter(dataAdapter);
+					spinner.setAdapter(dataAdapter);
 
-				// Confirm Button
+					// Confirm Button
 
-				final Button confirmButton = (Button) dialog.findViewById(R.id.fileDocumentConfirm);
-				confirmButton.setText(R.string.confirm);
+					final Button confirmButton = (Button) dialog.findViewById(R.id.fileDocumentConfirm);
+					confirmButton.setText(R.string.confirm);
 
-				confirmButton.setOnClickListener(new View.OnClickListener() {
+					confirmButton.setOnClickListener(new View.OnClickListener() {
 
-					@Override
-					public void onClick(View v) {
+					//final String filePath = uri.getPath();
 
-						File original = new File(filePath);
-						File copy = null;
-						Log.d(this.getClass().getName(), "Attachment size : " + original.length());
+						@Override
+						public void onClick(View v) {
 
-						if (original.length() > 800000) {
+							ByteArrayOutputStream baos = new ByteArrayOutputStream();
+							byte[] buffer = new byte[1024];
+							int len;
 
-							copy = FileSystemUtilities.reduceJpeg(original);
-
-							if (copy != null) {
-
-								Log.d(this.getClass().getName(), "Reduced size to : " + copy.length());
-								original.delete();
-								
-								if (copy.renameTo(new File(filePath))) {
-									Log.d(this.getClass().getName(), "Renamed : " + copy.getName() + " to "
-											+ filePath);
-								} else {
-									Log.e(this.getClass().getName(), "Can't rename : " + copy.getName() + " to "
-											+ filePath);
+							// read bytes from input stream to buffer
+							try (InputStream is = getContext().getContentResolver().openInputStream(uri)) {
+								while ((len = is.read(buffer)) != -1) {
+									baos.write(buffer, 0, len);
 								}
+							} catch (FileNotFoundException e) {
+								e.printStackTrace();
+							} catch (IOException e) {
+								e.printStackTrace();
 							}
-						} else {
-							copy = original;
+
+							long length = baos.size();
+							//File original = new File(filePath);
+							File copy = null;
+							Log.d(this.getClass().getName(), "Attachment size : " + length);
+
+							if (length > 800000) {
+								/*
+								copy = FileSystemUtilities.reduceJpeg(original);
+
+								if (copy != null) {
+
+									Log.d(this.getClass().getName(), "Reduced size to : " + copy.length());
+									original.delete();
+
+									if (copy.renameTo(new File(filePath))) {
+										Log.d(this.getClass().getName(), "Renamed : " + copy.getName() + " to "
+												+ filePath);
+									} else {
+										Log.e(this.getClass().getName(), "Can't rename : " + copy.getName() + " to "
+												+ filePath);
+									}
+								}
+
+								 */
+							} else {
+								//copy = original;
+							}
+
+							// Recreate the file object to take into account that the file has been renamed
+							String md5sum="";
+							try (InputStream is = getContext().getContentResolver().openInputStream(uri)) {
+								md5sum = MD5.calculateMD5(is);
+							} catch (Exception e) {
+
+							}
+
+							File att = new File(uri.getPath());
+
+							Attachment attachment = new Attachment();
+							attachment.setClaimId(claimActivity.getClaimId());
+							attachment.setDescription(fileDescription.getText().toString());
+							attachment.setFileName(att.getName());
+							attachment.setFileType((valueKeyDocTypes.get((String) spinner.getSelectedItem())));
+							attachment.setMimeType(mimeType);
+							attachment.setMD5Sum(md5sum);
+							attachment.setPath(att.getAbsolutePath());
+							attachment.setSize(att.length());
+
+							attachment.create();
+							update();
+
+							dialog.dismiss();
+
 						}
+					});
 
-						// Recreate the file object to take into account that the file has been renamed
-						File att = new File(filePath);
+					// Cancel Button
 
-						Attachment attachment = new Attachment();
-						attachment.setClaimId(claimActivity.getClaimId());
-						attachment.setDescription(fileDescription.getText().toString());
-						attachment.setFileName(att.getName());
-						attachment.setFileType((valueKeyDocTypes.get((String) spinner.getSelectedItem())));
-						attachment.setMimeType(mimeType);
-						attachment.setMD5Sum(MD5.calculateMD5(att));
-						attachment.setPath(att.getAbsolutePath());
-						attachment.setSize(att.length());
+					final Button cancelButton = (Button) dialog.findViewById(R.id.fileDocumentConfirmCancel);
+					cancelButton.setText(R.string.cancel);
 
-						attachment.create();
-						update();
+					cancelButton.setOnClickListener(new View.OnClickListener() {
 
-						dialog.dismiss();
+						@Override
+						public void onClick(View v) {
+							OpenTenureApplication.getContext().getContentResolver().delete(uri, null, null);
+							dialog.dismiss();
+						}
+					});
 
-					}
-				});
+					dialog.show();
 
-				// Cancel Button
-
-				final Button cancelButton = (Button) dialog.findViewById(R.id.fileDocumentConfirmCancel);
-				cancelButton.setText(R.string.cancel);
-
-				cancelButton.setOnClickListener(new View.OnClickListener() {
-
-					@Override
-					public void onClick(View v) {
-
-						new File(filePath).delete();
-						dialog.dismiss();
-					}
-				});
-
-				dialog.show();
-
-			}
-
-			break;
-		case REQUEST_CHOOSER:
-			if (resultCode == com.ipaulpro.afilechooser.FileChooserActivity.RESULT_OK) {
-
-				uri = data.getData();
-
-				Log.d(this.getClass().getName(), "Selected file: " + FileUtils.getPath(rootView.getContext(), uri));
-
-				fileType = "document";
-				mimeType = FileUtils.getMimeType(rootView.getContext(), uri);
-
-				// custom dialog
-				final Dialog dialog = new Dialog(rootView.getContext());
-				dialog.setContentView(R.layout.custom_add_document);
-				dialog.setTitle(R.string.new_file);
-
-				// Attachment Description
-				final EditText fileDescription = (EditText) dialog.findViewById(R.id.fileDocumentDescription);
-				fileDescription.setHint(R.string.add_description);
-
-				// Code Types Spinner
-				final Spinner spinner = (Spinner) dialog.findViewById(R.id.documentTypesSpinner);
-
-				DocumentType dt = new DocumentType();
-
-				keyValueDocTypes = dt.getKeyValueMap(OpenTenureApplication.getInstance().getLocalization(), onlyActive);
-				valueKeyDocTypes = dt.getValueKeyMap(OpenTenureApplication.getInstance().getLocalization(), onlyActive);
-
-				List<String> list = new ArrayList<String>();
-				TreeSet<String> keys = new TreeSet<String>(keyValueDocTypes.keySet());
-				for (String key : keys) {
-					String value = keyValueDocTypes.get(key);
-					list.add(value);
-					// do something
 				}
 
-				ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(OpenTenureApplication.getContext(),
-						android.R.layout.simple_spinner_item, list) {
-				};
-				dataAdapter.setDropDownViewResource(R.layout.document_spinner);
+				break;
+			case REQUEST_CHOOSER:
+				if (resultCode == com.ipaulpro.afilechooser.FileChooserActivity.RESULT_OK) {
 
-				spinner.setAdapter(dataAdapter);
-
-				final Button confirmButton = (Button) dialog.findViewById(R.id.fileDocumentConfirm);
-				confirmButton.setText(R.string.confirm);
-
-				confirmButton.setOnClickListener(new View.OnClickListener() {
-
-					@Override
-					public void onClick(View v) {
-
-						File copy = FileSystemUtilities.copyFileInAttachFolder(claimActivity.getClaimId(),
-								FileUtils.getFile(rootView.getContext(), uri));
-
-						Attachment attachment = new Attachment();
-						attachment.setClaimId(claimActivity.getClaimId());
-						attachment.setDescription(fileDescription.getText().toString());
-						attachment.setFileName(copy.getName());
-
-						attachment.setFileType(valueKeyDocTypes.get((String) spinner.getSelectedItem()));
-						attachment.setMimeType(mimeType);
-						attachment.setMD5Sum(MD5.calculateMD5(copy));
-						attachment.setPath(copy.getAbsolutePath());
-						attachment.setSize(copy.length());
-
-						attachment.create();
-						update();
-
-						dialog.dismiss();
-
+					if (data.getDataString().contains("document/raw%3A")) {
+						String path = data.getDataString().substring(data.getDataString().indexOf("document/raw%3A")+15);
+						try {
+							path = URLDecoder.decode(path, StandardCharsets.UTF_8.toString());
+							File file = new File(path);
+							uri = FileProvider.getUriForFile(this.getContext(), BuildConfig.APPLICATION_ID, file);
+						} catch (UnsupportedEncodingException e) {
+							e.printStackTrace();
+						}
+					} else {
+						uri = data.getData();
 					}
-				});
+					Log.d(this.getClass().getName(), "Selected file: " + uri.toString());// FileUtils.getPath(rootView.getContext(), uri));
 
-				final Button cancelButton = (Button) dialog.findViewById(R.id.fileDocumentConfirmCancel);
-				cancelButton.setText(R.string.cancel);
+					fileType = "document";
 
-				cancelButton.setOnClickListener(new View.OnClickListener() {
+					// get mime type
+					//mimeType = FileUtils.getMimeType(rootView.getContext(), uri);
+					ContentResolver cr = getContext().getContentResolver();
+					mimeType = cr.getType(uri);
 
-					@Override
-					public void onClick(View v) {
+					// custom dialog
+					final Dialog dialog = new Dialog(rootView.getContext());
+					dialog.setContentView(R.layout.custom_add_document);
+					dialog.setTitle(R.string.new_file);
 
-						dialog.dismiss();
+					// Attachment Description
+					final EditText fileDescription = (EditText) dialog.findViewById(R.id.fileDocumentDescription);
+					fileDescription.setHint(R.string.add_description);
+
+					// Code Types Spinner
+					final Spinner spinner = (Spinner) dialog.findViewById(R.id.documentTypesSpinner);
+
+					DocumentType dt = new DocumentType();
+
+					keyValueDocTypes = dt.getKeyValueMap(OpenTenureApplication.getInstance().getLocalization(), onlyActive);
+					valueKeyDocTypes = dt.getValueKeyMap(OpenTenureApplication.getInstance().getLocalization(), onlyActive);
+
+					List<String> list = new ArrayList<String>();
+					TreeSet<String> keys = new TreeSet<String>(keyValueDocTypes.keySet());
+					for (String key : keys) {
+						String value = keyValueDocTypes.get(key);
+						list.add(value);
+						// do something
 					}
-				});
 
-				dialog.show();
-			}
-			break;
+					ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(OpenTenureApplication.getContext(),
+							android.R.layout.simple_spinner_item, list) {
+					};
+					dataAdapter.setDropDownViewResource(R.layout.document_spinner);
+
+					spinner.setAdapter(dataAdapter);
+
+					final Button confirmButton = (Button) dialog.findViewById(R.id.fileDocumentConfirm);
+					confirmButton.setText(R.string.confirm);
+
+					confirmButton.setOnClickListener(new View.OnClickListener() {
+
+						@Override
+						public void onClick(View v) {
+							File copy;
+							try (InputStream in = getContext().getContentResolver().openInputStream(uri)) {
+								copy = FileSystemUtilities.copyStreamInAttachFolder(claimActivity.getClaimId(), in, uri.getLastPathSegment());
+
+							} catch (IOException e) {
+								e.printStackTrace();
+								return;
+							}
+
+							Attachment attachment = new Attachment();
+							attachment.setClaimId(claimActivity.getClaimId());
+							attachment.setDescription(fileDescription.getText().toString());
+							attachment.setFileName(copy.getName());
+
+							attachment.setFileType(valueKeyDocTypes.get((String) spinner.getSelectedItem()));
+							attachment.setMimeType(mimeType);
+							attachment.setMD5Sum(MD5.calculateMD5(copy));
+
+							String contentPath = FileProvider.getUriForFile(OpenTenureApplication.getContext(), BuildConfig.APPLICATION_ID, copy).getPath();
+
+							attachment.setPath(contentPath);//copy.getAbsolutePath());
+							attachment.setSize(copy.length());
+
+							attachment.create();
+							update();
+
+							dialog.dismiss();
+
+						}
+					});
+
+					final Button cancelButton = (Button) dialog.findViewById(R.id.fileDocumentConfirmCancel);
+					cancelButton.setText(R.string.cancel);
+
+					cancelButton.setOnClickListener(new View.OnClickListener() {
+
+						@Override
+						public void onClick(View v) {
+
+							dialog.dismiss();
+						}
+					});
+
+					dialog.show();
+				}
+				break;
 		}
 		super.onActivityResult(requestCode, resultCode, data);
 	}
+
+	/*private String getRealPathFromURI(String contentURI) {
+		Uri contentUri = Uri.parse(contentURI);
+		Cursor cursor = getActivity().getContentResolver().query(contentUri, null, null, null, null);
+		if (cursor == null) {
+			return contentUri.getPath();
+		} else {
+			cursor.moveToFirst();
+			int index = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
+			return cursor.getString(index);
+		}
+	}*/
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
@@ -380,39 +469,46 @@ public class ClaimDocumentsFragment extends ListFragment {
 		Intent intent;
 		switch (item.getItemId()) {
 
-		case R.id.action_new_picture:
-			if (claimActivity.getClaimId() == null) {
-				toast = Toast.makeText(rootView.getContext(), R.string.message_create_before_edit, Toast.LENGTH_SHORT);
-				toast.show();
+			case R.id.action_new_picture:
+				if (claimActivity.getClaimId() == null) {
+					toast = Toast.makeText(rootView.getContext(), R.string.message_create_before_edit, Toast.LENGTH_SHORT);
+					toast.show();
+					return true;
+				}
+
+				intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+						.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+
+
+
+				uri = getOutputMediaUri(MEDIA_TYPE_IMAGE);//FileProvider.getUriForFile(this.getContext(), BuildConfig.APPLICATION_ID, getOutputMediaUri(MEDIA_TYPE_IMAGE));
+						//Uri.fromFile(getOutputMediaFile(MEDIA_TYPE_IMAGE));
+				this.getContext().grantUriPermission(BuildConfig.APPLICATION_ID, uri, Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+
+				Log.d(this.getClass().getName(), "Passing " + uri + " to MediaStore intent");
+				intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
+
+				// start the image capture Intent
+				startActivityForResult(intent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
 				return true;
-			}
-			intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+			case R.id.action_new_attachment:
+				if (claimActivity.getClaimId() == null) {
+					toast = Toast.makeText(rootView.getContext(), R.string.message_create_before_edit, Toast.LENGTH_SHORT);
+					toast.show();
+					return true;
+				}
+				Intent getContentIntent = FileUtils.createGetContentIntent();
 
-			uri = Uri.fromFile(getOutputMediaFile(MEDIA_TYPE_IMAGE));
-			Log.d(this.getClass().getName(), "Passing " + uri + " to MediaStore intent");
-			intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
-
-			// start the image capture Intent
-			startActivityForResult(intent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
-			return true;
-		case R.id.action_new_attachment:
-			if (claimActivity.getClaimId() == null) {
-				toast = Toast.makeText(rootView.getContext(), R.string.message_create_before_edit, Toast.LENGTH_SHORT);
-				toast.show();
+				intent = Intent.createChooser(getContentIntent, getResources().getString(R.string.choose_file));
+				try {
+					startActivityForResult(intent, REQUEST_CHOOSER);
+				} catch (Exception e) {
+					Log.d(this.getClass().getName(), "Unable to start file chooser intent due to " + e.getMessage());
+				}
 				return true;
-			}
-			Intent getContentIntent = FileUtils.createGetContentIntent();
 
-			intent = Intent.createChooser(getContentIntent, getResources().getString(R.string.choose_file));
-			try {
-				startActivityForResult(intent, REQUEST_CHOOSER);
-			} catch (Exception e) {
-				Log.d(this.getClass().getName(), "Unable to start file chooser intent due to " + e.getMessage());
-			}
-			return true;
-
-		default:
-			return super.onOptionsItemSelected(item);
+			default:
+				return super.onOptionsItemSelected(item);
 
 		}
 
@@ -458,10 +554,6 @@ public class ClaimDocumentsFragment extends ListFragment {
 
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
-		/*
-		 * 
-		 * */
-
 		String attachmentId = ((TextView) v.findViewById(R.id.attachment_id)).getText().toString();
 		Attachment att = Attachment.getAttachment(attachmentId);
 

@@ -133,16 +133,16 @@
     <string name="group_name">Name</string>
     <string name="signature">Signature</string>
     <string name="software_version_title">Software Version</string>
-    <string name="claim_date">Claim date</string>    
+    <string name="claim_date">Claim date</string>
     <string name="claim_name">Claim name</string>
     <string name="claim_name_label">Claim name *</string>
     <string name="claim_type">Claim type *</string>
     <string name="claim_type_no_star">Claim type</string>
-    <string name="default_claim_name">New claim</string>    
+    <string name="default_claim_name">New claim</string>
     <string name="first_name">First name</string>
     <string name="first_name_label">First name *</string>
     <string name="last_name">Last name</string>
-    <string name="last_name_label">Last name *</string>    
+    <string name="last_name_label">Last name *</string>
     <string name="date_of_birth">Date of birth (YYYY-MM-DD)</string>
     <string name="date_of_birth_simple">Date of birth</string>
     <string name="date_of_birth_label">Date of birth * (YYYY-MM-DD)</string>
@@ -182,7 +182,7 @@
     <string name="message_claim_not_imported">Error, not imported the claim </string>
     <string name="message_attachment_downloaded">Downloaded the attachment %s</string>
     <string name="message_attachment_downloading">Attachment %s already downloading </string>
-    <string name="message_attachment_download_failed">Download of attachment %s failed </string>    
+    <string name="message_attachment_download_failed">Download of attachment %s failed </string>
     <string name="message_attachment_download_not_complete">Download of attachment %s not completed </string>
     <string name="message_remove_person">Person %s removed</string>
     <string name="message_remove_person_dialog">Do you really want to remove %s?</string>
@@ -248,14 +248,14 @@
     <string name="message_no_available_shares_adding_new">Free some shares on this claim before adding a new share </string>
     <string name="message_share_saved">Share saved</string>
     <string name="message_share_not_saved">Error saving share </string>
-	<string name="message_already_owner">The selected person already shares this claim</string>
-	<string name="message_files_not_present">One or more files of the claim are not present</string>
+    <string name="message_already_owner">The selected person already shares this claim</string>
+    <string name="message_files_not_present">One or more files of the claim are not present</string>
     <string name="message_touch_to_select_a_person">Touch to select a person</string>
     <string name="message_touch_to_select_a_claim">Touch to select a claim</string>
     <string name="message_error_mandatory_fields">Fulfill all the mandatory fields before to save</string>
     <string name="message_error_mandatory_field_first_name">Fulfill the mandatory field first name before to save</string>
     <string name="message_error_mandatory_field_last_name">Fulfill the mandatory field last name before to save</string>
-    <string name="message_error_mandatory_field_gender">Fulfill the mandatory field gander before to save</string>    
+    <string name="message_error_mandatory_field_gender">Fulfill the mandatory field gander before to save</string>
     <string name="message_error_mandatory_birthdate">Date of birth not in the right format or empty</string>
     <string name="message_error_startdate">Date of right\'s start  not in the right format or empty</string>
     <string name="message_error_boundary_name_empty">Fill in boundary name</string>
@@ -288,17 +288,17 @@
     <string name="message_update_server">The Community Server is using an old version of the communication protocol. Wait for your administrator to update the Community Server before proceeding</string>
     <string name="message_update_client">The Community Server is using a new version of the communication protocol. Wait for an update of Open Tenure before proceeding</string>
     <string name="check_location_service">No location information available. Check that location service is enabled in your settings</string>
-	<string name="tiles_queued">There are %d tiles in the download list</string>
-	<string name="too_many_tiles_queued">There are %d tiles in the download list. Please, wait before adding tiles to the list</string>
-	<string name="all_tiles_downloaded">All tiles in the download list have been downloaded</string>
-	<string name="not_all_tiles_downloaded">Some tiles for this map area were not downloaded. Check that you are happy with the result or retry the download</string>
-	<string name="tiles_download_status">Downloading tile %1$d of %2$d</string>
-	<string name="zoom_level_too_low">The area is too large. Increase the zoom level before downloading local data for the map</string>
-	<string name="claim_area_label">Area</string>
-	<string name="square_meters">m2</string>
-	<string name="markers_distance_label">Distance</string>
-	<string name="meters">m</string>
-	<string name="yes">Yes</string>
+    <string name="tiles_queued">There are %d tiles in the download list</string>
+    <string name="too_many_tiles_queued">There are %d tiles in the download list. Please, wait before adding tiles to the list</string>
+    <string name="all_tiles_downloaded">All tiles in the download list have been downloaded</string>
+    <string name="not_all_tiles_downloaded">Some tiles for this map area were not downloaded. Check that you are happy with the result or retry the download</string>
+    <string name="tiles_download_status">Downloading tile %1$d of %2$d</string>
+    <string name="zoom_level_too_low">The area is too large. Increase the zoom level before downloading local data for the map</string>
+    <string name="claim_area_label">Area</string>
+    <string name="square_meters">m2</string>
+    <string name="markers_distance_label">Distance</string>
+    <string name="meters">m</string>
+    <string name="yes">Yes</string>
     <string name="person">Person</string>
     <string name="group">Group</string>
     <string name="no">No</string>
@@ -321,7 +321,7 @@
     <string name="sticky_marker">Sticky marker</string>
     <string name="claimant_picture">Claimant picture</string>
     <string name="claimant">Claimant *</string>
-    <string name="claimant_no_star">Claimant</string>    
+    <string name="claimant_no_star">Claimant</string>
     <string name="delete_locally">Delete locally</string>
     <string name="owner">Owner</string>
     <string name="challenge_to">Challenge to</string>
@@ -382,7 +382,7 @@
     <string name="updating">updating</string>
     <string name="uploaded">uploaded</string>
     <string name="deleted">deleted</string>
-    <string name="description">Description</string> 
+    <string name="description">Description</string>
     <string name="upload_incomplete">upload incomplete</string>
     <string name="update_incomplete">update incomplete</string>
     <string name="upload_error">upload error</string>
@@ -410,33 +410,33 @@
     <string name="null_label">None</string>
     <string name="tiles_provider_dialog_title">Select the type of your offline map tiles provider</string>
     <string name="language_dialog_title">Select a language</string>
-	<string name="title_restart_dialog">Restart required</string>
-	<string name="message_restart_dialog">A change in OpenTenure configuration requires a restart to become effective. Would you like to restart OpenTenure now?</string>
-	
+    <string name="title_restart_dialog">Restart required</string>
+    <string name="message_restart_dialog">A change in OpenTenure configuration requires a restart to become effective. Would you like to restart OpenTenure now?</string>
+
     <string-array name="language_keys">
         <item >Khmer</item>
         <item >Albanian</item>
         <item >Myanmar</item>
         <item >Samoa</item>
         <item >Default</item>
-        </string-array>
+    </string-array>
     <string-array name="language_values">
         <item >khmer_language</item>
         <item >albanian_language</item>
         <item >burmese_language</item>
         <item >samoan_language</item>
         <item >default_language</item>
-        </string-array>
+    </string-array>
     <string-array name="tiles_provider_keys">
         <item >WTMS</item>
         <item >TMS</item>
         <item >GeoServer</item>
-        </string-array>
+    </string-array>
     <string-array name="tiles_provider_values">
         <item >WTMS</item>
         <item >TMS</item>
         <item >GeoServer</item>
-        </string-array>
+    </string-array>
     <string-array name="share_values">
         <item >1</item>
         <item >2</item>
@@ -538,29 +538,29 @@
         <item >98</item>
         <item >99</item>
         <item >100</item>
-        </string-array>
+    </string-array>
     <string name="message_add_hole_marker">Add hole marker?</string>
     <string name="title_add_hole">Add hole</string>
     <string name="message_invalid_marker_position">The marker position would invalidate the geometry</string>
     <string name="new_hole">New hole</string>
     <string name="action_add_hole">Add hole marker</string>
     <string name="title_select_hole">Select hole</string>
-    <string name="boundary">Boundary</string>
-    <string name="title_boundaries">Boundaries</string>
+    <string name="boundary">Community Area</string>
+    <string name="title_boundaries">Community Areas</string>
     <string name="action_refresh">Refresh</string>
-    <string name="boundary_new">Boundary New</string>
-    <string name="title_boundary_details">Boundary Details</string>
+    <string name="boundary_new">New</string>
+    <string name="title_boundary_details">Community Area Details</string>
     <string name="title_boundary_map">Map</string>
     <string name="boundary_name">Name *</string>
     <string name="boundary_type">Type</string>
-    <string name="boundary_authority">Authority</string>
-    <string name="boundary_parent">Parent Boundary</string>
+    <string name="boundary_authority">Custodian</string>
+    <string name="boundary_parent">Parent</string>
     <string name="boundary_status">Status</string>
     <string name="title_activity_boundary">Boundary</string>
     <string name="default_boundary_name">New Boundary</string>
     <string name="action_delete_boundary">Delete boundary</string>
     <string name="action_delete">Delete</string>
-    <string name="boundary_has_children">Boundary has children records. Delete them first.</string>
+    <string name="boundary_has_children">Community Area has children records. Delete them first.</string>
     <string name="message_remove_boundary">Are you sure you want to delete boundary?</string>
     <string name="action_remove_boundary">Boundary removal</string>
     <string name="polygon_not_enough_points">Map at least 3 points for the boundary</string>
@@ -570,4 +570,5 @@
     <string name="message_remove_permanently">Are you sure? This will delete the claim permanently.</string>
     <string name="soft_delete">Soft delete of claims</string>
     <string name="soft_delete_details">Allows claims restoration after deletion</string>
+    <string name="title_groups">Groups</string>
 </resources>

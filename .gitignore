@@ -1,0 +1,11 @@
+
+.scannerwork/
+.idea/
+.gradle/
+build/
+buildOutputCleanup/
+
+*.bin
+*.lock
+*.iml
+

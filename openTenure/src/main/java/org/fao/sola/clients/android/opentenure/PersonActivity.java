@@ -31,10 +31,7 @@ import java.util.Locale;
 
 import org.fao.sola.clients.android.opentenure.model.Person;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -49,7 +46,7 @@ public class PersonActivity extends FragmentActivity implements
 		PersonDispatcher, ModeDispatcher {
 
 	public static final String PERSON_ID_KEY = "personId";
-	public static final String ENTIY_TYPE = "entityType";
+	public static final String ENTITY_TYPE = "entityType";
 
 	public static final String MODE_KEY = "mode";
 	public static final String CREATE_PERSON_ID = "create_person";
@@ -121,7 +118,7 @@ public class PersonActivity extends FragmentActivity implements
 		super.onCreate(savedInstanceState);
 		Intent intent = getIntent();
 
-		setEntityType(intent.getStringExtra(ENTIY_TYPE));
+		setEntityType(intent.getStringExtra(ENTITY_TYPE));
 
 		String aMode = intent.getStringExtra(MODE_KEY);
 		if (aMode != null)
@@ -133,7 +130,7 @@ public class PersonActivity extends FragmentActivity implements
 		if ((getEntityType() != null && getEntityType().equalsIgnoreCase(
 				TYPE_GROUP))
 				|| (getPersonId() != null && Person.getPerson(personId)
-						.getPersonType().equalsIgnoreCase(Person._GROUP)))
+				.getPersonType().equalsIgnoreCase(Person._GROUP)))
 			this.setTitle(R.string.title_activity_group);
 
 		tabs = (PagerSlidingTabStrip) findViewById(R.id.tabs);
@@ -181,8 +178,8 @@ public class PersonActivity extends FragmentActivity implements
 		public Fragment getItem(int position) {
 
 			switch (position) {
-			case 0:
-				return new PersonFragment();
+				case 0:
+					return new PersonFragment();
 			}
 			return null;
 		}
@@ -196,30 +193,30 @@ public class PersonActivity extends FragmentActivity implements
 		public CharSequence getPageTitle(int position) {
 			Locale l = Locale.getDefault();
 			switch (position) {
-			case 0:
+				case 0:
 
-				String personId = getPersonId();
+					String personId = getPersonId();
 
-				if (getEntityType() != null) {
+					if (getEntityType() != null) {
 
-					if (getEntityType().equalsIgnoreCase(TYPE_GROUP))
-						return getString(R.string.title_group_details)
-								.toUpperCase(l);
-					else
-						return getString(R.string.title_person_details)
-								.toUpperCase(l);
+						if (getEntityType().equalsIgnoreCase(TYPE_GROUP))
+							return getString(R.string.title_group_details)
+									.toUpperCase(l);
+						else
+							return getString(R.string.title_person_details)
+									.toUpperCase(l);
 
-				} else {
+					} else {
 
-					if (personId != null
-							&& Person.getPerson(personId).getPersonType()
-									.equalsIgnoreCase(Person._GROUP))
-						return getString(R.string.title_group_details)
-								.toUpperCase(l);
-					else
-						return getString(R.string.title_person_details)
-								.toUpperCase(l);
-				}
+						if (personId != null
+								&& Person.getPerson(personId).getPersonType()
+								.equalsIgnoreCase(Person._GROUP))
+							return getString(R.string.title_group_details)
+									.toUpperCase(l);
+						else
+							return getString(R.string.title_person_details)
+									.toUpperCase(l);
+					}
 			}
 			return null;
 		}

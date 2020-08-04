@@ -28,7 +28,6 @@
 package org.fao.sola.clients.android.opentenure;
 
 import java.io.File;
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -38,6 +37,8 @@ import org.fao.sola.clients.android.opentenure.maps.MainMapFragment;
 import org.fao.sola.clients.android.opentenure.model.Claim;
 import org.fao.sola.clients.android.opentenure.model.Configuration;
 
+import android.Manifest;
+import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.AlarmManager;
 import android.app.AlertDialog;
@@ -47,13 +48,15 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.Menu;
@@ -61,7 +64,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-import com.astuetz.PagerSlidingTabStrip;
 import com.github.amlcurran.showcaseview.ApiUtils;
 import com.github.amlcurran.showcaseview.OnShowcaseEventListener;
 import com.github.amlcurran.showcaseview.ShowcaseView;
@@ -71,9 +73,8 @@ import com.github.amlcurran.showcaseview.targets.ViewTarget;
 public class OpenTenure extends FragmentActivity implements ModeDispatcher,
         OnShowcaseEventListener, View.OnClickListener {
 
-    SectionsPagerAdapter mSectionsPagerAdapter;
     ViewPager mViewPager;
-    PagerSlidingTabStrip tabs;
+    TabLayout tabLayout;
     Mode mode = Mode.MODE_RW;
 
     // SHOWCASE VARIABLES
@@ -81,6 +82,7 @@ public class OpenTenure extends FragmentActivity implements ModeDispatcher,
     private int counter = 0;
     int numberOfClaims = 0;
     private final ApiUtils apiUtils = new ApiUtils();
+    public static final int PERMISSIONS_WRITE_EXTERNAL_STORAGE = 150;
     public static final String FIRST_RUN_OT_ACTIVITY = "__FIRST_RUN_OT_ACTIVITY__";
     public static final String language = "language";
     public static final String albanian_language = "albanian_language";
@@ -93,13 +95,12 @@ public class OpenTenure extends FragmentActivity implements ModeDispatcher,
     public static final String geoserver_tiles_provider = "geoserver_tiles_provider";
     // END SHOW CASE
 
+
     @Override
     public void onPause() {
         OpenTenureApplication.getInstance().getDatabase().sync();
         super.onPause();
     }
-
-    ;
 
     private static void setLocale(Context context, Locale locale) {
         Locale.setDefault(locale);
@@ -144,15 +145,11 @@ public class OpenTenure extends FragmentActivity implements ModeDispatcher,
         super.onResume();
     }
 
-    ;
-
     @Override
     public void onDestroy() {
         cleanup();
         super.onDestroy();
     }
-
-    ;
 
     @Override
     public void onBackPressed() {
@@ -220,14 +217,36 @@ public class OpenTenure extends FragmentActivity implements ModeDispatcher,
                 "Starting with " + activityManager.getMemoryClass()
                         + "MB of memory for the application.");
 
-        tabs = (PagerSlidingTabStrip) findViewById(R.id.tabs);
+        tabLayout = (TabLayout)findViewById(R.id.tabLayout);
+        Locale l = Locale.getDefault();
+        tabLayout.addTab(tabLayout.newTab().setText(getString(R.string.title_news).toUpperCase(l)));
+        tabLayout.addTab(tabLayout.newTab().setText(getString(R.string.title_map).toUpperCase(l)));
+        tabLayout.addTab(tabLayout.newTab().setText(getString(R.string.title_claims).toUpperCase(l)));
+        tabLayout.addTab(tabLayout.newTab().setText(getString(R.string.title_boundaries).toUpperCase(l)));
+        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+        tabLayout.setSelectedTabIndicatorColor(getResources().getColor(R.color.ab_tab_indicator_opentenure));
+        tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
+        final MainTabAdapter mainTabAdapter = new MainTabAdapter(this, getSupportFragmentManager(), tabLayout.getTabCount());
+
         mViewPager = (ViewPager) findViewById(R.id.open_tenure_pager);
+        mViewPager.setAdapter(mainTabAdapter);
+        mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                mViewPager.setCurrentItem(tab.getPosition());
+            }
 
-        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
 
-        mViewPager.setAdapter(mSectionsPagerAdapter);
-        tabs.setIndicatorColor(getResources().getColor(R.color.ab_tab_indicator_opentenure));
-        tabs.setViewPager(mViewPager);
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
 
         // ShowCase Main
         if (getFirstRun().contentEquals("True")) {
@@ -238,10 +257,10 @@ public class OpenTenure extends FragmentActivity implements ModeDispatcher,
                     .setOnClickListener(this).build();
             sv.setButtonText(getString(R.string.next));
             sv.setSkipButtonText(getString(R.string.skip));
-            setAlpha(0.2f, tabs.getTabsContainer().getChildAt(0), tabs
-                            .getTabsContainer().getChildAt(1), tabs.getTabsContainer()
-                            .getChildAt(2), tabs.getTabsContainer().getChildAt(3),
-                    tabs.getTabsContainer().getChildAt(4), mViewPager);
+
+            setAlpha(0.2f, tabLayout.getChildAt(0), tabLayout.getChildAt(1),
+                    tabLayout.getChildAt(2), tabLayout.getChildAt(3),
+                    tabLayout.getChildAt(4), mViewPager);
         }
 
         if (!OpenTenureApplication.getInstance().isOnline()) {
@@ -275,10 +294,9 @@ public class OpenTenure extends FragmentActivity implements ModeDispatcher,
     public void onClick(View v) {
         if (v.toString().indexOf("skip") > 0) {
             sv.hide();
-            setAlpha(1.0f, tabs.getTabsContainer().getChildAt(0), tabs
-                            .getTabsContainer().getChildAt(1), tabs.getTabsContainer()
-                            .getChildAt(2), tabs.getTabsContainer().getChildAt(3),
-                    tabs.getTabsContainer().getChildAt(4), tabs, mViewPager);
+            setAlpha(1.0f, tabLayout.getChildAt(0), tabLayout.getChildAt(1),
+                    tabLayout.getChildAt(2), tabLayout.getChildAt(3),
+                    tabLayout.getChildAt(4), tabLayout, mViewPager);
             counter = 0;
         }
 
@@ -287,11 +305,11 @@ public class OpenTenure extends FragmentActivity implements ModeDispatcher,
 
         switch (counter) {
             case 0:
-                sv.setShowcase(new ViewTarget(tabs.getTabsContainer().getChildAt(0)), true);
+                sv.setShowcase(new ViewTarget(tabLayout.getChildAt(0)), true);
                 sv.setContentTitle(getString(R.string.title_news).toUpperCase(Locale.getDefault()));
                 sv.setContentText(getString(R.string.showcase_news_message));
                 mViewPager.setCurrentItem(0);
-                setAlpha(1.0f, tabs.getTabsContainer().getChildAt(0));
+                setAlpha(1.0f, tabLayout.getChildAt(0));
                 break;
 
             case 1:
@@ -300,10 +318,10 @@ public class OpenTenure extends FragmentActivity implements ModeDispatcher,
                 sv.setContentText(getString(R.string.showcase_actionNews_message));
                 break;
             case 2:
-                sv.setShowcase(new ViewTarget(tabs.getTabsContainer().getChildAt(1)), true);
+                sv.setShowcase(new ViewTarget(tabLayout.getChildAt(1)), true);
                 sv.setContentTitle(getString(R.string.title_map).toUpperCase(Locale.getDefault()));
                 sv.setContentText(getString(R.string.showcase_map_message));
-                setAlpha(1.0f, tabs.getTabsContainer().getChildAt(1));
+                setAlpha(1.0f, tabLayout.getChildAt(1));
                 mViewPager.setCurrentItem(1);
                 break;
             case 3:
@@ -316,10 +334,10 @@ public class OpenTenure extends FragmentActivity implements ModeDispatcher,
                 }
 
             case 4:
-                sv.setShowcase(new ViewTarget(tabs.getTabsContainer().getChildAt(2)), true);
+                sv.setShowcase(new ViewTarget(tabLayout.getChildAt(2)), true);
                 sv.setContentTitle(getString(R.string.title_claims).toUpperCase(Locale.getDefault()));
                 sv.setContentText(getString(R.string.showcase_claims_message));
-                setAlpha(1.0f, tabs.getTabsContainer().getChildAt(2));
+                setAlpha(1.0f, tabLayout.getChildAt(2));
                 mViewPager.setCurrentItem(2);
                 break;
             case 5:
@@ -343,13 +361,13 @@ public class OpenTenure extends FragmentActivity implements ModeDispatcher,
 
                     if ((conf == null) || ((conf != null) && (conf.getValue().equalsIgnoreCase("false")))) {
                         mViewPager.setCurrentItem(0);
-                        sv.setShowcase(new ViewTarget(tabs.getTabsContainer().getChildAt(0)), true);
+                        sv.setShowcase(new ViewTarget(tabLayout.getChildAt(0)), true);
                         sv.setContentText(getString(R.string.showcase_actionAlert1_message));
-                        setAlpha(1.0f, tabs);
+                        setAlpha(1.0f, tabLayout);
                     } else {
                         sv.hide();
                         mViewPager.setCurrentItem(0);
-                        setAlpha(1.0f, tabs, mViewPager);
+                        setAlpha(1.0f, tabLayout, mViewPager);
                         counter = 0;
                     }
                 }
@@ -357,13 +375,13 @@ public class OpenTenure extends FragmentActivity implements ModeDispatcher,
             case 7:
                 if (numberOfClaims > 0) {
                     if ((conf == null) || ((conf != null) && (conf.getValue().equalsIgnoreCase("false")))) {
-                        sv.setShowcase(new ViewTarget(tabs.getTabsContainer().getChildAt(0)), true);
+                        sv.setShowcase(new ViewTarget(tabLayout.getChildAt(0)), true);
                         sv.setContentText(getString(R.string.showcase_actionAlert1_message));
-                        setAlpha(1.0f, tabs);
+                        setAlpha(1.0f, tabLayout);
                     } else {
                         sv.hide();
                         mViewPager.setCurrentItem(0);
-                        setAlpha(1.0f, tabs, mViewPager);
+                        setAlpha(1.0f, tabLayout, mViewPager);
                         counter = 0;
                     }
                 } else {
@@ -371,11 +389,11 @@ public class OpenTenure extends FragmentActivity implements ModeDispatcher,
                         sv.setShowcase(new ViewTarget(findViewById(R.id.action_alert)), true);
                         sv.setContentText(getString(R.string.showcase_actionAlert_message));
                         sv.setButtonText(getString(R.string.close));
-                        setAlpha(1.0f, tabs);
+                        setAlpha(1.0f, tabLayout);
                     } else {
                         sv.hide();
                         mViewPager.setCurrentItem(0);
-                        setAlpha(1.0f, tabs, mViewPager);
+                        setAlpha(1.0f, tabLayout, mViewPager);
                         counter = 0;
                     }
                 }
@@ -385,18 +403,18 @@ public class OpenTenure extends FragmentActivity implements ModeDispatcher,
                     sv.setShowcase(new ViewTarget(findViewById(R.id.action_alert)), true);
                     sv.setContentText(getString(R.string.showcase_actionAlert_message));
                     sv.setButtonText(getString(R.string.close));
-                    setAlpha(1.0f, tabs);
+                    setAlpha(1.0f, tabLayout);
                 } else {
                     sv.hide();
                     mViewPager.setCurrentItem(0);
-                    setAlpha(1.0f, tabs, mViewPager);
+                    setAlpha(1.0f, tabLayout, mViewPager);
                     counter = 0;
                 }
                 break;
             case 9:
                 sv.hide();
                 mViewPager.setCurrentItem(0);
-                setAlpha(1.0f, tabs, mViewPager);
+                setAlpha(1.0f, tabLayout, mViewPager);
                 counter = 0;
                 break;
         }
@@ -406,11 +424,6 @@ public class OpenTenure extends FragmentActivity implements ModeDispatcher,
 
     @Override
     public void onShowcaseViewHide(ShowcaseView showcaseView) {
-        // if (apiUtils.isCompatWithHoneycomb()) {
-        // listView.setAlpha(1f);
-        // }
-        // buttonBlocked.setText(R.string.button_show);
-        // //buttonBlocked.setEnabled(false);
     }
 
     @Override
@@ -419,9 +432,6 @@ public class OpenTenure extends FragmentActivity implements ModeDispatcher,
 
     @Override
     public void onShowcaseViewShow(ShowcaseView showcaseView) {
-        // dimView(listView);
-        // buttonBlocked.setText(R.string.button_hide);
-        // //buttonBlocked.setEnabled(true);
     }
 
     // END SHOWCASE
@@ -462,10 +472,10 @@ public class OpenTenure extends FragmentActivity implements ModeDispatcher,
                 sv.setButtonText(getString(R.string.next));
                 sv.setSkipButtonText(getString(R.string.skip));
                 mViewPager.setCurrentItem(0);
-                setAlpha(0.2f, tabs.getTabsContainer().getChildAt(0), tabs
-                                .getTabsContainer().getChildAt(1), tabs.getTabsContainer()
-                                .getChildAt(2), tabs.getTabsContainer().getChildAt(3),
+                setAlpha(0.2f, tabLayout.getChildAt(0), tabLayout.getChildAt(1),
+                        tabLayout.getChildAt(2), tabLayout.getChildAt(3),
                         mViewPager);
+
 
                 return true;
             default:
@@ -536,14 +546,19 @@ public class OpenTenure extends FragmentActivity implements ModeDispatcher,
         }
     }
 
-    public class SectionsPagerAdapter extends FragmentStatePagerAdapter {
+    public class MainTabAdapter extends FragmentPagerAdapter {
+        private Context context;
+        int totalTabs;
 
-        public SectionsPagerAdapter(FragmentManager fm) {
+        public MainTabAdapter(Context context, FragmentManager fm, int totalTabs) {
             super(fm);
+            this.context = context;
+            this.totalTabs = totalTabs;
         }
 
         @Override
         public Fragment getItem(int position) {
+
             switch (position) {
                 case 0:
                     return new NewsFragment();
@@ -553,29 +568,15 @@ public class OpenTenure extends FragmentActivity implements ModeDispatcher,
                     return new LocalClaimsFragment();
                 case 3:
                     return new BoundariesListFragment();
+                default:
+                    return null;
             }
-            return null;
+
         }
 
         @Override
         public int getCount() {
-            return 4;
-        }
-
-        @Override
-        public CharSequence getPageTitle(int position) {
-            Locale l = Locale.getDefault();
-            switch (position) {
-                case 0:
-                    return getString(R.string.title_news).toUpperCase(l);
-                case 1:
-                    return getString(R.string.title_map).toUpperCase(l);
-                case 2:
-                    return getString(R.string.title_claims).toUpperCase(l);
-                case 3:
-                    return getString(R.string.title_boundaries).toUpperCase(l);
-            }
-            return null;
+            return totalTabs;
         }
     }
 

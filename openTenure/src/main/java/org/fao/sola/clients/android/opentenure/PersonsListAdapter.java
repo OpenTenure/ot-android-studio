@@ -76,6 +76,7 @@ public class PersonsListAdapter extends ArrayAdapter<PersonListTO> implements
 
 				filteredPersons = new ArrayList<PersonListTO>();
 				for (PersonListTO pto : originalPersons) {
+
 					String lcase = pto.getSlogan().toLowerCase(
 							Locale.getDefault());
 					if (lcase.contains(filterString.toLowerCase(Locale
@@ -92,7 +93,7 @@ public class PersonsListAdapter extends ArrayAdapter<PersonListTO> implements
 
 			@Override
 			protected void publishResults(CharSequence constraint,
-					FilterResults results) {
+										  FilterResults results) {
 				persons = (ArrayList<PersonListTO>) results.values;
 
 				if (results.count > 0) {

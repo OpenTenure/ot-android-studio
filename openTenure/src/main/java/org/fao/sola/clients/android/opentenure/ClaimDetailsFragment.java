@@ -71,7 +71,9 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.FileProvider;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -90,6 +92,8 @@ import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import static android.content.Intent.FLAG_GRANT_WRITE_URI_PERMISSION;
 
 public class ClaimDetailsFragment extends Fragment {
 
@@ -180,21 +184,21 @@ public class ClaimDetailsFragment extends Fragment {
 		if (data != null) { // No selection has been done
 
 			switch (requestCode) {
-			case PERSON_RESULT:
-				String personId = data
-						.getStringExtra(PersonActivity.PERSON_ID_KEY);
+				case PERSON_RESULT:
+					String personId = data
+							.getStringExtra(PersonActivity.PERSON_ID_KEY);
 
-				Person claimant = Person.getPerson(personId);
-				loadClaimant(claimant);
-				break;
-			case SelectClaimActivity.SELECT_CLAIM_ACTIVITY_RESULT:
-				String claimId = data
-						.getStringExtra(ClaimActivity.CLAIM_ID_KEY);
-				Claim challengedClaim = Claim.getClaim(claimId);
+					Person claimant = Person.getPerson(personId);
+					loadClaimant(claimant);
+					break;
+				case SelectClaimActivity.SELECT_CLAIM_ACTIVITY_RESULT:
+					String claimId = data
+							.getStringExtra(ClaimActivity.CLAIM_ID_KEY);
+					Claim challengedClaim = Claim.getClaim(claimId);
 
-				loadChallengedClaim(challengedClaim);
-				challengedJustLoaded = true;
-				break;
+					loadChallengedClaim(challengedClaim);
+					challengedJustLoaded = true;
+					break;
 			}
 		}
 
@@ -203,7 +207,7 @@ public class ClaimDetailsFragment extends Fragment {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
+							 Bundle savedInstanceState) {
 
 		OpenTenureApplication.setClaimId(claimActivity.getClaimId());
 		OpenTenureApplication.setDetailsFragment(this);
@@ -230,9 +234,9 @@ public class ClaimDetailsFragment extends Fragment {
 
 			if (!claim.getStatus().equals(ClaimStatus._UPLOADING)
 					&& !claim.getStatus()
-							.equals(ClaimStatus._UPDATE_INCOMPLETE)
+					.equals(ClaimStatus._UPDATE_INCOMPLETE)
 					&& !claim.getStatus()
-							.equals(ClaimStatus._UPLOAD_INCOMPLETE)
+					.equals(ClaimStatus._UPLOAD_INCOMPLETE)
 					&& !claim.getStatus().equals(ClaimStatus._UPDATING)) {
 				bar.setVisibility(View.GONE);
 				status.setVisibility(View.GONE);
@@ -272,104 +276,30 @@ public class ClaimDetailsFragment extends Fragment {
 
 					@Override
 					public void onClick(View v) {
-						// ////////
-
-						// Intent intent = new Intent(rootView.getContext(),
-						// SelectPersonActivity.class);
-						//
-						// // SOLA DB cannot store the same person twice
-						//
-						// ArrayList<String> idsWithSharesOrClaims = Person
-						// .getIdsWithSharesOrClaims();
-						//
-						// intent.putStringArrayListExtra(
-						// SelectPersonActivity.EXCLUDE_PERSON_IDS_KEY,
-						// idsWithSharesOrClaims);
-						//
-						// startActivityForResult(
-						// intent,
-						// SelectPersonActivity.SELECT_PERSON_ACTIVITY_RESULT);
 
 						String claimantId = ((TextView) rootView
 								.findViewById(R.id.claimant_id)).getText()
 								.toString();
 
-						if (claimantId != null && !claimantId.trim().equals("")) {
 
-							Intent intent = new Intent(rootView.getContext(),
-									PersonActivity.class);
-							intent.putExtra(PersonActivity.PERSON_ID_KEY,
-									((TextView) rootView
-											.findViewById(R.id.claimant_id))
-											.getText());
-							intent.putExtra(PersonActivity.MODE_KEY,
-									modeActivity.getMode().toString());
-							startActivityForResult(intent, PERSON_RESULT);
-
-						} else {
-
-							AlertDialog.Builder dialog = new AlertDialog.Builder(
-									rootView.getContext());
-
-							dialog.setTitle(R.string.new_entity);
-							dialog.setMessage(R.string.message_entity_type);
-
-							dialog.setPositiveButton(R.string.person,
-									new DialogInterface.OnClickListener() {
-
-										@Override
-										public void onClick(
-												DialogInterface dialog,
-												int which) {
-											Intent intent = new Intent(rootView
-													.getContext(),
-													PersonActivity.class);
-											intent.putExtra(
-													PersonActivity.PERSON_ID_KEY,
-													PersonActivity.CREATE_PERSON_ID);
-											intent.putExtra(
-													PersonActivity.ENTIY_TYPE,
-													PersonActivity.TYPE_PERSON);
-											intent.putExtra(
-													PersonActivity.MODE_KEY,
-													modeActivity.getMode()
-															.toString());
-											startActivityForResult(intent,
-													PERSON_RESULT);
-										}
-									});
-
-							dialog.setNegativeButton(R.string.group,
-									new DialogInterface.OnClickListener() {
-
-										@Override
-										public void onClick(
-												DialogInterface dialog,
-												int which) {
-											Intent intent = new Intent(rootView
-													.getContext(),
-													PersonActivity.class);
-											intent.putExtra(
-													PersonActivity.PERSON_ID_KEY,
-													PersonActivity.CREATE_PERSON_ID);
-											intent.putExtra(
-													PersonActivity.ENTIY_TYPE,
-													PersonActivity.TYPE_GROUP);
-											intent.putExtra(
-													PersonActivity.MODE_KEY,
-													modeActivity.getMode()
-															.toString());
-											startActivityForResult(intent,
-													PERSON_RESULT);
-
-										}
-									});
-
-							dialog.show();
-
-						}
-
+						Intent intent = new Intent(rootView
+								.getContext(),
+								SelectPersonActivity.class);
+						intent.putExtra(
+								PersonActivity.PERSON_ID_KEY,
+								PersonActivity.CREATE_PERSON_ID);
+						//intent.putExtra(
+						//			PersonActivity.ENTIY_TYPE,
+						//			PersonActivity.TYPE_PERSON);
+						intent.putExtra(
+								PersonActivity.MODE_KEY,
+								modeActivity.getMode()
+										.toString());
+						startActivityForResult(intent,
+								PERSON_RESULT);
 					}
+
+
 				});
 
 		if (modeActivity.getMode().compareTo(ModeDispatcher.Mode.MODE_RW) == 0) {
@@ -418,6 +348,27 @@ public class ClaimDetailsFragment extends Fragment {
 					|| claim.getStatus().equals(ClaimStatus._REJECTED)
 					|| claim.getStatus().equals(ClaimStatus._REVIEWED) || claim
 					.getStatus().equals(ClaimStatus._REJECTED));
+
+		/*
+		// Claimant spinner
+		Spinner claimantSpinner = (Spinner) rootView.findViewById(R.id.claimant_spinner);
+		List<Person> persons = Person.getAllPersons();
+		List<String> personIds = new ArrayList<>();
+		List<String> personNames = new ArrayList<>();
+		personIds.add("");
+		personNames.add("");
+		for (Person p : persons) {
+			if (!personIds.contains(p.getPersonId())) {
+				personIds.add(p.getPersonId());
+				personNames.add(p.getLastName() + " " + p.getFirstName());
+			}
+		}
+		ArrayAdapter<String> claimantSpinnerAdapter = new ArrayAdapter<>(
+				OpenTenureApplication.getContext(), R.layout.my_spinner, personNames
+		);
+		claimantSpinnerAdapter.setDropDownViewResource(R.layout.my_spinner);
+		claimantSpinner.setAdapter(claimantSpinnerAdapter);
+		*/
 
 		// Claim Types Spinner
 		Spinner spinner = (Spinner) rootView
@@ -506,7 +457,7 @@ public class ClaimDetailsFragment extends Fragment {
 
 			@Override
 			public void onDateSet(DatePicker view, int year, int monthOfYear,
-					int dayOfMonth) {
+								  int dayOfMonth) {
 				localCalendar.set(Calendar.YEAR, year);
 				localCalendar.set(Calendar.MONTH, monthOfYear);
 				localCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
@@ -662,7 +613,7 @@ public class ClaimDetailsFragment extends Fragment {
 				.getClaimArea()
 				+ " "
 				+ OpenTenureApplication.getContext().getString(
-						R.string.square_meters));
+				R.string.square_meters));
 
 		((TextView) rootView.findViewById(R.id.claim_area))
 				.setVisibility(View.VISIBLE);
@@ -722,7 +673,7 @@ public class ClaimDetailsFragment extends Fragment {
 						.setText(claim.getClaimArea()
 								+ " "
 								+ OpenTenureApplication.getContext().getString(
-										R.string.square_meters));
+								R.string.square_meters));
 
 				((TextView) rootView.findViewById(R.id.claim_area))
 						.setVisibility(View.VISIBLE);
@@ -876,7 +827,7 @@ public class ClaimDetailsFragment extends Fragment {
 	}
 
 	private void copyVerticesFromChallengedClaim(String challengedClaimId,
-			String challengingClaimId) {
+												 String challengingClaimId) {
 		Log.d(this.getClass().getName(), "copying vertices from "
 				+ challengedClaimId + " to " + challengingClaimId);
 		// delete eventually existing vertices
@@ -1015,124 +966,130 @@ public class ClaimDetailsFragment extends Fragment {
 		Toast toast;
 		switch (item.getItemId()) {
 
-		case R.id.action_save:
+			case R.id.action_save:
 
-			if (claimActivity.getClaimId() == null) {
-				int resultSave = saveClaim();
-				if (resultSave == 1) {
-					toast = Toast.makeText(rootView.getContext(),
-							R.string.message_saved, Toast.LENGTH_SHORT);
-					toast.show();
-				}
-				if (resultSave == 2) {
-					toast = Toast.makeText(rootView.getContext(),
-							R.string.message_error_startdate,
-							Toast.LENGTH_SHORT);
-					toast.show();
-				} else if (resultSave == 3) {
-					toast = Toast.makeText(rootView.getContext(),
-							R.string.message_unable_to_save_missing_claim_name,
-							Toast.LENGTH_SHORT);
-					toast.show();
-				} else if (resultSave == 4) {
-					toast = Toast.makeText(rootView.getContext(),
-							R.string.message_unable_to_save_missing_person,
-							Toast.LENGTH_SHORT);
-					toast.show();
-				} else if (resultSave == 5) {
-					toast = Toast
-							.makeText(rootView.getContext(),
-									R.string.message_unable_to_save,
-									Toast.LENGTH_SHORT);
-					toast.show();
-				}
-			} else {
-				int updated = updateClaim();
-
-				if (updated == 1) {
-					toast = Toast.makeText(rootView.getContext(),
-							R.string.message_saved, Toast.LENGTH_SHORT);
-					toast.show();
-
-				} else if (updated == 2) {
-					toast = Toast.makeText(rootView.getContext(),
-							R.string.message_error_startdate,
-							Toast.LENGTH_SHORT);
-					toast.show();
+				if (claimActivity.getClaimId() == null) {
+					int resultSave = saveClaim();
+					if (resultSave == 1) {
+						toast = Toast.makeText(rootView.getContext(),
+								R.string.message_saved, Toast.LENGTH_SHORT);
+						toast.show();
+					}
+					if (resultSave == 2) {
+						toast = Toast.makeText(rootView.getContext(),
+								R.string.message_error_startdate,
+								Toast.LENGTH_SHORT);
+						toast.show();
+					} else if (resultSave == 3) {
+						toast = Toast.makeText(rootView.getContext(),
+								R.string.message_unable_to_save_missing_claim_name,
+								Toast.LENGTH_SHORT);
+						toast.show();
+					} else if (resultSave == 4) {
+						toast = Toast.makeText(rootView.getContext(),
+								R.string.message_unable_to_save_missing_person,
+								Toast.LENGTH_SHORT);
+						toast.show();
+					} else if (resultSave == 5) {
+						toast = Toast
+								.makeText(rootView.getContext(),
+										R.string.message_unable_to_save,
+										Toast.LENGTH_SHORT);
+						toast.show();
+					}
 				} else {
-					toast = Toast
-							.makeText(rootView.getContext(),
-									R.string.message_unable_to_save,
-									Toast.LENGTH_SHORT);
+					int updated = updateClaim();
+
+					if (updated == 1) {
+						toast = Toast.makeText(rootView.getContext(),
+								R.string.message_saved, Toast.LENGTH_SHORT);
+						toast.show();
+
+					} else if (updated == 2) {
+						toast = Toast.makeText(rootView.getContext(),
+								R.string.message_error_startdate,
+								Toast.LENGTH_SHORT);
+						toast.show();
+					} else {
+						toast = Toast
+								.makeText(rootView.getContext(),
+										R.string.message_unable_to_save,
+										Toast.LENGTH_SHORT);
+						toast.show();
+					}
+				}
+
+				return true;
+
+			case R.id.action_print:
+				Claim claim = Claim.getClaim(claimActivity.getClaimId());
+				boolean mapPresent = false;
+				boolean mapToDownload = false;
+				String path = null;
+
+				if (claim == null) {
+					toast = Toast.makeText(rootView.getContext(),
+							R.string.message_save_snapshot_before_printing,
+							Toast.LENGTH_LONG);
+					toast.show();
+					return true;
+				}
+
+				for (Attachment attachment : claim.getAttachments()) {
+					if (EditablePropertyBoundary.DEFAULT_MAP_FILE_NAME
+							.equalsIgnoreCase(attachment.getFileName())
+							&& EditablePropertyBoundary.DEFAULT_MAP_FILE_TYPE
+							.equalsIgnoreCase(attachment.getFileType())
+							&& EditablePropertyBoundary.DEFAULT_MAP_MIME_TYPE
+							.equalsIgnoreCase(attachment.getMimeType())) {
+						mapPresent = true;
+						path = attachment.getPath();
+						mapToDownload = !(new File(path).exists());
+					}
+				}
+				if (!mapPresent) {
+					toast = Toast.makeText(rootView.getContext(),
+							R.string.message_save_snapshot_before_printing,
+							Toast.LENGTH_LONG);
+					toast.show();
+					return true;
+				}
+				if (mapToDownload) {
+
+					toast = Toast.makeText(rootView.getContext(),
+							R.string.message_download_snapshot_before_printing,
+							Toast.LENGTH_LONG);
+					toast.show();
+					return true;
+				}
+				try {
+					PDFClaimExporter pdf = new PDFClaimExporter(
+							rootView.getContext(), claim, false, PDFClaimExporter.PageType.A4);
+
+					Intent intent = new Intent(Intent.ACTION_VIEW);
+					File basePath =
+							new File(Environment.getExternalStorageDirectory(),"Open Tenure/Certificates");
+					File file =
+							new File(basePath,pdf.getFileName());
+
+					Uri uri = FileProvider.getUriForFile(rootView.getContext(), BuildConfig.APPLICATION_ID, file);
+					intent.setDataAndType(uri,"application/pdf");
+					intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+					intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | FLAG_GRANT_WRITE_URI_PERMISSION) ;
+
+					startActivity(intent);
+
+				} catch (Error e) {
+					toast = Toast.makeText(rootView.getContext(),
+							R.string.message_not_supported_on_this_device,
+							Toast.LENGTH_SHORT);
 					toast.show();
 				}
-			}
 
-			return true;
-
-		case R.id.action_print:
-			Claim claim = Claim.getClaim(claimActivity.getClaimId());
-			boolean mapPresent = false;
-			boolean mapToDownload = false;
-			String path = null;
-
-			if (claim == null) {
-				toast = Toast.makeText(rootView.getContext(),
-						R.string.message_save_snapshot_before_printing,
-						Toast.LENGTH_LONG);
-				toast.show();
 				return true;
-			}
 
-			for (Attachment attachment : claim.getAttachments()) {
-				if (EditablePropertyBoundary.DEFAULT_MAP_FILE_NAME
-						.equalsIgnoreCase(attachment.getFileName())
-						&& EditablePropertyBoundary.DEFAULT_MAP_FILE_TYPE
-								.equalsIgnoreCase(attachment.getFileType())
-						&& EditablePropertyBoundary.DEFAULT_MAP_MIME_TYPE
-								.equalsIgnoreCase(attachment.getMimeType())) {
-					mapPresent = true;
-					path = attachment.getPath();
-					mapToDownload = !(new File(path).exists());
-				}
-			}
-			if (!mapPresent) {
-				toast = Toast.makeText(rootView.getContext(),
-						R.string.message_save_snapshot_before_printing,
-						Toast.LENGTH_LONG);
-				toast.show();
-				return true;
-			}
-			if (mapToDownload) {
-
-				toast = Toast.makeText(rootView.getContext(),
-						R.string.message_download_snapshot_before_printing,
-						Toast.LENGTH_LONG);
-				toast.show();
-				return true;
-			}
-			try {
-				PDFClaimExporter pdf = new PDFClaimExporter(
-						rootView.getContext(), claim, false);
-
-				Intent intent = new Intent(Intent.ACTION_VIEW);
-				intent.setDataAndType(Uri.parse("file://" + pdf.getFilePath()),
-						"application/pdf");
-				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-
-				startActivity(intent);
-
-			} catch (Error e) {
-				toast = Toast.makeText(rootView.getContext(),
-						R.string.message_not_supported_on_this_device,
-						Toast.LENGTH_SHORT);
-				toast.show();
-			}
-
-			return true;
-
-		default:
-			return super.onOptionsItemSelected(item);
+			default:
+				return super.onOptionsItemSelected(item);
 		}
 	}
 
@@ -1393,7 +1350,7 @@ public class ClaimDetailsFragment extends Fragment {
 		if (((editedFormPayload != null) && (originalFormPayload == null))
 				|| ((editedFormPayload == null) && (originalFormPayload != null))
 				|| !editedFormPayload.toJson().equalsIgnoreCase(
-						originalFormPayload.toJson())) {
+				originalFormPayload.toJson())) {
 			Log.d(this.getClass().getName(), "Dynamic form has changed");
 			return true;
 		} else {
@@ -1415,3 +1372,4 @@ public class ClaimDetailsFragment extends Fragment {
 	}
 
 }
+

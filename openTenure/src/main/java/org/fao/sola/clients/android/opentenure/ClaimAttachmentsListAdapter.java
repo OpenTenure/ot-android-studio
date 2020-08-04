@@ -28,6 +28,7 @@
 package org.fao.sola.clients.android.opentenure;
 
 import java.io.File;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -44,10 +45,13 @@ import org.fao.sola.clients.android.opentenure.model.DocumentType;
 
 import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.support.v4.content.FileProvider;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -265,13 +269,16 @@ public class ClaimAttachmentsListAdapter extends ArrayAdapter<String> {
 				@Override
 				public void onClick(View v) {
 					try {
-						Intent intent = new Intent(Intent.ACTION_VIEW);
-						intent.setDataAndType(
-								Uri.parse("file://" + att.getPath()),
-								att.getMimeType());
-						intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+						File file = new File(att.getPath());
+						Uri uri = FileProvider.getUriForFile(context, BuildConfig.APPLICATION_ID, file);
+
+						context.grantUriPermission(BuildConfig.APPLICATION_ID, uri, Intent.FLAG_GRANT_READ_URI_PERMISSION);
+
+						Intent i = new Intent(Intent.ACTION_VIEW);
+						i.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+						i.setDataAndType(uri,"image/*");
 						OpenTenureApplication.getDocumentsFragment()
-								.startActivity(intent);
+								.startActivity(i);
 					} catch (ActivityNotFoundException e) {
 
 						Log.d(this.getClass().getName(),
@@ -313,13 +320,15 @@ public class ClaimAttachmentsListAdapter extends ArrayAdapter<String> {
 				@Override
 				public void onClick(View v) {
 					try {
-						Intent intent = new Intent(Intent.ACTION_VIEW);
-						intent.setDataAndType(
-								Uri.parse("file://" + att.getPath()),
-								att.getMimeType());
-						intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+						Uri uri = Uri.parse("content://"+BuildConfig.APPLICATION_ID+att.getPath());
+						context.grantUriPermission(BuildConfig.APPLICATION_ID, uri, Intent.FLAG_GRANT_READ_URI_PERMISSION);
+
+						Intent i = new Intent(Intent.ACTION_VIEW);
+						i.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+						i.setDataAndType(uri, att.getMimeType());// "image/*");
 						OpenTenureApplication.getDocumentsFragment()
-								.startActivity(intent);
+								.startActivity(i);
+
 					} catch (ActivityNotFoundException e) {
 
 						Log.d(this.getClass().getName(),
@@ -342,7 +351,7 @@ public class ClaimAttachmentsListAdapter extends ArrayAdapter<String> {
 					catch (Throwable t) {
 
 						Log.d(this.getClass().getName(), "Error opening :"
-								+ att.getFileName());
+								+ att.getFileName(), t);
 
 						Toast.makeText(
 								OpenTenureApplication.getContext(),

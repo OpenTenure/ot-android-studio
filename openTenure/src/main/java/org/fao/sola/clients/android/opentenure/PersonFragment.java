@@ -59,6 +59,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.FileProvider;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -201,12 +202,13 @@ public class PersonFragment extends Fragment {
 						Person.deleteAllBmp(personActivity.getPersonId());
 						
 						//*****************************************//						
-						
-						
+
+						Uri uri = FileProvider.getUriForFile(rootView.getContext(), BuildConfig.APPLICATION_ID, personPictureFile); //Uri.fromFile(personPictureFile)
+
 						Intent intent = new Intent(
 								MediaStore.ACTION_IMAGE_CAPTURE);
 						intent.putExtra(MediaStore.EXTRA_OUTPUT,
-								Uri.fromFile(personPictureFile));
+								uri);
 						startActivityForResult(intent,
 								CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
 					} else {
@@ -283,12 +285,13 @@ public class PersonFragment extends Fragment {
 					if (personPictureFile != null) {
 						
 						Person.deleteAllBmp(personActivity.getPersonId());
-						
+
+						Uri uri = FileProvider.getUriForFile(rootView.getContext(), BuildConfig.APPLICATION_ID, personPictureFile); //Uri.fromFile(personPictureFile)
 
 						Intent intent = new Intent(
 								MediaStore.ACTION_IMAGE_CAPTURE);
 						intent.putExtra(MediaStore.EXTRA_OUTPUT,
-								Uri.fromFile(personPictureFile));
+								uri);
 						startActivityForResult(intent,
 								CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
 					} else {
