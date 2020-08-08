@@ -76,6 +76,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class PersonFragment extends Fragment {
@@ -494,46 +495,47 @@ public class PersonFragment extends Fragment {
 
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		switch (requestCode) {
+			case CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE:
+				if (resultCode == Activity.RESULT_OK) {
+					File original = Person.getPersonPictureFile(personActivity.getPersonId());
+					File copy = null;
+					Log.d(this.getClass().getName(), "Attachment size : " + original.length());
 
-		if (requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE) {
-			if (resultCode == Activity.RESULT_OK) {
-				File original = Person.getPersonPictureFile(personActivity.getPersonId());
-				File copy = null;
-				Log.d(this.getClass().getName(), "Attachment size : " + original.length());
-				
-				if(original.length() > 800000){
+					if (original.length() > 800000) {
 
-					copy = FileSystemUtilities.reduceJpeg(original);
+						copy = FileSystemUtilities.reduceJpeg(original);
 
-					if(copy != null){
-						
-						Log.d(this.getClass().getName(), "Reduced size to : " + copy.length());
-						original.delete();
-					
-						if(copy.renameTo(Person.getPersonPictureFile(personActivity.getPersonId()))){
-							Log.d(this.getClass().getName(), "Renamed : " + copy.getName() + " to "
-									+ Person.getPersonPictureFile(personActivity.getPersonId()).getName());
+						if (copy != null) {
+
+							Log.d(this.getClass().getName(), "Reduced size to : " + copy.length());
+							original.delete();
+
+							if (copy.renameTo(Person.getPersonPictureFile(personActivity.getPersonId()))) {
+								Log.d(this.getClass().getName(), "Renamed : " + copy.getName() + " to "
+										+ Person.getPersonPictureFile(personActivity.getPersonId()).getName());
+							} else {
+								Log.e(this.getClass().getName(), "Can't rename : " + copy.getName() + " to "
+										+ Person.getPersonPictureFile(personActivity.getPersonId()).getName());
+							}
 						} else {
-							Log.e(this.getClass().getName(), "Can't rename : " + copy.getName() + " to "
-									+ Person.getPersonPictureFile(personActivity.getPersonId()).getName());
+
 						}
-					}else{
-						
+					} else {
+						copy = original;
 					}
-				}else{
-					copy = original;
+
+
+					try {
+						claimantImageView.setImageBitmap(Person.getPersonPicture(
+								rootView.getContext(),
+								personActivity.getPersonId(), 128));
+					} catch (Exception e) {
+						claimantImageView.setImageDrawable(getResources()
+								.getDrawable(R.drawable.ic_contact_picture));
+					}
 				}
-				
-				
-				try {
-					claimantImageView.setImageBitmap(Person.getPersonPicture(
-							rootView.getContext(),
-							personActivity.getPersonId(), 128));
-				} catch (Exception e) {
-					claimantImageView.setImageDrawable(getResources()
-							.getDrawable(R.drawable.ic_contact_picture));
-				}
-			}
+			break;
 		}
 	}
 
@@ -821,6 +823,7 @@ public class PersonFragment extends Fragment {
 		return person.update();
 	}
 
+
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 
@@ -840,12 +843,11 @@ public class PersonFragment extends Fragment {
 					toast.show();
 
 					Intent resultIntent = new Intent();
-
-					resultIntent.putExtra(PersonActivity.PERSON_ID_KEY,
-							personActivity.getPersonId());
-					// Set The Result in Intent
-					((PersonActivity) getActivity()).setResult(2, resultIntent);
-
+					resultIntent.putExtra(PersonActivity.PERSON_ID_KEY,personActivity.getPersonId());
+					getActivity().setResult(
+							PersonsFragment.ADD_PERSON_RESULT,
+							resultIntent);
+					//getActivity().finish();
 				} else if (saved == 2) {
 					toast = Toast.makeText(rootView.getContext(),
 							R.string.message_error_mandatory_field_first_name,
@@ -884,12 +886,22 @@ public class PersonFragment extends Fragment {
 					toast.show();
 
 					Intent resultIntent = new Intent();
+					resultIntent.putExtra(PersonActivity.PERSON_ID_KEY,personActivity.getPersonId());
+					getActivity().setResult(
+							PersonsFragment.ADD_PERSON_RESULT,
+							resultIntent);
+					//getActivity().finish();
+
+
+
+					/*
+					Intent resultIntent = new Intent();
 
 					resultIntent.putExtra(PersonActivity.PERSON_ID_KEY,
 							personActivity.getPersonId());
 					// Set The Result in Intent
 					((PersonActivity) getActivity()).setResult(2, resultIntent);
-
+					*/
 				} else {
 					toast = Toast
 							.makeText(rootView.getContext(),

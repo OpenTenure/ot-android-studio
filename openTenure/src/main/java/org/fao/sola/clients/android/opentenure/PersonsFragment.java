@@ -60,6 +60,7 @@ public class PersonsFragment extends ListFragment {
 
 	private View rootView;
 	private static final int PERSON_RESULT = 100;
+	public static final int ADD_PERSON_RESULT = 101;
 	private static final String FILTER_KEY = "filter";
 	private List<String> excludePersonIds = new ArrayList<String>();
 	private String filter = null;
@@ -150,7 +151,7 @@ public class PersonsFragment extends ListFragment {
 										PersonActivity.TYPE_PERSON);
 								intent.putExtra(PersonActivity.MODE_KEY, mainActivity.getMode()
 										.toString());
-								startActivityForResult(intent, PERSON_RESULT);
+								startActivityForResult(intent, ADD_PERSON_RESULT);
 							}
 						});
 
@@ -167,7 +168,7 @@ public class PersonsFragment extends ListFragment {
 										PersonActivity.TYPE_GROUP);
 								intent.putExtra(PersonActivity.MODE_KEY, mainActivity.getMode()
 										.toString());
-								startActivityForResult(intent, PERSON_RESULT);
+								startActivityForResult(intent, ADD_PERSON_RESULT);
 
 							}
 						});
@@ -187,10 +188,18 @@ public class PersonsFragment extends ListFragment {
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		switch (requestCode) {
+			case ADD_PERSON_RESULT:
+				if (data != null) {
+					CharSequence personId = data.getCharSequenceExtra(PersonActivity.PERSON_ID_KEY);
+					sendPersonBackToClaimDetails(personId);
+				} else {
+					// do nothing, no person chosen
+				}
+				break;
 			default:
 				update();
+				super.onActivityResult(requestCode, resultCode, data);
 		}
-		super.onActivityResult(requestCode, resultCode, data);
 	}
 
 	@Override
@@ -255,14 +264,19 @@ public class PersonsFragment extends ListFragment {
 					.toString());
 			startActivityForResult(intent, PERSON_RESULT);
 		} else {
-			Intent resultIntent = new Intent();
-			resultIntent.putExtra(PersonActivity.PERSON_ID_KEY,
-					((TextView) v.findViewById(R.id.person_id)).getText());
-			getActivity().setResult(
-					SelectPersonActivity.SELECT_PERSON_ACTIVITY_RESULT,
-					resultIntent);
-			getActivity().finish();
+			CharSequence personId=((TextView) v.findViewById(R.id.person_id)).getText();
+			sendPersonBackToClaimDetails(personId);
 		}
+	}
+
+	private void sendPersonBackToClaimDetails(CharSequence id) {
+		Intent resultIntent = new Intent();
+		resultIntent.putExtra(PersonActivity.PERSON_ID_KEY,
+				id);
+		getActivity().setResult(
+				SelectPersonActivity.SELECT_PERSON_ACTIVITY_RESULT,
+				resultIntent);
+		getActivity().finish();
 	}
 
 	protected void update() {
