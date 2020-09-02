@@ -183,7 +183,13 @@ public class ShowcaseView extends RelativeLayout
                 if (!shotStateStore.hasShot()) {
 
                     updateBitmap();
-                    Point targetPoint = target.getPoint();
+                    Point targetPoint = null;
+                    try {
+                        targetPoint = target.getPoint();
+                    } catch (NullPointerException e) {
+                        // target point remains null
+                    }
+
                     if (targetPoint != null) {
                         hasNoTarget = false;
                         if (animate) {
