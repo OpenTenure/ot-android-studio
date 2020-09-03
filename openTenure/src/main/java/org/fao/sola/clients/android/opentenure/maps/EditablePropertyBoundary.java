@@ -36,8 +36,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.fao.sola.clients.android.opentenure.BuildConfig;
 import org.fao.sola.clients.android.opentenure.ClaimDispatcher;
 import org.fao.sola.clients.android.opentenure.ModeDispatcher;
+import org.fao.sola.clients.android.opentenure.OpenTenureApplication;
 import org.fao.sola.clients.android.opentenure.R;
 import org.fao.sola.clients.android.opentenure.filesystem.FileSystemUtilities;
 import org.fao.sola.clients.android.opentenure.maps.ClaimMapFragment.MapMode;
@@ -61,6 +63,8 @@ import android.content.DialogInterface.OnClickListener;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Point;
+import android.net.Uri;
+import android.support.v4.content.FileProvider;
 import android.text.InputType;
 import android.util.Log;
 import android.widget.EditText;
@@ -1315,15 +1319,15 @@ public class EditablePropertyBoundary extends BasePropertyBoundary {
 
 				@Override
 				public void onSnapshotReady(Bitmap bmp) {
-					FileOutputStream out = null;
 					String claimId = claimActivity.getClaimId();
 					String path = FileSystemUtilities
 							.getAttachmentFolder(claimId)
 							+ File.separator
 							+ DEFAULT_MAP_FILE_NAME;
-					try {
-						out = new FileOutputStream(path);
+					try (FileOutputStream out = new FileOutputStream(path)){
 						bmp.compress(Bitmap.CompressFormat.JPEG, 100, out);
+						File file = new File(path);
+						Uri uri = FileProvider.getUriForFile(OpenTenureApplication.getContext(), BuildConfig.APPLICATION_ID, file);
 						Claim claim = Claim.getClaim(claimId);
 						for (Attachment att : claim.getAttachments()) {
 							if (att.getFileName().equals(DEFAULT_MAP_FILE_NAME)) {
@@ -1338,7 +1342,7 @@ public class EditablePropertyBoundary extends BasePropertyBoundary {
 						att.setFileType(DEFAULT_MAP_FILE_TYPE);						
 						att.setMimeType(DEFAULT_MAP_MIME_TYPE);
 						att.setMD5Sum(MD5.calculateMD5(new File(path)));
-						att.setPath(path);
+						att.setPath(uri.toString());
 						att.setSize(new File(path).length());
 						att.create();
 						Toast toast = Toast.makeText(context,
@@ -1347,13 +1351,6 @@ public class EditablePropertyBoundary extends BasePropertyBoundary {
 						toast.show();
 					} catch (Exception e) {
 						e.printStackTrace();
-					} finally {
-						if (out != null) {
-							try {
-								out.close();
-							} catch (Throwable ignore) {
-							}
-						}
 					}
 				}
 			});

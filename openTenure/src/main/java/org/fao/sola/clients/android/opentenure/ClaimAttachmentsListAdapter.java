@@ -320,7 +320,8 @@ public class ClaimAttachmentsListAdapter extends ArrayAdapter<String> {
 				@Override
 				public void onClick(View v) {
 					try {
-						Uri uri = Uri.parse("content://"+BuildConfig.APPLICATION_ID+att.getPath());
+						Uri uri = att.getPath().contains("content://") ? Uri.parse(att.getPath()) : Uri.parse("content://"+BuildConfig.APPLICATION_ID+att.getPath());
+
 						context.grantUriPermission(BuildConfig.APPLICATION_ID, uri, Intent.FLAG_GRANT_READ_URI_PERMISSION);
 
 						Intent i = new Intent(Intent.ACTION_VIEW);

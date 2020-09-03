@@ -307,7 +307,7 @@ public class ClaimDocumentsFragment extends ListFragment {
 							attachment.setFileType((valueKeyDocTypes.get((String) spinner.getSelectedItem())));
 							attachment.setMimeType(mimeType);
 							attachment.setMD5Sum(md5sum);
-							attachment.setPath(att.getAbsolutePath());
+							attachment.setPath(uri.toString());//att.getAbsolutePath());
 							attachment.setSize(att.length());
 
 							attachment.create();
@@ -357,7 +357,6 @@ public class ClaimDocumentsFragment extends ListFragment {
 					fileType = "document";
 
 					// get mime type
-					//mimeType = FileUtils.getMimeType(rootView.getContext(), uri);
 					ContentResolver cr = getContext().getContentResolver();
 					mimeType = cr.getType(uri);
 
@@ -418,7 +417,7 @@ public class ClaimDocumentsFragment extends ListFragment {
 							attachment.setMimeType(mimeType);
 							attachment.setMD5Sum(MD5.calculateMD5(copy));
 
-							String contentPath = FileProvider.getUriForFile(OpenTenureApplication.getContext(), BuildConfig.APPLICATION_ID, copy).getPath();
+							String contentPath = FileProvider.getUriForFile(OpenTenureApplication.getContext(), BuildConfig.APPLICATION_ID, copy).toString();//.getPath();
 
 							attachment.setPath(contentPath);//copy.getAbsolutePath());
 							attachment.setSize(copy.length());
