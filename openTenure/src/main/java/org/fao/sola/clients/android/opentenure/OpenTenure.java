@@ -82,7 +82,6 @@ public class OpenTenure extends FragmentActivity implements ModeDispatcher,
     private int counter = 0;
     int numberOfClaims = 0;
     private final ApiUtils apiUtils = new ApiUtils();
-    public static final int PERMISSIONS_WRITE_EXTERNAL_STORAGE = 150;
     public static final String FIRST_RUN_OT_ACTIVITY = "__FIRST_RUN_OT_ACTIVITY__";
     public static final String language = "language";
     public static final String albanian_language = "albanian_language";
