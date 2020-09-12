@@ -269,14 +269,13 @@ public class ClaimAttachmentsListAdapter extends ArrayAdapter<String> {
 				@Override
 				public void onClick(View v) {
 					try {
-						File file = new File(att.getPath());
-						Uri uri = FileProvider.getUriForFile(context, BuildConfig.APPLICATION_ID, file);
+						Uri uri = att.getPath().contains("content://") ? Uri.parse(att.getPath()) : Uri.parse("content://"+BuildConfig.APPLICATION_ID+att.getPath());
 
 						context.grantUriPermission(BuildConfig.APPLICATION_ID, uri, Intent.FLAG_GRANT_READ_URI_PERMISSION);
 
 						Intent i = new Intent(Intent.ACTION_VIEW);
 						i.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-						i.setDataAndType(uri,"image/*");
+						i.setDataAndType(uri, att.getMimeType());
 						OpenTenureApplication.getDocumentsFragment()
 								.startActivity(i);
 					} catch (ActivityNotFoundException e) {
@@ -326,7 +325,7 @@ public class ClaimAttachmentsListAdapter extends ArrayAdapter<String> {
 
 						Intent i = new Intent(Intent.ACTION_VIEW);
 						i.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-						i.setDataAndType(uri, att.getMimeType());// "image/*");
+						i.setDataAndType(uri, att.getMimeType());
 						OpenTenureApplication.getDocumentsFragment()
 								.startActivity(i);
 

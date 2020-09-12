@@ -225,9 +225,6 @@ public class ClaimDocumentsFragment extends ListFragment {
 						// do something
 					}
 
-					// List<String> list =
-					// dt.getDocumentTypesDisplayValues(OpenTenureApplication.getInstance().getLocalization());
-
 					ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(OpenTenureApplication.getContext(),
 							android.R.layout.simple_spinner_item, list) {
 					};
@@ -448,18 +445,6 @@ public class ClaimDocumentsFragment extends ListFragment {
 		}
 		super.onActivityResult(requestCode, resultCode, data);
 	}
-
-	/*private String getRealPathFromURI(String contentURI) {
-		Uri contentUri = Uri.parse(contentURI);
-		Cursor cursor = getActivity().getContentResolver().query(contentUri, null, null, null, null);
-		if (cursor == null) {
-			return contentUri.getPath();
-		} else {
-			cursor.moveToFirst();
-			int index = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
-			return cursor.getString(index);
-		}
-	}*/
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
