@@ -1044,7 +1044,9 @@ public class ClaimDetailsFragment extends Fragment {
 							.equalsIgnoreCase(attachment.getMimeType())) {
 						mapPresent = true;
 						path = attachment.getPath();
-						mapToDownload = !(new File(path).exists());
+						if (!path.startsWith("content://") && !(new File(path).exists())) {
+							mapToDownload=true;
+						}
 					}
 				}
 				if (!mapPresent) {
