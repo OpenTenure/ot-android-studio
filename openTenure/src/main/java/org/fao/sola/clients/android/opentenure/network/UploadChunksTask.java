@@ -31,10 +31,12 @@ import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Arrays;
 import java.util.UUID;
 
 import org.fao.sola.clients.android.opentenure.AttachmentViewHolder;
+import org.fao.sola.clients.android.opentenure.BuildConfig;
 import org.fao.sola.clients.android.opentenure.OpenTenureApplication;
 import org.fao.sola.clients.android.opentenure.R;
 import org.fao.sola.clients.android.opentenure.ViewHolder;
@@ -54,7 +56,9 @@ import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import android.net.Uri;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -70,21 +74,19 @@ public class UploadChunksTask extends AsyncTask<Object, ViewHolderResponse, View
 	protected ViewHolderResponse doInBackground(Object... params) {
 
 		boolean success = false;
-		DataInputStream dis = null;
 
 		UploadChunksResponse upResponse = new UploadChunksResponse();
 		ViewHolderResponse vhr = new ViewHolderResponse();
 
-		try {
+		Attachment attachment = Attachment.getAttachment((String) params[0]);
+		Uri uri = attachment.getPath().contains("content://") ? Uri.parse(attachment.getPath()) : Uri.parse("content://"+ BuildConfig.APPLICATION_ID+attachment.getPath());
+		try (InputStream in = OpenTenureApplication.getContext().getContentResolver().openInputStream(uri); DataInputStream dis = new DataInputStream(in)) {
 
-			Attachment attachment = Attachment.getAttachment((String) params[0]);
-
-			File toTransfer = new File(attachment.getPath());
-
-			FileInputStream fis = new FileInputStream(toTransfer);
+			//File toTransfer = new File(attachment.getPath());
+			//FileInputStream fis = new FileInputStream(toTransfer);
 			upResponse.setAttachmentId((String) params[0]);
 
-			dis = new DataInputStream(fis);
+			//dis = new DataInputStream(in);
 			dis.skipBytes((int) attachment.getUploadedBytes());
 
 			Integer startPosition = (int) attachment.getUploadedBytes();
@@ -148,15 +150,8 @@ public class UploadChunksTask extends AsyncTask<Object, ViewHolderResponse, View
 			upResponse.setSuccess(success);
 
 		} catch (Exception e) {
+			Log.e("Error", "Error uploading chunks for attachment with URI: "+uri.toString());
 			e.printStackTrace();
-		} finally {
-			if (dis != null) {
-				try {
-					dis.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
 		}
 
 		vhr.setRes(upResponse);

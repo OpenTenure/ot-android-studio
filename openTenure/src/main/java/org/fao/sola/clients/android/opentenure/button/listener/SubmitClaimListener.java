@@ -120,8 +120,8 @@ public class SubmitClaimListener implements OnClickListener {
 	private void submitClaim(View v) {
 		if (claimId != null) {
 
-			Person person = Claim.getClaim(claimId).getPerson();
 			Claim claim = Claim.getClaim(claimId);
+			Person person = claim.getPerson();
 
 			// Check is claim is already in uploading status(double click on
 			// send issue)

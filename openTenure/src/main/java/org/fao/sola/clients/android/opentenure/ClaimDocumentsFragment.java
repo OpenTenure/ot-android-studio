@@ -398,8 +398,8 @@ public class ClaimDocumentsFragment extends ListFragment {
 						public void onClick(View v) {
 							File copy;
 							try (InputStream in = getContext().getContentResolver().openInputStream(uri)) {
-								copy = FileSystemUtilities.copyStreamInAttachFolder(claimActivity.getClaimId(), in, uri.getLastPathSegment());
-
+								copy = FileSystemUtilities.copyStreamInAttachFolder(claimActivity.getClaimId(), in,
+										FilePathUtilities.getFileName(uri, getActivity().getContentResolver()));
 							} catch (IOException e) {
 								e.printStackTrace();
 								return;
@@ -416,7 +416,7 @@ public class ClaimDocumentsFragment extends ListFragment {
 
 							String contentPath = FileProvider.getUriForFile(OpenTenureApplication.getContext(), BuildConfig.APPLICATION_ID, copy).toString();//.getPath();
 
-							attachment.setPath(contentPath);//copy.getAbsolutePath());
+							attachment.setPath(contentPath);
 							attachment.setSize(copy.length());
 
 							attachment.create();
