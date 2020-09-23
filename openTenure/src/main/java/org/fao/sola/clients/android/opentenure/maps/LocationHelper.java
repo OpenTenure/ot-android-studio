@@ -46,9 +46,9 @@ import android.util.Log;
 public class LocationHelper {
 
 	public static final String CURRENT = "CURRENT";
-	private static final long LOCATION_LISTENER_INTERVAL_FAST = 1 * 1000;
+	private static final long LOCATION_LISTENER_INTERVAL_FAST = (long)0.8 * 1000;
 	private static final long LOCATION_LISTENER_INTERVAL_SLOW = 60 * 1000;
-	private static final float LOCATION_LISTENER_SHORT_DISTANCE = 1;
+	private static final float LOCATION_LISTENER_SHORT_DISTANCE = 0.5f;
 	private static final float LOCATION_LISTENER_LONG_DISTANCE = 10;
 	private static final double HOME_LATITUDE = 41.8825;
 	private static final double HOME_LONGITUDE = 12.4882;
@@ -91,14 +91,16 @@ public class LocationHelper {
 	}
 
 	public void hurryUp() {
-
 		locationManager.removeUpdates(gpsLL);
 		locationManager.removeUpdates(networkLL);
-
+		locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
+				LOCATION_LISTENER_INTERVAL_FAST, LOCATION_LISTENER_LONG_DISTANCE, gpsLL);
+		locationManager.requestLocationUpdates(
+				LocationManager.NETWORK_PROVIDER,
+				LOCATION_LISTENER_INTERVAL_FAST, LOCATION_LISTENER_LONG_DISTANCE, networkLL);
 	}
 
 	public void slowDown() {
-
 		locationManager.removeUpdates(gpsLL);
 		locationManager.removeUpdates(networkLL);
 		locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
@@ -109,7 +111,6 @@ public class LocationHelper {
 	}
 
 	public LatLng getLastKnownLocation() {
-
 		Location gpsLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 		Location networkLocation = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
 
@@ -139,6 +140,7 @@ public class LocationHelper {
 
 	LocationListener networkLL = new LocationListener() {
 
+		@Override
 		public void onLocationChanged(Location location) {
 
 			if(currentLocation == null || (currentLocation != null && location.getTime() > currentLocation.getTime())){
@@ -161,14 +163,17 @@ public class LocationHelper {
 			Log.d(this.getClass().getName(), "onLocationChanged");
 		}
 
+		@Override
 		public void onStatusChanged(String provider, int status, Bundle extras) {
 			Log.d(this.getClass().getName(), "onStatusChanged");
 		}
 
+		@Override
 		public void onProviderEnabled(String provider) {
 			Log.d(this.getClass().getName(), "onProviderEnabled");
 		}
 
+		@Override
 		public void onProviderDisabled(String provider) {
 			Log.d(this.getClass().getName(), "onProviderDisabled");
 		}
@@ -176,6 +181,7 @@ public class LocationHelper {
 
 	LocationListener gpsLL = new LocationListener() {
 
+		@Override
 		public void onLocationChanged(Location location) {
 
 			if(currentLocation == null || (currentLocation != null && location.getTime() > currentLocation.getTime())){
@@ -200,14 +206,17 @@ public class LocationHelper {
 			}
 		}
 
+		@Override
 		public void onStatusChanged(String provider, int status, Bundle extras) {
 			Log.d(this.getClass().getName(), "onStatusChanged");
 		}
 
+		@Override
 		public void onProviderEnabled(String provider) {
 			Log.d(this.getClass().getName(), "onProviderEnabled");
 		}
 
+		@Override
 		public void onProviderDisabled(String provider) {
 			Log.d(this.getClass().getName(), "onProviderDisabled");
 		}
