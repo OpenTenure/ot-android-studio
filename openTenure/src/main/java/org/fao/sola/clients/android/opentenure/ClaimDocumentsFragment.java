@@ -32,6 +32,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
@@ -239,8 +240,6 @@ public class ClaimDocumentsFragment extends ListFragment {
 
 					confirmButton.setOnClickListener(new View.OnClickListener() {
 
-					//final String filePath = uri.getPath();
-
 						@Override
 						public void onClick(View v) {
 
@@ -260,31 +259,24 @@ public class ClaimDocumentsFragment extends ListFragment {
 							}
 
 							long length = baos.size();
-							//File original = new File(filePath);
-							File copy = null;
 							Log.d(this.getClass().getName(), "Attachment size : " + length);
 
 							if (length > 800000) {
-								/*
-								copy = FileSystemUtilities.reduceJpeg(original);
-
-								if (copy != null) {
-
-									Log.d(this.getClass().getName(), "Reduced size to : " + copy.length());
-									original.delete();
-
-									if (copy.renameTo(new File(filePath))) {
-										Log.d(this.getClass().getName(), "Renamed : " + copy.getName() + " to "
-												+ filePath);
-									} else {
-										Log.e(this.getClass().getName(), "Can't rename : " + copy.getName() + " to "
-												+ filePath);
-									}
+								String fileName = FilePathUtilities.getFileName(uri, getActivity().getContentResolver());
+								byte[] reduced = FileSystemUtilities.reduceJpeg(baos.toByteArray(), length, fileName);
+								try (OutputStream outputStream = getActivity().getContentResolver().openOutputStream(uri)){
+									outputStream.write(reduced);
+									length = reduced.length;
+									Log.d(this.getClass().getName(), "Resized : " + fileName);
+									Log.d(this.getClass().getName(), "Attachment size : " + length);
+								} catch (FileNotFoundException e) {
+									Log.e(this.getClass().getName(), "Could not find file to resize : " + fileName);
+									e.printStackTrace();
+								} catch (IOException e) {
+									Log.e(this.getClass().getName(), "Could not resize : " + fileName);
+									e.printStackTrace();
 								}
 
-								 */
-							} else {
-								//copy = original;
 							}
 
 							// Recreate the file object to take into account that the file has been renamed
@@ -292,7 +284,7 @@ public class ClaimDocumentsFragment extends ListFragment {
 							try (InputStream is = getContext().getContentResolver().openInputStream(uri)) {
 								md5sum = MD5.calculateMD5(is);
 							} catch (Exception e) {
-
+								Log.e(this.getClass().getName(), "Could not calculate md5");
 							}
 
 							File att = new File(uri.getPath());
@@ -305,7 +297,7 @@ public class ClaimDocumentsFragment extends ListFragment {
 							attachment.setMimeType(mimeType);
 							attachment.setMD5Sum(md5sum);
 							attachment.setPath(uri.toString());//att.getAbsolutePath());
-							attachment.setSize(att.length());
+							attachment.setSize(length);
 
 							attachment.create();
 							update();
@@ -465,8 +457,7 @@ public class ClaimDocumentsFragment extends ListFragment {
 
 
 
-				uri = getOutputMediaUri(MEDIA_TYPE_IMAGE);//FileProvider.getUriForFile(this.getContext(), BuildConfig.APPLICATION_ID, getOutputMediaUri(MEDIA_TYPE_IMAGE));
-						//Uri.fromFile(getOutputMediaFile(MEDIA_TYPE_IMAGE));
+				uri = getOutputMediaUri(MEDIA_TYPE_IMAGE);
 				this.getContext().grantUriPermission(BuildConfig.APPLICATION_ID, uri, Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
 
 				Log.d(this.getClass().getName(), "Passing " + uri + " to MediaStore intent");

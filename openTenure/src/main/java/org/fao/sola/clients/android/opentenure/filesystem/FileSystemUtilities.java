@@ -28,6 +28,8 @@
 package org.fao.sola.clients.android.opentenure.filesystem;
 
 import java.io.BufferedInputStream;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -719,13 +721,8 @@ public class FileSystemUtilities {
 
 	}
 
-	/*
-	public static File reduceJpeg(InputStream in, long size) {
-		OutputStream out = null;
-		File dir = file.getParentFile();
-		String cmpFileName = file.getName().replace(".jpg", "_cmp.jpg");
-
-		/-* 100 = max quality, 0 = max compression *-/
+	public static byte[] reduceJpeg(byte[] original, long size, String fileName) {
+		/* 100 = max quality, 0 = max compression */
 
 		int quality = 0;
 
@@ -733,45 +730,29 @@ public class FileSystemUtilities {
 			quality = 80;
 		} else if (size >= 1000000 && size < 2000000) {
 			quality = 60;
-		}	else if (size >= 2000000) {
+		} else if (size >= 2000000) {
 			quality = 40;
+		}
 
-
-		try {
-			Log.d(FileSystemUtilities.class.getName(), "Compressing " + file.getName() + " to " + cmpFileName+ " with " + quality + " quality hint");
-			in = new FileInputStream(file);
+		try (ByteArrayInputStream in = new ByteArrayInputStream(original); ByteArrayOutputStream out = new ByteArrayOutputStream()) {
+			Log.d(FileSystemUtilities.class.getName(), "Compressing " + fileName + " with " + quality + " quality hint");
 
 			Bitmap bitmap = BitmapFactory.decodeStream(in);
-			File cmpFile = new File(dir, cmpFileName);
-			out = new FileOutputStream(cmpFile);
+
 			if (bitmap.compress(CompressFormat.JPEG, quality, out)) {
 				out.flush();
-				out.close();
 				in.close();
-				return cmpFile;
-
+				return out.toByteArray();
 			} else {
 				throw new Exception("Failed to save the image as a JPEG");
 			}
 		} catch (Exception e) {
 			Log.e(FileSystemUtilities.class.getName(), "Failed to compress image :" + e.getMessage());
 			e.printStackTrace();
-		} finally {
-			try {
-				if (out != null) {
-					out.close();
-				}
-				if (in != null) {
-					in.close();
-				}
-			} catch (IOException e) {
-				Log.e(FileSystemUtilities.class.getName(), "Failed to release streams :" + e.getMessage());
-				e.printStackTrace();
-			}
 		}
-		return null;
+		return new byte[0];
+
 	}
-		*/
 
 	public static File reduceJpeg(File file) {
 

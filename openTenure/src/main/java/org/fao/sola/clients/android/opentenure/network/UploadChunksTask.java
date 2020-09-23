@@ -82,11 +82,8 @@ public class UploadChunksTask extends AsyncTask<Object, ViewHolderResponse, View
 		Uri uri = attachment.getPath().contains("content://") ? Uri.parse(attachment.getPath()) : Uri.parse("content://"+ BuildConfig.APPLICATION_ID+attachment.getPath());
 		try (InputStream in = OpenTenureApplication.getContext().getContentResolver().openInputStream(uri); DataInputStream dis = new DataInputStream(in)) {
 
-			//File toTransfer = new File(attachment.getPath());
-			//FileInputStream fis = new FileInputStream(toTransfer);
 			upResponse.setAttachmentId((String) params[0]);
 
-			//dis = new DataInputStream(in);
 			dis.skipBytes((int) attachment.getUploadedBytes());
 
 			Integer startPosition = (int) attachment.getUploadedBytes();
