@@ -4,58 +4,7 @@
             "outputFile": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-lt\\values-lt.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\solov\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-22.2.0.aar\\96ce092b480ca8013bfad2e6a85e8452\\res\\values-lt\\values-lt.xml",
-                    "from": {
-                        "startLines": "4,5,6,7,8,9",
-                        "startColumns": "4,4,4,4,4,4",
-                        "startOffsets": "293,410,520,634,737,824",
-                        "endColumns": "116,109,113,102,86,96",
-                        "endOffsets": "405,515,629,732,819,916"
-                    },
-                    "to": {
-                        "startLines": "47,48,49,50,51,52",
-                        "startColumns": "4,4,4,4,4,4",
-                        "startOffsets": "6674,6791,6901,7015,7118,7205",
-                        "endColumns": "116,109,113,102,86,96",
-                        "endOffsets": "6786,6896,7010,7113,7200,7297"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\solov\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-22.2.0.aar\\02f31d5693fa186b332fc9a02db73d7f\\res\\values-lt\\values-lt.xml",
-                    "from": {
-                        "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "291,407,508,621,708,817,938,1047,1156,1256,1366,1470,1583",
-                        "endColumns": "115,100,112,86,108,120,108,108,99,109,103,112,129",
-                        "endOffsets": "402,503,616,703,812,933,1042,1151,1251,1361,1465,1578,1708"
-                    },
-                    "to": {
-                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "105,221,322,435,522,631,752,861,970,1070,1180,1284,1397",
-                        "endColumns": "115,100,112,86,108,120,108,108,99,109,103,112,129",
-                        "endOffsets": "216,317,430,517,626,747,856,965,1065,1175,1279,1392,1522"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\solov\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-8.3.0.aar\\af7964eb5c98c240375704668f67fc45\\res\\values-lt\\base_strings.xml",
-                    "from": {
-                        "startLines": "3,4",
-                        "startColumns": "4,4",
-                        "startOffsets": "170,266",
-                        "endColumns": "95,119",
-                        "endOffsets": "261,381"
-                    },
-                    "to": {
-                        "startLines": "45,46",
-                        "startColumns": "4,4",
-                        "startOffsets": "6458,6554",
-                        "endColumns": "95,119",
-                        "endOffsets": "6549,6669"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\solov\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-basement-8.3.0.aar\\1af3bc1cc859c43b1d0079d8723de892\\res\\values-lt\\common_strings.xml",
+                    "source": "C:\\Users\\solov\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-basement-8.3.0.aar\\1d20108e4f62bc505504bedc067d8279\\res\\values-lt\\common_strings.xml",
                     "from": {
                         "startLines": "5,18,16,30,14,13,12,7,11,9,10,8,24,23,6,22,21,4,3,32,31,25,27,26,28,17,15,20,19,29",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -72,7 +21,41 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\solov\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-wallet-8.3.0.aar\\a4b7f86cfb9cb3d77510015832d1bf64\\res\\values-lt\\wallet_strings.xml",
+                    "source": "C:\\Users\\solov\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-22.2.0.aar\\0d4a6147eabf6495b99259dc88a34c26\\res\\values-lt\\values-lt.xml",
+                    "from": {
+                        "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "291,407,508,621,708,817,938,1047,1156,1256,1366,1470,1583",
+                        "endColumns": "115,100,112,86,108,120,108,108,99,109,103,112,129",
+                        "endOffsets": "402,503,616,703,812,933,1042,1151,1251,1361,1465,1578,1708"
+                    },
+                    "to": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "105,221,322,435,522,631,752,861,970,1070,1180,1284,1397",
+                        "endColumns": "115,100,112,86,108,120,108,108,99,109,103,112,129",
+                        "endOffsets": "216,317,430,517,626,747,856,965,1065,1175,1279,1392,1522"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\solov\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-22.2.0.aar\\8d1372546c32a3ecf9bf90106a9f9b4b\\res\\values-lt\\values-lt.xml",
+                    "from": {
+                        "startLines": "4,5,6,7,8,9",
+                        "startColumns": "4,4,4,4,4,4",
+                        "startOffsets": "293,410,520,634,737,824",
+                        "endColumns": "116,109,113,102,86,96",
+                        "endOffsets": "405,515,629,732,819,916"
+                    },
+                    "to": {
+                        "startLines": "47,48,49,50,51,52",
+                        "startColumns": "4,4,4,4,4,4",
+                        "startOffsets": "6674,6791,6901,7015,7118,7205",
+                        "endColumns": "116,109,113,102,86,96",
+                        "endOffsets": "6786,6896,7010,7113,7200,7297"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\solov\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-wallet-8.3.0.aar\\e11e49100489e599400238e106a31c0d\\res\\values-lt\\wallet_strings.xml",
                     "from": {
                         "startLines": "5",
                         "startColumns": "4",
@@ -86,6 +69,23 @@
                         "startOffsets": "7302",
                         "endColumns": "114",
                         "endOffsets": "7412"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\solov\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-8.3.0.aar\\d294a403eae4ab54fb9b097a3045cda4\\res\\values-lt\\base_strings.xml",
+                    "from": {
+                        "startLines": "3,4",
+                        "startColumns": "4,4",
+                        "startOffsets": "170,266",
+                        "endColumns": "95,119",
+                        "endOffsets": "261,381"
+                    },
+                    "to": {
+                        "startLines": "45,46",
+                        "startColumns": "4,4",
+                        "startOffsets": "6458,6554",
+                        "endColumns": "95,119",
+                        "endOffsets": "6549,6669"
                     }
                 }
             ]

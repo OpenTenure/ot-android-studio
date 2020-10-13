@@ -4,24 +4,7 @@
             "outputFile": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-fr-rCA\\values-fr-rCA.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\solov\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-22.2.0.aar\\02f31d5693fa186b332fc9a02db73d7f\\res\\values-fr-rCA\\values-fr-rCA.xml",
-                    "from": {
-                        "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "295,406,521,632,719,835,965,1075,1187,1290,1401,1508,1615",
-                        "endColumns": "110,114,110,86,115,129,109,111,102,110,106,106,121",
-                        "endOffsets": "401,516,627,714,830,960,1070,1182,1285,1396,1503,1610,1732"
-                    },
-                    "to": {
-                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "105,216,331,442,529,645,775,885,997,1100,1211,1318,1425",
-                        "endColumns": "110,114,110,86,115,129,109,111,102,110,106,106,121",
-                        "endOffsets": "211,326,437,524,640,770,880,992,1095,1206,1313,1420,1542"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\solov\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-8.3.0.aar\\af7964eb5c98c240375704668f67fc45\\res\\values-fr-rCA\\base_strings.xml",
+                    "source": "C:\\Users\\solov\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-8.3.0.aar\\d294a403eae4ab54fb9b097a3045cda4\\res\\values-fr-rCA\\base_strings.xml",
                     "from": {
                         "startLines": "3,4",
                         "startColumns": "4,4",
@@ -38,7 +21,24 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\solov\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-basement-8.3.0.aar\\1af3bc1cc859c43b1d0079d8723de892\\res\\values-fr-rCA\\common_strings.xml",
+                    "source": "C:\\Users\\solov\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-22.2.0.aar\\8d1372546c32a3ecf9bf90106a9f9b4b\\res\\values-fr-rCA\\values-fr-rCA.xml",
+                    "from": {
+                        "startLines": "4,5,6,7,8,9",
+                        "startColumns": "4,4,4,4,4,4",
+                        "startOffsets": "297,415,539,652,758,845",
+                        "endColumns": "117,123,112,105,86,95",
+                        "endOffsets": "410,534,647,753,840,936"
+                    },
+                    "to": {
+                        "startLines": "47,48,49,50,51,52",
+                        "startColumns": "4,4,4,4,4,4",
+                        "startOffsets": "6895,7013,7137,7250,7356,7443",
+                        "endColumns": "117,123,112,105,86,95",
+                        "endOffsets": "7008,7132,7245,7351,7438,7534"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\solov\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-basement-8.3.0.aar\\1d20108e4f62bc505504bedc067d8279\\res\\values-fr-rCA\\common_strings.xml",
                     "from": {
                         "startLines": "5,18,16,30,14,13,12,7,11,9,10,8,24,23,6,22,21,4,3,32,31,25,27,26,28,17,15,20,19,29",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -55,20 +55,20 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\solov\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-22.2.0.aar\\96ce092b480ca8013bfad2e6a85e8452\\res\\values-fr-rCA\\values-fr-rCA.xml",
+                    "source": "C:\\Users\\solov\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-22.2.0.aar\\0d4a6147eabf6495b99259dc88a34c26\\res\\values-fr-rCA\\values-fr-rCA.xml",
                     "from": {
-                        "startLines": "4,5,6,7,8,9",
-                        "startColumns": "4,4,4,4,4,4",
-                        "startOffsets": "297,415,539,652,758,845",
-                        "endColumns": "117,123,112,105,86,95",
-                        "endOffsets": "410,534,647,753,840,936"
+                        "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "295,406,521,632,719,835,965,1075,1187,1290,1401,1508,1615",
+                        "endColumns": "110,114,110,86,115,129,109,111,102,110,106,106,121",
+                        "endOffsets": "401,516,627,714,830,960,1070,1182,1285,1396,1503,1610,1732"
                     },
                     "to": {
-                        "startLines": "47,48,49,50,51,52",
-                        "startColumns": "4,4,4,4,4,4",
-                        "startOffsets": "6895,7013,7137,7250,7356,7443",
-                        "endColumns": "117,123,112,105,86,95",
-                        "endOffsets": "7008,7132,7245,7351,7438,7534"
+                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "105,216,331,442,529,645,775,885,997,1100,1211,1318,1425",
+                        "endColumns": "110,114,110,86,115,129,109,111,102,110,106,106,121",
+                        "endOffsets": "211,326,437,524,640,770,880,992,1095,1206,1313,1420,1542"
                     }
                 }
             ]

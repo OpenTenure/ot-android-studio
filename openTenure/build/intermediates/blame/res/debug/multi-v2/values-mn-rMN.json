@@ -4,24 +4,7 @@
             "outputFile": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-mn-rMN\\values-mn-rMN.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\solov\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-22.2.0.aar\\96ce092b480ca8013bfad2e6a85e8452\\res\\values-mn-rMN\\values-mn-rMN.xml",
-                    "from": {
-                        "startLines": "4,5,6,7,8,9",
-                        "startColumns": "4,4,4,4,4,4",
-                        "startOffsets": "297,410,529,636,737,823",
-                        "endColumns": "112,118,106,100,85,98",
-                        "endOffsets": "405,524,631,732,818,917"
-                    },
-                    "to": {
-                        "startLines": "47,48,49,50,51,52",
-                        "startColumns": "4,4,4,4,4,4",
-                        "startOffsets": "6673,6786,6905,7012,7113,7199",
-                        "endColumns": "112,118,106,100,85,98",
-                        "endOffsets": "6781,6900,7007,7108,7194,7293"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\solov\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-22.2.0.aar\\02f31d5693fa186b332fc9a02db73d7f\\res\\values-mn-rMN\\values-mn-rMN.xml",
+                    "source": "C:\\Users\\solov\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-22.2.0.aar\\0d4a6147eabf6495b99259dc88a34c26\\res\\values-mn-rMN\\values-mn-rMN.xml",
                     "from": {
                         "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -38,7 +21,24 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\solov\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-basement-8.3.0.aar\\1af3bc1cc859c43b1d0079d8723de892\\res\\values-mn-rMN\\common_strings.xml",
+                    "source": "C:\\Users\\solov\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-22.2.0.aar\\8d1372546c32a3ecf9bf90106a9f9b4b\\res\\values-mn-rMN\\values-mn-rMN.xml",
+                    "from": {
+                        "startLines": "4,5,6,7,8,9",
+                        "startColumns": "4,4,4,4,4,4",
+                        "startOffsets": "297,410,529,636,737,823",
+                        "endColumns": "112,118,106,100,85,98",
+                        "endOffsets": "405,524,631,732,818,917"
+                    },
+                    "to": {
+                        "startLines": "47,48,49,50,51,52",
+                        "startColumns": "4,4,4,4,4,4",
+                        "startOffsets": "6673,6786,6905,7012,7113,7199",
+                        "endColumns": "112,118,106,100,85,98",
+                        "endOffsets": "6781,6900,7007,7108,7194,7293"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\solov\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-basement-8.3.0.aar\\1d20108e4f62bc505504bedc067d8279\\res\\values-mn-rMN\\common_strings.xml",
                     "from": {
                         "startLines": "5,18,16,30,14,13,12,7,11,9,10,8,24,23,6,22,21,4,3,32,31,25,27,26,28,17,15,20,19,29",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -55,7 +55,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\solov\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-8.3.0.aar\\af7964eb5c98c240375704668f67fc45\\res\\values-mn-rMN\\base_strings.xml",
+                    "source": "C:\\Users\\solov\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-8.3.0.aar\\d294a403eae4ab54fb9b097a3045cda4\\res\\values-mn-rMN\\base_strings.xml",
                     "from": {
                         "startLines": "3,4",
                         "startColumns": "4,4",

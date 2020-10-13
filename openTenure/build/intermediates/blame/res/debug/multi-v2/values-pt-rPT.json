@@ -4,58 +4,24 @@
             "outputFile": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-pt-rPT\\values-pt-rPT.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\solov\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-22.2.0.aar\\96ce092b480ca8013bfad2e6a85e8452\\res\\values-pt-rPT\\values-pt-rPT.xml",
+                    "source": "C:\\Users\\solov\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-wallet-8.3.0.aar\\e11e49100489e599400238e106a31c0d\\res\\values-pt-rPT\\wallet_strings.xml",
                     "from": {
-                        "startLines": "4,5,6,7,8,9",
-                        "startColumns": "4,4,4,4,4,4",
-                        "startOffsets": "297,421,538,646,752,839",
-                        "endColumns": "123,116,107,105,86,98",
-                        "endOffsets": "416,533,641,747,834,933"
+                        "startLines": "5",
+                        "startColumns": "4",
+                        "startOffsets": "230",
+                        "endColumns": "109",
+                        "endOffsets": "335"
                     },
                     "to": {
-                        "startLines": "47,48,49,50,51,52",
-                        "startColumns": "4,4,4,4,4,4",
-                        "startOffsets": "6723,6847,6964,7072,7178,7265",
-                        "endColumns": "123,116,107,105,86,98",
-                        "endOffsets": "6842,6959,7067,7173,7260,7359"
+                        "startLines": "53",
+                        "startColumns": "4",
+                        "startOffsets": "7364",
+                        "endColumns": "109",
+                        "endOffsets": "7469"
                     }
                 },
                 {
-                    "source": "C:\\Users\\solov\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-8.3.0.aar\\af7964eb5c98c240375704668f67fc45\\res\\values-pt-rPT\\base_strings.xml",
-                    "from": {
-                        "startLines": "3,4",
-                        "startColumns": "4,4",
-                        "startOffsets": "170,269",
-                        "endColumns": "98,116",
-                        "endOffsets": "264,381"
-                    },
-                    "to": {
-                        "startLines": "45,46",
-                        "startColumns": "4,4",
-                        "startOffsets": "6507,6606",
-                        "endColumns": "98,116",
-                        "endOffsets": "6601,6718"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\solov\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-22.2.0.aar\\02f31d5693fa186b332fc9a02db73d7f\\res\\values-pt-rPT\\values-pt-rPT.xml",
-                    "from": {
-                        "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "295,415,521,628,717,818,942,1049,1161,1263,1371,1478,1585",
-                        "endColumns": "119,105,106,88,100,123,106,111,101,107,106,106,121",
-                        "endOffsets": "410,516,623,712,813,937,1044,1156,1258,1366,1473,1580,1702"
-                    },
-                    "to": {
-                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "105,225,331,438,527,628,752,859,971,1073,1181,1288,1395",
-                        "endColumns": "119,105,106,88,100,123,106,111,101,107,106,106,121",
-                        "endOffsets": "220,326,433,522,623,747,854,966,1068,1176,1283,1390,1512"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\solov\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-basement-8.3.0.aar\\1af3bc1cc859c43b1d0079d8723de892\\res\\values-pt-rPT\\common_strings.xml",
+                    "source": "C:\\Users\\solov\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-basement-8.3.0.aar\\1d20108e4f62bc505504bedc067d8279\\res\\values-pt-rPT\\common_strings.xml",
                     "from": {
                         "startLines": "5,18,16,30,14,13,12,7,11,9,10,8,24,23,6,22,21,4,3,32,31,25,27,26,28,17,15,20,19,29",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -72,20 +38,54 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\solov\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-wallet-8.3.0.aar\\a4b7f86cfb9cb3d77510015832d1bf64\\res\\values-pt-rPT\\wallet_strings.xml",
+                    "source": "C:\\Users\\solov\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-8.3.0.aar\\d294a403eae4ab54fb9b097a3045cda4\\res\\values-pt-rPT\\base_strings.xml",
                     "from": {
-                        "startLines": "5",
-                        "startColumns": "4",
-                        "startOffsets": "230",
-                        "endColumns": "109",
-                        "endOffsets": "335"
+                        "startLines": "3,4",
+                        "startColumns": "4,4",
+                        "startOffsets": "170,269",
+                        "endColumns": "98,116",
+                        "endOffsets": "264,381"
                     },
                     "to": {
-                        "startLines": "53",
-                        "startColumns": "4",
-                        "startOffsets": "7364",
-                        "endColumns": "109",
-                        "endOffsets": "7469"
+                        "startLines": "45,46",
+                        "startColumns": "4,4",
+                        "startOffsets": "6507,6606",
+                        "endColumns": "98,116",
+                        "endOffsets": "6601,6718"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\solov\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-22.2.0.aar\\8d1372546c32a3ecf9bf90106a9f9b4b\\res\\values-pt-rPT\\values-pt-rPT.xml",
+                    "from": {
+                        "startLines": "4,5,6,7,8,9",
+                        "startColumns": "4,4,4,4,4,4",
+                        "startOffsets": "297,421,538,646,752,839",
+                        "endColumns": "123,116,107,105,86,98",
+                        "endOffsets": "416,533,641,747,834,933"
+                    },
+                    "to": {
+                        "startLines": "47,48,49,50,51,52",
+                        "startColumns": "4,4,4,4,4,4",
+                        "startOffsets": "6723,6847,6964,7072,7178,7265",
+                        "endColumns": "123,116,107,105,86,98",
+                        "endOffsets": "6842,6959,7067,7173,7260,7359"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\solov\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-22.2.0.aar\\0d4a6147eabf6495b99259dc88a34c26\\res\\values-pt-rPT\\values-pt-rPT.xml",
+                    "from": {
+                        "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "295,415,521,628,717,818,942,1049,1161,1263,1371,1478,1585",
+                        "endColumns": "119,105,106,88,100,123,106,111,101,107,106,106,121",
+                        "endOffsets": "410,516,623,712,813,937,1044,1156,1258,1366,1473,1580,1702"
+                    },
+                    "to": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "105,225,331,438,527,628,752,859,971,1073,1181,1288,1395",
+                        "endColumns": "119,105,106,88,100,123,106,111,101,107,106,106,121",
+                        "endOffsets": "220,326,433,522,623,747,854,966,1068,1176,1283,1390,1512"
                     }
                 }
             ]

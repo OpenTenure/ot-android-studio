@@ -4,7 +4,7 @@
             "outputFile": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-bn-rBD\\values-bn-rBD.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\solov\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-22.2.0.aar\\02f31d5693fa186b332fc9a02db73d7f\\res\\values-bn-rBD\\values-bn-rBD.xml",
+                    "source": "C:\\Users\\solov\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-22.2.0.aar\\0d4a6147eabf6495b99259dc88a34c26\\res\\values-bn-rBD\\values-bn-rBD.xml",
                     "from": {
                         "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -21,24 +21,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\solov\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-22.2.0.aar\\96ce092b480ca8013bfad2e6a85e8452\\res\\values-bn-rBD\\values-bn-rBD.xml",
-                    "from": {
-                        "startLines": "4,5,6,7,8,9",
-                        "startColumns": "4,4,4,4,4,4",
-                        "startOffsets": "297,412,535,641,756,843",
-                        "endColumns": "114,122,105,114,86,96",
-                        "endOffsets": "407,530,636,751,838,935"
-                    },
-                    "to": {
-                        "startLines": "47,48,49,50,51,52",
-                        "startColumns": "4,4,4,4,4,4",
-                        "startOffsets": "6597,6712,6835,6941,7056,7143",
-                        "endColumns": "114,122,105,114,86,96",
-                        "endOffsets": "6707,6830,6936,7051,7138,7235"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\solov\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-basement-8.3.0.aar\\1af3bc1cc859c43b1d0079d8723de892\\res\\values-bn-rBD\\common_strings.xml",
+                    "source": "C:\\Users\\solov\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-basement-8.3.0.aar\\1d20108e4f62bc505504bedc067d8279\\res\\values-bn-rBD\\common_strings.xml",
                     "from": {
                         "startLines": "5,18,16,30,14,13,12,7,11,9,10,8,24,23,6,22,21,4,3,32,31,25,27,26,28,17,15,20,19,29",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -55,7 +38,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\solov\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-8.3.0.aar\\af7964eb5c98c240375704668f67fc45\\res\\values-bn-rBD\\base_strings.xml",
+                    "source": "C:\\Users\\solov\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-8.3.0.aar\\d294a403eae4ab54fb9b097a3045cda4\\res\\values-bn-rBD\\base_strings.xml",
                     "from": {
                         "startLines": "3,4",
                         "startColumns": "4,4",
@@ -69,6 +52,23 @@
                         "startOffsets": "6380,6477",
                         "endColumns": "96,119",
                         "endOffsets": "6472,6592"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\solov\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-22.2.0.aar\\8d1372546c32a3ecf9bf90106a9f9b4b\\res\\values-bn-rBD\\values-bn-rBD.xml",
+                    "from": {
+                        "startLines": "4,5,6,7,8,9",
+                        "startColumns": "4,4,4,4,4,4",
+                        "startOffsets": "297,412,535,641,756,843",
+                        "endColumns": "114,122,105,114,86,96",
+                        "endOffsets": "407,530,636,751,838,935"
+                    },
+                    "to": {
+                        "startLines": "47,48,49,50,51,52",
+                        "startColumns": "4,4,4,4,4,4",
+                        "startOffsets": "6597,6712,6835,6941,7056,7143",
+                        "endColumns": "114,122,105,114,86,96",
+                        "endOffsets": "6707,6830,6936,7051,7138,7235"
                     }
                 }
             ]

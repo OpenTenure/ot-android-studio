@@ -4,24 +4,7 @@
             "outputFile": "C:\\SOLA\\Project\\GIT\\SOLA\\open_tenure\\ot-android-studio\\openTenure\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-uz-rUZ\\values-uz-rUZ.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\solov\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-8.3.0.aar\\af7964eb5c98c240375704668f67fc45\\res\\values-uz-rUZ\\base_strings.xml",
-                    "from": {
-                        "startLines": "3,4",
-                        "startColumns": "4,4",
-                        "startOffsets": "170,261",
-                        "endColumns": "90,109",
-                        "endOffsets": "256,366"
-                    },
-                    "to": {
-                        "startLines": "44,45",
-                        "startColumns": "4,4",
-                        "startOffsets": "6348,6439",
-                        "endColumns": "90,109",
-                        "endOffsets": "6434,6544"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\solov\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-22.2.0.aar\\02f31d5693fa186b332fc9a02db73d7f\\res\\values-uz-rUZ\\values-uz-rUZ.xml",
+                    "source": "C:\\Users\\solov\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-22.2.0.aar\\0d4a6147eabf6495b99259dc88a34c26\\res\\values-uz-rUZ\\values-uz-rUZ.xml",
                     "from": {
                         "startLines": "4,5,6,7,8,9,10,11,12,13,14,15",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4",
@@ -38,24 +21,24 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\solov\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-22.2.0.aar\\96ce092b480ca8013bfad2e6a85e8452\\res\\values-uz-rUZ\\values-uz-rUZ.xml",
+                    "source": "C:\\Users\\solov\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-base-8.3.0.aar\\d294a403eae4ab54fb9b097a3045cda4\\res\\values-uz-rUZ\\base_strings.xml",
                     "from": {
-                        "startLines": "4,5,6,7,8,9",
-                        "startColumns": "4,4,4,4,4,4",
-                        "startOffsets": "297,411,525,630,730,815",
-                        "endColumns": "113,113,104,99,84,96",
-                        "endOffsets": "406,520,625,725,810,907"
+                        "startLines": "3,4",
+                        "startColumns": "4,4",
+                        "startOffsets": "170,261",
+                        "endColumns": "90,109",
+                        "endOffsets": "256,366"
                     },
                     "to": {
-                        "startLines": "46,47,48,49,50,51",
-                        "startColumns": "4,4,4,4,4,4",
-                        "startOffsets": "6549,6663,6777,6882,6982,7067",
-                        "endColumns": "113,113,104,99,84,96",
-                        "endOffsets": "6658,6772,6877,6977,7062,7159"
+                        "startLines": "44,45",
+                        "startColumns": "4,4",
+                        "startOffsets": "6348,6439",
+                        "endColumns": "90,109",
+                        "endOffsets": "6434,6544"
                     }
                 },
                 {
-                    "source": "C:\\Users\\solov\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-basement-8.3.0.aar\\1af3bc1cc859c43b1d0079d8723de892\\res\\values-uz-rUZ\\common_strings.xml",
+                    "source": "C:\\Users\\solov\\.gradle\\caches\\transforms-1\\files-1.1\\play-services-basement-8.3.0.aar\\1d20108e4f62bc505504bedc067d8279\\res\\values-uz-rUZ\\common_strings.xml",
                     "from": {
                         "startLines": "5,18,16,30,14,13,12,7,11,9,10,8,24,23,6,22,21,4,3,32,31,25,27,26,28,17,15,20,19,29",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -69,6 +52,23 @@
                         "startOffsets": "1377,1588,1768,1892,2189,2321,2503,2633,2805,2944,3155,3367,3503,3682,3809,3975,4135,4255,4435,4571,4748,4877,5041,5342,5469,5579,5769,5903,6116,6253",
                         "endColumns": "210,179,123,296,131,181,129,171,138,210,211,135,178,126,165,159,119,179,135,176,128,163,300,126,109,189,133,212,136,94",
                         "endOffsets": "1583,1763,1887,2184,2316,2498,2628,2800,2939,3150,3362,3498,3677,3804,3970,4130,4250,4430,4566,4743,4872,5036,5337,5464,5574,5764,5898,6111,6248,6343"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\solov\\.gradle\\caches\\transforms-1\\files-1.1\\mediarouter-v7-22.2.0.aar\\8d1372546c32a3ecf9bf90106a9f9b4b\\res\\values-uz-rUZ\\values-uz-rUZ.xml",
+                    "from": {
+                        "startLines": "4,5,6,7,8,9",
+                        "startColumns": "4,4,4,4,4,4",
+                        "startOffsets": "297,411,525,630,730,815",
+                        "endColumns": "113,113,104,99,84,96",
+                        "endOffsets": "406,520,625,725,810,907"
+                    },
+                    "to": {
+                        "startLines": "46,47,48,49,50,51",
+                        "startColumns": "4,4,4,4,4,4",
+                        "startOffsets": "6549,6663,6777,6882,6982,7067",
+                        "endColumns": "113,113,104,99,84,96",
+                        "endOffsets": "6658,6772,6877,6977,7062,7159"
                     }
                 }
             ]
