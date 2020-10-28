@@ -30,6 +30,7 @@ package org.fao.sola.clients.android.opentenure.network;
 import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
@@ -79,9 +80,19 @@ public class UploadChunksTask extends AsyncTask<Object, ViewHolderResponse, View
 		ViewHolderResponse vhr = new ViewHolderResponse();
 
 		Attachment attachment = Attachment.getAttachment((String) params[0]);
-		Uri uri = attachment.getPath().contains("content://") ? Uri.parse(attachment.getPath()) : Uri.parse("content://"+ BuildConfig.APPLICATION_ID+attachment.getPath());
-		try (InputStream in = OpenTenureApplication.getContext().getContentResolver().openInputStream(uri); DataInputStream dis = new DataInputStream(in)) {
+		DataInputStream dis = null;
 
+		try {
+			InputStream fis = null;
+
+			if(attachment.getPath().contains("content://")){
+				fis = OpenTenureApplication.getContext().getContentResolver().openInputStream(Uri.parse(attachment.getPath()));
+			} else {
+				File toTransfer = new File(attachment.getPath());
+				fis = new FileInputStream(toTransfer);
+			}
+
+			dis = new DataInputStream(fis);
 			upResponse.setAttachmentId((String) params[0]);
 
 			dis.skipBytes((int) attachment.getUploadedBytes());
@@ -147,8 +158,16 @@ public class UploadChunksTask extends AsyncTask<Object, ViewHolderResponse, View
 			upResponse.setSuccess(success);
 
 		} catch (Exception e) {
-			Log.e("Error", "Error uploading chunks for attachment with URI: "+uri.toString());
+			Log.e("Error", "Error uploading chunks for attachment with URI: "+ attachment.getPath());
 			e.printStackTrace();
+		} finally {
+			if (dis != null) {
+				try {
+					dis.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
 		}
 
 		vhr.setRes(upResponse);

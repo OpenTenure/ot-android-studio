@@ -32,9 +32,13 @@ import java.util.List;
 import java.util.Locale;
 
 import org.fao.sola.clients.android.opentenure.button.listener.DeletePersonListener;
+import org.fao.sola.clients.android.opentenure.button.listener.OpenPersonListener;
 import org.fao.sola.clients.android.opentenure.model.Person;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Build;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,20 +48,19 @@ import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class PersonsListAdapter extends ArrayAdapter<PersonListTO> implements
-		Filterable {
+public class PersonsListAdapter extends ArrayAdapter<PersonListTO> implements Filterable {
 	private final Context context;
 	private final List<PersonListTO> originalPersons;
 	private List<PersonListTO> filteredPersons;
 	private List<PersonListTO> persons;
 	LayoutInflater inflater;
 	private ModeDispatcher.Mode mode;
+	private OnSloganClickedListener sloganClickCallBack;
 
 	public PersonsListAdapter(Context context, List<PersonListTO> persons, ModeDispatcher.Mode mode) {
 		super(context, R.layout.persons_list_item, persons);
 		this.context = context;
-		this.inflater = (LayoutInflater) context
-				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		this.originalPersons = new ArrayList<PersonListTO>(persons);
 		this.persons = persons;
 		this.filteredPersons = null;
@@ -76,11 +79,8 @@ public class PersonsListAdapter extends ArrayAdapter<PersonListTO> implements
 
 				filteredPersons = new ArrayList<PersonListTO>();
 				for (PersonListTO pto : originalPersons) {
-
-					String lcase = pto.getSlogan().toLowerCase(
-							Locale.getDefault());
-					if (lcase.contains(filterString.toLowerCase(Locale
-							.getDefault()))) {
+					String lcase = pto.getSlogan().toLowerCase(Locale.getDefault());
+					if (lcase.contains(filterString.toLowerCase(Locale.getDefault()))) {
 						filteredPersons.add(pto);
 					}
 				}
@@ -92,10 +92,8 @@ public class PersonsListAdapter extends ArrayAdapter<PersonListTO> implements
 			}
 
 			@Override
-			protected void publishResults(CharSequence constraint,
-										  FilterResults results) {
+			protected void publishResults(CharSequence constraint, FilterResults results) {
 				persons = (ArrayList<PersonListTO>) results.values;
-
 				if (results.count > 0) {
 					notifyDataSetChanged();
 				} else {
@@ -116,47 +114,66 @@ public class PersonsListAdapter extends ArrayAdapter<PersonListTO> implements
 		TextView slogan;
 		ImageView picture;
 		ImageView remove;
+		ImageView view;
 	}
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-
 		ViewHolder vh;
-
 		if (convertView == null) {
-			convertView = inflater.inflate(R.layout.persons_list_item, parent,
-					false);
+			convertView = inflater.inflate(R.layout.persons_list_item, parent, false);
 			vh = new ViewHolder();
 			vh.slogan = (TextView) convertView.findViewById(R.id.person_slogan);
 			vh.id = (TextView) convertView.findViewById(R.id.person_id);
-
-			vh.remove = (ImageView) convertView
-					.findViewById(R.id.remove_person);
-
-			vh.picture = (ImageView) convertView
-					.findViewById(R.id.person_picture);
+			vh.remove = (ImageView) convertView.findViewById(R.id.remove_person);
+			vh.picture = (ImageView) convertView.findViewById(R.id.person_picture);
+			vh.view = (ImageView) convertView.findViewById(R.id.view_person);
 			convertView.setTag(vh);
 		} else {
 			vh = (ViewHolder) convertView.getTag();
-
 		}
 
-		if (!persons.get(position).hasClaimOrShare()
-				&& mode.compareTo(ModeDispatcher.Mode.MODE_RW) == 0) {
+		final PersonListTO person = persons.get(position);
+		OpenPersonListener pListener = new OpenPersonListener(person.getId(), person.getPersonType());
+		vh.view.setOnClickListener(pListener);
+		vh.picture.setOnClickListener(pListener);
 
-			vh.remove.setOnClickListener(new DeletePersonListener(persons.get(
-					position).getId()));
+		vh.slogan.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if(sloganClickCallBack != null){
+					sloganClickCallBack.onSloganClicked(person.getId());
+				}
+			}
+		});
+
+		if (!person.hasClaimOrShare() && mode.compareTo(ModeDispatcher.Mode.MODE_RW) == 0) {
+			vh.remove.setOnClickListener(new DeletePersonListener(person.getId()));
 			vh.remove.setVisibility(View.VISIBLE);
 		} else
 			vh.remove.setVisibility(View.INVISIBLE);
 
-		vh.slogan.setText(persons.get(position).getSlogan());
-		vh.id.setTextSize(8);
-		vh.id.setText(persons.get(position).getId());
-		vh.picture
-				.setImageBitmap(Person.getPersonPicture(context, persons.get(position).getId(),
-						96));
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+			vh.slogan.setText(Html.fromHtml(person.getSlogan(), Html.FROM_HTML_MODE_COMPACT));
+		} else {
+			vh.slogan.setText(Html.fromHtml(person.getSlogan()));
+		}
+		vh.id.setText(person.getId());
+		if(person.getPersonType().equalsIgnoreCase(Person._PHYSICAL)) {
+			vh.picture.setVisibility(View.VISIBLE);
+			vh.picture.setImageBitmap(Person.getPersonPicture(context, person.getId(), 96));
+		} else {
+			vh.picture.setVisibility(View.GONE);
+		}
 
 		return convertView;
+	}
+
+	public void setOnSloganClickedListener(OnSloganClickedListener callback) {
+		this.sloganClickCallBack = callback;
+	}
+
+	public interface OnSloganClickedListener {
+		public void onSloganClicked(String personId);
 	}
 }

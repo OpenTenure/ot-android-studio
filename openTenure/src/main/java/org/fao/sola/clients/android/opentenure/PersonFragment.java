@@ -44,6 +44,7 @@ import org.fao.sola.clients.android.opentenure.button.listener.ConfirmExit;
 import org.fao.sola.clients.android.opentenure.filesystem.FileSystemUtilities;
 import org.fao.sola.clients.android.opentenure.model.IdType;
 import org.fao.sola.clients.android.opentenure.model.Person;
+import org.fao.sola.clients.android.opentenure.tools.StringUtility;
 
 import com.ipaulpro.afilechooser.utils.FileUtils;
 
@@ -128,157 +129,44 @@ public class PersonFragment extends Fragment {
 		super.onCreateOptionsMenu(menu, inflater);
 	}
 
-	// @Override
-	// public void onPause() {
-	//
-	// checkChanges();
-	//
-	// }
-
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
 		if(personActivity.getPersonId() == null)
 			onlyActive = true;
 		else 
 			onlyActive = false;
-		
 
-		if ((personActivity.getEntityType() != null && personActivity
-				.getEntityType().equalsIgnoreCase("group"))
-				|| (personActivity.getPersonId() != null && Person
-						.getPerson(personActivity.getPersonId())
-						.getPersonType().equals(Person._GROUP))) {
+		if ((personActivity.getEntityType() != null && personActivity.getEntityType().equalsIgnoreCase(PersonActivity.TYPE_GROUP))
+				|| (personActivity.getPersonId() != null
+				&& Person.getPerson(personActivity.getPersonId()).getPersonType().equals(Person._GROUP))) {
 
-			rootView = inflater.inflate(R.layout.fragment_group, container,
-					false);
+			rootView = inflater.inflate(R.layout.fragment_group, container, false);
 			setHasOptionsMenu(true);
 
 			OpenTenureApplication.setPersonsView(rootView);
 
-			InputMethodManager imm = (InputMethodManager) rootView.getContext()
-					.getSystemService(Context.INPUT_METHOD_SERVICE);
+			InputMethodManager imm = (InputMethodManager) rootView.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
 			imm.hideSoftInputFromWindow(rootView.getWindowToken(), 0);
 
-			EditText dateOfEstablishment = (EditText) rootView
-					.findViewById(R.id.date_of_establishment_input_field);
-
-			final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
-
-				@Override
-				public void onDateSet(DatePicker view, int year,
-						int monthOfYear, int dayOfMonth) {
-					localCalendar.set(Calendar.YEAR, year);
-					localCalendar.set(Calendar.MONTH, monthOfYear);
-					localCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-					updateDoE();
-				}
-
-			};
-
-			dateOfEstablishment
-					.setOnLongClickListener(new OnLongClickListener() {
-
-						@Override
-						public boolean onLongClick(View v) {
-							new DatePickerDialog(rootView.getContext(), date,
-									localCalendar.get(Calendar.YEAR),
-									localCalendar.get(Calendar.MONTH),
-									localCalendar.get(Calendar.DAY_OF_MONTH))
-									.show();
-							return true;
-						}
-					});
-
-			claimantImageView = (ImageView) rootView
-					.findViewById(R.id.claimant_picture);
-			claimantImageView.setOnClickListener(new OnClickListener() {
-
-				@Override
-				public void onClick(View v) {
-					if (personPictureFile != null) {
-
-						Person.deleteAllBmp(personActivity.getPersonId());
-						
-						//*****************************************//						
-
-						Uri uri = FileProvider.getUriForFile(rootView.getContext(), BuildConfig.APPLICATION_ID, personPictureFile); //Uri.fromFile(personPictureFile)
-
-						Intent intent = new Intent(
-								MediaStore.ACTION_IMAGE_CAPTURE);
-						intent.putExtra(MediaStore.EXTRA_OUTPUT,
-								uri);
-						startActivityForResult(intent,
-								CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
-					} else {
-						Toast toast = Toast.makeText(
-								rootView.getContext(),
-								R.string.message_save_person_before_adding_content,
-								Toast.LENGTH_SHORT);
-						toast.show();
-					}
-
-				}
-			});
-			
-			
-			if (personActivity.getPersonId() != null
-					&& Person.getPerson(personActivity.getPersonId())
-							.getPersonType().equalsIgnoreCase(Person._PHYSICAL)) {
-				load(personActivity.getPersonId());
-			} else if (personActivity.getPersonId() != null
-					&& Person.getPerson(personActivity.getPersonId())
-							.getPersonType().equalsIgnoreCase(Person._GROUP)) {
+			if (personActivity.getPersonId() != null) {
 				loadGroup(personActivity.getPersonId());
 			}
-
 			return rootView;
-
 		} else {
 
-			rootView = inflater.inflate(R.layout.fragment_person, container,
-					false);
+			rootView = inflater.inflate(R.layout.fragment_person, container, false);
 			setHasOptionsMenu(true);
-			InputMethodManager imm = (InputMethodManager) rootView.getContext()
-					.getSystemService(Context.INPUT_METHOD_SERVICE);
+			InputMethodManager imm = (InputMethodManager) rootView.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
 			imm.hideSoftInputFromWindow(rootView.getWindowToken(), 0);
 
 			OpenTenureApplication.setPersonsView(rootView);
 
 			preload();
 
-			EditText dateOfBirth = (EditText) rootView
-					.findViewById(R.id.date_of_birth_input_field);
+			EditText dateOfBirth = (EditText) rootView.findViewById(R.id.date_of_birth_input_field);
 
-			final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
-
-				@Override
-				public void onDateSet(DatePicker view, int year,
-						int monthOfYear, int dayOfMonth) {
-					localCalendar.set(Calendar.YEAR, year);
-					localCalendar.set(Calendar.MONTH, monthOfYear);
-					localCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-					updateDoB();
-				}
-
-			};
-
-			dateOfBirth.setOnLongClickListener(new OnLongClickListener() {
-
-				@Override
-				public boolean onLongClick(View v) {
-					new DatePickerDialog(rootView.getContext(), date,
-							localCalendar.get(Calendar.YEAR), localCalendar
-									.get(Calendar.MONTH), localCalendar
-									.get(Calendar.DAY_OF_MONTH)).show();
-					return true;
-				}
-			});
-
-			claimantImageView = (ImageView) rootView
-					.findViewById(R.id.claimant_picture);
+			claimantImageView = (ImageView) rootView.findViewById(R.id.claimant_picture);
 			claimantImageView.setOnClickListener(new OnClickListener() {
 
 				@Override
@@ -315,27 +203,21 @@ public class PersonFragment extends Fragment {
 
 	private void preload() {
 		// ID TYPE Spinner
-		Spinner spinnerIT = (Spinner) rootView
-				.findViewById(R.id.id_type_spinner);
-		Spinner spinnerGender = (Spinner) rootView
-				.findViewById(R.id.gender_spinner);
+		Spinner spinnerIT = (Spinner) rootView.findViewById(R.id.id_type_spinner);
+		Spinner spinnerGender = (Spinner) rootView.findViewById(R.id.gender_spinner);
 
 		IdType it = new IdType();
-
 		SortedSet<String> keys;
 
 		/* Mapping id type localization */
-		keyValueMapIdTypes = it.getKeyValueMap(OpenTenureApplication
-				.getInstance().getLocalization(),onlyActive);
-		valueKeyMapIdTypes = it.getValueKeyMap(OpenTenureApplication
-				.getInstance().getLocalization(),onlyActive);
+		keyValueMapIdTypes = it.getKeyValueMap(OpenTenureApplication.getInstance().getLocalization(),onlyActive);
+		valueKeyMapIdTypes = it.getValueKeyMap(OpenTenureApplication.getInstance().getLocalization(),onlyActive);
 
 		List<String> idTypelist = new ArrayList<String>();
 		keys = new TreeSet<String>(keyValueMapIdTypes.keySet());
 		for (String key : keys) {
 			String value = keyValueMapIdTypes.get(key);
 			idTypelist.add(value);
-			// do something
 		}
 
 		List<String> genderList = new ArrayList<String>();
@@ -355,142 +237,76 @@ public class PersonFragment extends Fragment {
 				genderList) {
 		};
 
-		// dataAdapterIT.setDropDownViewResource(R.layout.my_spinner);
-
 		spinnerIT.setAdapter(dataAdapterIT);
 		spinnerGender.setAdapter(dataAdapterGender);
-
 	}
 
 	private void load(String personId) {
 		
 		Person person = Person.getPerson(personId);
-		((EditText) rootView.findViewById(R.id.first_name_input_field))
-				.setText(person.getFirstName());
-		((EditText) rootView.findViewById(R.id.last_name_input_field))
-				.setText(person.getLastName());
-		((EditText) rootView.findViewById(R.id.date_of_birth_input_field))
-				.setText(new SimpleDateFormat("yyyy-MM-dd", Locale.US)
-						.format(person.getDateOfBirth()));
-		((EditText) rootView.findViewById(R.id.postal_address_input_field))
-				.setText(person.getPostalAddress());
-		((EditText) rootView.findViewById(R.id.email_address_input_field))
-				.setText(person.getEmailAddress());
-		((EditText) rootView
-				.findViewById(R.id.contact_phone_number_input_field))
-				.setText(person.getContactPhoneNumber());
-		((Spinner) rootView.findViewById(R.id.id_type_spinner))
-				.setSelection(new IdType().getIndexByCodeType(person
-						.getIdType(),onlyActive));
+		((EditText) rootView.findViewById(R.id.first_name_input_field)).setText(person.getFirstName());
+		((EditText) rootView.findViewById(R.id.last_name_input_field)).setText(person.getLastName());
+		((EditText) rootView.findViewById(R.id.date_of_birth_input_field)).setText(new SimpleDateFormat("yyyy-MM-dd", Locale.US).format(person.getDateOfBirth()));
+		((EditText) rootView.findViewById(R.id.postal_address_input_field)).setText(person.getPostalAddress());
+		((EditText) rootView.findViewById(R.id.email_address_input_field)).setText(person.getEmailAddress());
+		((EditText) rootView.findViewById(R.id.contact_phone_number_input_field)).setText(person.getContactPhoneNumber());
+		((Spinner) rootView.findViewById(R.id.id_type_spinner)).setSelection(new IdType().getIndexByCodeType(person.getIdType(),onlyActive));
 
 		if (person.getGender().equals("M")) {
-			((Spinner) rootView.findViewById(R.id.gender_spinner))
-					.setSelection(0);
+			((Spinner) rootView.findViewById(R.id.gender_spinner)).setSelection(0);
 		} else
-			((Spinner) rootView.findViewById(R.id.gender_spinner))
-					.setSelection(1);
+			((Spinner) rootView.findViewById(R.id.gender_spinner)).setSelection(1);
 
-		((EditText) rootView.findViewById(R.id.id_number)).setText(person
-				.getIdNumber());
+		((EditText) rootView.findViewById(R.id.id_number)).setText(person.getIdNumber());
 
 		if (person.hasUploadedClaims()) {
-			((EditText) rootView.findViewById(R.id.first_name_input_field))
-					.setFocusable(false);
-			((EditText) rootView.findViewById(R.id.last_name_input_field))
-					.setFocusable(false);
-			((EditText) rootView.findViewById(R.id.date_of_birth_input_field))
-					.setFocusable(false);
-			((EditText) rootView.findViewById(R.id.date_of_birth_input_field))
-					.setOnLongClickListener(null);
-			((EditText) rootView.findViewById(R.id.postal_address_input_field))
-					.setFocusable(false);
-			((EditText) rootView.findViewById(R.id.email_address_input_field))
-					.setFocusable(false);
-			((EditText) rootView
-					.findViewById(R.id.contact_phone_number_input_field))
-					.setFocusable(false);
-			((Spinner) rootView.findViewById(R.id.id_type_spinner))
-					.setFocusable(false);
-			((Spinner) rootView.findViewById(R.id.id_type_spinner))
-					.setClickable(false);
-			((ImageView) rootView.findViewById(R.id.claimant_picture))
-					.setClickable(false);
+			((EditText) rootView.findViewById(R.id.first_name_input_field)).setFocusable(false);
+			((EditText) rootView.findViewById(R.id.last_name_input_field)).setFocusable(false);
+			((EditText) rootView.findViewById(R.id.date_of_birth_input_field)).setFocusable(false);
+			((EditText) rootView.findViewById(R.id.date_of_birth_input_field)).setLongClickable(false);
+			((EditText) rootView.findViewById(R.id.date_of_birth_input_field)).setClickable(false);
+			((EditText) rootView.findViewById(R.id.postal_address_input_field)).setFocusable(false);
+			((EditText) rootView.findViewById(R.id.email_address_input_field)).setFocusable(false);
+			((EditText) rootView.findViewById(R.id.contact_phone_number_input_field)).setFocusable(false);
+			((Spinner) rootView.findViewById(R.id.id_type_spinner)).setFocusable(false);
+			((Spinner) rootView.findViewById(R.id.id_type_spinner)).setClickable(false);
+			((ImageView) rootView.findViewById(R.id.claimant_picture)).setClickable(false);
+			((Spinner) rootView.findViewById(R.id.gender_spinner)).setFocusable(false);
+			((Spinner) rootView.findViewById(R.id.gender_spinner)).setClickable(false);
+			((EditText) rootView.findViewById(R.id.id_number)).setFocusable(false);
 
-			((Spinner) rootView.findViewById(R.id.gender_spinner))
-					.setFocusable(false);
-			((Spinner) rootView.findViewById(R.id.gender_spinner))
-					.setClickable(false);
-			((EditText) rootView.findViewById(R.id.id_number))
-					.setFocusable(false);
 			allowSave = false;
 			getActivity().invalidateOptionsMenu();
 		}
 
 		personPictureFile = Person.getPersonPictureFile(person.getPersonId());
-
-		claimantImageView.setImageBitmap(Person.getPersonPicture(
-				rootView.getContext(), person.getPersonId(), 128));
+		claimantImageView.setImageBitmap(Person.getPersonPicture(rootView.getContext(), person.getPersonId(), 128));
 	}
 
 	private void loadGroup(String personId) {
 		Person person = Person.getPerson(personId);
-		((EditText) rootView.findViewById(R.id.first_name_input_field))
-				.setText(person.getFirstName());
-
+		((EditText) rootView.findViewById(R.id.first_name_input_field)).setText(person.getFirstName());
 		if (person.getDateOfBirth() != null)
 			((EditText) rootView
 					.findViewById(R.id.date_of_establishment_input_field))
-					.setText(new SimpleDateFormat("yyyy-MM-dd", Locale.US)
-							.format(person.getDateOfBirth()));
+					.setText(new SimpleDateFormat("yyyy-MM-dd", Locale.US).format(person.getDateOfBirth()));
 
-		((EditText) rootView.findViewById(R.id.id_number)).setText(person
-				.getIdNumber());
+		((EditText) rootView.findViewById(R.id.id_number)).setText(person.getIdNumber());
+		((EditText) rootView.findViewById(R.id.postal_address_input_field)).setText(person.getPostalAddress());
+		((EditText) rootView.findViewById(R.id.email_address_input_field)).setText(person.getEmailAddress());
+		((EditText) rootView.findViewById(R.id.contact_phone_number_input_field)).setText(person.getContactPhoneNumber());
 
-		((EditText) rootView.findViewById(R.id.postal_address_input_field))
-				.setText(person.getPostalAddress());
-
-		((EditText) rootView.findViewById(R.id.email_address_input_field))
-				.setText(person.getEmailAddress());
-
-		((EditText) rootView
-				.findViewById(R.id.contact_phone_number_input_field))
-				.setText(person.getContactPhoneNumber());
 		if (person.hasUploadedClaims()) {
-
-			((EditText) rootView.findViewById(R.id.first_name_input_field))
-					.setFocusable(false);
-
-			((EditText) rootView
-					.findViewById(R.id.date_of_establishment_input_field))
-					.setFocusable(false);
-
-			((EditText) rootView
-					.findViewById(R.id.date_of_establishment_input_field))
-					.setOnLongClickListener(null);
-
-			((EditText) rootView.findViewById(R.id.id_number))
-					.setFocusable(false);
-
-			((EditText) rootView.findViewById(R.id.postal_address_input_field))
-					.setFocusable(false);
-
-			((EditText) rootView.findViewById(R.id.email_address_input_field))
-					.setFocusable(false);
-
-			((ImageView) rootView.findViewById(R.id.claimant_picture))
-					.setClickable(false);
-
-			((EditText) rootView
-					.findViewById(R.id.contact_phone_number_input_field))
-					.setFocusable(false);
-
+			((EditText) rootView.findViewById(R.id.first_name_input_field)).setFocusable(false);
+			((EditText) rootView.findViewById(R.id.date_of_establishment_input_field)).setFocusable(false);
+			((EditText) rootView.findViewById(R.id.date_of_establishment_input_field)).setLongClickable(false);
+			((EditText) rootView.findViewById(R.id.date_of_establishment_input_field)).setClickable(false);
+			((EditText) rootView.findViewById(R.id.id_number)).setFocusable(false);
+			((EditText) rootView.findViewById(R.id.postal_address_input_field)).setFocusable(false);
+			((EditText) rootView.findViewById(R.id.email_address_input_field)).setFocusable(false);
+			((EditText) rootView.findViewById(R.id.contact_phone_number_input_field)).setFocusable(false);
+			allowSave = false;
 		}
-
-		personPictureFile = Person.getPersonPictureFile(person.getPersonId());
-
-		claimantImageView.setImageBitmap(Person.getPersonPicture(
-				rootView.getContext(), person.getPersonId(), 128));
-
 	}
 
 	@Override
@@ -539,119 +355,61 @@ public class PersonFragment extends Fragment {
 		}
 	}
 
-	private void updateDoB() {
-
-		EditText dateOfBirth = (EditText) getView().findViewById(
-				R.id.date_of_birth_input_field);
-		String myFormat = "yyyy-MM-dd";
-		SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
-
-		dateOfBirth.setText(sdf.format(localCalendar.getTime()));
-	}
-
-	private void updateDoE() {
-
-		EditText date = (EditText) getView().findViewById(
-				R.id.date_of_establishment_input_field);
-		String myFormat = "yyyy-MM-dd";
-		SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
-
-		date.setText(sdf.format(localCalendar.getTime()));
-	}
-
 	public int savePerson() {
 		Person person = new Person();
-		person.setFirstName(((EditText) rootView
-				.findViewById(R.id.first_name_input_field)).getText()
-				.toString());
-		person.setLastName(((EditText) rootView
-				.findViewById(R.id.last_name_input_field)).getText().toString());
+		person.setFirstName(((EditText) rootView.findViewById(R.id.first_name_input_field)).getText().toString());
+		person.setLastName(((EditText) rootView.findViewById(R.id.last_name_input_field)).getText().toString());
 		java.util.Date dob;
 		try {
-			dob = new SimpleDateFormat("yyyy-MM-dd", Locale.US)
-					.parse(((EditText) rootView
-							.findViewById(R.id.date_of_birth_input_field))
-							.getText().toString());
+			dob = new SimpleDateFormat("yyyy-MM-dd", Locale.US).parse(((EditText) rootView
+					.findViewById(R.id.date_of_birth_input_field)).getText().toString());
 		} catch (ParseException e) {
 			e.printStackTrace();
 			return 4;
 		}
 
 		person.setDateOfBirth(new Date(dob.getTime()));
-		person.setPostalAddress(((EditText) rootView
-				.findViewById(R.id.postal_address_input_field)).getText()
-				.toString());
-		person.setEmailAddress(((EditText) rootView
-				.findViewById(R.id.email_address_input_field)).getText()
-				.toString());
-
-		person.setContactPhoneNumber(((EditText) rootView
-				.findViewById(R.id.contact_phone_number_input_field)).getText()
-				.toString());
-		person.setContactPhoneNumber(((EditText) rootView
-				.findViewById(R.id.contact_phone_number_input_field)).getText()
-				.toString());
-
-		String idTypeDispValue = (String) ((Spinner) rootView
-				.findViewById(R.id.id_type_spinner)).getSelectedItem();
+		person.setPostalAddress(((EditText) rootView.findViewById(R.id.postal_address_input_field)).getText().toString());
+		person.setEmailAddress(((EditText) rootView.findViewById(R.id.email_address_input_field)).getText().toString());
+		person.setContactPhoneNumber(((EditText) rootView.findViewById(R.id.contact_phone_number_input_field)).getText().toString());
+		person.setContactPhoneNumber(((EditText) rootView.findViewById(R.id.contact_phone_number_input_field)).getText().toString());
+		String idTypeDispValue = (String) ((Spinner) rootView.findViewById(R.id.id_type_spinner)).getSelectedItem();
 		person.setIdType(valueKeyMapIdTypes.get(idTypeDispValue));
-
-		person.setIdNumber(((EditText) rootView.findViewById(R.id.id_number))
-				.getText().toString());
-
-		String gender = (String) ((Spinner) rootView
-				.findViewById(R.id.gender_spinner)).getSelectedItem();
+		person.setIdNumber(((EditText) rootView.findViewById(R.id.id_number)).getText().toString());
+		String gender = (String) ((Spinner) rootView.findViewById(R.id.gender_spinner)).getSelectedItem();
 		if (gender.equals(OpenTenureApplication.getContext().getResources()
 				.getString(R.string.gender_feminine)))
 			person.setGender("F");
 		else
 			person.setGender("M");
-		// if (((RadioButton) rootView
-		// .findViewById(R.id.gender_feminine_input_field)).isChecked())
-		// person.setGender("F");
-		// if (((RadioButton) rootView
-		// .findViewById(R.id.gender_masculine_input_field)).isChecked())
-		// person.setGender("M");
+			person.setPersonType(Person._PHYSICAL);
 
-		person.setPersonType(Person._PHYSICAL);
-
-		if (person.getFirstName() == null
-				|| person.getFirstName().trim().equals(""))
+		if (person.getFirstName() == null || person.getFirstName().trim().equals(""))
 			return 2;
 
-		if (person.getLastName() == null
-				|| person.getLastName().trim().equals(""))
+		if (person.getLastName() == null || person.getLastName().trim().equals(""))
 			return 3;
 
 		if (person.getGender() == null)
 			return 5;
 
 		if (person.create() == 1) {
-
 			personActivity.setPersonId(person.getPersonId());
 			personActivity.setEntityType(person.getPersonType());
-			personPictureFile = Person.getPersonPictureFile(person
-					.getPersonId());
-
+			personPictureFile = Person.getPersonPictureFile(person.getPersonId());
 			return 1;
 		}
 		return 0;
-
 	}
 
 	public int saveGroup() {
 		Person person = new Person();
-		person.setFirstName(((EditText) rootView
-				.findViewById(R.id.first_name_input_field)).getText()
-				.toString());
+		person.setFirstName(((EditText) rootView.findViewById(R.id.first_name_input_field)).getText().toString());
 		person.setLastName("");
 
 		java.util.Date doe = null;
 		try {
-
-			String date = ((EditText) rootView
-					.findViewById(R.id.date_of_establishment_input_field))
-					.getText().toString();
+			String date = ((EditText) rootView.findViewById(R.id.date_of_establishment_input_field)).getText().toString();
 			if (date != null && !date.trim().equals(""))
 				doe = new SimpleDateFormat("yyyy-MM-dd", Locale.US).parse(date);
 		} catch (ParseException e) {
@@ -661,36 +419,21 @@ public class PersonFragment extends Fragment {
 		if (doe != null)
 			person.setDateOfBirth(new Date(doe.getTime()));
 
-		person.setPostalAddress(((EditText) rootView
-				.findViewById(R.id.postal_address_input_field)).getText()
-				.toString());
-		person.setEmailAddress(((EditText) rootView
-				.findViewById(R.id.email_address_input_field)).getText()
-				.toString());
-		person.setContactPhoneNumber(((EditText) rootView
-				.findViewById(R.id.contact_phone_number_input_field)).getText()
-				.toString());
-
-		person.setIdNumber(((EditText) rootView.findViewById(R.id.id_number))
-				.getText().toString());
-
+		person.setPostalAddress(((EditText) rootView.findViewById(R.id.postal_address_input_field)).getText().toString());
+		person.setEmailAddress(((EditText) rootView.findViewById(R.id.email_address_input_field)).getText().toString());
+		person.setContactPhoneNumber(((EditText) rootView.findViewById(R.id.contact_phone_number_input_field)).getText().toString());
+		person.setIdNumber(((EditText) rootView.findViewById(R.id.id_number)).getText().toString());
 		person.setPersonType(Person._GROUP);
 
-		if (person.getFirstName() == null
-				|| person.getFirstName().trim().equals(""))
+		if (person.getFirstName() == null || person.getFirstName().trim().equals(""))
 			return 2;
 
 		if (person.create() == 1) {
-
 			personActivity.setPersonId(person.getPersonId());
 			personActivity.setEntityType(person.getPersonType());
-			personPictureFile = Person.getPersonPictureFile(person
-					.getPersonId());
-
 			return 1;
 		}
 		return 0;
-
 	}
 
 	public int updateGroup(PersonActivity personActivity) {
@@ -704,17 +447,12 @@ public class PersonFragment extends Fragment {
 
 		person = Person.getPerson(this.personActivity.getPersonId());
 
-		person.setFirstName(((EditText) rootView
-				.findViewById(R.id.first_name_input_field)).getText()
-				.toString());
+		person.setFirstName(((EditText) rootView.findViewById(R.id.first_name_input_field)).getText().toString());
 		person.setLastName("");
 
 		java.util.Date doe = null;
 		try {
-
-			String date = ((EditText) rootView
-					.findViewById(R.id.date_of_establishment_input_field))
-					.getText().toString();
+			String date = ((EditText) rootView.findViewById(R.id.date_of_establishment_input_field)).getText().toString();
 			if (date != null && !date.trim().equals(""))
 				doe = new SimpleDateFormat("yyyy-MM-dd", Locale.US).parse(date);
 		} catch (ParseException e) {
@@ -724,36 +462,21 @@ public class PersonFragment extends Fragment {
 		if (doe != null)
 			person.setDateOfBirth(new Date(doe.getTime()));
 
-		person.setPostalAddress(((EditText) rootView
-				.findViewById(R.id.postal_address_input_field)).getText()
-				.toString());
-		person.setEmailAddress(((EditText) rootView
-				.findViewById(R.id.email_address_input_field)).getText()
-				.toString());
-		person.setContactPhoneNumber(((EditText) rootView
-				.findViewById(R.id.contact_phone_number_input_field)).getText()
-				.toString());
-
-		person.setIdNumber(((EditText) rootView.findViewById(R.id.id_number))
-				.getText().toString());
-
+		person.setPostalAddress(((EditText) rootView.findViewById(R.id.postal_address_input_field)).getText().toString());
+		person.setEmailAddress(((EditText) rootView.findViewById(R.id.email_address_input_field)).getText().toString());
+		person.setContactPhoneNumber(((EditText) rootView.findViewById(R.id.contact_phone_number_input_field)).getText().toString());
+		person.setIdNumber(((EditText) rootView.findViewById(R.id.id_number)).getText().toString());
 		person.setPersonType(Person._GROUP);
 
-		if (person.getFirstName() == null
-				|| person.getFirstName().trim().equals(""))
+		if (person.getFirstName() == null || person.getFirstName().trim().equals(""))
 			return 2;
 
 		if (person.update() == 1) {
-
 			this.personActivity.setPersonId(person.getPersonId());
 			this.personActivity.setEntityType(person.getPersonType());
-			personPictureFile = Person.getPersonPictureFile(person
-					.getPersonId());
-
 			return 1;
 		}
 		return 0;
-
 	}
 
 	public int updatePerson(String personId) {
@@ -762,59 +485,37 @@ public class PersonFragment extends Fragment {
 			rootView = OpenTenureApplication.getPersonsView();
 
 		Person person = Person.getPerson(personId);
-		// person = new Person();
-		// person.setPersonId(personActivity.getPersonId());
-		person.setFirstName(((EditText) rootView
-				.findViewById(R.id.first_name_input_field)).getText()
-				.toString());
-		person.setLastName(((EditText) rootView
-				.findViewById(R.id.last_name_input_field)).getText().toString());
+		person.setFirstName(((EditText) rootView.findViewById(R.id.first_name_input_field)).getText().toString());
+		person.setLastName(((EditText) rootView.findViewById(R.id.last_name_input_field)).getText().toString());
 		java.util.Date dob;
 		try {
-
-			dob = new SimpleDateFormat("yyyy-MM-dd", Locale.US)
-					.parse(((EditText) rootView
-							.findViewById(R.id.date_of_birth_input_field))
-							.getText().toString());
+			dob = new SimpleDateFormat("yyyy-MM-dd", Locale.US).parse(((EditText) rootView
+							.findViewById(R.id.date_of_birth_input_field)).getText().toString());
 		} catch (ParseException e) {
 			e.printStackTrace();
-			// dob = new java.util.Date();
 			return 4;
 		}
 		person.setDateOfBirth(new Date(dob.getTime()));
 
-		person.setPostalAddress(((EditText) rootView
-				.findViewById(R.id.postal_address_input_field)).getText()
-				.toString());
-		person.setEmailAddress(((EditText) rootView
-				.findViewById(R.id.email_address_input_field)).getText()
-				.toString());
-		person.setContactPhoneNumber(((EditText) rootView
-				.findViewById(R.id.contact_phone_number_input_field)).getText()
-				.toString());
+		person.setPostalAddress(((EditText) rootView.findViewById(R.id.postal_address_input_field)).getText().toString());
+		person.setEmailAddress(((EditText) rootView.findViewById(R.id.email_address_input_field)).getText().toString());
+		person.setContactPhoneNumber(((EditText) rootView.findViewById(R.id.contact_phone_number_input_field)).getText().toString());
 		person.setPersonType(Person._PHYSICAL);
-
-		String idTypeDispValue = (String) ((Spinner) rootView
-				.findViewById(R.id.id_type_spinner)).getSelectedItem();
+		String idTypeDispValue = (String) ((Spinner) rootView.findViewById(R.id.id_type_spinner)).getSelectedItem();
 		person.setIdType(valueKeyMapIdTypes.get(idTypeDispValue));
+		person.setIdNumber(((EditText) rootView.findViewById(R.id.id_number)).getText().toString());
 
-		person.setIdNumber(((EditText) rootView.findViewById(R.id.id_number))
-				.getText().toString());
-
-		String gender = (String) ((Spinner) rootView
-				.findViewById(R.id.gender_spinner)).getSelectedItem();
+		String gender = (String) ((Spinner) rootView.findViewById(R.id.gender_spinner)).getSelectedItem();
 		if (gender.equals(OpenTenureApplication.getContext().getResources()
 				.getString(R.string.gender_feminine)))
 			person.setGender("F");
 		else
 			person.setGender("M");
 
-		if (person.getFirstName() == null
-				|| person.getFirstName().trim().equals(""))
+		if (person.getFirstName() == null || person.getFirstName().trim().equals(""))
 			return 2;
 
-		if (person.getLastName() == null
-				|| person.getLastName().trim().equals(""))
+		if (person.getLastName() == null || person.getLastName().trim().equals(""))
 			return 3;
 
 		if (person.getGender() == null)
@@ -832,21 +533,17 @@ public class PersonFragment extends Fragment {
 
 		case R.id.action_save:
 
-			if (personActivity.getPersonId() == null
-					&& !(personActivity.getEntityType() != null && personActivity
-							.getEntityType().equalsIgnoreCase("group"))) {
+			if (personActivity.getPersonId() == null && (personActivity.getEntityType() != null && personActivity
+							.getEntityType().equalsIgnoreCase(PersonActivity.TYPE_PERSON))) {
 
 				int saved = savePerson();
 				if (saved == 1) {
-					toast = Toast.makeText(rootView.getContext(),
-							R.string.message_saved, Toast.LENGTH_SHORT);
+					toast = Toast.makeText(rootView.getContext(), R.string.message_saved, Toast.LENGTH_SHORT);
 					toast.show();
 
 					Intent resultIntent = new Intent();
 					resultIntent.putExtra(PersonActivity.PERSON_ID_KEY,personActivity.getPersonId());
-					getActivity().setResult(
-							PersonsFragment.ADD_PERSON_RESULT,
-							resultIntent);
+					getActivity().setResult(PersonsFragment.ADD_PERSON_RESULT, resultIntent);
 					//getActivity().finish();
 				} else if (saved == 2) {
 					toast = Toast.makeText(rootView.getContext(),
@@ -877,7 +574,7 @@ public class PersonFragment extends Fragment {
 				}
 			} else if (personActivity.getPersonId() == null
 					&& (personActivity.getEntityType() != null && personActivity
-							.getEntityType().equalsIgnoreCase("group"))) {
+							.getEntityType().equalsIgnoreCase(PersonActivity.TYPE_GROUP))) {
 
 				int saved = saveGroup();
 				if (saved == 1) {
@@ -887,21 +584,7 @@ public class PersonFragment extends Fragment {
 
 					Intent resultIntent = new Intent();
 					resultIntent.putExtra(PersonActivity.PERSON_ID_KEY,personActivity.getPersonId());
-					getActivity().setResult(
-							PersonsFragment.ADD_PERSON_RESULT,
-							resultIntent);
-					//getActivity().finish();
-
-
-
-					/*
-					Intent resultIntent = new Intent();
-
-					resultIntent.putExtra(PersonActivity.PERSON_ID_KEY,
-							personActivity.getPersonId());
-					// Set The Result in Intent
-					((PersonActivity) getActivity()).setResult(2, resultIntent);
-					*/
+					getActivity().setResult(PersonsFragment.ADD_PERSON_RESULT, resultIntent);
 				} else {
 					toast = Toast
 							.makeText(rootView.getContext(),
@@ -912,7 +595,7 @@ public class PersonFragment extends Fragment {
 
 			} else if (personActivity.getPersonId() != null
 					&& (Person.getPerson(personActivity.getPersonId())
-							.getPersonType().equalsIgnoreCase("group"))) {
+							.getPersonType().equalsIgnoreCase(PersonActivity.TYPE_GROUP))) {
 
 				int saved = updateGroup(null);
 				if (saved == 1) {
@@ -922,11 +605,9 @@ public class PersonFragment extends Fragment {
 
 					Intent resultIntent = new Intent();
 
-					resultIntent.putExtra(PersonActivity.PERSON_ID_KEY,
-							personActivity.getPersonId());
+					resultIntent.putExtra(PersonActivity.PERSON_ID_KEY, personActivity.getPersonId());
 					// Set The Result in Intent
 					((PersonActivity) getActivity()).setResult(2, resultIntent);
-
 				} else {
 					toast = Toast
 							.makeText(rootView.getContext(),
@@ -946,8 +627,7 @@ public class PersonFragment extends Fragment {
 
 					Intent resultIntent = new Intent();
 
-					resultIntent.putExtra(PersonActivity.PERSON_ID_KEY,
-							personActivity.getPersonId());
+					resultIntent.putExtra(PersonActivity.PERSON_ID_KEY, personActivity.getPersonId());
 					// Set The Result in Intent
 					((PersonActivity) getActivity()).setResult(2, resultIntent);
 
@@ -991,9 +671,7 @@ public class PersonFragment extends Fragment {
 		String entityType = personActivity.getEntityType();
 
 		if (entityType == null)
-
-			entityType = Person.getPerson(personActivity.getPersonId())
-					.getPersonType();
+			entityType = Person.getPerson(personActivity.getPersonId()).getPersonType();
 
 		if (entityType.equalsIgnoreCase(Person._GROUP))
 			return checkChangesGroup(personActivity);

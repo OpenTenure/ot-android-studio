@@ -25,46 +25,46 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * *********************************************************************************************
  */
-package org.fao.sola.clients.android.opentenure;
+package org.fao.sola.clients.android.opentenure.button.listener;
 
-import java.io.Serializable;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.TextView;
+import android.widget.Toast;
 
-public class PersonListTO implements Serializable {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 2447003746237485759L;
-	
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
-	}
-	public String getSlogan() {
-		return slogan;
-	}
-	public void setSlogan(String slogan) {
-		this.slogan = slogan;
-	}
+import org.fao.sola.clients.android.opentenure.ModeDispatcher;
+import org.fao.sola.clients.android.opentenure.OpenTenureApplication;
+import org.fao.sola.clients.android.opentenure.PersonActivity;
+import org.fao.sola.clients.android.opentenure.R;
+import org.fao.sola.clients.android.opentenure.R.string;
+import org.fao.sola.clients.android.opentenure.filesystem.FileSystemUtilities;
+import org.fao.sola.clients.android.opentenure.model.Person;
 
-	public String getPersonType() {
-		return personType;
-	}
+public class OpenPersonListener implements OnClickListener {
 
-	public void setPersonType(String personType) {
-		this.personType = personType;
+	private String personId;
+	private String entityType;
+	private ModeDispatcher.Mode mode = ModeDispatcher.Mode.MODE_RO;
+
+	public OpenPersonListener(String personId, String entityType) {
+		this(personId, ModeDispatcher.Mode.MODE_RO, entityType);
 	}
 
-	public boolean hasClaimOrShare() {
-		return hasClaimOrShare;
+	public OpenPersonListener(String personId, ModeDispatcher.Mode mode, String entityType) {
+		this.personId = personId;
+		this.mode = mode;
+		this.entityType = entityType;
 	}
-	public void setHasClaimOrShare(boolean hasClaimOrShare) {
-		this.hasClaimOrShare = hasClaimOrShare;
+
+	@Override
+	public void onClick(View v) {
+		Intent intent = new Intent(v.getContext(), PersonActivity.class);
+		intent.putExtra(PersonActivity.PERSON_ID_KEY, personId);
+		intent.putExtra(PersonActivity.ENTITY_TYPE, entityType);
+		intent.putExtra(PersonActivity.MODE_KEY, mode.toString());
+		v.getContext().startActivity(intent);
 	}
-	
-	private String id;
-	private String slogan;
-	private boolean hasClaimOrShare;
-	private String personType;
 }

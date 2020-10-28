@@ -54,10 +54,9 @@ public class DeletePersonListener implements OnClickListener {
 		final Person person = Person.getPerson(personId);
 		AlertDialog.Builder deletePersonDialog = new AlertDialog.Builder(v.getContext());
 		deletePersonDialog.setTitle(R.string.title_remove_person_dialog);
-		String dialogMessage = String
-				.format(OpenTenureApplication.getContext().getString(
-						R.string.message_remove_person_dialog,
-						person.getFirstName() + " " + person.getLastName()));
+		String dialogMessage = String.format(OpenTenureApplication.getContext().getString(
+						R.string.message_remove_person_dialog),
+						person.getFirstName() + " " + person.getLastName());
 
 		deletePersonDialog.setMessage(dialogMessage);
 
@@ -76,8 +75,8 @@ public class DeletePersonListener implements OnClickListener {
 
 					String toastMessage = String
 							.format(OpenTenureApplication.getContext().getString(
-									R.string.message_remove_person,
-									person.getFirstName() + " " + person.getLastName()));
+									R.string.message_remove_person),
+									person.getFirstName() + " " + person.getLastName());
 
 					toast = Toast.makeText(OpenTenureApplication.getContext(), toastMessage,
 							Toast.LENGTH_LONG);
@@ -91,8 +90,8 @@ public class DeletePersonListener implements OnClickListener {
 
 					String toastMessage = String
 							.format(OpenTenureApplication.getContext().getString(
-									R.string.message_error_remove_person,
-									person.getFirstName() + " " + person.getLastName()));
+									R.string.message_error_remove_person),
+									person.getFirstName() + " " + person.getLastName());
 
 					toast = Toast.makeText(OpenTenureApplication.getContext(), toastMessage,
 							Toast.LENGTH_LONG);

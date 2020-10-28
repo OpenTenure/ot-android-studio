@@ -1104,7 +1104,8 @@ public class Claim {
 							+ "ATTACHMENT.ATTACHMENT_ID, "
 							+ "ATTACHMENT.STATUS, "
 							+ "ATTACHMENT.SIZE, "
-							+ "CP.DELETED "
+							+ "CP.DELETED, "
+							+ "CP.DATE_OF_START "
 							+ "FROM (SELECT "
 							+ "CLAIM.CLAIM_ID, "
 							+ "CLAIM.STATUS, "
@@ -1114,12 +1115,13 @@ public class Claim {
 							+ "CLAIM.CHALLANGE_EXPIRY_DATE, "
 							+ "CLAIM.RECORDER_NAME, "
 							+ "CLAIM.DELETED, "
+							+ "CLAIM.DATE_OF_START, "
 							+ "PERSON.PERSON_ID, "
 							+ "PERSON.FIRST_NAME, "
 							+ "PERSON.LAST_NAME "
 							+ "FROM CLAIM, PERSON "
 							+ "WHERE CLAIM.PERSON_ID=PERSON.PERSON_ID) AS CP LEFT JOIN ATTACHMENT ON (CP.CLAIM_ID=ATTACHMENT.CLAIM_ID) "
-							+ "ORDER BY CP.CLAIM_ID");
+							+ "ORDER BY CP.DATE_OF_START DESC");
 			ResultSet rs = statement.executeQuery();
 			List<Attachment> attachments = null;
 			Claim claim = null;
@@ -1150,6 +1152,7 @@ public class Claim {
 					claim.setChallengeExpiryDate((rs.getDate(6)));
 					claim.setRecorderName((rs.getString(7)));
 					claim.setDeleted(rs.getBoolean(14));
+					claim.setDateOfStart(rs.getDate(15));
 					String personId = rs.getString(8);
 					Person person = new Person();
 					person.setPersonId(personId);

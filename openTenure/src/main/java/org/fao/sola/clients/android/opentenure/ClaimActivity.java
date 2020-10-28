@@ -505,8 +505,7 @@ public class ClaimActivity extends FragmentActivity implements ClaimDispatcher,
 					fragment = new ChallengingClaimsFragment();
 					break;
 				default:
-					List<SectionTemplate> sectionTemplateList = formTemplate
-							.getSectionTemplateList();
+					List<SectionTemplate> sectionTemplateList = formTemplate.getSectionTemplateList();
 					if (sectionTemplateList == null
 							|| sectionTemplateList.size() <= 0
 							|| sectionTemplateList.size() <= sectionPosition) {
@@ -516,8 +515,7 @@ public class ClaimActivity extends FragmentActivity implements ClaimDispatcher,
 						sef.setMode(mode);
 						return sef;
 					}
-					SectionTemplate sectionTemplate = sectionTemplateList
-							.get(sectionPosition);
+					SectionTemplate sectionTemplate = sectionTemplateList.get(sectionPosition);
 					if (sectionTemplate == null) {
 						SectionElementFragment sef = new SectionElementFragment();
 						sef.setTemplate(new SectionTemplate());
@@ -528,13 +526,10 @@ public class ClaimActivity extends FragmentActivity implements ClaimDispatcher,
 					if (sectionTemplate.getMaxOccurrences() > 1) {
 						fragment = new SectionFragment();
 						((SectionFragment)fragment).setTemplate(sectionTemplate);
-						((SectionFragment)fragment).setPayload(editedFormPayload
-								.getSectionPayloadList().get(sectionPosition));
+						((SectionFragment)fragment).setPayload(editedFormPayload.getSectionPayloadList().get(sectionPosition));
 						((SectionFragment)fragment).setMode(mode);
 					} else {
-						if (editedFormPayload.getSectionPayloadList()
-								.get(sectionPosition)
-								.getSectionElementPayloadList().size() == 0) {
+						if (editedFormPayload.getSectionPayloadList().get(sectionPosition).getSectionElementPayloadList().size() == 0) {
 							editedFormPayload
 									.getSectionPayloadList()
 									.get(sectionPosition)
@@ -555,9 +550,7 @@ public class ClaimActivity extends FragmentActivity implements ClaimDispatcher,
 
 		@Override
 		public int getCount() {
-
 			return NUMBER_OF_STATIC_SECTIONS + getNumberOfSections();
-
 		}
 
 		private int getNumberOfSections() {
@@ -571,8 +564,7 @@ public class ClaimActivity extends FragmentActivity implements ClaimDispatcher,
 		}
 
 		private String getSectionTitle(int position) {
-			DisplayNameLocalizer dnl = new DisplayNameLocalizer(
-					OpenTenureApplication.getInstance().getLocalization());
+			DisplayNameLocalizer dnl = new DisplayNameLocalizer(OpenTenureApplication.getInstance().getLocalization());
 			String sectionTitle = null;
 			if (editedFormPayload != null) {
 				sectionTitle = editedFormPayload.getSectionPayloadList()
@@ -585,7 +577,6 @@ public class ClaimActivity extends FragmentActivity implements ClaimDispatcher,
 				sectionTitle = "";
 			}
 			return dnl.getLocalizedDisplayName(sectionTitle);
-
 		}
 
 		@Override
@@ -602,13 +593,11 @@ public class ClaimActivity extends FragmentActivity implements ClaimDispatcher,
 				case 2:
 					return getString(R.string.title_claim_documents).toUpperCase(l);
 				case 3:
-					return getString(R.string.title_claim_adjacencies).toUpperCase(
-							l);
+					return getString(R.string.title_claim_adjacencies).toUpperCase(l);
 				case 4:
 					return getString(R.string.title_claim_map).toUpperCase(l);
 				case 5:
-					return getString(R.string.title_claim_challenges)
-							.toUpperCase(l);
+					return getString(R.string.title_claim_challenges).toUpperCase(l);
 				default:
 					return getSectionTitle(sectionPosition);
 			}
@@ -674,8 +663,7 @@ public class ClaimActivity extends FragmentActivity implements ClaimDispatcher,
 
 	@Override
 	public void onClaimSaved() {
-		ClaimMapFragment claimMapFragment = (ClaimMapFragment) fragmentReferences
-				.get(4);
+		ClaimMapFragment claimMapFragment = (ClaimMapFragment) fragmentReferences.get(4);
 		if (editedFormPayload != null) {
 			editedFormPayload.setClaimId(claimId);
 		}

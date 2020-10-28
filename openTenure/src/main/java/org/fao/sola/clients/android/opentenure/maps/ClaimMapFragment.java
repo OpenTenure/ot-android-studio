@@ -105,7 +105,7 @@ import android.widget.Toast;
 public class ClaimMapFragment extends Fragment implements OnCameraChangeListener, SensorEventListener, ClaimListener {
 
 	enum MapMode {
-		add_boundary, add_non_boundary, measure, edit_hole
+		add_boundary, add_non_boundary, measure, edit_hole, insert_boundary
 	};
 
 	private static final int MAP_LABEL_FONT_SIZE = 16;
@@ -185,7 +185,6 @@ public class ClaimMapFragment extends Fragment implements OnCameraChangeListener
 	public void onSaveInstanceState(Bundle outState) {
 		outState.putString(MAP_TYPE, mapType.toString());
 		super.onSaveInstanceState(outState);
-
 	}
 
 	@Override
@@ -198,11 +197,12 @@ public class ClaimMapFragment extends Fragment implements OnCameraChangeListener
 		if (modeActivity.getMode().compareTo(ModeDispatcher.Mode.MODE_RO) == 0) {
 			menu.removeItem(R.id.action_add_from_gps);
 			menu.findItem(R.id.action_change_map_mode).getSubMenu().removeItem(R.id.action_add_boundary);
+			menu.findItem(R.id.action_change_map_mode).getSubMenu().removeItem(R.id.action_insert_boundary);
 			menu.findItem(R.id.action_change_map_mode).getSubMenu().removeItem(R.id.action_add_non_boundary);
 			menu.findItem(R.id.action_change_map_mode).getSubMenu().removeItem(R.id.action_edit_hole);
 			mapMode = MapMode.measure;
-
 		}
+
 		this.menu = menu;
 		super.onCreateOptionsMenu(menu, inflater);
 		setHasOptionsMenu(true);
@@ -388,16 +388,13 @@ public class ClaimMapFragment extends Fragment implements OnCameraChangeListener
 		if (modeActivity.getMode().compareTo(ModeDispatcher.Mode.MODE_RW) == 0) {
 
 			// Allow adding, removing and dragging markers
-
 			this.map.setOnMapLongClickListener(new OnMapLongClickListener() {
-
 				@Override
 				public void onMapLongClick(final LatLng position) {
-
 					currentProperty.addMarker(position, mapMode);
-
 				}
 			});
+
 			this.map.setOnMarkerDragListener(new OnMarkerDragListener() {
 				@Override
 				public void onMarkerDrag(Marker mark) {
@@ -414,12 +411,10 @@ public class ClaimMapFragment extends Fragment implements OnCameraChangeListener
 						snapLon = 0.0;
 					}
 					currentProperty.onMarkerDrag(mark);
-
 				}
 
 				@Override
 				public void onMarkerDragEnd(Marker mark) {
-
 					if (snapLat != 0.0 && snapLon != 0.0) {
 						mark.setPosition(new LatLng(snapLat, snapLon));
 					}
@@ -440,6 +435,7 @@ public class ClaimMapFragment extends Fragment implements OnCameraChangeListener
 			public boolean onMarkerClick(final Marker mark) {
 				switch (mapMode) {
 					case add_boundary:
+					case insert_boundary:
 					case add_non_boundary:
 					case edit_hole:
 						return currentProperty.handleMarkerClick(mark, mapMode);
@@ -456,6 +452,7 @@ public class ClaimMapFragment extends Fragment implements OnCameraChangeListener
 			public void onMapClick(final LatLng position) {
 				switch (mapMode) {
 					case add_boundary:
+					case insert_boundary:
 					case add_non_boundary:
 					case edit_hole:
 						break;
@@ -615,6 +612,9 @@ public class ClaimMapFragment extends Fragment implements OnCameraChangeListener
 		switch (mapMode) {
 			case add_boundary:
 				mode = ": " + getResources().getString(R.string.action_add_boundary);
+				break;
+			case insert_boundary:
+				mode = ": " + getResources().getString(R.string.action_insert_boundary);
 				break;
 			case add_non_boundary:
 				mode = ": " + getResources().getString(R.string.action_add_non_boundary);
@@ -778,8 +778,14 @@ public class ClaimMapFragment extends Fragment implements OnCameraChangeListener
 		switch (item.getItemId()) {
 			case R.id.action_settings:
 				return true;
-			case R.id.action_add_boundary:
+			case R.id.action_add_boundary :
 				mapMode = MapMode.add_boundary;
+				currentProperty.deselect();
+				cancelDistance();
+				setMapLabel();
+				return true;
+			case R.id.action_insert_boundary :
+				mapMode = MapMode.insert_boundary;
 				currentProperty.deselect();
 				cancelDistance();
 				setMapLabel();

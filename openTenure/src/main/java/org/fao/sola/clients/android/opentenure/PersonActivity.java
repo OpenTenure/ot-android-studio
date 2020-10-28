@@ -42,16 +42,14 @@ import android.view.KeyEvent;
 
 import com.astuetz.PagerSlidingTabStrip;
 
-public class PersonActivity extends FragmentActivity implements
-		PersonDispatcher, ModeDispatcher {
+public class PersonActivity extends FragmentActivity implements PersonDispatcher, ModeDispatcher {
 
 	public static final String PERSON_ID_KEY = "personId";
 	public static final String ENTITY_TYPE = "entityType";
-
 	public static final String MODE_KEY = "mode";
 	public static final String CREATE_PERSON_ID = "create_person";
 	public static final String TYPE_GROUP = "group";
-	public static final String TYPE_PERSON = "person";
+	public static final String TYPE_PERSON = "physical";
 	private ModeDispatcher.Mode mode = ModeDispatcher.Mode.MODE_RW;
 	private String personId = null;
 	private String entityType = null;
@@ -69,14 +67,12 @@ public class PersonActivity extends FragmentActivity implements
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
 
-			final PersonFragment fragment = (PersonFragment) mSectionsPagerAdapter
-					.getItem(0);
+			final PersonFragment fragment = (PersonFragment) mSectionsPagerAdapter.getItem(0);
 
 			if (fragment != null) {
 				if (fragment.checkChanges(this)) {
 					return true;
 				} else {
-
 					return super.onKeyDown(keyCode, event);
 				}
 			} else {
@@ -102,14 +98,12 @@ public class PersonActivity extends FragmentActivity implements
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
 		outState.putString(PERSON_ID_KEY, personId);
-
 		Intent resultIntent = new Intent();
 
 		resultIntent.putExtra(PersonActivity.PERSON_ID_KEY, personId);
 		// Set The Result in Intent
 		setResult(2, resultIntent);
 		super.onSaveInstanceState(outState);
-
 	}
 
 	@Override
@@ -119,24 +113,23 @@ public class PersonActivity extends FragmentActivity implements
 		Intent intent = getIntent();
 
 		setEntityType(intent.getStringExtra(ENTITY_TYPE));
-
 		String aMode = intent.getStringExtra(MODE_KEY);
+
 		if (aMode != null)
 			mode = ModeDispatcher.Mode.valueOf(aMode);
 		else
 			mode = ModeDispatcher.Mode.MODE_RW;
+
 		setContentView(R.layout.activity_person);
 
-		if ((getEntityType() != null && getEntityType().equalsIgnoreCase(
-				TYPE_GROUP))
+		if ((getEntityType() != null && getEntityType().equalsIgnoreCase(TYPE_GROUP))
 				|| (getPersonId() != null && Person.getPerson(personId)
 				.getPersonType().equalsIgnoreCase(Person._GROUP)))
 			this.setTitle(R.string.title_activity_group);
 
 		tabs = (PagerSlidingTabStrip) findViewById(R.id.tabs);
 		mViewPager = (ViewPager) findViewById(R.id.person_pager);
-		mSectionsPagerAdapter = new SectionsPagerAdapter(
-				getSupportFragmentManager());
+		mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
 		String savedInstancePersonId = null;
 
@@ -144,28 +137,22 @@ public class PersonActivity extends FragmentActivity implements
 			savedInstancePersonId = savedInstanceState.getString(PERSON_ID_KEY);
 		}
 
-		String intentPersonId = getIntent().getExtras()
-				.getString(PERSON_ID_KEY);
+		String intentPersonId = getIntent().getExtras().getString(PERSON_ID_KEY);
 
 		if (savedInstancePersonId != null) {
 			setPersonId(savedInstancePersonId);
-		} else if (intentPersonId != null
-				&& !intentPersonId.equalsIgnoreCase(CREATE_PERSON_ID)) {
+		} else if (intentPersonId != null && !intentPersonId.equalsIgnoreCase(CREATE_PERSON_ID)) {
 			setPersonId(intentPersonId);
-
 		}
 
 		mViewPager.setAdapter(mSectionsPagerAdapter);
-		tabs.setIndicatorColor(getResources().getColor(
-				R.color.ab_tab_indicator_opentenure));
+		tabs.setIndicatorColor(getResources().getColor(R.color.ab_tab_indicator_opentenure));
 		tabs.setViewPager(mViewPager);
-
 	}
 
 	@Override
 	public void onStart() {
 		super.onStart();
-
 	}
 
 	public class SectionsPagerAdapter extends FragmentPagerAdapter {
@@ -176,7 +163,6 @@ public class PersonActivity extends FragmentActivity implements
 
 		@Override
 		public Fragment getItem(int position) {
-
 			switch (position) {
 				case 0:
 					return new PersonFragment();
@@ -198,24 +184,15 @@ public class PersonActivity extends FragmentActivity implements
 					String personId = getPersonId();
 
 					if (getEntityType() != null) {
-
 						if (getEntityType().equalsIgnoreCase(TYPE_GROUP))
-							return getString(R.string.title_group_details)
-									.toUpperCase(l);
+							return getString(R.string.title_group_details).toUpperCase(l);
 						else
-							return getString(R.string.title_person_details)
-									.toUpperCase(l);
-
+							return getString(R.string.title_person_details).toUpperCase(l);
 					} else {
-
-						if (personId != null
-								&& Person.getPerson(personId).getPersonType()
-								.equalsIgnoreCase(Person._GROUP))
-							return getString(R.string.title_group_details)
-									.toUpperCase(l);
+						if (personId != null && Person.getPerson(personId).getPersonType().equalsIgnoreCase(Person._GROUP))
+							return getString(R.string.title_group_details).toUpperCase(l);
 						else
-							return getString(R.string.title_person_details)
-									.toUpperCase(l);
+							return getString(R.string.title_person_details).toUpperCase(l);
 					}
 			}
 			return null;
@@ -227,8 +204,7 @@ public class PersonActivity extends FragmentActivity implements
 		this.personId = personId;
 		if (personId != null && !personId.equalsIgnoreCase(CREATE_PERSON_ID)) {
 			Person person = Person.getPerson(personId);
-			setTitle(getResources().getString(R.string.app_name) + ": "
-					+ person.getFirstName() + " " + person.getLastName());
+			setTitle(getResources().getString(R.string.app_name) + ": " + person.getFirstName() + " " + person.getLastName());
 		}
 	}
 

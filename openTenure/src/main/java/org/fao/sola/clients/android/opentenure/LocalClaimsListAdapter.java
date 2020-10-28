@@ -28,6 +28,8 @@
 package org.fao.sola.clients.android.opentenure;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
@@ -54,20 +56,26 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-public class LocalClaimsListAdapter extends ArrayAdapter<ClaimListTO> implements
-		Filterable {
+public class LocalClaimsListAdapter extends ArrayAdapter<ClaimListTO> implements Filterable {
 	private final Context context;
 	private final List<ClaimListTO> originalClaims;
 	private List<ClaimListTO> filteredClaims;
 	private List<ClaimListTO> claims;
 	LayoutInflater inflater;
+	public enum SortBy {
+        CREATION_DATE_ASC,
+		CREATION_DATE_DESC,
+		CLAIM_NAME_ASC,
+		CLAIM_NAME_DESC,
+		CLAIM_NUM_ASC,
+		CLAIM_NUM_DESC
+	};
+	private SortBy sortBy = SortBy.CREATION_DATE_DESC;
 
-	public LocalClaimsListAdapter(Context context, List<ClaimListTO> claims,
-			ModeDispatcher.Mode mode) {
+	public LocalClaimsListAdapter(Context context, List<ClaimListTO> claims, ModeDispatcher.Mode mode) {
 		super(context, R.layout.claims_list_item, claims);
 		this.context = context;
-		this.inflater = (LayoutInflater) context
-				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		this.originalClaims = new ArrayList<ClaimListTO>(claims);
 		this.claims = claims;
 		this.filteredClaims = null;
@@ -80,9 +88,7 @@ public class LocalClaimsListAdapter extends ArrayAdapter<ClaimListTO> implements
 
 			@Override
 			protected FilterResults performFiltering(CharSequence constraint) {
-
 				String filterString = constraint.toString();
-
 				filteredClaims = new ArrayList<ClaimListTO>();
 				for (ClaimListTO cto : originalClaims) {
 					String lcase = cto.getSlogan().toLowerCase(Locale.getDefault());
@@ -98,9 +104,9 @@ public class LocalClaimsListAdapter extends ArrayAdapter<ClaimListTO> implements
 			}
 
 			@Override
-			protected void publishResults(CharSequence constraint,
-					FilterResults results) {
+			protected void publishResults(CharSequence constraint, FilterResults results) {
 				claims = (ArrayList<ClaimListTO>) results.values;
+				sortList(false);
 
 				if (results.count > 0) {
 					notifyDataSetChanged();
@@ -110,6 +116,37 @@ public class LocalClaimsListAdapter extends ArrayAdapter<ClaimListTO> implements
 			}
 		};
 		return filter;
+	}
+
+	public void setSortBy(SortBy sortBy) {
+		this.sortBy = sortBy;
+		sortList(true);
+	}
+
+	private void sortList(boolean notify) {
+		switch (sortBy){
+			case CREATION_DATE_DESC:
+				Collections.sort(claims, ClaimListTO.startDateDesc);
+				break;
+			case CREATION_DATE_ASC:
+				Collections.sort(claims, ClaimListTO.startDateAsc);
+				break;
+			case CLAIM_NAME_DESC:
+				Collections.sort(claims, ClaimListTO.claimNameDesc);
+				break;
+			case CLAIM_NAME_ASC:
+				Collections.sort(claims, ClaimListTO.claimNameAsc);
+				break;
+			case CLAIM_NUM_DESC:
+				Collections.sort(claims, ClaimListTO.claimNumberDesc);
+				break;
+			case CLAIM_NUM_ASC:
+				Collections.sort(claims, ClaimListTO.claimNumberAsc);
+				break;
+		}
+		if (notify) {
+			notifyDataSetChanged();
+		}
 	}
 
 	@Override

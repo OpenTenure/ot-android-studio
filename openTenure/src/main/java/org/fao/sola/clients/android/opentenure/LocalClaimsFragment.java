@@ -40,7 +40,6 @@ import org.fao.sola.clients.android.opentenure.model.ClaimType;
 import org.fao.sola.clients.android.opentenure.model.Configuration;
 import org.fao.sola.clients.android.opentenure.network.LoginActivity;
 import org.fao.sola.clients.android.opentenure.network.LogoutTask;
-
 import com.ipaulpro.afilechooser.utils.FileUtils;
 
 import android.app.Activity;
@@ -64,6 +63,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -83,6 +83,7 @@ public class LocalClaimsFragment extends ListFragment {
     private MenuItem showDeletedMenuItem = null;
     private boolean showDeleted = false;
     private File dest;
+    private LocalClaimsListAdapter.SortBy sortBy = LocalClaimsListAdapter.SortBy.CREATION_DATE_DESC;
 
     @Override
     public void onAttach(Activity activity) {
@@ -376,6 +377,9 @@ public class LocalClaimsFragment extends ListFragment {
         setHasOptionsMenu(true);
         setRetainInstance(true);
         EditText inputSearch = (EditText) rootView.findViewById(R.id.filter_input_field);
+        Button btnSortByCreationDate = (Button) rootView.findViewById(R.id.btnSortByCreationDate);
+        Button btnSortByClaimDesc = (Button) rootView.findViewById(R.id.btnSortByClaimDesc);
+        Button btnSortByClaimNum = (Button) rootView.findViewById(R.id.btnSortByClaimNum);
         inputSearch.setInputType(InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
         inputSearch.addTextChangedListener(new TextWatcher() {
 
@@ -402,6 +406,52 @@ public class LocalClaimsFragment extends ListFragment {
             showDeleted = savedInstanceState.getBoolean(SHOW_DELETED_KEY);
         }
 
+        View.OnClickListener sortListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(v.getId() == R.id.btnSortByCreationDate){
+                    btnSortByClaimDesc.setCompoundDrawablesWithIntrinsicBounds(R.drawable.sort, 0, 0, 0);
+                    btnSortByClaimNum.setCompoundDrawablesWithIntrinsicBounds(R.drawable.sort, 0, 0, 0);
+
+                    if(sortBy == LocalClaimsListAdapter.SortBy.CREATION_DATE_DESC) {
+                        sortBy = LocalClaimsListAdapter.SortBy.CREATION_DATE_ASC;
+                        btnSortByCreationDate.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ascending, 0, 0, 0);
+                    } else {
+                        sortBy = LocalClaimsListAdapter.SortBy.CREATION_DATE_DESC;
+                        btnSortByCreationDate.setCompoundDrawablesWithIntrinsicBounds(R.drawable.descending, 0, 0, 0);
+                    }
+                } else if(v.getId() == R.id.btnSortByClaimDesc){
+                    btnSortByCreationDate.setCompoundDrawablesWithIntrinsicBounds(R.drawable.sort, 0, 0, 0);
+                    btnSortByClaimNum.setCompoundDrawablesWithIntrinsicBounds(R.drawable.sort, 0, 0, 0);
+
+                    if(sortBy == LocalClaimsListAdapter.SortBy.CLAIM_NAME_DESC) {
+                        sortBy = LocalClaimsListAdapter.SortBy.CLAIM_NAME_ASC;
+                        btnSortByClaimDesc.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ascending, 0, 0, 0);
+                    } else {
+                        sortBy = LocalClaimsListAdapter.SortBy.CLAIM_NAME_DESC;
+                        btnSortByClaimDesc.setCompoundDrawablesWithIntrinsicBounds(R.drawable.descending, 0, 0, 0);
+                    }
+                } else if(v.getId() == R.id.btnSortByClaimNum){
+                    btnSortByCreationDate.setCompoundDrawablesWithIntrinsicBounds(R.drawable.sort, 0, 0, 0);
+                    btnSortByClaimDesc.setCompoundDrawablesWithIntrinsicBounds(R.drawable.sort, 0, 0, 0);
+
+                    if(sortBy == LocalClaimsListAdapter.SortBy.CLAIM_NUM_DESC) {
+                        sortBy = LocalClaimsListAdapter.SortBy.CLAIM_NUM_ASC;
+                        btnSortByClaimNum.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ascending, 0, 0, 0);
+                    } else {
+                        sortBy = LocalClaimsListAdapter.SortBy.CLAIM_NUM_DESC;
+                        btnSortByClaimNum.setCompoundDrawablesWithIntrinsicBounds(R.drawable.descending, 0, 0, 0);
+                    }
+                }
+
+                ((LocalClaimsListAdapter) getListAdapter()).setSortBy(sortBy);
+            }
+        };
+
+        btnSortByCreationDate.setOnClickListener(sortListener);
+        btnSortByClaimDesc.setOnClickListener(sortListener);
+        btnSortByClaimNum.setOnClickListener(sortListener);
+
         update();
         OpenTenureApplication.setLocalClaimsFragment(this);
 
@@ -414,6 +464,7 @@ public class LocalClaimsFragment extends ListFragment {
         if (filter != null) {
             ((LocalClaimsListAdapter) getListAdapter()).getFilter().filter(filter);
         }
+        ((LocalClaimsListAdapter) getListAdapter()).setSortBy(sortBy);
         super.onResume();
     }
 
@@ -453,22 +504,22 @@ public class LocalClaimsFragment extends ListFragment {
                 if((claim.isDeleted() && showDeleted) || (!claim.isDeleted() && !showDeleted)){
                     ClaimListTO cto = new ClaimListTO();
                     String claimName = claim.getName().equalsIgnoreCase("") ? rootView
-                            .getContext().getString(R.string.default_claim_name)
-                            : claim.getName();
+                            .getContext().getString(R.string.default_claim_name) : claim.getName();
+                    String claimDate = claim.getDateOfStart() != null ? claim.getDateOfStart().toString() : "...";
+
                     String slogan = claimName
                             + ", "
-                            + OpenTenureApplication.getContext().getResources()
-                            .getString(R.string.by)
+                            + OpenTenureApplication.getContext().getResources().getString(R.string.by)
                             + ": "
                             + claim.getPerson().getFirstName()
                             + " "
                             + claim.getPerson().getLastName()
-                            + " "
-                            + OpenTenureApplication.getContext().getResources()
-                            .getString(R.string.type)
+                            + ", "
+                            + OpenTenureApplication.getContext().getResources().getString(R.string.type)
                             + ": "
-                            + dnl.getLocalizedDisplayName(new ClaimType()
-                            .getDisplayValueByType(claim.getType()));
+                            + dnl.getLocalizedDisplayName(new ClaimType().getDisplayValueByType(claim.getType()))
+                            + ", " + OpenTenureApplication.getContext().getResources().getString(R.string.occupiedSince)
+                            + ": " + claimDate ;
 
                     if (claim.getRecorderName() != null)
                         slogan = slogan
@@ -477,10 +528,12 @@ public class LocalClaimsFragment extends ListFragment {
                                 .getString(R.string.recorded_by) + " "
                                 + claim.getRecorderName();
 
+                    cto.setName(claimName);
                     cto.setSlogan(slogan);
                     cto.setDeleted(claim.isDeleted());
                     cto.setId(claim.getClaimId());
                     cto.setModifiable(claim.isModifiable());
+                    cto.setDateOfStart(claim.getDateOfStart());
                     cto.setPersonId(claim.getPerson().getPersonId());
                     cto.setAttachments(claim.getAttachments());
 
@@ -491,13 +544,11 @@ public class LocalClaimsFragment extends ListFragment {
 
                     cto.setStatus(claim.getStatus());
 
-                    int days = JsonUtilities.remainingDays(claim
-                            .getChallengeExpiryDate());
+                    int days = JsonUtilities.remainingDays(claim.getChallengeExpiryDate());
 
                     if (claim.isUploadable())
                         cto.setRemaingDays(getResources().getString(
-                                R.string.message_remaining_days)
-                                + days);
+                                R.string.message_remaining_days) + days);
                     else
                         cto.setRemaingDays("");
 

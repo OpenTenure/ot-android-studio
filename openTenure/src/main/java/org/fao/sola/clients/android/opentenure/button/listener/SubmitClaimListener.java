@@ -39,6 +39,7 @@ import org.fao.sola.clients.android.opentenure.filesystem.json.JsonUtilities;
 import org.fao.sola.clients.android.opentenure.form.FieldConstraint;
 import org.fao.sola.clients.android.opentenure.form.FormPayload;
 import org.fao.sola.clients.android.opentenure.form.FormTemplate;
+import org.fao.sola.clients.android.opentenure.maps.BasePropertyBoundary;
 import org.fao.sola.clients.android.opentenure.model.Claim;
 import org.fao.sola.clients.android.opentenure.model.ClaimStatus;
 import org.fao.sola.clients.android.opentenure.model.Configuration;
@@ -164,19 +165,24 @@ public class SubmitClaimListener implements OnClickListener {
 			person.addPersonPictureAsAttachment(claimId);
 
 			/* Checking if the Geometry is mandatory for claim's submission */
-			List<Vertex> vertices = Vertex.getVertices(claimId);
-
-			if (Boolean.parseBoolean(Configuration.getConfigurationByName(
-					"geometryRequired").getValue())) {
-
+			if (Boolean.parseBoolean(Configuration.getConfigurationByName("geometryRequired").getValue())) {
+				List<Vertex> vertices = Vertex.getVertices(claimId);
 				if (vertices.size() < 3) {
-
 					Toast toast = Toast.makeText(v.getContext(),
 							R.string.message_map_not_yet_draw,
 							Toast.LENGTH_LONG);
 					toast.show();
 					return;
 				}
+			}
+
+			// Checking geometry is valid
+			if(!BasePropertyBoundary.isValidateGeometry(claimId)){
+				Toast toast = Toast.makeText(v.getContext(),
+						R.string.message_invalid_geom,
+						Toast.LENGTH_SHORT);
+				toast.show();
+				return;
 			}
 
 			JsonUtilities.createClaimJson(claimId);

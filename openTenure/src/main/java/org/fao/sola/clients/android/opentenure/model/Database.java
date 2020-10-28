@@ -93,9 +93,7 @@ public class Database {
 		this.context = context;
 		this.password = password;
 		DB_PATH = context.getFilesDir().getPath();
-
 		DB_NAME = "opentenure";
-
 		DB_FILE_NAME = "opentenure.h2.db";
 	}
 

@@ -177,42 +177,25 @@ public class AdjacentClaimsFragment extends ListFragment {
 
 		AdjacenciesNotes adjacenciesNotes = new AdjacenciesNotes();
 		adjacenciesNotes.setClaimId(claimId);
-		adjacenciesNotes.setNorthAdjacency(((EditText) rootView
-				.findViewById(R.id.north_adjacency)).getText().toString());
-
-		adjacenciesNotes.setEastAdjacency(((EditText) rootView
-				.findViewById(R.id.east_adjacency)).getText().toString());
-
-		adjacenciesNotes.setSouthAdjacency(((EditText) rootView
-				.findViewById(R.id.south_adjacency)).getText().toString());
-
-		adjacenciesNotes.setWestAdjacency(((EditText) rootView
-				.findViewById(R.id.west_adjacency)).getText().toString());
+		adjacenciesNotes.setNorthAdjacency(((EditText) rootView.findViewById(R.id.north_adjacency)).getText().toString());
+		adjacenciesNotes.setEastAdjacency(((EditText) rootView.findViewById(R.id.east_adjacency)).getText().toString());
+		adjacenciesNotes.setSouthAdjacency(((EditText) rootView.findViewById(R.id.south_adjacency)).getText().toString());
+		adjacenciesNotes.setWestAdjacency(((EditText) rootView.findViewById(R.id.west_adjacency)).getText().toString());
 
 		int result = AdjacenciesNotes.createAdjacenciesNotes(adjacenciesNotes);
 
-		
-
 		if (result == 1) {
-
-			toast = Toast.makeText(OpenTenureApplication.getContext(),
-					R.string.message_adjacencies_saved, Toast.LENGTH_LONG);
+			toast = Toast.makeText(OpenTenureApplication.getContext(), R.string.message_adjacencies_saved, Toast.LENGTH_LONG);
 			toast.show();
-
 			return true;
 		} else {
-
-			toast = Toast.makeText(OpenTenureApplication.getContext(),
-					R.string.message_adjacencies_not_saved, Toast.LENGTH_LONG);
+			toast = Toast.makeText(OpenTenureApplication.getContext(), R.string.message_adjacencies_not_saved, Toast.LENGTH_LONG);
 			toast.show();
-
 			return false;
 		}
 	}
 
 	protected boolean updateNotes() {
-
-		
 		Toast toast;
 		String claimId = claimActivity.getClaimId();
 		

@@ -297,30 +297,8 @@ public class JsonUtilities {
 										.getPersonType()
 										.equals(org.fao.sola.clients.android.opentenure.model.Person._PHYSICAL));
 
-						if (claim.getPerson().getPersonId()
-								.equals(personDB.getPersonId()))
-							personJson.setId(UUID.randomUUID().toString()); // This
-																			// trick
-						// is
-						// to
-						// permit a
-						// claimant
-						// to be
-						// also
-						// owner
-						// . When
-						// the
-						// issue
-						// will be
-						// resolved
-						// on SOLA
-						// ----->
-						// personJson.setId(personDB.getPersonId());
-
-						else
-							personJson.setId(personDB.getPersonId());
-						personJson.setMobilePhone(personDB
-								.getMobilePhoneNumber());
+						personJson.setId(personDB.getPersonId());
+						personJson.setMobilePhone(personDB.getMobilePhoneNumber());
 						personJson.setLastName(personDB.getLastName());
 						personJson.setName(personDB.getFirstName());
 						personJson.setPhone(personDB.getContactPhoneNumber());

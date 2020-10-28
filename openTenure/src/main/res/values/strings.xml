@@ -46,6 +46,7 @@
     <string name="action_select_bookmark">Go to bookmark</string>
     <string name="action_view_community_area">View Community Area</string>
     <string name="action_submit">Submit</string>
+    <string name="action_view">View</string>
     <string name="action_download_file">Download File</string>
     <string name="action_download_claims">Download Claims</string>
     <string name="action_new_picture">New picture</string>
@@ -60,6 +61,7 @@
     <string name="action_modify_claimant">Modify Claimant</string>
     <string name="action_add_claimant">Add Claimant</string>
     <string name="action_select_challenge">Select Claim to Challenge</string>
+    <string name="title_claim_challenge">Claim to Challenge</string>
     <string name="action_claim_map_snapshot">Attach a snapshot of this claim map</string>
     <string name="title_news">News</string>
     <string name="title_map">Community Map</string>
@@ -101,6 +103,7 @@
     <string name="title_exit_dialog">Exit</string>
     <string name="title_initialization_process">Initialization Process</string>
     <string name="title_remove_person_dialog">Remove person</string>
+    <string name="title_remove_claimant_dialog">Remove claimant</string>
     <string name="title_save_claim_dialog">The claim has been modified</string>
     <string name="title_save_boundary_dialog">Community area has been modified</string>
     <string name="title_save_person_dialog">The person has been modified</string>
@@ -127,6 +130,7 @@
     <string name="cardinal_direction">Cardinal direction</string>
     <string name="new_entity">New entity</string>
     <string name="by">By</string>
+    <string name="occupiedSince">Occupied since</string>
     <string name="type">Type</string>
     <string name="na">N.A.</string>
     <string name="generated_on">Generated on</string>
@@ -145,9 +149,9 @@
     <string name="last_name_label">Last name *</string>
     <string name="date_of_birth">Date of birth (YYYY-MM-DD)</string>
     <string name="date_of_birth_simple">Date of birth</string>
-    <string name="date_of_birth_label">Date of birth * (YYYY-MM-DD)</string>
+    <string name="date_of_birth_label">Date of birth *</string>
     <string name="date_of_start">YYYY-MM-DD</string>
-    <string name="date_of_start_label">Date claim applies from (YYYY-MM-DD)</string>
+    <string name="date_of_start_label">Occupied since (YYYY-MM-DD)</string>
     <string name="date_of_start_label_print">Date claim applies from</string>
     <string name="place_of_birth">Place of birth</string>
     <string name="place_of_birth_label">Place of birth *</string>
@@ -258,6 +262,7 @@
     <string name="message_error_mandatory_field_gender">Fulfill the mandatory field gander before to save</string>
     <string name="message_error_mandatory_birthdate">Date of birth not in the right format or empty</string>
     <string name="message_error_startdate">Date of right\'s start  not in the right format or empty</string>
+    <string name="message_invalid_geom">Boundary geometry is invalid</string>
     <string name="message_error_boundary_name_empty">Fill in Community area name</string>
     <string name="message_error_boundary_geom_empty">Draw the Community area</string>
     <string name="message_error_boundary_type_empty">Select Community Area type</string>
@@ -287,6 +292,7 @@
     <string name="message_app_initialized">The app is ready to work and communicate to the Open Tenure Community Server </string>
     <string name="message_update_server">The Community Server is using an old version of the communication protocol. Wait for your administrator to update the Community Server before proceeding</string>
     <string name="message_update_client">The Community Server is using a new version of the communication protocol. Wait for an update of Open Tenure before proceeding</string>
+    <string name="message_claimant_not_matching_owners">Claimant has been changed and not matching recorded owners. Please, make sure this is correct.</string>
     <string name="check_location_service">No location information available. Check that location service is enabled in your settings</string>
     <string name="tiles_queued">There are %d tiles in the download list</string>
     <string name="too_many_tiles_queued">There are %d tiles in the download list. Please, wait before adding tiles to the list</string>
@@ -571,4 +577,9 @@
     <string name="soft_delete">Soft delete of claims</string>
     <string name="soft_delete_details">Allows claims restoration after deletion</string>
     <string name="title_groups">Groups</string>
+    <string name="sort_by">Sort by:</string>
+    <string name="creation_date">Creation date</string>
+    <string name="claim_number">Claim number</string>
+    <string name="confirm_claimant_removal">Do you want to remove claimant?</string>
+    <string name="action_insert_boundary">Insert boundary marker</string>
 </resources>

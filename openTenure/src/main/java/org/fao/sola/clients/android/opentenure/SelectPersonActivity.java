@@ -60,7 +60,7 @@ public class SelectPersonActivity extends FragmentActivity implements ModeDispat
 	@Override
 	public void onPause() {
 		super.onPause();
-		OpenTenureApplication.getInstance().getDatabase().sync();;
+		OpenTenureApplication.getInstance().getDatabase().sync();
 	};
 
 	@Override
@@ -76,10 +76,7 @@ public class SelectPersonActivity extends FragmentActivity implements ModeDispat
 
 		tabs = (PagerSlidingTabStrip) findViewById(R.id.tabs);
 		mViewPager = (ViewPager) findViewById(R.id.person_pager);
-		mSectionsPagerAdapter = new SectionsPagerAdapter(
-				getSupportFragmentManager());
-
-
+		mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
 		mViewPager.setAdapter(mSectionsPagerAdapter);
 		tabs.setIndicatorColor(getResources().getColor(R.color.ab_tab_indicator_opentenure));
@@ -101,7 +98,6 @@ public class SelectPersonActivity extends FragmentActivity implements ModeDispat
 
 		@Override
 		public Fragment getItem(int position) {
-
 			switch (position) {
 				case 0:
 					PersonsFragment pfp = PersonsFragment.newInstance(Person._PHYSICAL);

@@ -171,7 +171,7 @@ public class EditablePropertyBoundary extends BasePropertyBoundary {
 				return addMarker(mapMode);
 			}else if (mark.equals(moveTo)) {
 				Log.d(this.getClass().getName(),"moveTo");
-				return moveMarker();
+				return moveMarker(mapMode);
 			}else if (mark.equals(cancel)) {
 				Log.d(this.getClass().getName(),"cancel");
 				deselect();
@@ -356,9 +356,18 @@ public class EditablePropertyBoundary extends BasePropertyBoundary {
 		return true;
 	}
 
-    private boolean moveBoundaryMarker(){
-        Marker mark = insertBoundaryMarker(target.getPosition(), verticesMap.get(selectedMarker).getGPSPosition());
+    private boolean moveBoundaryMarker(MapMode mapMode){
+        Marker mark = insertBoundaryMarker(target.getPosition(), verticesMap.get(selectedMarker).getGPSPosition(), mapMode);
         Vertex vertex = removeBoundaryVertexAndMarker(selectedMarker);
+
+		hideMarkerEditControls();
+		selectedMarker = null;
+		updateVertices();
+		resetAdjacency(otherProperties);
+		calculateGeometry(true);
+		redrawProperty();
+		return true;
+		/*
         if(validateGeometry()){
             hideMarkerEditControls();
             selectedMarker = null;
@@ -367,35 +376,33 @@ public class EditablePropertyBoundary extends BasePropertyBoundary {
             calculateGeometry(true);
             redrawProperty();
             return true;
-        }else{
+        } else {
             hideMarkerEditControls();
             vertices.remove(verticesMap.remove(mark));
 			mark.remove();
-			insertBoundaryMarker(selectedMarker.getPosition(), vertex.getGPSPosition());
+			insertBoundaryMarker(selectedMarker.getPosition(), vertex.getGPSPosition(), mapMode);
             redrawProperty();
 			selectedMarker = null;
             return false;
-        }
+        }*/
     }
 
-    private boolean moveMarker(){
-
+    private boolean moveMarker(MapMode mapMode){
 		// Insert a marker at target position and remove the selected
-
 		if (verticesMap.containsKey(selectedMarker)) {
-            if(moveBoundaryMarker()){
+            if(moveBoundaryMarker(mapMode)) {
                 return true;
-            }else{
+            } else {
                 Toast toast = Toast.makeText(context,
                         R.string.message_invalid_marker_position,
                         Toast.LENGTH_SHORT);
                 toast.show();
                 return false;
             }
-        }else if (holesVerticesMap.containsKey(selectedMarker)) {
-            if(moveHoleMarker()){
+        } else if (holesVerticesMap.containsKey(selectedMarker)) {
+            if(moveHoleMarker()) {
                 return true;
-            }else{
+            } else {
                 Toast toast = Toast.makeText(context,
                         R.string.message_invalid_marker_position,
                         Toast.LENGTH_SHORT);
@@ -406,48 +413,44 @@ public class EditablePropertyBoundary extends BasePropertyBoundary {
 			return moveLocationMarker();
 		}
 		return false;
-		
 	}
 
 	void deselect(){
 		hideMarkerEditControls();
 		if(selectedMarker != null){
 			if(verticesMap.containsKey(selectedMarker)){
-				selectedMarker.setIcon(BitmapDescriptorFactory
-						.fromResource(R.drawable.ot_blue_marker));
-			}else if(holesVerticesMap.containsKey(selectedMarker)){
-                selectedMarker.setIcon(BitmapDescriptorFactory
-                        .fromResource(R.drawable.ot_blue_marker));
-            }else{
-				selectedMarker.setIcon(BitmapDescriptorFactory
-						.fromResource(R.drawable.ot_orange_marker));
+				selectedMarker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.ot_blue_marker));
+			} else if (holesVerticesMap.containsKey(selectedMarker)){
+                selectedMarker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.ot_blue_marker));
+            } else {
+				selectedMarker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.ot_orange_marker));
 			}
 		selectedMarker = null;
 		}
 	}
 	
-	private void hideMarkerEditControls(){
+	private void hideMarkerEditControls() {
 		if(up!=null){
 			up.hide();
 			amr.remove(up);
 		}
-		if(down != null){
+		if(down != null) {
 			down.hide();
 			amr.remove(down);
 		}
-		if(left != null){
+		if(left != null) {
 			left.hide();
 			amr.remove(left);
 		}
-		if(right != null){
+		if(right != null) {
 			right.hide();
 			amr.remove(right);
 		}
-		if(target != null){
+		if(target != null) {
 			target.remove();
 			target = null;
 		}
-		if(relativeEdit != null){
+		if(relativeEdit != null) {
 			relativeEdit.remove();
 			relativeEdit = null;
 		}
@@ -753,9 +756,7 @@ public class EditablePropertyBoundary extends BasePropertyBoundary {
             Adjacency.deleteAdjacencies(claim.getClaimId());
 
             if (adjacentProperties != null) {
-
                 for (BasePropertyBoundary adjacentProperty : adjacentProperties) {
-
                     Adjacency adj = new Adjacency();
                     adj.setSourceClaimId(claim.getClaimId());
                     adj.setDestClaimId(adjacentProperty.getClaimId());
@@ -787,7 +788,11 @@ public class EditablePropertyBoundary extends BasePropertyBoundary {
 
 	private void onBoundaryMarkerDragEnd(Marker mark) {
 		updateVertexPosition(mark);
-		if(validateGeometry()){
+		updateVertices();
+		calculateGeometry(true);
+		redrawProperty();
+		resetAdjacency(otherProperties);
+		/*if(validateGeometry()){
 			updateVertices();
 			calculateGeometry(true);
 			redrawProperty();
@@ -800,7 +805,7 @@ public class EditablePropertyBoundary extends BasePropertyBoundary {
 			toast.show();
 			updateVertexPosition(mark, draggedVertex);
 			redrawProperty();
-		}
+		}*/
 		draggedVertex = null;
 	}
 
@@ -910,7 +915,7 @@ public class EditablePropertyBoundary extends BasePropertyBoundary {
         return vertex;
 	}
 
-    private Marker insertBoundaryMarker(LatLng mapPosition, LatLng gpsPosition) {
+    private Marker insertBoundaryMarker(LatLng mapPosition, LatLng gpsPosition, MapMode mapMode) {
 
         if (claimActivity.getClaimId() == null) {
             // Useless to add markers without a claim
@@ -932,39 +937,45 @@ public class EditablePropertyBoundary extends BasePropertyBoundary {
             return mark;
         }
 
-        double minDistance = Double.MAX_VALUE;
-        int insertIndex = 0;
+		if(mapMode == MapMode.add_boundary) {
+			vertices.add(newVertex);
+		} else {
+			// Insert marker base on the distance to other points
+			double minDistance = Double.MAX_VALUE;
+			int insertIndex = 0;
 
-        // calculate the insertion point
-        for (int i = 0; i < vertices.size(); i++) {
+			// calculate the insertion point
+			for (int i = 0; i < vertices.size(); i++) {
 
-            Vertex from = vertices.get(i);
-            Vertex to = null;
+				Vertex from = vertices.get(i);
+				Vertex to = null;
 
-            if (i == vertices.size() - 1) {
-                to = vertices.get(0);
-            } else {
-                to = vertices.get(i + 1);
-            }
+				if (i == vertices.size() - 1) {
+					to = vertices.get(0);
+				} else {
+					to = vertices.get(i + 1);
+				}
 
-            PointPairDistance ppd = new PointPairDistance();
-            DistanceToPoint.computeDistance(
-                    new LineSegment(from.getMapPosition().longitude, from
-                            .getMapPosition().latitude,
-                            to.getMapPosition().longitude,
-                            to.getMapPosition().latitude),
-                    new Coordinate(newVertex.getMapPosition().longitude,
-                            newVertex.getMapPosition().latitude), ppd);
+				PointPairDistance ppd = new PointPairDistance();
+				DistanceToPoint.computeDistance(
+						new LineSegment(from.getMapPosition().longitude, from
+								.getMapPosition().latitude,
+								to.getMapPosition().longitude,
+								to.getMapPosition().latitude),
+						new Coordinate(newVertex.getMapPosition().longitude,
+								newVertex.getMapPosition().latitude), ppd);
 
-            double currDistance = ppd.getDistance();
+				double currDistance = ppd.getDistance();
 
-            if (currDistance < minDistance) {
-                minDistance = currDistance;
-                insertIndex = i + 1;
-            }
+				if (currDistance < minDistance) {
+					minDistance = currDistance;
+					insertIndex = i + 1;
+				}
 
-        }
-        vertices.add(insertIndex, newVertex);
+			}
+			vertices.add(insertIndex, newVertex);
+		}
+
         return mark;
     }
 
@@ -1058,15 +1069,20 @@ public class EditablePropertyBoundary extends BasePropertyBoundary {
 			return;
 		}
 		
-		if(mapMode == MapMode.add_boundary){
-            Marker mark = insertBoundaryMarker(mapPosition, gpsPosition);
+		if(mapMode == MapMode.add_boundary || mapMode == MapMode.insert_boundary){
+            Marker mark = insertBoundaryMarker(mapPosition, gpsPosition, mapMode);
             if(mark != null){
-                if(validateGeometry()){
+            	// Add boundary point, even if geometry is invalid
+				updateVertices();
+				resetAdjacency(otherProperties);
+				calculateGeometry(true);
+				redrawProperty();
+                /*if(validateGeometry()){
                     updateVertices();
                     resetAdjacency(otherProperties);
                     calculateGeometry(true);
                     redrawProperty();
-                }else{
+                } else {
                     vertices.remove(verticesMap.remove(mark));
                     redrawProperty();
                     Toast toast = Toast.makeText(
@@ -1074,54 +1090,35 @@ public class EditablePropertyBoundary extends BasePropertyBoundary {
                             R.string.message_invalid_marker_position,
                             Toast.LENGTH_SHORT);
                     toast.show();
-                }
+                }*/
             }
 		}else if(mapMode == MapMode.add_non_boundary){
-            AlertDialog.Builder locationDescriptionDialog = new AlertDialog.Builder(
-                    context);
-            locationDescriptionDialog
-                    .setTitle(R.string.title_add_non_boundary);
-            final EditText locationDescriptionInput = new EditText(
-                    context);
-            locationDescriptionInput
-                    .setInputType(InputType.TYPE_CLASS_TEXT);
-            locationDescriptionDialog
-                    .setView(locationDescriptionInput);
-            locationDescriptionDialog
-                    .setMessage(context.getResources()
+            AlertDialog.Builder locationDescriptionDialog = new AlertDialog.Builder(context);
+            locationDescriptionDialog.setTitle(R.string.title_add_non_boundary);
+            final EditText locationDescriptionInput = new EditText(context);
+            locationDescriptionInput.setInputType(InputType.TYPE_CLASS_TEXT);
+            locationDescriptionDialog.setView(locationDescriptionInput);
+            locationDescriptionDialog.setMessage(context.getResources()
                             .getString(
                                     R.string.message_enter_description));
 
-            locationDescriptionDialog
-                    .setPositiveButton(
-                            R.string.confirm,
-                            new OnClickListener() {
-
+            locationDescriptionDialog.setPositiveButton(R.string.confirm, 	new OnClickListener() {
                                 @Override
-                                public void onClick(
-                                        DialogInterface dialog,
-                                        int which) {
-                                    String locationDescription = locationDescriptionInput
-                                            .getText()
-                                            .toString();
+                                public void onClick(DialogInterface dialog, int which) {
+                                    String locationDescription = locationDescriptionInput.getText().toString();
                                     addLocation(mapPosition, gpsPosition, locationDescription);
                                 }
                             });
-            locationDescriptionDialog
-                    .setNegativeButton(
-                            R.string.cancel,
-                            new OnClickListener() {
-
+            locationDescriptionDialog.setNegativeButton(R.string.cancel, new OnClickListener() {
                                 @Override
                                 public void onClick(
-                                        DialogInterface dialog,
-                                        int which) {
+                                		DialogInterface dialog, int which) {
                                 }
                             });
 
             locationDescriptionDialog.show();
 
-		}else if(mapMode == MapMode.edit_hole){
+		} else if(mapMode == MapMode.edit_hole){
 
             Marker mark = insertHoleMarker(mapPosition, gpsPosition);
 			if(mark != null){
@@ -1168,14 +1165,12 @@ public class EditablePropertyBoundary extends BasePropertyBoundary {
 					.position(position)
 					.title(sequenceNumber + ", Lat: " + position.latitude + ", Lon: " + position.longitude)
 					.draggable(true)
-					.icon(BitmapDescriptorFactory
-							.fromResource(R.drawable.ot_blue_marker)));
+					.icon(BitmapDescriptorFactory.fromResource(R.drawable.ot_blue_marker)));
 		}else{
 			marker = map.addMarker(new MarkerOptions()
 					.position(position)
 					.title(sequenceNumber + ", Lat: " + position.latitude + ", Lon: " + position.longitude)
-					.icon(BitmapDescriptorFactory
-							.fromResource(R.drawable.ot_blue_marker)));
+					.icon(BitmapDescriptorFactory.fromResource(R.drawable.ot_blue_marker)));
 		}
 		// To prevent vertices to cluster when they are too close
 		// assign each vertex to its own group
@@ -1213,14 +1208,12 @@ public class EditablePropertyBoundary extends BasePropertyBoundary {
 			.position(position)
 			.title(description)
 			.draggable(true)
-			.icon(BitmapDescriptorFactory
-					.fromResource(R.drawable.ot_orange_marker)));
+			.icon(BitmapDescriptorFactory.fromResource(R.drawable.ot_orange_marker)));
 		}else{
 			marker = map.addMarker(new MarkerOptions()
 			.position(position)
 			.title(description)
-			.icon(BitmapDescriptorFactory
-					.fromResource(R.drawable.ot_orange_marker)));
+			.icon(BitmapDescriptorFactory.fromResource(R.drawable.ot_orange_marker)));
 		}
 		marker.setClusterGroup(ClusterGroup.NOT_CLUSTERED);
 		return marker;
@@ -1239,7 +1232,6 @@ public class EditablePropertyBoundary extends BasePropertyBoundary {
 
 			try {
 				bw = new BufferedWriter(new FileWriter(path));
-				
 				bw.write(
 						"HOLE_NUMBER" + FileSystemUtilities._CSV_FIELD_SEPARATOR
 						+ "SEQUENCE_NUMBER" + FileSystemUtilities._CSV_FIELD_SEPARATOR

@@ -258,8 +258,7 @@ public class OpenTenure extends FragmentActivity implements ModeDispatcher,
             sv.setSkipButtonText(getString(R.string.skip));
 
             setAlpha(0.2f, tabLayout.getChildAt(0), tabLayout.getChildAt(1),
-                    tabLayout.getChildAt(2), tabLayout.getChildAt(3),
-                    tabLayout.getChildAt(4), mViewPager);
+                    tabLayout.getChildAt(2), tabLayout.getChildAt(3), mViewPager);
         }
 
         if (!OpenTenureApplication.getInstance().isOnline()) {
@@ -294,13 +293,16 @@ public class OpenTenure extends FragmentActivity implements ModeDispatcher,
         if (v.toString().indexOf("skip") > 0) {
             sv.hide();
             setAlpha(1.0f, tabLayout.getChildAt(0), tabLayout.getChildAt(1),
-                    tabLayout.getChildAt(2), tabLayout.getChildAt(3),
-                    tabLayout.getChildAt(4), tabLayout, mViewPager);
+                    tabLayout.getChildAt(2), tabLayout.getChildAt(3), tabLayout, mViewPager);
             counter = 0;
         }
 
         Configuration conf = Configuration.getConfigurationByName("isInitialized");
         numberOfClaims = Claim.getNumberOfClaims();
+
+        if (conf.getValue().equalsIgnoreCase("true") && counter == 1) {
+            counter = 2;
+        }
 
         switch (counter) {
             case 0:
@@ -463,7 +465,7 @@ public class OpenTenure extends FragmentActivity implements ModeDispatcher,
             case R.id.action_showcase:
 
                 // ShowCase Tutorial
-                sv = new ShowcaseView.Builder(this, true).setTarget(Target.NONE)
+                sv = new ShowcaseView.Builder(this, true).setTarget(new ViewTarget(tabLayout.getChildAt(0)))
                         .setContentTitle(getString(R.string.showcase_main_title))
                         .setContentText(getString(R.string.showcase_main_message))
                         .setStyle(R.style.CustomShowcaseTheme)

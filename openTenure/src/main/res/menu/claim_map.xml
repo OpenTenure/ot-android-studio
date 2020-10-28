@@ -7,6 +7,8 @@
         <menu>
             <item android:id="@+id/action_add_boundary"
                   android:title="@string/action_add_boundary" />
+            <item android:id="@+id/action_insert_boundary"
+                android:title="@string/action_insert_boundary" />
             <item android:id="@+id/action_add_non_boundary"
                   android:title="@string/action_add_non_boundary" />
             <item android:id="@+id/action_measure"
