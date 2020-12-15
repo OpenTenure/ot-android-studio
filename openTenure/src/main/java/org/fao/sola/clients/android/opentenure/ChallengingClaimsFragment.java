@@ -88,10 +88,7 @@ public class ChallengingClaimsFragment extends ListFragment {
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
 		if (modeActivity.getMode().compareTo(ModeDispatcher.Mode.MODE_RW) == 0){
-			
-
-			Intent intent = new Intent(rootView.getContext(),
-					ClaimActivity.class);
+			Intent intent = new Intent(rootView.getContext(),	ClaimActivity.class);
 			intent.putExtra(ClaimActivity.CLAIM_ID_KEY, ((TextView)v.findViewById(R.id.claim_id)).getText());
 			intent.putExtra(ClaimActivity.MODE_KEY, ModeDispatcher.Mode.MODE_RO.toString());
 			startActivity(intent);
@@ -108,7 +105,6 @@ public class ChallengingClaimsFragment extends ListFragment {
 			List<ClaimListTO> claimListTOs = new ArrayList<ClaimListTO>();
 
 			for(Claim challengingClaim : challengingClaims){
-				
 				ClaimListTO cto = new ClaimListTO();
 				cto.setSlogan(challengingClaim.getName() + ", " + getResources().getString(R.string.by) + ": " + challengingClaim.getPerson().getFirstName()+ " " + challengingClaim.getPerson().getLastName());
 				cto.setId(challengingClaim.getClaimId());
@@ -125,7 +121,6 @@ public class ChallengingClaimsFragment extends ListFragment {
 			ArrayAdapter<ClaimListTO> adapter = new ChallengingClaimsListAdapter(rootView.getContext(), claimListTOs, modeActivity.getMode());
 			setListAdapter(adapter);
 			adapter.notifyDataSetChanged();
-
 		}
 	}
 }

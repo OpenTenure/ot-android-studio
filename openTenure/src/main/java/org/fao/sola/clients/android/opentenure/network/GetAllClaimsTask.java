@@ -49,13 +49,11 @@ import android.widget.Toast;
  * 
  * */
 public class GetAllClaimsTask extends AsyncTask<Object, Void, GetClaimsInput> {
-
 	@Override
 	protected GetClaimsInput doInBackground(Object... params) {
 
 		if (params[0] == null) {
-			List<Claim> listClaim = (List<Claim>) CommunityServerAPI
-					.getAllClaims();
+			List<Claim> listClaim = (List<Claim>) CommunityServerAPI.getAllClaims();
 			
 			GetClaimsInput claimToRetrieve = new GetClaimsInput();
 			claimToRetrieve.setClaims(listClaim);
@@ -64,11 +62,9 @@ public class GetAllClaimsTask extends AsyncTask<Object, Void, GetClaimsInput> {
 			return claimToRetrieve;
 
 		} else {
-
 			/*
 			 * Here in the case of current box bounds
 			 */
-
 			GetClaimsInput claimToRetrieve = new GetClaimsInput();
 
 			/* In case there's no connection*/
@@ -78,31 +74,23 @@ public class GetAllClaimsTask extends AsyncTask<Object, Void, GetClaimsInput> {
 			}
 
 			String[] coordinates = buildCoordinates((LatLngBounds) params[0]);
-			List<Claim> listClaim = (List<Claim>) CommunityServerAPI
-					.getAllClaimsByBox(coordinates);
+			List<Claim> listClaim = (List<Claim>) CommunityServerAPI.getAllClaimsByBox(coordinates);
 
 			claimToRetrieve.setClaims(listClaim);
 			claimToRetrieve.setMapView((View) params[1]);
-
 			return claimToRetrieve;
-
 		}
-
 	}
 
 	@Override
 	protected void onPostExecute(final GetClaimsInput input) {
-
 		Toast toast;
-
 		if (input.getClaims() == null || input.getClaims().size() == 0) {
-
 			if (!OpenTenureApplication.getInstance().isOnline()) {
 				toast = Toast.makeText(OpenTenureApplication.getContext(),
 						OpenTenureApplication.getContext().getResources()
 								.getString(R.string.message_connection_error),
 						Toast.LENGTH_LONG);
-
 			} else {
 				toast = Toast.makeText(
 						OpenTenureApplication.getContext(),
@@ -112,35 +100,25 @@ public class GetAllClaimsTask extends AsyncTask<Object, Void, GetClaimsInput> {
 								.getString(
 										R.string.message_no_claim_to_download),
 						Toast.LENGTH_LONG);
-
 			}
 
 			toast.show();
-
 			View mapView = input.getMapView();
 
 			if (mapView != null) {
-
-				ProgressBar bar = (ProgressBar) mapView
-						.findViewById(R.id.progress_bar);
+				ProgressBar bar = (ProgressBar) mapView.findViewById(R.id.progress_bar);
 				bar.setVisibility(View.GONE);
 
-				TextView label = (TextView) mapView
-						.findViewById(R.id.download_claim_label);
+				TextView label = (TextView) mapView.findViewById(R.id.download_claim_label);
 				label.setVisibility(View.GONE);
 			}
-
 			return;
 		}
 		
-		
 		// Before to start downloading claims the input is divided in two and assigned to two thread. 
-		
 		OpenTenureApplication.setClaimsToDownload(input.getClaims().size());
 		OpenTenureApplication.setClaimsDownloaded(0);
-		
-		
-		
+
 		List<Claim> inputList = input.getClaims();
 		Map<String, org.fao.sola.clients.android.opentenure.model.Claim> claimsMap = org.fao.sola.clients.android.opentenure.model.Claim.getSimplifiedClaimsForDownload();
 		
@@ -148,7 +126,6 @@ public class GetAllClaimsTask extends AsyncTask<Object, Void, GetClaimsInput> {
 		List<Claim> inputList2 = inputList.subList((inputList.size()/2)/2, (inputList.size()/2));
 		List<Claim> inputList3 = inputList.subList((inputList.size()/2), (inputList.size()/2)+(inputList.size()/4));
 		List<Claim> inputList4 = inputList.subList((inputList.size()/2)+(inputList.size()/4), inputList.size());
-		
 		
 		GetClaimsInput input2 = new GetClaimsInput();
 		
@@ -169,9 +146,7 @@ public class GetAllClaimsTask extends AsyncTask<Object, Void, GetClaimsInput> {
 		input3.setMapView(input.getMapView());
 		input3.setMessage(input.getMessage());
 		input3.setFirst(false);
-		
-		
-		
+
 		GetClaimsInput input4 = new GetClaimsInput();
 		input4.setClaimId(input.getClaimId());
 		input4.setClaims(inputList4);
@@ -202,7 +177,6 @@ public class GetAllClaimsTask extends AsyncTask<Object, Void, GetClaimsInput> {
 		task4.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,input4);
 
 		return;
-
 	}
 
 	private String[] buildCoordinates(LatLngBounds bounds) {

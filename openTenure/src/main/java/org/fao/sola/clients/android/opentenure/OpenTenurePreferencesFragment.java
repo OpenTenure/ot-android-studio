@@ -41,24 +41,16 @@ public class OpenTenurePreferencesFragment extends PreferenceFragment {
 	private class PrefChangeListener implements SharedPreferences.OnSharedPreferenceChangeListener{
 
 		@Override
-		public void onSharedPreferenceChanged(
-				SharedPreferences sharedPreferences, String key) {
-
+		public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
 			// LANGUAGE SELECTION REQUIRES RESTARTING THE APPLICATION
-
 			if (key.equals(OpenTenure.language)) {
-				getActivity()
-						.setResult(
-								OpenTenurePreferencesActivity.RESULT_CODE_RESTART);
+				getActivity().setResult(OpenTenurePreferencesActivity.RESULT_CODE_RESTART);
 			}
 			if (key.equals(OpenTenurePreferencesActivity.CS_URL_PREF)) {
 				Link link = Link.getLink(Link.ID_CS_URL);
 				if(link != null){
-					SharedPreferences OpenTenurePreferences = PreferenceManager
-							.getDefaultSharedPreferences(OpenTenureApplication.getContext());
-					String csUrl = OpenTenurePreferences.getString(
-							OpenTenurePreferencesActivity.CS_URL_PREF,
-							OpenTenureApplication._DEFAULT_COMMUNITY_SERVER);
+					SharedPreferences OpenTenurePreferences = PreferenceManager.getDefaultSharedPreferences(OpenTenureApplication.getContext());
+					String csUrl = OpenTenurePreferences.getString(OpenTenurePreferencesActivity.CS_URL_PREF, OpenTenureApplication._DEFAULT_COMMUNITY_SERVER);
 					link.setUrl(csUrl);
 					link.update();
 				}
@@ -69,10 +61,8 @@ public class OpenTenurePreferencesFragment extends PreferenceFragment {
 	@Override
 	public void onResume() {
 		super.onResume();
-		SharedPreferences OpenTenurePreferences = PreferenceManager
-				.getDefaultSharedPreferences(OpenTenureApplication.getContext());
-		OpenTenurePreferences
-				.registerOnSharedPreferenceChangeListener(new PrefChangeListener());
+		SharedPreferences OpenTenurePreferences = PreferenceManager.getDefaultSharedPreferences(OpenTenureApplication.getContext());
+		OpenTenurePreferences.registerOnSharedPreferenceChangeListener(new PrefChangeListener());
 	};
 
 	@Override
@@ -80,11 +70,8 @@ public class OpenTenurePreferencesFragment extends PreferenceFragment {
 		super.onCreate(savedInstanceState);
 
 		addPreferencesFromResource(R.xml.preferences);
-
-		SharedPreferences OpenTenurePreferences = PreferenceManager
-				.getDefaultSharedPreferences(OpenTenureApplication.getContext());
-		OpenTenurePreferences
-				.registerOnSharedPreferenceChangeListener(new PrefChangeListener());
+		SharedPreferences OpenTenurePreferences = PreferenceManager.getDefaultSharedPreferences(OpenTenureApplication.getContext());
+		OpenTenurePreferences.registerOnSharedPreferenceChangeListener(new PrefChangeListener());
 		EditTextPreference versionPref = (EditTextPreference)findPreference(OpenTenurePreferencesActivity.SOFTWARE_VERSION_PREF);
 		String version;
 		try {

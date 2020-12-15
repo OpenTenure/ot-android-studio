@@ -9,13 +9,14 @@
     <EditText
         android:id="@+id/filter_input_field"
         android:layout_width="fill_parent"
-        android:layout_height="60dp"
+        android:layout_height="wrap_content"
         android:autofillHints=""
         android:background="@color/dark_background_opentenure"
         android:drawableEnd="@android:drawable/ic_search_category_default"
         android:hint="@string/hint_type_to_filter"
         android:inputType="text"
-        android:padding="10dp"></EditText>
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp" />
 
     <LinearLayout
         android:layout_width="match_parent"

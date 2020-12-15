@@ -223,6 +223,7 @@ public class UploadChunksTask extends AsyncTask<Object, ViewHolderResponse, View
 			 * close the flow. There 's the risk of a infinite loop
 			 */
 
+			Log.d(">>>>>>>>>>>>>>> ", "ATTACHMENT CHUNKS ARE UPLOADED FOR [" + res.getAttachmentId() + "] CALLING SAVE TASK AGAIN");
 			SaveAttachmentTask sat = new SaveAttachmentTask();
 			sat.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, res.getAttachmentId(), vhr.getVh());
 

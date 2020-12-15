@@ -113,8 +113,6 @@ public class ClaimDocumentsFragment extends ListFragment {
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
 
-		// This makes sure that the container activity has implemented
-		// the callback interface. If not, it throws an exception
 		try {
 			claimActivity = (ClaimDispatcher) activity;
 		} catch (ClassCastException e) {
@@ -197,8 +195,6 @@ public class ClaimDocumentsFragment extends ListFragment {
 		switch (requestCode) {
 			case CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE:
 				if (resultCode == Activity.RESULT_OK) {
-					Log.d(this.getClass().getName(), "Captured image: " + uri.getPath());
-
 					// custom dialog
 					final Dialog dialog = new Dialog(rootView.getContext());
 					dialog.setContentView(R.layout.custom_add_document);
@@ -242,44 +238,8 @@ public class ClaimDocumentsFragment extends ListFragment {
 
 						@Override
 						public void onClick(View v) {
+							FileSystemUtilities.rotateAndCompressImage(getContext(), uri);
 
-							ByteArrayOutputStream baos = new ByteArrayOutputStream();
-							byte[] buffer = new byte[1024];
-							int len;
-
-							// read bytes from input stream to buffer
-							try (InputStream is = getContext().getContentResolver().openInputStream(uri)) {
-								while ((len = is.read(buffer)) != -1) {
-									baos.write(buffer, 0, len);
-								}
-							} catch (FileNotFoundException e) {
-								e.printStackTrace();
-							} catch (IOException e) {
-								e.printStackTrace();
-							}
-
-							long length = baos.size();
-							Log.d(this.getClass().getName(), "Attachment size : " + length);
-
-							if (length > 800000) {
-								String fileName = FilePathUtilities.getFileName(uri, getActivity().getContentResolver());
-								byte[] reduced = FileSystemUtilities.reduceJpeg(baos.toByteArray(), length, fileName);
-								try (OutputStream outputStream = getActivity().getContentResolver().openOutputStream(uri)){
-									outputStream.write(reduced);
-									length = reduced.length;
-									Log.d(this.getClass().getName(), "Resized : " + fileName);
-									Log.d(this.getClass().getName(), "Attachment size : " + length);
-								} catch (FileNotFoundException e) {
-									Log.e(this.getClass().getName(), "Could not find file to resize : " + fileName);
-									e.printStackTrace();
-								} catch (IOException e) {
-									Log.e(this.getClass().getName(), "Could not resize : " + fileName);
-									e.printStackTrace();
-								}
-
-							}
-
-							// Recreate the file object to take into account that the file has been renamed
 							String md5sum="";
 							try (InputStream is = getContext().getContentResolver().openInputStream(uri)) {
 								md5sum = MD5.calculateMD5(is);
@@ -297,13 +257,12 @@ public class ClaimDocumentsFragment extends ListFragment {
 							attachment.setMimeType(mimeType);
 							attachment.setMD5Sum(md5sum);
 							attachment.setPath(uri.toString());//att.getAbsolutePath());
-							attachment.setSize(length);
+							attachment.setSize((long) FileSystemUtilities.getFileSizeFromUri(getContext(), uri));
 
 							attachment.create();
 							update();
 
 							dialog.dismiss();
-
 						}
 					});
 
@@ -452,18 +411,11 @@ public class ClaimDocumentsFragment extends ListFragment {
 					return true;
 				}
 
-				intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-						.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
-
-
-
+				intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE).addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
 				uri = getOutputMediaUri(MEDIA_TYPE_IMAGE);
 				this.getContext().grantUriPermission(BuildConfig.APPLICATION_ID, uri, Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
-
-				Log.d(this.getClass().getName(), "Passing " + uri + " to MediaStore intent");
 				intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
 
-				// start the image capture Intent
 				startActivityForResult(intent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
 				return true;
 			case R.id.action_new_attachment:
@@ -484,9 +436,7 @@ public class ClaimDocumentsFragment extends ListFragment {
 
 			default:
 				return super.onOptionsItemSelected(item);
-
 		}
-
 	}
 
 	@Override
@@ -529,74 +479,41 @@ public class ClaimDocumentsFragment extends ListFragment {
 
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
-		String attachmentId = ((TextView) v.findViewById(R.id.attachment_id)).getText().toString();
-		Attachment att = Attachment.getAttachment(attachmentId);
-
-		if (att != null && att.getPath() != null && !att.getPath().equals("")) {
-
-			try {
-				Intent intent = new Intent(Intent.ACTION_VIEW);
-				intent.setDataAndType(Uri.parse("file://" + att.getPath()), att.getMimeType());
-				intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-				startActivity(intent);
-			} catch (ActivityNotFoundException e) {
-
-				Log.d(this.getClass().getName(), "No Activity Found Exception to handle :" + att.getFileName());
-
-				Toast.makeText(OpenTenureApplication.getContext(),
-						OpenTenureApplication.getContext().getResources().getString(R.string.message_no_application)
-								+ " " + att.getFileName(),
-						Toast.LENGTH_LONG).show();
-
-				e.getMessage();
-			}
-
-			catch (Throwable t) {
-
-				Log.d(this.getClass().getName(), "Error opening :" + att.getFileName());
-
-				Toast.makeText(OpenTenureApplication.getContext(), OpenTenureApplication.getContext().getResources()
-						.getString(R.string.message_error_opening_file), Toast.LENGTH_LONG).show();
-			}
-
-		}
 
 	}
 
 	public void update() {
 		String claimId = claimActivity.getClaimId();
-		List<Attachment> attachments;
-		List<String> ids = new ArrayList<String>();
-		List<String> slogans = new ArrayList<String>();
-		List<String> stati = new ArrayList<String>();
+		List<Attachment> attachments = new ArrayList<>();
+		List<String> slogans = new ArrayList<>();
 
 		if (claimId != null) {
-
 			Claim claim = Claim.getClaim(claimId);
 			attachments = claim.getAttachments();
-			for (Attachment attachment : attachments) {
-				if (!attachment.getAttachmentId().equals(claim.getPerson().getPersonId()))
 
-				{
-					String slogan = attachment.getDescription() + " - " + (attachment.getFileType()) + " - "
-							+ attachment.getMimeType();
-					slogans.add(slogan);
-					ids.add(attachment.getAttachmentId());
+			if(attachments != null){
+				// Remove person photo
+				for (int i = 0; i < attachments.size(); i++) {
+					if (claim.getPerson() != null && attachments.get(i).getAttachmentId().equals(claim.getPerson().getPersonId()))  {
+						attachments.remove(i);
+						break;
+					}
+				}
 
-					stati.add(attachment.getStatus());
+				for(Attachment attachment: attachments){
+					slogans.add(attachment.getDescription());
 				}
 			}
 		}
 
 		ArrayAdapter<String> adapter = null;
 		if (mainActivity.getMode().compareTo(ModeDispatcher.Mode.MODE_RO) == 0) {
-			adapter = new ClaimAttachmentsListAdapter(rootView.getContext(), slogans, ids, claimId, true);
+			adapter = new ClaimAttachmentsListAdapter(rootView.getContext(), attachments, slogans, claimId, true);
 		} else {
-			adapter = new ClaimAttachmentsListAdapter(rootView.getContext(), slogans, ids, claimId, false);
+			adapter = new ClaimAttachmentsListAdapter(rootView.getContext(), attachments, slogans, claimId, false);
 		}
 		setListAdapter(adapter);
 		adapter.notifyDataSetChanged();
-
 	}
 
 	public Uri getUri() {

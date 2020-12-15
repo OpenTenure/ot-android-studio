@@ -91,7 +91,6 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.text.InputType;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -99,10 +98,9 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.Toast;
 
-public class ClaimMapFragment extends Fragment implements OnCameraChangeListener, SensorEventListener, ClaimListener {
+public class ClaimMapFragment extends Fragment implements OnCameraChangeListener, SensorEventListener {
 
 	enum MapMode {
 		add_boundary, add_non_boundary, measure, edit_hole, insert_boundary
@@ -143,6 +141,8 @@ public class ClaimMapFragment extends Fragment implements OnCameraChangeListener
 	private Marker distanceMarker;
 	private Marker bookmark;
 	private Polyline distanceSegment;
+	LatLng lastCameraPosition = null;
+
 	private LocationListener myLocationListener = new LocationListener() {
 
 		public void onLocationChanged(Location location) {
@@ -189,9 +189,7 @@ public class ClaimMapFragment extends Fragment implements OnCameraChangeListener
 
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-
 		menu.clear();
-
 		inflater.inflate(R.menu.claim_map, menu);
 		menu.findItem(R.id.action_stop_rotating).setVisible(false);
 		if (modeActivity.getMode().compareTo(ModeDispatcher.Mode.MODE_RO) == 0) {
@@ -233,8 +231,7 @@ public class ClaimMapFragment extends Fragment implements OnCameraChangeListener
 		lh.start();
 	}
 
-	@Override
-	public void onClaimSaved() {
+	public void reloadBoundary() {
 		currentProperty.reload();
 	}
 
@@ -376,7 +373,6 @@ public class ClaimMapFragment extends Fragment implements OnCameraChangeListener
 		}
 
 		hideVisibleProperties();
-		Claim currentClaim = Claim.getClaim(claimActivity.getClaimId());
 		currentProperty = new EditablePropertyBoundary(mapView.getContext(), map,
 				claimActivity.getClaimId(), claimActivity, visibleProperties, modeActivity.getMode());
 
@@ -464,11 +460,54 @@ public class ClaimMapFragment extends Fragment implements OnCameraChangeListener
 				}
 			}
 		});
+
 		mSensorManager = (SensorManager) mapView.getContext().getSystemService(Context.SENSOR_SERVICE);
 		currentProperty.calculateGeometry(true);
 		currentProperty.redrawProperty();
 		return mapView;
+	}
 
+	@Override
+	public void onCameraChange(CameraPosition cameraPosition) {
+		LatLng newSelectedMarkerPosition = cameraPosition.target;
+		if(currentProperty.hasSelectedMarker()){
+			if(lastCameraPosition != null) {
+				// Calculate shift
+				LatLng selectedMarkerPosition = currentProperty.getSelectedMarkerPosition();
+				if (selectedMarkerPosition != null) {
+					double newLat = cameraPosition.target.latitude;
+					double newLng = cameraPosition.target.longitude;
+
+					if (newLat >= lastCameraPosition.latitude) {
+						newLat = selectedMarkerPosition.latitude + (newLat - lastCameraPosition.latitude);
+					} else {
+						newLat = selectedMarkerPosition.latitude - (lastCameraPosition.latitude - newLat);
+					}
+
+					if (newLng >= lastCameraPosition.longitude) {
+						newLng = selectedMarkerPosition.longitude + (newLng - lastCameraPosition.longitude);
+					} else {
+						newLng = selectedMarkerPosition.longitude - (lastCameraPosition.longitude - newLng);
+					}
+
+					newSelectedMarkerPosition = new LatLng(newLat, newLng);
+				}
+			}
+			currentProperty.updateSelectedMarker(newSelectedMarkerPosition);
+		}
+
+		lastCameraPosition = cameraPosition.target;
+
+		hideVisibleProperties();
+		reloadVisibleProperties(false);
+		showVisibleProperties();
+		currentProperty.redrawProperty();
+		currentProperty.refreshMarkerEditControls();
+		newCameraPosition = cameraPosition;
+		if (!adjacenciesReset) {
+			currentProperty.resetAdjacency(visibleProperties);
+			adjacenciesReset = true;
+		}
 	}
 
 	private boolean handleDistanceMarkerClick(Marker mark) {
@@ -929,14 +968,9 @@ public class ClaimMapFragment extends Fragment implements OnCameraChangeListener
 				LatLng newLocation = lh.getLastKnownLocation();
 
 				if (newLocation != null && newLocation.latitude != 0.0 && newLocation.longitude != 0.0) {
-					Toast.makeText(getActivity().getBaseContext(), "onOptionsItemSelected - " + newLocation,
-							Toast.LENGTH_SHORT).show();
-
 					currentProperty.addMarker(newLocation, newLocation, mapMode);
-
 				} else {
-					Toast.makeText(getActivity().getBaseContext(), R.string.check_location_service, Toast.LENGTH_LONG)
-							.show();
+					Toast.makeText(getActivity().getBaseContext(), R.string.check_location_service, Toast.LENGTH_LONG).show();
 				}
 				return true;
 			case R.id.action_rotate:
@@ -983,20 +1017,6 @@ public class ClaimMapFragment extends Fragment implements OnCameraChangeListener
 		}
 
 		super.onActivityResult(requestCode, resultCode, data);
-	}
-
-	@Override
-	public void onCameraChange(CameraPosition cameraPosition) {
-		hideVisibleProperties();
-		reloadVisibleProperties(false);
-		showVisibleProperties();
-		currentProperty.redrawProperty();
-		currentProperty.refreshMarkerEditControls();
-		newCameraPosition = cameraPosition;
-		if (!adjacenciesReset) {
-			currentProperty.resetAdjacency(visibleProperties);
-			adjacenciesReset = true;
-		}
 	}
 
 	@Override

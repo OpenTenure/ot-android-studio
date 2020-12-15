@@ -34,6 +34,7 @@ import org.fao.sola.clients.android.opentenure.OpenTenureApplication;
 import org.fao.sola.clients.android.opentenure.OpenTenurePreferencesActivity;
 import org.fao.sola.clients.android.opentenure.R;
 import org.fao.sola.clients.android.opentenure.ViewHolder;
+import org.fao.sola.clients.android.opentenure.exceptions.OpenTenureException;
 import org.fao.sola.clients.android.opentenure.filesystem.FileSystemUtilities;
 import org.fao.sola.clients.android.opentenure.filesystem.json.JsonUtilities;
 import org.fao.sola.clients.android.opentenure.form.FieldConstraint;
@@ -122,7 +123,6 @@ public class SubmitClaimListener implements OnClickListener {
 		if (claimId != null) {
 
 			Claim claim = Claim.getClaim(claimId);
-			Person person = claim.getPerson();
 
 			// Check is claim is already in uploading status(double click on
 			// send issue)
@@ -130,31 +130,34 @@ public class SubmitClaimListener implements OnClickListener {
 				return;
 			}
 
+			// Validate
+			try {
+				if(!claim.validate(false)){
+					Toast.makeText(v.getContext(), R.string.message_validation_failed, Toast.LENGTH_LONG).show();
+					return;
+				}
+			} catch (OpenTenureException e) {
+				e.printStackTrace();
+				return;
+			}
+
+			Person person = claim.getPerson();
+
 			boolean isDefaultCertificateDocumentTypeAvailable = false;
 			DocumentType dt = DocumentType.getDocumentType(PDFClaimExporter.DEFAULT_CERTIFICATE_DOCUMENT_TYPE);
 			if(dt!= null && PDFClaimExporter.DEFAULT_CERTIFICATE_DOCUMENT_TYPE.equalsIgnoreCase(dt.getType()) && dt.isActive()){
 				isDefaultCertificateDocumentTypeAvailable = true;
-				Log.d(this.getClass().getName(),"Automatic attachment of claim summary is enabled");
-			}else{
-				if(dt != null){
-					Log.i(this.getClass().getName(),"Automatic attachment of claim summary is disabled due to " + dt.toString());
-				}else{
-					Log.i(this.getClass().getName(),"Automatic attachment of claim summary is disabled");
-				}
 			}
+
 			if(isDefaultCertificateDocumentTypeAvailable){
 				// Here the printed certificate is added as attachment just before to
 				// submit claim
 				
 				try {
-					PDFClaimExporter pdf = new PDFClaimExporter(
-							v.getContext(), claim, true);
+					PDFClaimExporter pdf = new PDFClaimExporter(v.getContext(), claim, true);
 					pdf.addAsAttachment(v.getContext(), claimId);
-
 				} catch (Error e) {
-					Toast toast = Toast.makeText(v.getContext(),
-							R.string.message_not_supported_on_this_device,
-							Toast.LENGTH_SHORT);
+					Toast toast = Toast.makeText(v.getContext(), R.string.message_not_supported_on_this_device, Toast.LENGTH_SHORT);
 					toast.show();
 					Log.w(this.getClass().getName(),"Exporting a PDF is not supported on this device");
 				}
@@ -164,72 +167,19 @@ public class SubmitClaimListener implements OnClickListener {
 			// submit claim
 			person.addPersonPictureAsAttachment(claimId);
 
-			/* Checking if the Geometry is mandatory for claim's submission */
-			if (Boolean.parseBoolean(Configuration.getConfigurationByName("geometryRequired").getValue())) {
-				List<Vertex> vertices = Vertex.getVertices(claimId);
-				if (vertices.size() < 3) {
-					Toast toast = Toast.makeText(v.getContext(),
-							R.string.message_map_not_yet_draw,
-							Toast.LENGTH_LONG);
-					toast.show();
-					return;
-				}
-			}
-
-			// Checking geometry is valid
-			if(!BasePropertyBoundary.isValidateGeometry(claimId)){
-				Toast toast = Toast.makeText(v.getContext(),
-						R.string.message_invalid_geom,
-						Toast.LENGTH_SHORT);
-				toast.show();
-				return;
-			}
-
 			JsonUtilities.createClaimJson(claimId);
 
-			FormPayload payload = claim.getDynamicForm();
-			SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(v.getContext());
-			boolean enableFormValidation = preferences.getBoolean(OpenTenurePreferencesActivity.FORM_VALIDATION_PREF, true);
-
-			if (payload != null && enableFormValidation) {
-
-				FormTemplate template = payload.getFormTemplate();
-
-				if (template != null) {
-
-					DisplayNameLocalizer dnl = new DisplayNameLocalizer(
-							OpenTenureApplication.getInstance().getLocalization());
-					FieldConstraint failedConstraint = template
-							.getFailedConstraint(payload, dnl);
-
-					if (failedConstraint != null) {
-						Toast toast = Toast.makeText(v.getContext(),
-								dnl.getLocalizedDisplayName(failedConstraint.getErrorMsg()),
-								Toast.LENGTH_LONG);
-						toast.show();
-						return;
-					}
-				}
-			}
-
-			int progress = FileSystemUtilities.getUploadProgress(claimId,
-					claim.getStatus());
+			int progress = FileSystemUtilities.getUploadProgress(claimId, claim.getStatus());
 
 			vh.getBar().setVisibility(View.VISIBLE);
 			vh.getBar().setProgress(progress);
 
 			String status = claim.getStatus();
-			if (status.equals(ClaimStatus._MODERATED)
-					|| status.equals(ClaimStatus._UPDATE_ERROR)
-					|| status.equals(ClaimStatus._UPDATE_INCOMPLETE))
-				vh.getStatus().setText(
-						ClaimStatus._UPDATING + ": " + progress + " %");
+			if (status.equals(ClaimStatus._MODERATED) || status.equals(ClaimStatus._UPDATE_ERROR) || status.equals(ClaimStatus._UPDATE_INCOMPLETE))
+				vh.getStatus().setText(ClaimStatus._UPDATING + ": " + progress + " %");
 			else
-				vh.getStatus().setText(
-						ClaimStatus._UPLOADING + ": " + progress + " %");
-			vh.getStatus().setTextColor(
-					OpenTenureApplication.getContext().getResources()
-							.getColor(R.color.status_created));
+				vh.getStatus().setText(ClaimStatus._UPLOADING + ": " + progress + " %");
+			vh.getStatus().setTextColor(OpenTenureApplication.getContext().getResources().getColor(R.color.status_created));
 			vh.getStatus().setVisibility(View.VISIBLE);
 
 			try {
@@ -241,11 +191,8 @@ public class SubmitClaimListener implements OnClickListener {
 			SaveClaimTask saveClaimtask = new SaveClaimTask();
 			saveClaimtask.execute(claimId, vh);
 		} else {
-			Toast toast = Toast.makeText(v.getContext(),
-					R.string.message_save_claim_before_submit,
-					Toast.LENGTH_SHORT);
+			Toast toast = Toast.makeText(v.getContext(), R.string.message_save_claim_before_submit, Toast.LENGTH_SHORT);
 			toast.show();
 		}
 	}
-
 }

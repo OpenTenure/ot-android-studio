@@ -38,14 +38,10 @@ public class AttachmentViewHolder extends ViewHolder {
 	ImageView downloadIcon;
 	ImageView removeIcon;
 	ImageView sendIcon;
-	ImageView saveIcon;
 	ProgressBar barAttachment;
 	TextView attachmentStatus;
-	TextView attachmentFileType;
 	Spinner attachmentType;
-	LinearLayout clickableArea;
-	LinearLayout clickableArea2;
-
+	ImageView viewIcon;
 
 	public ImageView getDownloadIcon() {
 		return downloadIcon;
@@ -75,12 +71,12 @@ public class AttachmentViewHolder extends ViewHolder {
 		return barAttachment;
 	}
 
-	public LinearLayout getClickableArea() {
-		return clickableArea;
+	public ImageView getViewIcon() {
+		return viewIcon;
 	}
 
-	public void setClickableArea(LinearLayout clickableArea) {
-		this.clickableArea = clickableArea;
+	public void setViewIcon(ImageView viewIcon) {
+		this.viewIcon = viewIcon;
 	}
 
 	public void setBarAttachment(ProgressBar barAttachment) {
@@ -95,14 +91,6 @@ public class AttachmentViewHolder extends ViewHolder {
 		this.attachmentStatus = attachmentStatus;
 	}
 
-	public TextView getAttachmentFileType() {
-		return attachmentFileType;
-	}
-
-	public void setAttachmentFileType(TextView attachmentFileType) {
-		this.attachmentFileType = attachmentFileType;
-	}
-
 	public Spinner getAttachmentType() {
 		return attachmentType;
 	}
@@ -110,22 +98,5 @@ public class AttachmentViewHolder extends ViewHolder {
 	public void setAttachmentType(Spinner attachmentType) {
 		this.attachmentType = attachmentType;
 	}
-
-	public ImageView getSaveIcon() {
-		return saveIcon;
-	}
-
-	public void setSaveIcon(ImageView saveIcon) {
-		this.saveIcon = saveIcon;
-	}
-
-	public LinearLayout getClickableArea2() {
-		return clickableArea2;
-	}
-
-	public void setClickableArea2(LinearLayout clickableArea2) {
-		this.clickableArea2 = clickableArea2;
-	}
-
 
 }

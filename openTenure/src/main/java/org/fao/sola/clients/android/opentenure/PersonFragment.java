@@ -56,6 +56,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 
 
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -168,21 +169,15 @@ public class PersonFragment extends Fragment {
 
 			claimantImageView = (ImageView) rootView.findViewById(R.id.claimant_picture);
 			claimantImageView.setOnClickListener(new OnClickListener() {
-
 				@Override
 				public void onClick(View v) {
 					if (personPictureFile != null) {
-						
 						Person.deleteAllBmp(personActivity.getPersonId());
-
 						Uri uri = FileProvider.getUriForFile(rootView.getContext(), BuildConfig.APPLICATION_ID, personPictureFile); //Uri.fromFile(personPictureFile)
 
-						Intent intent = new Intent(
-								MediaStore.ACTION_IMAGE_CAPTURE);
-						intent.putExtra(MediaStore.EXTRA_OUTPUT,
-								uri);
-						startActivityForResult(intent,
-								CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
+						Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+						intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
+						startActivityForResult(intent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
 					} else {
 						Toast toast = Toast.makeText(
 								rootView.getContext(),
@@ -190,7 +185,6 @@ public class PersonFragment extends Fragment {
 								Toast.LENGTH_SHORT);
 						toast.show();
 					}
-
 				}
 			});
 			if (personActivity.getPersonId() != null) {
@@ -314,41 +308,13 @@ public class PersonFragment extends Fragment {
 		switch (requestCode) {
 			case CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE:
 				if (resultCode == Activity.RESULT_OK) {
-					File original = Person.getPersonPictureFile(personActivity.getPersonId());
-					File copy = null;
-					Log.d(this.getClass().getName(), "Attachment size : " + original.length());
-
-					if (original.length() > 800000) {
-
-						copy = FileSystemUtilities.reduceJpeg(original);
-
-						if (copy != null) {
-
-							Log.d(this.getClass().getName(), "Reduced size to : " + copy.length());
-							original.delete();
-
-							if (copy.renameTo(Person.getPersonPictureFile(personActivity.getPersonId()))) {
-								Log.d(this.getClass().getName(), "Renamed : " + copy.getName() + " to "
-										+ Person.getPersonPictureFile(personActivity.getPersonId()).getName());
-							} else {
-								Log.e(this.getClass().getName(), "Can't rename : " + copy.getName() + " to "
-										+ Person.getPersonPictureFile(personActivity.getPersonId()).getName());
-							}
-						} else {
-
-						}
-					} else {
-						copy = original;
-					}
-
+					Uri uri = FileProvider.getUriForFile(rootView.getContext(), BuildConfig.APPLICATION_ID, personPictureFile);
+					FileSystemUtilities.rotateAndCompressImage(getContext(), uri);
 
 					try {
-						claimantImageView.setImageBitmap(Person.getPersonPicture(
-								rootView.getContext(),
-								personActivity.getPersonId(), 128));
+						claimantImageView.setImageBitmap(Person.getPersonPicture(rootView.getContext(),	personActivity.getPersonId(), 128));
 					} catch (Exception e) {
-						claimantImageView.setImageDrawable(getResources()
-								.getDrawable(R.drawable.ic_contact_picture));
+						claimantImageView.setImageDrawable(getResources().getDrawable(R.drawable.ic_contact_picture));
 					}
 				}
 			break;

@@ -33,6 +33,7 @@ import java.util.List;
 import org.fao.sola.clients.android.opentenure.model.AdjacenciesNotes;
 import org.fao.sola.clients.android.opentenure.model.Adjacency;
 import org.fao.sola.clients.android.opentenure.model.Claim;
+import org.fao.sola.clients.android.opentenure.tools.StringUtility;
 
 import android.app.Activity;
 import android.content.Context;
@@ -62,19 +63,15 @@ public class AdjacentClaimsFragment extends ListFragment {
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
 
-		// This makes sure that the container activity has implemented
-		// the callback interface. If not, it throws an exception
 		try {
 			claimActivity = (ClaimDispatcher) activity;
 		} catch (ClassCastException e) {
-			throw new ClassCastException(activity.toString()
-					+ " must implement ClaimDispatcher");
+			throw new ClassCastException(activity.toString() + " must implement ClaimDispatcher");
 		}
 		try {
 			modeActivity = (ModeDispatcher) activity;
 		} catch (ClassCastException e) {
-			throw new ClassCastException(activity.toString()
-					+ " must implement ModeDispatcher");
+			throw new ClassCastException(activity.toString() + " must implement ModeDispatcher");
 		}
 	}
 
@@ -83,7 +80,6 @@ public class AdjacentClaimsFragment extends ListFragment {
 
 	@Override
 	public void onPrepareOptionsMenu(Menu menu) {
-
 		try {
 			Thread.sleep(400);
 		} catch (InterruptedException e) {
@@ -91,37 +87,25 @@ public class AdjacentClaimsFragment extends ListFragment {
 		}
 
 		super.onPrepareOptionsMenu(menu);
-
 	}
 
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		menu.clear();
-
-		inflater.inflate(R.menu.adjacencies, menu);
-
+		//inflater.inflate(R.menu.adjacencies, menu);
 		super.onCreateOptionsMenu(menu, inflater);
-		
-		Claim claim = Claim.getClaim(claimActivity.getClaimId());
-		
-		if (claim != null && !claim.isModifiable() ) {
-			menu.removeItem(R.id.action_save);
-		}
-		
-		setHasOptionsMenu(true);
+
+		setHasOptionsMenu(false);
 		setRetainInstance(true);
 	}
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		rootView = inflater.inflate(R.layout.adjacent_claims_list, container,
-				false);
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		rootView = inflater.inflate(R.layout.adjacent_claims_list, container, false);
 
-		setHasOptionsMenu(true);
+		setHasOptionsMenu(false);
 		setRetainInstance(true);
-		InputMethodManager imm = (InputMethodManager) rootView.getContext()
-				.getSystemService(Context.INPUT_METHOD_SERVICE);
+		InputMethodManager imm = (InputMethodManager) rootView.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
 		imm.hideSoftInputFromWindow(rootView.getWindowToken(), 0);
 
 		Claim claim = Claim.getClaim(claimActivity.getClaimId());
@@ -129,50 +113,29 @@ public class AdjacentClaimsFragment extends ListFragment {
 			load(claim);
 
 		update();
-
 		return rootView;
 	}
 
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
 		if (modeActivity.getMode().compareTo(ModeDispatcher.Mode.MODE_RW) == 0) {
-
-			Intent intent = new Intent(rootView.getContext(),
-					ClaimActivity.class);
-			intent.putExtra(ClaimActivity.CLAIM_ID_KEY,
-					((TextView) v.findViewById(R.id.claim_id)).getText());
-			intent.putExtra(ClaimActivity.MODE_KEY,
-					ModeDispatcher.Mode.MODE_RO.toString());
+			Intent intent = new Intent(rootView.getContext(), ClaimActivity.class);
+			intent.putExtra(ClaimActivity.CLAIM_ID_KEY,	((TextView) v.findViewById(R.id.claim_id)).getText());
+			intent.putExtra(ClaimActivity.MODE_KEY,	ModeDispatcher.Mode.MODE_RO.toString());
 			startActivity(intent);
 		}
 	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		// handle item selection
-		switch (item.getItemId()) {
-
-		case R.id.action_save:
-
-			if (AdjacenciesNotes
-					.getAdjacenciesNotes(claimActivity.getClaimId()) != null)
-				return updateNotes();
-
-			return save();
-		}
 		return false;
 	}
 
-	protected boolean save() {
-
-		Toast toast;
+	public boolean saveNotes() {
 		String claimId = claimActivity.getClaimId();
 		
 		if(claimId == null){			
-			toast = Toast.makeText(OpenTenureApplication.getContext(),
-					R.string.message_save_claim_before_adding_content, Toast.LENGTH_LONG);
-			toast.show();
-			return true;			
+			return true;
 		}
 
 		AdjacenciesNotes adjacenciesNotes = new AdjacenciesNotes();
@@ -182,65 +145,23 @@ public class AdjacentClaimsFragment extends ListFragment {
 		adjacenciesNotes.setSouthAdjacency(((EditText) rootView.findViewById(R.id.south_adjacency)).getText().toString());
 		adjacenciesNotes.setWestAdjacency(((EditText) rootView.findViewById(R.id.west_adjacency)).getText().toString());
 
-		int result = AdjacenciesNotes.createAdjacenciesNotes(adjacenciesNotes);
+		int result = 0;
 
-		if (result == 1) {
-			toast = Toast.makeText(OpenTenureApplication.getContext(), R.string.message_adjacencies_saved, Toast.LENGTH_LONG);
-			toast.show();
-			return true;
+		if (AdjacenciesNotes.getAdjacenciesNotes(claimId) != null){
+			result = AdjacenciesNotes.updateAdjacenciesNotes(adjacenciesNotes);
 		} else {
-			toast = Toast.makeText(OpenTenureApplication.getContext(), R.string.message_adjacencies_not_saved, Toast.LENGTH_LONG);
-			toast.show();
-			return false;
-		}
-	}
-
-	protected boolean updateNotes() {
-		Toast toast;
-		String claimId = claimActivity.getClaimId();
-		
-		if(claimId == null){			
-			toast = Toast.makeText(OpenTenureApplication.getContext(),
-					R.string.message_save_claim_before_adding_content, Toast.LENGTH_LONG);
-			toast.show();
-			return true;			
+			result = AdjacenciesNotes.createAdjacenciesNotes(adjacenciesNotes);
 		}
 
-		AdjacenciesNotes adjacenciesNotes = new AdjacenciesNotes();
-		adjacenciesNotes.setClaimId(claimId);
-		adjacenciesNotes.setNorthAdjacency(((EditText) rootView
-				.findViewById(R.id.north_adjacency)).getText().toString());
-
-		adjacenciesNotes.setEastAdjacency(((EditText) rootView
-				.findViewById(R.id.east_adjacency)).getText().toString());
-
-		adjacenciesNotes.setSouthAdjacency(((EditText) rootView
-				.findViewById(R.id.south_adjacency)).getText().toString());
-
-		adjacenciesNotes.setWestAdjacency(((EditText) rootView
-				.findViewById(R.id.west_adjacency)).getText().toString());
-
-		int result = AdjacenciesNotes.updateAdjacenciesNotes(adjacenciesNotes);
-
 		if (result == 1) {
-
-			toast = Toast.makeText(OpenTenureApplication.getContext(),
-					R.string.message_adjacencies_saved, Toast.LENGTH_LONG);
-			toast.show();
-
 			return true;
 		} else {
-
-			toast = Toast.makeText(OpenTenureApplication.getContext(),
-					R.string.message_adjacencies_not_saved, Toast.LENGTH_LONG);
-			toast.show();
-
+			Toast.makeText(OpenTenureApplication.getContext(), R.string.message_adjacencies_not_saved, Toast.LENGTH_LONG).show();
 			return false;
 		}
 	}
 
 	protected void update() {
-
 		String claimId = claimActivity.getClaimId();
 
 		if (claimId != null) {
@@ -249,83 +170,49 @@ public class AdjacentClaimsFragment extends ListFragment {
 			List<AdjacentClaimListTO> claimListTOs = new ArrayList<AdjacentClaimListTO>();
 
 			for (Adjacency adjacency : adjacencies) {
-
 				Claim adjacentClaim;
 				String direction;
 
-				if (claimActivity.getClaimId().equalsIgnoreCase(
-						adjacency.getSourceClaimId())) {
+				if (claimActivity.getClaimId().equalsIgnoreCase(adjacency.getSourceClaimId())) {
 					adjacentClaim = Claim.getClaim(adjacency.getDestClaimId());
-					direction = Adjacency.getCardinalDirection(
-							rootView.getContext(),
-							adjacency.getCardinalDirection());
+					direction = Adjacency.getCardinalDirection(rootView.getContext(), adjacency.getCardinalDirection());
 				} else {
-					adjacentClaim = Claim
-							.getClaim(adjacency.getSourceClaimId());
-					direction = Adjacency.getCardinalDirection(rootView
-							.getContext(), Adjacency
-							.getReverseCardinalDirection(adjacency
-									.getCardinalDirection()));
+					adjacentClaim = Claim.getClaim(adjacency.getSourceClaimId());
+					direction = Adjacency.getCardinalDirection(rootView.getContext(), Adjacency.getReverseCardinalDirection(adjacency.getCardinalDirection()));
 				}
 
 				AdjacentClaimListTO acto = new AdjacentClaimListTO();
-				acto.setSlogan(adjacentClaim.getName() + ", "
-						+ getResources().getString(R.string.by) + ": "
-						+ adjacentClaim.getPerson().getFirstName() + " "
-						+ adjacentClaim.getPerson().getLastName());
+				acto.setSlogan(adjacentClaim.getSlogan(getContext()));
 				acto.setId(adjacentClaim.getClaimId());
 				acto.setCardinalDirection(direction);
 				acto.setStatus(adjacentClaim.getStatus());
 
 				claimListTOs.add(acto);
 			}
-			ArrayAdapter<AdjacentClaimListTO> adapter = new AdjacentClaimsListAdapter(
-					rootView.getContext(), claimListTOs);
+			ArrayAdapter<AdjacentClaimListTO> adapter = new AdjacentClaimsListAdapter(rootView.getContext(), claimListTOs);
 			setListAdapter(adapter);
 			adapter.notifyDataSetChanged();
-
 		}
 	}
 
 	public void load(Claim claim) {
-
-		AdjacenciesNotes adNotes = AdjacenciesNotes.getAdjacenciesNotes(claim
-				.getClaimId());
+		AdjacenciesNotes adNotes = AdjacenciesNotes.getAdjacenciesNotes(claim.getClaimId());
 
 		if (claim != null && adNotes != null) {
-
-			((EditText) rootView.findViewById(R.id.north_adjacency))
-					.setText(adNotes.getNorthAdjacency());
-
-			((EditText) rootView.findViewById(R.id.south_adjacency))
-					.setText(adNotes.getSouthAdjacency());
-
-			((EditText) rootView.findViewById(R.id.east_adjacency))
-					.setText(adNotes.getEastAdjacency());
-
-			((EditText) rootView.findViewById(R.id.west_adjacency))
-					.setText(adNotes.getWestAdjacency());
+			((EditText) rootView.findViewById(R.id.north_adjacency)).setText(adNotes.getNorthAdjacency());
+			((EditText) rootView.findViewById(R.id.south_adjacency)).setText(adNotes.getSouthAdjacency());
+			((EditText) rootView.findViewById(R.id.east_adjacency)).setText(adNotes.getEastAdjacency());
+			((EditText) rootView.findViewById(R.id.west_adjacency)).setText(adNotes.getWestAdjacency());
 
 			if (modeActivity.getMode().compareTo(ModeDispatcher.Mode.MODE_RO) == 0) {
-				((EditText) rootView.findViewById(R.id.north_adjacency))
-						.setFocusable(false);
-				((EditText) rootView.findViewById(R.id.north_adjacency))
-				.setLongClickable(false);
-
-				((EditText) rootView.findViewById(R.id.south_adjacency))
-						.setFocusable(false);
-				((EditText) rootView.findViewById(R.id.south_adjacency))
-				.setLongClickable(false);
-
-				((EditText) rootView.findViewById(R.id.east_adjacency))
-						.setFocusable(false);
-				((EditText) rootView.findViewById(R.id.east_adjacency))
-				.setLongClickable(false);
-
-				((EditText) rootView.findViewById(R.id.west_adjacency))
-						.setFocusable(false);
-				((EditText) rootView.findViewById(R.id.west_adjacency))
-				.setLongClickable(false);
+				((EditText) rootView.findViewById(R.id.north_adjacency)).setFocusable(false);
+				((EditText) rootView.findViewById(R.id.north_adjacency)).setLongClickable(false);
+				((EditText) rootView.findViewById(R.id.south_adjacency)).setFocusable(false);
+				((EditText) rootView.findViewById(R.id.south_adjacency)).setLongClickable(false);
+				((EditText) rootView.findViewById(R.id.east_adjacency)).setFocusable(false);
+				((EditText) rootView.findViewById(R.id.east_adjacency)).setLongClickable(false);
+				((EditText) rootView.findViewById(R.id.west_adjacency)).setFocusable(false);
+				((EditText) rootView.findViewById(R.id.west_adjacency)).setLongClickable(false);
 			}
 
 		}

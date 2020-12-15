@@ -252,7 +252,6 @@ public class LocalClaimsListAdapter extends ArrayAdapter<ClaimListTO> implements
 		if (realStatus.equals(ClaimStatus._UPLOADING)) {
 
 			vh.iconLocal.setVisibility(View.VISIBLE);
-			vh.number.setTextSize(8);
 			if (claims.get(position).getNumber() != null)
 				vh.number.setText(claims.get(position).getNumber());
 			vh.status.setTextColor(context.getResources().getColor(
@@ -279,7 +278,6 @@ public class LocalClaimsListAdapter extends ArrayAdapter<ClaimListTO> implements
 
 			vh.iconLocal.setVisibility(View.GONE);
 			vh.iconUnmoderated.setVisibility(View.VISIBLE);
-			vh.number.setTextSize(8);
 			if (claims.get(position).getNumber() != null)
 				vh.number.setText(claims.get(position).getNumber());
 			vh.status.setTextColor(context.getResources().getColor(
@@ -304,7 +302,6 @@ public class LocalClaimsListAdapter extends ArrayAdapter<ClaimListTO> implements
 		if (realStatus.equals(ClaimStatus._UPLOAD_ERROR)) {
 
 			vh.iconLocal.setVisibility(View.VISIBLE);
-			vh.number.setTextSize(8);
 			if (claims.get(position).getNumber() != null)
 				vh.number.setText(claims.get(position).getNumber());
 			vh.status.setTextColor(context.getResources().getColor(
@@ -327,7 +324,6 @@ public class LocalClaimsListAdapter extends ArrayAdapter<ClaimListTO> implements
 
 			vh.iconLocal.setVisibility(View.GONE);
 			vh.iconUnmoderated.setVisibility(View.VISIBLE);
-			vh.number.setTextSize(8);
 			if (claims.get(position).getNumber() != null)
 				vh.number.setText(claims.get(position).getNumber());
 			vh.status.setTextColor(context.getResources().getColor(
@@ -343,7 +339,6 @@ public class LocalClaimsListAdapter extends ArrayAdapter<ClaimListTO> implements
 		if (realStatus.equals(ClaimStatus._UPLOAD_INCOMPLETE)) {
 
 			vh.iconLocal.setVisibility(View.VISIBLE);
-			vh.number.setTextSize(8);
 			if (claims.get(position).getNumber() != null)
 				vh.number.setText(claims.get(position).getNumber());
 			vh.status.setTextColor(context.getResources().getColor(R.color.status_created));
@@ -366,7 +361,6 @@ public class LocalClaimsListAdapter extends ArrayAdapter<ClaimListTO> implements
 
 			vh.iconLocal.setVisibility(View.GONE);
 			vh.iconUnmoderated.setVisibility(View.VISIBLE);
-			vh.number.setTextSize(8);
 			if (claims.get(position).getNumber() != null)
 				vh.number.setText(claims.get(position).getNumber());
 			vh.status.setTextColor(context.getResources().getColor(
@@ -391,7 +385,6 @@ public class LocalClaimsListAdapter extends ArrayAdapter<ClaimListTO> implements
 		if (realStatus.equals(ClaimStatus._UNMODERATED)) {
 
 			vh.iconUnmoderated.setVisibility(View.VISIBLE);
-			vh.number.setTextSize(8);
 			vh.number.setText(claims.get(position).getNumber());
 			vh.bar = (ProgressBar) convertView.findViewById(R.id.progress_bar);
 			vh.status.setVisibility(View.GONE);
@@ -404,7 +397,6 @@ public class LocalClaimsListAdapter extends ArrayAdapter<ClaimListTO> implements
 		if (realStatus.equals(ClaimStatus._MODERATED)) {
 
 			vh.iconModerated.setVisibility(View.VISIBLE);
-			vh.number.setTextSize(8);
 			vh.number.setText(claims.get(position).getNumber());
 			vh.bar = (ProgressBar) convertView.findViewById(R.id.progress_bar);
 			vh.status.setVisibility(View.GONE);
@@ -415,7 +407,6 @@ public class LocalClaimsListAdapter extends ArrayAdapter<ClaimListTO> implements
 		if (realStatus.equals(ClaimStatus._CHALLENGED)) {
 
 			vh.iconChallenged.setVisibility(View.VISIBLE);
-			vh.number.setTextSize(8);
 			vh.number.setText(claims.get(position).getNumber());
 			vh.bar = (ProgressBar) convertView.findViewById(R.id.progress_bar);
 			vh.status.setVisibility(View.GONE);
@@ -427,7 +418,6 @@ public class LocalClaimsListAdapter extends ArrayAdapter<ClaimListTO> implements
 		if (realStatus.equals(ClaimStatus._WITHDRAWN)) {
 
 			vh.iconWithdrawn.setVisibility(View.VISIBLE);
-			vh.number.setTextSize(8);
 			vh.number.setText(claims.get(position).getNumber());
 			vh.bar = (ProgressBar) convertView.findViewById(R.id.progress_bar);
 			vh.status.setVisibility(View.GONE);
@@ -439,7 +429,6 @@ public class LocalClaimsListAdapter extends ArrayAdapter<ClaimListTO> implements
 		if (realStatus.equals(ClaimStatus._REVIEWED)) {
 
 			vh.iconReviewed.setVisibility(View.VISIBLE);
-			vh.number.setTextSize(8);
 			vh.number.setText(claims.get(position).getNumber());
 			vh.bar = (ProgressBar) convertView.findViewById(R.id.progress_bar);
 			vh.status.setVisibility(View.GONE);
@@ -452,14 +441,12 @@ public class LocalClaimsListAdapter extends ArrayAdapter<ClaimListTO> implements
 		vh.id.setTextSize(8);
 		vh.id.setText(claims.get(position).getId());
 		// vh.bar = (ProgressBar) convertView.findViewById(R.id.progress_bar);
-		vh.number.setTextSize(8);
 		vh.number.setVisibility(View.VISIBLE);
 
 		vh.number.setText(claims.get(position).getNumber());
 		vh.position = position;
 
-		vh.picture.setImageBitmap(Person.getPersonPicture(context,
-				claims.get(position).getPersonId(), 96));
+		vh.picture.setImageBitmap(Person.getPersonPicture(context, claims.get(position).getPersonId(), 96));
 
 		if (OpenTenureApplication.getInstance().getLocale().toString().startsWith("ar")) {
 			vh.slogan.setGravity(View.TEXT_DIRECTION_LOCALE);

@@ -41,6 +41,7 @@
     <string name="action_backup_db">Backup local data</string>
     <string name="action_print">Print</string>
     <string name="action_save">Save</string>
+    <string name="action_validate">Validate</string>
     <string name="action_go_to">Go to</string>
     <string name="action_center">Center GPS</string>
     <string name="action_select_bookmark">Go to bookmark</string>
@@ -142,7 +143,7 @@
     <string name="claim_name_label">Claim name *</string>
     <string name="claim_type">Claim type *</string>
     <string name="claim_type_no_star">Claim type</string>
-    <string name="default_claim_name">New claim</string>
+    <string name="default_claim_name">Draft</string>
     <string name="first_name">First name</string>
     <string name="first_name_label">First name *</string>
     <string name="last_name">Last name</string>
@@ -168,6 +169,7 @@
     <string name="message_password_too_short">The password must be at least %d characters long</string>
     <string name="message_password_character_is_wrong">The password must only contain digits and letters</string>
     <string name="message_saved">Saved</string>
+    <string name="message_claim_valid">Claim is valid</string>
     <string name="message_exported">Exported</string>
     <string name="message_server_error_saving_claim">Server Internal Error</string>
     <string name="message_service_not_available">Service Not Available</string>
@@ -199,8 +201,9 @@
     <string name="message_uploading_attachment">Uploading the attachment</string>
     <string name="message_invalid_url">Invalid URL</string>
     <string name="message_unable_to_save">Unable to save. Check details and retry</string>
-    <string name="message_unable_to_save_missing_claim_name">Unable to save. Missing Claim name</string>
-    <string name="message_unable_to_save_missing_person">Unable to save. Missing Claimant</string>
+    <string name="message_unable_to_save_missing_claim_name">Missing Claim name</string>
+    <string name="message_unable_to_save_missing_person">Missing Claimant</string>
+    <string name="message_ownership_missing">Ownership information is missing</string>
     <string name="message_submitted">The claim has been submitted</string>
     <string name="message_boundary_submitted">Community area %s has been submitted successfully</string>
     <string name="message_uploading">The claim is in upload</string>
@@ -246,7 +249,8 @@
     <string name="message_not_supported_on_this_device">Not supported on this device</string>
     <string name="message_exit_dialog">Do you really want to quit the application?</string>
     <string name="message_create_before_edit">Create a claim by specifying its details before adding information</string>
-    <string name="message_map_not_yet_draw">The map of the claim is not yet complete</string>
+    <string name="message_map_not_yet_draw">Parcel boundary is not yet completed</string>
+    <string name="message_validation_failed">Validation failed. Please, open it and run validation for detailed information</string>
     <string name="message_available_shares">The sum of the shares is less than 100%</string>
     <string name="message_no_available_shares">Free some shares on this claim before modify the value of this share </string>
     <string name="message_no_available_shares_adding_new">Free some shares on this claim before adding a new share </string>
@@ -378,7 +382,7 @@
     <string name="south">South</string>
     <string name="east">East</string>
     <string name="west">West</string>
-    <string name="status">status : </string>
+    <string name="status">status: </string>
     <string name="north_east">North-East</string>
     <string name="north_west">North-West</string>
     <string name="south_east">South-East</string>
@@ -582,4 +586,5 @@
     <string name="claim_number">Claim number</string>
     <string name="confirm_claimant_removal">Do you want to remove claimant?</string>
     <string name="action_insert_boundary">Insert boundary marker</string>
+    <string name="confirm_create_claim">New claim will be created. Do you want to proceed?</string>
 </resources>

@@ -36,6 +36,9 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.TemporalAccessor;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -311,52 +314,19 @@ public class JsonUtilities {
 
 					share.setOwners(ownersJson);
 					share.setId("" + shareDB.getId());
-
 					share.setPercentage(shareDB.getShares());
-
 					shares.add(share);
-
 				}
 
-				/*
-				 * TEmporary off the additional info on the claim submission
-				 */
-
-				// List<AdditionalInfo> xMetadata = new
-				// ArrayList<AdditionalInfo>();
-				//
-				// for (Iterator iterator = claim.getMetadata().iterator();
-				// iterator.hasNext();) {
-				// Metadata metadataO = (Metadata) iterator.next();
-				//
-				// AdditionalInfo xm = new AdditionalInfo();
-				//
-				// xm.setMetadataId(metadataO.getMetadataId());
-				// xm.setName(metadataO.getName());
-				// xm.setValue(metadataO.getValue());
-				//
-				// xMetadata.add(xm);
-				// }
-
-				tempClaim
-						.setGpsGeometry(claim.getGPSWKT());
-				tempClaim
-						.setMappedGeometry(claim.getMapWKT());
+				tempClaim.setGpsGeometry(claim.getGPSWKT());
+				tempClaim.setMappedGeometry(claim.getMapWKT());
 				tempClaim.setAttachments(attachments);
-
 				tempClaim.setLocations(locations);
-
 				tempClaim.setShares(shares);
-				// tempClaim.setAdditionaInfo(xMetadata);
 
 				try {
-					Gson gson = new GsonBuilder()
-							.setPrettyPrinting()
-							.serializeNulls()
-							// .setFieldNamingPolicy(
-							// FieldNamingPolicy.UPPER_CAMEL_CASE)
-							.excludeFieldsWithModifiers(Modifier.TRANSIENT)
-							.create();
+					Gson gson = new GsonBuilder().setPrettyPrinting().serializeNulls()
+							.excludeFieldsWithModifiers(Modifier.TRANSIENT).create();
 
 					String g = gson.toJson(tempClaim);
 					Log.d("CreateClaimJson", g);
@@ -455,17 +425,10 @@ public class JsonUtilities {
 	}
 
 	/** Transform ISO 8601 string to Calendar. */
-	public static Calendar toCalendar(final String iso8601string)
-			throws ParseException {
+	public static Calendar toCalendar(final String iso8601string) throws ParseException {
 		Calendar calendar = GregorianCalendar.getInstance();
-		String s = iso8601string.replace("Z", "+00:00");
-		try {
-			s = s.substring(0, 22) + s.substring(23); // to get rid of the ":"
-		} catch (IndexOutOfBoundsException e) {
-			throw new ParseException("Invalid length", 0);
-		}
-		Date date = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.US)
-				.parse(s);
+		String s = iso8601string.substring(0, 19);
+		Date date = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.US).parse(s);
 		calendar.setTime(date);
 		return calendar;
 	}

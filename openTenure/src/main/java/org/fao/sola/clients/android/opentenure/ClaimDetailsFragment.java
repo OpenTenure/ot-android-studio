@@ -40,8 +40,7 @@ import java.util.Map;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
-import org.fao.sola.clients.android.opentenure.button.listener.SaveDetailsListener;
-import org.fao.sola.clients.android.opentenure.button.listener.SaveDetailsNegativeListener;
+import org.fao.sola.clients.android.opentenure.exceptions.OpenTenureException;
 import org.fao.sola.clients.android.opentenure.filesystem.FileSystemUtilities;
 import org.fao.sola.clients.android.opentenure.form.FieldConstraint;
 import org.fao.sola.clients.android.opentenure.form.FormPayload;
@@ -165,7 +164,7 @@ public class ClaimDetailsFragment extends Fragment {
 		Claim claim = Claim.getClaim(claimActivity.getClaimId());
 
 		if (claim != null && !claim.isModifiable()) {
-			menu.removeItem(R.id.action_save);
+			menu.removeItem(R.id.action_validate);
 		}
 
 		setHasOptionsMenu(true);
@@ -179,6 +178,9 @@ public class ClaimDetailsFragment extends Fragment {
 					String personId = data.getStringExtra(PersonActivity.PERSON_ID_KEY);
 					Person claimant = Person.getPerson(personId);
 					loadClaimant(claimant);
+
+					// Save
+					saveClaim();
 
 					// Check if claimant is not matching owners and show a warning
 					List<ShareProperty> shares = ShareProperty.getShares(claimActivity.getClaimId());
@@ -209,6 +211,10 @@ public class ClaimDetailsFragment extends Fragment {
 					Claim challengedClaim = Claim.getClaim(claimId);
 
 					loadChallengedClaim(challengedClaim);
+
+					// Save
+					saveClaim();
+
 					challengedJustLoaded = true;
 					break;
 			}
@@ -261,9 +267,14 @@ public class ClaimDetailsFragment extends Fragment {
 		View claimantPhoto = (View) rootView.findViewById(R.id.claimant_picture);
 		Button addClaimantBtn = (Button) rootView.findViewById(R.id.claimant_button);
 
+		TextView challengedClaimantSlogan = (TextView) rootView.findViewById(R.id.challenge_to_claim_slogan);
+		Button challengeBtn = (Button) rootView.findViewById(R.id.challenge_button);
+
 		if (OpenTenureApplication.getInstance().getLocalization().startsWith("ar")) {
 			claimantSlogan.setTextDirection(View.TEXT_DIRECTION_LOCALE);
 			claimantSlogan.setTextAlignment(View.TEXT_ALIGNMENT_GRAVITY);
+			challengedClaimantSlogan.setTextDirection(View.TEXT_DIRECTION_LOCALE);
+			challengedClaimantSlogan.setTextAlignment(View.TEXT_ALIGNMENT_GRAVITY);
 		}
 		if (claimantId == null || claimantId.trim().equals("")) {
 			claimantSlogan.setVisibility(View.GONE);
@@ -321,7 +332,7 @@ public class ClaimDetailsFragment extends Fragment {
 		});
 
 		if (modeActivity.getMode().compareTo(ModeDispatcher.Mode.MODE_RW) == 0) {
-			((View) rootView.findViewById(R.id.challenge_button)).setOnClickListener(new OnClickListener() {
+			challengeBtn.setOnClickListener(new OnClickListener() {
 						@Override
 						public void onClick(View v) {
 							Intent intent = new Intent(rootView.getContext(), SelectClaimActivity.class);
@@ -340,15 +351,19 @@ public class ClaimDetailsFragment extends Fragment {
 									excludeList.add(claim.getClaimId());
 								}
 							}
-							intent.putStringArrayListExtra(
-									SelectClaimActivity.EXCLUDE_CLAIM_IDS_KEY,
-									excludeList);
-							startActivityForResult(
-									intent,
-									SelectClaimActivity.SELECT_CLAIM_ACTIVITY_RESULT);
+							intent.putStringArrayListExtra(SelectClaimActivity.EXCLUDE_CLAIM_IDS_KEY, excludeList);
+							startActivityForResult(intent, SelectClaimActivity.SELECT_CLAIM_ACTIVITY_RESULT);
 						}
 					});
 		}
+
+		if (OpenTenureApplication.getInstance().getLocale().toString().startsWith("ar")) {
+			((View) rootView.findViewById(R.id.claimant_slogan)).setTextDirection(View.TEXT_DIRECTION_LOCALE);
+			((View) rootView.findViewById(R.id.claimant_slogan)).setTextAlignment(View.TEXT_ALIGNMENT_GRAVITY);
+		}
+
+		// Call save claim to create a claim immediately if claim is read only, nothing will happen
+		saveClaim();
 
 		return rootView;
 	}
@@ -416,7 +431,6 @@ public class ClaimDetailsFragment extends Fragment {
 		((ArrayAdapter) spinnerBoundaries.getAdapter()).setDropDownViewResource(R.layout.my_spinner);
 
 		// Claimant
-		((TextView) rootView.findViewById(R.id.claimant_id)).setTextSize(8);
 		((TextView) rootView.findViewById(R.id.claimant_id)).setText("");
 		ImageView claimantImageView = (ImageView) rootView.findViewById(R.id.claimant_picture);
 
@@ -427,7 +441,6 @@ public class ClaimDetailsFragment extends Fragment {
 		claimantImageView.setImageBitmap(Bitmap.createScaledBitmap(bitmap, 128, 128, true));
 
 		// Challenged claim
-		((TextView) rootView.findViewById(R.id.challenge_to_claim_id)).setTextSize(8);
 		((TextView) rootView.findViewById(R.id.challenge_to_claim_id)).setText("");
 
 		// Challenged claimant
@@ -438,82 +451,62 @@ public class ClaimDetailsFragment extends Fragment {
 	}
 
 	private void loadChallengedClaim(Claim challengedClaim) {
+		TextView challengedClaimantSlogan = (TextView) rootView.findViewById(R.id.challenge_to_claim_slogan);
+		ImageView challengedClaimantRemove = (ImageView) rootView.findViewById(R.id.action_remove_challenge);
+		ImageView challengedClaimantPhoto = (ImageView) rootView.findViewById(R.id.challenge_to_claimant_picture);
+		Button challengeBtn = (Button) rootView.findViewById(R.id.challenge_button);
+		TextView challengedClaimId = (TextView) rootView.findViewById(R.id.challenge_to_claim_id);
 
 		if (challengedClaim != null) {
-
 			Person challengedPerson = challengedClaim.getPerson();
-			((TextView) rootView.findViewById(R.id.challenge_to_claim_id))
-					.setTextSize(8);
-			((TextView) rootView.findViewById(R.id.challenge_to_claim_id))
-					.setText(challengedClaim.getClaimId());
-			((TextView) rootView.findViewById(R.id.challenge_to_claim_slogan))
-					.setBackgroundColor(getResources().getColor(
-							R.color.light_background_opentenure));
-			((TextView) rootView.findViewById(R.id.challenge_to_claim_slogan))
-					.setText(getResources().getString(
-							R.string.title_challenged_claims)
-							+ " "
-							+ challengedClaim.getName()
-							+ ", "
-							+ getResources().getString(R.string.by)
-							+ ": "
+
+			challengedClaimantSlogan.setVisibility(View.VISIBLE);
+			challengeBtn.setVisibility(View.GONE);
+
+			if (modeActivity.getMode().compareTo(ModeDispatcher.Mode.MODE_RO) != 0) {
+				challengedClaimantRemove.setVisibility(View.VISIBLE);
+				challengedClaimantRemove.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						challengedClaimId.setText("");
+						challengedClaimantSlogan.setText("");
+						challengedClaimantSlogan.setVisibility(View.GONE);
+						challengedClaimantRemove.setVisibility(View.GONE);
+						challengedClaimantPhoto.setVisibility(View.GONE);
+						challengeBtn.setVisibility(View.VISIBLE);
+					}
+				});
+			} else {
+				challengedClaimantRemove.setVisibility(View.GONE);
+			}
+
+			if(challengedPerson.getPersonType().equalsIgnoreCase(Person._PHYSICAL)){
+				challengedClaimantPhoto.setVisibility(View.VISIBLE);
+				challengedClaimantPhoto.setImageBitmap(Person.getPersonPicture(rootView.getContext(), challengedPerson.getPersonId(), 128));
+			} else {
+				challengedClaimantPhoto.setVisibility(View.GONE);
+			}
+
+			challengedClaimId.setText(challengedClaim.getClaimId());
+			String sloganText = "<b>" + challengedClaim.getName() + "</b><br><i>" + getResources().getString(R.string.by) + ": "
 							+ challengedPerson.getFirstName()
 							+ " "
 							+ challengedPerson.getLastName()
-							+ ", "
+							+ "<br>"
 							+ getResources().getString(R.string.status)
-							+ challengedClaim.getStatus());
-			((TextView) rootView.findViewById(R.id.challenge_to_claim_slogan))
-					.setVisibility(View.VISIBLE);
-			ImageView challengedClaimantImageView = (ImageView) rootView
-					.findViewById(R.id.challenge_to_claimant_picture);
-
-			((View) rootView.findViewById(R.id.challenge_button))
-					.setEnabled(false);
-
-			// File challengedPersonPictureFile = Person
-			// .getPersonPictureFile(challengedPerson.getPersonId());
-			challengedClaimantImageView
-					.setImageBitmap(Person.getPersonPicture(
-							rootView.getContext(),
-							challengedPerson.getPersonId(), 128));
-
-			ImageView challengedClaimantRemoveButton = (ImageView) rootView
-					.findViewById(R.id.action_remove_challenge);
-
-			if (modeActivity.getMode().compareTo(ModeDispatcher.Mode.MODE_RO) != 0)
-				challengedClaimantRemoveButton.setVisibility(View.VISIBLE);
-
-			challengedClaimantRemoveButton
-					.setOnClickListener(new View.OnClickListener() {
-
-						@Override
-						public void onClick(View v) {
-
-							((TextView) rootView
-									.findViewById(R.id.challenge_to_claim_id))
-									.setText("");
-
-							((TextView) rootView
-									.findViewById(R.id.challenge_to_claim_slogan))
-									.setVisibility(View.GONE);
-
-							((ImageView) rootView
-									.findViewById(R.id.action_remove_challenge))
-									.setVisibility(View.INVISIBLE);
-							((View) rootView
-									.findViewById(R.id.challenge_button))
-									.setEnabled(true);
-
-						}
-					});
-
+							+ challengedClaim.getStatus() + "</i>";
+			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+				challengedClaimantSlogan.setText(Html.fromHtml(sloganText, Html.FROM_HTML_MODE_COMPACT));
+			} else {
+				challengedClaimantSlogan.setText(Html.fromHtml(sloganText));
+			}
 		} else {
-
-			((TextView) rootView.findViewById(R.id.challenge_to_claim_slogan))
-					.setVisibility(View.GONE);
-			((TextView) rootView.findViewById(R.id.challenge_to_claim_slogan))
-					.setVisibility(View.GONE);
+			challengedClaimId.setText("");
+			challengedClaimantSlogan.setText("");
+			challengedClaimantSlogan.setVisibility(View.GONE);
+			challengedClaimantPhoto.setVisibility(View.GONE);
+			challengedClaimantRemove.setVisibility(View.GONE);
+			challengeBtn.setVisibility(View.VISIBLE);
 		}
 	}
 
@@ -600,20 +593,13 @@ public class ClaimDetailsFragment extends Fragment {
 					.getStatus().equals(ClaimStatus._UPLOAD_INCOMPLETE));
 
 			if (OpenTenureApplication.getInstance().getLocale().toString().startsWith("ar")) {
-				((EditText) rootView.findViewById(R.id.claim_name_input_field))
-						.setTextAlignment(View.TEXT_ALIGNMENT_GRAVITY);
-				((EditText) rootView.findViewById(R.id.claim_name_input_field))
-						.setTextDirection(View.TEXT_DIRECTION_LOCALE);
+				((EditText) rootView.findViewById(R.id.claim_name_input_field)).setTextAlignment(View.TEXT_ALIGNMENT_GRAVITY);
+				((EditText) rootView.findViewById(R.id.claim_name_input_field)).setTextDirection(View.TEXT_DIRECTION_LOCALE);
 			}
-			((EditText) rootView.findViewById(R.id.claim_name_input_field))
-					.setText(claim.getName());
-			((Spinner) rootView.findViewById(R.id.claimTypesSpinner))
-					.setSelection(new ClaimType().getIndexByCodeType(
-							claim.getType(), onlyActiveValues));
 
-			((Spinner) rootView.findViewById(R.id.landUseSpinner))
-					.setSelection(new LandUse().getIndexByCodeType(
-							claim.getLandUse(), onlyActiveValues));
+			((EditText) rootView.findViewById(R.id.claim_name_input_field)).setText(claim.getName());
+			((Spinner) rootView.findViewById(R.id.claimTypesSpinner)).setSelection(new ClaimType().getIndexByCodeType(claim.getType(), onlyActiveValues));
+			((Spinner) rootView.findViewById(R.id.landUseSpinner)).setSelection(new LandUse().getIndexByCodeType(claim.getLandUse(), onlyActiveValues));
 
 			if(claim.getBoundaryId() != null && boundaries != null){
 				for(int i = 0; i < boundaries.size(); i++){
@@ -635,43 +621,13 @@ public class ClaimDetailsFragment extends Fragment {
 			}
 
 			if (claim.getDateOfStart() != null) {
-				((EditText) rootView
-						.findViewById(R.id.date_of_start_input_field))
-						.setText(new SimpleDateFormat("yyyy-MM-dd", Locale.US)
-								.format(claim.getDateOfStart()));
+				((EditText) rootView.findViewById(R.id.date_of_start_input_field)).setText(new SimpleDateFormat("yyyy-MM-dd", Locale.US).format(claim.getDateOfStart()));
 			} else {
-				((EditText) rootView
-						.findViewById(R.id.date_of_start_input_field))
-						.setText("");
-			}
-			if (modeActivity.getMode().compareTo(ModeDispatcher.Mode.MODE_RO) == 0) {
-				((EditText) rootView.findViewById(R.id.claim_name_input_field))
-						.setFocusable(false);
-				((Spinner) rootView.findViewById(R.id.claimTypesSpinner))
-						.setFocusable(false);
-				((Spinner) rootView.findViewById(R.id.claimTypesSpinner))
-						.setClickable(false);
-
-				((Spinner) rootView.findViewById(R.id.landUseSpinner))
-						.setFocusable(false);
-				((Spinner) rootView.findViewById(R.id.landUseSpinner))
-						.setClickable(false);
-				((EditText) rootView
-						.findViewById(R.id.date_of_start_input_field))
-						.setFocusable(false);
-				((EditText) rootView
-						.findViewById(R.id.date_of_start_input_field))
-						.setLongClickable(false);
-				((EditText) rootView
-						.findViewById(R.id.date_of_start_input_field))
-						.setOnTouchListener(null);
-
-				((EditText) rootView.findViewById(R.id.claim_notes_input_field)).setFocusable(false);
+				((EditText) rootView.findViewById(R.id.date_of_start_input_field)).setText("");
 			}
 
 			Person claimant = null;
-			String claimantId = ((TextView) rootView
-					.findViewById(R.id.claimant_id)).getText().toString();
+			String claimantId = ((TextView) rootView.findViewById(R.id.claimant_id)).getText().toString();
 
 			if (claimantId == null || claimantId.trim().equals(""))
 				claimant = claim.getPerson();
@@ -679,27 +635,46 @@ public class ClaimDetailsFragment extends Fragment {
 				claimant = Person.getPerson(claimantId);
 			loadClaimant(claimant);
 
-			if (challengedJustLoaded) {
-				challengedJustLoaded = false;
-			} else
+			if (!challengedJustLoaded) {
 				loadChallengedClaim(claim.getChallengedClaim());
+			}
+
+			if (modeActivity.getMode().compareTo(ModeDispatcher.Mode.MODE_RO) == 0) {
+				((EditText) rootView.findViewById(R.id.claim_name_input_field)).setFocusable(false);
+				((Spinner) rootView.findViewById(R.id.claimTypesSpinner)).setFocusable(false);
+				((Spinner) rootView.findViewById(R.id.claimTypesSpinner)).setEnabled(false);
+
+				((Spinner) rootView.findViewById(R.id.boundarySpinner)).setFocusable(false);
+				((Spinner) rootView.findViewById(R.id.boundarySpinner)).setEnabled(false);
+
+				((Spinner) rootView.findViewById(R.id.landUseSpinner)).setFocusable(false);
+				((Spinner) rootView.findViewById(R.id.landUseSpinner)).setEnabled(false);
+				((EditText) rootView.findViewById(R.id.date_of_start_input_field)).setFocusable(false);
+				((EditText) rootView.findViewById(R.id.date_of_start_input_field)).setLongClickable(false);
+				((EditText) rootView.findViewById(R.id.date_of_start_input_field)).setOnTouchListener(null);
+				((EditText) rootView.findViewById(R.id.claim_notes_input_field)).setFocusable(false);
+				((Button) rootView.findViewById(R.id.challenge_button)).setVisibility(View.GONE);
+			}
 		}
 	}
 
-	public int saveClaim() {
+	public boolean saveClaim() {
+		if (modeActivity.getMode().compareTo(ModeDispatcher.Mode.MODE_RW) != 0) {
+			return true;
+		}
+
 		Person person = Person.getPerson(((TextView) rootView.findViewById(R.id.claimant_id)).getText().toString());
-		Claim challengedClaim = Claim
-				.getClaim(((TextView) rootView
-						.findViewById(R.id.challenge_to_claim_id)).getText()
-						.toString());
+		Claim challengedClaim = Claim.getClaim(((TextView) rootView.findViewById(R.id.challenge_to_claim_id)).getText().toString());
 
-		Claim claim = new Claim();
-		String claimName = ((EditText) rootView
-				.findViewById(R.id.claim_name_input_field)).getText()
-				.toString();
+		Claim claim;
 
-		if (claimName == null || claimName.trim().equals(""))
-			return 3;
+		if(claimActivity.getClaimId() == null) {
+			claim = new Claim();
+		} else {
+			claim = Claim.getClaim(claimActivity.getClaimId());
+		}
+
+		String claimName = ((EditText) rootView.findViewById(R.id.claim_name_input_field)).getText().toString();
 		claim.setName(claimName);
 
 		String displayValue = (String) ((Spinner) rootView.findViewById(R.id.claimTypesSpinner)).getSelectedItem();
@@ -715,74 +690,74 @@ public class ClaimDetailsFragment extends Fragment {
 			claim.setBoundaryId(boundaryId);
 		}
 
-		String notes = ((EditText) rootView
-				.findViewById(R.id.claim_notes_input_field)).getText()
-				.toString();
-
+		String notes = ((EditText) rootView.findViewById(R.id.claim_notes_input_field)).getText().toString();
 		claim.setNotes(notes);
 
-		String startDate = ((EditText) rootView
-				.findViewById(R.id.date_of_start_input_field)).getText()
-				.toString();
-
-		java.util.Date dob = null;
+		String startDate = ((EditText) rootView.findViewById(R.id.date_of_start_input_field)).getText().toString();
 
 		if (startDate != null && !startDate.trim().equals("")) {
+			java.util.Date dateStartDate = null;
 			try {
-
-				dob = new SimpleDateFormat("yyyy-MM-dd", Locale.US)
-						.parse(startDate);
-
-				if (dob != null)
-					claim.setDateOfStart(new Date(dob.getTime()));
-
+				dateStartDate = new SimpleDateFormat("yyyy-MM-dd", Locale.US).parse(startDate);
+				if (dateStartDate != null)
+					claim.setDateOfStart(new Date(dateStartDate.getTime()));
 			} catch (ParseException e) {
+				claim.setDateOfStart(null);
 				e.printStackTrace();
-				dob = null;
-				return 2;
 			}
-
 		}
 
-		if (person == null)
-			return 4;
+		if (person == null){
+			claim.setPerson(null);
+			claim.setPersonId(null);
+		} else {
+			claim.setPerson(person);
+		}
 
-		claim.setPerson(person);
+		if(challengedClaim == null){
+			claim.setChallengedClaimId(null);
+		}
 		claim.setChallengedClaim(challengedClaim);
-		// Still allow saving the claim if the dynamic part contains errors
-		isFormValid();
-
 		claim.setDynamicForm(formDispatcher.getEditedFormPayload());
-		claim.setVersion("0");
 
-		if (claim.create() == 1) {
-			List<Vertex> vertices = Vertex.getVertices(claim.getClaimId());
-			if (challengedClaim != null
-					&& (vertices == null || vertices.size() == 0)) {
-				copyVerticesFromChallengedClaim(challengedClaim.getClaimId(),
-						claim.getClaimId());
+		boolean isNew = StringUtility.isEmpty(claimActivity.getClaimId());
+
+		if(isNew) {
+			// Create claim
+			claim.setVersion("0");
+			if (claim.create() == 1) {
+				OpenTenureApplication.setClaimId(claim.getClaimId());
+				claimActivity.setClaimId(claim.getClaimId());
+				FileSystemUtilities.createClaimFileSystem(claim.getClaimId());
+			} else {
+				Toast.makeText(rootView.getContext(), R.string.message_unable_to_save,	Toast.LENGTH_SHORT).show();
+				return false;
 			}
+		} else {
+			// Update claim
+			if(claim.update() < 1){
+				Toast.makeText(rootView.getContext(), R.string.message_unable_to_save,	Toast.LENGTH_SHORT).show();
+				return false;
+			}
+		}
 
-			OpenTenureApplication.setClaimId(claim.getClaimId());
+		if (!createPersonAsOwner(person)){
+			Toast.makeText(rootView.getContext(), R.string.message_unable_to_save,	Toast.LENGTH_SHORT).show();
+		}
 
-			FileSystemUtilities.createClaimFileSystem(claim.getClaimId());
-			claimActivity.setClaimId(claim.getClaimId());
+		if (challengedClaim != null) {
+			List<Vertex> vertices = Vertex.getVertices(claim.getClaimId());
+			if (vertices == null || vertices.size() == 0) {
+				copyVerticesFromChallengedClaim(challengedClaim.getClaimId(), claim.getClaimId());
+			}
+		}
 
-			if (createPersonAsOwner(person) == 0)
-				return 0;
-
-			claimListener.onClaimSaved();
-			return 1;
-
-		} else
-			return 5;
-
+		claimListener.onClaimSaved(isNew);
+		return true;
 	}
 
-	private void copyVerticesFromChallengedClaim(String challengedClaimId,
-												 String challengingClaimId) {
-		Log.d(this.getClass().getName(), "copying vertices from "
-				+ challengedClaimId + " to " + challengingClaimId);
+	private void copyVerticesFromChallengedClaim(String challengedClaimId, String challengingClaimId) {
+		Log.d(this.getClass().getName(), "copying vertices from " + challengedClaimId + " to " + challengingClaimId);
 		// delete eventually existing vertices
 		Vertex.deleteVertices(challengingClaimId);
 		// get vertices from the challenged claim
@@ -816,163 +791,37 @@ public class ClaimDetailsFragment extends Fragment {
 		HoleVertex.createVertices(copiedHoles);
 	}
 
-	public int updateClaim() {
-
-		Person person = Person.getPerson(((TextView) rootView.findViewById(R.id.claimant_id)).getText().toString());
-
-		if (OpenTenureApplication.getInstance().getLocale().toString().startsWith("ar")) {
-			((View) rootView.findViewById(R.id.claimant_slogan)).setTextDirection(View.TEXT_DIRECTION_LOCALE);
-			((View) rootView.findViewById(R.id.claimant_slogan)).setTextAlignment(View.TEXT_ALIGNMENT_GRAVITY);
-		}
-		if (person != null)
-			((View) rootView.findViewById(R.id.claimant_slogan)).setVisibility(View.VISIBLE);
-
-		// Check geometry
-		if(!BasePropertyBoundary.isValidateGeometry(claimActivity.getClaimId())){
-			return 10;
-		}
-
-		Claim challengedClaim = Claim.getClaim(((TextView) rootView.findViewById(R.id.challenge_to_claim_id)).getText().toString());
-
-		// Claim claim = Claim.getClaim(claimActivity.getClaimId());
-		Claim claim = Claim.getClaim(claimActivity.getClaimId());
-		claim.setClaimId(claimActivity.getClaimId());
-		claim.setName(((EditText) rootView.findViewById(R.id.claim_name_input_field)).getText().toString());
-
-		if (claim.getName() == null || claim.getName().trim().equals(""))
-			return 0;
-
-		String displayValue = (String) ((Spinner) rootView.findViewById(R.id.claimTypesSpinner)).getSelectedItem();
-		claim.setType(valueKeyClaimTypesMap.get(displayValue));
-
-		String landUseDispValue = (String) ((Spinner) rootView.findViewById(R.id.landUseSpinner)).getSelectedItem();
-		claim.setLandUse(valueKeyMapLandUse.get(landUseDispValue));
-
-		String boundaryId = ((Boundary)((Spinner) rootView.findViewById(R.id.boundarySpinner)).getSelectedItem()).getId();
-		if(boundaryId == null || boundaryId.equals("")){
-			claim.setBoundaryId(null);
-		} else {
-			claim.setBoundaryId(boundaryId);
-		}
-
-		String notes = ((EditText) rootView.findViewById(R.id.claim_notes_input_field)).getText().toString();
-		claim.setNotes(notes);
-
-		String startDate = ((EditText) rootView.findViewById(R.id.date_of_start_input_field)).getText().toString();
-		java.util.Date occupiedSince = null;
-
-		if (startDate != null && !startDate.trim().equals("")) {
-			try {
-				occupiedSince = new SimpleDateFormat("yyyy-MM-dd", Locale.US).parse(startDate);
-				if (occupiedSince != null)
-					claim.setDateOfStart(new Date(occupiedSince.getTime()));
-
-			} catch (ParseException e) {
-				e.printStackTrace();
-				return 2;
-			}
-		}
-
-		// Still allow saving the claim if the dynamic part contains errors
-		isFormValid();
-
-		if (createPersonAsOwner(person) == 0)
-			return 0;
-
-		claim.setPerson(person);
-		claim.setChallengedClaim(challengedClaim);
-		claim.setDynamicForm(formDispatcher.getEditedFormPayload());
-
-		int result = claim.update();
-
-		if (challengedClaim != null) {
-			List<Vertex> vertices = Vertex.getVertices(claim.getClaimId());
-			if (vertices == null || vertices.size() == 0) {
-				copyVerticesFromChallengedClaim(challengedClaim.getClaimId(),
-						claim.getClaimId());
-			}
-		}
-
-		return result;
-	}
-
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// handle item selection
 		Toast toast;
 		switch (item.getItemId()) {
+			case R.id.action_validate:
+				// Save before validation
+				if(saveClaim()){
+					Claim claim = Claim.getClaim(claimActivity.getClaimId());
 
-			case R.id.action_save:
-
-				if (claimActivity.getClaimId() == null) {
-					int resultSave = saveClaim();
-					if (resultSave == 1) {
-						toast = Toast.makeText(rootView.getContext(),
-								R.string.message_saved, Toast.LENGTH_SHORT);
-						toast.show();
-					}
-					if (resultSave == 2) {
-						toast = Toast.makeText(rootView.getContext(),
-								R.string.message_error_startdate,
-								Toast.LENGTH_SHORT);
-						toast.show();
-					} else if (resultSave == 3) {
-						toast = Toast.makeText(rootView.getContext(),
-								R.string.message_unable_to_save_missing_claim_name,
-								Toast.LENGTH_SHORT);
-						toast.show();
-					} else if (resultSave == 4) {
-						toast = Toast.makeText(rootView.getContext(),
-								R.string.message_unable_to_save_missing_person,
-								Toast.LENGTH_SHORT);
-						toast.show();
-					} else if (resultSave == 5) {
-						toast = Toast
-								.makeText(rootView.getContext(),
-										R.string.message_unable_to_save,
-										Toast.LENGTH_SHORT);
-						toast.show();
-					}
-				} else {
-					int updated = updateClaim();
-
-					if (updated == 1) {
-						toast = Toast.makeText(rootView.getContext(),
-								R.string.message_saved, Toast.LENGTH_SHORT);
-						toast.show();
-
-					} else if (updated == 2) {
-						toast = Toast.makeText(rootView.getContext(),
-								R.string.message_error_startdate,
-								Toast.LENGTH_SHORT);
-						toast.show();
-					} else if (updated == 10) {
-						toast = Toast.makeText(rootView.getContext(),
-								R.string.message_invalid_geom,
-								Toast.LENGTH_SHORT);
-						toast.show();
-					} else {
-						toast = Toast
-								.makeText(rootView.getContext(),
-										R.string.message_unable_to_save,
-										Toast.LENGTH_SHORT);
-						toast.show();
+					try {
+						claim.validate(true);
+						// If no Exceptions, all cool
+						Toast.makeText(rootView.getContext(), R.string.message_claim_valid, Toast.LENGTH_SHORT).show();
+					} catch (OpenTenureException e) {
+						Toast.makeText(rootView.getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+						e.printStackTrace();
 					}
 				}
-
 				return true;
 
 			case R.id.action_print:
+				// Call save first
+				saveClaim();
+
 				Claim claim = Claim.getClaim(claimActivity.getClaimId());
 				boolean mapPresent = false;
 				boolean mapToDownload = false;
 				String path = null;
 
 				if (claim == null) {
-					toast = Toast.makeText(rootView.getContext(),
-							R.string.message_save_snapshot_before_printing,
-							Toast.LENGTH_LONG);
-					toast.show();
 					return true;
 				}
 
@@ -1010,10 +859,8 @@ public class ClaimDetailsFragment extends Fragment {
 							rootView.getContext(), claim, false, PDFClaimExporter.PageType.A4);
 
 					Intent intent = new Intent(Intent.ACTION_VIEW);
-					File basePath =
-							new File(Environment.getExternalStorageDirectory(),"Open Tenure/Certificates");
-					File file =
-							new File(basePath,pdf.getFileName());
+					File basePath =	new File(Environment.getExternalStorageDirectory(),"Open Tenure/Certificates");
+					File file =	new File(basePath,pdf.getFileName());
 
 					Uri uri = FileProvider.getUriForFile(rootView.getContext(), BuildConfig.APPLICATION_ID, file);
 					intent.setDataAndType(uri,"application/pdf");
@@ -1021,11 +868,8 @@ public class ClaimDetailsFragment extends Fragment {
 					intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | FLAG_GRANT_WRITE_URI_PERMISSION) ;
 
 					startActivity(intent);
-
 				} catch (Error e) {
-					toast = Toast.makeText(rootView.getContext(),
-							R.string.message_not_supported_on_this_device,
-							Toast.LENGTH_SHORT);
+					toast = Toast.makeText(rootView.getContext(), R.string.message_not_supported_on_this_device, Toast.LENGTH_SHORT);
 					toast.show();
 				}
 
@@ -1036,185 +880,19 @@ public class ClaimDetailsFragment extends Fragment {
 		}
 	}
 
-	public boolean isClaimChanged(Claim claim){
-
-		if (!claim.getName().equalsIgnoreCase(
-				((EditText) rootView
-						.findViewById(R.id.claim_name_input_field))
-						.getText().toString())){
-			Log.d(this.getClass().getName(), "Claim name has changed");
-			return true;
-		}
-
-		Person person = Person.getPerson(((TextView) rootView
-				.findViewById(R.id.claimant_id)).getText().toString());
-		if (person == null || !claim.getPerson().getPersonId().equalsIgnoreCase(person.getPersonId())){
-			Log.d(this.getClass().getName(), "Claimant has changed");
-			return true;
-		}
-
-		Claim challengedClaim = Claim.getClaim(((TextView) rootView
-				.findViewById(R.id.challenge_to_claim_id))
-				.getText().toString());
-		if ((challengedClaim == null && claim.getChallengedClaim() != null)
-				|| (challengedClaim != null && claim.getChallengedClaim() == null)
-				|| (challengedClaim != null && claim.getChallengedClaim() != null
-				&& !claim.getChallengedClaim().getClaimId().equalsIgnoreCase(challengedClaim.getClaimId()))){
-			Log.d(this.getClass().getName(), "Challenged claim has changed");
-			return true;
-		}
-
-		String claimType = (String) ((Spinner) rootView
-				.findViewById(R.id.claimTypesSpinner))
-				.getSelectedItem();
-
-		if (!claim.getType().equalsIgnoreCase(valueKeyClaimTypesMap.get(claimType))){
-			Log.d(this.getClass().getName(), "Claim type has changed");
-			return true;
-		}
-
-		String landUseDispValue = (String) ((Spinner) rootView
-				.findViewById(R.id.landUseSpinner))
-				.getSelectedItem();
-		if ((claim.getLandUse() == null && valueKeyMapLandUse.get(landUseDispValue) != null)
-				|| (!claim.getLandUse().equals(valueKeyMapLandUse.get(landUseDispValue)))){
-			Log.d(this.getClass().getName(), "Land use has changed");
-			return true;
-		}
-
-		String boundaryId = ((Boundary)((Spinner) rootView.findViewById(R.id.boundarySpinner)).getSelectedItem()).getId();
-		if (!StringUtils.equals(claim.getBoundaryId(), boundaryId)){
-			Log.d(this.getClass().getName(), "Boundary has changed");
-			return true;
-		}
-
-		String notes = ((EditText) rootView
-				.findViewById(R.id.claim_notes_input_field))
-				.getText().toString();
-
-		if (claim.getNotes() != null && !claim.getNotes().equals(notes)){
-			Log.d(this.getClass().getName(), "Claim notes have changed");
-			return true;
-		}
-		String startDate = ((EditText) rootView
-				.findViewById(R.id.date_of_start_input_field))
-				.getText().toString();
-
-		if (claim.getDateOfStart() == null ^ startDate.trim().equalsIgnoreCase("")) {
-
-			Log.d(this.getClass().getName(), "Rights start date has changed");
-			return true;
-
-		}
-		if (!startDate.trim().equalsIgnoreCase("")) {
-
-			try {
-				java.util.Date dos = new SimpleDateFormat(
-						"yyyy-MM-dd", Locale.US)
-						.parse(startDate);
-
-				Date date = new Date(
-						dos.getTime());
-
-				if (claim.getDateOfStart()
-						.compareTo(date) != 0) {
-					Log.d(this.getClass().getName(), "Rights start date has changed");
-					return true;
-				}
-			} catch (ParseException e) {
-				e.printStackTrace();
-				return true;
-			}
-		}
-
-		return isFormChanged();
-	}
-
-	public boolean hasFragmentValues(){
-
-		if (!((EditText) rootView
-				.findViewById(R.id.claim_name_input_field)).getText()
-				.toString().trim().equals("")){
-			Log.d(this.getClass().getName(), "Claim name has value");
-			return true;
-		}
-
-		String person = ((TextView) rootView
-				.findViewById(R.id.claimant_id)).getText().toString();
-		if (person != null && !person.trim().equals("")){
-			Log.d(this.getClass().getName(), "Claimant has value");
-			return true;
-		}
-
-		String challengedClaim = ((TextView) rootView
-				.findViewById(R.id.challenge_to_claim_id))
-				.getText().toString();
-		if (challengedClaim != null
-				&& !challengedClaim.trim().equals("")){
-			Log.d(this.getClass().getName(), "Challenged claim has value");
-			return true;
-		}
-
-		if (!((EditText) rootView
-				.findViewById(R.id.claim_notes_input_field))
-				.getText().toString().trim().equals("")){
-			Log.d(this.getClass().getName(), "Claim notes have value");
-			return true;
-		}
-
-		if (!((EditText) rootView
-				.findViewById(R.id.date_of_start_input_field))
-				.getText().toString().trim().equals("")){
-			Log.d(this.getClass().getName(), "Rights start date has value");
-			return true;
-		}
-
-		return isFormChanged();
-
-	}
-
-	public boolean checkChanges() {
-
-		Claim claim = Claim.getClaim(claimActivity.getClaimId());
-
-		if ((claim != null && isClaimChanged(claim)) || (claim == null && hasFragmentValues())) {
-
-			AlertDialog.Builder saveChangesDialog = new AlertDialog.Builder(
-					this.getActivity());
-			saveChangesDialog.setTitle(R.string.title_save_claim_dialog);
-			String dialogMessage = OpenTenureApplication.getContext()
-					.getString(R.string.message_discard_changes);
-
-			saveChangesDialog.setMessage(dialogMessage);
-
-			saveChangesDialog.setPositiveButton(R.string.confirm,
-					new SaveDetailsNegativeListener(this));
-
-			saveChangesDialog.setNegativeButton(R.string.cancel,
-					new DialogInterface.OnClickListener() {
-
-						@Override
-						public void onClick(DialogInterface dialog,
-											int which) {
-							return;
-						}
-					});
-			saveChangesDialog.show();
-			return true;
-		}
-		return false;
-	}
 	@Override
 	public void onResume() {
 		Claim claim = Claim.getClaim(claimActivity.getClaimId());
 		load(claim);
-
 		super.onResume();
-
 	};
 
-	public int createPersonAsOwner(Person claimant) {
+	public boolean createPersonAsOwner(Person claimant) {
 		try {
+			if (claimant == null){
+				return true;
+			}
+
 			List<ShareProperty> shares = ShareProperty.getShares(claimActivity.getClaimId());
 
 			int value = 0;
@@ -1222,6 +900,12 @@ public class ClaimDetailsFragment extends Fragment {
 			for (Iterator<ShareProperty> iterator = shares.iterator(); iterator.hasNext();) {
 				ShareProperty shareProperty = (ShareProperty) iterator.next();
 				value = value + shareProperty.getShares();
+
+				// Check that claimant is not on the share
+				if(Owner.getOwner(claimant.getPersonId(), shareProperty.getId()) != null){
+					// Exists
+					return true;
+				}
 			}
 
 			int shareValue = 100 - value;
@@ -1235,18 +919,6 @@ public class ClaimDetailsFragment extends Fragment {
 				share.create();
 
 				Person claimantCopy = claimant;
-				//Person claimantCopy = claimant.copy();
-				//claimantCopy.create();
-
-				/*File personImg = new File(
-						FileSystemUtilities.getClaimantFolder(claimant
-								.getPersonId())
-								+ File.separator
-								+ claimant.getPersonId() + ".jpg");
-
-				if (personImg != null)
-					FileSystemUtilities.copyFileInClaimantFolder(
-							claimantCopy.getPersonId(), personImg);*/
 
 				Owner owner = new Owner();
 				owner.setPersonId(claimantCopy.getPersonId());
@@ -1256,41 +928,11 @@ public class ClaimDetailsFragment extends Fragment {
 
 				OpenTenureApplication.getOwnersFragment().update();
 			}
-			return 1;
+			return true;
 
 		} catch (Exception e) {
 			Log.d("Details", "An error " + e.getMessage());
 			e.printStackTrace();
-			return 0;
-		}
-	}
-
-	private boolean isFormValid() {
-		FormPayload formPayload = formDispatcher.getEditedFormPayload();
-		FormTemplate formTemplate = formDispatcher.getFormTemplate();
-		FieldConstraint constraint = null;
-		DisplayNameLocalizer dnl = new DisplayNameLocalizer(OpenTenureApplication.getInstance().getLocalization());
-
-		if ((constraint = formTemplate.getFailedConstraint(formPayload, dnl)) != null) {
-			Toast.makeText(rootView.getContext(), dnl.getLocalizedDisplayName(constraint.displayErrorMsg()), Toast.LENGTH_SHORT).show();
-			return false;
-		} else {
-			return true;
-		}
-	}
-
-	private boolean isFormChanged() {
-		FormPayload editedFormPayload = formDispatcher.getEditedFormPayload();
-		FormPayload originalFormPayload = formDispatcher
-				.getOriginalFormPayload();
-
-		if (((editedFormPayload != null) && (originalFormPayload == null))
-				|| ((editedFormPayload == null) && (originalFormPayload != null))
-				|| !editedFormPayload.toJson().equalsIgnoreCase(
-				originalFormPayload.toJson())) {
-			Log.d(this.getClass().getName(), "Dynamic form has changed");
-			return true;
-		} else {
 			return false;
 		}
 	}

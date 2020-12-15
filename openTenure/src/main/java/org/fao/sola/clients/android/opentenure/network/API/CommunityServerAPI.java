@@ -326,27 +326,18 @@ public class CommunityServerAPI {
 
 				Type listType = new TypeToken<ArrayList<org.fao.sola.clients.android.opentenure.network.response.Claim>>() {
 				}.getType();
-				List<org.fao.sola.clients.android.opentenure.network.response.Claim> claimList = new Gson()
-						.fromJson(json, listType);
+				List<org.fao.sola.clients.android.opentenure.network.response.Claim> claimList = new Gson().fromJson(json, listType);
 
 				return claimList;
-
 			} else {
-
-				Log.d("CommunityServerAPI", "GET ALL CLAIMS JSON RESPONSE "
-						+ json);
+				Log.d("CommunityServerAPI", "GET ALL CLAIMS JSON RESPONSE " + json);
 				return null;
-
 			}
 
 		} catch (Exception ex) {
-
-			Log.d("CommunityServerAPI",
-					"GET ALL CLAIMS error " + ex.getMessage());
+			Log.d("CommunityServerAPI", "GET ALL CLAIMS error " + ex.getMessage());
 			ex.printStackTrace();
-
 			return null;
-
 		}
 
 	}
@@ -1745,8 +1736,7 @@ public class CommunityServerAPI {
 		}
 	}
 
-	public static SaveAttachmentResponse saveAttachment(String attachment,
-			String attachmentId) {
+	public static SaveAttachmentResponse saveAttachment(String attachment, String attachmentId) {
 		SharedPreferences OpenTenurePreferences = PreferenceManager
 				.getDefaultSharedPreferences(OpenTenureApplication.getContext());
 
@@ -1765,7 +1755,6 @@ public class CommunityServerAPI {
 		SaveAttachmentResponse saveAttachmentResponse = null;
 		StringEntity entity;
 		try {
-
 			Log.d("CommunityServerAPI", "saveAttachment payload " + attachment);
 
 			entity = new StringEntity(attachment, HTTP.UTF_8);

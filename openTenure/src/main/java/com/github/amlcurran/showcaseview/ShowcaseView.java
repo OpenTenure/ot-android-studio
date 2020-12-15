@@ -26,17 +26,24 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.PorterDuff;
+import android.graphics.Rect;
+import android.os.Build;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.util.Log;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 
 import com.github.amlcurran.showcaseview.targets.Target;
+
+import java.lang.reflect.InvocationTargetException;
 
 import static com.github.amlcurran.showcaseview.AnimationFactory.AnimationEndListener;
 import static com.github.amlcurran.showcaseview.AnimationFactory.AnimationStartListener;
@@ -168,6 +175,7 @@ public class ShowcaseView extends RelativeLayout
         showcaseX = x;
         showcaseY = y;
         //init();
+        recalculateText();
         invalidate();
     }
 
@@ -282,13 +290,23 @@ public class ShowcaseView extends RelativeLayout
 
     @Override
     public boolean onPreDraw() {
+       /* boolean recalculatedCling = showcaseAreaCalculator.calculateShowcaseRect(showcaseX, showcaseY, showcaseDrawer);
+        boolean recalculateText = recalculatedCling || hasAlteredText;
+        if (recalculateText) {
+            textDrawer.calculateTextPosition(getMeasuredWidth(), getMeasuredHeight(), this, shouldCentreText);
+        }
+        hasAlteredText = false;
+        return true;*/
+        return true;
+    }
+
+    private void recalculateText() {
         boolean recalculatedCling = showcaseAreaCalculator.calculateShowcaseRect(showcaseX, showcaseY, showcaseDrawer);
         boolean recalculateText = recalculatedCling || hasAlteredText;
         if (recalculateText) {
             textDrawer.calculateTextPosition(getMeasuredWidth(), getMeasuredHeight(), this, shouldCentreText);
         }
         hasAlteredText = false;
-        return true;
     }
 
     @Override
@@ -377,12 +395,68 @@ public class ShowcaseView extends RelativeLayout
     }
 
     private static void insertShowcaseView(ShowcaseView showcaseView, Activity activity) {
-        ((ViewGroup) activity.getWindow().getDecorView()).addView(showcaseView);
+        ViewGroup decor = (ViewGroup) activity.getWindow().getDecorView();
+
+        Point appUsableSize = getAppUsableScreenSize(activity);
+        Point realScreenSize = getRealScreenSize(activity);
+
+        if(realScreenSize.y > appUsableSize.y) {
+            // This is workaround to make sure buttons are not hidden by navigation bar, which happens in newer android versions
+            Button nextButton = showcaseView.findViewById(R.id.showcase_button);
+            Button skipButton = showcaseView.findViewById(R.id.showcase_skip_button);
+
+            int margin = (int) showcaseView.getResources().getDimension(R.dimen.button_margin);
+            int marginBottom = margin + (realScreenSize.y - appUsableSize.y);
+
+            if(nextButton != null){
+                RelativeLayout.LayoutParams lps = (LayoutParams) showcaseView.generateDefaultLayoutParams();
+                lps.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+                lps.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+                lps.setMargins(margin, margin, margin, marginBottom);
+                nextButton.setLayoutParams(lps);
+            }
+
+            if(skipButton != null){
+                RelativeLayout.LayoutParams lps = (LayoutParams) showcaseView.generateDefaultLayoutParams();
+                lps.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+                lps.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+                lps.setMargins(margin, margin, margin, marginBottom);
+                skipButton.setLayoutParams(lps);
+            }
+        }
+
+        decor.addView(showcaseView);
+
         if (!showcaseView.hasShot()) {
             showcaseView.show();
         } else {
             showcaseView.hideImmediate();
         }
+    }
+
+    public static Point getAppUsableScreenSize(Context context) {
+        WindowManager windowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        Display display = windowManager.getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        return size;
+    }
+
+    public static Point getRealScreenSize(Context context) {
+        WindowManager windowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        Display display = windowManager.getDefaultDisplay();
+        Point size = new Point();
+
+        if (Build.VERSION.SDK_INT >= 17) {
+            display.getRealSize(size);
+        } else if (Build.VERSION.SDK_INT >= 14) {
+            try {
+                size.x = (Integer) Display.class.getMethod("getRawWidth").invoke(display);
+                size.y = (Integer) Display.class.getMethod("getRawHeight").invoke(display);
+            } catch (IllegalAccessException e) {} catch (InvocationTargetException e) {} catch (NoSuchMethodException e) {}
+        }
+
+        return size;
     }
 
     private void hideImmediate() {

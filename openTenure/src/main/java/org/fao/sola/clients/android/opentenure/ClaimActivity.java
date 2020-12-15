@@ -56,6 +56,7 @@ import android.util.SparseArray;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 
 import com.astuetz.PagerSlidingTabStrip;
@@ -77,6 +78,7 @@ public class ClaimActivity extends FragmentActivity implements ClaimDispatcher,
 	private FormPayload originalFormPayload;
 	private FormPayload editedFormPayload;
 	private FormTemplate formTemplate;
+	private final ApiUtils apiUtils = new ApiUtils();
 
 	SectionsPagerAdapter mSectionsPagerAdapter;
 	ViewPager mViewPager;
@@ -86,7 +88,6 @@ public class ClaimActivity extends FragmentActivity implements ClaimDispatcher,
 	// SHOWCASE Variables
 	ShowcaseView sv;
 	private int counter = 0;
-	private final ApiUtils apiUtils = new ApiUtils();
 	public static final String FIRST_RUN_CLAIM_ACTIVITY = "__FIRST_RUN_CLAIM_ACTIVITY__";
 
 	// END SHOW CASE
@@ -99,22 +100,19 @@ public class ClaimActivity extends FragmentActivity implements ClaimDispatcher,
 
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
-
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
+			saveClaim();
+		}
+		return super.onKeyDown(keyCode, event);
+	}
 
-			final ClaimDetailsFragment fragment = (ClaimDetailsFragment) fragmentReferences
-					.get(0);
-
-			if (fragment != null) {
-				if (fragment.checkChanges()) {
-					return true;
-				} else {
-					return super.onKeyDown(keyCode, event);
-				}
-			} else
-				return super.onKeyDown(keyCode, event);
-		} else
-			return super.onKeyDown(keyCode, event);
+	private void saveClaim() {
+		if (mode != null && mode.compareTo(ModeDispatcher.Mode.MODE_RW) == 0) {
+			final ClaimDetailsFragment claimDetailsFragment = (ClaimDetailsFragment) fragmentReferences.get(0);
+			if (claimDetailsFragment != null) {
+				claimDetailsFragment.saveClaim();
+			}
+		}
 	}
 
 	@Override
@@ -128,7 +126,6 @@ public class ClaimActivity extends FragmentActivity implements ClaimDispatcher,
 		OpenTenureApplication.getInstance().getDatabase().open();
 		OpenTenure.setLocale(this);
 		super.onResume();
-
 	}
 
 	@Override
@@ -136,13 +133,11 @@ public class ClaimActivity extends FragmentActivity implements ClaimDispatcher,
 		outState.putString(CLAIM_ID_KEY, claimId);
 		outState.putString(MODE_KEY, mode.toString());
 		super.onSaveInstanceState(outState);
-
 	}
 
 	private String getFirstRun() {
 		String result = "False";
-		Configuration firstRun = Configuration
-				.getConfigurationByName(FIRST_RUN_CLAIM_ACTIVITY);
+		Configuration firstRun = Configuration.getConfigurationByName(FIRST_RUN_CLAIM_ACTIVITY);
 
 		if (firstRun != null) {
 			result = firstRun.getValue();
@@ -160,9 +155,6 @@ public class ClaimActivity extends FragmentActivity implements ClaimDispatcher,
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		Log.d(this.getClass().getName(), "Starting onCreate");
-		long start = System.currentTimeMillis();
-
 		OpenTenure.setLocale(this);
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 		super.onCreate(savedInstanceState);
@@ -172,12 +164,11 @@ public class ClaimActivity extends FragmentActivity implements ClaimDispatcher,
 		String savedInstanceMode = null;
 
 		// Setup the form before creating the section adapter
-
 		if (savedInstanceState != null) {
-
 			savedInstanceClaimId = savedInstanceState.getString(CLAIM_ID_KEY);
 			savedInstanceMode = savedInstanceState.getString(MODE_KEY);
 		}
+
 		String localClaimId = null;
 
 		if (savedInstanceClaimId == null) {
@@ -187,59 +178,103 @@ public class ClaimActivity extends FragmentActivity implements ClaimDispatcher,
 		}
 
 		if (savedInstanceMode == null) {
-			mode = ModeDispatcher.Mode.valueOf(getIntent().getStringExtra(
-					MODE_KEY));
+			mode = ModeDispatcher.Mode.valueOf(getIntent().getStringExtra(MODE_KEY));
 		} else {
 			mode = ModeDispatcher.Mode.valueOf(savedInstanceMode);
 		}
 
-		if (localClaimId != null
-				&& !localClaimId.equalsIgnoreCase(CREATE_CLAIM_ID)) {
+		if (localClaimId != null && !localClaimId.equalsIgnoreCase(CREATE_CLAIM_ID)) {
 			setClaimId(localClaimId);
 		}
 
 		// Setup the form before creating the section adapter
-
-		Log.d(this.getClass().getName(), "Initial set up in " + (System.currentTimeMillis() - start) + "ms");
-		start = System.currentTimeMillis();
 		setupDynamicSections();
-		Log.d(this.getClass().getName(), "Dynamic sections set up in " + (System.currentTimeMillis() - start) + "ms");
-		start = System.currentTimeMillis();
 		tabs = (PagerSlidingTabStrip) findViewById(R.id.tabs);
 		mViewPager = (ViewPager) findViewById(R.id.claim_pager);
-		Log.d(this.getClass().getName(), "Two views found in " + (System.currentTimeMillis() - start) + "ms");
-		start = System.currentTimeMillis();
-		mSectionsPagerAdapter = new SectionsPagerAdapter(
-				getSupportFragmentManager());
+		mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
 		mViewPager.setAdapter(mSectionsPagerAdapter);
-		Log.d(this.getClass().getName(), "View pager set up in " + (System.currentTimeMillis() - start) + "ms");
-		start = System.currentTimeMillis();
-		tabs.setIndicatorColor(getResources().getColor(
-				R.color.ab_tab_indicator_opentenure));
+		tabs.setIndicatorColor(getResources().getColor(R.color.ab_tab_indicator_opentenure));
 		tabs.setViewPager(mViewPager);
-		Log.d(this.getClass().getName(), "Tabs set up in " + (System.currentTimeMillis() - start) + "ms");
-		start = System.currentTimeMillis();
+
+		// Handle tab change when tutorial is displayed. It's required to precisely position tutorial highlighter,
+		// after tabs are shifted on a small screen. Otherwise the highlighter will be positioned in a wrong place.
+		mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+			int tabIndex = -1;
+
+			@Override
+			public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+			}
+
+			@Override
+			public void onPageSelected(int position) {
+				tabIndex = position;
+			}
+
+			@Override
+			public void onPageScrollStateChanged(int state) {
+				// Show tutorial slide only if tutorial component is active and state = 0.
+				// State = 0 means tabs are scrolled
+				if(sv !=null && sv.isShown() && state == 0) {
+					// Claim details
+					if(tabIndex == 0){
+						mViewPager.setCurrentItem(0);
+						sv.setShowcase(new ViewTarget(tabs.getTabsContainer().getChildAt(0)), true);
+						setAlpha(1.0f, tabs.getTabsContainer().getChildAt(0));
+					}
+
+					// Owners
+					if(tabIndex == 1){
+						sv.setShowcase(new ViewTarget(tabs.getTabsContainer().getChildAt(1)), true);
+						sv.setContentTitle(getString(R.string.owners).toUpperCase(Locale.getDefault()));
+						sv.setContentText(getString(R.string.showcase_claim_shares_message));
+						setAlpha(1.0f, tabs.getTabsContainer().getChildAt(1));
+					}
+
+					// Documents
+					if (tabIndex == 2) {
+						sv.setShowcase(new ViewTarget(tabs.getTabsContainer().getChildAt(2)), true);
+						sv.setContentTitle(getString(R.string.title_claim_documents).toUpperCase(Locale.getDefault()));
+						sv.setContentText(getString(R.string.showcase_claim_document_message));
+						setAlpha(1.0f, tabs.getTabsContainer().getChildAt(2));
+					}
+
+					// Adjacencies
+					if (tabIndex == 3) {
+						sv.setShowcase(new ViewTarget(tabs.getTabsContainer().getChildAt(3)), true);
+						sv.setContentTitle(getString(R.string.title_claim_adjacencies).toUpperCase(Locale.getDefault()));
+						sv.setContentText(getString(R.string.showcase_claim_adjacencies_message));
+						setAlpha(1.0f, tabs.getTabsContainer().getChildAt(3));
+					}
+
+					// Map
+					if (tabIndex == 4) {
+						sv.setShowcase(new ViewTarget(tabs.getTabsContainer().getChildAt(4)), true);
+						sv.setContentTitle(getString(R.string.title_claim_map).toUpperCase(Locale.getDefault()));
+						sv.setContentText(getString(R.string.showcase_claim_map_message));
+						setAlpha(1.0f, tabs.getTabsContainer().getChildAt(4));
+					}
+
+					// Challenges
+					if (tabIndex == 5) {
+						sv.setShowcase(new ViewTarget(tabs.getTabsContainer().getChildAt(5)), true);
+						sv.setContentTitle(getString(R.string.title_claim_challenges).toUpperCase(Locale.getDefault()));
+						sv.setContentText(getString(R.string.showcase_claim_challenges_message));
+						setAlpha(1.0f, tabs.getTabsContainer().getChildAt(5));
+					}
+				}
+
+				// Call auto save when going through the tabs and it's not tutorial mode
+				if((sv == null || !sv.isShown()) && state == 0) {
+					//saveClaim();
+				}
+			}
+		});
 
 		// ShowCase Main
 		if (getFirstRun().contentEquals("True")) {
-			sv = new ShowcaseView.Builder(this, true)
-					.setTarget(
-							new ViewTarget(tabs.getTabsContainer()
-									.getChildAt(0)))
-					.setContentTitle(getString(R.string.showcase_claim_title))
-					.setContentText(getString(R.string.showcase_claim_message))
-					.setStyle(R.style.CustomShowcaseTheme)
-					.setOnClickListener(this).build();
-			sv.setButtonText(getString(R.string.next));
-			sv.setSkipButtonText(getString(R.string.skip));
-			setAlpha(0.2f, tabs.getTabsContainer().getChildAt(0), tabs
-					.getTabsContainer().getChildAt(1), tabs.getTabsContainer()
-					.getChildAt(2), tabs.getTabsContainer().getChildAt(3), tabs
-					.getTabsContainer().getChildAt(4), tabs.getTabsContainer()
-					.getChildAt(5), mViewPager);
+			runTutorial();
 		}
-		Log.d(this.getClass().getName(), "Remaining part of onCreate completed in " + (System.currentTimeMillis() - start) + "ms");
 	}
 
 	private void setAlpha(float alpha, View... views) {
@@ -253,7 +288,6 @@ public class ClaimActivity extends FragmentActivity implements ClaimDispatcher,
 
 	@Override
 	public void onClick(View v) {
-
 		if (v.toString().indexOf("skip") > 0) {
 			counter = 0;
 			sv.hide();
@@ -286,74 +320,34 @@ public class ClaimActivity extends FragmentActivity implements ClaimDispatcher,
 			// sv.setContentText(getString(R.string.showcase_actionClaimDetails_message));
 			// break;
 			case 0:
-				sv.setShowcase(
-						new ViewTarget(tabs.getTabsContainer().getChildAt(1)), true);
-				sv.setContentTitle(getString(R.string.owners).toUpperCase(
-						Locale.getDefault()));
-				sv.setContentText(getString(R.string.showcase_claim_shares_message));
-				setAlpha(1.0f, tabs.getTabsContainer().getChildAt(1));
 				mViewPager.setCurrentItem(1);
 				break;
 			case 1:
-				sv.setShowcase(
-						new ViewTarget(tabs.getTabsContainer().getChildAt(2)), true);
-				sv.setContentTitle(getString(R.string.title_claim_documents)
-						.toUpperCase(Locale.getDefault()));
-				sv.setContentText(getString(R.string.showcase_claim_document_message));
-				setAlpha(1.0f, tabs.getTabsContainer().getChildAt(2));
 				mViewPager.setCurrentItem(2);
 				break;
 			case 2:
-				sv.setShowcase(
-						new ViewTarget(tabs.getTabsContainer().getChildAt(3)), true);
-				sv.setContentTitle(getString(R.string.title_claim_adjacencies)
-						.toUpperCase(Locale.getDefault()));
-				sv.setContentText(getString(R.string.showcase_claim_adjacencies_message));
-				setAlpha(1.0f, tabs.getTabsContainer().getChildAt(3));
 				mViewPager.setCurrentItem(3);
 				break;
 			case 3:
-				sv.setShowcase(
-						new ViewTarget(tabs.getTabsContainer().getChildAt(4)), true);
-				sv.setContentTitle(getString(R.string.title_claim_map).toUpperCase(
-						Locale.getDefault()));
-				sv.setContentText(getString(R.string.showcase_claim_map_message));
-				setAlpha(1.0f, tabs.getTabsContainer().getChildAt(4));
 				mViewPager.setCurrentItem(4);
 				break;
 			case 4:
 				sv.setShowcase(new ViewTarget(mViewPager), true);
 				sv.setContentTitle("  ");
 				sv.setContentText(getString(R.string.showcase_claim_mapdraw_message));
-				mViewPager.setCurrentItem(4);
 				break;
-
 			case 5:
-				sv.setShowcase(new ViewTarget(
-						findViewById(R.id.action_center_and_follow)), true);
+				/*sv.setShowcase(new ViewTarget(findViewById(R.id.action_center_and_follow)), true);
 				sv.setContentTitle("  ");
 				sv.setContentText(getString(R.string.showcase_actionClaimMap_message));
-				break;
+				break;*/
+				counter++;
 			case 6:
-				sv.setShowcase(
-						new ViewTarget(tabs.getTabsContainer().getChildAt(5)), true);
-				sv.setContentTitle(getString(R.string.title_claim_challenges)
-						.toUpperCase(Locale.getDefault()));
-				sv.setContentText(getString(R.string.showcase_claim_challenges_message));
-				setAlpha(1.0f, tabs.getTabsContainer().getChildAt(5));
 				mViewPager.setCurrentItem(5);
 				break;
-
 			case 7:
-				sv.setShowcase(
-						new ViewTarget(tabs.getTabsContainer().getChildAt(0)), true);
-				sv.setContentTitle(("  "));
+				sv.setContentTitle(" ");
 				sv.setContentText(getString(R.string.showcase_end_message));
-				setAlpha(0.6f, tabs.getTabsContainer().getChildAt(0), tabs
-						.getTabsContainer().getChildAt(1), tabs.getTabsContainer()
-						.getChildAt(2), tabs.getTabsContainer().getChildAt(3), tabs
-						.getTabsContainer().getChildAt(4), tabs.getTabsContainer()
-						.getChildAt(5), tabs);
 				sv.setButtonText(getString(R.string.close));
 				mViewPager.setCurrentItem(0);
 				break;
@@ -369,11 +363,6 @@ public class ClaimActivity extends FragmentActivity implements ClaimDispatcher,
 
 	@Override
 	public void onShowcaseViewHide(ShowcaseView showcaseView) {
-		// if (apiUtils.isCompatWithHoneycomb()) {
-		// listView.setAlpha(1f);
-		// }
-		// buttonBlocked.setText(R.string.button_show);
-		// //buttonBlocked.setEnabled(false);
 	}
 
 	@Override
@@ -382,9 +371,23 @@ public class ClaimActivity extends FragmentActivity implements ClaimDispatcher,
 
 	@Override
 	public void onShowcaseViewShow(ShowcaseView showcaseView) {
-		// dimView(listView);
-		// buttonBlocked.setText(R.string.button_hide);
-		// //buttonBlocked.setEnabled(true);
+	}
+
+	private void runTutorial() {
+		counter = 0;
+		sv = new ShowcaseView.Builder(this, true)
+				.setTarget(new ViewTarget(tabs.getTabsContainer().getChildAt(0)))
+				.setStyle(R.style.CustomShowcaseTheme)
+				.setOnClickListener(this).build();
+		sv.setContentTitle(getString(R.string.showcase_claim_title));
+		sv.setContentText(getString(R.string.showcase_claim_message));
+
+		sv.setButtonText(getString(R.string.next));
+		sv.setSkipButtonText(getString(R.string.skip));
+		setAlpha(0.2f, tabs.getTabsContainer().getChildAt(1), tabs.getTabsContainer()
+				.getChildAt(2), tabs.getTabsContainer().getChildAt(3), tabs
+				.getTabsContainer().getChildAt(4), tabs.getTabsContainer()
+				.getChildAt(5), mViewPager);
 	}
 
 	@Override
@@ -392,77 +395,27 @@ public class ClaimActivity extends FragmentActivity implements ClaimDispatcher,
 		switch (item.getItemId()) {
 			case R.id.action_claim_showcase:
 				// ShowCase Tutorial
-				counter = 0;
-				sv = new ShowcaseView.Builder(this, true)
-						.setTarget(
-								new ViewTarget(tabs.getTabsContainer()
-										.getChildAt(0)))
-						.setContentTitle(getString(R.string.showcase_claim_title))
-						.setContentText(getString(R.string.showcase_claim_message))
-						.setStyle(R.style.CustomShowcaseTheme)
-						.setOnClickListener(this).build();
-				sv.setButtonText(getString(R.string.next));
-				sv.setSkipButtonText(getString(R.string.skip));
-				setAlpha(0.2f, tabs.getTabsContainer().getChildAt(0), tabs
-						.getTabsContainer().getChildAt(1), tabs.getTabsContainer()
-						.getChildAt(2), tabs.getTabsContainer().getChildAt(3), tabs
-						.getTabsContainer().getChildAt(4), tabs.getTabsContainer()
-						.getChildAt(5), mViewPager);
+				runTutorial();
 				return true;
 			// Respond to the action bar's Up/Home button
 			case android.R.id.home:
-				// This is called when the Home (Up) button is pressed in the action
-				// bar.
+				// Save before exit
+				saveClaim();
 
-				final ClaimDetailsFragment fragment = (ClaimDetailsFragment) fragmentReferences
-						.get(0);
-
-				if (fragment != null) {
-					if (fragment.checkChanges()) {
-
-						// Intent upIntent;
-						//
-						// upIntent = NavUtils.getParentActivityIntent(this);
-						// upIntent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP
-						// | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-						// startActivity(upIntent);
-						// finish();
-
-						return true;
-					} else {
-						Intent upIntent;
-
-						upIntent = NavUtils.getParentActivityIntent(this);
-						upIntent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP
-								| Intent.FLAG_ACTIVITY_CLEAR_TOP);
-						startActivity(upIntent);
-						finish();
-
-						return true;
-					}
-				} else {
-
-					Intent upIntent;
-
-					upIntent = NavUtils.getParentActivityIntent(this);
-					upIntent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP
-							| Intent.FLAG_ACTIVITY_CLEAR_TOP);
-					startActivity(upIntent);
-					finish();
-
-					return true;
-				}
+				Intent upIntent;
+				upIntent = NavUtils.getParentActivityIntent(this);
+				upIntent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				startActivity(upIntent);
+				finish();
+				return true;
 			default:
 				return super.onOptionsItemSelected(item);
 		}
 	}
 
-	// END SHOWCASE
-
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		menu.clear();
-		getMenuInflater().inflate(R.menu.claim, menu);
 		return true;
 	}
 
@@ -473,16 +426,12 @@ public class ClaimActivity extends FragmentActivity implements ClaimDispatcher,
 		}
 
 		@Override
-		public void destroyItem(android.view.ViewGroup container, int position,
-								Object object) {
-
-			// fragmentReferences.remove(position);
+		public void destroyItem(android.view.ViewGroup container, int position, Object object) {
 
 		}
 
 		@Override
 		public Fragment getItem(int position) {
-
 			Fragment fragment;
 			int sectionPosition = position - NUMBER_OF_STATIC_SECTIONS;
 			switch (position) {
@@ -662,16 +611,25 @@ public class ClaimActivity extends FragmentActivity implements ClaimDispatcher,
 	}
 
 	@Override
-	public void onClaimSaved() {
-		ClaimMapFragment claimMapFragment = (ClaimMapFragment) fragmentReferences.get(4);
-		if (editedFormPayload != null) {
-			editedFormPayload.setClaimId(claimId);
+	public void onClaimSaved(boolean created) {
+		AdjacentClaimsFragment adjacentClaimsFragment = (AdjacentClaimsFragment) fragmentReferences.get(3);
+
+		// Saved first time (claim created)
+		if(created) {
+			ClaimMapFragment claimMapFragment = (ClaimMapFragment) fragmentReferences.get(4);
+			if (editedFormPayload != null) {
+				editedFormPayload.setClaimId(claimId);
+			}
+			if (originalFormPayload != null) {
+				originalFormPayload.setClaimId(claimId);
+			}
+			if (claimMapFragment != null) {
+				claimMapFragment.reloadBoundary();
+			}
 		}
-		if (originalFormPayload != null) {
-			originalFormPayload.setClaimId(claimId);
+		if (adjacentClaimsFragment != null) {
+			adjacentClaimsFragment.saveNotes();
 		}
-		if (claimMapFragment != null)
-			claimMapFragment.onClaimSaved();
 	}
 
 	@Override

@@ -428,18 +428,12 @@ public class BasePropertyBoundary {
 		}
 
 		PolygonOptions polygonOptions = new PolygonOptions();
-		Log.d(this.getClass().getName(), "Adding boundary with "
-				+ vertices.size() + " vertices");
 		for (Vertex vertex:vertices) {
 			polygonOptions.add(vertex.getMapPosition());
 		}
 		if(holesVertices != null && holesVertices.size() >0){
-			Log.d(this.getClass().getName(), "Adding "
-					+ holesVertices.size() + " holes");
 			for(List<HoleVertex> holeVertices:holesVertices){
 				if(holeVertices != null && holeVertices.size()>0){
-					Log.d(this.getClass().getName(), "Adding hole with "
-							+ holeVertices.size() + " vertices");
 					List<LatLng> hole = new ArrayList<LatLng>();
 					for(HoleVertex holeVertex:holeVertices){
 						hole.add(holeVertex.getMapPosition());
@@ -458,8 +452,7 @@ public class BasePropertyBoundary {
 		ClaimType ct = new ClaimType();
 		String areaString = null;
 
-		DisplayNameLocalizer dnl = new DisplayNameLocalizer(
-				OpenTenureApplication.getInstance().getLocalization());
+		DisplayNameLocalizer dnl = new DisplayNameLocalizer(OpenTenureApplication.getInstance().getLocalization());
 
 		areaString = OpenTenureApplication.getContext().getString(
 				R.string.claim_area_label)

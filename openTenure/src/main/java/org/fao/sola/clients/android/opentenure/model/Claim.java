@@ -36,33 +36,46 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.UUID;
 
+import org.fao.sola.clients.android.opentenure.DisplayNameLocalizer;
 import org.fao.sola.clients.android.opentenure.OpenTenureApplication;
+import org.fao.sola.clients.android.opentenure.OpenTenurePreferencesActivity;
 import org.fao.sola.clients.android.opentenure.R;
+import org.fao.sola.clients.android.opentenure.exceptions.OpenTenureException;
 import org.fao.sola.clients.android.opentenure.filesystem.FileSystemUtilities;
 import org.fao.sola.clients.android.opentenure.filesystem.json.JsonUtilities;
+import org.fao.sola.clients.android.opentenure.form.FieldConstraint;
 import org.fao.sola.clients.android.opentenure.form.FormPayload;
+import org.fao.sola.clients.android.opentenure.form.FormTemplate;
+import org.fao.sola.clients.android.opentenure.maps.BasePropertyBoundary;
 import org.fao.sola.clients.android.opentenure.maps.Constants;
 import org.fao.sola.clients.android.opentenure.maps.WKTWriter;
+import org.fao.sola.clients.android.opentenure.tools.StringUtility;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.util.Log;
+import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.vividsolutions.jts.geom.Geometry;
 import com.vividsolutions.jts.geom.GeometryFactory;
-import com.vividsolutions.jts.geom.LineString;
 import com.vividsolutions.jts.geom.LinearRing;
-import com.vividsolutions.jts.geom.Point;
-import com.vividsolutions.jts.geom.Polygon;
-import com.vividsolutions.jts.geom.util.GeometryTransformer;
 
 public class Claim {
 
@@ -210,7 +223,15 @@ public class Claim {
         return Vertex.mapShell(getVertices());
     }
 
-    public LinearRing[] getMapHoles(){
+	public Date getCreationDate() {
+		return creationDate;
+	}
+
+	public void setCreationDate(Date creationDate) {
+		this.creationDate = creationDate;
+	}
+
+	public LinearRing[] getMapHoles(){
         return HoleVertex.mapHoles(getHolesVertices());
     }
 
@@ -223,6 +244,10 @@ public class Claim {
     }
 
     public String getMapWKT(){
+		if(getVertices() == null || getVertices().size() < 1){
+			return null;
+		}
+
 		WKTWriter ww = new WKTWriter(2);
 		StringWriter sw = new StringWriter();
 		GeometryFactory gf = new GeometryFactory();
@@ -267,6 +292,10 @@ public class Claim {
 	}
 
 	public String getGPSWKT(){
+		if(getVertices() == null || getVertices().size() < 1){
+			return null;
+		}
+
 		WKTWriter ww = new WKTWriter(2);
 		StringWriter sw = new StringWriter();
 		GeometryFactory gf = new GeometryFactory();
@@ -470,7 +499,11 @@ public class Claim {
 			statement.setString(3, claim.getClaimNumber());
 			statement.setString(4, claim.getName());
 			statement.setString(5, claim.getType());
-			statement.setString(6, claim.getPerson().getPersonId());
+			if(claim.getPerson() != null) {
+				statement.setString(6, claim.getPerson().getPersonId());
+			} else {
+				statement.setString(6, null);
+			}
 			if (claim.getChallengedClaim() != null) {
 				statement.setString(7, claim.getChallengedClaim().getClaimId());
 
@@ -529,7 +562,11 @@ public class Claim {
 			statement.setString(3, getClaimNumber());
 			statement.setString(4, getName());
 			statement.setString(5, getType());
-			statement.setString(6, getPerson().getPersonId());
+			if(getPerson() != null) {
+				statement.setString(6, getPerson().getPersonId());
+			} else {
+				statement.setString(6, null);
+			}
 			if (getChallengedClaim() != null) {
 				statement.setString(7, getChallengedClaim().getClaimId());
 			} else {
@@ -585,7 +622,11 @@ public class Claim {
 			statement.setString(1, claim.getStatus());
 			statement.setString(2, claim.getClaimNumber());
 			statement.setString(3, claim.getName());
-			statement.setString(4, claim.getPerson().getPersonId());
+			if(claim.getPerson() != null) {
+				statement.setString(4, claim.getPerson().getPersonId());
+			} else {
+				statement.setString(4, null);
+			}
 			statement.setString(5, claim.getType());
 			if (claim.getChallengedClaim() != null) {
 				statement.setString(6, claim.getChallengedClaim().getClaimId());
@@ -642,7 +683,11 @@ public class Claim {
 			statement.setString(1, getStatus());
 			statement.setString(2, getClaimNumber());
 			statement.setString(3, getName());
-			statement.setString(4, getPerson().getPersonId());
+			if(getPerson() != null) {
+				statement.setString(4, getPerson().getPersonId());
+			} else {
+				statement.setString(4, null);
+			}
 			statement.setString(5, getType());
 			if (getChallengedClaim() != null) {
 				statement.setString(6, getChallengedClaim().getClaimId());
@@ -733,7 +778,7 @@ public class Claim {
 			localConnection = OpenTenureApplication.getInstance().getDatabase()
 					.getConnection();
 			statement = localConnection
-					.prepareStatement("SELECT STATUS, CLAIM_NUMBER, NAME, PERSON_ID, TYPE, CHALLENGED_CLAIM_ID, CHALLANGE_EXPIRY_DATE, DATE_OF_START, LAND_USE, NOTES, RECORDER_NAME, VERSION, CLAIM_AREA, SURVEY_FORM, BOUNDARY_ID, DELETED FROM CLAIM WHERE CLAIM_ID=?");
+					.prepareStatement("SELECT STATUS, CLAIM_NUMBER, NAME, PERSON_ID, TYPE, CHALLENGED_CLAIM_ID, CHALLANGE_EXPIRY_DATE, DATE_OF_START, LAND_USE, NOTES, RECORDER_NAME, VERSION, CLAIM_AREA, SURVEY_FORM, BOUNDARY_ID, DELETED, CREATION_DATE FROM CLAIM WHERE CLAIM_ID=?");
 			statement.setString(1, claimId);
 			rs = statement.executeQuery();
 			while (rs.next()) {
@@ -761,6 +806,10 @@ public class Claim {
 				}
 				claim.setBoundaryId(rs.getString(15));
 				claim.setDeleted(rs.getBoolean(16));
+				Timestamp ts = rs.getTimestamp(17);
+				if(ts!=null){
+					claim.setCreationDate(new Date(ts.getTime()));
+				}
 			}
 
 		} catch (SQLException e) {
@@ -1000,9 +1049,8 @@ public class Claim {
 					+ "VERTEX.VERTEX_ID, " + "VERTEX.SEQUENCE_NUMBER, "
 					+ "VERTEX.GPS_LAT, " + "VERTEX.GPS_LON, "
 					+ "VERTEX.MAP_LAT, " + "VERTEX.MAP_LON "
-					+ "FROM CLAIM, PERSON, VERTEX "
-					+ "WHERE CLAIM.PERSON_ID=PERSON.PERSON_ID "
-					+ "AND CLAIM.CLAIM_ID=VERTEX.CLAIM_ID AND CLAIM.DELETED=FALSE "
+					+ "FROM (CLAIM LEFT JOIN PERSON ON CLAIM.PERSON_ID = PERSON.PERSON_ID) INNER JOIN VERTEX ON CLAIM.CLAIM_ID=VERTEX.CLAIM_ID "
+					+ "WHERE CLAIM.DELETED=FALSE "
 					+ "ORDER BY CLAIM_ID, VERTEX.SEQUENCE_NUMBER");
 			ResultSet rs = statement.executeQuery();
 			List<Vertex> vertices = null;
@@ -1105,7 +1153,8 @@ public class Claim {
 							+ "ATTACHMENT.STATUS, "
 							+ "ATTACHMENT.SIZE, "
 							+ "CP.DELETED, "
-							+ "CP.DATE_OF_START "
+							+ "CP.DATE_OF_START, "
+							+ "CP.CREATION_DATE "
 							+ "FROM (SELECT "
 							+ "CLAIM.CLAIM_ID, "
 							+ "CLAIM.STATUS, "
@@ -1115,12 +1164,13 @@ public class Claim {
 							+ "CLAIM.CHALLANGE_EXPIRY_DATE, "
 							+ "CLAIM.RECORDER_NAME, "
 							+ "CLAIM.DELETED, "
+							+ "CLAIM.CREATION_DATE, "
 							+ "CLAIM.DATE_OF_START, "
 							+ "PERSON.PERSON_ID, "
 							+ "PERSON.FIRST_NAME, "
 							+ "PERSON.LAST_NAME "
-							+ "FROM CLAIM, PERSON "
-							+ "WHERE CLAIM.PERSON_ID=PERSON.PERSON_ID) AS CP LEFT JOIN ATTACHMENT ON (CP.CLAIM_ID=ATTACHMENT.CLAIM_ID) "
+							+ "FROM CLAIM LEFT JOIN PERSON ON CLAIM.PERSON_ID=PERSON.PERSON_ID) AS CP "
+							+ "LEFT JOIN ATTACHMENT ON (CP.CLAIM_ID=ATTACHMENT.CLAIM_ID) "
 							+ "ORDER BY CP.DATE_OF_START DESC");
 			ResultSet rs = statement.executeQuery();
 			List<Attachment> attachments = null;
@@ -1153,12 +1203,19 @@ public class Claim {
 					claim.setRecorderName((rs.getString(7)));
 					claim.setDeleted(rs.getBoolean(14));
 					claim.setDateOfStart(rs.getDate(15));
+					Timestamp ts = rs.getTimestamp(16);
+					if(ts!=null){
+						claim.setCreationDate(new Date(ts.getTime()));
+					}
+
 					String personId = rs.getString(8);
-					Person person = new Person();
-					person.setPersonId(personId);
-					person.setFirstName(rs.getString(9));
-					person.setLastName(rs.getString(10));
-					claim.setPerson(person);
+					if(personId != null) {
+						Person person = new Person();
+						person.setPersonId(personId);
+						person.setFirstName(rs.getString(9));
+						person.setLastName(rs.getString(10));
+						claim.setPerson(person);
+					}
 				}
 				String attachmentId = rs.getString(11);
 				if (attachmentId != null) {
@@ -1342,9 +1399,7 @@ public class Claim {
 		Connection localConnection = null;
 		List<Claim> allClaims = null;
 		try {
-
-			localConnection = OpenTenureApplication.getInstance().getDatabase()
-					.getConnection();
+			localConnection = OpenTenureApplication.getInstance().getDatabase().getConnection();
 			allClaims = getSimplifiedClaimsForList(localConnection);
 		} catch (Exception exception) {
 			exception.printStackTrace();
@@ -1470,10 +1525,27 @@ public class Claim {
 	}
 
 	public String getSlogan(Context context) {
-		String claimName = getName().equalsIgnoreCase("") ? context
-				.getString(R.string.default_claim_name) : getName();
-		return claimName + ", " + context.getString(R.string.by) + ": "
-				+ getPerson().getFirstName() + " " + getPerson().getLastName();
+		String slogan = "";
+		if(!StringUtility.isEmpty(getName())){
+			slogan = getName();
+		} else {
+			if(context != null){
+				slogan = context.getString(R.string.default_claim_name);
+			}
+			if(getCreationDate() != null){
+				SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				slogan += " (" + df.format(getCreationDate()) + ")";
+			}
+		}
+
+		if(getPerson() != null){
+			if(context != null){
+				slogan += ", " + context.getString(R.string.by) + ": " + getPerson().getFirstName() + " " + getPerson().getLastName();
+			} else {
+				slogan += ", " + getPerson().getFirstName() + " " + getPerson().getLastName();
+			}
+		}
+		return slogan;
 	}
 
 	public static String getSlogan(String name, String firstName,
@@ -1582,6 +1654,79 @@ public class Claim {
 		return result;
 	}
 
+	/**
+	 * Validates claim.
+	 * @param throwException Indicates whether to throw an exception if validation fails
+	 * @return
+	 */
+	public boolean validate(boolean throwException) throws OpenTenureException {
+		// Claim name
+		if (getName() == null || getName().trim().equals("")) {
+			if(throwException){
+				throw new OpenTenureException(OpenTenureApplication.getContext().getResources().getString(R.string.message_unable_to_save_missing_claim_name));
+			}
+			return false;
+		}
+
+		// Person
+		if (getPerson() == null) {
+			if(throwException){
+				throw new OpenTenureException(OpenTenureApplication.getContext().getResources().getString(R.string.message_unable_to_save_missing_person));
+			}
+			return false;
+		}
+
+		// Shares
+		List<ShareProperty> shares = getShares();
+		if(shares == null || shares.size() < 1){
+			if(throwException){
+				throw new OpenTenureException(OpenTenureApplication.getContext().getResources().getString(R.string.message_ownership_missing));
+			}
+			return false;
+		}
+
+		// Dynamic form
+		FormPayload formPayload = getDynamicForm();
+		SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(OpenTenureApplication.getContext());
+		boolean enableFormValidation = preferences.getBoolean(OpenTenurePreferencesActivity.FORM_VALIDATION_PREF, true);
+
+		if (formPayload != null && enableFormValidation) {
+			FormTemplate formTemplate = formPayload.getFormTemplate();
+			if (formTemplate != null) {
+				DisplayNameLocalizer dnl = new DisplayNameLocalizer(OpenTenureApplication.getInstance().getLocalization());
+				FieldConstraint failedConstraint = formTemplate.getFailedConstraint(formPayload, dnl);
+
+				if ((failedConstraint = formTemplate.getFailedConstraint(formPayload, dnl)) != null) {
+					if(throwException){
+						throw new OpenTenureException(dnl.getLocalizedDisplayName(failedConstraint.displayErrorMsg()));
+					}
+					return false;
+				}
+			}
+		}
+
+		// Checking if the Geometry is mandatory and validate it
+		if (Boolean.parseBoolean(Configuration.getConfigurationByName("geometryRequired").getValue())) {
+			List<Vertex> vertices = Vertex.getVertices(claimId);
+			if (vertices.size() < 3) {
+				if(throwException){
+					throw new OpenTenureException(OpenTenureApplication.getContext().getResources().getString(R.string.message_map_not_yet_draw));
+				}
+				return false;
+			}
+		}
+
+		// Checking geometry is valid
+		if(!BasePropertyBoundary.isValidateGeometry(claimId)){
+			if(throwException){
+				throw new OpenTenureException(OpenTenureApplication.getContext().getResources().getString(R.string.message_invalid_geom));
+			}
+			return false;
+		}
+
+		return true;
+	}
+
 	private String claimId;
 	private String name;
 	private String type;
@@ -1610,4 +1755,5 @@ public class Claim {
 	private long claimArea;
 	private FormPayload dynamicForm;
 	private boolean deleted;
+	private Date creationDate;
 }

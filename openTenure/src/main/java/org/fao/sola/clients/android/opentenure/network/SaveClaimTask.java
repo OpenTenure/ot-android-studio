@@ -40,6 +40,7 @@ import org.fao.sola.clients.android.opentenure.R;
 import org.fao.sola.clients.android.opentenure.ViewHolder;
 import org.fao.sola.clients.android.opentenure.filesystem.FileSystemUtilities;
 import org.fao.sola.clients.android.opentenure.filesystem.json.JsonUtilities;
+import org.fao.sola.clients.android.opentenure.model.AttachmentStatus;
 import org.fao.sola.clients.android.opentenure.model.Claim;
 import org.fao.sola.clients.android.opentenure.model.ClaimStatus;
 import org.fao.sola.clients.android.opentenure.network.API.CommunityServerAPI;
@@ -416,16 +417,36 @@ public class SaveClaimTask extends AsyncTask<Object, ViewHolderResponse, ViewHol
 								.getString(R.string.uploading)
 								+ ": " + progress + " %");
 
+			// This is missing attachments that have to be uploaded to the server
 			List<Attachment> list = res.getAttachments();
-			for (Iterator<Attachment> iterator = list.iterator(); iterator
-					.hasNext();) {
+
+			// Check existing claims attachments and if any not matching the list of missing ones, that means it was already uploaded.
+			// This happens in the case of using existing claimant with photo, which was already uploaded to server in some other claim.
+			// In such case we should mark it as uploaded
+			for (Iterator<org.fao.sola.clients.android.opentenure.model.Attachment> iterator = claim.getAttachments().iterator(); iterator.hasNext();) {
+				org.fao.sola.clients.android.opentenure.model.Attachment existingAttachment = (org.fao.sola.clients.android.opentenure.model.Attachment) iterator.next();
+				boolean found = false;
+
+				for (Iterator<Attachment> iterator2 = list.iterator(); iterator.hasNext();) {
+					Attachment missingAttachment = (Attachment) iterator2.next();
+					if(existingAttachment.getAttachmentId().equalsIgnoreCase(missingAttachment.getId())){
+						found = true;
+						break;
+					}
+				}
+
+				if(!found) {
+					// Attachment exists on the server, mark it as downloaded
+					existingAttachment.setStatus(AttachmentStatus._UPLOADED);
+					org.fao.sola.clients.android.opentenure.model.Attachment.updateAttachment(existingAttachment);
+				}
+			}
+
+			// Run saving
+			for (Iterator<Attachment> iterator = list.iterator(); iterator.hasNext();) {
 				Attachment attachment = (Attachment) iterator.next();
-
 				SaveAttachmentTask saveAttachmentTask = new SaveAttachmentTask();
-				saveAttachmentTask
-						.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,
-								attachment.getId(), avh);
-
+				saveAttachmentTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, attachment.getId(), avh);
 			}
 
 			break;

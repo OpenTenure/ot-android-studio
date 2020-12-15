@@ -119,16 +119,7 @@ public class SectionElementFragment extends Fragment {
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		menu.clear();
-		inflater.inflate(R.menu.field_group, menu);
-
-		Claim claim = Claim.getClaim(claimActivity.getClaimId());
-		if (claim == null || !claim.isModifiable()) {
-			menu.removeItem(R.id.action_save);
-		}
-
-		if (getActivity().getIntent().getBooleanExtra(SectionElementActivity.HIDE_SAVE_BUTTON_KEY, false))
-			menu.removeItem(R.id.action_save);
-
+		//inflater.inflate(R.menu.field_group, menu);
 		super.onCreateOptionsMenu(menu, inflater);
 	}
 
@@ -165,30 +156,6 @@ public class SectionElementFragment extends Fragment {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		// handle item selection
-		Toast toast;
-		switch (item.getItemId()) {
-
-		case R.id.action_save:
-
-			int updated = updateClaim();
-
-			if (updated == 1) {
-				toast = Toast.makeText(rootView.getContext(),
-						R.string.message_saved, Toast.LENGTH_SHORT);
-				toast.show();
-
-			} else if (updated == 2) {
-				toast = Toast.makeText(rootView.getContext(),
-						R.string.message_error_startdate, Toast.LENGTH_SHORT);
-				toast.show();
-			} else {
-				toast = Toast.makeText(rootView.getContext(),
-						R.string.message_unable_to_save, Toast.LENGTH_SHORT);
-				toast.show();
-			}
-
-		}
 		return true;
 	}
 
@@ -265,37 +232,6 @@ public class SectionElementFragment extends Fragment {
 				}
 				i++;
 			}
-		}
-	}
-
-	public int updateClaim() {
-
-		int result = 0;
-
-		Claim claim = Claim.getClaim(claimActivity.getClaimId());
-		// Still allow saving the claim if the dynamic part contains errors
-
-		isFormValid();
-		claim.setDynamicForm(formDispatcher.getEditedFormPayload());
-
-		result = claim.update();
-
-		return result;
-	}
-
-	private boolean isFormValid() {
-		FormPayload formPayload = formDispatcher.getEditedFormPayload();
-		FormTemplate formTemplate = formDispatcher.getFormTemplate();
-		FieldConstraint constraint = null;
-		DisplayNameLocalizer dnl = new DisplayNameLocalizer(
-				OpenTenureApplication.getInstance().getLocalization());
-
-		if ((constraint = formTemplate.getFailedConstraint(formPayload, dnl)) != null) {
-			Toast.makeText(rootView.getContext(), dnl.getLocalizedDisplayName(constraint.displayErrorMsg()),
-					Toast.LENGTH_SHORT).show();
-			return false;
-		} else {
-			return true;
 		}
 	}
 

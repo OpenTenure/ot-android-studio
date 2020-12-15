@@ -29,6 +29,6 @@ package org.fao.sola.clients.android.opentenure;
 
 public interface ClaimListener {
 	
-	public void onClaimSaved();
+	public void onClaimSaved(boolean created);
 
 }

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_weight="1"
     android:fillViewport="true" >
 
     <LinearLayout
@@ -204,7 +205,7 @@
                     android:singleLine="false"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textColor="@color/status_created"
-                    android:visibility="visible" />
+                    android:visibility="gone" />
 
                 <Button
                     android:id="@+id/claimant_button"
@@ -229,18 +230,9 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_weight="0"
                 android:orientation="horizontal">
-                <ImageView
-                    android:id="@+id/action_remove_person"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="start|top"
-                    android:layout_weight="1"
-                    android:paddingStart="4dp"
-                    android:contentDescription="@string/action_remove_claim"
-                    android:src="@android:drawable/ic_delete"
-                    android:visibility="gone" />
+
                 <ImageView
                     android:id="@+id/claimant_picture"
                     android:layout_width="wrap_content"
@@ -251,9 +243,20 @@
                     android:contentDescription="@string/person_picture"
                     android:paddingEnd="4dp"
                     android:layout_gravity="end"
-                    android:src="@drawable/ic_contact_picture" />
+                    android:src="@drawable/ic_contact_picture"
+                    android:visibility="gone" />
 
-
+                <ImageView
+                    android:id="@+id/action_remove_person"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center|end"
+                    android:layout_weight="1"
+                    android:paddingStart="4dp"
+                    android:paddingEnd="4dp"
+                    android:contentDescription="@string/action_remove_claim"
+                    android:src="@android:drawable/ic_delete"
+                    android:visibility="gone" />
             </LinearLayout>
 
         </LinearLayout>
@@ -270,21 +273,17 @@
             android:id="@+id/challenge_to"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="4"
+            android:layout_weight="2"
             android:background="@color/light_background_opentenure"
             android:orientation="horizontal" >
-
             <LinearLayout
-                android:layout_width="350dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="8"
-                android:background="@color/light_background_opentenure"
-                android:orientation="vertical"
-                android:paddingTop="10sp" >
-
+                android:layout_weight="1"
+                android:orientation="horizontal">
                 <TextView
                     android:id="@+id/challenge_to_claim_id"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:background="@drawable/item_color"
@@ -294,42 +293,55 @@
 
                 <TextView
                     android:id="@+id/challenge_to_claim_slogan"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@color/dark_background_opentenure"
                     android:gravity="left|center"
-                    android:hint="@string/message_touch_to_select_a_claim"
                     android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="@color/status_created"
                     android:visibility="gone" />
 
                 <Button
                     android:id="@+id/challenge_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/action_select_challenge" />
+                    android:layout_weight="1"
+                    android:gravity="left|center"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:drawableStart="@android:drawable/ic_input_add"
+                    android:text="@string/action_select_challenge"
+                    android:visibility="visible" />
             </LinearLayout>
 
-            <ImageView
-                android:id="@+id/challenge_to_claimant_picture"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:contentDescription="@string/person_picture"
-                android:paddingEnd="4dp"
-                android:paddingTop="10sp"
-                android:src="@drawable/ic_contact_picture" />
+                android:layout_weight="0"
+                android:orientation="horizontal">
+                <ImageView
+                    android:id="@+id/challenge_to_claimant_picture"
+                    android:layout_width="wrap_content"
+                    android:minWidth="80dp"
+                    android:minHeight="80dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:contentDescription="@string/person_picture"
+                    android:paddingEnd="4dp"
+                    android:layout_gravity="end"
+                    android:src="@drawable/ic_contact_picture"
+                    android:visibility="gone" />
 
-            <ImageView
-                android:id="@+id/action_remove_challenge"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:contentDescription="@string/action_remove_claim"
-                android:paddingStart="10dp"
-                android:paddingTop="10dp"
-                android:src="@android:drawable/ic_delete"
-                android:visibility="invisible" />
+                <ImageView
+                    android:id="@+id/action_remove_challenge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center|end"
+                    android:layout_weight="1"
+                    android:paddingStart="4dp"
+                    android:paddingEnd="4dp"
+                    android:contentDescription="@string/action_remove_claim"
+                    android:src="@android:drawable/ic_delete"
+                    android:visibility="gone" />
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 

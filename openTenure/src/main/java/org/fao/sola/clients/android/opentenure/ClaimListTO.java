@@ -27,8 +27,11 @@
  */
 package org.fao.sola.clients.android.opentenure;
 
+import android.content.Context;
+
 import java.io.Serializable;
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.Comparator;
 import java.util.List;
 
@@ -37,10 +40,10 @@ import org.fao.sola.clients.android.opentenure.tools.StringUtility;
 
 public class ClaimListTO implements Serializable {
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = -7028473419982625766L;
-	
+
 	public String getId() {
 		return id;
 	}
@@ -140,17 +143,18 @@ public class ClaimListTO implements Serializable {
 	private List<Attachment> attachments;
 	private boolean isModifiable;
 	private Date dateOfStart;
+	private Date creationDate;
 
 	public static Comparator<ClaimListTO> startDateAsc = new Comparator<ClaimListTO>() {
 		@Override
 		public int compare(ClaimListTO claim1, ClaimListTO claim2) {
-			if(claim1.getDateOfStart() == null && claim2.getDateOfStart() == null){
+			if (claim1.getDateOfStart() == null && claim2.getDateOfStart() == null) {
 				return 0;
 			}
-			if(claim1.getDateOfStart() != null && claim2.getDateOfStart() == null){
+			if (claim1.getDateOfStart() != null && claim2.getDateOfStart() == null) {
 				return 1;
 			}
-			if(claim1.getDateOfStart() == null && claim2.getDateOfStart() != null){
+			if (claim1.getDateOfStart() == null && claim2.getDateOfStart() != null) {
 				return -1;
 			}
 			return claim1.getDateOfStart().compareTo(claim2.getDateOfStart());
@@ -167,7 +171,26 @@ public class ClaimListTO implements Serializable {
 	public static Comparator<ClaimListTO> claimNameAsc = new Comparator<ClaimListTO>() {
 		@Override
 		public int compare(ClaimListTO claim1, ClaimListTO claim2) {
-			return StringUtility.empty(claim1.getName()).compareTo(claim2.getName());
+			String name1 = StringUtility.empty(claim1.getName());
+			String name2 = StringUtility.empty(claim2.getName());
+
+			if (StringUtility.isEmpty(name1)) {
+				name1 = OpenTenureApplication.getInstance().getString(R.string.default_claim_name);
+				if (claim1.getCreationDate() != null) {
+					SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+					name1 += " (" + df.format(claim1.getCreationDate()) + ")";
+				}
+			}
+
+			if (StringUtility.isEmpty(name2)) {
+				name2 = OpenTenureApplication.getInstance().getString(R.string.default_claim_name);
+				if (claim2.getCreationDate() != null) {
+					SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+					name2 += " [" + df.format(claim1.getCreationDate()) + "]";
+				}
+			}
+
+			return name1.compareTo(name2);
 		}
 	};
 
@@ -191,4 +214,12 @@ public class ClaimListTO implements Serializable {
 			return claimNameAsc.compare(claim2, claim1);
 		}
 	};
+
+	public Date getCreationDate() {
+		return creationDate;
+	}
+
+	public void setCreationDate(Date creationDate) {
+		this.creationDate = creationDate;
+	}
 }
