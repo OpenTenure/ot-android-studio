@@ -525,5 +525,15 @@
     <string name="title_activity_select_bookmark">Open Tenure: Select bookmark</string>
     <string name="title_add_map_bookmark">Add map bookmark</string>
     <string name="title_bookmarks">Bookmarks</string>
+    <string name="boundary">"Zone Communautaire "</string>
+    <string name="title_boundaries">"Zones Communautaires "</string>
+    <string name="title_boundary_details">Détails</string>
+    <string name="boundary_name">Nom *</string>
+    <string name="boundary_type">Type</string>
+    <string name="boundary_authority">Gardien</string>
+    <string name="boundary_parent">Parcelle mère</string>
+    <string name="boundary_status">état</string>
+    <string name="title_activity_boundary">"Zone Communautaire "</string>
+    <string name="default_boundary_name">Nouveau</string>
 
 </resources>

@@ -86,7 +86,7 @@ public class BasePropertyBoundary {
 		return locationsVisible;
 	}
 
-    List<Vertex> getVertices() {
+    public List<Vertex> getVertices() {
         return vertices;
     }
 
@@ -207,29 +207,22 @@ public class BasePropertyBoundary {
 		GeometryFactory gf = new GeometryFactory();
 
 		// need at least 4 coordinates for a three vertices polygon
-		Coordinate[] coords = new Coordinate[(vertices.size() + 1) > 4 ? (vertices
-				.size() + 1) : 4];
+		Coordinate[] coords = new Coordinate[(vertices.size() + 1) > 4 ? (vertices.size() + 1) : 4];
 
 		int i = 0;
 
 		for (Vertex vertex : vertices) {
-			coords[i++] = new Coordinate(vertex.getMapPosition().longitude,
-					vertex.getMapPosition().latitude);
+			coords[i++] = new Coordinate(vertex.getMapPosition().longitude, vertex.getMapPosition().latitude);
 		}
 
 		if (vertices.size() == 2) {
 			// the source is a line segment so we replicate the second vertex to
 			// create a three vertices polygon
-			coords[i++] = new Coordinate(
-					vertices.get(1).getMapPosition().longitude, vertices.get(1)
-							.getMapPosition().latitude);
+			coords[i++] = new Coordinate(vertices.get(1).getMapPosition().longitude, vertices.get(1).getMapPosition().latitude);
 		}
 
 		// then we close the polygon
-
-		coords[coords.length - 1] = new Coordinate(vertices.get(0)
-				.getMapPosition().longitude,
-				vertices.get(0).getMapPosition().latitude);
+		coords[coords.length - 1] = new Coordinate(vertices.get(0).getMapPosition().longitude, vertices.get(0).getMapPosition().latitude);
 
 		polygon = gf.createPolygon(coords);
 		polygon.setSRID(Constants.SRID);
@@ -238,8 +231,7 @@ public class BasePropertyBoundary {
 		if ((claim != null)
 				&& updateArea
 				&& OpenTenureApplication.getClaimId() != null
-				&& (OpenTenureApplication.getClaimId().equals(claim
-						.getClaimId()))) {
+				&& (OpenTenureApplication.getClaimId().equals(claim.getClaimId()))) {
 
 			area = (long) Math.round(Vertex.getArea(vertices) - HoleVertex.getArea(holesVertices));
 
@@ -286,9 +278,7 @@ public class BasePropertyBoundary {
 				claim.updateArea((long) area);
 				claim.setClaimArea((long) area);
 				OpenTenureApplication.getDetailsFragment().reloadArea(claim);
-
 			}
-
 		}
 
 		Geometry envelope = polygon.getEnvelope();
@@ -319,19 +309,32 @@ public class BasePropertyBoundary {
 		}
 
 		try {
-			center = new LatLng(polygon.getInteriorPoint().getCoordinate().y,
-					polygon.getInteriorPoint().getCoordinate().x);
+			center = new LatLng(polygon.getInteriorPoint().getCoordinate().y, polygon.getInteriorPoint().getCoordinate().x);
 		} catch (Exception e) {
-			center = new LatLng(polygon.getCentroid().getCoordinate().y,
-					polygon.getCentroid().getCoordinate().x);
+			center = new LatLng(polygon.getCentroid().getCoordinate().y, polygon.getCentroid().getCoordinate().x);
 		}
 	}
 
-	protected boolean validateGeometry(){
+	public static boolean isValidateGeometry(String claimId){
+		Claim claim = Claim.getClaim(claimId);
+		if(claim == null) {
+			return true;
+		}
+
+		List<Vertex> vertices = claim.getVertices();
+		List<List<HoleVertex>> holeVertices = claim.getHolesVertices();
+
+		if(vertices == null || vertices.size() <= 0){
+			return true;
+		}
+		return isValidateGeometry(vertices, holeVertices);
+	}
+
+	public static boolean isValidateGeometry(List<Vertex> vertices, List<List<HoleVertex>> holeVertices){
 		GeometryFactory gf = new GeometryFactory();
 
 		Geometry shell = Vertex.mapShell(vertices);
-		LinearRing[] holes = HoleVertex.mapHoles(holesVertices);
+		LinearRing[] holes = HoleVertex.mapHoles(holeVertices);
 		Geometry geometry;
 		if(shell instanceof LinearRing){
 			if(holes != null && holes.length > 0){
@@ -364,10 +367,12 @@ public class BasePropertyBoundary {
 			isValid = geometry.isValid();
 		}else{
 			isValid = false;
-
 		}
-		Log.d(this.getClass().getName(), "Calculated polygon isValid: " + isValid);
 		return isValid;
+	}
+
+	public boolean validateGeometry(){
+		return BasePropertyBoundary.isValidateGeometry(vertices, holesVertices);
 	}
 
 	private Marker createPropertyMarker(LatLng position, String title) {
@@ -423,18 +428,12 @@ public class BasePropertyBoundary {
 		}
 
 		PolygonOptions polygonOptions = new PolygonOptions();
-		Log.d(this.getClass().getName(), "Adding boundary with "
-				+ vertices.size() + " vertices");
 		for (Vertex vertex:vertices) {
 			polygonOptions.add(vertex.getMapPosition());
 		}
 		if(holesVertices != null && holesVertices.size() >0){
-			Log.d(this.getClass().getName(), "Adding "
-					+ holesVertices.size() + " holes");
 			for(List<HoleVertex> holeVertices:holesVertices){
 				if(holeVertices != null && holeVertices.size()>0){
-					Log.d(this.getClass().getName(), "Adding hole with "
-							+ holeVertices.size() + " vertices");
 					List<LatLng> hole = new ArrayList<LatLng>();
 					for(HoleVertex holeVertex:holeVertices){
 						hole.add(holeVertex.getMapPosition());
@@ -453,8 +452,7 @@ public class BasePropertyBoundary {
 		ClaimType ct = new ClaimType();
 		String areaString = null;
 
-		DisplayNameLocalizer dnl = new DisplayNameLocalizer(
-				OpenTenureApplication.getInstance().getLocalization());
+		DisplayNameLocalizer dnl = new DisplayNameLocalizer(OpenTenureApplication.getInstance().getLocalization());
 
 		areaString = OpenTenureApplication.getContext().getString(
 				R.string.claim_area_label)

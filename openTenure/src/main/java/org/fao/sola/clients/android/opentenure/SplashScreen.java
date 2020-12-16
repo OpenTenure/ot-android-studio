@@ -29,13 +29,20 @@ package org.fao.sola.clients.android.opentenure;
 
 
 
+import android.Manifest;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.v4.app.ActivityCompat;
+import android.widget.Toast;
 
 
 public class SplashScreen extends Activity {
+	public static final int REQUEST_CODE_ALL=9;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -68,12 +75,65 @@ public class SplashScreen extends Activity {
 		@Override
 		protected void onPostExecute(Void result) {
 			super.onPostExecute(result);
-			Intent i = new Intent(SplashScreen.this, InitializationActivity.class);
-			startActivity(i);
-
-			finish();
+			if (checkPermissions()) {
+				Intent i = new Intent(SplashScreen.this, InitializationActivity.class);
+				startActivity(i);
+				finish();
+			} else {
+				requestPermissions();
+			}
 		}
 
+		private void requestPermissions() {
+			ActivityCompat.requestPermissions(SplashScreen.this, new String[] {
+							Manifest.permission.ACCESS_FINE_LOCATION,
+							Manifest.permission.CAMERA,
+							Manifest.permission.WRITE_EXTERNAL_STORAGE
+					}, REQUEST_CODE_ALL);
+
+		}
+		private boolean checkPermissions() {
+
+			int FirstPermissionResult = ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION);
+			int SecondPermissionResult = ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CAMERA);
+			int ThirdPermissionResult = ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE);
+
+			return FirstPermissionResult == PackageManager.PERMISSION_GRANTED &&
+					SecondPermissionResult == PackageManager.PERMISSION_GRANTED &&
+					ThirdPermissionResult == PackageManager.PERMISSION_GRANTED;
+		}
+	}
+
+	@Override
+	public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+		switch (requestCode) {
+			case REQUEST_CODE_ALL:
+				if (grantResults.length > 0) {
+
+					boolean gpsPerm = grantResults[0] == PackageManager.PERMISSION_GRANTED;
+					boolean cameraPerm = grantResults[1] == PackageManager.PERMISSION_GRANTED;
+					boolean storagePerm = grantResults[2] == PackageManager.PERMISSION_GRANTED;
+
+					if (gpsPerm && cameraPerm && storagePerm) {
+						Intent i = new Intent(SplashScreen.this, InitializationActivity.class);
+						startActivity(i);
+						finish();
+					}
+					else {
+						Toast.makeText(this,"Permissions are necessary",Toast.LENGTH_LONG).show();
+						final Handler handler = new Handler();
+						handler.postDelayed(new Runnable() {
+							@Override
+							public void run() {
+								System.exit(0);
+							}
+						}, 4000);
+
+					}
+				}
+
+				break;
+		}
 	}
 
 }

@@ -66,12 +66,13 @@ class TextDrawer {
     public void draw(Canvas canvas) {
         if (shouldDrawText()) {
             float[] textPosition = getBestTextPosition();
+            int width = Math.max(0, (int) mBestTextPosition[2]);
 
             if (!TextUtils.isEmpty(mTitle)) {
                 canvas.save();
                 if (hasRecalculated) {
                     mDynamicTitleLayout = new DynamicLayout(mTitle, titlePaint,
-                            (int) textPosition[2], Layout.Alignment.ALIGN_NORMAL,
+                            width, Layout.Alignment.ALIGN_NORMAL,
                             1.0f, 1.0f, true);
                 }
                 if (mDynamicTitleLayout != null) {
@@ -85,7 +86,7 @@ class TextDrawer {
                 canvas.save();
                 if (hasRecalculated) {
                     mDynamicDetailLayout = new DynamicLayout(mDetails, textPaint,
-                            (int) textPosition[2],
+                            width,
                             Layout.Alignment.ALIGN_NORMAL,
                             1.2f, 1.0f, true);
                 }

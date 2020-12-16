@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="Gradle: ./openTenure/libs/jts-1.14.jar">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/openTenure/libs/jts-1.14.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

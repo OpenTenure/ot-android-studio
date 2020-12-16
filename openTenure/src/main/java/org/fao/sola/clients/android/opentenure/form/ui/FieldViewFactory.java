@@ -37,6 +37,7 @@ import java.util.Locale;
 import org.fao.sola.clients.android.opentenure.ModeDispatcher.Mode;
 import org.fao.sola.clients.android.opentenure.DisplayNameLocalizer;
 import org.fao.sola.clients.android.opentenure.R;
+import org.fao.sola.clients.android.opentenure.components.DateField;
 import org.fao.sola.clients.android.opentenure.form.FieldConstraint;
 import org.fao.sola.clients.android.opentenure.form.FieldConstraintOption;
 import org.fao.sola.clients.android.opentenure.form.FieldConstraintType;
@@ -447,9 +448,9 @@ public class FieldViewFactory {
 		}
 
 		final String format = tmpFormat;
-		final EditText datetime;
+		final DateField datetime;
 		final Calendar localCalendar = Calendar.getInstance();
-		datetime = new EditText(activity);
+		datetime = new DateField(activity);
 		datetime.setPadding(0, 10, 0, 8);
 		datetime.setTextSize(20);
 		datetime.setTextAppearance(activity,
@@ -463,40 +464,11 @@ public class FieldViewFactory {
 			datetime.setText(payload.getStringPayload());
 		}
 		if (mode == Mode.MODE_RO) {
-			datetime.setEnabled(false);
-			datetime.setClickable(false);
+			datetime.setOnTouchListener(null);
+			datetime.setFocusable(false);
 			datetime.setLongClickable(false);
 		} else {
-			datetime.setHint(dnl.getLocalizedDisplayName(field.getHint()));
-			final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
-
-				@Override
-				public void onDateSet(DatePicker view, int year,
-						int monthOfYear, int dayOfMonth) {
-					localCalendar.set(Calendar.YEAR, year);
-					localCalendar.set(Calendar.MONTH, monthOfYear);
-					localCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-					if (format != null) {
-						SimpleDateFormat sdf = new SimpleDateFormat(format,
-								Locale.US);
-						sdf.format(localCalendar.getTime());
-						datetime.setText(sdf.format(localCalendar.getTime()));
-					}
-				}
-
-			};
-
-			datetime.setOnLongClickListener(new OnLongClickListener() {
-
-				@Override
-				public boolean onLongClick(View v) {
-					new DatePickerDialog(activity, date, localCalendar
-							.get(Calendar.YEAR), localCalendar
-							.get(Calendar.MONTH), localCalendar
-							.get(Calendar.DAY_OF_MONTH)).show();
-					return true;
-				}
-			});
+			//datetime.setHint(dnl.getLocalizedDisplayName(field.getHint()));
 			datetime.addTextChangedListener(new TextWatcher() {
 				long lastTime = System.currentTimeMillis();
 

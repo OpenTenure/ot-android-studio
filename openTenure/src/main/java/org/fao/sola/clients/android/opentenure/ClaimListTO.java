@@ -27,17 +27,23 @@
  */
 package org.fao.sola.clients.android.opentenure;
 
+import android.content.Context;
+
 import java.io.Serializable;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.util.Comparator;
 import java.util.List;
 
 import org.fao.sola.clients.android.opentenure.model.Attachment;
+import org.fao.sola.clients.android.opentenure.tools.StringUtility;
 
 public class ClaimListTO implements Serializable {
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = -7028473419982625766L;
-	
+
 	public String getId() {
 		return id;
 	}
@@ -110,14 +116,110 @@ public class ClaimListTO implements Serializable {
 		this.deleted = deleted;
 	}
 
+	public Date getDateOfStart() {
+		return dateOfStart;
+	}
+
+	public void setDateOfStart(Date dateOfStart) {
+		this.dateOfStart = dateOfStart;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	private String number;
 	private String id;
 	private String slogan;
 	private String status;
 	private String remaingDays;
 	private String personId;
+	private String name;
 	private boolean deleted;
 	private List<Attachment> attachments;
 	private boolean isModifiable;
+	private Date dateOfStart;
+	private Date creationDate;
 
+	public static Comparator<ClaimListTO> startDateAsc = new Comparator<ClaimListTO>() {
+		@Override
+		public int compare(ClaimListTO claim1, ClaimListTO claim2) {
+			if (claim1.getDateOfStart() == null && claim2.getDateOfStart() == null) {
+				return 0;
+			}
+			if (claim1.getDateOfStart() != null && claim2.getDateOfStart() == null) {
+				return 1;
+			}
+			if (claim1.getDateOfStart() == null && claim2.getDateOfStart() != null) {
+				return -1;
+			}
+			return claim1.getDateOfStart().compareTo(claim2.getDateOfStart());
+		}
+	};
+
+	public static Comparator<ClaimListTO> claimNumberAsc = new Comparator<ClaimListTO>() {
+		@Override
+		public int compare(ClaimListTO claim1, ClaimListTO claim2) {
+			return StringUtility.empty(claim1.getNumber()).compareTo(claim2.getNumber());
+		}
+	};
+
+	public static Comparator<ClaimListTO> claimNameAsc = new Comparator<ClaimListTO>() {
+		@Override
+		public int compare(ClaimListTO claim1, ClaimListTO claim2) {
+			String name1 = StringUtility.empty(claim1.getName());
+			String name2 = StringUtility.empty(claim2.getName());
+
+			if (StringUtility.isEmpty(name1)) {
+				name1 = OpenTenureApplication.getInstance().getString(R.string.default_claim_name);
+				if (claim1.getCreationDate() != null) {
+					SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+					name1 += " (" + df.format(claim1.getCreationDate()) + ")";
+				}
+			}
+
+			if (StringUtility.isEmpty(name2)) {
+				name2 = OpenTenureApplication.getInstance().getString(R.string.default_claim_name);
+				if (claim2.getCreationDate() != null) {
+					SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+					name2 += " [" + df.format(claim1.getCreationDate()) + "]";
+				}
+			}
+
+			return name1.compareTo(name2);
+		}
+	};
+
+	public static Comparator<ClaimListTO> startDateDesc = new Comparator<ClaimListTO>() {
+		@Override
+		public int compare(ClaimListTO claim1, ClaimListTO claim2) {
+			return startDateAsc.compare(claim2, claim1);
+		}
+	};
+
+	public static Comparator<ClaimListTO> claimNumberDesc = new Comparator<ClaimListTO>() {
+		@Override
+		public int compare(ClaimListTO claim1, ClaimListTO claim2) {
+			return claimNumberAsc.compare(claim2, claim1);
+		}
+	};
+
+	public static Comparator<ClaimListTO> claimNameDesc = new Comparator<ClaimListTO>() {
+		@Override
+		public int compare(ClaimListTO claim1, ClaimListTO claim2) {
+			return claimNameAsc.compare(claim2, claim1);
+		}
+	};
+
+	public Date getCreationDate() {
+		return creationDate;
+	}
+
+	public void setCreationDate(Date creationDate) {
+		this.creationDate = creationDate;
+	}
 }

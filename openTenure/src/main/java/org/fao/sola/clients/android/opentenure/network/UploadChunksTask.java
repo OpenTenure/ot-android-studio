@@ -30,11 +30,14 @@ package org.fao.sola.clients.android.opentenure.network;
 import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Arrays;
 import java.util.UUID;
 
 import org.fao.sola.clients.android.opentenure.AttachmentViewHolder;
+import org.fao.sola.clients.android.opentenure.BuildConfig;
 import org.fao.sola.clients.android.opentenure.OpenTenureApplication;
 import org.fao.sola.clients.android.opentenure.R;
 import org.fao.sola.clients.android.opentenure.ViewHolder;
@@ -54,7 +57,9 @@ import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import android.net.Uri;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -70,21 +75,26 @@ public class UploadChunksTask extends AsyncTask<Object, ViewHolderResponse, View
 	protected ViewHolderResponse doInBackground(Object... params) {
 
 		boolean success = false;
-		DataInputStream dis = null;
 
 		UploadChunksResponse upResponse = new UploadChunksResponse();
 		ViewHolderResponse vhr = new ViewHolderResponse();
 
+		Attachment attachment = Attachment.getAttachment((String) params[0]);
+		DataInputStream dis = null;
+
 		try {
+			InputStream fis = null;
 
-			Attachment attachment = Attachment.getAttachment((String) params[0]);
-
-			File toTransfer = new File(attachment.getPath());
-
-			FileInputStream fis = new FileInputStream(toTransfer);
-			upResponse.setAttachmentId((String) params[0]);
+			if(attachment.getPath().contains("content://")){
+				fis = OpenTenureApplication.getContext().getContentResolver().openInputStream(Uri.parse(attachment.getPath()));
+			} else {
+				File toTransfer = new File(attachment.getPath());
+				fis = new FileInputStream(toTransfer);
+			}
 
 			dis = new DataInputStream(fis);
+			upResponse.setAttachmentId((String) params[0]);
+
 			dis.skipBytes((int) attachment.getUploadedBytes());
 
 			Integer startPosition = (int) attachment.getUploadedBytes();
@@ -148,6 +158,7 @@ public class UploadChunksTask extends AsyncTask<Object, ViewHolderResponse, View
 			upResponse.setSuccess(success);
 
 		} catch (Exception e) {
+			Log.e("Error", "Error uploading chunks for attachment with URI: "+ attachment.getPath());
 			e.printStackTrace();
 		} finally {
 			if (dis != null) {
@@ -212,6 +223,7 @@ public class UploadChunksTask extends AsyncTask<Object, ViewHolderResponse, View
 			 * close the flow. There 's the risk of a infinite loop
 			 */
 
+			Log.d(">>>>>>>>>>>>>>> ", "ATTACHMENT CHUNKS ARE UPLOADED FOR [" + res.getAttachmentId() + "] CALLING SAVE TASK AGAIN");
 			SaveAttachmentTask sat = new SaveAttachmentTask();
 			sat.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, res.getAttachmentId(), vhr.getVh());
 

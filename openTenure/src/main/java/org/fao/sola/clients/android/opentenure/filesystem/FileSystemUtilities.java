@@ -28,6 +28,8 @@
 package org.fao.sola.clients.android.opentenure.filesystem;
 
 import java.io.BufferedInputStream;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -35,6 +37,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.file.Files;
 import java.util.Iterator;
 import java.util.List;
 
@@ -53,7 +56,12 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.CompressFormat;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
+import android.media.ExifInterface;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Environment;
+import android.provider.MediaStore;
 import android.util.Log;
 
 public class FileSystemUtilities {
@@ -403,7 +411,7 @@ public class FileSystemUtilities {
 
 		} catch (Exception e) {
 			// TODO: handle exception
-			Log.e("org.fao.sola.clients.android.opentenure.filesystem", e.getMessage());
+			Log.e("opentenure.filesystem", e.getMessage());
 		}
 
 		if (multiFolder.exists() && multiFolder.isDirectory()) {
@@ -425,19 +433,18 @@ public class FileSystemUtilities {
 		return new File(getOpentenureFolder(), _CERTIFICATES);
 	}
 
-	public static File copyFileInAttachFolder(String claimID, File source) {
-
+	public static File copyStreamInAttachFolder(String claimID, InputStream reader, String fileName) {
 		File dest = null;
 
 		try {
 
-			dest = new File(getAttachmentFolder(claimID), source.getName());
+			dest = new File(getAttachmentFolder(claimID), fileName);
 			dest.createNewFile();
 
 			Log.d("FileSystemUtilities", dest.getAbsolutePath());
 			byte[] buffer = new byte[1024];
 
-			FileInputStream reader = new FileInputStream(source);
+
 			FileOutputStream writer = new FileOutputStream(dest);
 
 			BufferedInputStream br = new BufferedInputStream(reader);
@@ -457,6 +464,14 @@ public class FileSystemUtilities {
 		}
 
 		return dest;
+	}
+	public static File copyFileInAttachFolder(String claimID, File source) {
+		try (FileInputStream reader = new FileInputStream(source)) {
+			return copyStreamInAttachFolder(claimID, reader, source.getName());
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	public static File copyFileInClaimantFolder(String personId, File source) {
@@ -531,8 +546,9 @@ public class FileSystemUtilities {
 
 	public static String getJsonClaim(String claimId) {
 		try {
-			File folder = getClaimFolder(claimId);
-			FileInputStream fis = new FileInputStream(folder + File.separator + "claim.json");
+			File claimFile = new File(getClaimFolder(claimId)+ File.separator + "claim.json");
+			boolean isFileExists = claimFile.exists();
+			FileInputStream fis = new FileInputStream(claimFile);
 			return CommunityServerAPIUtilities.Slurp(fis, 100);
 		} catch (Exception e) {
 			Log.d("FileSystemUtilities", "Error reading claim.json :" + e.getMessage());
@@ -710,6 +726,182 @@ public class FileSystemUtilities {
 
 	}
 
+	public static void rotateAndCompressImage(Context context, Uri imageUri) {
+		try {
+			int MAX_HEIGHT = 1024;
+			int MAX_WIDTH = 1024;
+
+			// First decode with inJustDecodeBounds=true to check dimensions
+			final BitmapFactory.Options options = new BitmapFactory.Options();
+			options.inJustDecodeBounds = true;
+			InputStream imageStream = context.getContentResolver().openInputStream(imageUri);
+			BitmapFactory.decodeStream(imageStream, null, options);
+			imageStream.close();
+
+			// Calculate inSampleSize
+			options.inSampleSize = calculateInSampleSize(options, MAX_WIDTH, MAX_HEIGHT);
+
+			// Decode bitmap with inSampleSize set
+			options.inJustDecodeBounds = false;
+			imageStream = context.getContentResolver().openInputStream(imageUri);
+			Bitmap img = BitmapFactory.decodeStream(imageStream, null, options);
+			imageStream.close();
+
+			imageStream = context.getContentResolver().openInputStream(imageUri);
+			ExifInterface ei;
+			if (Build.VERSION.SDK_INT > 23)
+				ei = new ExifInterface(imageStream);
+			else
+				ei = new ExifInterface(imageUri.getPath());
+
+			imageStream.close();
+
+			int orientation = ei.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
+			int rotationDegree = 0;
+
+			switch (orientation) {
+				case ExifInterface.ORIENTATION_ROTATE_90:
+					rotationDegree = 90;
+					break;
+				case ExifInterface.ORIENTATION_ROTATE_180:
+					rotationDegree = 180;
+					break;
+				case ExifInterface.ORIENTATION_ROTATE_270:
+					rotationDegree = 270;
+					break;
+			}
+
+			// Rotation is required
+			if(rotationDegree > 0){
+				Matrix matrix = new Matrix();
+				matrix.postRotate(rotationDegree);
+				Bitmap rotatedImg = Bitmap.createBitmap(img, 0, 0, img.getWidth(), img.getHeight(), matrix, true);
+				img.recycle();
+				img = rotatedImg;
+			}
+
+			// Save
+			try (OutputStream out = context.getContentResolver().openOutputStream(imageUri)){
+				img.compress(CompressFormat.JPEG, 80, out);
+				out.flush();
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
+		} catch (IOException ex) {
+			Log.e(FileSystemUtilities.class.getName(), "Failed to rotate image: " + ex.getMessage());
+			ex.printStackTrace();
+		}
+	}
+
+	private static int calculateInSampleSize(BitmapFactory.Options options, int reqWidth, int reqHeight) {
+		// Raw height and width of image
+		final int height = options.outHeight;
+		final int width = options.outWidth;
+		int inSampleSize = 1;
+
+		if (height > reqHeight || width > reqWidth) {
+			// Calculate ratios of height and width to requested height and width
+			final int heightRatio = Math.round((float) height / (float) reqHeight);
+			final int widthRatio = Math.round((float) width / (float) reqWidth);
+
+			// Choose the smallest ratio as inSampleSize value, this will guarantee a final image
+			// with both dimensions larger than or equal to the requested height and width.
+			inSampleSize = heightRatio < widthRatio ? heightRatio : widthRatio;
+
+			// This offers some additional logic in case the image has a strange
+			// aspect ratio. For example, a panorama may have a much larger
+			// width than height. In these cases the total pixels might still
+			// end up being too large to fit comfortably in memory, so we should
+			// be more aggressive with sample down the image (=larger inSampleSize).
+			final float totalPixels = width * height;
+
+			// Anything more than 2x the requested pixels we'll sample down further
+			final float totalReqPixelsCap = reqWidth * reqHeight * 2;
+
+			while (totalPixels / (inSampleSize * inSampleSize) > totalReqPixelsCap) {
+				inSampleSize++;
+			}
+		}
+		return inSampleSize;
+	}
+
+	public static int getFileSizeFromUri(Context ctx, Uri uri){
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		byte[] buffer = new byte[1024];
+		int len;
+
+		// read bytes from input stream to buffer
+		try (InputStream is = ctx.getContentResolver().openInputStream(uri)) {
+			while ((len = is.read(buffer)) != -1) {
+				baos.write(buffer, 0, len);
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return baos.size();
+	}
+
+	/**
+	* @deprecated
+	 * Compress JPEG image
+	*/
+	public static void reduceJpeg(Uri imageUri, Context context) {
+		ByteArrayOutputStream original = new ByteArrayOutputStream();
+		byte[] buffer = new byte[1024];
+		int len;
+
+		// read bytes from input stream to buffer
+		try (InputStream is = context.getContentResolver().openInputStream(imageUri)) {
+			while ((len = is.read(buffer)) != -1) {
+				original.write(buffer, 0, len);
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		/* 100 = max quality, 0 = max compression */
+		int quality = 0;
+		int size = original.size();
+
+		if (size < 1000000) {
+			quality = 80;
+		} else if (size >= 1000000 && size < 2000000) {
+			quality = 60;
+		} else if (size >= 2000000) {
+			quality = 40;
+		}
+
+		try (ByteArrayInputStream in = new ByteArrayInputStream(original.toByteArray())) {
+			Bitmap bitmap = BitmapFactory.decodeStream(in);
+			in.close();
+
+			try (OutputStream out = context.getContentResolver().openOutputStream(imageUri)) {
+				if (bitmap.compress(CompressFormat.JPEG, quality, out)) {
+					out.flush();
+				} else {
+					throw new Exception("Failed to save the image as a JPEG");
+				}
+			} catch (Exception e) {
+				Log.e(FileSystemUtilities.class.getName(), "Failed to compress image :" + e.getMessage());
+				e.printStackTrace();
+			}
+		} catch (Exception e) {
+			Log.e(FileSystemUtilities.class.getName(), "Failed to compress image :" + e.getMessage());
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * @deprecated
+	 * Compress JPEG file
+	 */
 	public static File reduceJpeg(File file) {
 
 		InputStream in = null;

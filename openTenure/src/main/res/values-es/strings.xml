@@ -525,5 +525,15 @@
     <string name="wtms_url_pref_dialog_title">Enter the URL of your Web Tiles Map Server</string>
     <string name="wtms_url_pref_summary">Base URL of your Web Tiles Map Server</string>
     <string name="wtms_url_pref_title">WTMS URL</string>
-
+    <string name="boundary">Áreas de la Comunidad</string>
+    <string name="title_boundaries">Área de la Comunidad</string>
+    <string name="title_boundary_details">Detalles</string>
+    <string name="boundary_name">Nombre *</string>
+    <string name="boundary_new">Nuevo</string>
+    <string name="boundary_authority">Autoridad encargada</string>
+    <string name="boundary_parent">Parcela principal</string>
+    <string name="boundary_type">"Tipo de tenencia  "</string>
+    <string name="boundary_status">"Estado "</string>
+    <string name="title_activity_boundary">Área de la Comunidad</string>
+    <string name="default_boundary_name">Nuevo</string>
 </resources>

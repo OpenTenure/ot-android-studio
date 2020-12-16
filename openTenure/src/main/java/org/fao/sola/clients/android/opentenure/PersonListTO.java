@@ -48,6 +48,14 @@ public class PersonListTO implements Serializable {
 		this.slogan = slogan;
 	}
 
+	public String getPersonType() {
+		return personType;
+	}
+
+	public void setPersonType(String personType) {
+		this.personType = personType;
+	}
+
 	public boolean hasClaimOrShare() {
 		return hasClaimOrShare;
 	}
@@ -58,4 +66,5 @@ public class PersonListTO implements Serializable {
 	private String id;
 	private String slogan;
 	private boolean hasClaimOrShare;
+	private String personType;
 }

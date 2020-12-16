@@ -214,9 +214,9 @@ public class MainMapFragment extends SupportMapFragment implements OnCameraChang
 	};
 
 	private void showMarkerEditControls() {
-		
+
 		hideMarkerEditControls();
-		
+
 		Projection projection = map.getProjection();
 		Point markerScreenPosition = projection.toScreenLocation(selectedMarker.getPosition());
 
@@ -226,16 +226,16 @@ public class MainMapFragment extends SupportMapFragment implements OnCameraChang
 		int markerWidth = bmp.getWidth();
 
 		remove = map.addMarker(new MarkerOptions()
-		.position(projection.fromScreenLocation(getControlRemovePosition(markerScreenPosition, markerWidth, markerHeight)))
-		.anchor(0.5f, 0.5f)
-		.icon(BitmapDescriptorFactory
-				.fromResource(R.drawable.ic_menu_close_clear_cancel)));
+				.position(projection.fromScreenLocation(getControlRemovePosition(markerScreenPosition, markerWidth, markerHeight)))
+				.anchor(0.5f, 0.5f)
+				.icon(BitmapDescriptorFactory
+						.fromResource(R.drawable.ic_menu_close_clear_cancel)));
 		remove.setClusterGroup(ClusterGroup.NOT_CLUSTERED);
 		cancel = map.addMarker(new MarkerOptions()
-		.position(projection.fromScreenLocation(getControlCancelPosition(markerScreenPosition, markerWidth, markerHeight)))
-		.anchor(0.5f, 0.5f)
-		.icon(BitmapDescriptorFactory
-				.fromResource(R.drawable.ic_menu_block)));
+				.position(projection.fromScreenLocation(getControlCancelPosition(markerScreenPosition, markerWidth, markerHeight)))
+				.anchor(0.5f, 0.5f)
+				.icon(BitmapDescriptorFactory
+						.fromResource(R.drawable.ic_menu_block)));
 		cancel.setClusterGroup(ClusterGroup.NOT_CLUSTERED);
 	}
 
@@ -408,9 +408,9 @@ public class MainMapFragment extends SupportMapFragment implements OnCameraChang
 				return handleMarkerClick(mark);
 			}
 		});
-		
+
 		List<Bookmark> allBookmarks = Bookmark.getAllBookmarks();
-		
+
 		for(Bookmark bm : allBookmarks){
 			mapBookmarksMap.put(createMapBookmarkMarker(new LatLng(bm.getLat(), bm.getLon()), bm.getName()),bm);
 		}
@@ -432,15 +432,15 @@ public class MainMapFragment extends SupportMapFragment implements OnCameraChang
 
 	private boolean handleMapBookmarkMarkerClick(final Marker mark){
 		if (mapBookmarksMap.containsKey(mark)) {
-				deselect();
-				selectedMarker = mark;
-				selectedMarker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.map_bookmark_selected));
-				selectedMarker.showInfoWindow();
-				showMarkerEditControls();
-				return true;
+			deselect();
+			selectedMarker = mark;
+			selectedMarker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.map_bookmark_selected));
+			selectedMarker.showInfoWindow();
+			showMarkerEditControls();
+			return true;
 		}
 		return false;
-		
+
 	}
 
 	private boolean handleClick(Marker mark) {
@@ -611,38 +611,38 @@ public class MainMapFragment extends SupportMapFragment implements OnCameraChang
 	private void setMapLabel() {
 
 		switch (mapType) {
-		case map_provider_google_normal:
-			label.changeTextProperties(MAP_LABEL_FONT_SIZE,
-					getResources().getString(R.string.map_provider_google_normal));
-			break;
-		case map_provider_google_satellite:
-			label.changeTextProperties(MAP_LABEL_FONT_SIZE,
-					getResources().getString(R.string.map_provider_google_satellite));
-			break;
-		case map_provider_google_hybrid:
-			label.changeTextProperties(MAP_LABEL_FONT_SIZE,
-					getResources().getString(R.string.map_provider_google_hybrid));
-			break;
-		case map_provider_google_terrain:
-			label.changeTextProperties(MAP_LABEL_FONT_SIZE,
-					getResources().getString(R.string.map_provider_google_terrain));
-			break;
-		case map_provider_osm_mapnik:
-			label.changeTextProperties(MAP_LABEL_FONT_SIZE, getResources().getString(R.string.map_provider_osm_mapnik));
-			break;
-		case map_provider_osm_mapquest:
-			label.changeTextProperties(MAP_LABEL_FONT_SIZE,
-					getResources().getString(R.string.map_provider_osm_mapquest));
-			break;
-		case map_provider_local_tiles:
-			label.changeTextProperties(MAP_LABEL_FONT_SIZE,
-					getResources().getString(R.string.map_provider_local_tiles));
-			break;
-		case map_provider_geoserver:
-			label.changeTextProperties(MAP_LABEL_FONT_SIZE, getResources().getString(R.string.map_provider_geoserver));
-			break;
-		default:
-			break;
+			case map_provider_google_normal:
+				label.changeTextProperties(MAP_LABEL_FONT_SIZE,
+						getResources().getString(R.string.map_provider_google_normal));
+				break;
+			case map_provider_google_satellite:
+				label.changeTextProperties(MAP_LABEL_FONT_SIZE,
+						getResources().getString(R.string.map_provider_google_satellite));
+				break;
+			case map_provider_google_hybrid:
+				label.changeTextProperties(MAP_LABEL_FONT_SIZE,
+						getResources().getString(R.string.map_provider_google_hybrid));
+				break;
+			case map_provider_google_terrain:
+				label.changeTextProperties(MAP_LABEL_FONT_SIZE,
+						getResources().getString(R.string.map_provider_google_terrain));
+				break;
+			case map_provider_osm_mapnik:
+				label.changeTextProperties(MAP_LABEL_FONT_SIZE, getResources().getString(R.string.map_provider_osm_mapnik));
+				break;
+			case map_provider_osm_mapquest:
+				label.changeTextProperties(MAP_LABEL_FONT_SIZE,
+						getResources().getString(R.string.map_provider_osm_mapquest));
+				break;
+			case map_provider_local_tiles:
+				label.changeTextProperties(MAP_LABEL_FONT_SIZE,
+						getResources().getString(R.string.map_provider_local_tiles));
+				break;
+			case map_provider_geoserver:
+				label.changeTextProperties(MAP_LABEL_FONT_SIZE, getResources().getString(R.string.map_provider_geoserver));
+				break;
+			default:
+				break;
 		}
 	}
 
@@ -653,43 +653,43 @@ public class MainMapFragment extends SupportMapFragment implements OnCameraChang
 		}
 
 		switch (mapType) {
-		case map_provider_google_normal:
-			map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-			break;
-		case map_provider_google_satellite:
-			map.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
-			break;
-		case map_provider_google_hybrid:
-			map.setMapType(GoogleMap.MAP_TYPE_HYBRID);
-			break;
-		case map_provider_google_terrain:
-			map.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
-			break;
-		case map_provider_osm_mapnik:
-			OsmTileProvider mapNikTileProvider = new OsmTileProvider(256, 256, OSM_MAPNIK_BASE_URL);
-			map.setMapType(GoogleMap.MAP_TYPE_NONE);
-			map.addTileOverlay(new TileOverlayOptions().tileProvider(mapNikTileProvider));
-			redrawVisibleProperties();
-			break;
-		case map_provider_osm_mapquest:
-			OsmTileProvider mapQuestTileProvider = new OsmTileProvider(256, 256, OSM_MAPQUEST_BASE_URL);
-			map.setMapType(GoogleMap.MAP_TYPE_NONE);
-			map.addTileOverlay(new TileOverlayOptions().tileProvider(mapQuestTileProvider));
-			redrawVisibleProperties();
-			break;
-		case map_provider_local_tiles:
-			map.setMapType(GoogleMap.MAP_TYPE_NONE);
-			map.addTileOverlay(new TileOverlayOptions().tileProvider(new LocalMapTileProvider()));
-			redrawVisibleProperties();
-			break;
-		case map_provider_geoserver:
-			map.setMapType(GoogleMap.MAP_TYPE_NONE);
-			SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(mapView.getContext());
-			map.addTileOverlay(new TileOverlayOptions().tileProvider(new WmsMapTileProvider(256, 256, preferences)));
-			redrawVisibleProperties();
-			break;
-		default:
-			break;
+			case map_provider_google_normal:
+				map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+				break;
+			case map_provider_google_satellite:
+				map.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
+				break;
+			case map_provider_google_hybrid:
+				map.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+				break;
+			case map_provider_google_terrain:
+				map.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
+				break;
+			case map_provider_osm_mapnik:
+				OsmTileProvider mapNikTileProvider = new OsmTileProvider(256, 256, OSM_MAPNIK_BASE_URL);
+				map.setMapType(GoogleMap.MAP_TYPE_NONE);
+				map.addTileOverlay(new TileOverlayOptions().tileProvider(mapNikTileProvider));
+				redrawVisibleProperties();
+				break;
+			case map_provider_osm_mapquest:
+				OsmTileProvider mapQuestTileProvider = new OsmTileProvider(256, 256, OSM_MAPQUEST_BASE_URL);
+				map.setMapType(GoogleMap.MAP_TYPE_NONE);
+				map.addTileOverlay(new TileOverlayOptions().tileProvider(mapQuestTileProvider));
+				redrawVisibleProperties();
+				break;
+			case map_provider_local_tiles:
+				map.setMapType(GoogleMap.MAP_TYPE_NONE);
+				map.addTileOverlay(new TileOverlayOptions().tileProvider(new LocalMapTileProvider()));
+				redrawVisibleProperties();
+				break;
+			case map_provider_geoserver:
+				map.setMapType(GoogleMap.MAP_TYPE_NONE);
+				SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(mapView.getContext());
+				map.addTileOverlay(new TileOverlayOptions().tileProvider(new WmsMapTileProvider(256, 256, preferences)));
+				redrawVisibleProperties();
+				break;
+			default:
+				break;
 		}
 		setMapLabel();
 
@@ -717,215 +717,215 @@ public class MainMapFragment extends SupportMapFragment implements OnCameraChang
 	public boolean onOptionsItemSelected(MenuItem item) {
 
 		switch (item.getItemId()) {
-		case R.id.action_settings:
-			return true;
-		case R.id.map_provider_google_normal:
-			mapType = MapType.map_provider_google_normal;
-			setMapType();
-			return true;
-		case R.id.map_provider_google_satellite:
-			mapType = MapType.map_provider_google_satellite;
-			setMapType();
-			return true;
-		case R.id.map_provider_google_hybrid:
-			mapType = MapType.map_provider_google_hybrid;
-			setMapType();
-			return true;
-		case R.id.map_provider_google_terrain:
-			mapType = MapType.map_provider_google_terrain;
-			setMapType();
-			return true;
-		case R.id.map_provider_osm_mapnik:
-			mapType = MapType.map_provider_osm_mapnik;
-			setMapType();
-			return true;
-		case R.id.map_provider_osm_mapquest:
-			mapType = MapType.map_provider_osm_mapquest;
-			setMapType();
-			return true;
-		case R.id.map_provider_local_tiles:
-			mapType = MapType.map_provider_local_tiles;
-			setMapType();
-			return true;
-		case R.id.map_provider_geoserver:
-			mapType = MapType.map_provider_geoserver;
-			setMapType();
-			return true;
-		case R.id.action_center_and_follow:
-			if (isFollowing) {
-				isFollowing = false;
-				myLocation.remove();
-				myLocation = null;
-				lh.setCustomListener(null);
-			} else {
-				LatLng currentLocation = lh.getLastKnownLocation();
-
-				if (currentLocation != null && currentLocation.latitude != 0.0 && currentLocation.longitude != 0.0) {
-					map.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, 18), 1000, null);
-					myLocation = map.addMarker(new MarkerOptions().position(currentLocation).anchor(0.5f, 0.5f)
-							.title(mapView.getContext().getResources().getString(R.string.title_i_m_here))
-							.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_menu_mylocation)));
-					myLocation.setClusterGroup(Constants.MY_LOCATION_MARKERS_GROUP);
-					lh.setCustomListener(myLocationListener);
-					isFollowing = true;
-
+			case R.id.action_settings:
+				return true;
+			case R.id.map_provider_google_normal:
+				mapType = MapType.map_provider_google_normal;
+				setMapType();
+				return true;
+			case R.id.map_provider_google_satellite:
+				mapType = MapType.map_provider_google_satellite;
+				setMapType();
+				return true;
+			case R.id.map_provider_google_hybrid:
+				mapType = MapType.map_provider_google_hybrid;
+				setMapType();
+				return true;
+			case R.id.map_provider_google_terrain:
+				mapType = MapType.map_provider_google_terrain;
+				setMapType();
+				return true;
+			case R.id.map_provider_osm_mapnik:
+				mapType = MapType.map_provider_osm_mapnik;
+				setMapType();
+				return true;
+			case R.id.map_provider_osm_mapquest:
+				mapType = MapType.map_provider_osm_mapquest;
+				setMapType();
+				return true;
+			case R.id.map_provider_local_tiles:
+				mapType = MapType.map_provider_local_tiles;
+				setMapType();
+				return true;
+			case R.id.map_provider_geoserver:
+				mapType = MapType.map_provider_geoserver;
+				setMapType();
+				return true;
+			case R.id.action_center_and_follow:
+				if (isFollowing) {
+					isFollowing = false;
+					myLocation.remove();
+					myLocation = null;
+					lh.setCustomListener(null);
 				} else {
-					Toast.makeText(getActivity().getBaseContext(), R.string.check_location_service, Toast.LENGTH_LONG)
+					LatLng currentLocation = lh.getLastKnownLocation();
+
+					if (currentLocation != null && currentLocation.latitude != 0.0 && currentLocation.longitude != 0.0) {
+						map.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, 18), 1000, null);
+						myLocation = map.addMarker(new MarkerOptions().position(currentLocation).anchor(0.5f, 0.5f)
+								.title(mapView.getContext().getResources().getString(R.string.title_i_m_here))
+								.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_menu_mylocation)));
+						myLocation.setClusterGroup(Constants.MY_LOCATION_MARKERS_GROUP);
+						lh.setCustomListener(myLocationListener);
+						isFollowing = true;
+
+					} else {
+						Toast.makeText(getActivity().getBaseContext(), R.string.check_location_service, Toast.LENGTH_LONG)
+								.show();
+					}
+				}
+				return true;
+
+			case R.id.action_center_community_area:
+
+				if (!Boolean.parseBoolean(Configuration.getConfigurationByName("isInitialized").getValue())) {
+					Toast toast;
+					String toastMessage = String
+							.format(OpenTenureApplication.getContext().getString(R.string.message_app_not_yet_initialized));
+
+					toast = Toast.makeText(OpenTenureApplication.getContext(), toastMessage, Toast.LENGTH_LONG);
+					toast.show();
+
+					return true;
+				}
+
+				MainMapFragment mapFrag = OpenTenureApplication.getMapFragment();
+
+				mapFrag.boundCameraToInterestArea();
+				return true;
+
+			case R.id.action_download_claims:
+
+				if (!Boolean.parseBoolean(Configuration.getConfigurationByName("isInitialized").getValue())) {
+					Toast toast;
+					String toastMessage = String
+							.format(OpenTenureApplication.getContext().getString(R.string.message_app_not_yet_initialized));
+
+					toast = Toast.makeText(OpenTenureApplication.getContext(), toastMessage, Toast.LENGTH_LONG);
+					toast.show();
+
+					return true;
+				}
+
+				if (!OpenTenureApplication.isLoggedin()) {
+					Toast toast = Toast.makeText(OpenTenureApplication.getContext(), R.string.message_login_before,
+							Toast.LENGTH_LONG);
+					toast.show();
+					return true;
+				} else {
+					if (OpenTenureApplication.getInstance().isConnectedWifi(mapView.getContext())) {
+						downloadClaims();
+					} else {
+						// Avoid to automatically download claims over mobile data
+						AlertDialog.Builder confirmDownloadBuilder = new AlertDialog.Builder(mapView.getContext());
+						confirmDownloadBuilder.setTitle(R.string.title_confirm_data_transfer);
+						confirmDownloadBuilder.setMessage(getResources().getString(R.string.message_data_over_mobile));
+
+						confirmDownloadBuilder.setPositiveButton(R.string.confirm, new OnClickListener() {
+
+							@Override
+							public void onClick(DialogInterface dialog, int which) {
+								downloadClaims();
+							}
+						});
+						confirmDownloadBuilder.setNegativeButton(R.string.cancel, new OnClickListener() {
+
+							@Override
+							public void onClick(DialogInterface dialog, int which) {
+							}
+						});
+
+						final AlertDialog confirmDownloadDialog = confirmDownloadBuilder.create();
+						confirmDownloadDialog.show();
+					}
+					return true;
+				}
+			case R.id.action_login:
+
+				if (!Boolean.parseBoolean(Configuration.getConfigurationByName("isInitialized").getValue())) {
+					Toast toast;
+					String toastMessage = String
+							.format(OpenTenureApplication.getContext().getString(R.string.message_app_not_yet_initialized));
+
+					toast = Toast.makeText(OpenTenureApplication.getContext(), toastMessage, Toast.LENGTH_LONG);
+					toast.show();
+					return true;
+				}
+
+				OpenTenureApplication.setActivity(getActivity());
+
+				Context context = getActivity().getApplicationContext();
+				Intent intent2 = new Intent(context, LoginActivity.class);
+				startActivity(intent2);
+
+				OpenTenureApplication.setActivity(getActivity());
+
+				return false;
+
+			case R.id.action_logout:
+
+				try {
+
+					LogoutTask logoutTask = new LogoutTask();
+
+					logoutTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, getActivity());
+
+				} catch (Exception e) {
+					Log.d("Details", "An error ");
+
+					e.printStackTrace();
+				}
+
+				return true;
+			case R.id.action_download_tiles:
+
+				if (!Boolean.parseBoolean(Configuration.getConfigurationByName("isInitialized").getValue())) {
+					Toast toast;
+					String toastMessage = String
+							.format(OpenTenureApplication.getContext().getString(R.string.message_app_not_yet_initialized));
+
+					toast = Toast.makeText(OpenTenureApplication.getContext(), toastMessage, Toast.LENGTH_LONG);
+					toast.show();
+
+					return true;
+				}
+
+				if (!OpenTenureApplication.getInstance().isOnline()) {
+					Toast.makeText(mapView.getContext(),
+							mapView.getContext().getResources().getString(R.string.error_connection), Toast.LENGTH_LONG)
 							.show();
-				}
-			}
-			return true;
 
-		case R.id.action_center_community_area:
-
-			if (!Boolean.parseBoolean(Configuration.getConfigurationByName("isInitialized").getValue())) {
-				Toast toast;
-				String toastMessage = String
-						.format(OpenTenureApplication.getContext().getString(R.string.message_app_not_yet_initialized));
-
-				toast = Toast.makeText(OpenTenureApplication.getContext(), toastMessage, Toast.LENGTH_LONG);
-				toast.show();
-
-				return true;
-			}
-
-			MainMapFragment mapFrag = OpenTenureApplication.getMapFragment();
-
-			mapFrag.boundCameraToInterestArea();
-			return true;
-
-		case R.id.action_download_claims:
-
-			if (!Boolean.parseBoolean(Configuration.getConfigurationByName("isInitialized").getValue())) {
-				Toast toast;
-				String toastMessage = String
-						.format(OpenTenureApplication.getContext().getString(R.string.message_app_not_yet_initialized));
-
-				toast = Toast.makeText(OpenTenureApplication.getContext(), toastMessage, Toast.LENGTH_LONG);
-				toast.show();
-
-				return true;
-			}
-
-			if (!OpenTenureApplication.isLoggedin()) {
-				Toast toast = Toast.makeText(OpenTenureApplication.getContext(), R.string.message_login_before,
-						Toast.LENGTH_LONG);
-				toast.show();
-				return true;
-			} else {
-				if (OpenTenureApplication.getInstance().isConnectedWifi(mapView.getContext())) {
-					downloadClaims();
+					return true;
 				} else {
-					// Avoid to automatically download claims over mobile data
-					AlertDialog.Builder confirmDownloadBuilder = new AlertDialog.Builder(mapView.getContext());
-					confirmDownloadBuilder.setTitle(R.string.title_confirm_data_transfer);
-					confirmDownloadBuilder.setMessage(getResources().getString(R.string.message_data_over_mobile));
+					if (OpenTenureApplication.getInstance().isConnectedWifi(mapView.getContext())) {
+						downloadTiles();
+					} else {
+						// Avoid to automatically download tiles over mobile data
+						AlertDialog.Builder confirmDownloadBuilder = new AlertDialog.Builder(mapView.getContext());
+						confirmDownloadBuilder.setTitle(R.string.title_confirm_data_transfer);
+						confirmDownloadBuilder.setMessage(getResources().getString(R.string.message_data_over_mobile));
 
-					confirmDownloadBuilder.setPositiveButton(R.string.confirm, new OnClickListener() {
+						confirmDownloadBuilder.setPositiveButton(R.string.confirm, new OnClickListener() {
 
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							downloadClaims();
-						}
-					});
-					confirmDownloadBuilder.setNegativeButton(R.string.cancel, new OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog, int which) {
+								downloadTiles();
+							}
+						});
+						confirmDownloadBuilder.setNegativeButton(R.string.cancel, new OnClickListener() {
 
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-						}
-					});
+							@Override
+							public void onClick(DialogInterface dialog, int which) {
+							}
+						});
 
-					final AlertDialog confirmDownloadDialog = confirmDownloadBuilder.create();
-					confirmDownloadDialog.show();
+						final AlertDialog confirmDownloadDialog = confirmDownloadBuilder.create();
+						confirmDownloadDialog.show();
+					}
 				}
 				return true;
-			}
-		case R.id.action_login:
-
-			if (!Boolean.parseBoolean(Configuration.getConfigurationByName("isInitialized").getValue())) {
-				Toast toast;
-				String toastMessage = String
-						.format(OpenTenureApplication.getContext().getString(R.string.message_app_not_yet_initialized));
-
-				toast = Toast.makeText(OpenTenureApplication.getContext(), toastMessage, Toast.LENGTH_LONG);
-				toast.show();
-				return true;
-			}
-
-			OpenTenureApplication.setActivity(getActivity());
-
-			Context context = getActivity().getApplicationContext();
-			Intent intent2 = new Intent(context, LoginActivity.class);
-			startActivity(intent2);
-
-			OpenTenureApplication.setActivity(getActivity());
-
-			return false;
-
-		case R.id.action_logout:
-
-			try {
-
-				LogoutTask logoutTask = new LogoutTask();
-
-				logoutTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, getActivity());
-
-			} catch (Exception e) {
-				Log.d("Details", "An error ");
-
-				e.printStackTrace();
-			}
-
-			return true;
-		case R.id.action_download_tiles:
-
-			if (!Boolean.parseBoolean(Configuration.getConfigurationByName("isInitialized").getValue())) {
-				Toast toast;
-				String toastMessage = String
-						.format(OpenTenureApplication.getContext().getString(R.string.message_app_not_yet_initialized));
-
-				toast = Toast.makeText(OpenTenureApplication.getContext(), toastMessage, Toast.LENGTH_LONG);
-				toast.show();
-
-				return true;
-			}
-
-			if (!OpenTenureApplication.getInstance().isOnline()) {
-				Toast.makeText(mapView.getContext(),
-						mapView.getContext().getResources().getString(R.string.error_connection), Toast.LENGTH_LONG)
-						.show();
-
-				return true;
-			} else {
-				if (OpenTenureApplication.getInstance().isConnectedWifi(mapView.getContext())) {
-					downloadTiles();
-				} else {
-					// Avoid to automatically download tiles over mobile data
-					AlertDialog.Builder confirmDownloadBuilder = new AlertDialog.Builder(mapView.getContext());
-					confirmDownloadBuilder.setTitle(R.string.title_confirm_data_transfer);
-					confirmDownloadBuilder.setMessage(getResources().getString(R.string.message_data_over_mobile));
-
-					confirmDownloadBuilder.setPositiveButton(R.string.confirm, new OnClickListener() {
-
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							downloadTiles();
-						}
-					});
-					confirmDownloadBuilder.setNegativeButton(R.string.cancel, new OnClickListener() {
-
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-						}
-					});
-
-					final AlertDialog confirmDownloadDialog = confirmDownloadBuilder.create();
-					confirmDownloadDialog.show();
-				}
-			}
-			return true;
-		default:
-			return super.onOptionsItemSelected(item);
+			default:
+				return super.onOptionsItemSelected(item);
 		}
 	}
 

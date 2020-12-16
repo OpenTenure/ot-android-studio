@@ -60,7 +60,7 @@ public class MD5 {
         return calculatedDigest.equalsIgnoreCase(md5);
     }
 
-    public static String calculateMD5(File updateFile) {
+    public static String calculateMD5(InputStream is) {
         MessageDigest digest;
         try {
             digest = MessageDigest.getInstance("MD5");
@@ -68,15 +68,6 @@ public class MD5 {
             Log.e(TAG, "Exception while getting digest", e);
             return null;
         }
-
-        InputStream is;
-        try {
-            is = new FileInputStream(updateFile);
-        } catch (FileNotFoundException e) {
-            Log.e(TAG, "Exception while getting FileInputStream", e);
-            return null;
-        }
-
         byte[] buffer = new byte[8192];
         int read;
         try {
@@ -98,6 +89,18 @@ public class MD5 {
                 Log.e(TAG, "Exception on closing MD5 input stream", e);
             }
         }
+    }
+
+    public static String calculateMD5(File updateFile) {
+        InputStream is;
+        try {
+            is = new FileInputStream(updateFile);
+        } catch (FileNotFoundException e) {
+            Log.e(TAG, "Exception while getting FileInputStream", e);
+            return null;
+        }
+
+        return calculateMD5(is);
     }
     
     

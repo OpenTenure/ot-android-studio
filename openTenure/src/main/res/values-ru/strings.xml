@@ -387,15 +387,20 @@
     <string name="wtms_url_pref_dialog_title">Введите URL вашего Веб сервера тайлов</string>
 
     <string-array name="language_keys">
-        <item>Хмерский</item>
-        <item>Албанский</item>
-        <item>По умолчанию</item>
+        <item >Хмерский</item>
+        <item >Албанский</item>
+        <item >Мьянманский</item>
+        <item >Самоанский</item>
+        <item >По умолчанию</item>
     </string-array>
     <string-array name="language_values">
-        <item>khmer_language</item>
-        <item>albanian_language</item>
-        <item>default_language</item>
+        <item >khmer_language</item>
+        <item >albanian_language</item>
+        <item >burmese_language</item>
+        <item >samoan_language</item>
+        <item >default_language</item>
     </string-array>
+
     <string-array name="tiles_provider_keys">
         <item>TMS</item>
         <item>GeoServer</item>

@@ -28,7 +28,6 @@
 package org.fao.sola.clients.android.opentenure;
 
 import java.io.File;
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -38,6 +37,8 @@ import org.fao.sola.clients.android.opentenure.maps.MainMapFragment;
 import org.fao.sola.clients.android.opentenure.model.Claim;
 import org.fao.sola.clients.android.opentenure.model.Configuration;
 
+import android.Manifest;
+import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.AlarmManager;
 import android.app.AlertDialog;
@@ -47,8 +48,11 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -80,6 +84,9 @@ public class OpenTenure extends FragmentActivity implements ModeDispatcher,
     ShowcaseView sv;
     private int counter = 0;
     int numberOfClaims = 0;
+    boolean isInitialized = false;
+    String slideTitle = "";
+    String slideText = "";
     private final ApiUtils apiUtils = new ApiUtils();
     public static final String FIRST_RUN_OT_ACTIVITY = "__FIRST_RUN_OT_ACTIVITY__";
     public static final String language = "language";
@@ -93,32 +100,25 @@ public class OpenTenure extends FragmentActivity implements ModeDispatcher,
     public static final String geoserver_tiles_provider = "geoserver_tiles_provider";
     // END SHOW CASE
 
+
     @Override
     public void onPause() {
         OpenTenureApplication.getInstance().getDatabase().sync();
         super.onPause();
     }
 
-    ;
-
     private static void setLocale(Context context, Locale locale) {
         Locale.setDefault(locale);
         android.content.res.Configuration config = new android.content.res.Configuration();
         config.locale = locale;
 
-        context.getResources().updateConfiguration(config,
-                context.getResources().getDisplayMetrics());
-
+        context.getResources().updateConfiguration(config, context.getResources().getDisplayMetrics());
         OpenTenureApplication.getInstance().setLocalization(locale);
     }
 
     public static void setLocale(Context context) {
-        SharedPreferences OpenTenurePreferences = PreferenceManager
-                .getDefaultSharedPreferences(context);
-
+        SharedPreferences OpenTenurePreferences = PreferenceManager.getDefaultSharedPreferences(context);
         String language = OpenTenurePreferences.getString(OpenTenure.language, OpenTenure.default_language);
-
-        Log.d(OpenTenure.class.getName(), "Setting locale for language: " + language);
 
         OpenTenureApplication.getInstance().setKhmer(language.equals(OpenTenure.khmer_language));
         OpenTenureApplication.getInstance().setAlbanian(language.equals(OpenTenure.albanian_language));
@@ -144,15 +144,11 @@ public class OpenTenure extends FragmentActivity implements ModeDispatcher,
         super.onResume();
     }
 
-    ;
-
     @Override
     public void onDestroy() {
         cleanup();
         super.onDestroy();
     }
-
-    ;
 
     @Override
     public void onBackPressed() {
@@ -160,16 +156,16 @@ public class OpenTenure extends FragmentActivity implements ModeDispatcher,
         exitDialog.setTitle(R.string.title_exit_dialog);
         exitDialog.setMessage(getResources().getString(
                 R.string.message_exit_dialog));
-        exitDialog.setPositiveButton(R.string.confirm, new OnClickListener() {
 
+        exitDialog.setPositiveButton(R.string.confirm, new OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 cleanup();
                 OpenTenure.super.onBackPressed();
             }
         });
-        exitDialog.setNegativeButton(R.string.cancel, new OnClickListener() {
 
+        exitDialog.setNegativeButton(R.string.cancel, new OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
             }
@@ -222,26 +218,60 @@ public class OpenTenure extends FragmentActivity implements ModeDispatcher,
 
         tabs = (PagerSlidingTabStrip) findViewById(R.id.tabs);
         mViewPager = (ViewPager) findViewById(R.id.open_tenure_pager);
-
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
-
         mViewPager.setAdapter(mSectionsPagerAdapter);
         tabs.setIndicatorColor(getResources().getColor(R.color.ab_tab_indicator_opentenure));
         tabs.setViewPager(mViewPager);
 
+        // Handle tab change when tutorial is displayed. It's required to precisely position tutorial highlighter,
+        // after tabs are shifted on a small screen. Otherwise the highlighter will be positioned in a wrong place.
+        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            int tabIndex = -1;
+
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                tabIndex = position;
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+                // Show tutorial slide only if tutorial component is active and state = 0.
+                // State = 0 means tabs are scrolled
+                if(sv !=null && sv.isShown() && state == 0) {
+                    // News
+                    if(tabIndex == 0) {
+                        sv.setShowcase(new ViewTarget(tabs.getTabsContainer().getChildAt(0)), true);
+                        sv.setContentTitle(slideTitle);
+                        sv.setContentText(slideText);
+                        setAlpha(1.0f, tabs.getTabsContainer().getChildAt(0));
+                    }
+
+                    // Community map
+                    if(tabIndex == 1){
+                        sv.setShowcase(new ViewTarget(tabs.getTabsContainer().getChildAt(1)), true);
+                        sv.setContentTitle(getString(R.string.title_map).toUpperCase(Locale.getDefault()));
+                        sv.setContentText(getString(R.string.showcase_map_message));
+                        setAlpha(1.0f, tabs.getTabsContainer().getChildAt(1));
+                    }
+
+                    // Claims
+                    if (tabIndex == 2) {
+                        sv.setShowcase(new ViewTarget(tabs.getTabsContainer().getChildAt(2)), true);
+                        sv.setContentTitle(getString(R.string.title_claims).toUpperCase(Locale.getDefault()));
+                        sv.setContentText(getString(R.string.showcase_claims_message));
+                        setAlpha(1.0f, tabs.getTabsContainer().getChildAt(2));
+                    }
+                }
+            }
+        });
+
         // ShowCase Main
         if (getFirstRun().contentEquals("True")) {
-            sv = new ShowcaseView.Builder(this, true).setTarget(Target.NONE)
-                    .setContentTitle(getString(R.string.showcase_main_title))
-                    .setContentText(getString(R.string.showcase_main_message))
-                    .setStyle(R.style.CustomShowcaseTheme)
-                    .setOnClickListener(this).build();
-            sv.setButtonText(getString(R.string.next));
-            sv.setSkipButtonText(getString(R.string.skip));
-            setAlpha(0.2f, tabs.getTabsContainer().getChildAt(0), tabs
-                            .getTabsContainer().getChildAt(1), tabs.getTabsContainer()
-                            .getChildAt(2), tabs.getTabsContainer().getChildAt(3),
-                    tabs.getTabsContainer().getChildAt(4), mViewPager);
+            runTutorial();
         }
 
         if (!OpenTenureApplication.getInstance().isOnline()) {
@@ -268,60 +298,85 @@ public class OpenTenure extends FragmentActivity implements ModeDispatcher,
                 if (view != null)
                     view.setAlpha(alpha);
             }
+            tabs.setAlpha(alpha);
         }
+    }
+
+    private void setAlphaToAllTabs(float alpha) {
+        if (apiUtils.isCompatWithHoneycomb()) {
+            for(int i = 0; i < tabs.getTabsContainer().getChildCount(); i++){
+                tabs.getTabsContainer().getChildAt(i).setAlpha(alpha);
+            }
+            mViewPager.setAlpha(alpha);
+            tabs.setAlpha(alpha);
+        }
+    }
+
+    private void runTutorial() {
+        counter = 0;
+        beforeTutorialStart();
+        sv = new ShowcaseView.Builder(this, true).setTarget(Target.NONE)
+                .setContentTitle(getString(R.string.showcase_main_title))
+                .setContentText(getString(R.string.showcase_main_message))
+                .setStyle(R.style.CustomShowcaseTheme)
+                .setOnClickListener(this).build();
+        sv.setButtonText(getString(R.string.next));
+        sv.setSkipButtonText(getString(R.string.skip));
+
+        setAlphaToAllTabs(0.2f);
+    }
+
+    private void beforeTutorialStart() {
+        Configuration conf = Configuration.getConfigurationByName("isInitialized");
+        isInitialized = conf != null && conf.getValue().equalsIgnoreCase("true");
+        numberOfClaims = Claim.getNumberOfClaims();
     }
 
     @Override
     public void onClick(View v) {
         if (v.toString().indexOf("skip") > 0) {
             sv.hide();
-            setAlpha(1.0f, tabs.getTabsContainer().getChildAt(0), tabs
-                            .getTabsContainer().getChildAt(1), tabs.getTabsContainer()
-                            .getChildAt(2), tabs.getTabsContainer().getChildAt(3),
-                    tabs.getTabsContainer().getChildAt(4), tabs, mViewPager);
+            setAlphaToAllTabs(1.0f);
             counter = 0;
+            return;
         }
-
-        Configuration conf = Configuration.getConfigurationByName("isInitialized");
-        numberOfClaims = Claim.getNumberOfClaims();
 
         switch (counter) {
             case 0:
-                sv.setShowcase(new ViewTarget(tabs.getTabsContainer().getChildAt(0)), true);
-                sv.setContentTitle(getString(R.string.title_news).toUpperCase(Locale.getDefault()));
-                sv.setContentText(getString(R.string.showcase_news_message));
-                mViewPager.setCurrentItem(0);
-                setAlpha(1.0f, tabs.getTabsContainer().getChildAt(0));
+                slideTitle = getString(R.string.title_news).toUpperCase(Locale.getDefault());
+                slideText = getString(R.string.showcase_news_message);
+                // Trigger news slide manually if tab is 0
+                if(mViewPager.getCurrentItem() == 0){
+                    sv.setShowcase(new ViewTarget(tabs.getTabsContainer().getChildAt(0)), true);
+                    sv.setContentTitle(slideTitle);
+                    sv.setContentText(slideText);
+                    setAlpha(1.0f, tabs.getTabsContainer().getChildAt(0));
+                } else {
+                    mViewPager.setCurrentItem(0);
+                }
                 break;
-
             case 1:
-                sv.setShowcase(new ViewTarget(findViewById(R.id.action_lock)), true);
-                sv.setContentTitle("  ");
-                sv.setContentText(getString(R.string.showcase_actionNews_message));
-                break;
+                if(!isInitialized) {
+                    sv.setShowcase(new ViewTarget(findViewById(R.id.action_alert)), true);
+                    sv.setContentTitle("  ");
+                    sv.setContentText(getString(R.string.showcase_actionNews_message));
+                    break;
+                }
+                counter++;
             case 2:
-                sv.setShowcase(new ViewTarget(tabs.getTabsContainer().getChildAt(1)), true);
-                sv.setContentTitle(getString(R.string.title_map).toUpperCase(Locale.getDefault()));
-                sv.setContentText(getString(R.string.showcase_map_message));
-                setAlpha(1.0f, tabs.getTabsContainer().getChildAt(1));
                 mViewPager.setCurrentItem(1);
                 break;
             case 3:
-
                 if (findViewById(R.id.action_download_claims) != null) {
                     sv.setContentTitle("  ");
                     sv.setShowcase(new ViewTarget(findViewById(R.id.action_download_claims)), true);
                     sv.setContentText(getString(R.string.showcase_actionMap_message));
                     break;
                 }
-
+                counter++;
             case 4:
-                sv.setShowcase(new ViewTarget(tabs.getTabsContainer().getChildAt(2)), true);
-                sv.setContentTitle(getString(R.string.title_claims).toUpperCase(Locale.getDefault()));
-                sv.setContentText(getString(R.string.showcase_claims_message));
-                setAlpha(1.0f, tabs.getTabsContainer().getChildAt(2));
                 mViewPager.setCurrentItem(2);
-                break;
+                 break;
             case 5:
                 if (numberOfClaims > 0) {
                     sv.setShowcase(new ViewTarget(mViewPager), true);
@@ -339,35 +394,34 @@ public class OpenTenure extends FragmentActivity implements ModeDispatcher,
                     sv.setShowcase(new ViewTarget(findViewById(R.id.action_new)), true);
                     sv.setContentText(getString(R.string.showcase_actionClaims_message));
                 } else {
-                    mViewPager.setCurrentItem(0);
-
-                    if ((conf == null) || ((conf != null) && (conf.getValue().equalsIgnoreCase("false")))) {
+                    if (!isInitialized) {
+                        slideTitle = "";
+                        slideText = getString(R.string.showcase_actionAlert1_message);
                         mViewPager.setCurrentItem(0);
-                        sv.setShowcase(new ViewTarget(tabs.getTabsContainer().getChildAt(0)), true);
-                        sv.setContentText(getString(R.string.showcase_actionAlert1_message));
                         setAlpha(1.0f, tabs);
                     } else {
                         sv.hide();
                         mViewPager.setCurrentItem(0);
-                        setAlpha(1.0f, tabs, mViewPager);
+                        setAlphaToAllTabs(1.0f);
                         counter = 0;
                     }
                 }
                 break;
             case 7:
                 if (numberOfClaims > 0) {
-                    if ((conf == null) || ((conf != null) && (conf.getValue().equalsIgnoreCase("false")))) {
-                        sv.setShowcase(new ViewTarget(tabs.getTabsContainer().getChildAt(0)), true);
-                        sv.setContentText(getString(R.string.showcase_actionAlert1_message));
+                    if (!isInitialized) {
+                        slideTitle = "";
+                        slideText = getString(R.string.showcase_actionAlert1_message);
+                        mViewPager.setCurrentItem(0);
                         setAlpha(1.0f, tabs);
                     } else {
                         sv.hide();
                         mViewPager.setCurrentItem(0);
-                        setAlpha(1.0f, tabs, mViewPager);
+                        setAlphaToAllTabs(1.0f);
                         counter = 0;
                     }
                 } else {
-                    if ((conf == null) || ((conf != null) && (conf.getValue().equalsIgnoreCase("false")))) {
+                    if (!isInitialized) {
                         sv.setShowcase(new ViewTarget(findViewById(R.id.action_alert)), true);
                         sv.setContentText(getString(R.string.showcase_actionAlert_message));
                         sv.setButtonText(getString(R.string.close));
@@ -375,13 +429,13 @@ public class OpenTenure extends FragmentActivity implements ModeDispatcher,
                     } else {
                         sv.hide();
                         mViewPager.setCurrentItem(0);
-                        setAlpha(1.0f, tabs, mViewPager);
+                        setAlphaToAllTabs(1.0f);
                         counter = 0;
                     }
                 }
                 break;
             case 8:
-                if ((conf == null) || ((conf != null) && (conf.getValue().equalsIgnoreCase("false")))) {
+                if (numberOfClaims > 0 && !isInitialized) {
                     sv.setShowcase(new ViewTarget(findViewById(R.id.action_alert)), true);
                     sv.setContentText(getString(R.string.showcase_actionAlert_message));
                     sv.setButtonText(getString(R.string.close));
@@ -389,14 +443,14 @@ public class OpenTenure extends FragmentActivity implements ModeDispatcher,
                 } else {
                     sv.hide();
                     mViewPager.setCurrentItem(0);
-                    setAlpha(1.0f, tabs, mViewPager);
+                    setAlphaToAllTabs(1.0f);
                     counter = 0;
                 }
                 break;
             case 9:
                 sv.hide();
                 mViewPager.setCurrentItem(0);
-                setAlpha(1.0f, tabs, mViewPager);
+                setAlphaToAllTabs(1.0f);
                 counter = 0;
                 break;
         }
@@ -406,11 +460,6 @@ public class OpenTenure extends FragmentActivity implements ModeDispatcher,
 
     @Override
     public void onShowcaseViewHide(ShowcaseView showcaseView) {
-        // if (apiUtils.isCompatWithHoneycomb()) {
-        // listView.setAlpha(1f);
-        // }
-        // buttonBlocked.setText(R.string.button_show);
-        // //buttonBlocked.setEnabled(false);
     }
 
     @Override
@@ -419,9 +468,6 @@ public class OpenTenure extends FragmentActivity implements ModeDispatcher,
 
     @Override
     public void onShowcaseViewShow(ShowcaseView showcaseView) {
-        // dimView(listView);
-        // buttonBlocked.setText(R.string.button_hide);
-        // //buttonBlocked.setEnabled(true);
     }
 
     // END SHOWCASE
@@ -437,36 +483,19 @@ public class OpenTenure extends FragmentActivity implements ModeDispatcher,
         switch (item.getItemId()) {
             case R.id.action_settings:
                 Intent intent = new Intent();
-                intent.setClass(OpenTenure.this,
-                        OpenTenurePreferencesActivity.class);
+                intent.setClass(OpenTenure.this, OpenTenurePreferencesActivity.class);
                 startActivityForResult(intent, OpenTenurePreferencesActivity.REQUEST_CODE);
                 return true;
             case R.id.action_export_log:
                 exportLog();
                 String backupMessage = String.format(OpenTenureApplication
                         .getContext().getString(R.string.message_log_exported));
-
-                Toast backupToast = Toast.makeText(
-                        OpenTenureApplication.getContext(), backupMessage,
-                        Toast.LENGTH_LONG);
+                Toast backupToast = Toast.makeText(OpenTenureApplication.getContext(), backupMessage, Toast.LENGTH_LONG);
                 backupToast.show();
                 return true;
             case R.id.action_showcase:
-
                 // ShowCase Tutorial
-                sv = new ShowcaseView.Builder(this, true).setTarget(Target.NONE)
-                        .setContentTitle(getString(R.string.showcase_main_title))
-                        .setContentText(getString(R.string.showcase_main_message))
-                        .setStyle(R.style.CustomShowcaseTheme)
-                        .setOnClickListener(this).build();
-                sv.setButtonText(getString(R.string.next));
-                sv.setSkipButtonText(getString(R.string.skip));
-                mViewPager.setCurrentItem(0);
-                setAlpha(0.2f, tabs.getTabsContainer().getChildAt(0), tabs
-                                .getTabsContainer().getChildAt(1), tabs.getTabsContainer()
-                                .getChildAt(2), tabs.getTabsContainer().getChildAt(3),
-                        mViewPager);
-
+                runTutorial();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -536,10 +565,14 @@ public class OpenTenure extends FragmentActivity implements ModeDispatcher,
         }
     }
 
-    public class SectionsPagerAdapter extends FragmentStatePagerAdapter {
+    public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
         public SectionsPagerAdapter(FragmentManager fm) {
             super(fm);
+        }
+
+        @Override
+        public void destroyItem(android.view.ViewGroup container, int position, Object object) {
         }
 
         @Override

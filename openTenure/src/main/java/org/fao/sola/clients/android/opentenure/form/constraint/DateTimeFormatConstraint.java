@@ -57,14 +57,14 @@ public class DateTimeFormatConstraint extends FieldConstraint {
 		fieldConstraintType=FieldConstraintType.DATETIME;
 		addApplicableType(FieldType.DATE);
 		addApplicableType(FieldType.TIME);
-		setFormat(format);
+		setFormat(format!=null ? format : "yyyy-MM-dd");
 	}
 
 	@Override
 	public boolean check(String externalDisplayName, FieldPayload fieldPayload) {
 		displayErrorMsg = null;
 		try {
-			SimpleDateFormat sdf = new SimpleDateFormat(format, Locale.US);
+			SimpleDateFormat sdf = new SimpleDateFormat(format!=null ? format : "yyyy-MM-dd", Locale.US);
 			String payload = fieldPayload.getStringPayload();
 			if(payload != null){
 				sdf.parse(payload);

@@ -173,8 +173,6 @@ public class ClaimDeleteListener implements OnClickListener {
 
             if (Claim.deleteCascade(claim.getClaimId()) != 0) {
 
-                dialog.dismiss();
-
                 if (!claim.getStatus().equals(ClaimStatus._CREATED)
                         && !claim.getStatus().equals(ClaimStatus._UPLOAD_INCOMPLETE)
                         && !claim.getStatus().equals(ClaimStatus._UPLOAD_ERROR))
@@ -205,6 +203,7 @@ public class ClaimDeleteListener implements OnClickListener {
             claim.markDeleted(true);
             OpenTenureApplication.getLocalClaimsFragment().refresh();
             OpenTenureApplication.getMapFragment().refreshMap();
+            dialog.dismiss();
         }
     }
 }

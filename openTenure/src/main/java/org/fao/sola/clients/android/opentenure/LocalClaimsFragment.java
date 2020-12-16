@@ -40,6 +40,7 @@ import org.fao.sola.clients.android.opentenure.model.ClaimType;
 import org.fao.sola.clients.android.opentenure.model.Configuration;
 import org.fao.sola.clients.android.opentenure.network.LoginActivity;
 import org.fao.sola.clients.android.opentenure.network.LogoutTask;
+import org.fao.sola.clients.android.opentenure.tools.StringUtility;
 
 import com.ipaulpro.afilechooser.utils.FileUtils;
 
@@ -64,6 +65,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -83,6 +85,7 @@ public class LocalClaimsFragment extends ListFragment {
     private MenuItem showDeletedMenuItem = null;
     private boolean showDeleted = false;
     private File dest;
+    private LocalClaimsListAdapter.SortBy sortBy = LocalClaimsListAdapter.SortBy.CREATION_DATE_DESC;
 
     @Override
     public void onAttach(Activity activity) {
@@ -170,68 +173,71 @@ public class LocalClaimsFragment extends ListFragment {
                 backupToast.show();
                 return true;
             case R.id.action_new:
-                if (!Boolean.parseBoolean(Configuration.getConfigurationByName(
-                        "isInitialized").getValue())) {
+                if (!Boolean.parseBoolean(Configuration.getConfigurationByName("isInitialized").getValue())) {
                     String newMessage = String.format(OpenTenureApplication
                             .getContext().getString(
                                     R.string.message_app_not_yet_initialized));
 
-                    Toast newToast = Toast.makeText(
-                            OpenTenureApplication.getContext(), newMessage,
-                            Toast.LENGTH_LONG);
+                    Toast newToast = Toast.makeText(OpenTenureApplication.getContext(), newMessage, Toast.LENGTH_LONG);
                     newToast.show();
 
                     return true;
                 }
 
-                Intent intent = new Intent(rootView.getContext(),
-                        ClaimActivity.class);
+                AlertDialog.Builder dlgCreateClaim = new AlertDialog.Builder(getContext());
+                dlgCreateClaim.setTitle(R.string.confirm);
+                dlgCreateClaim.setMessage(getContext().getString(R.string.confirm_create_claim));
 
-                intent.putExtra(ClaimActivity.CLAIM_ID_KEY,
-                        ClaimActivity.CREATE_CLAIM_ID);
-                intent.putExtra(ClaimActivity.MODE_KEY, mainActivity.getMode()
-                        .toString());
-                startActivityForResult(intent, CLAIM_RESULT);
+                dlgCreateClaim.setPositiveButton(R.string.confirm, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent(rootView.getContext(), ClaimActivity.class);
+
+                        intent.putExtra(ClaimActivity.CLAIM_ID_KEY, ClaimActivity.CREATE_CLAIM_ID);
+                        intent.putExtra(ClaimActivity.MODE_KEY, mainActivity.getMode().toString());
+                        startActivityForResult(intent, CLAIM_RESULT);
+                    }
+                });
+                dlgCreateClaim.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                });
+                dlgCreateClaim.show();
+
                 return true;
             case R.id.action_import_zip:
 
-                if (!Boolean.parseBoolean(Configuration.getConfigurationByName(
-                        "isInitialized").getValue())) {
+                if (!Boolean.parseBoolean(Configuration.getConfigurationByName("isInitialized").getValue())) {
                     String newMessage = String.format(OpenTenureApplication
                             .getContext().getString(
                                     R.string.message_app_not_yet_initialized));
 
-                    Toast newToast = Toast.makeText(
-                            OpenTenureApplication.getContext(), newMessage,
-                            Toast.LENGTH_LONG);
+                    Toast newToast = Toast.makeText(OpenTenureApplication.getContext(), newMessage, Toast.LENGTH_LONG);
                     newToast.show();
 
                     return true;
                 }
 
                 Intent getContentIntent = FileUtils.createGetContentIntent();
-
-                intent = Intent.createChooser(getContentIntent, getResources()
+                Intent intent = Intent.createChooser(getContentIntent, getResources()
                         .getString(R.string.choose_file));
+
                 try {
                     startActivityForResult(intent, REQUEST_IMPORT);
                 } catch (Exception e) {
-                    Log.d(this.getClass().getName(),
-                            "Unable to start file chooser intent due to "
-                                    + e.getMessage());
+                    Log.d(this.getClass().getName(), "Unable to start file chooser intent due to " + e.getMessage());
                 }
                 return true;
             case R.id.action_login:
 
-                if (!Boolean.parseBoolean(Configuration.getConfigurationByName(
-                        "isInitialized").getValue())) {
+                if (!Boolean.parseBoolean(Configuration.getConfigurationByName("isInitialized").getValue())) {
                     Toast toast;
                     String toastMessage = String.format(OpenTenureApplication
                             .getContext().getString(
                                     R.string.message_app_not_yet_initialized));
 
-                    toast = Toast.makeText(OpenTenureApplication.getContext(),
-                            toastMessage, Toast.LENGTH_LONG);
+                    toast = Toast.makeText(OpenTenureApplication.getContext(), toastMessage, Toast.LENGTH_LONG);
                     toast.show();
 
                     return true;
@@ -376,6 +382,9 @@ public class LocalClaimsFragment extends ListFragment {
         setHasOptionsMenu(true);
         setRetainInstance(true);
         EditText inputSearch = (EditText) rootView.findViewById(R.id.filter_input_field);
+        Button btnSortByCreationDate = (Button) rootView.findViewById(R.id.btnSortByCreationDate);
+        Button btnSortByClaimDesc = (Button) rootView.findViewById(R.id.btnSortByClaimDesc);
+        Button btnSortByClaimNum = (Button) rootView.findViewById(R.id.btnSortByClaimNum);
         inputSearch.setInputType(InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
         inputSearch.addTextChangedListener(new TextWatcher() {
 
@@ -402,6 +411,52 @@ public class LocalClaimsFragment extends ListFragment {
             showDeleted = savedInstanceState.getBoolean(SHOW_DELETED_KEY);
         }
 
+        View.OnClickListener sortListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(v.getId() == R.id.btnSortByCreationDate){
+                    btnSortByClaimDesc.setCompoundDrawablesWithIntrinsicBounds(R.drawable.sort, 0, 0, 0);
+                    btnSortByClaimNum.setCompoundDrawablesWithIntrinsicBounds(R.drawable.sort, 0, 0, 0);
+
+                    if(sortBy == LocalClaimsListAdapter.SortBy.CREATION_DATE_DESC) {
+                        sortBy = LocalClaimsListAdapter.SortBy.CREATION_DATE_ASC;
+                        btnSortByCreationDate.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ascending, 0, 0, 0);
+                    } else {
+                        sortBy = LocalClaimsListAdapter.SortBy.CREATION_DATE_DESC;
+                        btnSortByCreationDate.setCompoundDrawablesWithIntrinsicBounds(R.drawable.descending, 0, 0, 0);
+                    }
+                } else if(v.getId() == R.id.btnSortByClaimDesc){
+                    btnSortByCreationDate.setCompoundDrawablesWithIntrinsicBounds(R.drawable.sort, 0, 0, 0);
+                    btnSortByClaimNum.setCompoundDrawablesWithIntrinsicBounds(R.drawable.sort, 0, 0, 0);
+
+                    if(sortBy == LocalClaimsListAdapter.SortBy.CLAIM_NAME_DESC) {
+                        sortBy = LocalClaimsListAdapter.SortBy.CLAIM_NAME_ASC;
+                        btnSortByClaimDesc.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ascending, 0, 0, 0);
+                    } else {
+                        sortBy = LocalClaimsListAdapter.SortBy.CLAIM_NAME_DESC;
+                        btnSortByClaimDesc.setCompoundDrawablesWithIntrinsicBounds(R.drawable.descending, 0, 0, 0);
+                    }
+                } else if(v.getId() == R.id.btnSortByClaimNum){
+                    btnSortByCreationDate.setCompoundDrawablesWithIntrinsicBounds(R.drawable.sort, 0, 0, 0);
+                    btnSortByClaimDesc.setCompoundDrawablesWithIntrinsicBounds(R.drawable.sort, 0, 0, 0);
+
+                    if(sortBy == LocalClaimsListAdapter.SortBy.CLAIM_NUM_DESC) {
+                        sortBy = LocalClaimsListAdapter.SortBy.CLAIM_NUM_ASC;
+                        btnSortByClaimNum.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ascending, 0, 0, 0);
+                    } else {
+                        sortBy = LocalClaimsListAdapter.SortBy.CLAIM_NUM_DESC;
+                        btnSortByClaimNum.setCompoundDrawablesWithIntrinsicBounds(R.drawable.descending, 0, 0, 0);
+                    }
+                }
+
+                ((LocalClaimsListAdapter) getListAdapter()).setSortBy(sortBy);
+            }
+        };
+
+        btnSortByCreationDate.setOnClickListener(sortListener);
+        btnSortByClaimDesc.setOnClickListener(sortListener);
+        btnSortByClaimNum.setOnClickListener(sortListener);
+
         update();
         OpenTenureApplication.setLocalClaimsFragment(this);
 
@@ -414,6 +469,7 @@ public class LocalClaimsFragment extends ListFragment {
         if (filter != null) {
             ((LocalClaimsListAdapter) getListAdapter()).getFilter().filter(filter);
         }
+        ((LocalClaimsListAdapter) getListAdapter()).setSortBy(sortBy);
         super.onResume();
     }
 
@@ -453,36 +509,34 @@ public class LocalClaimsFragment extends ListFragment {
                 if((claim.isDeleted() && showDeleted) || (!claim.isDeleted() && !showDeleted)){
                     ClaimListTO cto = new ClaimListTO();
                     String claimName = claim.getName().equalsIgnoreCase("") ? rootView
-                            .getContext().getString(R.string.default_claim_name)
-                            : claim.getName();
-                    String slogan = claimName
-                            + ", "
-                            + OpenTenureApplication.getContext().getResources()
-                            .getString(R.string.by)
-                            + ": "
-                            + claim.getPerson().getFirstName()
-                            + " "
-                            + claim.getPerson().getLastName()
-                            + " "
-                            + OpenTenureApplication.getContext().getResources()
-                            .getString(R.string.type)
-                            + ": "
-                            + dnl.getLocalizedDisplayName(new ClaimType()
-                            .getDisplayValueByType(claim.getType()));
+                            .getContext().getString(R.string.default_claim_name) : claim.getName();
+                    String claimDate = claim.getDateOfStart() != null ? claim.getDateOfStart().toString() : "...";
 
-                    if (claim.getRecorderName() != null)
-                        slogan = slogan
-                                + "\r\n"
-                                + OpenTenureApplication.getContext().getResources()
-                                .getString(R.string.recorded_by) + " "
-                                + claim.getRecorderName();
+                    String slogan = claim.getSlogan(getContext());
 
+                    if(!StringUtility.isEmpty(claim.getType())){
+                        slogan += ", " + OpenTenureApplication.getContext().getResources().getString(R.string.type)
+                                + ": " + dnl.getLocalizedDisplayName(new ClaimType().getDisplayValueByType(claim.getType()));
+                    }
+
+                    slogan += ", " + OpenTenureApplication.getContext().getResources().getString(R.string.occupiedSince) + ": " + claimDate ;
+
+                    if (claim.getRecorderName() != null) {
+                        slogan += "\r\n" + OpenTenureApplication.getContext().getResources()
+                                .getString(R.string.recorded_by) + " " + claim.getRecorderName();
+                    }
+
+                    cto.setName(claimName);
                     cto.setSlogan(slogan);
                     cto.setDeleted(claim.isDeleted());
                     cto.setId(claim.getClaimId());
                     cto.setModifiable(claim.isModifiable());
-                    cto.setPersonId(claim.getPerson().getPersonId());
+                    cto.setDateOfStart(claim.getDateOfStart());
+                    if(claim.getPerson() != null){
+                        cto.setPersonId(claim.getPerson().getPersonId());
+                    }
                     cto.setAttachments(claim.getAttachments());
+                    cto.setCreationDate(claim.getCreationDate());
 
                     if (claim.getClaimNumber() != null)
                         cto.setNumber(claim.getClaimNumber());
@@ -491,13 +545,11 @@ public class LocalClaimsFragment extends ListFragment {
 
                     cto.setStatus(claim.getStatus());
 
-                    int days = JsonUtilities.remainingDays(claim
-                            .getChallengeExpiryDate());
+                    int days = JsonUtilities.remainingDays(claim.getChallengeExpiryDate());
 
                     if (claim.isUploadable())
                         cto.setRemaingDays(getResources().getString(
-                                R.string.message_remaining_days)
-                                + days);
+                                R.string.message_remaining_days) + days);
                     else
                         cto.setRemaingDays("");
 

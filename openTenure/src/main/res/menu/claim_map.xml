@@ -1,12 +1,25 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:id="@+id/action_add_from_gps"
+        android:icon="@drawable/add_location_point"
+        android:title="@string/action_add_from_gps"
+        android:showAsAction="always"  />
+
+    <item android:id="@+id/action_new_picture"
+        android:icon="@drawable/screenshot"
+        android:title="@string/action_claim_map_snapshot"
+        android:showAsAction="always" />
+
     <item android:id="@+id/action_change_map_mode"
-          android:icon="@android:drawable/ic_menu_manage"
+          android:icon="@drawable/map_mode"
           android:title="@string/action_change_map_mode"
-          app:showAsAction="ifRoom" >
+          android:showAsAction="always" >
         <menu>
             <item android:id="@+id/action_add_boundary"
                   android:title="@string/action_add_boundary" />
+            <item android:id="@+id/action_insert_boundary"
+                android:title="@string/action_insert_boundary" />
             <item android:id="@+id/action_add_non_boundary"
                   android:title="@string/action_add_non_boundary" />
             <item android:id="@+id/action_measure"
@@ -15,22 +28,19 @@
                 android:title="@string/action_add_hole" />
             </menu>
     </item>
-    <item android:id="@+id/action_add_from_gps"
-          android:icon="@android:drawable/ic_input_add"
-          android:title="@string/action_add_from_gps"
-        app:showAsAction="ifRoom" />
+
     <item android:id="@+id/action_rotate"
           android:icon="@drawable/screenrotation"
           android:title="@string/action_rotate"
-        app:showAsAction="ifRoom" />
+        android:showAsAction="ifRoom" />
 	<item android:id="@+id/action_stop_rotating"
           android:icon="@drawable/stop"
           android:title="@string/action_stop_rotating"
-        app:showAsAction="ifRoom" />
+        android:showAsAction="ifRoom" />
     <item android:id="@+id/action_go_to"
           android:icon="@drawable/position"
           android:title="@string/action_go_to"
-        app:showAsAction="ifRoom" >
+        android:showAsAction="ifRoom" >
         <menu>
             <item android:id="@+id/action_center_and_follow"
                   android:title="@string/action_center" />
@@ -38,35 +48,31 @@
                   android:title="@string/action_select_bookmark" />
             </menu>
     </item>
-    <item android:id="@+id/action_new_picture"
-          android:icon="@drawable/screenshot"
-          android:title="@string/action_claim_map_snapshot"
-        app:showAsAction="ifRoom" />
     <item android:id="@+id/map_provider_google_normal"
           android:title="@string/map_provider_google_normal"
-        app:showAsAction="never" />
+        android:showAsAction="never" />
     <item android:id="@+id/map_provider_google_hybrid"
           android:title="@string/map_provider_google_hybrid"
-        app:showAsAction="never" />
+        android:showAsAction="never" />
     <item android:id="@+id/map_provider_google_satellite"
           android:title="@string/map_provider_google_satellite"
-        app:showAsAction="never" />
+        android:showAsAction="never" />
     <item android:id="@+id/map_provider_google_terrain"
           android:title="@string/map_provider_google_terrain"
-        app:showAsAction="never" />
+        android:showAsAction="never" />
     <item android:id="@+id/map_provider_osm_mapnik"
           android:title="@string/map_provider_osm_mapnik"
-        app:showAsAction="never" />
+        android:showAsAction="never" />
     <item android:id="@+id/map_provider_osm_mapquest"
           android:title="@string/map_provider_osm_mapquest"
-        app:showAsAction="never" />
+        android:showAsAction="never" />
     <item android:id="@+id/map_provider_local_tiles"
           android:title="@string/map_provider_local_tiles"
-        app:showAsAction="never" />
+        android:showAsAction="never" />
     <item android:id="@+id/map_provider_geoserver"
           android:title="@string/map_provider_geoserver"
-        app:showAsAction="never" />
+        android:showAsAction="never" />
     <item android:id="@+id/action_export_geo"
           android:title="@string/action_export_geo"
-        app:showAsAction="never" />
+        android:showAsAction="never" />
 </menu>

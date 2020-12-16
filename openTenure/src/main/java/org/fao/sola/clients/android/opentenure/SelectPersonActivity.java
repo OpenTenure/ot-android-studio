@@ -39,6 +39,8 @@ import android.support.v4.view.ViewPager;
 
 import com.astuetz.PagerSlidingTabStrip;
 
+import org.fao.sola.clients.android.opentenure.model.Person;
+
 public class SelectPersonActivity extends FragmentActivity implements ModeDispatcher {
 
 	public static final int SELECT_PERSON_ACTIVITY_RESULT = 100;
@@ -54,13 +56,13 @@ public class SelectPersonActivity extends FragmentActivity implements ModeDispat
 		super.onDestroy();
 		OpenTenureApplication.getInstance().getDatabase().sync();
 	};
-	
+
 	@Override
 	public void onPause() {
 		super.onPause();
-		OpenTenureApplication.getInstance().getDatabase().sync();;
+		OpenTenureApplication.getInstance().getDatabase().sync();
 	};
-	
+
 	@Override
 	public void onResume() {
 		super.onResume();
@@ -69,23 +71,17 @@ public class SelectPersonActivity extends FragmentActivity implements ModeDispat
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		
-		
-
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_person);
 
 		tabs = (PagerSlidingTabStrip) findViewById(R.id.tabs);
 		mViewPager = (ViewPager) findViewById(R.id.person_pager);
-		mSectionsPagerAdapter = new SectionsPagerAdapter(
-				getSupportFragmentManager());
-		
-		
+		mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
 		mViewPager.setAdapter(mSectionsPagerAdapter);
 		tabs.setIndicatorColor(getResources().getColor(R.color.ab_tab_indicator_opentenure));
 		tabs.setViewPager(mViewPager);
-		
+
 		if (savedInstanceState != null
 				&& savedInstanceState.getStringArrayList(EXCLUDE_PERSON_IDS_KEY) != null) {
 			excludePersonIds = savedInstanceState.getStringArrayList(EXCLUDE_PERSON_IDS_KEY);
@@ -102,38 +98,47 @@ public class SelectPersonActivity extends FragmentActivity implements ModeDispat
 
 		@Override
 		public Fragment getItem(int position) {
-
 			switch (position) {
-			case 0:
-				
-				PersonsFragment pf = new PersonsFragment();
-				if(excludePersonIds != null){
-					pf.setExcludePersonIds(excludePersonIds);
-				}
-				return pf;
+				case 0:
+					PersonsFragment pfp = PersonsFragment.newInstance(Person._PHYSICAL);
+					if(excludePersonIds != null){
+						pfp.setExcludePersonIds(excludePersonIds);
+					}
+					return pfp;
+				case 1:
+					PersonsFragment pfg = PersonsFragment.newInstance(Person._GROUP);
+					if(excludePersonIds != null){
+						pfg.setExcludePersonIds(excludePersonIds);
+					}
+					return pfg;
+				default:
+					return null;
 			}
-			return null;
+
 		}
 
 		@Override
 		public int getCount() {
-			return 1;
+			return 2;
 		}
 
 		@Override
 		public CharSequence getPageTitle(int position) {
 			Locale l = Locale.getDefault();
 			switch (position) {
-			case 0:
-				return getString(R.string.title_persons).toUpperCase(l);
+				case 0:
+					return getString(R.string.title_persons).toUpperCase(l);
+				case 1:
+					return getString(R.string.title_groups).toUpperCase(l);
 			}
 			return null;
 		}
 	}
-	
+
 	@Override
 	protected void onSaveInstanceState(Bundle outState) {
 		outState.putStringArrayList(EXCLUDE_PERSON_IDS_KEY, excludePersonIds);
+		super.onSaveInstanceState(outState);
 	};
 
 	@Override

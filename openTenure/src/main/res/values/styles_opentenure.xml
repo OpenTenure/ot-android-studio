@@ -31,8 +31,11 @@
         <item name="android:actionModeBackground">@drawable/cab_background_top_opentenure</item>
         <item name="android:actionModeSplitBackground">@drawable/cab_background_bottom_opentenure</item>
         <item name="android:actionModeCloseButtonStyle">@style/ActionButton.CloseMode.Opentenure</item>
-        
-        
+        <item name="android:editTextStyle">@style/OpenTenureEditTextStyle</item>
+    </style>
+
+    <style name="OpenTenureEditTextStyle" parent="@android:style/Widget.EditText">
+            <item name="android:padding">5dp</item>
     </style>
 
     <style name="ActionBar.Solid.Opentenure" parent="@android:style/Widget.Holo.Light.ActionBar.Solid">
@@ -115,4 +118,27 @@
     <item name="android:textColorHint">@android:color/black</item>
     </style>
 
+    <style name="Button.Sort" parent="@style/Widget.AppCompat.Button.Borderless">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:textColor">@color/dark_green</item>
+        <item name="android:drawableStart">@drawable/sort</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="Button.Sort.Ascending" parent="@style/Button.Sort">
+        <item name="android:drawableStart">@drawable/ascending</item>
+    </style>
+
+    <style name="Button.Sort.Descending" parent="@style/Button.Sort">
+        <item name="android:drawableStart">@drawable/descending</item>
+    </style>
+
+    <style name="LabelOpenTenure">
+        <item name="android:paddingTop">10dp</item>
+        <item name="android:paddingBottom">5dp</item>
+        <item name="android:gravity">bottom</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceMedium</item>
+    </style>
 </resources>

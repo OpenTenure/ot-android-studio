@@ -42,6 +42,7 @@ import java.util.UUID;
 import org.fao.sola.clients.android.opentenure.OpenTenureApplication;
 import org.fao.sola.clients.android.opentenure.R;
 import org.fao.sola.clients.android.opentenure.filesystem.FileSystemUtilities;
+import org.fao.sola.clients.android.opentenure.tools.StringUtility;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -718,8 +719,10 @@ public class Person {
 	}
 
 	public static File getPersonPictureBmp(String personId, int size) {
-		return new File(FileSystemUtilities.getClaimantFolder(personId)
-				+ File.separator + personId + "_" + size + ".png");
+		if(StringUtility.isEmpty(personId)){
+			return null;
+		}
+		return new File(FileSystemUtilities.getClaimantFolder(personId) + File.separator + personId + "_" + size + ".png");
 	}
 	
 	public boolean addPersonPictureAsAttachment(String claimId) {
@@ -730,7 +733,7 @@ public class Person {
 			Attachment att = new Attachment();
 			att.setAttachmentId(personId);
 			att.setClaimId(claimId);
-			att.setDescription("person photo");
+			att.setDescription("Claimant photo");
 			att.setFileName(image.getName());
 			att.setFileType("personPhoto");
 			att.setMD5Sum(MD5.calculateMD5(image));
@@ -747,18 +750,12 @@ public class Person {
 		return true;
 	}
 
-	public static Bitmap getPersonPicture(Context context, String personId,
-			int size) {
+	public static Bitmap getPersonPicture(Context context, String personId, int size) {
 		File file = getPersonPictureBmp(personId, size);
 		if (file != null && file.exists()) {
-
 			return BitmapFactory.decodeFile(file.getAbsolutePath());
-
 		} else {
-
-			return getPersonPicture(context, getPersonPictureFile(personId),
-					size);
-
+			return getPersonPicture(context, getPersonPictureFile(personId), size);
 		}
 	}
 	

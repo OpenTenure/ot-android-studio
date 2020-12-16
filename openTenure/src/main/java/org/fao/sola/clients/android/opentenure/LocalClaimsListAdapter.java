@@ -28,6 +28,8 @@
 package org.fao.sola.clients.android.opentenure;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
@@ -54,20 +56,26 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-public class LocalClaimsListAdapter extends ArrayAdapter<ClaimListTO> implements
-		Filterable {
+public class LocalClaimsListAdapter extends ArrayAdapter<ClaimListTO> implements Filterable {
 	private final Context context;
 	private final List<ClaimListTO> originalClaims;
 	private List<ClaimListTO> filteredClaims;
 	private List<ClaimListTO> claims;
 	LayoutInflater inflater;
+	public enum SortBy {
+        CREATION_DATE_ASC,
+		CREATION_DATE_DESC,
+		CLAIM_NAME_ASC,
+		CLAIM_NAME_DESC,
+		CLAIM_NUM_ASC,
+		CLAIM_NUM_DESC
+	};
+	private SortBy sortBy = SortBy.CREATION_DATE_DESC;
 
-	public LocalClaimsListAdapter(Context context, List<ClaimListTO> claims,
-			ModeDispatcher.Mode mode) {
+	public LocalClaimsListAdapter(Context context, List<ClaimListTO> claims, ModeDispatcher.Mode mode) {
 		super(context, R.layout.claims_list_item, claims);
 		this.context = context;
-		this.inflater = (LayoutInflater) context
-				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		this.originalClaims = new ArrayList<ClaimListTO>(claims);
 		this.claims = claims;
 		this.filteredClaims = null;
@@ -80,9 +88,7 @@ public class LocalClaimsListAdapter extends ArrayAdapter<ClaimListTO> implements
 
 			@Override
 			protected FilterResults performFiltering(CharSequence constraint) {
-
 				String filterString = constraint.toString();
-
 				filteredClaims = new ArrayList<ClaimListTO>();
 				for (ClaimListTO cto : originalClaims) {
 					String lcase = cto.getSlogan().toLowerCase(Locale.getDefault());
@@ -98,9 +104,9 @@ public class LocalClaimsListAdapter extends ArrayAdapter<ClaimListTO> implements
 			}
 
 			@Override
-			protected void publishResults(CharSequence constraint,
-					FilterResults results) {
+			protected void publishResults(CharSequence constraint, FilterResults results) {
 				claims = (ArrayList<ClaimListTO>) results.values;
+				sortList(false);
 
 				if (results.count > 0) {
 					notifyDataSetChanged();
@@ -110,6 +116,37 @@ public class LocalClaimsListAdapter extends ArrayAdapter<ClaimListTO> implements
 			}
 		};
 		return filter;
+	}
+
+	public void setSortBy(SortBy sortBy) {
+		this.sortBy = sortBy;
+		sortList(true);
+	}
+
+	private void sortList(boolean notify) {
+		switch (sortBy){
+			case CREATION_DATE_DESC:
+				Collections.sort(claims, ClaimListTO.startDateDesc);
+				break;
+			case CREATION_DATE_ASC:
+				Collections.sort(claims, ClaimListTO.startDateAsc);
+				break;
+			case CLAIM_NAME_DESC:
+				Collections.sort(claims, ClaimListTO.claimNameDesc);
+				break;
+			case CLAIM_NAME_ASC:
+				Collections.sort(claims, ClaimListTO.claimNameAsc);
+				break;
+			case CLAIM_NUM_DESC:
+				Collections.sort(claims, ClaimListTO.claimNumberDesc);
+				break;
+			case CLAIM_NUM_ASC:
+				Collections.sort(claims, ClaimListTO.claimNumberAsc);
+				break;
+		}
+		if (notify) {
+			notifyDataSetChanged();
+		}
 	}
 
 	@Override
@@ -215,7 +252,6 @@ public class LocalClaimsListAdapter extends ArrayAdapter<ClaimListTO> implements
 		if (realStatus.equals(ClaimStatus._UPLOADING)) {
 
 			vh.iconLocal.setVisibility(View.VISIBLE);
-			vh.number.setTextSize(8);
 			if (claims.get(position).getNumber() != null)
 				vh.number.setText(claims.get(position).getNumber());
 			vh.status.setTextColor(context.getResources().getColor(
@@ -242,7 +278,6 @@ public class LocalClaimsListAdapter extends ArrayAdapter<ClaimListTO> implements
 
 			vh.iconLocal.setVisibility(View.GONE);
 			vh.iconUnmoderated.setVisibility(View.VISIBLE);
-			vh.number.setTextSize(8);
 			if (claims.get(position).getNumber() != null)
 				vh.number.setText(claims.get(position).getNumber());
 			vh.status.setTextColor(context.getResources().getColor(
@@ -267,7 +302,6 @@ public class LocalClaimsListAdapter extends ArrayAdapter<ClaimListTO> implements
 		if (realStatus.equals(ClaimStatus._UPLOAD_ERROR)) {
 
 			vh.iconLocal.setVisibility(View.VISIBLE);
-			vh.number.setTextSize(8);
 			if (claims.get(position).getNumber() != null)
 				vh.number.setText(claims.get(position).getNumber());
 			vh.status.setTextColor(context.getResources().getColor(
@@ -290,7 +324,6 @@ public class LocalClaimsListAdapter extends ArrayAdapter<ClaimListTO> implements
 
 			vh.iconLocal.setVisibility(View.GONE);
 			vh.iconUnmoderated.setVisibility(View.VISIBLE);
-			vh.number.setTextSize(8);
 			if (claims.get(position).getNumber() != null)
 				vh.number.setText(claims.get(position).getNumber());
 			vh.status.setTextColor(context.getResources().getColor(
@@ -306,7 +339,6 @@ public class LocalClaimsListAdapter extends ArrayAdapter<ClaimListTO> implements
 		if (realStatus.equals(ClaimStatus._UPLOAD_INCOMPLETE)) {
 
 			vh.iconLocal.setVisibility(View.VISIBLE);
-			vh.number.setTextSize(8);
 			if (claims.get(position).getNumber() != null)
 				vh.number.setText(claims.get(position).getNumber());
 			vh.status.setTextColor(context.getResources().getColor(R.color.status_created));
@@ -329,7 +361,6 @@ public class LocalClaimsListAdapter extends ArrayAdapter<ClaimListTO> implements
 
 			vh.iconLocal.setVisibility(View.GONE);
 			vh.iconUnmoderated.setVisibility(View.VISIBLE);
-			vh.number.setTextSize(8);
 			if (claims.get(position).getNumber() != null)
 				vh.number.setText(claims.get(position).getNumber());
 			vh.status.setTextColor(context.getResources().getColor(
@@ -354,7 +385,6 @@ public class LocalClaimsListAdapter extends ArrayAdapter<ClaimListTO> implements
 		if (realStatus.equals(ClaimStatus._UNMODERATED)) {
 
 			vh.iconUnmoderated.setVisibility(View.VISIBLE);
-			vh.number.setTextSize(8);
 			vh.number.setText(claims.get(position).getNumber());
 			vh.bar = (ProgressBar) convertView.findViewById(R.id.progress_bar);
 			vh.status.setVisibility(View.GONE);
@@ -367,7 +397,6 @@ public class LocalClaimsListAdapter extends ArrayAdapter<ClaimListTO> implements
 		if (realStatus.equals(ClaimStatus._MODERATED)) {
 
 			vh.iconModerated.setVisibility(View.VISIBLE);
-			vh.number.setTextSize(8);
 			vh.number.setText(claims.get(position).getNumber());
 			vh.bar = (ProgressBar) convertView.findViewById(R.id.progress_bar);
 			vh.status.setVisibility(View.GONE);
@@ -378,7 +407,6 @@ public class LocalClaimsListAdapter extends ArrayAdapter<ClaimListTO> implements
 		if (realStatus.equals(ClaimStatus._CHALLENGED)) {
 
 			vh.iconChallenged.setVisibility(View.VISIBLE);
-			vh.number.setTextSize(8);
 			vh.number.setText(claims.get(position).getNumber());
 			vh.bar = (ProgressBar) convertView.findViewById(R.id.progress_bar);
 			vh.status.setVisibility(View.GONE);
@@ -390,7 +418,6 @@ public class LocalClaimsListAdapter extends ArrayAdapter<ClaimListTO> implements
 		if (realStatus.equals(ClaimStatus._WITHDRAWN)) {
 
 			vh.iconWithdrawn.setVisibility(View.VISIBLE);
-			vh.number.setTextSize(8);
 			vh.number.setText(claims.get(position).getNumber());
 			vh.bar = (ProgressBar) convertView.findViewById(R.id.progress_bar);
 			vh.status.setVisibility(View.GONE);
@@ -402,7 +429,6 @@ public class LocalClaimsListAdapter extends ArrayAdapter<ClaimListTO> implements
 		if (realStatus.equals(ClaimStatus._REVIEWED)) {
 
 			vh.iconReviewed.setVisibility(View.VISIBLE);
-			vh.number.setTextSize(8);
 			vh.number.setText(claims.get(position).getNumber());
 			vh.bar = (ProgressBar) convertView.findViewById(R.id.progress_bar);
 			vh.status.setVisibility(View.GONE);
@@ -415,14 +441,12 @@ public class LocalClaimsListAdapter extends ArrayAdapter<ClaimListTO> implements
 		vh.id.setTextSize(8);
 		vh.id.setText(claims.get(position).getId());
 		// vh.bar = (ProgressBar) convertView.findViewById(R.id.progress_bar);
-		vh.number.setTextSize(8);
 		vh.number.setVisibility(View.VISIBLE);
 
 		vh.number.setText(claims.get(position).getNumber());
 		vh.position = position;
 
-		vh.picture.setImageBitmap(Person.getPersonPicture(context,
-				claims.get(position).getPersonId(), 96));
+		vh.picture.setImageBitmap(Person.getPersonPicture(context, claims.get(position).getPersonId(), 96));
 
 		if (OpenTenureApplication.getInstance().getLocale().toString().startsWith("ar")) {
 			vh.slogan.setGravity(View.TEXT_DIRECTION_LOCALE);

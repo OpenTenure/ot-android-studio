@@ -40,25 +40,16 @@ import android.view.View.OnClickListener;
 import android.widget.Toast;
 
 public class UploadAttachmentListener implements OnClickListener {
-
 	AttachmentViewHolder vh;
 	Attachment attachment;
 
 	public UploadAttachmentListener(Attachment att, AttachmentViewHolder vh) {
-
 		this.vh = vh;
 		this.attachment = att;
-
 	}
 
 	@Override
 	public void onClick(View v) {
-		// TODO Auto-generated method stub
-
-		Object[] params = new Object[2];
-		params[0] = attachment;
-		params[1] = vh;
-
 		if (!OpenTenureApplication.isLoggedin()) {
 			Toast toast;
 			toast = Toast.makeText(OpenTenureApplication.getContext(),
@@ -66,7 +57,6 @@ public class UploadAttachmentListener implements OnClickListener {
 							.getString(R.string.message_login_before)
 							+ " ", Toast.LENGTH_SHORT);
 			toast.show();
-
 			return;
 		}
 
@@ -74,13 +64,10 @@ public class UploadAttachmentListener implements OnClickListener {
 		vh.getAttachmentStatus().setVisibility(View.GONE);
 
 		SaveAttachmentTask task = new SaveAttachmentTask();
-		task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,
-				attachment.getAttachmentId(), vh);
+		task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, attachment.getAttachmentId(), vh);
 
 		Toast toast = Toast.makeText(OpenTenureApplication.getContext(),
 				R.string.message_uploading_attachment, Toast.LENGTH_LONG);
 		toast.show();
-
 	}
-
 }

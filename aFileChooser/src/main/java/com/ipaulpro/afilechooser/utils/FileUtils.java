@@ -292,9 +292,10 @@ public class FileUtils {
             else if (isDownloadsDocument(uri)) {
 
                 final String id = DocumentsContract.getDocumentId(uri);
-                final Uri contentUri = ContentUris.withAppendedId(
-                        Uri.parse("content://downloads/public_downloads"), Long.valueOf(id));
+                //final Uri contentUri = ContentUris.withAppendedId(
+                 //       Uri.parse("content://downloads/public_downloads"), Long.valueOf(id));
 
+                final Uri contentUri = Uri.parse(id);
                 return getDataColumn(context, contentUri, null, null);
             }
             // MediaProvider
@@ -517,11 +518,13 @@ public class FileUtils {
      * @author paulburke
      */
     public static Intent createGetContentIntent() {
-        // Implicitly allow the user to select a particular kind of data
-        final Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-        // The MIME data type filter
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        }
+
         intent.setType("*/*");
-        // Only return URIs that can be opened with ContentResolver
         intent.addCategory(Intent.CATEGORY_OPENABLE);
         return intent;
     }

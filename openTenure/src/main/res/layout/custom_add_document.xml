@@ -32,14 +32,13 @@
         android:orientation="horizontal" >
 
         <Button
-            android:id="@+id/fileDocumentConfirm"
+            android:id="@+id/fileDocumentConfirmCancel"
             style="?android:attr/buttonBarButtonStyle"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:layout_weight="1" />
-        
-        
+
         <View
         android:layout_width="1dip"
         android:layout_height="fill_parent"
@@ -47,12 +46,13 @@
         />
 
         <Button
-            android:id="@+id/fileDocumentConfirmCancel"
+            android:id="@+id/fileDocumentConfirm"
             style="?android:attr/buttonBarButtonStyle"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:layout_weight="1" />
+
     </LinearLayout>
 
 </LinearLayout>
