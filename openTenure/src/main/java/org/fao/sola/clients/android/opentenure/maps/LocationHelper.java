@@ -31,16 +31,12 @@ import org.fao.sola.clients.android.opentenure.OpenTenureApplication;
 
 import com.google.android.gms.maps.model.LatLng;
 
-import android.Manifest;
-import android.app.Activity;
-import android.content.Context;
-import android.content.pm.PackageManager;
 import android.hardware.GeomagneticField;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
+import androidx.core.app.ActivityCompat;
 import android.util.Log;
 
 public class LocationHelper {
@@ -78,7 +74,7 @@ public class LocationHelper {
 	public void start() {
 
 		locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
-				LOCATION_LISTENER_INTERVAL_FAST, LOCATION_LISTENER_SHORT_DISTANCE, gpsLL);	
+				LOCATION_LISTENER_INTERVAL_FAST, LOCATION_LISTENER_SHORT_DISTANCE, gpsLL);
 		locationManager.requestLocationUpdates(
 				LocationManager.NETWORK_PROVIDER,
 				LOCATION_LISTENER_INTERVAL_FAST, LOCATION_LISTENER_SHORT_DISTANCE, networkLL);
@@ -154,9 +150,11 @@ public class LocationHelper {
 				if (OpenTenureApplication.getInstance().getDatabase().isOpen()) {
 					org.fao.sola.clients.android.opentenure.model.Location loc = org.fao.sola.clients.android.opentenure.model.Location
 							.getLocation(CURRENT);
-					loc.setLat(location.getLatitude());
-					loc.setLon(location.getLongitude());
-					loc.update();
+					if(loc != null) {
+						loc.setLat(location.getLatitude());
+						loc.setLon(location.getLongitude());
+						loc.update();
+					}
 				}
 			}
 

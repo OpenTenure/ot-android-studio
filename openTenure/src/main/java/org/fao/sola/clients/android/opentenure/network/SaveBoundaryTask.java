@@ -28,7 +28,7 @@
 package org.fao.sola.clients.android.opentenure.network;
 
 import android.os.AsyncTask;
-import android.support.v4.app.FragmentActivity;
+import androidx.fragment.app.FragmentActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;

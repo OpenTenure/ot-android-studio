@@ -33,13 +33,12 @@ import java.util.List;
 import org.fao.sola.clients.android.opentenure.model.AdjacenciesNotes;
 import org.fao.sola.clients.android.opentenure.model.Adjacency;
 import org.fao.sola.clients.android.opentenure.model.Claim;
-import org.fao.sola.clients.android.opentenure.tools.StringUtility;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.ListFragment;
+import androidx.fragment.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -60,8 +59,13 @@ public class AdjacentClaimsFragment extends ListFragment {
 	private ModeDispatcher modeActivity;
 
 	@Override
-	public void onAttach(Activity activity) {
-		super.onAttach(activity);
+	public void onAttach(Context context) {
+		super.onAttach(context);
+
+		Activity activity = getActivity();
+		if (context instanceof Activity){
+			activity = (Activity) context;
+		}
 
 		try {
 			claimActivity = (ClaimDispatcher) activity;
@@ -76,17 +80,6 @@ public class AdjacentClaimsFragment extends ListFragment {
 	}
 
 	public AdjacentClaimsFragment() {
-	}
-
-	@Override
-	public void onPrepareOptionsMenu(Menu menu) {
-		try {
-			Thread.sleep(400);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-
-		super.onPrepareOptionsMenu(menu);
 	}
 
 	@Override
@@ -132,6 +125,9 @@ public class AdjacentClaimsFragment extends ListFragment {
 	}
 
 	public boolean saveNotes() {
+		if(claimActivity == null) {
+			return true;
+		}
 		String claimId = claimActivity.getClaimId();
 		
 		if(claimId == null){			

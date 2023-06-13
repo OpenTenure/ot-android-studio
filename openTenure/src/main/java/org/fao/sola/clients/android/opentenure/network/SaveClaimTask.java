@@ -46,15 +46,12 @@ import org.fao.sola.clients.android.opentenure.model.ClaimStatus;
 import org.fao.sola.clients.android.opentenure.network.API.CommunityServerAPI;
 import org.fao.sola.clients.android.opentenure.network.response.Attachment;
 import org.fao.sola.clients.android.opentenure.network.response.SaveClaimResponse;
-import org.fao.sola.clients.android.opentenure.network.response.UploadChunksResponse;
 import org.fao.sola.clients.android.opentenure.network.response.ViewHolderResponse;
 
 import android.view.View;
 import android.os.AsyncTask;
-import android.support.v4.app.FragmentActivity;
+import androidx.fragment.app.FragmentActivity;
 import android.util.Log;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
 /**

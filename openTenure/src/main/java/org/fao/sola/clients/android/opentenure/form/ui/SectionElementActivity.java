@@ -29,13 +29,10 @@ package org.fao.sola.clients.android.opentenure.form.ui;
 
 import java.util.Locale;
 
-import org.fao.sola.clients.android.opentenure.ClaimActivity;
 import org.fao.sola.clients.android.opentenure.ClaimDispatcher;
-import org.fao.sola.clients.android.opentenure.ClaimListener;
 import org.fao.sola.clients.android.opentenure.FormDispatcher;
 import org.fao.sola.clients.android.opentenure.ModeDispatcher;
 import org.fao.sola.clients.android.opentenure.OpenTenureApplication;
-import org.fao.sola.clients.android.opentenure.PersonFragment;
 import org.fao.sola.clients.android.opentenure.R;
 import org.fao.sola.clients.android.opentenure.form.FormPayload;
 import org.fao.sola.clients.android.opentenure.form.FormTemplate;
@@ -49,16 +46,14 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 import android.view.KeyEvent;
-import android.view.View;
 
 import com.astuetz.PagerSlidingTabStrip;
-import com.github.amlcurran.showcaseview.OnShowcaseEventListener;
 
 public class SectionElementActivity extends FragmentActivity implements
 		ClaimDispatcher, FormDispatcher {

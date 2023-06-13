@@ -15,6 +15,8 @@
  */
 package com.androidmapsextensions.impl;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.location.Location;
 
@@ -47,6 +49,10 @@ import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.gms.maps.model.TileOverlay;
 import com.google.android.gms.maps.model.TileOverlayOptions;
+
+import org.fao.sola.clients.android.opentenure.OpenTenureApplication;
+
+import androidx.core.app.ActivityCompat;
 
 // TODO: to be deleted when com.google.android.gms.maps.GoogleMap becomes an interface
 class GoogleMapWrapper implements IGoogleMap {
@@ -194,12 +200,31 @@ class GoogleMapWrapper implements IGoogleMap {
 
     @Override
     public final void setMyLocationEnabled(boolean enabled) {
+        if (ActivityCompat.checkSelfPermission(OpenTenureApplication.getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(OpenTenureApplication.getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
         map.setMyLocationEnabled(enabled);
     }
 
     @Override
     public final void setOnCameraChangeListener(OnCameraChangeListener listener) {
         map.setOnCameraChangeListener(listener);
+    }
+
+    @Override
+    public void setOnCameraMoveStartedListener(GoogleMap.OnCameraMoveStartedListener listener) {
+        map.setOnCameraMoveStartedListener(listener);
+    }
+
+    @Override
+    public void setOnCameraMoveListener(GoogleMap.OnCameraMoveListener listener) {
+        map.setOnCameraMoveListener(listener);
+    }
+
+    @Override
+    public void setOnCameraIdleListener(GoogleMap.OnCameraIdleListener listener) {
+        map.setOnCameraIdleListener(listener);
     }
 
     @Override

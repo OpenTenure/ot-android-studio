@@ -34,7 +34,7 @@ import org.fao.sola.clients.android.opentenure.model.Bookmark;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.ListFragment;
+import androidx.fragment.app.ListFragment;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;

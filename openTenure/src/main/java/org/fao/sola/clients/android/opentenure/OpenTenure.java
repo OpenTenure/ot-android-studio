@@ -38,7 +38,6 @@ import org.fao.sola.clients.android.opentenure.model.Claim;
 import org.fao.sola.clients.android.opentenure.model.Configuration;
 
 import android.Manifest;
-import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.AlarmManager;
 import android.app.AlertDialog;
@@ -49,16 +48,22 @@ import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.preference.PreferenceManager;
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentStatePagerAdapter;
-import android.support.v4.view.ViewPager;
+
+import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.viewpager.widget.ViewPager;
+
+import android.provider.Settings;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -71,6 +76,7 @@ import com.github.amlcurran.showcaseview.OnShowcaseEventListener;
 import com.github.amlcurran.showcaseview.ShowcaseView;
 import com.github.amlcurran.showcaseview.targets.Target;
 import com.github.amlcurran.showcaseview.targets.ViewTarget;
+import com.google.android.material.tabs.TabLayout;
 
 public class OpenTenure extends FragmentActivity implements ModeDispatcher,
         OnShowcaseEventListener, View.OnClickListener {
@@ -219,6 +225,7 @@ public class OpenTenure extends FragmentActivity implements ModeDispatcher,
         tabs = (PagerSlidingTabStrip) findViewById(R.id.tabs);
         mViewPager = (ViewPager) findViewById(R.id.open_tenure_pager);
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+
         mViewPager.setAdapter(mSectionsPagerAdapter);
         tabs.setIndicatorColor(getResources().getColor(R.color.ab_tab_indicator_opentenure));
         tabs.setViewPager(mViewPager);
@@ -290,6 +297,12 @@ public class OpenTenure extends FragmentActivity implements ModeDispatcher,
             final AlertDialog alertConnectionDialog = alertConnectionBuilder.create();
             alertConnectionDialog.show();
         }
+    }
+
+    @Override
+    public void onConfigurationChanged(android.content.res.Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        setLocale(this);
     }
 
     private void setAlpha(float alpha, View... views) {
@@ -523,37 +536,27 @@ public class OpenTenure extends FragmentActivity implements ModeDispatcher,
     }
 
     public void restart() {
-        Context context = OpenTenureApplication.getContext();
-        Intent mStartActivity = OpenTenureApplication.getContext().getPackageManager().getLaunchIntentForPackage(
-                OpenTenureApplication.getContext().getPackageName());
-        mStartActivity.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        int mPendingIntentId = 123456;
-        PendingIntent mPendingIntent = PendingIntent.getActivity(context, mPendingIntentId, mStartActivity, PendingIntent.FLAG_CANCEL_CURRENT);
-        AlarmManager mgr = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-        // setWindow is not used for compatibility with API level 17
-        mgr.set(AlarmManager.RTC, System.currentTimeMillis() + 1000, mPendingIntent);
         cleanup();
         finish();
-        System.exit(0);
+        Intent mStartActivity = OpenTenureApplication.getContext().getPackageManager().getLaunchIntentForPackage(OpenTenureApplication.getContext().getPackageName());
+        startActivity(mStartActivity);
+        overridePendingTransition(0, 0);
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-
-        if (resultCode == OpenTenurePreferencesActivity.RESULT_CODE_RESTART
-                && requestCode == OpenTenurePreferencesActivity.REQUEST_CODE) {
-
+        if (resultCode == OpenTenurePreferencesActivity.RESULT_CODE_RESTART && requestCode == OpenTenurePreferencesActivity.REQUEST_CODE) {
             AlertDialog.Builder restartDialog = new AlertDialog.Builder(this);
             restartDialog.setTitle(R.string.title_restart_dialog);
             restartDialog.setMessage(getResources().getString(
                     R.string.message_restart_dialog));
             restartDialog.setPositiveButton(R.string.confirm, new OnClickListener() {
-
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     restart();
                 }
             });
+
             restartDialog.setNegativeButton(R.string.cancel, new OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
@@ -566,18 +569,13 @@ public class OpenTenure extends FragmentActivity implements ModeDispatcher,
     }
 
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
-
         public SectionsPagerAdapter(FragmentManager fm) {
             super(fm);
         }
 
         @Override
-        public void destroyItem(android.view.ViewGroup container, int position, Object object) {
-        }
-
-        @Override
         public Fragment getItem(int position) {
-            switch (position) {
+             switch (position) {
                 case 0:
                     return new NewsFragment();
                 case 1:
@@ -620,5 +618,4 @@ public class OpenTenure extends FragmentActivity implements ModeDispatcher,
     public Mode getMode() {
         return mode;
     }
-
 }

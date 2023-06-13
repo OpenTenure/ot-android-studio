@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="org.fao.sola.clients.android.opentenure"
-    android:versionCode="32"
-    android:versionName="1.15" >
+    xmlns:tools="http://schemas.android.com/tools"
+    android:versionCode="34"
+    android:targetSdkVersion="33"
+    android:versionName="1.17" >
 
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -10,7 +11,8 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:maxSdkVersion="29" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" android:maxSdkVersion="28" />
     <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
 
     <uses-feature
@@ -20,16 +22,20 @@
     <uses-feature android:name="android.hardware.camera"
         android:required="true" />
 
+    <queries>
+        <package android:name="com.google.android.apps.maps" />
+    </queries>
+
     <application
         android:largeHeap="true"
         android:allowBackup="true"
+        android:fullBackupOnly="false"
         android:icon="@drawable/sola_logo"
         android:label="@string/app_name"
         android:name="org.fao.sola.clients.android.opentenure.OpenTenureApplication"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         android:supportsRtl="true">
-        <uses-library android:name="com.google.android.maps" />
         <uses-library android:name="org.apache.http.legacy" android:required="false" />
 
         <meta-data
@@ -39,7 +45,7 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
         <provider
-            android:name="android.support.v4.content.FileProvider"
+            android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}"
             android:exported="false"
             android:grantUriPermissions="true">
@@ -50,6 +56,7 @@
         <activity
             android:name="org.fao.sola.clients.android.opentenure.SplashScreen"
             android:label="@string/app_name"
+            android:exported="true"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -60,25 +67,29 @@
             android:name="org.fao.sola.clients.android.opentenure.form.ui.SectionElementActivity"
             android:theme="@style/Theme.Opentenure"
             android:label="@string/app_name"
+            android:exported="true"
             android:windowSoftInputMode="adjustPan" >
         </activity>
         <activity
             android:name="org.fao.sola.clients.android.opentenure.InitializationActivity"
             android:theme="@style/Theme.Opentenure"
             android:label="@string/app_name"
+            android:exported="true"
             android:windowSoftInputMode="adjustPan" >
         </activity>
         <activity
             android:name="org.fao.sola.clients.android.opentenure.OpenTenure"
             android:theme="@style/Theme.Opentenure"
             android:label="@string/app_name"
-            android:configChanges="orientation|screenSize"
+            android:exported="true"
+            android:configChanges="orientation|screenSize|screenLayout"
             android:windowSoftInputMode="adjustPan">
         </activity>
         <activity
             android:name="org.fao.sola.clients.android.opentenure.ClaimActivity"
             android:theme="@style/Theme.Opentenure"
             android:label="@string/title_activity_claim"
+            android:exported="true"
             android:windowSoftInputMode="stateUnspecified|adjustResize"
             android:icon="@drawable/sola_logo"
             >
@@ -91,6 +102,7 @@
             android:name="org.fao.sola.clients.android.opentenure.BoundaryActivity"
             android:theme="@style/Theme.Opentenure"
             android:label="@string/title_activity_boundary"
+            android:exported="true"
             android:windowSoftInputMode="stateVisible|adjustResize|adjustPan"
             android:icon="@drawable/sola_logo"
             >
@@ -102,41 +114,48 @@
         <activity
             android:name="org.fao.sola.clients.android.opentenure.PersonActivity"
             android:theme="@style/Theme.Opentenure"
+            android:exported="true"
             android:configChanges="orientation|screenSize"
             android:label="@string/title_activity_person" >
         </activity>
         <activity
             android:name="org.fao.sola.clients.android.opentenure.SelectClaimActivity"
             android:theme="@style/Theme.Opentenure"
+            android:exported="true"
             android:label="@string/title_activity_select_claim"
             android:windowSoftInputMode="adjustPan" >
         </activity>
         <activity
             android:name="org.fao.sola.clients.android.opentenure.SelectPersonActivity"
             android:theme="@style/Theme.Opentenure"
+            android:exported="true"
             android:label="@string/title_activity_select_person"
             android:windowSoftInputMode="adjustPan" >
         </activity>
         <activity
             android:name="org.fao.sola.clients.android.opentenure.SelectBookmarkActivity"
             android:theme="@style/Theme.Opentenure"
+            android:exported="true"
             android:label="@string/title_activity_select_bookmark"
             android:windowSoftInputMode="adjustPan" >
         </activity>
         <activity
             android:name="org.fao.sola.clients.android.opentenure.ShareDetailsActivity"
             android:theme="@style/Theme.Opentenure"
+            android:exported="true"
             android:label="@string/title_activity_share_details"
             android:windowSoftInputMode="stateVisible|adjustResize" >
         </activity>
         <activity
             android:name="org.fao.sola.clients.android.opentenure.OpenTenurePreferencesActivity"
             android:theme="@style/Theme.Opentenure"
+            android:exported="true"
             android:label="@string/title_activity_settings" >
         </activity>
         <activity
             android:name="org.fao.sola.clients.android.opentenure.network.LoginActivity"
             android:theme="@android:style/Theme.Holo.Light.Dialog"
+            android:exported="true"
             >
         </activity>
         <activity
@@ -154,6 +173,18 @@
                 <data android:mimeType="*/*" />
             </intent-filter>
         </activity>
+
+        <receiver
+            android:name="com.google.android.gms.measurement.AppMeasurementReceiver"
+            android:enabled="true"
+            android:exported="false"
+            tools:node="merge"
+            tools:overrideLibrary="com.google.android.gms.measurement">
+            <intent-filter>
+                <action android:name="com.google.android.gms.measurement.UPLOAD"/>
+            </intent-filter>
+        </receiver>
+
      </application>
 
 </manifest>

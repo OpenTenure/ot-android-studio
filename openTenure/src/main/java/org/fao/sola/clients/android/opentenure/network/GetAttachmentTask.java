@@ -33,6 +33,7 @@ import java.io.IOException;
 
 import org.apache.http.HttpStatus;
 import org.fao.sola.clients.android.opentenure.AttachmentViewHolder;
+import org.fao.sola.clients.android.opentenure.BuildConfig;
 import org.fao.sola.clients.android.opentenure.OpenTenureApplication;
 import org.fao.sola.clients.android.opentenure.R;
 import org.fao.sola.clients.android.opentenure.button.listener.DownloadAttachmentListener;
@@ -43,6 +44,7 @@ import org.fao.sola.clients.android.opentenure.model.MD5;
 import org.fao.sola.clients.android.opentenure.network.API.CommunityServerAPI;
 import org.fao.sola.clients.android.opentenure.network.response.GetAttachmentResponse;
 
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.view.View;
@@ -83,13 +85,10 @@ public class GetAttachmentTask extends AsyncTask<Object, Void, Object[]> {
 		}
 
 		/* create the File object to write */
-		File file = new File(FileSystemUtilities.getAttachmentFolder(att
-				.getClaimId()), att.getFileName());
+		File file = new File(FileSystemUtilities.getAttachmentFolder(att.getClaimId()), att.getFileName());
 
 		try {
-
 			if (file.exists()) {
-
 				/* If the file exist set the offset to the last byte downoaded */
 				offSet = file.length();
 			} else
@@ -190,7 +189,8 @@ public class GetAttachmentTask extends AsyncTask<Object, Void, Object[]> {
 			if (file != null && att.getSize() == file.length() && res != null
 					&& MD5.checkMD5(res.getMd5(), file)) {
 
-				att.setPath(file.getAbsolutePath());
+				//att.setPath(file.getAbsolutePath());
+				att.setPath(FileSystemUtilities.getClaimAttachmentContentPath(att.getClaimId(), att.getFileName()));
 				att.setStatus(AttachmentStatus._UPLOADED);
 				Attachment.updateAttachment(att);
 

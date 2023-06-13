@@ -31,13 +31,13 @@ package org.fao.sola.clients.android.opentenure;
 
 import android.Manifest;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.app.ActivityCompat;
+import androidx.core.app.ActivityCompat;
 import android.widget.Toast;
 
 
@@ -114,12 +114,11 @@ public class SplashScreen extends Activity {
 					boolean cameraPerm = grantResults[1] == PackageManager.PERMISSION_GRANTED;
 					boolean storagePerm = grantResults[2] == PackageManager.PERMISSION_GRANTED;
 
-					if (gpsPerm && cameraPerm && storagePerm) {
+					if (gpsPerm && cameraPerm && (storagePerm || Build.VERSION.SDK_INT > Build.VERSION_CODES.P)) {
 						Intent i = new Intent(SplashScreen.this, InitializationActivity.class);
 						startActivity(i);
 						finish();
-					}
-					else {
+					} else {
 						Toast.makeText(this,"Permissions are necessary",Toast.LENGTH_LONG).show();
 						final Handler handler = new Handler();
 						handler.postDelayed(new Runnable() {

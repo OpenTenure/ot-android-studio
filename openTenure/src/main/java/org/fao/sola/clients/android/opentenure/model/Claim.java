@@ -102,6 +102,9 @@ public class Claim {
 	}
 
 	public String getName() {
+		if(name == null) {
+			return "";
+		}
 		return name;
 	}
 
@@ -1540,9 +1543,18 @@ public class Claim {
 
 		if(getPerson() != null){
 			if(context != null){
-				slogan += ", " + context.getString(R.string.by) + ": " + getPerson().getFirstName() + " " + getPerson().getLastName();
+				slogan += ", " + context.getString(R.string.by) + ": ";
+				if(!StringUtility.isEmpty(getPerson().getLastName())) {
+					slogan += getPerson().getFirstName() + " " + getPerson().getLastName();
+				} else {
+					slogan += getPerson().getFirstName();
+				}
 			} else {
-				slogan += ", " + getPerson().getFirstName() + " " + getPerson().getLastName();
+				if(!StringUtility.isEmpty(getPerson().getLastName())) {
+					slogan += ", " + getPerson().getFirstName() + " " + getPerson().getLastName();
+				} else {
+					slogan += ", " + getPerson().getFirstName();
+				}
 			}
 		}
 		return slogan;

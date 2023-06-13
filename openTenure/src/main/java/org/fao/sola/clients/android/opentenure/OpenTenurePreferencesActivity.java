@@ -57,7 +57,7 @@ public class OpenTenurePreferencesActivity extends PreferenceActivity implements
 				.beginTransaction()
 				.replace(android.R.id.content,
 						new OpenTenurePreferencesFragment()).commit();
-
+		OpenTenure.setLocale(this);
 		
 	}
 

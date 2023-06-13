@@ -37,8 +37,6 @@ import java.net.URL;
 import org.fao.sola.clients.android.opentenure.OpenTenureApplication;
 import org.fao.sola.clients.android.opentenure.OpenTenurePreferencesActivity;
 import org.fao.sola.clients.android.opentenure.form.FormTemplate;
-import org.fao.sola.clients.android.opentenure.maps.MainMapFragment;
-import org.fao.sola.clients.android.opentenure.model.Configuration;
 import org.fao.sola.clients.android.opentenure.model.SurveyFormTemplate;
 import org.fao.sola.clients.android.opentenure.network.API.CommunityServerAPIUtilities;
 
@@ -46,7 +44,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
-import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 
 public class FormRetriever extends AsyncTask<Void, Integer, Integer> {

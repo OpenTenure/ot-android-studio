@@ -27,13 +27,14 @@
  */
 package org.fao.sola.clients.android.opentenure.maps;
 
+import android.Manifest;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.hardware.GeomagneticField;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -42,9 +43,12 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.Looper;
 import android.preference.PreferenceManager;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
+
+import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -65,11 +69,17 @@ import com.androidmapsextensions.GoogleMap.OnMarkerClickListener;
 import com.androidmapsextensions.GoogleMap.OnMarkerDragListener;
 import com.androidmapsextensions.Marker;
 import com.androidmapsextensions.MarkerOptions;
+import com.androidmapsextensions.OnMapReadyCallback;
 import com.androidmapsextensions.Polyline;
 import com.androidmapsextensions.PolylineOptions;
 import com.androidmapsextensions.SupportMapFragment;
 import com.androidmapsextensions.TileOverlay;
 import com.androidmapsextensions.TileOverlayOptions;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
@@ -94,13 +104,12 @@ import org.fao.sola.clients.android.opentenure.maps.MainMapFragment.MapType;
 import org.fao.sola.clients.android.opentenure.model.Bookmark;
 import org.fao.sola.clients.android.opentenure.model.Boundary;
 import org.fao.sola.clients.android.opentenure.model.Configuration;
-import org.fao.sola.clients.android.opentenure.model.HoleVertex;
 import org.fao.sola.clients.android.opentenure.tools.GisUtility;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class BoundaryMapFragment extends Fragment implements OnCameraChangeListener, SensorEventListener {
+public class BoundaryMapFragment extends Fragment  implements SensorEventListener {
 	private BoundaryDispatcher boundaryDispatcher;
 	private BoundaryActivity boundaryActivity;
 	private static final int MAP_LABEL_FONT_SIZE = 16;
@@ -119,7 +128,6 @@ public class BoundaryMapFragment extends Fragment implements OnCameraChangeListe
 	private List<BaseBoundary> visibleBoundaries;
 	private List<Boundary> allBoundaries;
 	private MultiPolygon visibleBoundariesMultiPolygon;
-	private LocationHelper lh;
 	private final static String MAP_TYPE = "__MAP_TYPE__";
 	private double snapLat;
 	private double snapLon;
@@ -133,24 +141,11 @@ public class BoundaryMapFragment extends Fragment implements OnCameraChangeListe
 	private Marker distanceMarker;
 	private Marker bookmark;
 	private Polyline distanceSegment;
+	private FusedLocationProviderClient fusedLocationClient;
+	private LocationCallback locationCallback;
+	private LocationRequest locationRequest;
+	private Location lastKnownLocation;
 
-	private LocationListener myLocationListener = new LocationListener() {
-
-		public void onLocationChanged(Location location) {
-			if (isFollowing && myLocation != null) {
-				myLocation.setPosition(new LatLng(location.getLatitude(), location.getLongitude()));
-			}
-		}
-
-		public void onStatusChanged(String provider, int status, Bundle extras) {
-		}
-
-		public void onProviderEnabled(String provider) {
-		}
-
-		public void onProviderDisabled(String provider) {
-		}
-	};
 	// device sensor manager
 	private SensorManager mSensorManager;
 
@@ -171,6 +166,17 @@ public class BoundaryMapFragment extends Fragment implements OnCameraChangeListe
 		outState.putString(MAP_TYPE, mapType.toString());
 		super.onSaveInstanceState(outState);
 
+	}
+
+	private void stopLocationUpdates() {
+		fusedLocationClient.removeLocationUpdates(locationCallback);
+	}
+
+	private void startLocationUpdates() {
+		if (ActivityCompat.checkSelfPermission(OpenTenureApplication.getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+				&& ActivityCompat.checkSelfPermission(OpenTenureApplication.getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+		}
+		fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, Looper.getMainLooper());
 	}
 
 	@Override
@@ -196,36 +202,32 @@ public class BoundaryMapFragment extends Fragment implements OnCameraChangeListe
 	@Override
 	public void onResume() {
 		super.onResume();
+		startLocationUpdates();
 		if (isRotating) {
 			mSensorManager.registerListener(this, mSensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR),
 					SensorManager.SENSOR_DELAY_UI);
 		}
-		lh.hurryUp();
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
-		// to stop the listener and save battery
 		mSensorManager.unregisterListener(this);
-		lh.slowDown();
+		stopLocationUpdates();
 	}
 
 	@Override
 	public void onStart() {
 		super.onStart();
-		lh.start();
 	}
 
 	@Override
 	public void onStop() {
 		super.onStop();
-		lh.stop();
 	}
 
 	@Override
 	public void onDestroyView() {
-		lh.stop();
 		Fragment map = getFragmentManager().findFragmentById(R.id.boundary_map_fragment);
 		Fragment label = getFragmentManager().findFragmentById(R.id.boundary_map_provider_label);
 		try {
@@ -317,121 +319,153 @@ public class BoundaryMapFragment extends Fragment implements OnCameraChangeListe
 		setHasOptionsMenu(true);
 		label = (MapLabel) getChildFragmentManager().findFragmentById(R.id.boundary_map_provider_label);
 		label.changeTextProperties(MAP_LABEL_FONT_SIZE,	getActivity().getResources().getString(R.string.map_provider_google_normal));
-		map = ((SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.boundary_map_fragment)).getExtendedMap();
+		final BoundaryMapFragment that = this;
 
-		ClusteringSettings settings = new ClusteringSettings();
-		settings.clusterOptionsProvider(new OpenTenureClusterOptionsProvider(getResources()));
-		settings.addMarkersDynamically(true);
-		map.setClustering(settings);
+		// Location client
+		fusedLocationClient = LocationServices.getFusedLocationProviderClient(OpenTenureApplication.getContext());
+		locationRequest = LocationRequest.create();
+		locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+		locationRequest.setInterval(5000);
+		locationRequest.setFastestInterval(1000);
 
-		lh = new LocationHelper((LocationManager) getActivity().getBaseContext().getSystemService(Context.LOCATION_SERVICE));
-		lh.start();
-
-		MapsInitializer.initialize(this.getActivity());
-		this.map.setInfoWindowAdapter(new PopupAdapter(inflater));
-		this.map.setOnCameraChangeListener(this);
-
-		if (savedInstanceState != null && savedInstanceState.getString(MAP_TYPE) != null) {
-			// probably an orientation change don't move the view but
-			// restore the current type of the map
-			mapType = MapType.valueOf(savedInstanceState.getString(MAP_TYPE));
-			setMapType(true);
-		} else {
-			// restore the latest map type used on the main map
-			try {
-				mapType = MapType.valueOf(Configuration.getConfigurationValue(MainMapFragment.MAIN_MAP_TYPE));
-			} catch (Exception e) {
-				mapType = MapType.map_provider_google_normal;
-			}
-			// don't draw properties since we might not have loaded them yet
-			setMapType(false);
-		}
-
-		hideVisibleBoundaries();
-		currentBoundary = new EditableBoundary(mapView.getContext(), map, boundaryActivity.getBoundary(), visibleBoundaries, editable());
-
-		centerMapOnCurrentBoundary(null);
-		reloadVisibleBoundaries(true);
-		showVisibleBoundaries();
-		drawAreaOfInterest();
-
-		if (editable()) {
-			// Allow adding, removing and dragging markers
-			this.map.setOnMapLongClickListener(new OnMapLongClickListener() {
-
-				@Override
-				public void onMapLongClick(final LatLng position) {
-					currentBoundary.addMarker(position, mapMode);
-				}
-			});
-
-			this.map.setOnMarkerDragListener(new OnMarkerDragListener() {
-				@Override
-				public void onMarkerDrag(Marker mark) {
-					PointPairDistance ppd = new PointPairDistance();
-					DistanceToPoint.computeDistance(visibleBoundariesMultiPolygon,
-							new Coordinate(mark.getPosition().longitude, mark.getPosition().latitude), ppd);
-
-					if (ppd.getDistance() < BasePropertyBoundary.SNAP_THRESHOLD) {
-						snapLat = ppd.getCoordinate(0).y;
-						snapLon = ppd.getCoordinate(0).x;
-						mark.setPosition(new LatLng(snapLat, snapLon));
-					} else {
-						snapLat = 0.0;
-						snapLon = 0.0;
-					}
-					currentBoundary.onMarkerDrag(mark);
-				}
-
-				@Override
-				public void onMarkerDragEnd(Marker mark) {
-					if (snapLat != 0.0 && snapLon != 0.0) {
-						mark.setPosition(new LatLng(snapLat, snapLon));
-					}
-					currentBoundary.onMarkerDragEnd(mark);
-				}
-
-				@Override
-				public void onMarkerDragStart(Marker mark) {
-					currentBoundary.onMarkerDragStart(mark);
-				}
-
-			});
-
-		}
-
-		this.map.setOnMarkerClickListener(new OnMarkerClickListener() {
-
+		locationCallback = new LocationCallback() {
 			@Override
-			public boolean onMarkerClick(final Marker mark) {
-				switch (mapMode) {
-					case add_boundary:
-						return currentBoundary.handleMarkerClick(mark);
-					case measure:
-						return handleDistanceMarkerClick(mark);
-					default:
-						return false;
+			public void onLocationResult(LocationResult locationResult) {
+				if (locationResult == null) {
+					return;
 				}
+				lastKnownLocation = locationResult.getLastLocation();
+			}
+		};
+
+		SupportMapFragment mapViewFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.boundary_map_fragment);
+		mapViewFragment.getExtendedMapAsync(new OnMapReadyCallback() {
+			@Override
+			public void onMapReady(GoogleMap googleMap) {
+				map = googleMap;
+				ClusteringSettings settings = new ClusteringSettings();
+				settings.clusterOptionsProvider(new OpenTenureClusterOptionsProvider(getResources()));
+				settings.addMarkersDynamically(true);
+				map.setClustering(settings);
+
+				//MapsInitializer.initialize(this.getActivity());
+				map.setInfoWindowAdapter(new PopupAdapter(inflater));
+				map.setOnCameraIdleListener(new GoogleMap.OnCameraIdleListener() {
+					@Override
+					public void onCameraIdle() {
+						hideVisibleBoundaries();
+						reloadVisibleBoundaries(false);
+						showVisibleBoundaries();
+						currentBoundary.redrawBoundary();
+						currentBoundary.refreshMarkerEditControls();
+						newCameraPosition = map.getCameraPosition();
+					}
+				});
+
+				if (savedInstanceState != null && savedInstanceState.getString(MAP_TYPE) != null) {
+					// probably an orientation change don't move the view but
+					// restore the current type of the map
+					mapType = MapType.valueOf(savedInstanceState.getString(MAP_TYPE));
+					setMapType(true);
+				} else {
+					// restore the latest map type used on the main map
+					try {
+						mapType = MapType.valueOf(Configuration.getConfigurationValue(MainMapFragment.MAIN_MAP_TYPE));
+					} catch (Exception e) {
+						mapType = MapType.map_provider_google_normal;
+					}
+					// don't draw properties since we might not have loaded them yet
+					setMapType(false);
+				}
+
+				hideVisibleBoundaries();
+				currentBoundary = new EditableBoundary(mapView.getContext(), map, boundaryActivity.getBoundary(), visibleBoundaries, editable());
+
+				centerMapOnCurrentBoundary(null);
+				reloadVisibleBoundaries(true);
+				showVisibleBoundaries();
+				drawAreaOfInterest();
+
+				if (editable()) {
+					// Allow adding, removing and dragging markers
+					map.setOnMapLongClickListener(new OnMapLongClickListener() {
+
+						@Override
+						public void onMapLongClick(final LatLng position) {
+							currentBoundary.addMarker(position, mapMode);
+						}
+					});
+
+					map.setOnMarkerDragListener(new OnMarkerDragListener() {
+						@Override
+						public void onMarkerDrag(Marker mark) {
+							PointPairDistance ppd = new PointPairDistance();
+							DistanceToPoint.computeDistance(visibleBoundariesMultiPolygon,
+									new Coordinate(mark.getPosition().longitude, mark.getPosition().latitude), ppd);
+
+							if (ppd.getDistance() < BasePropertyBoundary.SNAP_THRESHOLD) {
+								snapLat = ppd.getCoordinate(0).y;
+								snapLon = ppd.getCoordinate(0).x;
+								mark.setPosition(new LatLng(snapLat, snapLon));
+							} else {
+								snapLat = 0.0;
+								snapLon = 0.0;
+							}
+							currentBoundary.onMarkerDrag(mark);
+						}
+
+						@Override
+						public void onMarkerDragEnd(Marker mark) {
+							if (snapLat != 0.0 && snapLon != 0.0) {
+								mark.setPosition(new LatLng(snapLat, snapLon));
+							}
+							currentBoundary.onMarkerDragEnd(mark);
+						}
+
+						@Override
+						public void onMarkerDragStart(Marker mark) {
+							currentBoundary.onMarkerDragStart(mark);
+						}
+
+					});
+
+				}
+
+				map.setOnMarkerClickListener(new OnMarkerClickListener() {
+
+					@Override
+					public boolean onMarkerClick(final Marker mark) {
+						switch (mapMode) {
+							case add_boundary:
+								return currentBoundary.handleMarkerClick(mark);
+							case measure:
+								return handleDistanceMarkerClick(mark);
+							default:
+								return false;
+						}
+					}
+				});
+
+				map.setOnMapClickListener(new OnMapClickListener() {
+
+					@Override
+					public void onMapClick(final LatLng position) {
+						switch (mapMode) {
+							case add_boundary:
+							case measure:
+								cancelDistance();
+								break;
+							default:
+								break;
+						}
+					}
+				});
+
+				mSensorManager = (SensorManager) mapView.getContext().getSystemService(Context.SENSOR_SERVICE);
+				currentBoundary.redrawBoundary();
 			}
 		});
 
-		this.map.setOnMapClickListener(new OnMapClickListener() {
-
-			@Override
-			public void onMapClick(final LatLng position) {
-				switch (mapMode) {
-					case add_boundary:
-					case measure:
-						cancelDistance();
-						break;
-					default:
-						break;
-				}
-			}
-		});
-
-		mSensorManager = (SensorManager) mapView.getContext().getSystemService(Context.SENSOR_SERVICE);
-		currentBoundary.redrawBoundary();
 		return mapView;
 	}
 
@@ -664,8 +698,7 @@ public class BoundaryMapFragment extends Fragment implements OnCameraChangeListe
 				break;
 			case map_provider_geoserver:
 				map.setMapType(GoogleMap.MAP_TYPE_NONE);
-				SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(mapView.getContext());
-				map.addTileOverlay(new TileOverlayOptions().tileProvider(new WmsMapTileProvider(256, 256, preferences)));
+				map.addTileOverlay(new TileOverlayOptions().tileProvider(new WmsMapTileProvider(256, 256, PreferenceManager.getDefaultSharedPreferences(mapView.getContext()))));
 				if (drawBoundaries) {
 					redrawBoundaries();
 				}
@@ -768,9 +801,11 @@ public class BoundaryMapFragment extends Fragment implements OnCameraChangeListe
 					isFollowing = false;
 					myLocation.remove();
 					myLocation = null;
-					lh.setCustomListener(null);
 				} else {
-					LatLng currentLocation = lh.getLastKnownLocation();
+					LatLng currentLocation = null;
+					if(lastKnownLocation != null){
+						currentLocation = new LatLng(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude());
+					}
 
 					if (currentLocation != null && currentLocation.latitude != 0.0 && currentLocation.longitude != 0.0) {
 						map.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, 18), 1000, null);
@@ -778,7 +813,6 @@ public class BoundaryMapFragment extends Fragment implements OnCameraChangeListe
 								.title(mapView.getContext().getResources().getString(R.string.title_i_m_here))
 								.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_menu_mylocation)));
 						myLocation.setClusterGroup(Constants.MY_LOCATION_MARKERS_GROUP);
-						lh.setCustomListener(myLocationListener);
 						isFollowing = true;
 
 					} else {
@@ -788,21 +822,21 @@ public class BoundaryMapFragment extends Fragment implements OnCameraChangeListe
 				}
 				return true;
 			case R.id.action_add_from_gps:
-				LatLng newLocation = lh.getLastKnownLocation();
+				LatLng newLocation = null;
+
+				if(lastKnownLocation != null){
+					newLocation = new LatLng(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude());
+				}
 
 				if (newLocation != null && newLocation.latitude != 0.0 && newLocation.longitude != 0.0) {
-					Toast.makeText(getActivity().getBaseContext(), "onOptionsItemSelected - " + newLocation,
-							Toast.LENGTH_SHORT).show();
-
 					currentBoundary.addMarker(newLocation, mapMode);
-
 				} else {
 					Toast.makeText(getActivity().getBaseContext(), R.string.check_location_service, Toast.LENGTH_LONG)
 							.show();
 				}
 				return true;
 			case R.id.action_rotate:
-				if (!isRotating && lh.getCurrentLocation() != null) {
+				if (!isRotating && lastKnownLocation != null) {
 					menu.findItem(R.id.action_rotate).setVisible(false);
 					menu.findItem(R.id.action_stop_rotating).setVisible(true);
 					mSensorManager.registerListener(this, mSensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR),
@@ -846,39 +880,6 @@ public class BoundaryMapFragment extends Fragment implements OnCameraChangeListe
 		super.onActivityResult(requestCode, resultCode, data);
 	}
 
-	@Override
-	public void onCameraChange(CameraPosition cameraPosition) {
-		hideVisibleBoundaries();
-		reloadVisibleBoundaries(false);
-		showVisibleBoundaries();
-		currentBoundary.redrawBoundary();
-		currentBoundary.refreshMarkerEditControls();
-		newCameraPosition = cameraPosition;
-	}
-
-	@Override
-	public void onAccuracyChanged(Sensor sensor, int accuracy) {
-		// nothing to do as of now
-	}
-
-	@Override
-	public void onSensorChanged(SensorEvent event) {
-		Location latestLocation = lh.getCurrentLocation();
-
-		if (event.sensor.getType() == Sensor.TYPE_ROTATION_VECTOR && latestLocation != null) {
-			float mDeclination = lh.getMagField().getDeclination();
-			float[] mRotationMatrix = new float[16];
-			SensorManager.getRotationMatrixFromVector(mRotationMatrix, event.values);
-			float[] orientation = new float[3];
-			SensorManager.getOrientation(mRotationMatrix, orientation);
-			float bearing = (float) (Math.toDegrees(orientation[0]) + mDeclination);
-			CameraPosition currentPosition = map.getCameraPosition();
-
-			CameraPosition newPosition = new CameraPosition.Builder(currentPosition).bearing(bearing).build();
-			map.animateCamera(CameraUpdateFactory.newCameraPosition(newPosition));
-		}
-	}
-
 	private boolean editable(){
 		return boundaryActivity.getBoundary().getStatusCode().equals("pending") && !boundaryActivity.getBoundary().isProcessed();
 	}
@@ -890,6 +891,33 @@ public class BoundaryMapFragment extends Fragment implements OnCameraChangeListe
 			Toast toast = Toast.makeText(boundaryActivity.getBaseContext(), e.getMessage(), Toast.LENGTH_SHORT);
 			toast.show();
 			return null;
+		}
+	}
+
+	@Override
+	public void onAccuracyChanged(Sensor sensor, int accuracy) {
+		// nothing to do as of now
+	}
+
+	@Override
+	public void onSensorChanged(SensorEvent event) {
+		if (event.sensor.getType() == Sensor.TYPE_ROTATION_VECTOR && lastKnownLocation != null && map != null) {
+			GeomagneticField gField = new GeomagneticField(
+					(float)lastKnownLocation.getLatitude(),
+					(float)lastKnownLocation.getLongitude(),
+					(float)lastKnownLocation.getAltitude(),
+					lastKnownLocation.getTime());
+			float mDeclination = gField.getDeclination();
+			float[] mRotationMatrix = new float[16];
+			SensorManager.getRotationMatrixFromVector(mRotationMatrix, event.values);
+			float[] orientation = new float[3];
+			SensorManager.getOrientation(mRotationMatrix, orientation);
+			float bearing = (float) (Math.toDegrees(orientation[0]) + mDeclination);
+			CameraPosition currentPosition = map.getCameraPosition();
+
+			CameraPosition newPosition = new CameraPosition.Builder(currentPosition).bearing(bearing).build();
+
+			map.animateCamera(CameraUpdateFactory.newCameraPosition(newPosition));
 		}
 	}
 }

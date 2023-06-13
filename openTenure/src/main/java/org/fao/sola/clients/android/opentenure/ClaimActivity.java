@@ -28,7 +28,6 @@
  */
 package org.fao.sola.clients.android.opentenure;
 
-import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 
@@ -45,19 +44,21 @@ import org.fao.sola.clients.android.opentenure.model.SurveyFormTemplate;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.NavUtils;
-import android.support.v4.view.ViewPager;
-import android.util.Log;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.core.app.NavUtils;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.viewpager.widget.PagerAdapter;
+import androidx.viewpager.widget.ViewPager;
+
 import android.util.SparseArray;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.astuetz.PagerSlidingTabStrip;
 import com.github.amlcurran.showcaseview.ApiUtils;
@@ -191,6 +192,7 @@ public class ClaimActivity extends FragmentActivity implements ClaimDispatcher,
 		setupDynamicSections();
 		tabs = (PagerSlidingTabStrip) findViewById(R.id.tabs);
 		mViewPager = (ViewPager) findViewById(R.id.claim_pager);
+		//mViewPager.getAdapter().
 		mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
 		mViewPager.setAdapter(mSectionsPagerAdapter);
@@ -420,86 +422,107 @@ public class ClaimActivity extends FragmentActivity implements ClaimDispatcher,
 	}
 
 	public class SectionsPagerAdapter extends FragmentPagerAdapter {
+		private final String titles[] = new String[NUMBER_OF_STATIC_SECTIONS + getNumberOfSections()];
+		private final Fragment frags[] = new Fragment[titles.length];
 
 		public SectionsPagerAdapter(FragmentManager fm) {
 			super(fm);
+			Locale l = Locale.getDefault();
+
+
+			for(int i = 0; i < frags.length; i++){
+				Fragment fragment;
+				int sectionPosition = i - NUMBER_OF_STATIC_SECTIONS;
+
+				switch (i) {
+					case 0:
+						fragment = new ClaimDetailsFragment();
+						titles[i] = getString(R.string.title_claim).toUpperCase(l);
+						break;
+					case 1:
+						fragment = new OwnersFragment();
+						titles[i] = getString(R.string.owners).toUpperCase(l);
+						break;
+					case 2:
+						titles[i] = getString(R.string.title_claim_documents).toUpperCase(l);
+						fragment = new ClaimDocumentsFragment();
+						break;
+					case 3:
+						titles[i] = getString(R.string.title_claim_adjacencies).toUpperCase(l);
+						fragment = new AdjacentClaimsFragment();
+						break;
+					case 4:
+						titles[i] = getString(R.string.title_claim_map).toUpperCase(l);
+						fragment = new ClaimMapFragment();
+						break;
+					case 5:
+						titles[i] = getString(R.string.title_claim_challenges).toUpperCase(l);
+						fragment = new ChallengingClaimsFragment();
+						break;
+					default:
+						titles[i] = getSectionTitle(i);
+						List<SectionTemplate> sectionTemplateList = formTemplate.getSectionTemplateList();
+						if (sectionTemplateList == null
+								|| sectionTemplateList.size() <= 0
+								|| sectionTemplateList.size() <= sectionPosition) {
+							SectionElementFragment sef = new SectionElementFragment();
+							sef.setTemplate(new SectionTemplate());
+							sef.setPayload(new SectionElementPayload());
+							sef.setMode(mode);
+							fragment = sef;
+							break;
+						}
+
+						SectionTemplate sectionTemplate = sectionTemplateList.get(sectionPosition);
+						if (sectionTemplate == null) {
+							SectionElementFragment sef = new SectionElementFragment();
+							sef.setTemplate(new SectionTemplate());
+							sef.setPayload(new SectionElementPayload());
+							sef.setMode(mode);
+							fragment = sef;
+							break;
+						}
+
+						if (sectionTemplate.getMaxOccurrences() > 1) {
+							fragment = new SectionFragment();
+							((SectionFragment)fragment).setTemplate(sectionTemplate);
+							((SectionFragment)fragment).setPayload(editedFormPayload.getSectionPayloadList().get(sectionPosition));
+							((SectionFragment)fragment).setMode(mode);
+						} else {
+							if (editedFormPayload.getSectionPayloadList().get(sectionPosition).getSectionElementPayloadList().size() == 0) {
+								editedFormPayload
+										.getSectionPayloadList()
+										.get(sectionPosition)
+										.getSectionElementPayloadList()
+										.add(new SectionElementPayload(sectionTemplate));
+							}
+							fragment = new SectionElementFragment();
+							((SectionElementFragment)fragment).setTemplate(sectionTemplate);
+							((SectionElementFragment)fragment).setPayload(editedFormPayload
+									.getSectionPayloadList().get(sectionPosition)
+									.getSectionElementPayloadList().get(0));
+							((SectionElementFragment)fragment).setMode(mode);
+						}
+				}
+				frags[i] = fragment;
+				fragmentReferences.put(i, fragment);
+			}
 		}
 
-		@Override
-		public void destroyItem(android.view.ViewGroup container, int position, Object object) {
 
+		@Override
+		public CharSequence getPageTitle(int position) {
+			return titles[position];
 		}
 
 		@Override
 		public Fragment getItem(int position) {
-			Fragment fragment;
-			int sectionPosition = position - NUMBER_OF_STATIC_SECTIONS;
-			switch (position) {
-				case 0:
-					fragment = new ClaimDetailsFragment();
-					break;
-				case 1:
-					fragment = new OwnersFragment();
-					break;
-				case 2:
-					fragment = new ClaimDocumentsFragment();
-					break;
-				case 3:
-					fragment = new AdjacentClaimsFragment();
-					break;
-				case 4:
-					fragment = new ClaimMapFragment();
-					break;
-				case 5:
-					fragment = new ChallengingClaimsFragment();
-					break;
-				default:
-					List<SectionTemplate> sectionTemplateList = formTemplate.getSectionTemplateList();
-					if (sectionTemplateList == null
-							|| sectionTemplateList.size() <= 0
-							|| sectionTemplateList.size() <= sectionPosition) {
-						SectionElementFragment sef = new SectionElementFragment();
-						sef.setTemplate(new SectionTemplate());
-						sef.setPayload(new SectionElementPayload());
-						sef.setMode(mode);
-						return sef;
-					}
-					SectionTemplate sectionTemplate = sectionTemplateList.get(sectionPosition);
-					if (sectionTemplate == null) {
-						SectionElementFragment sef = new SectionElementFragment();
-						sef.setTemplate(new SectionTemplate());
-						sef.setPayload(new SectionElementPayload());
-						sef.setMode(mode);
-						return sef;
-					}
-					if (sectionTemplate.getMaxOccurrences() > 1) {
-						fragment = new SectionFragment();
-						((SectionFragment)fragment).setTemplate(sectionTemplate);
-						((SectionFragment)fragment).setPayload(editedFormPayload.getSectionPayloadList().get(sectionPosition));
-						((SectionFragment)fragment).setMode(mode);
-					} else {
-						if (editedFormPayload.getSectionPayloadList().get(sectionPosition).getSectionElementPayloadList().size() == 0) {
-							editedFormPayload
-									.getSectionPayloadList()
-									.get(sectionPosition)
-									.getSectionElementPayloadList()
-									.add(new SectionElementPayload(sectionTemplate));
-						}
-						fragment = new SectionElementFragment();
-						((SectionElementFragment)fragment).setTemplate(sectionTemplate);
-						((SectionElementFragment)fragment).setPayload(editedFormPayload
-								.getSectionPayloadList().get(sectionPosition)
-								.getSectionElementPayloadList().get(0));
-						((SectionElementFragment)fragment).setMode(mode);
-					}
-			}
-			fragmentReferences.put(position, fragment);
-			return fragment;
+			return frags[position];
 		}
 
 		@Override
 		public int getCount() {
-			return NUMBER_OF_STATIC_SECTIONS + getNumberOfSections();
+			return frags.length;
 		}
 
 		private int getNumberOfSections() {
@@ -514,13 +537,15 @@ public class ClaimActivity extends FragmentActivity implements ClaimDispatcher,
 
 		private String getSectionTitle(int position) {
 			DisplayNameLocalizer dnl = new DisplayNameLocalizer(OpenTenureApplication.getInstance().getLocalization());
+			int sectionPosition = position - NUMBER_OF_STATIC_SECTIONS;
+
 			String sectionTitle = null;
 			if (editedFormPayload != null) {
 				sectionTitle = editedFormPayload.getSectionPayloadList()
-						.get(position).getDisplayName().toUpperCase(Locale.US);
+						.get(sectionPosition).getDisplayName().toUpperCase(Locale.US);
 			} else if (formTemplate != null) {
 				sectionTitle = formTemplate.getSectionTemplateList()
-						.get(position).getDisplayName()
+						.get(sectionPosition).getDisplayName()
 						.toUpperCase(Locale.getDefault());
 			} else {
 				sectionTitle = "";
@@ -529,27 +554,9 @@ public class ClaimActivity extends FragmentActivity implements ClaimDispatcher,
 		}
 
 		@Override
-		public CharSequence getPageTitle(int position) {
-			Locale l = Locale.getDefault();
-
-			int sectionPosition = position - NUMBER_OF_STATIC_SECTIONS;
-
-			switch (position) {
-				case 0:
-					return getString(R.string.title_claim).toUpperCase(l);
-				case 1:
-					return getString(R.string.owners).toUpperCase(l);
-				case 2:
-					return getString(R.string.title_claim_documents).toUpperCase(l);
-				case 3:
-					return getString(R.string.title_claim_adjacencies).toUpperCase(l);
-				case 4:
-					return getString(R.string.title_claim_map).toUpperCase(l);
-				case 5:
-					return getString(R.string.title_claim_challenges).toUpperCase(l);
-				default:
-					return getSectionTitle(sectionPosition);
-			}
+		public Object instantiateItem(ViewGroup container, int position) {
+			frags[position] = (Fragment) super.instantiateItem(container, position);
+			return frags[position];
 		}
 	}
 

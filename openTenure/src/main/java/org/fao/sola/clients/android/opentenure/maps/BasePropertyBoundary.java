@@ -233,46 +233,7 @@ public class BasePropertyBoundary {
 				&& OpenTenureApplication.getClaimId() != null
 				&& (OpenTenureApplication.getClaimId().equals(claim.getClaimId()))) {
 
-			area = (long) Math.round(Vertex.getArea(vertices) - HoleVertex.getArea(holesVertices));
-
-			int digit = 0;
-
-			if (area > 100 && area < 1000) {
-				digit = (int) (Math.abs(area) % 10);
-				if (digit > 0 && digit < 7)
-					area = area - digit;
-				else if (digit >= 7 && digit < 9)
-					area = area + 10 - digit;
-				else if (digit == 9)
-					area = area + 1;
-			}
-
-			if (area > 1000 && area < 10000) {
-				digit = (int) (Math.abs(area) % 100);
-				if (digit > 0 && digit < 70)
-					area = area - digit;
-				else if (digit >= 70 && digit <= 99)
-					area = area + 100 - digit;
-
-			}
-
-			if (area > 10000 && area < 100000) {
-				digit = (int) (Math.abs(area) % 1000);
-
-				if (digit > 0 && digit < 700)
-					area = area - digit;
-				else if (digit >= 700 && digit <= 999)
-					area = area + 1000 - digit;
-			}
-
-			if (area > 100000) {
-				digit = (int) (Math.abs(area) % 10000);
-
-				if (digit > 0 && digit < 7000)
-					area = area - digit;
-				else if (digit >= 7000 && digit <= 9999)
-					area = area + 10000 - digit;
-			}
+			calculateArea();
 
 			if (claim.getClaimArea() != area) {
 				claim.updateArea((long) area);
@@ -312,6 +273,53 @@ public class BasePropertyBoundary {
 			center = new LatLng(polygon.getInteriorPoint().getCoordinate().y, polygon.getInteriorPoint().getCoordinate().x);
 		} catch (Exception e) {
 			center = new LatLng(polygon.getCentroid().getCoordinate().y, polygon.getCentroid().getCoordinate().x);
+		}
+	}
+
+	protected void calculateArea() {
+		if (vertices == null || vertices.size() <= 0 || vertices.size() <= 1) {
+			return;
+		}
+
+		area = (long) Math.round(Vertex.getArea(vertices) - HoleVertex.getArea(holesVertices));
+
+		int digit = 0;
+
+		if (area > 100 && area < 1000) {
+			digit = (int) (Math.abs(area) % 10);
+			if (digit > 0 && digit < 7)
+				area = area - digit;
+			else if (digit >= 7 && digit < 9)
+				area = area + 10 - digit;
+			else if (digit == 9)
+				area = area + 1;
+		}
+
+		if (area > 1000 && area < 10000) {
+			digit = (int) (Math.abs(area) % 100);
+			if (digit > 0 && digit < 70)
+				area = area - digit;
+			else if (digit >= 70 && digit <= 99)
+				area = area + 100 - digit;
+
+		}
+
+		if (area > 10000 && area < 100000) {
+			digit = (int) (Math.abs(area) % 1000);
+
+			if (digit > 0 && digit < 700)
+				area = area - digit;
+			else if (digit >= 700 && digit <= 999)
+				area = area + 1000 - digit;
+		}
+
+		if (area > 100000) {
+			digit = (int) (Math.abs(area) % 10000);
+
+			if (digit > 0 && digit < 7000)
+				area = area - digit;
+			else if (digit >= 7000 && digit <= 9999)
+				area = area + 10000 - digit;
 		}
 	}
 
@@ -454,6 +462,8 @@ public class BasePropertyBoundary {
 
 		DisplayNameLocalizer dnl = new DisplayNameLocalizer(OpenTenureApplication.getInstance().getLocalization());
 
+		calculateArea();
+
 		areaString = OpenTenureApplication.getContext().getString(
 				R.string.claim_area_label)
 				+ " "
@@ -468,8 +478,7 @@ public class BasePropertyBoundary {
 						+ ", "
 						+ context.getString(R.string.type)
 						+ ": "
-						+ dnl.getLocalizedDisplayName(ct
-								.getDisplayValueByType(claim.getType())) + ", "
+						+ dnl.getLocalizedDisplayName(ct.getDisplayValueByType(claim.getType())) + ", "
 						+ areaString);
 
 	}

@@ -28,7 +28,6 @@
 package org.fao.sola.clients.android.opentenure;
 
 import java.io.File;
-import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -45,13 +44,11 @@ import org.fao.sola.clients.android.opentenure.tools.StringUtility;
 
 import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.net.Uri;
-import android.support.v4.content.FileProvider;
+import androidx.core.content.FileProvider;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -59,11 +56,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.view.ViewManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -244,6 +239,7 @@ public class ClaimAttachmentsListAdapter extends ArrayAdapter<String> {
 			@Override
 			public void onClick(View v) {
 				try {
+
 					Uri uri = attachment.getPath().contains("content://") ? Uri.parse(attachment.getPath()) : Uri.parse("content://"+BuildConfig.APPLICATION_ID+attachment.getPath());
 
 					context.grantUriPermission(BuildConfig.APPLICATION_ID, uri, Intent.FLAG_GRANT_READ_URI_PERMISSION);

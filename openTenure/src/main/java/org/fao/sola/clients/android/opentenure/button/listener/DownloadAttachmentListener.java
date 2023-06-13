@@ -46,10 +46,8 @@ public class DownloadAttachmentListener implements OnClickListener {
 	Attachment attachment;
 
 	public DownloadAttachmentListener(Attachment att, AttachmentViewHolder vh) {
-
 		this.vh = vh;
 		this.attachment = att;
-
 	}
 
 	@Override

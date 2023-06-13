@@ -54,11 +54,17 @@ import com.androidmapsextensions.GoogleMap.OnMapLongClickListener;
 import com.androidmapsextensions.GoogleMap.OnMarkerClickListener;
 import com.androidmapsextensions.Marker;
 import com.androidmapsextensions.MarkerOptions;
+import com.androidmapsextensions.OnMapReadyCallback;
 import com.androidmapsextensions.SupportMapFragment;
 import com.androidmapsextensions.TileOverlay;
 import com.androidmapsextensions.TileOverlayOptions;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.Projection;
@@ -71,6 +77,7 @@ import com.vividsolutions.jts.geom.GeometryFactory;
 import com.vividsolutions.jts.geom.MultiPolygon;
 import com.vividsolutions.jts.geom.Polygon;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
@@ -78,6 +85,7 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Point;
@@ -86,9 +94,12 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Looper;
 import android.preference.PreferenceManager;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
+
+import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import android.text.InputType;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -102,7 +113,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class MainMapFragment extends SupportMapFragment implements OnCameraChangeListener {
+public class MainMapFragment extends SupportMapFragment {
 
 	public static final String MAIN_MAP_ZOOM = "__MAIN_MAP_ZOOM__";
 	public static final String MAIN_MAP_LATITUDE = "__MAIN_MAP_LATITUDE__";
@@ -123,15 +134,19 @@ public class MainMapFragment extends SupportMapFragment implements OnCameraChang
 	private View mapView;
 	private MapLabel label;
 	private GoogleMap map;
-	private LocationHelper lh;
 	private List<BasePropertyBoundary> visibleProperties;
 	private List<Claim> allClaims;
 	private MultiPolygon visiblePropertiesMultiPolygon;
 	private boolean isFollowing = false;
 	private Marker myLocation;
+	private Location lastKnownLocation;
 	private Marker remove;
 	private Marker cancel;
 	private Marker selectedMarker;
+	private CommunityArea communityArea;
+	private FusedLocationProviderClient fusedLocationClient;
+	private LocationCallback locationCallback;
+	private LocationRequest locationRequest;
 
 	private boolean handleMarkerEditClick(Marker mark) {
 		if (remove == null || cancel == null) {
@@ -191,27 +206,6 @@ public class MainMapFragment extends SupportMapFragment implements OnCameraChang
 			selectedMarker = null;
 		}
 	}
-
-	private LocationListener myLocationListener = new LocationListener() {
-
-		public void onLocationChanged(Location location) {
-			if (isFollowing && myLocation != null) {
-				myLocation.setPosition(new LatLng(location.getLatitude(), location.getLongitude()));
-			}
-		}
-
-		public void onStatusChanged(String provider, int status, Bundle extras) {
-			Log.d(this.getClass().getName(), "onStatusChanged");
-		}
-
-		public void onProviderEnabled(String provider) {
-			Log.d(this.getClass().getName(), "onProviderEnabled");
-		}
-
-		public void onProviderDisabled(String provider) {
-			Log.d(this.getClass().getName(), "onProviderDisabled");
-		}
-	};
 
 	private void showMarkerEditControls() {
 
@@ -298,123 +292,141 @@ public class MainMapFragment extends SupportMapFragment implements OnCameraChang
 		super.onCreateView(inflater, container, savedInstanceState);
 		mapView = inflater.inflate(R.layout.main_map, container, false);
 		setHasOptionsMenu(true);
-		label = (MapLabel) getChildFragmentManager().findFragmentById(R.id.main_map_provider_label);
-//		label = (MapLabel) getActivity().getSupportFragmentManager().findFragmentById(R.id.main_map_provider_label);
-		label.changeTextProperties(MAP_LABEL_FONT_SIZE,	getActivity().getResources().getString(R.string.map_provider_google_normal));
-//		map = ((SupportMapFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.main_map_fragment))
-//				.getExtendedMap();
-		map = ((SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.main_map_fragment))
-				.getExtendedMap();
-		ClusteringSettings settings = new ClusteringSettings();
-		settings.clusterOptionsProvider(new OpenTenureClusterOptionsProvider(getResources()));
-		settings.addMarkersDynamically(true);
-		try {
-			map.setClustering(settings);
-		} catch (Throwable i) {
 
-			final int status = GooglePlayServicesUtil.isGooglePlayServicesAvailable(OpenTenureApplication.getContext());
-			if (status != ConnectionResult.SUCCESS) {
-				Log.d(this.getClass().getName(), GooglePlayServicesUtil.getErrorString(status));
+		// Location client
+		fusedLocationClient = LocationServices.getFusedLocationProviderClient(OpenTenureApplication.getContext());
+		locationRequest = LocationRequest.create();
+		locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+		locationRequest.setInterval(5000);
+		locationRequest.setFastestInterval(1000);
 
-				// ask user to update google play services.
-				Dialog dialog = GooglePlayServicesUtil.getErrorDialog(status, getActivity(), 1);
-				dialog.show();
+		locationCallback = new LocationCallback() {
+			@Override
+			public void onLocationResult(LocationResult locationResult) {
+				if (locationResult == null) {
+					return;
+				}
+				lastKnownLocation = locationResult.getLastLocation();
+			}
+		};
 
+		SupportMapFragment mapViewFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.main_map_fragment);
+		mapViewFragment.getExtendedMapAsync(new OnMapReadyCallback() {
+			@Override
+			public void onMapReady(GoogleMap googleMap) {
+				map = googleMap;
+				ClusteringSettings settings = new ClusteringSettings();
+				settings.clusterOptionsProvider(new OpenTenureClusterOptionsProvider(getResources()));
+				settings.addMarkersDynamically(true);
 				try {
-					Thread.sleep(1000);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
+					map.setClustering(settings);
+				} catch (Throwable i) {
+					final int status = GooglePlayServicesUtil.isGooglePlayServicesAvailable(OpenTenureApplication.getContext());
+					if (status != ConnectionResult.SUCCESS) {
+						Log.d(this.getClass().getName(), GooglePlayServicesUtil.getErrorString(status));
+
+						// ask user to update google play services.
+						Dialog dialog = GooglePlayServicesUtil.getErrorDialog(status, getActivity(), 1);
+						dialog.show();
+
+						try {
+							Thread.sleep(1000);
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
+						System.exit(0);
+					}
 				}
-				System.exit(0);
-			}
 
-		}
-		reloadVisibleProperties();
+				label = (MapLabel) getChildFragmentManager().findFragmentById(R.id.main_map_provider_label);
+				label.changeTextProperties(MAP_LABEL_FONT_SIZE,	getActivity().getResources().getString(R.string.map_provider_google_normal));
 
-		lh = new LocationHelper(
-				(LocationManager) getActivity().getBaseContext().getSystemService(Context.LOCATION_SERVICE));
-		lh.start();
-		MapsInitializer.initialize(this.getActivity());
-		map.setInfoWindowAdapter(new PopupAdapter(inflater));
-		map.setOnCameraChangeListener(this);
+				reloadVisibleProperties();
 
-		if (savedInstanceState != null && savedInstanceState.getString(MAIN_MAP_TYPE) != null) {
-			// probably an orientation change don't move the view but
-			// restore the current type of the map
-			mapType = MapType.valueOf(savedInstanceState.getString(MAIN_MAP_TYPE));
-		} else {
-			// restore the latest map type used on the main map
-			try {
-				mapType = MapType.valueOf(Configuration.getConfigurationValue(MainMapFragment.MAIN_MAP_TYPE));
-			} catch (Exception e) {
-				mapType = MapType.map_provider_google_normal;
-			}
-		}
-		setMapType();
-
-		String zoom = Configuration.getConfigurationValue(MainMapFragment.MAIN_MAP_ZOOM);
-		String latitude = Configuration.getConfigurationValue(MainMapFragment.MAIN_MAP_LATITUDE);
-		String longitude = Configuration.getConfigurationValue(MainMapFragment.MAIN_MAP_LONGITUDE);
-
-		// If we previously used the map
-		if (zoom != null && latitude != null && longitude != null) {
-			try {
-
-				// Let's start from where we left it
-				map.moveCamera(CameraUpdateFactory.newLatLngZoom(
-						new LatLng(Double.parseDouble(latitude), Double.parseDouble(longitude)),
-						Float.parseFloat(zoom)));
-			} catch (Exception e) {
-			}
-		} else {
-			Configuration cfg = Configuration.getConfigurationByName("isInitialized");
-			if (cfg != null && Boolean.parseBoolean(cfg.getValue())) {
-
-				LatLngBounds.Builder bounds;
-				// setup map
-
-				bounds = new LatLngBounds.Builder();
-				// Get vertices of the community area
-				List<LatLng> K = CommunityArea.getPolyline().getPoints();
-
-				for (LatLng cn : K) {
-					// Make sure that the vertices are in the displayed area
-					bounds.include(cn);
-
+				if (savedInstanceState != null && savedInstanceState.getString(MAIN_MAP_TYPE) != null) {
+					// probably an orientation change don't move the view but
+					// restore the current type of the map
+					mapType = MapType.valueOf(savedInstanceState.getString(MAIN_MAP_TYPE));
+				} else {
+					// restore the latest map type used on the main map
+					try {
+						mapType = MapType.valueOf(Configuration.getConfigurationValue(MainMapFragment.MAIN_MAP_TYPE));
+					} catch (Exception e) {
+						mapType = MapType.map_provider_google_normal;
+					}
 				}
-				// set bounds with all the map points
-				map.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds.build(), 400, 400, 10));
+				setMapType();
 
+				String zoom = Configuration.getConfigurationValue(MainMapFragment.MAIN_MAP_ZOOM);
+				String latitude = Configuration.getConfigurationValue(MainMapFragment.MAIN_MAP_LATITUDE);
+				String longitude = Configuration.getConfigurationValue(MainMapFragment.MAIN_MAP_LONGITUDE);
+
+				// If we previously used the map
+				if (zoom != null && latitude != null && longitude != null) {
+					try {
+
+						// Let's start from where we left it
+						map.moveCamera(CameraUpdateFactory.newLatLngZoom(
+								new LatLng(Double.parseDouble(latitude), Double.parseDouble(longitude)),
+								Float.parseFloat(zoom)));
+					} catch (Exception e) {
+					}
+				} else {
+					Configuration cfg = Configuration.getConfigurationByName("isInitialized");
+					if (cfg != null && Boolean.parseBoolean(cfg.getValue())) {
+
+						LatLngBounds.Builder bounds;
+						// setup map
+
+						bounds = new LatLngBounds.Builder();
+						// Get vertices of the community area
+						List<LatLng> K = CommunityArea.getPolyline().getPoints();
+
+						for (LatLng cn : K) {
+							// Make sure that the vertices are in the displayed area
+							bounds.include(cn);
+
+						}
+						// set bounds with all the map points
+						map.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds.build(), 400, 400, 10));
+					}
+				}
+
+				map.setInfoWindowAdapter(new PopupAdapter(getLayoutInflater()));
+				map.setOnCameraIdleListener(new GoogleMap.OnCameraIdleListener() {
+					@Override
+					public void onCameraIdle() {
+						getActivity().invalidateOptionsMenu();
+						storeCameraPosition(map.getCameraPosition());
+						reloadVisibleProperties();
+					}
+				});
+
+				redrawVisibleProperties();
+
+				map.setOnMapLongClickListener(new OnMapLongClickListener() {
+					@Override
+					public void onMapLongClick(final LatLng position) {
+						addMapBookmark(position);
+					}
+				});
+
+				map.setOnMarkerClickListener(new OnMarkerClickListener() {
+					@Override
+					public boolean onMarkerClick(final Marker mark) {
+						return handleMarkerClick(mark);
+					}
+				});
+
+				List<Bookmark> allBookmarks = Bookmark.getAllBookmarks();
+
+				for(Bookmark bm : allBookmarks){
+					mapBookmarksMap.put(createMapBookmarkMarker(new LatLng(bm.getLat(), bm.getLon()), bm.getName()),bm);
+				}
 			}
-
-		}
+		});
 
 		OpenTenureApplication.setMapFragment(this);
-
-		redrawVisibleProperties();
-
-		this.map.setOnMapLongClickListener(new OnMapLongClickListener() {
-
-			@Override
-			public void onMapLongClick(final LatLng position) {
-				addMapBookmark(position);
-			}
-		});
-
-		this.map.setOnMarkerClickListener(new OnMarkerClickListener() {
-
-			@Override
-			public boolean onMarkerClick(final Marker mark) {
-				return handleMarkerClick(mark);
-			}
-		});
-
-		List<Bookmark> allBookmarks = Bookmark.getAllBookmarks();
-
-		for(Bookmark bm : allBookmarks){
-			mapBookmarksMap.put(createMapBookmarkMarker(new LatLng(bm.getLat(), bm.getLon()), bm.getName()),bm);
-		}
-
 		OpenTenureApplication.setActivity(getActivity());
 
 		return mapView;
@@ -547,25 +559,14 @@ public class MainMapFragment extends SupportMapFragment implements OnCameraChang
 
 	@Override
 	public void onStart() {
-
-//		map = ((SupportMapFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.main_map_fragment))
-//				.getExtendedMap();
-		map = ((SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.main_map_fragment))
-				.getExtendedMap();
-		ClusteringSettings settings = new ClusteringSettings();
-		settings.clusterOptionsProvider(new OpenTenureClusterOptionsProvider(getResources()));
-		settings.addMarkersDynamically(true);
-		map.setClustering(settings);
 		super.onStart();
-
 	}
 
 	@Override
 	public void onDestroyView() {
-
-		lh.stop();
 		Fragment map = getFragmentManager().findFragmentById(R.id.main_map_fragment);
 		Fragment label = getFragmentManager().findFragmentById(R.id.main_map_provider_label);
+		mapView = null;
 		try {
 			if (map.isResumed()) {
 				FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
@@ -585,20 +586,30 @@ public class MainMapFragment extends SupportMapFragment implements OnCameraChang
 	@Override
 	public void onResume() {
 		super.onResume();
-		refreshMap();
-		lh.hurryUp();
+		startLocationUpdates();
+		//refreshMap();
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
-		lh.slowDown();
+		stopLocationUpdates();
 	}
 
 	@Override
 	public void onStop() {
 		super.onStop();
-		lh.stop();
+	}
+
+	private void stopLocationUpdates() {
+		fusedLocationClient.removeLocationUpdates(locationCallback);
+	}
+
+	private void startLocationUpdates() {
+		if (ActivityCompat.checkSelfPermission(OpenTenureApplication.getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+				&& ActivityCompat.checkSelfPermission(OpenTenureApplication.getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+		}
+		fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, Looper.getMainLooper());
 	}
 
 	@Override
@@ -756,9 +767,11 @@ public class MainMapFragment extends SupportMapFragment implements OnCameraChang
 					isFollowing = false;
 					myLocation.remove();
 					myLocation = null;
-					lh.setCustomListener(null);
 				} else {
-					LatLng currentLocation = lh.getLastKnownLocation();
+					LatLng currentLocation = null;
+					if(lastKnownLocation != null){
+						currentLocation = new LatLng(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude());
+					}
 
 					if (currentLocation != null && currentLocation.latitude != 0.0 && currentLocation.longitude != 0.0) {
 						map.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, 18), 1000, null);
@@ -766,7 +779,6 @@ public class MainMapFragment extends SupportMapFragment implements OnCameraChang
 								.title(mapView.getContext().getResources().getString(R.string.title_i_m_here))
 								.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_menu_mylocation)));
 						myLocation.setClusterGroup(Constants.MY_LOCATION_MARKERS_GROUP);
-						lh.setCustomListener(myLocationListener);
 						isFollowing = true;
 
 					} else {
@@ -1106,38 +1118,34 @@ public class MainMapFragment extends SupportMapFragment implements OnCameraChang
 		return polygon;
 	}
 
-	@Override
-	public void onCameraChange(CameraPosition cameraPosition) {
-
-		getActivity().invalidateOptionsMenu();
-		// Store camera position to allow drawing on the claim map where we
-		// left off the main map
-		storeCameraPosition(cameraPosition);
-
-		reloadVisibleProperties();
-
+	public void refreshMap() {
+		refreshMap(false);
 	}
 
-	public void refreshMap() {
+	public void refreshMap(boolean zoomToAreaOfInterest) {
+		if(map != null) {
+			hideVisibleProperties();
 
-		hideVisibleProperties();
-
-		allClaims = Claim.getSimplifiedClaimsForMap();
-		visibleProperties = new ArrayList<BasePropertyBoundary>();
-		for (Claim claim : allClaims) {
-			visibleProperties.add(new BasePropertyBoundary(mapView.getContext(), map, claim.getClaimId(), false));
+			allClaims = Claim.getSimplifiedClaimsForMap();
+			visibleProperties = new ArrayList<BasePropertyBoundary>();
+			for (Claim claim : allClaims) {
+				visibleProperties.add(new BasePropertyBoundary(mapView.getContext(), map, claim.getClaimId(), false));
+			}
+			showVisibleProperties();
+			drawAreaOfInterest();
+			if (zoomToAreaOfInterest) {
+				boundCameraToInterestArea();
+			}
 		}
-
-		showVisibleProperties();
-		drawAreaOfInterest();
-
-		return;
 	}
 
 	private void drawAreaOfInterest() {
-		CommunityArea area = new CommunityArea(map);
-		area.drawInterestArea();
-
+		if(communityArea != null && communityArea.getPolyline() != null){
+			communityArea.getPolyline().remove();
+		} else {
+			communityArea = new CommunityArea(map);
+		}
+		communityArea.drawInterestArea();
 	}
 
 	public void boundCameraToInterestArea() {
@@ -1145,10 +1153,8 @@ public class MainMapFragment extends SupportMapFragment implements OnCameraChang
 		if (Boolean.parseBoolean(Configuration.getConfigurationByName("isInitialized").getValue())) {
 
 			drawAreaOfInterest();
-
 			LatLngBounds.Builder bounds;
 			// setup map
-
 			bounds = new LatLngBounds.Builder();
 			// get all cars from the datbase with getter method
 			List<LatLng> K = CommunityArea.getPolyline().getPoints();
@@ -1158,7 +1164,6 @@ public class MainMapFragment extends SupportMapFragment implements OnCameraChang
 				// use .include to put add each point to be included in the
 				// bounds
 				bounds.include(cn);
-
 			}
 
 			// set bounds with all the map points

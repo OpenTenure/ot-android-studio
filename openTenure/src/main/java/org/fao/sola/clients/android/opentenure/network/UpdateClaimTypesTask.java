@@ -31,13 +31,10 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.fao.sola.clients.android.opentenure.OpenTenureApplication;
-import org.fao.sola.clients.android.opentenure.maps.MainMapFragment;
-import org.fao.sola.clients.android.opentenure.model.Configuration;
 import org.fao.sola.clients.android.opentenure.network.API.CommunityServerAPI;
 import org.fao.sola.clients.android.opentenure.network.response.ClaimType;
 
 import android.os.AsyncTask;
-import android.support.v4.app.FragmentActivity;
 
 /**
  * Task called to initialize the Application with the values of Types of claim

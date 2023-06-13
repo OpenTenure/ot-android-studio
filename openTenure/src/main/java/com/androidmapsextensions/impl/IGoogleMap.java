@@ -107,6 +107,12 @@ interface IGoogleMap {
 
     void setOnCameraChangeListener(OnCameraChangeListener listener);
 
+    void setOnCameraMoveStartedListener(GoogleMap.OnCameraMoveStartedListener listener);
+
+    void setOnCameraMoveListener(GoogleMap.OnCameraMoveListener listener);
+
+    void setOnCameraIdleListener(GoogleMap.OnCameraIdleListener listener);
+
     void setOnInfoWindowClickListener(OnInfoWindowClickListener listener);
 
     void setOnMapClickListener(OnMapClickListener listener);

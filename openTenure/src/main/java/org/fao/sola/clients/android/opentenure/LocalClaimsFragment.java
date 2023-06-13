@@ -28,7 +28,10 @@
 package org.fao.sola.clients.android.opentenure;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,13 +49,17 @@ import com.ipaulpro.afilechooser.utils.FileUtils;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.app.ListFragment;
+import androidx.fragment.app.ListFragment;
+
+import android.provider.OpenableColumns;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
@@ -219,9 +226,12 @@ public class LocalClaimsFragment extends ListFragment {
                     return true;
                 }
 
+                //Intent intent = new Intent();
+                //intent.setType("*/*");
+                //intent.setAction(Intent.ACTION_GET_CONTENT);
+
                 Intent getContentIntent = FileUtils.createGetContentIntent();
-                Intent intent = Intent.createChooser(getContentIntent, getResources()
-                        .getString(R.string.choose_file));
+                Intent intent = Intent.createChooser(getContentIntent, getResources().getString(R.string.choose_file));
 
                 try {
                     startActivityForResult(intent, REQUEST_IMPORT);
@@ -280,94 +290,77 @@ public class LocalClaimsFragment extends ListFragment {
                 if (resultCode == com.ipaulpro.afilechooser.FileChooserActivity.RESULT_OK) {
 
                     Uri uri = data.getData();
+                    Cursor cursor =  OpenTenureApplication.getContext().getContentResolver().query(uri, null, null, null, null);
+                    int indxName = cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME);
+                    cursor.moveToFirst();
+                    String fileName = cursor.getString(indxName);
+                    cursor.close();
 
-                    fullPath = FileUtils.getPath(rootView.getContext(), uri);
+                    if (fileName.endsWith(".zip")) {
+                        ContentResolver contentResolver = OpenTenureApplication.getContext().getContentResolver();
+                        File importFolder = FileSystemUtilities.getImportFolder();
+                        dest = new File(importFolder, fileName);
 
-                    Log.d(this.getClass().getName(), "Selected file: " + fullPath);
-
-                    if (fullPath.endsWith(".zip")) {
-
-                        dest = FileSystemUtilities.copyFileInImportFolder(new File(
-                                fullPath));
+                        try (final InputStream inputStream = contentResolver.openInputStream(uri); OutputStream output = new FileOutputStream(dest)) {
+                            final byte[] buffer = new byte[4 * 1024]; // or other buffer size
+                            int read;
+                            while ((read = inputStream.read(buffer)) != -1) {
+                                output.write(buffer, 0, read);
+                            }
+                            output.flush();
+                        } catch (IOException ex) {
+                            ex.printStackTrace();
+                        }
 
                         if (!dest.exists() || !dest.isFile()) {
-
-                            String newMessage = "Error preparing import of "
-                                    + fullPath;
-
-                            Toast newToast = Toast.makeText(rootView.getContext(),
-                                    newMessage, Toast.LENGTH_LONG);
+                            String newMessage = "Error preparing import of " + fullPath;
+                            Toast newToast = Toast.makeText(rootView.getContext(), newMessage, Toast.LENGTH_LONG);
                             newToast.show();
-
                             return;
                         }
                     } else {
-
                         String newMessage = OpenTenureApplication
                                 .getContext()
                                 .getString(
                                         R.string.message_claim_import_not_claim_archive);
-
-                        Toast newToast = Toast.makeText(rootView.getContext(),
-                                newMessage, Toast.LENGTH_LONG);
+                        Toast newToast = Toast.makeText(rootView.getContext(), newMessage, Toast.LENGTH_LONG);
                         newToast.show();
-
                         return;
                     }
 
-                    AlertDialog.Builder metadataDialog = new AlertDialog.Builder(
-                            rootView.getContext());
-
+                    AlertDialog.Builder metadataDialog = new AlertDialog.Builder(rootView.getContext());
                     metadataDialog.setTitle(R.string.password);
 
                     final EditText input = new EditText(rootView.getContext());
-
-                    input.setInputType(InputType.TYPE_CLASS_TEXT
-                            | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-                    input.setTransformationMethod(PasswordTransformationMethod
-                            .getInstance());
+                    input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                    input.setTransformationMethod(PasswordTransformationMethod.getInstance());
                     metadataDialog.setView(input);
 
                     metadataDialog.setPositiveButton(R.string.confirm,
                             new DialogInterface.OnClickListener() {
 
                                 @Override
-                                public void onClick(DialogInterface dialog,
-                                                    int which) {
-
+                                public void onClick(DialogInterface dialog, int which) {
                                     String password = input.getText().toString();
                                     dialog.dismiss();
-
-                                    new PreImportTask(rootView.getContext())
-                                            .execute(password, dest);
-
+                                    new PreImportTask(rootView.getContext()).execute(password, dest);
                                     return;
-
                                 }
                             });
 
                     metadataDialog.setNegativeButton(R.string.cancel,
                             new DialogInterface.OnClickListener() {
-
-                                public void onClick(DialogInterface dialog,
-                                                    int which) {
-
+                                public void onClick(DialogInterface dialog, int which) {
                                     try {
-                                        FileSystemUtilities
-                                                .deleteFilesInFolder(dest
-                                                        .getParentFile());
+                                        FileSystemUtilities.deleteFilesInFolder(dest.getParentFile());
                                     } catch (IOException e) {
-                                        // TODO Auto-generated catch block
-                                        System.out.println("Error deleting files "
-                                                + e.getLocalizedMessage());
+                                        System.out.println("Error deleting files " + e.getLocalizedMessage());
                                         e.printStackTrace();
                                     }
                                     return;
                                 }
                             });
-
                     metadataDialog.show();
-
                 }
 
             default:
@@ -508,22 +501,20 @@ public class LocalClaimsFragment extends ListFragment {
             if (excludeClaimIds != null && !excludeClaimIds.contains(claim.getClaimId())) {
                 if((claim.isDeleted() && showDeleted) || (!claim.isDeleted() && !showDeleted)){
                     ClaimListTO cto = new ClaimListTO();
-                    String claimName = claim.getName().equalsIgnoreCase("") ? rootView
-                            .getContext().getString(R.string.default_claim_name) : claim.getName();
+                    String claimName = claim.getName().equalsIgnoreCase("") ? getResources().getString(R.string.default_claim_name) : claim.getName();
                     String claimDate = claim.getDateOfStart() != null ? claim.getDateOfStart().toString() : "...";
 
                     String slogan = claim.getSlogan(getContext());
 
                     if(!StringUtility.isEmpty(claim.getType())){
-                        slogan += ", " + OpenTenureApplication.getContext().getResources().getString(R.string.type)
+                        slogan += ", " + getResources().getString(R.string.type)
                                 + ": " + dnl.getLocalizedDisplayName(new ClaimType().getDisplayValueByType(claim.getType()));
                     }
 
-                    slogan += ", " + OpenTenureApplication.getContext().getResources().getString(R.string.occupiedSince) + ": " + claimDate ;
+                    slogan += ", " + getResources().getString(R.string.occupiedSince) + ": " + claimDate ;
 
                     if (claim.getRecorderName() != null) {
-                        slogan += "\r\n" + OpenTenureApplication.getContext().getResources()
-                                .getString(R.string.recorded_by) + " " + claim.getRecorderName();
+                        slogan += "\r\n" + getResources().getString(R.string.recorded_by) + " " + claim.getRecorderName();
                     }
 
                     cto.setName(claimName);

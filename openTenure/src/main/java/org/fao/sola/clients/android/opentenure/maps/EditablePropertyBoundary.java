@@ -64,7 +64,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Point;
 import android.net.Uri;
-import android.support.v4.content.FileProvider;
+import androidx.core.content.FileProvider;
 import android.text.InputType;
 import android.util.Log;
 import android.widget.EditText;
@@ -75,7 +75,6 @@ import com.androidmapsextensions.GoogleMap;
 import com.androidmapsextensions.GoogleMap.SnapshotReadyCallback;
 import com.androidmapsextensions.Marker;
 import com.androidmapsextensions.MarkerOptions;
-import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.Projection;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
@@ -707,6 +706,10 @@ public class EditablePropertyBoundary extends BasePropertyBoundary {
 	}
 
 	protected void reload(){
+		if(claimActivity == null) {
+			return;
+		}
+
 		Log.d(this.getClass().getName(), "Reloading claim on fragment change");
 
 		for(Marker mark:verticesMap.keySet()){

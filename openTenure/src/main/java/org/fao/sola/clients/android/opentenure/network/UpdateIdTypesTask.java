@@ -31,13 +31,10 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.fao.sola.clients.android.opentenure.OpenTenureApplication;
-import org.fao.sola.clients.android.opentenure.maps.MainMapFragment;
-import org.fao.sola.clients.android.opentenure.model.Configuration;
 import org.fao.sola.clients.android.opentenure.network.API.CommunityServerAPI;
 import org.fao.sola.clients.android.opentenure.network.response.IdType;
 
 import android.os.AsyncTask;
-import android.support.v4.app.FragmentActivity;
 
 public class UpdateIdTypesTask extends AsyncTask<String, Void, List<IdType>> {
 

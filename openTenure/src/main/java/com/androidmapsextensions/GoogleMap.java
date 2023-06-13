@@ -134,6 +134,12 @@ public interface GoogleMap {
 
     void setOnCameraChangeListener(OnCameraChangeListener onCameraChangeListener);
 
+    void setOnCameraMoveStartedListener(OnCameraMoveStartedListener onCameraMoveStartedListener);
+
+    void setOnCameraMoveListener(OnCameraMoveListener onCameraMoveListener);
+
+    void setOnCameraIdleListener(OnCameraIdleListener onCameraIdleListener);
+
     void setOnInfoWindowClickListener(OnInfoWindowClickListener onInfoWindowClickListener);
 
     void setOnMapClickListener(OnMapClickListener onMapClickListener);
@@ -174,6 +180,20 @@ public interface GoogleMap {
         View getInfoContents(Marker marker);
 
         View getInfoWindow(Marker marker);
+    }
+
+    interface OnCameraMoveStartedListener extends com.google.android.gms.maps.GoogleMap.OnCameraMoveStartedListener {
+        @Override
+        void onCameraMoveStarted(int reason);
+    }
+
+    interface OnCameraMoveListener extends com.google.android.gms.maps.GoogleMap.OnCameraMoveListener {
+        void onCameraMove();
+    }
+
+    interface OnCameraIdleListener extends com.google.android.gms.maps.GoogleMap.OnCameraIdleListener {
+        @Override
+        void onCameraIdle();
     }
 
     interface OnCameraChangeListener extends com.google.android.gms.maps.GoogleMap.OnCameraChangeListener {

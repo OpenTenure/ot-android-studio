@@ -43,7 +43,6 @@ import org.fao.sola.clients.android.opentenure.model.Configuration;
 import org.fao.sola.clients.android.opentenure.model.Database;
 
 import android.app.Activity;
-import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager.NameNotFoundException;
@@ -52,8 +51,8 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.http.AndroidHttpClient;
 import android.preference.PreferenceManager;
-import android.support.multidex.MultiDexApplication;
-import android.support.v4.app.FragmentActivity;
+import androidx.multidex.MultiDexApplication;
+import androidx.fragment.app.FragmentActivity;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.View;
@@ -688,10 +687,10 @@ public class OpenTenureApplication extends MultiDexApplication {
 			if (latitude != null)
 				latitude.delete();
 
-			MainMapFragment mapFrag = OpenTenureApplication.getMapFragment();
+			/*MainMapFragment mapFrag = OpenTenureApplication.getMapFragment();
 			if(mapFrag != null) {
 				mapFrag.boundCameraToInterestArea();
-			}
+			}*/
 		}
 	}
 }

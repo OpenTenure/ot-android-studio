@@ -4,7 +4,13 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/ot-android-studio.iml" filepath="$PROJECT_DIR$/ot-android-studio.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/aFileChooser/ot-android-studio.aFileChooser.iml" filepath="$PROJECT_DIR$/.idea/modules/aFileChooser/ot-android-studio.aFileChooser.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/aFileChooser/ot-android-studio.aFileChooser.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/aFileChooser/ot-android-studio.aFileChooser.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/aFileChooser/ot-android-studio.aFileChooser.main.iml" filepath="$PROJECT_DIR$/.idea/modules/aFileChooser/ot-android-studio.aFileChooser.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/aFileChooser/ot-android-studio.aFileChooser.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/aFileChooser/ot-android-studio.aFileChooser.unitTest.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/openTenure/ot-android-studio.openTenure.iml" filepath="$PROJECT_DIR$/.idea/modules/openTenure/ot-android-studio.openTenure.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/openTenure/ot-android-studio.openTenure.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/openTenure/ot-android-studio.openTenure.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/openTenure/ot-android-studio.openTenure.main.iml" filepath="$PROJECT_DIR$/.idea/modules/openTenure/ot-android-studio.openTenure.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/openTenure/ot-android-studio.openTenure.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/openTenure/ot-android-studio.openTenure.unitTest.iml" />
     </modules>
   </component>
 </project>

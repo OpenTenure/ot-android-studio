@@ -51,6 +51,9 @@ class DelegatingGoogleMap implements GoogleMap {
     private InfoWindowAdapter infoWindowAdapter;
     private OnCameraChangeListener onCameraChangeListener;
     private OnMarkerDragListener onMarkerDragListener;
+    private OnCameraMoveStartedListener onCameraMoveStartedListener;
+    private OnCameraIdleListener onCameraIdleListener;
+    private OnCameraMoveListener onCameraMoveListener;
 
     private MarkerManager markerManager;
     private PolylineManager polylineManager;
@@ -262,6 +265,21 @@ class DelegatingGoogleMap implements GoogleMap {
     }
 
     @Override
+    public void setOnCameraMoveStartedListener(OnCameraMoveStartedListener onCameraMoveStartedListener) {
+        this.onCameraMoveStartedListener = onCameraMoveStartedListener;
+    }
+
+    @Override
+    public void setOnCameraMoveListener(OnCameraMoveListener onCameraMoveListener) {
+        this.onCameraMoveListener = onCameraMoveListener;
+    }
+
+    @Override
+    public void setOnCameraIdleListener(OnCameraIdleListener onCameraIdleListener) {
+        this.onCameraIdleListener = onCameraIdleListener;
+    }
+
+    @Override
     public void setOnCameraChangeListener(OnCameraChangeListener onCameraChangeListener) {
         this.onCameraChangeListener = onCameraChangeListener;
     }
@@ -383,6 +401,9 @@ class DelegatingGoogleMap implements GoogleMap {
         real.setInfoWindowAdapter(new DelegatingInfoWindowAdapter());
         real.setOnCameraChangeListener(new DelegatingOnCameraChangeListener());
         real.setOnMarkerDragListener(new DelegatingOnMarkerDragListener());
+        real.setOnCameraMoveStartedListener(new DelegatingOnCameraMoveStartedListener());
+        real.setOnCameraMoveListener(new DelegatingOnCameraMoveListener());
+        real.setOnCameraIdleListener(new DelegatingOnCameraIdleListener());
     }
 
     private class DelegatingOnCameraChangeListener implements com.google.android.gms.maps.GoogleMap.OnCameraChangeListener {
@@ -392,6 +413,34 @@ class DelegatingGoogleMap implements GoogleMap {
             markerManager.onCameraChange(cameraPosition);
             if (onCameraChangeListener != null) {
                 onCameraChangeListener.onCameraChange(cameraPosition);
+            }
+        }
+    }
+
+    private class DelegatingOnCameraMoveListener implements com.google.android.gms.maps.GoogleMap.OnCameraMoveListener {
+        @Override
+        public void onCameraMove (){
+            if (onCameraMoveListener != null) {
+                onCameraMoveListener.onCameraMove();
+            }
+        }
+    }
+
+    private class DelegatingOnCameraIdleListener implements com.google.android.gms.maps.GoogleMap.OnCameraIdleListener {
+        @Override
+        public void onCameraIdle() {
+            markerManager.onCameraChange(real.getCameraPosition());
+            if (onCameraIdleListener != null) {
+                onCameraIdleListener.onCameraIdle();
+            }
+        }
+    }
+
+    private class DelegatingOnCameraMoveStartedListener implements com.google.android.gms.maps.GoogleMap.OnCameraMoveStartedListener {
+        @Override
+        public void onCameraMoveStarted(int reason){
+            if (onCameraMoveStartedListener != null) {
+                onCameraMoveStartedListener.onCameraMoveStarted(reason);
             }
         }
     }

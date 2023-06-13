@@ -41,6 +41,7 @@ import java.nio.file.Files;
 import java.util.Iterator;
 import java.util.List;
 
+import org.fao.sola.clients.android.opentenure.BuildConfig;
 import org.fao.sola.clients.android.opentenure.OpenTenureApplication;
 import org.fao.sola.clients.android.opentenure.model.Attachment;
 import org.fao.sola.clients.android.opentenure.model.AttachmentStatus;
@@ -52,7 +53,11 @@ import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import android.Manifest;
 import android.content.Context;
+import android.content.ContextWrapper;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.CompressFormat;
 import android.graphics.BitmapFactory;
@@ -62,7 +67,10 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.provider.Settings;
 import android.util.Log;
+
+import androidx.core.content.ContextCompat;
 
 public class FileSystemUtilities {
 
@@ -118,23 +126,15 @@ public class FileSystemUtilities {
 	 **/
 
 	public static boolean createOpenTenureFolder() {
-
 		if (isExternalStorageWritable()) {
-
-			File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
-			File ot = new File(path.getParentFile(), _OPEN_TENURE_FOLDER);
-
-			if (ot.mkdir() && ot.isDirectory()) {
-
+			File ot = getOpentenureFolder();
+			if (ot.mkdirs()) {
 				Log.d("FileSystemUtilities", "Created Open Tenure Folder");
 				return true;
 			}
 			return false;
-		}
-
-		else
+		} else
 			return false;
-
 	}
 
 	/**
@@ -143,24 +143,16 @@ public class FileSystemUtilities {
 	 * be exported the compressed claim
 	 * 
 	 **/
-
 	public static boolean createCertificatesFolder() {
-
 		if (isExternalStorageWritable()) {
-
-			File ot = new File(getOpentenureFolder(), _CERTIFICATES);
-
-			if (ot.mkdir() && ot.isDirectory()) {
-
+			File certificatesFolder = getCertificatesFolder();
+			if (certificatesFolder.mkdirs()) {
 				Log.d("FileSystemUtilities", "Created Certificates Folder");
 				return true;
 			}
 			return false;
-		}
-
-		else
+		} else
 			return false;
-
 	}
 
 	/**
@@ -367,11 +359,9 @@ public class FileSystemUtilities {
 	}
 
 	public static File getClaimsFolder() {
-
 		Context context = OpenTenureApplication.getContext();
 		File appFolder = context.getExternalFilesDir(null);
 		return new File(appFolder, _CLAIMS_FOLDER);
-
 	}
 
 	public static File getClaimantsFolder() {
@@ -402,6 +392,10 @@ public class FileSystemUtilities {
 		return new File(getClaimFolder(claimID), _ATTACHMENT_FOLDER);
 	}
 
+	public static String getClaimAttachmentContentPath(String claimID, String fileName) {
+		return "content://"+ BuildConfig.APPLICATION_ID+"/app-files/" + _CLAIMS_FOLDER + "/" + _CLAIM_PREFIX + claimID + "/" + _ATTACHMENT_FOLDER + "/" + fileName;
+	}
+
 	public static boolean createMutipageFolder(String claimID) {
 
 		File multiFolder = null;
@@ -424,12 +418,11 @@ public class FileSystemUtilities {
 	}
 
 	public static File getOpentenureFolder() {
-		File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
-		return new File(path.getParentFile(), _OPEN_TENURE_FOLDER);
+		File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS);
+		return new File(path, _OPEN_TENURE_FOLDER);
 	}
 
 	public static File getCertificatesFolder() {
-
 		return new File(getOpentenureFolder(), _CERTIFICATES);
 	}
 
@@ -487,42 +480,6 @@ public class FileSystemUtilities {
 			byte[] buffer = new byte[1024];
 
 			FileInputStream reader = new FileInputStream(source);
-			FileOutputStream writer = new FileOutputStream(dest);
-
-			BufferedInputStream br = new BufferedInputStream(reader);
-
-			int i = 0;
-			while ((i = br.read(buffer)) != -1) {
-				writer.write(buffer, 0, i);
-			}
-
-			reader.close();
-			writer.close();
-
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		return dest;
-	}
-
-	public static File copyFileInImportFolder(File source) {
-
-		File importFolder = null;
-		File dest = null;
-
-		try {
-
-			importFolder = new File(getOpentenureFolder(), _IMPORT);
-			dest = new File(importFolder, source.getName());
-			dest.createNewFile();
-
-			Log.d("FileSystemUtilities", dest.getAbsolutePath());
-			byte[] buffer = new byte[1024];
-
-			FileInputStream reader = new FileInputStream(source.getAbsoluteFile());
 			FileOutputStream writer = new FileOutputStream(dest);
 
 			BufferedInputStream br = new BufferedInputStream(reader);
