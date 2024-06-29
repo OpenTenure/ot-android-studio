@@ -16,6 +16,7 @@
     <string name="error_generic_conection">An error has occurred during connection</string>
     <string name="error_connection">The connection is not available</string>
     <string name="error_field_required">This field is required</string>
+    <string name="error_server_url_required">Server URL is required</string>
     <string name="message_login_before">Do login before</string>
     <string name="message_logout_ok">You have successfully logged out</string>
     <string name="message_login_ok">You have successfully logged in</string>

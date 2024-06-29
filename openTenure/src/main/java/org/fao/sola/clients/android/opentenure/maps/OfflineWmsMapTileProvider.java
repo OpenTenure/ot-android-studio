@@ -27,15 +27,14 @@
  */
 package org.fao.sola.clients.android.opentenure.maps;
 
+import android.util.Log;
+
+import org.fao.sola.clients.android.opentenure.OpenTenureApplication;
+import org.fao.sola.clients.android.opentenure.tools.StringUtility;
+
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Locale;
-
-import org.fao.sola.clients.android.opentenure.OpenTenureApplication;
-import org.fao.sola.clients.android.opentenure.OpenTenurePreferencesActivity;
-
-import android.content.SharedPreferences;
-import android.util.Log;
 
 public class OfflineWmsMapTileProvider extends OfflineTilesProvider{
 	// Web Mercator upper left corner of the world map.
@@ -62,16 +61,21 @@ public class OfflineWmsMapTileProvider extends OfflineTilesProvider{
 
     final String URL_STRING;
     
-    public OfflineWmsMapTileProvider(int width, int height, SharedPreferences preferences) {
+    public OfflineWmsMapTileProvider(int width, int height) {
     	super(width, height);
-		String baseURL = preferences.getString(
-				OpenTenurePreferencesActivity.GEOSERVER_URL_PREF,
-				"http://demo.flossola.org:8080/geoserver/sola/wms");
-		String layer = preferences.getString(
-				OpenTenurePreferencesActivity.GEOSERVER_LAYER_PREF,
-				"sola:nz_orthophoto");
-		URL_STRING = baseURL + 
-	            "/wms?layers=" + layer + 
+		String url = "http://localhost:8080/geoserver";
+		String layerName = "opentenure:test";
+
+    	if(OpenTenureApplication.getInstance().getProject() != null){
+    		if(!StringUtility.isEmpty(OpenTenureApplication.getInstance().getProject().getTilesLayerName())){
+    			layerName = OpenTenureApplication.getInstance().getProject().getTilesLayerName();
+			}
+			if(!StringUtility.isEmpty(OpenTenureApplication.getInstance().getProject().getTilesServerUrl())){
+				url = OpenTenureApplication.getInstance().getProject().getTilesServerUrl();
+			}
+		}
+		URL_STRING = url +
+	            "/wms?layers=" + layerName +
 	            "&version=" + version + 
 	            "&service=" + service + 
 	            "&request=" + request + 
@@ -135,7 +139,7 @@ public class OfflineWmsMapTileProvider extends OfflineTilesProvider{
 	}
 
 	protected TilesProviderType getType() {
-		return TilesProviderType.GeoServer;
+		return TilesProviderType.geoserver;
 	}
 
 	protected String getBaseStorageDir() {

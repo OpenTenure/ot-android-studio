@@ -25,58 +25,100 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * *********************************************************************************************
  */
-package org.fao.sola.clients.android.opentenure.network;
+package org.fao.sola.clients.android.opentenure.network.response;
 
-import java.util.List;
+public class BoundaryResponse {
+	private String id;
+	private String name;
+	private String typeCode;
+	private String authorityName;
+	private String parentId;
+	private String projectId;
+	private String recorderName;
+	private String statusCode;
+	private String geom;
+	private int rowVersion;
 
-import org.fao.sola.clients.android.opentenure.OpenTenureApplication;
-import org.fao.sola.clients.android.opentenure.network.API.CommunityServerAPI;
-import org.fao.sola.clients.android.opentenure.network.response.Language;
-
-import android.os.AsyncTask;
-import android.util.Log;
-
-public class UpdateLanguagesTask extends
-		AsyncTask<String, Void, List<Language>> {
-
-	@Override
-	protected List<Language> doInBackground(String... params) {
-		List<Language> types = CommunityServerAPI.getLanguages();
-		return types;
+	public BoundaryResponse(){
 	}
 
-	@Override
-	protected void onPostExecute(List<Language> languages) {
-
-		if (languages != null && (languages.size() > 0)) {
-
-			for (Language language : languages) {
-
-				org.fao.sola.clients.android.opentenure.model.Language lang = new org.fao.sola.clients.android.opentenure.model.Language();
-
-				lang.setActive(language.isActive());
-				lang.setIsDefault(language.isIsDefault());
-				lang.setLtr(language.isLtr());
-				lang.setCode(language.getCode());
-				lang.setDisplayValue(language.getDisplayValue());
-				lang.setItemOrder(language.getItemOrder());
-				if (org.fao.sola.clients.android.opentenure.model.Language
-						.getLanguage(language.getCode()) == null) {
-					Log.d(this.getClass().getName(), "Storing language " + lang);
-					lang.add();
-
-				} else {
-					Log.d(this.getClass().getName(), "Updating language "
-							+ lang);
-					lang.updateLanguage();
-				}
-
-			}
-
-			OpenTenureApplication.getInstance().setCheckedLanguages(true);
-			OpenTenureApplication.getInstance().setSettingsSynchronized();
-		}
-
+	public String getId() {
+		return id;
 	}
 
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getProjectId() {
+		return projectId;
+	}
+
+	public void setProjectId(String projectId) {
+		this.projectId = projectId;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getTypeCode() {
+		return typeCode;
+	}
+
+	public void setTypeCode(String typeCode) {
+		this.typeCode = typeCode;
+	}
+
+	public String getAuthorityName() {
+		return authorityName;
+	}
+
+	public void setAuthorityName(String authorityName) {
+		this.authorityName = authorityName;
+	}
+
+	public String getParentId() {
+		return parentId;
+	}
+
+	public void setParentId(String parentId) {
+		this.parentId = parentId;
+	}
+
+	public String getRecorderName() {
+		return recorderName;
+	}
+
+	public void setRecorderName(String recorderName) {
+		this.recorderName = recorderName;
+	}
+
+	public String getStatusCode() {
+		return statusCode;
+	}
+
+	public void setStatusCode(String statusCode) {
+		this.statusCode = statusCode;
+	}
+
+	public String getGeom() {
+		return geom;
+	}
+
+	public void setGeom(String geom) {
+		this.geom = geom;
+	}
+
+	public int getRowVersion() {
+		return rowVersion;
+	}
+
+	public void setRowVersion(int rowVersion) {
+		this.rowVersion = rowVersion;
+	}
 }

@@ -326,7 +326,7 @@ public class SectionFragment extends ListFragment {
 		FormTemplate formTemplate = formDispatcher.getFormTemplate();
 		FieldConstraint constraint = null;
 		DisplayNameLocalizer dnl = new DisplayNameLocalizer(
-				OpenTenureApplication.getInstance().getLocalization());
+				OpenTenureApplication.getInstance().getLanguageCode());
 		if ((constraint = formTemplate.getFailedConstraint(formPayload,dnl)) != null) {
 			Toast.makeText(rootView.getContext(), constraint.displayErrorMsg(),
 					Toast.LENGTH_SHORT).show();

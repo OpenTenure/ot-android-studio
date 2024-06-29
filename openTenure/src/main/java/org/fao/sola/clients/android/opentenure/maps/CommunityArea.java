@@ -27,66 +27,97 @@
  */
 package org.fao.sola.clients.android.opentenure.maps;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.fao.sola.clients.android.opentenure.OpenTenureApplication;
 import org.fao.sola.clients.android.opentenure.R;
-import org.fao.sola.clients.android.opentenure.model.Configuration;
 import org.fao.sola.clients.android.opentenure.model.Vertex;
+import org.fao.sola.clients.android.opentenure.tools.GisUtility;
 
 import com.androidmapsextensions.Polyline;
 import com.androidmapsextensions.PolylineOptions;
 import com.androidmapsextensions.GoogleMap;
+import com.google.android.gms.maps.model.LatLng;
+import com.vividsolutions.jts.geom.Geometry;
+import com.vividsolutions.jts.geom.MultiPolygon;
+import com.vividsolutions.jts.geom.Polygon;
 
 public class CommunityArea {
-
-	String communityAreaClob = null;
 	GoogleMap map = null;
-	protected static Polyline polyline = null;
+	protected static ArrayList<Polyline> polylines = null;
 
 	public void drawInterestArea() {
-		
-		if(communityAreaClob == null)
-			return;
-		
-		List<Vertex> communityAreaVertices = Vertex.shellFromWKT(
-				communityAreaClob, null);
-
-		if (communityAreaVertices.size() <= 0) {
-			return;
+		String boundary = null;
+		if(polylines == null) {
+			polylines = new ArrayList<Polyline>();
 		}
 
+		// Clear first
+		removeFromMap();
+		polylines.clear();
+
+		if(OpenTenureApplication.getInstance().getProject() != null) {
+			boundary = OpenTenureApplication.getInstance().getProject().getBoundary();
+		}
+
+		if(boundary == null || boundary.equals(""))
+			return;
+
+		Geometry cAreaGeom = GisUtility.getGeomFromWkt(boundary);
+
+		if (cAreaGeom instanceof Polygon) {
+			addToMap((Polygon) cAreaGeom);
+		} else if (cAreaGeom instanceof MultiPolygon) {
+			MultiPolygon mPolygon = (MultiPolygon) cAreaGeom;
+			for(int i = 0; i < mPolygon.getNumGeometries(); i++) {
+				if(mPolygon.getGeometryN(i) instanceof Polygon) {
+					addToMap((Polygon) mPolygon.getGeometryN(i));
+				}
+			}
+		}
+	}
+
+	private void addToMap (Polygon geom) {
+		List<Vertex> communityAreaVertices = Vertex.shellFromPolygon(geom);
 		PolylineOptions polylineOptions = new PolylineOptions();
+
 		for (int i = 0; i < communityAreaVertices.size(); i++) {
 			polylineOptions.add(communityAreaVertices.get(i).getMapPosition());
 		}
+
+		// Needed in order to close the polyline
 		polylineOptions.add(communityAreaVertices.get(0).getMapPosition());
-        // Needed in order to close the polyline
+
 		polylineOptions.zIndex(BasePropertyBoundary.BOUNDARY_Z_INDEX);
 		polylineOptions.width(4);
-		polylineOptions.color(OpenTenureApplication.getContext().getResources()
-				.getColor(R.color.community_area));
-		polyline = map.addPolyline(polylineOptions);
-		
-
+		polylineOptions.color(OpenTenureApplication.getContext().getResources().getColor(R.color.community_area));
+		polylines.add(map.addPolyline(polylineOptions));
 	}
 
 	public CommunityArea(GoogleMap map) {
-
-		communityAreaClob = Configuration
-				.getConfigurationValue("communityArea");
 		this.map = map;
-
 	}
 
-	public static Polyline getPolyline() {
-		return polyline;
+	public static ArrayList<Polyline> getPolylines() {
+		return polylines;
 	}
 
-	public static void setPolyline(Polyline polyline) {
-		CommunityArea.polyline = polyline;
+	public static List<LatLng> getPoints(){
+		List<LatLng> points = new ArrayList<LatLng>();
+		if(polylines != null && !polylines.isEmpty()) {
+			for (Polyline polyline: polylines) {
+				points.addAll(polyline.getPoints());
+			}
+		}
+		return points;
 	}
-	
-	
 
+	public static void removeFromMap() {
+		if(polylines != null && !polylines.isEmpty()) {
+			for (Polyline polyline: polylines) {
+				polyline.remove();
+			}
+		}
+	}
 }

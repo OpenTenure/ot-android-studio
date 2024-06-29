@@ -132,6 +132,15 @@ public class SaveClaimTask extends AsyncTask<Object, ViewHolderResponse, ViewHol
 
 		}
 
+		// User cannot access the project recorded for the claim
+		case 460: {
+			toast = Toast.makeText(OpenTenureApplication.getContext(),
+					OpenTenureApplication.getContext().getResources()
+							.getString(R.string.message_project_not_accessible_error), Toast.LENGTH_LONG);
+			toast.show();
+			break;
+		}
+
 		case 105: {
 			/* IOException: */
 
@@ -424,7 +433,7 @@ public class SaveClaimTask extends AsyncTask<Object, ViewHolderResponse, ViewHol
 				org.fao.sola.clients.android.opentenure.model.Attachment existingAttachment = (org.fao.sola.clients.android.opentenure.model.Attachment) iterator.next();
 				boolean found = false;
 
-				for (Iterator<Attachment> iterator2 = list.iterator(); iterator.hasNext();) {
+				for (Iterator<Attachment> iterator2 = list.iterator(); iterator2.hasNext();) {
 					Attachment missingAttachment = (Attachment) iterator2.next();
 					if(existingAttachment.getAttachmentId().equalsIgnoreCase(missingAttachment.getId())){
 						found = true;

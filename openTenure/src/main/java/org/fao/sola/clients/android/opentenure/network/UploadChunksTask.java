@@ -111,7 +111,6 @@ public class UploadChunksTask extends AsyncTask<Object, ViewHolderResponse, View
 						chunk = Arrays.copyOfRange(chunk, 0, rsz);
 
 					payload.setMd5(MD5.calculateMD5(chunk));
-
 					payload.setAttachmentId((String) params[0]);
 					payload.setClaimId(attachment.getClaimId());
 					payload.setId(UUID.randomUUID().toString());

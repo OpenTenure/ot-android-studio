@@ -3,7 +3,7 @@
 
     <PreferenceCategory android:title="@string/general" >
     <EditTextPreference
-        android:defaultValue="https://demo.opentenure.org"
+        android:defaultValue="https://sola-opentenure.review.fao.org"
         android:dialogTitle="@string/cs_url_pref_dialog_title"
         android:key="cs_url_pref"
         android:summary="@string/cs_url_pref_summary"
@@ -18,40 +18,7 @@
 		android:summaryOn="@string/soft_delete_details" />
 	</PreferenceCategory>
     
-    <PreferenceCategory android:title="@string/map_sources" >
-    <ListPreference
-        android:defaultValue="GeoServer"
-        android:dialogTitle="@string/tiles_provider_dialog_title"
-        android:entries="@array/tiles_provider_keys"
-        android:entryValues="@array/tiles_provider_values"
-        android:key="tiles_provider"
-        android:title="@string/tiles_provider" />
-    <EditTextPreference
-        android:defaultValue="http://demo.flossola.org:8080/geoserver/sola/wms"
-        android:dialogTitle="@string/geoserver_url_pref_dialog_title"
-        android:key="geoserver_url_pref"
-        android:summary="@string/geoserver_url_pref_summary"
-        android:title="@string/geoserver_url_pref_title" />
-    <EditTextPreference
-        android:defaultValue="sola:nz_orthophoto"
-        android:dialogTitle="@string/geoserver_layer_pref_dialog_title"
-        android:key="geoserver_layer_pref"
-        android:summary="@string/geoserver_layer_pref_summary"
-        android:title="@string/geoserver_layer_pref_title" />
-    <EditTextPreference
-        android:defaultValue="http://host/path&#63;x=%d&amp;y=%d&amp;z=%d"
-        android:dialogTitle="@string/tms_url_pref_dialog_title"
-        android:key="tms_url_pref"
-        android:summary="@string/tms_url_pref_summary"
-        android:title="@string/tms_url_pref_title" />
-    <EditTextPreference
-        android:defaultValue="http://host/path/%d/%d/%d.jpg"
-        android:dialogTitle="@string/wtms_url_pref_dialog_title"
-        android:key="wtms_url_pref"
-        android:summary="@string/wtms_url_pref_summary"
-        android:title="@string/wtms_url_pref_title" />
-    </PreferenceCategory>
-    
+
     <PreferenceCategory android:title="@string/dynamic_form" >
 	    <EditTextPreference
 	        android:defaultValue=""

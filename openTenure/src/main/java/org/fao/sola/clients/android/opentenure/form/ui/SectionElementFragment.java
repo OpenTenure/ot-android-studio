@@ -159,7 +159,7 @@ public class SectionElementFragment extends Fragment {
 				.findViewById(R.id.fragment_field_group);
 		int i = 0;
 		DisplayNameLocalizer dnl = new DisplayNameLocalizer(
-				OpenTenureApplication.getInstance().getLocalization());
+				OpenTenureApplication.getInstance().getLanguageCode());
 		List<FieldTemplate> fieldTemplateList = elementTemplate.getFieldTemplateList();
 		if(fieldTemplateList != null){
 			Collections.sort(fieldTemplateList);

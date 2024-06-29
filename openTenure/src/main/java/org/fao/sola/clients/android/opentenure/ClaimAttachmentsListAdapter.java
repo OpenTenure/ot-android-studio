@@ -27,7 +27,6 @@
  */
 package org.fao.sola.clients.android.opentenure;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -48,7 +47,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
-import androidx.core.content.FileProvider;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -107,7 +105,7 @@ public class ClaimAttachmentsListAdapter extends ArrayAdapter<String> {
 
 			// Attachment Type Spinner set up
 			DocumentType dt = new DocumentType();
-			keyValueDocTypes = dt.getKeyValueMap(OpenTenureApplication.getInstance().getLocalization(),onlyActive);
+			keyValueDocTypes = dt.getKeyValueMap(onlyActive);
 
 			List<String> list = new ArrayList<String>();
 			TreeSet<String> keys = new TreeSet<String>(keyValueDocTypes.keySet());
@@ -374,7 +372,7 @@ public class ClaimAttachmentsListAdapter extends ArrayAdapter<String> {
 	private void updateAttachment(Attachment attachment, AttachmentViewHolder vh) {
 		DocumentType dt = new DocumentType();
 		attachment.setDescription(vh.getSlogan().getText().toString());
-		attachment.setFileType(dt.getTypebyDisplayVaue(vh.getAttachmentType().getSelectedItem().toString()));
+		attachment.setFileType(dt.getCodeByDisplayValue(vh.getAttachmentType().getSelectedItem().toString()));
 		attachment.update();
 	}
 }

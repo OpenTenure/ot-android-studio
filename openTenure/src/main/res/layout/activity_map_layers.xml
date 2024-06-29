@@ -1,0 +1,101 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/lblBackgroundLayers"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:textColor="@color/ab_tab_indicator_opentenure"
+            android:layout_marginBottom="10dp"
+            android:text="@string/background_layers" />
+
+        <View
+            android:id="@+id/line2"
+            android:layout_width="match_parent"
+            android:background="@color/ab_tab_indicator_opentenure"
+            android:layout_height="1dp" />
+
+        <RadioGroup
+            android:id="@+id/rbgProjects"
+            android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <RadioButton android:id="@+id/map_provider_google_normal"
+                android:text="@string/map_provider_google_normal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <RadioButton android:id="@+id/map_provider_google_hybrid"
+                android:text="@string/map_provider_google_hybrid"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <RadioButton android:id="@+id/map_provider_google_satellite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/map_provider_google_satellite" />
+            <RadioButton android:id="@+id/map_provider_geoserver"
+                android:text="@string/map_provider_geoserver"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <RadioButton android:id="@+id/map_provider_local_tiles"
+                android:text="@string/map_provider_local_tiles"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <RadioButton android:id="@+id/map_provider_empty"
+                android:text="@string/map_provider_empty"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RadioGroup>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/lblUserLayers"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:textColor="@color/ab_tab_indicator_opentenure"
+                android:layout_weight="100"
+                android:text="@string/user_layers" />
+
+            <Button
+                android:id="@+id/btnAddLayer"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:drawableStart="@android:drawable/ic_input_add"
+                android:text="@string/add"
+                android:textFontWeight="600"
+                android:textColor="@color/ab_tab_indicator_opentenure"
+                android:textSize="16dp" />
+        </LinearLayout>
+
+        <View
+            android:id="@+id/line1"
+            android:layout_width="match_parent"
+            android:background="@color/ab_tab_indicator_opentenure"
+            android:layout_height="1dp" />
+
+        <ListView
+            android:id="@+id/lstLayers"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+
+
+</RelativeLayout>

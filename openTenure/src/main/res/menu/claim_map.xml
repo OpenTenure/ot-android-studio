@@ -17,14 +17,19 @@
           android:showAsAction="always" >
         <menu>
             <item android:id="@+id/action_add_boundary"
+                android:checkable="true"
                   android:title="@string/action_add_boundary" />
             <item android:id="@+id/action_insert_boundary"
+                android:checkable="true"
                 android:title="@string/action_insert_boundary" />
             <item android:id="@+id/action_add_non_boundary"
+                android:checkable="true"
                   android:title="@string/action_add_non_boundary" />
             <item android:id="@+id/action_measure"
+                android:checkable="true"
                 android:title="@string/action_measure" />
             <item android:id="@+id/action_edit_hole"
+                android:checkable="true"
                 android:title="@string/action_add_hole" />
             </menu>
     </item>
@@ -37,6 +42,9 @@
           android:icon="@drawable/stop"
           android:title="@string/action_stop_rotating"
         android:showAsAction="ifRoom" />
+    <item android:id="@+id/action_export_geo"
+        android:title="@string/action_export_geo"
+        android:showAsAction="never" />
     <item android:id="@+id/action_go_to"
           android:icon="@drawable/position"
           android:title="@string/action_go_to"
@@ -48,31 +56,4 @@
                   android:title="@string/action_select_bookmark" />
             </menu>
     </item>
-    <item android:id="@+id/map_provider_google_normal"
-          android:title="@string/map_provider_google_normal"
-        android:showAsAction="never" />
-    <item android:id="@+id/map_provider_google_hybrid"
-          android:title="@string/map_provider_google_hybrid"
-        android:showAsAction="never" />
-    <item android:id="@+id/map_provider_google_satellite"
-          android:title="@string/map_provider_google_satellite"
-        android:showAsAction="never" />
-    <item android:id="@+id/map_provider_google_terrain"
-          android:title="@string/map_provider_google_terrain"
-        android:showAsAction="never" />
-    <item android:id="@+id/map_provider_osm_mapnik"
-          android:title="@string/map_provider_osm_mapnik"
-        android:showAsAction="never" />
-    <item android:id="@+id/map_provider_osm_mapquest"
-          android:title="@string/map_provider_osm_mapquest"
-        android:showAsAction="never" />
-    <item android:id="@+id/map_provider_local_tiles"
-          android:title="@string/map_provider_local_tiles"
-        android:showAsAction="never" />
-    <item android:id="@+id/map_provider_geoserver"
-          android:title="@string/map_provider_geoserver"
-        android:showAsAction="never" />
-    <item android:id="@+id/action_export_geo"
-          android:title="@string/action_export_geo"
-        android:showAsAction="never" />
 </menu>

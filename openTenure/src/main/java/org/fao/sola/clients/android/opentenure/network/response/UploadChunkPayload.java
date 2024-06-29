@@ -74,5 +74,4 @@ public class UploadChunkPayload {
 	public void setMd5(String md5) {
 		this.md5 = md5;
 	}
-
 }

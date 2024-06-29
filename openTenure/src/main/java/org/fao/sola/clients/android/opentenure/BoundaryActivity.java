@@ -121,6 +121,9 @@ public class BoundaryActivity extends FragmentActivity implements BoundaryDispat
             boundary.setId(UUID.randomUUID().toString());
             boundary.setStatusCode("pending");
             boundary.setProcessed(false);
+            if(OpenTenureApplication.getInstance().getProject() != null) {
+                boundary.setProjectId(OpenTenureApplication.getInstance().getProject().getId());
+            }
             isNew = true;
         } else {
             boundary = Boundary.getById(boundaryId);

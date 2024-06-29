@@ -391,18 +391,15 @@ public class LocalClaimsListAdapter extends ArrayAdapter<ClaimListTO> implements
 			vh.bar.setVisibility(View.GONE);
 
 			vh.send.setVisibility(View.INVISIBLE);
-
 		}
 
-		if (realStatus.equals(ClaimStatus._MODERATED)) {
-
+		if (realStatus.equals(ClaimStatus._MODERATED) || realStatus.equals(ClaimStatus._ISSUED)) {
 			vh.iconModerated.setVisibility(View.VISIBLE);
 			vh.number.setText(claims.get(position).getNumber());
 			vh.bar = (ProgressBar) convertView.findViewById(R.id.progress_bar);
 			vh.status.setVisibility(View.GONE);
 			vh.bar.setVisibility(View.GONE);
 			vh.send.setVisibility(View.INVISIBLE);
-
 		}
 		if (realStatus.equals(ClaimStatus._CHALLENGED)) {
 
@@ -412,29 +409,24 @@ public class LocalClaimsListAdapter extends ArrayAdapter<ClaimListTO> implements
 			vh.status.setVisibility(View.GONE);
 
 			vh.send.setVisibility(View.INVISIBLE);
-
 		}
 
 		if (realStatus.equals(ClaimStatus._WITHDRAWN)) {
-
 			vh.iconWithdrawn.setVisibility(View.VISIBLE);
 			vh.number.setText(claims.get(position).getNumber());
 			vh.bar = (ProgressBar) convertView.findViewById(R.id.progress_bar);
 			vh.status.setVisibility(View.GONE);
 			vh.bar.setVisibility(View.GONE);
 			vh.send.setVisibility(View.INVISIBLE);
-
 		}
 
 		if (realStatus.equals(ClaimStatus._REVIEWED)) {
-
 			vh.iconReviewed.setVisibility(View.VISIBLE);
 			vh.number.setText(claims.get(position).getNumber());
 			vh.bar = (ProgressBar) convertView.findViewById(R.id.progress_bar);
 			vh.status.setVisibility(View.GONE);
 			vh.bar.setVisibility(View.GONE);
 			vh.send.setVisibility(View.INVISIBLE);
-
 		}
 
 		vh.challengeExpiryDate.setText(claims.get(position).getRemaingDays());

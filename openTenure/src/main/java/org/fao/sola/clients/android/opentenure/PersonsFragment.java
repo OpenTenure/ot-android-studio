@@ -110,7 +110,7 @@ public class PersonsFragment extends ListFragment implements PersonsListAdapter.
 		switch (item.getItemId()) {
 			case R.id.action_new:
 
-				if (!Boolean.parseBoolean(Configuration.getConfigurationByName("isInitialized").getValue())) {
+				if (!OpenTenureApplication.getInstance().isInitialized()) {
 					Toast toast;
 					String toastMessage = String.format(OpenTenureApplication
 							.getContext().getString(

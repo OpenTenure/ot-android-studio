@@ -6,6 +6,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.vividsolutions.jts.geom.Coordinate;
 import com.vividsolutions.jts.geom.Geometry;
 import com.vividsolutions.jts.geom.GeometryFactory;
+import com.vividsolutions.jts.geom.MultiPolygon;
 import com.vividsolutions.jts.geom.Polygon;
 import com.vividsolutions.jts.io.ParseException;
 import com.vividsolutions.jts.io.WKTReader;
@@ -121,5 +122,17 @@ public class GisUtility {
 
         geom.setSRID(Constants.SRID);
         return wktWriter.write(geom);
+    }
+
+    public static Geometry getGeomFromWkt(String wkt) {
+        GeometryFactory geometryFactory = new GeometryFactory();
+        WKTReader reader = new WKTReader(geometryFactory);
+        try {
+            return reader.read(wkt);
+        } catch (ParseException e) {
+            Log.e(GisUtility.class.getName(), "Exception: " + e.getLocalizedMessage()
+                    + " while parsing WKT " + wkt);
+            return null;
+        }
     }
 }

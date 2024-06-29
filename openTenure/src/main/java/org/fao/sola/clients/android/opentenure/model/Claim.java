@@ -37,14 +37,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.UUID;
 
@@ -67,10 +65,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.util.Log;
-import android.widget.EditText;
-import android.widget.Spinner;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.vividsolutions.jts.geom.Geometry;
@@ -78,6 +72,36 @@ import com.vividsolutions.jts.geom.GeometryFactory;
 import com.vividsolutions.jts.geom.LinearRing;
 
 public class Claim {
+	private String claimId;
+	private String name;
+	private String projectId;
+	private String type;
+	private String status;
+	private Person person;
+	private String personId;
+	private Date dateOfStart;
+	private Claim challengedClaim;
+	private String challengedClaimId;
+	private AdjacenciesNotes adjacenciesNotes;
+	private List<Vertex> vertices;
+	private List<List<HoleVertex>> holesVertices;
+	private List<PropertyLocation> propertyLocations;
+	private List<AdditionalInfo> additionalInfo;
+	private List<Claim> challengingClaims;
+	private List<Attachment> attachments;
+	private List<ShareProperty> shares;
+	private Date challengeExpiryDate;
+	private int availableShares;
+	private String landUse;
+	private String boundaryId;
+	private String notes;
+	private String claimNumber;
+	private String recorderName;
+	private String version;
+	private long claimArea;
+	private FormPayload dynamicForm;
+	private boolean deleted;
+	private Date creationDate;
 
 	public enum Status {
 		unmoderated, moderated, challenged, created, uploading, updating, upload_incomplete, update_incomplete, upload_error, update_error, withdrawn, reviewed, issued
@@ -112,6 +136,14 @@ public class Claim {
 		this.name = name;
 	}
 
+	public String getProjectId() {
+		return projectId;
+	}
+
+	public void setProjectId(String projectId) {
+		this.projectId = projectId;
+	}
+
 	public List<AdditionalInfo> getAdditionalInfo() {
 		// No longer used
 		return new ArrayList<AdditionalInfo>();
@@ -127,6 +159,9 @@ public class Claim {
 		this.claimId = UUID.randomUUID().toString();
 		this.status = ClaimStatus._CREATED;
 		this.availableShares = MAX_SHARES_PER_CLAIM;
+		if(OpenTenureApplication.getInstance().getProject() != null) {
+			this.setProjectId(OpenTenureApplication.getInstance().getProject().getId());
+		}
 	}
 
 	public int getAvailableShares() {
@@ -148,7 +183,7 @@ public class Claim {
 
 	@Override
 	public String toString() {
-		return "Claim [" + "claimId=" + claimId + ", status=" + status
+		return "Claim [" + "claimId=" + claimId + ", projectId=" + projectId + ", status=" + status
 				+ ", claimNumber=" + claimNumber + ", type=" + type + ", name="
 				+ name + ", person=" + person + ", propertyLocations="
 				+ Arrays.toString(propertyLocations.toArray()) + ", vertices="
@@ -493,10 +528,8 @@ public class Claim {
 
 		try {
 
-			localConnection = OpenTenureApplication.getInstance().getDatabase()
-					.getConnection();
-			statement = localConnection
-					.prepareStatement("INSERT INTO CLAIM(CLAIM_ID, STATUS, CLAIM_NUMBER, NAME, TYPE, PERSON_ID, CHALLENGED_CLAIM_ID, CHALLANGE_EXPIRY_DATE,DATE_OF_START, LAND_USE, NOTES, RECORDER_NAME, VERSION, SURVEY_FORM, BOUNDARY_ID) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+			localConnection = OpenTenureApplication.getInstance().getDatabase().getConnection();
+			statement = localConnection.prepareStatement("INSERT INTO CLAIM(CLAIM_ID, STATUS, CLAIM_NUMBER, NAME, TYPE, PERSON_ID, CHALLENGED_CLAIM_ID, CHALLANGE_EXPIRY_DATE,DATE_OF_START, LAND_USE, NOTES, RECORDER_NAME, VERSION, SURVEY_FORM, BOUNDARY_ID, PROJECT_ID) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 			statement.setString(1, claim.getClaimId());
 			statement.setString(2, claim.getStatus());
 			statement.setString(3, claim.getClaimNumber());
@@ -527,6 +560,7 @@ public class Claim {
 				statement.setCharacterStream(14, null);
 			}
 			statement.setString(15, claim.getBoundaryId());
+			statement.setString(16, claim.getProjectId());
 
 			result = statement.executeUpdate();
 		} catch (SQLException e) {
@@ -551,64 +585,7 @@ public class Claim {
 	}
 
 	public int create() {
-		int result = 0;
-		Connection localConnection = null;
-		PreparedStatement statement = null;
-
-		try {
-
-			localConnection = db.getConnection();
-			statement = localConnection
-					.prepareStatement("INSERT INTO CLAIM(CLAIM_ID, STATUS, CLAIM_NUMBER, NAME, TYPE, PERSON_ID, CHALLENGED_CLAIM_ID, CHALLANGE_EXPIRY_DATE,DATE_OF_START, LAND_USE, NOTES,RECORDER_NAME,VERSION, SURVEY_FORM, BOUNDARY_ID) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
-			statement.setString(1, getClaimId());
-			statement.setString(2, getStatus());
-			statement.setString(3, getClaimNumber());
-			statement.setString(4, getName());
-			statement.setString(5, getType());
-			if(getPerson() != null) {
-				statement.setString(6, getPerson().getPersonId());
-			} else {
-				statement.setString(6, null);
-			}
-			if (getChallengedClaim() != null) {
-				statement.setString(7, getChallengedClaim().getClaimId());
-			} else {
-				statement.setString(7, null);
-			}
-			statement.setDate(8, getChallengeExpiryDate());
-			statement.setDate(9, getDateOfStart());
-			statement.setString(10, getLandUse());
-			statement.setString(11, getNotes());
-			statement.setString(12, getRecorderName());
-			statement.setString(13, getVersion());
-			if (getDynamicForm() != null) {
-				statement.setCharacterStream(14, new StringReader(
-						getDynamicForm().toJson()));
-
-			} else {
-				statement.setCharacterStream(14, null);
-			}
-			statement.setString(15, getBoundaryId());
-			result = statement.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} catch (Exception exception) {
-			exception.printStackTrace();
-		} finally {
-			if (statement != null) {
-				try {
-					statement.close();
-				} catch (SQLException e) {
-				}
-			}
-			if (localConnection != null) {
-				try {
-					localConnection.close();
-				} catch (SQLException e) {
-				}
-			}
-		}
-		return result;
+		return Claim.createClaim(this);
 	}
 
 	public static int updateClaim(Claim claim) {
@@ -618,10 +595,8 @@ public class Claim {
 
 		try {
 
-			localConnection = OpenTenureApplication.getInstance().getDatabase()
-					.getConnection();
-			statement = localConnection
-					.prepareStatement("UPDATE CLAIM SET STATUS=?, CLAIM_NUMBER=?, NAME=?, PERSON_ID=?, TYPE=?,CHALLENGED_CLAIM_ID=?, CHALLANGE_EXPIRY_DATE=?, DATE_OF_START=?, LAND_USE=?, NOTES=?, RECORDER_NAME=?, VERSION=? , SURVEY_FORM=?, BOUNDARY_ID=? WHERE CLAIM_ID=?");
+			localConnection = OpenTenureApplication.getInstance().getDatabase().getConnection();
+			statement = localConnection.prepareStatement("UPDATE CLAIM SET STATUS=?, CLAIM_NUMBER=?, NAME=?, PERSON_ID=?, TYPE=?,CHALLENGED_CLAIM_ID=?, CHALLANGE_EXPIRY_DATE=?, DATE_OF_START=?, LAND_USE=?, NOTES=?, RECORDER_NAME=?, VERSION=? , SURVEY_FORM=?, BOUNDARY_ID=?, PROJECT_ID=? WHERE CLAIM_ID=?");
 			statement.setString(1, claim.getStatus());
 			statement.setString(2, claim.getClaimNumber());
 			statement.setString(3, claim.getName());
@@ -650,7 +625,9 @@ public class Claim {
 				statement.setCharacterStream(13, null);
 			}
 			statement.setString(14, claim.getBoundaryId());
-			statement.setString(15, claim.getClaimId());
+			statement.setString(15, claim.getProjectId());
+
+			statement.setString(16, claim.getClaimId());
 			result = statement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -674,65 +651,7 @@ public class Claim {
 	}
 
 	public int update() {
-		int result = 0;
-		Connection localConnection = null;
-		PreparedStatement statement = null;
-
-		try {
-
-			localConnection = db.getConnection();
-			statement = localConnection
-					.prepareStatement("UPDATE CLAIM SET STATUS=?, CLAIM_NUMBER=?,NAME=?, PERSON_ID=?, TYPE=?, CHALLENGED_CLAIM_ID=?, CHALLANGE_EXPIRY_DATE=?, DATE_OF_START=?, LAND_USE=?, NOTES=?, RECORDER_NAME=?, VERSION=?, SURVEY_FORM=?, BOUNDARY_ID=? WHERE CLAIM_ID=?");
-			statement.setString(1, getStatus());
-			statement.setString(2, getClaimNumber());
-			statement.setString(3, getName());
-			if(getPerson() != null) {
-				statement.setString(4, getPerson().getPersonId());
-			} else {
-				statement.setString(4, null);
-			}
-			statement.setString(5, getType());
-			if (getChallengedClaim() != null) {
-				statement.setString(6, getChallengedClaim().getClaimId());
-
-			} else {
-				statement.setString(6, null);
-			}
-			statement.setDate(7, getChallengeExpiryDate());
-			statement.setDate(8, getDateOfStart());
-			statement.setString(9, getLandUse());
-			statement.setString(10, getNotes());
-			statement.setString(11, getRecorderName());
-			statement.setString(12, getVersion());
-			if (getDynamicForm() != null) {
-				statement.setCharacterStream(13, new StringReader(
-						getDynamicForm().toJson()));
-
-			} else {
-				statement.setCharacterStream(13, null);
-			}
-			statement.setString(14, getBoundaryId());
-			statement.setString(15, getClaimId());
-			result = statement.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} catch (Exception exception) {
-			exception.printStackTrace();
-		} finally {
-			if (statement != null) {
-				try {
-					statement.close();
-				} catch (SQLException e) {
-				}
-			}
-			if (localConnection != null) {
-				try {
-					localConnection.close();
-				} catch (SQLException e) {
-				}
-			}
-		}
-		return result;
+		return Claim.updateClaim(this);
 	}
 
 	public int markDeleted(boolean isDeleted) {
@@ -778,10 +697,8 @@ public class Claim {
 
 		try {
 
-			localConnection = OpenTenureApplication.getInstance().getDatabase()
-					.getConnection();
-			statement = localConnection
-					.prepareStatement("SELECT STATUS, CLAIM_NUMBER, NAME, PERSON_ID, TYPE, CHALLENGED_CLAIM_ID, CHALLANGE_EXPIRY_DATE, DATE_OF_START, LAND_USE, NOTES, RECORDER_NAME, VERSION, CLAIM_AREA, SURVEY_FORM, BOUNDARY_ID, DELETED, CREATION_DATE FROM CLAIM WHERE CLAIM_ID=?");
+			localConnection = OpenTenureApplication.getInstance().getDatabase().getConnection();
+			statement = localConnection.prepareStatement("SELECT STATUS, CLAIM_NUMBER, NAME, PERSON_ID, TYPE, CHALLENGED_CLAIM_ID, CHALLANGE_EXPIRY_DATE, DATE_OF_START, LAND_USE, NOTES, RECORDER_NAME, VERSION, CLAIM_AREA, SURVEY_FORM, BOUNDARY_ID, DELETED, CREATION_DATE, PROJECT_ID FROM CLAIM WHERE CLAIM_ID=?");
 			statement.setString(1, claimId);
 			rs = statement.executeQuery();
 			while (rs.next()) {
@@ -813,6 +730,7 @@ public class Claim {
 				if(ts!=null){
 					claim.setCreationDate(new Date(ts.getTime()));
 				}
+				claim.setProjectId(rs.getString(18));
 			}
 
 		} catch (SQLException e) {
@@ -842,65 +760,18 @@ public class Claim {
 		return claim;
 	}
 
-	public static Claim getClaim(String claimId, Connection externalConnection) {
-		Claim claim = null;
-		PreparedStatement statement = null;
-		try {
-
-			statement = externalConnection
-					.prepareStatement("SELECT STATUS, CLAIM_NUMBER, NAME, PERSON_ID, TYPE, CHALLENGED_CLAIM_ID, CHALLANGE_EXPIRY_DATE, DATE_OF_START, LAND_USE, NOTES, RECORDER_NAME, VERSION, CLAIM_AREA, SURVEY_FORM, BOUNDARY_ID, DELETED FROM CLAIM WHERE CLAIM_ID=?");
-			statement.setString(1, claimId);
-			ResultSet rs = statement.executeQuery();
-			while (rs.next()) {
-				claim = new Claim();
-				claim.setClaimId(claimId);
-				claim.setStatus(rs.getString(1));
-				claim.setClaimNumber(rs.getString(2));
-				claim.setName(rs.getString(3));
-				claim.setPersonId(rs.getString(4));
-				claim.setType((rs.getString(5)));
-				claim.setChallengedClaimId(rs.getString(6));
-				claim.setChallengeExpiryDate(rs.getDate(7));
-				claim.setDateOfStart(rs.getDate(8));
-				claim.setLandUse(rs.getString(9));
-				claim.setNotes(rs.getString(10));
-				claim.setRecorderName(rs.getString(11));
-				claim.setVersion(rs.getString(12));
-				claim.setClaimArea(rs.getInt(13));
-				Clob clob = rs.getClob(14);
-				if (clob != null) {
-					claim.setDynamicForm(FormPayload.fromJson(clob
-							.getSubString(1L, (int) clob.length())));
-				} else {
-					claim.setDynamicForm(new FormPayload());
-				}
-				claim.setBoundaryId(rs.getString(15));
-				claim.setDeleted(rs.getBoolean(16));
-			}
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} catch (Exception exception) {
-			exception.printStackTrace();
-		} finally {
-			if (statement != null) {
-				try {
-					// also closes current result set if any
-					statement.close();
-				} catch (SQLException e) {
-				}
-			}
-		}
-		return claim;
-	}
-
 	public static List<Claim> getAllClaims(Connection externalConnection) {
 		List<Claim> allClaims = new ArrayList<Claim>();
 		PreparedStatement statement = null;
 		try {
 
-			statement = externalConnection
-					.prepareStatement("SELECT CLAIM_ID, STATUS, CLAIM_NUMBER, NAME, PERSON_ID, TYPE, CHALLENGED_CLAIM_ID, CHALLANGE_EXPIRY_DATE, DATE_OF_START, LAND_USE, NOTES, RECORDER_NAME, VERSION, CLAIM_AREA, SURVEY_FORM, BOUNDARY_ID, DELETED FROM CLAIM");
+			statement = externalConnection.prepareStatement("SELECT CLAIM_ID, STATUS, CLAIM_NUMBER, NAME, PERSON_ID, TYPE, CHALLENGED_CLAIM_ID, CHALLANGE_EXPIRY_DATE, DATE_OF_START, LAND_USE, NOTES, RECORDER_NAME, VERSION, CLAIM_AREA, SURVEY_FORM, BOUNDARY_ID, DELETED, PROJECT_ID FROM CLAIM WHERE PROJECT_ID=?");
+			if(OpenTenureApplication.getInstance().getProject() != null) {
+				statement.setString(1, OpenTenureApplication.getInstance().getProject().getId());
+			} else {
+				statement.setString(1, "");
+			}
+
 			ResultSet rs = statement.executeQuery();
 			while (rs.next()) {
 				String claimId = rs.getString(1);
@@ -922,20 +793,16 @@ public class Claim {
 				Clob clob = rs.getClob(15);
 				claim.setBoundaryId(rs.getString(16));
 				claim.setDeleted(rs.getBoolean(17));
+				claim.setProjectId(rs.getString(18));
 				if (clob != null) {
-					claim.setDynamicForm(FormPayload.fromJson(clob
-							.getSubString(1L, (int) clob.length())));
+					claim.setDynamicForm(FormPayload.fromJson(clob.getSubString(1L, (int) clob.length())));
 				} else {
 					claim.setDynamicForm(new FormPayload());
 				}
-				claim.setVertices(Vertex.getVertices(claimId,
-						externalConnection));
-				claim.setPropertyLocations(PropertyLocation
-						.getPropertyLocations(claimId, externalConnection));
-				claim.setAttachments(Attachment.getAttachments(claimId,
-						externalConnection));
-				claim.setShares(ShareProperty.getShares(claimId,
-						externalConnection));
+				claim.setVertices(Vertex.getVertices(claimId, externalConnection));
+				claim.setPropertyLocations(PropertyLocation.getPropertyLocations(claimId, externalConnection));
+				claim.setAttachments(Attachment.getAttachments(claimId, externalConnection));
+				claim.setShares(ShareProperty.getShares(claimId, externalConnection));
 				claim.setAdditionalInfo(new ArrayList<AdditionalInfo>());
 
 				allClaims.add(claim);
@@ -963,8 +830,12 @@ public class Claim {
 		PreparedStatement statement = null;
 		try {
 
-			statement = externalConnection
-					.prepareStatement("SELECT CLAIM_ID, STATUS, CLAIM_NUMBER, NAME, TYPE, CHALLANGE_EXPIRY_DATE, DATE_OF_START, LAND_USE, NOTES, RECORDER_NAME, VERSION, CLAIM_AREA, BOUNDARY_ID, DELETED FROM CLAIM");
+			statement = externalConnection.prepareStatement("SELECT CLAIM_ID, STATUS, CLAIM_NUMBER, NAME, TYPE, CHALLANGE_EXPIRY_DATE, DATE_OF_START, LAND_USE, NOTES, RECORDER_NAME, VERSION, CLAIM_AREA, BOUNDARY_ID, DELETED, PROJECT_ID FROM CLAIM WHERE PROJECT_ID=?");
+			if(OpenTenureApplication.getInstance().getProject() != null) {
+				statement.setString(1, OpenTenureApplication.getInstance().getProject().getId());
+			} else {
+				statement.setString(1, "");
+			}
 			ResultSet rs = statement.executeQuery();
 			while (rs.next()) {
 				String claimId = rs.getString(1);
@@ -983,6 +854,7 @@ public class Claim {
 				claim.setClaimArea(rs.getInt(12));
 				claim.setBoundaryId(rs.getString(13));
 				claim.setDeleted(rs.getBoolean(14));
+				claim.setProjectId(rs.getString(15));
 				claim.setAdditionalInfo(new ArrayList<AdditionalInfo>());
 
 				allClaims.add(claim);
@@ -1004,20 +876,23 @@ public class Claim {
 		return allClaims;
 	}
 
-	public static Map<String, Claim> getSimplifiedClaimsForDownload(
-			Connection externalConnection) {
+	public static Map<String, Claim> getSimplifiedClaimsForDownload(Connection externalConnection) {
 		HashMap<String, Claim> allClaims = new HashMap<String, Claim>();
 		PreparedStatement statement = null;
 		try {
-
-			statement = externalConnection
-					.prepareStatement("SELECT CLAIM_ID, VERSION FROM CLAIM");
+			statement = externalConnection.prepareStatement("SELECT CLAIM_ID, VERSION, PROJECT_ID FROM CLAIM WHERE PROJECT_ID=?");
+			if(OpenTenureApplication.getInstance().getProject() != null) {
+				statement.setString(1, OpenTenureApplication.getInstance().getProject().getId());
+			} else {
+				statement.setString(1, "");
+			}
 			ResultSet rs = statement.executeQuery();
 			while (rs.next()) {
 				String claimId = rs.getString(1);
 				Claim claim = new Claim();
 				claim.setClaimId(claimId);
 				claim.setVersion(rs.getString(2));
+				claim.setProjectId(rs.getString(3));
 				allClaims.put(claimId, claim);
 			}
 
@@ -1053,8 +928,13 @@ public class Claim {
 					+ "VERTEX.GPS_LAT, " + "VERTEX.GPS_LON, "
 					+ "VERTEX.MAP_LAT, " + "VERTEX.MAP_LON "
 					+ "FROM (CLAIM LEFT JOIN PERSON ON CLAIM.PERSON_ID = PERSON.PERSON_ID) INNER JOIN VERTEX ON CLAIM.CLAIM_ID=VERTEX.CLAIM_ID "
-					+ "WHERE CLAIM.DELETED=FALSE "
+					+ "WHERE CLAIM.PROJECT_ID=? AND CLAIM.DELETED=FALSE "
 					+ "ORDER BY CLAIM_ID, VERTEX.SEQUENCE_NUMBER");
+			if(OpenTenureApplication.getInstance().getProject() != null) {
+				statement.setString(1, OpenTenureApplication.getInstance().getProject().getId());
+			} else {
+				statement.setString(1, "");
+			}
 			ResultSet rs = statement.executeQuery();
 			List<Vertex> vertices = null;
 			Claim claim = null;
@@ -1140,8 +1020,7 @@ public class Claim {
 			// Join Claim, Person and Attachment to get everything we need at
 			// once
 
-			statement = externalConnection
-					.prepareStatement("SELECT "
+			statement = externalConnection.prepareStatement("SELECT "
 							+ "CP.CLAIM_ID, "
 							+ "CP.STATUS, "
 							+ "CP.NAME, "
@@ -1172,9 +1051,14 @@ public class Claim {
 							+ "PERSON.PERSON_ID, "
 							+ "PERSON.FIRST_NAME, "
 							+ "PERSON.LAST_NAME "
-							+ "FROM CLAIM LEFT JOIN PERSON ON CLAIM.PERSON_ID=PERSON.PERSON_ID) AS CP "
+							+ "FROM CLAIM LEFT JOIN PERSON ON CLAIM.PERSON_ID=PERSON.PERSON_ID WHERE PROJECT_ID=?) AS CP "
 							+ "LEFT JOIN ATTACHMENT ON (CP.CLAIM_ID=ATTACHMENT.CLAIM_ID) "
 							+ "ORDER BY CP.DATE_OF_START DESC");
+			if(OpenTenureApplication.getInstance().getProject() != null) {
+				statement.setString(1, OpenTenureApplication.getInstance().getProject().getId());
+			} else {
+				statement.setString(1, "");
+			}
 			ResultSet rs = statement.executeQuery();
 			List<Attachment> attachments = null;
 			Claim claim = null;
@@ -1266,14 +1150,11 @@ public class Claim {
 		ResultSet rs = null;
 
 		try {
-			localConnection = OpenTenureApplication.getInstance().getDatabase()
-					.getConnection();
-			statement = localConnection
-					.prepareStatement("SELECT CLAIM_ID FROM CLAIM WHERE CHALLENGED_CLAIM_ID=?");
+			localConnection = OpenTenureApplication.getInstance().getDatabase().getConnection();
+			statement = localConnection.prepareStatement("SELECT CLAIM_ID FROM CLAIM WHERE CHALLENGED_CLAIM_ID=?");
 			statement.setString(1, claimId);
 			rs = statement.executeQuery();
 			while (rs.next()) {
-
 				Claim challengingClaim = Claim.getClaim(rs.getString(1));
 				challengingClaims.add(challengingClaim);
 			}
@@ -1309,7 +1190,6 @@ public class Claim {
 	}
 
 	public int addOwner(String personId, int shares) {
-
 		ShareProperty share = new ShareProperty();
 		share.setClaimId(claimId);
 		share.setShares(shares);
@@ -1323,7 +1203,6 @@ public class Claim {
 	}
 
 	public int removeShare(String shareId) {
-
 		ShareProperty share = ShareProperty.getShare(shareId);
 		int shares = share.getShares();
 
@@ -1339,9 +1218,7 @@ public class Claim {
 		Connection localConnection = null;
 		List<Claim> allClaims = null;
 		try {
-
-			localConnection = OpenTenureApplication.getInstance().getDatabase()
-					.getConnection();
+			localConnection = OpenTenureApplication.getInstance().getDatabase().getConnection();
 			allClaims = getAllClaims(localConnection);
 		} catch (Exception exception) {
 			exception.printStackTrace();
@@ -1360,9 +1237,7 @@ public class Claim {
 		Connection localConnection = null;
 		List<Claim> allClaims = null;
 		try {
-
-			localConnection = OpenTenureApplication.getInstance().getDatabase()
-					.getConnection();
+			localConnection = OpenTenureApplication.getInstance().getDatabase().getConnection();
 			allClaims = getSimplifiedClaimsForMap(localConnection);
 		} catch (Exception exception) {
 			exception.printStackTrace();
@@ -1421,9 +1296,7 @@ public class Claim {
 		Connection localConnection = null;
 		Map<String, Claim> allClaims = null;
 		try {
-
-			localConnection = OpenTenureApplication.getInstance().getDatabase()
-					.getConnection();
+			localConnection = OpenTenureApplication.getInstance().getDatabase().getConnection();
 			allClaims = getSimplifiedClaimsForDownload(localConnection);
 		} catch (Exception exception) {
 			exception.printStackTrace();
@@ -1446,10 +1319,13 @@ public class Claim {
 
 		try {
 
-			localConnection = OpenTenureApplication.getInstance().getDatabase()
-					.getConnection();
-			statement = localConnection
-					.prepareStatement("SELECT COUNT (*) FROM CLAIM");
+			localConnection = OpenTenureApplication.getInstance().getDatabase().getConnection();
+			statement = localConnection.prepareStatement("SELECT COUNT (*) FROM CLAIM WHERE PROJCT_ID=?");
+			if(OpenTenureApplication.getInstance().getProject() != null) {
+				statement.setString(1, OpenTenureApplication.getInstance().getProject().getId());
+			} else {
+				statement.setString(1, "");
+			}
 			rs = statement.executeQuery();
 			while (rs.next()) {
 				result = rs.getInt(1);
@@ -1488,8 +1364,7 @@ public class Claim {
 
 		try {
 
-			localConnection = OpenTenureApplication.getInstance().getDatabase()
-					.getConnection();
+			localConnection = OpenTenureApplication.getInstance().getDatabase().getConnection();
 
 			ShareProperty.deleteShares(claimId, localConnection);
 			Vertex.deleteVertices(claimId, localConnection);
@@ -1499,8 +1374,7 @@ public class Claim {
 			Adjacency.deleteAdjacencies(claimId, localConnection);
 			AdjacenciesNotes.deleteAdjacenciesNotes(claimId, localConnection);
 
-			statement = localConnection
-					.prepareStatement("DELETE CLAIM WHERE CLAIM_ID=?");
+			statement = localConnection.prepareStatement("DELETE CLAIM WHERE CLAIM_ID=?");
 			statement.setString(1, claimId);
 
 			result = statement.executeUpdate();
@@ -1569,7 +1443,6 @@ public class Claim {
 	}
 
 	public boolean isUploadable() {
-
 		if (getChallengeExpiryDate() == null)
 			return true;
 
@@ -1581,7 +1454,6 @@ public class Claim {
 	}
 
 	public boolean isModifiable() {
-
 		if (getChallengeExpiryDate() == null && !isDeleted())
 			return true;
 		else
@@ -1590,20 +1462,14 @@ public class Claim {
 	
 	
 	public static int resetClaimUploading(){
-		
 		int result = 0;
 		Connection localConnection = null;
 		PreparedStatement statement = null;
 
 		try {
-
-			localConnection = OpenTenureApplication.getInstance().getDatabase()
-					.getConnection();
-			statement = localConnection
-					.prepareStatement("UPDATE CLAIM SET STATUS= 'created' WHERE status= 'uploading' ");
-			
+			localConnection = OpenTenureApplication.getInstance().getDatabase().getConnection();
+			statement = localConnection.prepareStatement("UPDATE CLAIM SET STATUS= 'created' WHERE status= 'uploading' ");
 			result = statement.executeUpdate();
-
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (Exception exception) {
@@ -1635,11 +1501,8 @@ public class Claim {
 		PreparedStatement statement = null;
 
 		try {
-
-			localConnection = OpenTenureApplication.getInstance().getDatabase()
-					.getConnection();
-			statement = localConnection
-					.prepareStatement("UPDATE CLAIM SET CLAIM_AREA=? WHERE CLAIM_ID=?");
+			localConnection = OpenTenureApplication.getInstance().getDatabase().getConnection();
+			statement = localConnection.prepareStatement("UPDATE CLAIM SET CLAIM_AREA=? WHERE CLAIM_ID=?");
 			statement.setLong(1, area);
 			statement.setString(2, getClaimId());
 			result = statement.executeUpdate();
@@ -1705,7 +1568,7 @@ public class Claim {
 		if (formPayload != null && enableFormValidation) {
 			FormTemplate formTemplate = formPayload.getFormTemplate();
 			if (formTemplate != null) {
-				DisplayNameLocalizer dnl = new DisplayNameLocalizer(OpenTenureApplication.getInstance().getLocalization());
+				DisplayNameLocalizer dnl = new DisplayNameLocalizer(OpenTenureApplication.getInstance().getLanguageCode());
 				FieldConstraint failedConstraint = formTemplate.getFailedConstraint(formPayload, dnl);
 
 				if ((failedConstraint = formTemplate.getFailedConstraint(formPayload, dnl)) != null) {
@@ -1718,7 +1581,7 @@ public class Claim {
 		}
 
 		// Checking if the Geometry is mandatory and validate it
-		if (Boolean.parseBoolean(Configuration.getConfigurationByName("geometryRequired").getValue())) {
+		if (OpenTenureApplication.getInstance().getProject().getGeomRequired()) {
 			List<Vertex> vertices = Vertex.getVertices(claimId);
 			if (vertices.size() < 3) {
 				if(throwException){
@@ -1738,34 +1601,4 @@ public class Claim {
 
 		return true;
 	}
-
-	private String claimId;
-	private String name;
-	private String type;
-	private String status;
-	private Person person;
-	private String personId;
-	private Date dateOfStart;
-	private Claim challengedClaim;
-	private String challengedClaimId;
-	private AdjacenciesNotes adjacenciesNotes;
-	private List<Vertex> vertices;
-	private List<List<HoleVertex>> holesVertices;
-	private List<PropertyLocation> propertyLocations;
-	private List<AdditionalInfo> additionalInfo;
-	private List<Claim> challengingClaims;
-	private List<Attachment> attachments;
-	private List<ShareProperty> shares;
-	private Date challengeExpiryDate;
-	private int availableShares;
-	private String landUse;
-	private String boundaryId;
-	private String notes;
-	private String claimNumber;
-	private String recorderName;
-	private String version;
-	private long claimArea;
-	private FormPayload dynamicForm;
-	private boolean deleted;
-	private Date creationDate;
 }

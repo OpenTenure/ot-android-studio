@@ -123,7 +123,7 @@ public class PDFClaimExporter {
 		PdfDocument document;
 		String mapFileName;
 		DisplayNameLocalizer dnl = new DisplayNameLocalizer(OpenTenureApplication
-				.getInstance().getLocalization());
+				.getInstance().getLanguageCode());
 		try {
 			String baseDir = null;
 			
@@ -401,7 +401,7 @@ public class PDFClaimExporter {
 				newLine();
 				if (claim.getPerson().getIdType() != null)
 					writeText(dnl.getLocalizedDisplayName(new IdType()
-							.getDisplayValueByType(claim.getPerson()
+							.getDisplayValueByCode(claim.getPerson()
 									.getIdType())));
 				setX(midPage);
 				if (claim.getPerson().getIdNumber() != null)
@@ -572,7 +572,7 @@ public class PDFClaimExporter {
                 newLine(2);
 				if (claim.getPerson().getIdType() != null)
 					writeText(dnl.getLocalizedDisplayName(new IdType()
-							.getDisplayValueByType(claim.getPerson()
+							.getDisplayValueByCode(claim.getPerson()
 									.getIdType())));
 				setX(ARABIC_MID_PAGE);
 				if (claim.getPerson().getIdNumber() != null)
@@ -703,7 +703,7 @@ public class PDFClaimExporter {
 						newLine();
 						if (person.getIdType() != null)
 							writeText(dnl.getLocalizedDisplayName(new IdType()
-									.getDisplayValueByType(claim.getPerson()
+									.getDisplayValueByCode(claim.getPerson()
 											.getIdType())));
 
 						setX(midPage);
@@ -819,7 +819,7 @@ public class PDFClaimExporter {
                         newLine();
 						if (person.getIdType() != null)
 							writeText(dnl.getLocalizedDisplayName(new IdType()
-									.getDisplayValueByType(claim.getPerson()
+									.getDisplayValueByCode(claim.getPerson()
 											.getIdType())));
 
 						setX(ARABIC_MID_PAGE);
@@ -857,7 +857,7 @@ public class PDFClaimExporter {
 					Attachment attachment = (Attachment) iterator.next();
 
 					writeText(dnl.getLocalizedDisplayName((new DocumentType())
-							.getDisplayVauebyType(attachment.getFileType())));
+							.getDisplayValueByCode(attachment.getFileType())));
 
 					setX(midPage);
 					writeText(attachment.getDescription());
@@ -889,7 +889,7 @@ public class PDFClaimExporter {
 					Attachment attachment = (Attachment) iterator.next();
 
 					writeText(dnl.getLocalizedDisplayName((new DocumentType())
-							.getDisplayVauebyType(attachment.getFileType())));
+							.getDisplayValueByCode(attachment.getFileType())));
 
 					setX(ARABIC_MID_PAGE);
 					writeText(attachment.getDescription());
@@ -953,7 +953,7 @@ public class PDFClaimExporter {
 								R.string.square_meters));
 				setX(midPage);
 				writeText(dnl.getLocalizedDisplayName(new ClaimType()
-						.getDisplayValueByType(claim.getType())));
+						.getDisplayValueByCode(claim.getType())));
 				newLine();
 				writeBoldText(
 						context.getResources().getString(R.string.land_use), 16);
@@ -964,7 +964,7 @@ public class PDFClaimExporter {
 
 				newLine();
 				writeText(dnl.getLocalizedDisplayName(new LandUse()
-						.getDisplayValueByType(claim.getLandUse())));
+						.getDisplayValueByCode(claim.getLandUse())));
 				setX(midPage);
 				if (claim.getDateOfStart() != null){
 					sdf.applyPattern("dd/MM/yyyy");
@@ -990,7 +990,7 @@ public class PDFClaimExporter {
 								R.string.square_meters));
 				setX(ARABIC_MID_PAGE);
 				writeText(dnl.getLocalizedDisplayName(new ClaimType()
-						.getDisplayValueByType(claim.getType())));
+						.getDisplayValueByCode(claim.getType())));
                 newLine();
 				writeBoldText(
 						context.getResources().getString(R.string.land_use), 16);
@@ -1001,7 +1001,7 @@ public class PDFClaimExporter {
 
                 newLine();
 				writeText(dnl.getLocalizedDisplayName(new LandUse()
-						.getDisplayValueByType(claim.getLandUse())));
+						.getDisplayValueByCode(claim.getLandUse())));
 				setX(ARABIC_MID_PAGE);
 				if (claim.getDateOfStart() != null){
 					sdf.applyPattern("dd/MM/yyyy");

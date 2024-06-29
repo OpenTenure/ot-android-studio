@@ -181,7 +181,9 @@ public class Database {
 				}
 				Log.d(this.getClass().getName(), "... opened");
 			} catch (ClassNotFoundException e) {
+				Log.d(this.getClass().getName(), e.getMessage());
 			} catch (SQLException e) {
+				Log.d(this.getClass().getName(), e.getMessage());
 			}
 		}
 	}

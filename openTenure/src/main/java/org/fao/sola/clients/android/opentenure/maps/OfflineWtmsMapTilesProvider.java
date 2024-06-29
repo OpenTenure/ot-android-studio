@@ -27,24 +27,26 @@
  */
 package org.fao.sola.clients.android.opentenure.maps;
 
+import org.fao.sola.clients.android.opentenure.OpenTenureApplication;
+import org.fao.sola.clients.android.opentenure.tools.StringUtility;
+
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Locale;
-
-import org.fao.sola.clients.android.opentenure.OpenTenureApplication;
-import org.fao.sola.clients.android.opentenure.OpenTenurePreferencesActivity;
-
-import android.content.SharedPreferences;
 
 public class OfflineWtmsMapTilesProvider extends OfflineTilesProvider{
 
     private String URL_STRING;
     
-    public OfflineWtmsMapTilesProvider(int width, int height, SharedPreferences preferences) {
+    public OfflineWtmsMapTilesProvider(int width, int height) {
     	super(width, height);
-		URL_STRING = preferences.getString(
-				OpenTenurePreferencesActivity.WTMS_URL_PREF,
-				"http://host/path/%d/%d/%d.jpg");
+		String URL_STRING = "http://host/path/%d/%d/%d.jpg";
+
+		if(OpenTenureApplication.getInstance().getProject() != null){
+			if(!StringUtility.isEmpty(OpenTenureApplication.getInstance().getProject().getTilesServerUrl())){
+				URL_STRING = OpenTenureApplication.getInstance().getProject().getTilesServerUrl();
+			}
+		}
 	}
     
     protected String getUrl(int x, int y, int zoom){
@@ -71,7 +73,7 @@ public class OfflineWtmsMapTilesProvider extends OfflineTilesProvider{
 	}
 
 	protected TilesProviderType getType() {
-		return TilesProviderType.WTMS;
+		return TilesProviderType.wtms;
 	}
 
 	protected String getBaseStorageDir() {

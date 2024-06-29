@@ -66,7 +66,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
+
 import androidx.fragment.app.Fragment;
 import androidx.core.content.FileProvider;
 import android.text.Html;
@@ -260,7 +260,7 @@ public class ClaimDetailsFragment extends Fragment {
 		TextView challengedClaimantSlogan = (TextView) rootView.findViewById(R.id.challenge_to_claim_slogan);
 		Button challengeBtn = (Button) rootView.findViewById(R.id.challenge_button);
 
-		if (OpenTenureApplication.getInstance().getLocalization().startsWith("ar")) {
+		if (OpenTenureApplication.getInstance().getLanguageCode().startsWith("ar")) {
 			claimantSlogan.setTextDirection(View.TEXT_DIRECTION_LOCALE);
 			claimantSlogan.setTextAlignment(View.TEXT_ALIGNMENT_GRAVITY);
 			challengedClaimantSlogan.setTextDirection(View.TEXT_DIRECTION_LOCALE);
@@ -375,8 +375,8 @@ public class ClaimDetailsFragment extends Fragment {
 
 		ClaimType ct = new ClaimType();
 
-		keyValueClaimTypesMap = ct.getKeyValueMap(OpenTenureApplication.getInstance().getLocalization(), onlyActiveValues);
-		valueKeyClaimTypesMap = ct.getValueKeyMap(OpenTenureApplication.getInstance().getLocalization(), onlyActiveValues);
+		keyValueClaimTypesMap = ct.getKeyValueMap(onlyActiveValues);
+		valueKeyClaimTypesMap = ct.getValueKeyMap(onlyActiveValues);
 		List<String> list = new ArrayList<String>();
 
 		SortedSet<String> keys = new TreeSet<String>(
@@ -397,8 +397,8 @@ public class ClaimDetailsFragment extends Fragment {
 		Spinner spinnerLU = (Spinner) rootView.findViewById(R.id.landUseSpinner);
 
 		LandUse lu = new LandUse();
-		keyValueMapLandUse = lu.getKeyValueMap(OpenTenureApplication.getInstance().getLocalization(), onlyActiveValues);
-		valueKeyMapLandUse = lu.getValueKeyMap(OpenTenureApplication.getInstance().getLocalization(), onlyActiveValues);
+		keyValueMapLandUse = lu.getKeyValueMap(onlyActiveValues);
+		valueKeyMapLandUse = lu.getValueKeyMap(onlyActiveValues);
 
 		List<String> landUseslist = new ArrayList<String>();
 		keys = new TreeSet<String>(keyValueMapLandUse.keySet());

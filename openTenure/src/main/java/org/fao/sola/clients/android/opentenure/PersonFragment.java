@@ -196,8 +196,8 @@ public class PersonFragment extends Fragment {
 		SortedSet<String> keys;
 
 		/* Mapping id type localization */
-		keyValueMapIdTypes = it.getKeyValueMap(OpenTenureApplication.getInstance().getLocalization(),onlyActive);
-		valueKeyMapIdTypes = it.getValueKeyMap(OpenTenureApplication.getInstance().getLocalization(),onlyActive);
+		keyValueMapIdTypes = it.getKeyValueMap(onlyActive);
+		valueKeyMapIdTypes = it.getValueKeyMap(onlyActive);
 
 		List<String> idTypelist = new ArrayList<String>();
 		keys = new TreeSet<String>(keyValueMapIdTypes.keySet());
@@ -1063,9 +1063,7 @@ public class PersonFragment extends Fragment {
 	public boolean checkChangesPerson(PersonActivity personActivity) {
 
 		if (valueKeyMapIdTypes == null)
-			valueKeyMapIdTypes = new IdType()
-					.getValueKeyMap(OpenTenureApplication.getInstance()
-							.getLocalization(),onlyActive);
+			valueKeyMapIdTypes = new IdType().getValueKeyMap(onlyActive);
 
 		Person person = Person.getPerson(personActivity.getPersonId());
 		View rootView = OpenTenureApplication.getPersonsView();

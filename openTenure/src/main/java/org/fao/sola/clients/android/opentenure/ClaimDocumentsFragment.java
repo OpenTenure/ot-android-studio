@@ -56,7 +56,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import androidx.core.app.ActivityCompat;
+
 import androidx.fragment.app.ListFragment;
 import androidx.core.content.FileProvider;
 import android.util.Log;
@@ -197,8 +197,8 @@ public class ClaimDocumentsFragment extends ListFragment {
 					/* Mapping id type localization */
 					DocumentType dt = new DocumentType();
 
-					keyValueDocTypes = dt.getKeyValueMap(OpenTenureApplication.getInstance().getLocalization(), onlyActive);
-					valueKeyDocTypes = dt.getValueKeyMap(OpenTenureApplication.getInstance().getLocalization(), onlyActive);
+					keyValueDocTypes = dt.getKeyValueMap(onlyActive);
+					valueKeyDocTypes = dt.getValueKeyMap(onlyActive);
 
 					final Spinner spinner = (Spinner) dialog.findViewById(R.id.documentTypesSpinner);
 
@@ -310,8 +310,8 @@ public class ClaimDocumentsFragment extends ListFragment {
 
 					DocumentType dt = new DocumentType();
 
-					keyValueDocTypes = dt.getKeyValueMap(OpenTenureApplication.getInstance().getLocalization(), onlyActive);
-					valueKeyDocTypes = dt.getValueKeyMap(OpenTenureApplication.getInstance().getLocalization(), onlyActive);
+					keyValueDocTypes = dt.getKeyValueMap(onlyActive);
+					valueKeyDocTypes = dt.getValueKeyMap(onlyActive);
 
 					List<String> list = new ArrayList<String>();
 					TreeSet<String> keys = new TreeSet<String>(keyValueDocTypes.keySet());

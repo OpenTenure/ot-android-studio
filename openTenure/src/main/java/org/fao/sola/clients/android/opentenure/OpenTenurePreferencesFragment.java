@@ -58,7 +58,6 @@ public class OpenTenurePreferencesFragment extends PreferenceFragment implements
 	@Override
 	public void onResume() {
 		super.onResume();
-		//SharedPreferences OpenTenurePreferences = PreferenceManager.getDefaultSharedPreferences(OpenTenureApplication.getContext());
 		getPreferenceScreen().getSharedPreferences().registerOnSharedPreferenceChangeListener(this);
 	};
 
@@ -66,8 +65,6 @@ public class OpenTenurePreferencesFragment extends PreferenceFragment implements
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		addPreferencesFromResource(R.xml.preferences);
-		//SharedPreferences OpenTenurePreferences = PreferenceManager.getDefaultSharedPreferences(OpenTenureApplication.getContext());
-		//OpenTenurePreferences.registerOnSharedPreferenceChangeListener(new PrefChangeListener());
 		EditTextPreference versionPref = (EditTextPreference)findPreference(OpenTenurePreferencesActivity.SOFTWARE_VERSION_PREF);
 		String version;
 		try {

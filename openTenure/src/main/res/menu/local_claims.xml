@@ -10,16 +10,6 @@
           android:title="@string/action_new"
           android:showAsAction="always" 
           android:orderInCategory="2"/>
-    <item android:id="@+id/action_login"
-          android:icon="@drawable/login"
-          android:title="@string/action_login"
-          android:showAsAction="ifRoom" 
-          android:orderInCategory="3"/>
-    <item android:id="@+id/action_logout"
-          android:icon="@drawable/logout"
-          android:title="@string/action_logout"          
-          android:showAsAction="ifRoom" 
-          android:orderInCategory="4"/>
     <item android:id="@+id/action_backup_db"
           android:icon="@android:drawable/ic_menu_upload"
           android:title="@string/action_backup_db"          

@@ -34,6 +34,7 @@ public class ClaimStatus {
 	public static String _UNMODERATED = "unmoderated";
 	public static String _UPDATING = "updating";
 	public static String _MODERATED = "moderated";
+	public static String _ISSUED = "issued";
 	public static String _CHALLENGED = "challenged";
 	public static String _UPLOAD_INCOMPLETE = "upload_incomplete";
 	public static String _UPLOAD_ERROR = "upload_error";

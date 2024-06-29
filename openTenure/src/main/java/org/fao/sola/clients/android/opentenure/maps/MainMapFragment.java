@@ -27,6 +27,7 @@
  */
 package org.fao.sola.clients.android.opentenure.maps;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -42,14 +43,13 @@ import org.fao.sola.clients.android.opentenure.model.Claim;
 import org.fao.sola.clients.android.opentenure.model.Configuration;
 import org.fao.sola.clients.android.opentenure.model.Task;
 import org.fao.sola.clients.android.opentenure.model.Tile;
+import org.fao.sola.clients.android.opentenure.model.UserLayer;
 import org.fao.sola.clients.android.opentenure.network.GetAllClaimsTask;
-import org.fao.sola.clients.android.opentenure.network.LoginActivity;
-import org.fao.sola.clients.android.opentenure.network.LogoutTask;
+import org.fao.sola.clients.android.opentenure.tools.StringUtility;
 
 import com.androidmapsextensions.ClusterGroup;
 import com.androidmapsextensions.ClusteringSettings;
 import com.androidmapsextensions.GoogleMap;
-import com.androidmapsextensions.GoogleMap.OnCameraChangeListener;
 import com.androidmapsextensions.GoogleMap.OnMapLongClickListener;
 import com.androidmapsextensions.GoogleMap.OnMarkerClickListener;
 import com.androidmapsextensions.Marker;
@@ -66,7 +66,6 @@ import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.Projection;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
@@ -86,6 +85,7 @@ import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Point;
@@ -102,6 +102,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import android.text.InputType;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -109,7 +110,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -127,26 +130,24 @@ public class MainMapFragment extends SupportMapFragment {
 	private Map<Marker, Bookmark> mapBookmarksMap = new HashMap<Marker, Bookmark>();
 
 	public enum MapType {
-		map_provider_google_normal, map_provider_google_satellite, map_provider_google_hybrid, map_provider_google_terrain, map_provider_osm_mapnik, map_provider_osm_mapquest, map_provider_local_tiles, map_provider_geoserver
+		map_provider_google_normal, map_provider_google_satellite, map_provider_google_hybrid, map_provider_google_terrain,
+		map_provider_osm_mapnik, map_provider_osm_mapquest, map_provider_local_tiles, map_provider_geoserver, map_provider_empty
 	};
 
 	private MapType mapType = MapType.map_provider_google_normal;
 	private View mapView;
-	private MapLabel label;
 	private GoogleMap map;
+	private LocationHelper lh;
 	private List<BasePropertyBoundary> visibleProperties;
 	private List<Claim> allClaims;
 	private MultiPolygon visiblePropertiesMultiPolygon;
 	private boolean isFollowing = false;
 	private Marker myLocation;
-	private Location lastKnownLocation;
 	private Marker remove;
 	private Marker cancel;
 	private Marker selectedMarker;
 	private CommunityArea communityArea;
-	private FusedLocationProviderClient fusedLocationClient;
-	private LocationCallback locationCallback;
-	private LocationRequest locationRequest;
+	private MenuItem menuDownloadTiles;
 
 	private boolean handleMarkerEditClick(Marker mark) {
 		if (remove == null || cancel == null) {
@@ -207,6 +208,24 @@ public class MainMapFragment extends SupportMapFragment {
 		}
 	}
 
+	private LocationListener myLocationListener = new LocationListener() {
+
+		public void onLocationChanged(Location location) {
+			if (isFollowing && myLocation != null) {
+				myLocation.setPosition(new LatLng(location.getLatitude(), location.getLongitude()));
+			}
+		}
+
+		public void onStatusChanged(String provider, int status, Bundle extras) {
+		}
+
+		public void onProviderEnabled(String provider) {
+		}
+
+		public void onProviderDisabled(String provider) {
+		}
+	};
+
 	private void showMarkerEditControls() {
 
 		hideMarkerEditControls();
@@ -243,45 +262,19 @@ public class MainMapFragment extends SupportMapFragment {
 
 	@Override
 	public void onPrepareOptionsMenu(Menu menu) {
-		MenuItem itemIn;
-		MenuItem itemOut;
+		super.onPrepareOptionsMenu(menu);
+	}
 
-		try {
-			Thread.sleep(400);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-
-		Log.d(this.getClass().getName(), "Is the user logged in ? : " + OpenTenureApplication.isLoggedin());
-
-		if (OpenTenureApplication.isLoggedin()) {
-			itemIn = menu.findItem(R.id.action_login);
-			itemIn.setVisible(false);
-			itemOut = menu.findItem(R.id.action_logout);
-			itemOut.setVisible(true);
-
-		} else {
-
-			itemIn = menu.findItem(R.id.action_login);
-			itemIn.setVisible(true);
-			itemOut = menu.findItem(R.id.action_logout);
-			itemOut.setVisible(false);
-		}
-		if (map != null) {
+	private void showHideTilesDownload() {
+		if (map != null && menuDownloadTiles != null) {
 			float currentZoomLevel = map.getCameraPosition().zoom;
 			float maxSupportedZoomLevel = map.getMaxZoomLevel();
-
-			if (currentZoomLevel >= (maxSupportedZoomLevel - MAX_ZOOM_LEVELS_TO_DOWNLOAD)) {
-				MenuItem item = menu.findItem(R.id.action_download_tiles);
-				item.setVisible(true);
+			if (currentZoomLevel >= (maxSupportedZoomLevel - MAX_ZOOM_LEVELS_TO_DOWNLOAD) && OpenTenureApplication.getInstance().isInitialized()) {
+				menuDownloadTiles.setVisible(true);
 			} else {
-				MenuItem item = menu.findItem(R.id.action_download_tiles);
-				item.setVisible(false);
+				menuDownloadTiles.setVisible(false);
 			}
 		}
-
-		super.onPrepareOptionsMenu(menu);
-
 	}
 
 	@Override
@@ -292,23 +285,6 @@ public class MainMapFragment extends SupportMapFragment {
 		super.onCreateView(inflater, container, savedInstanceState);
 		mapView = inflater.inflate(R.layout.main_map, container, false);
 		setHasOptionsMenu(true);
-
-		// Location client
-		fusedLocationClient = LocationServices.getFusedLocationProviderClient(OpenTenureApplication.getContext());
-		locationRequest = LocationRequest.create();
-		locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-		locationRequest.setInterval(5000);
-		locationRequest.setFastestInterval(1000);
-
-		locationCallback = new LocationCallback() {
-			@Override
-			public void onLocationResult(LocationResult locationResult) {
-				if (locationResult == null) {
-					return;
-				}
-				lastKnownLocation = locationResult.getLastLocation();
-			}
-		};
 
 		SupportMapFragment mapViewFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.main_map_fragment);
 		mapViewFragment.getExtendedMapAsync(new OnMapReadyCallback() {
@@ -338,11 +314,58 @@ public class MainMapFragment extends SupportMapFragment {
 					}
 				}
 
-				label = (MapLabel) getChildFragmentManager().findFragmentById(R.id.main_map_provider_label);
-				label.changeTextProperties(MAP_LABEL_FONT_SIZE,	getActivity().getResources().getString(R.string.map_provider_google_normal));
+				// Set compass location to the right
+				try {
+					final ViewGroup parent = (ViewGroup) mapViewFragment.getView().findViewWithTag("GoogleMapMyLocationButton").getParent();
+					container.post(new Runnable() {
+						@Override
+						public void run() {
+							try {
+								Resources r = getResources();
+								//convert our dp margin into pixels
+								int marginPixels = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 20, r.getDisplayMetrics());
+								// Get the map compass view
+								View mapCompass = parent.getChildAt(4);
+
+								// create layoutParams, giving it our wanted width and height(important, by default the width is "match parent")
+								RelativeLayout.LayoutParams rlp = new RelativeLayout.LayoutParams(mapCompass.getHeight(),mapCompass.getHeight());
+								// position on top right
+								rlp.addRule(RelativeLayout.ALIGN_PARENT_LEFT, 0);
+								rlp.addRule(RelativeLayout.ALIGN_PARENT_TOP);
+								rlp.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+								rlp.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, 0);
+								//give compass margin
+								rlp.setMargins(marginPixels, marginPixels, marginPixels, marginPixels);
+								mapCompass.setLayoutParams(rlp);
+							} catch (Exception ex) {
+								ex.printStackTrace();
+							}
+						}
+					});
+				} catch (Exception ex) {
+					ex.printStackTrace();
+				}
 
 				reloadVisibleProperties();
 
+				lh = new LocationHelper((LocationManager) getActivity().getBaseContext().getSystemService(Context.LOCATION_SERVICE));
+				lh.start();
+
+				map.setInfoWindowAdapter(new PopupAdapter(getLayoutInflater()));
+				map.setOnCameraIdleListener(new GoogleMap.OnCameraIdleListener() {
+					@Override
+					public void onCameraIdle() {
+						showHideTilesDownload();
+						storeCameraPosition(map.getCameraPosition());
+						reloadVisibleProperties();
+					}
+				});
+
+				try {
+					mapType = MapType.valueOf(Configuration.getConfigurationValue(MainMapFragment.MAIN_MAP_TYPE));
+				} catch (Exception e) {
+					mapType = MapType.map_provider_empty;
+				}
 				if (savedInstanceState != null && savedInstanceState.getString(MAIN_MAP_TYPE) != null) {
 					// probably an orientation change don't move the view but
 					// restore the current type of the map
@@ -352,10 +375,11 @@ public class MainMapFragment extends SupportMapFragment {
 					try {
 						mapType = MapType.valueOf(Configuration.getConfigurationValue(MainMapFragment.MAIN_MAP_TYPE));
 					} catch (Exception e) {
-						mapType = MapType.map_provider_google_normal;
+						mapType = MapType.map_provider_empty;
 					}
 				}
-				setMapType();
+
+				loadLayers();
 
 				String zoom = Configuration.getConfigurationValue(MainMapFragment.MAIN_MAP_ZOOM);
 				String latitude = Configuration.getConfigurationValue(MainMapFragment.MAIN_MAP_LATITUDE);
@@ -372,15 +396,14 @@ public class MainMapFragment extends SupportMapFragment {
 					} catch (Exception e) {
 					}
 				} else {
-					Configuration cfg = Configuration.getConfigurationByName("isInitialized");
-					if (cfg != null && Boolean.parseBoolean(cfg.getValue())) {
+					if (OpenTenureApplication.getInstance().isInitialized()) {
 
 						LatLngBounds.Builder bounds;
 						// setup map
 
 						bounds = new LatLngBounds.Builder();
 						// Get vertices of the community area
-						List<LatLng> K = CommunityArea.getPolyline().getPoints();
+						List<LatLng> K = CommunityArea.getPoints();
 
 						for (LatLng cn : K) {
 							// Make sure that the vertices are in the displayed area
@@ -428,6 +451,15 @@ public class MainMapFragment extends SupportMapFragment {
 
 		OpenTenureApplication.setMapFragment(this);
 		OpenTenureApplication.setActivity(getActivity());
+
+		ImageButton btnLayers = mapView.findViewById(R.id.btnLayers);
+		btnLayers.setOnClickListener(new View.OnClickListener(){
+			@Override
+			public void onClick(View view) {
+				Intent mapLayersActivity = new Intent(getContext(), MapLayersActivity.class);
+				startActivityForResult(mapLayersActivity, MapLayersActivity.REQUEST_CODE);
+			}
+		});
 
 		return mapView;
 	}
@@ -564,18 +596,14 @@ public class MainMapFragment extends SupportMapFragment {
 
 	@Override
 	public void onDestroyView() {
+		if(map != null) {
+			lh.stop();
+		}
 		Fragment map = getFragmentManager().findFragmentById(R.id.main_map_fragment);
-		Fragment label = getFragmentManager().findFragmentById(R.id.main_map_provider_label);
-		mapView = null;
 		try {
 			if (map.isResumed()) {
 				FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
 				ft.remove(map);
-				ft.commit();
-			}
-			if (label.isResumed()) {
-				FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-				ft.remove(label);
 				ft.commit();
 			}
 		} catch (Exception e) {
@@ -586,83 +614,61 @@ public class MainMapFragment extends SupportMapFragment {
 	@Override
 	public void onResume() {
 		super.onResume();
-		startLocationUpdates();
-		//refreshMap();
+		refreshMap();
+		if(map != null) {
+			lh.hurryUp();
+		}
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
-		stopLocationUpdates();
+		if(map != null) {
+			lh.slowDown();
+		}
 	}
 
 	@Override
 	public void onStop() {
 		super.onStop();
-	}
-
-	private void stopLocationUpdates() {
-		fusedLocationClient.removeLocationUpdates(locationCallback);
-	}
-
-	private void startLocationUpdates() {
-		if (ActivityCompat.checkSelfPermission(OpenTenureApplication.getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-				&& ActivityCompat.checkSelfPermission(OpenTenureApplication.getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+		if(map != null) {
+			lh.stop();
 		}
-		fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, Looper.getMainLooper());
 	}
 
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		inflater.inflate(R.menu.map, menu);
+		boolean isInitialized = OpenTenureApplication.getInstance().isInitialized();
+
+		menuDownloadTiles = menu.findItem(R.id.action_download_tiles);
+		MenuItem menuZoomToCommunity = menu.findItem(R.id.action_center_community_area);
+		MenuItem menuDownloadClaims = menu.findItem(R.id.action_download_claims);
+
+		if(menuDownloadTiles != null && !isInitialized){
+			menuDownloadTiles.setVisible(false);
+		} else {
+			showHideTilesDownload();
+		}
+
+		if(menuZoomToCommunity != null){
+			menuZoomToCommunity.setVisible(isInitialized);
+		}
+		if(menuDownloadClaims != null){
+			menuDownloadClaims.setVisible(isInitialized);
+		}
 
 		super.onCreateOptionsMenu(menu, inflater);
 	}
 
-	private void setMapLabel() {
-
-		switch (mapType) {
-			case map_provider_google_normal:
-				label.changeTextProperties(MAP_LABEL_FONT_SIZE,
-						getResources().getString(R.string.map_provider_google_normal));
-				break;
-			case map_provider_google_satellite:
-				label.changeTextProperties(MAP_LABEL_FONT_SIZE,
-						getResources().getString(R.string.map_provider_google_satellite));
-				break;
-			case map_provider_google_hybrid:
-				label.changeTextProperties(MAP_LABEL_FONT_SIZE,
-						getResources().getString(R.string.map_provider_google_hybrid));
-				break;
-			case map_provider_google_terrain:
-				label.changeTextProperties(MAP_LABEL_FONT_SIZE,
-						getResources().getString(R.string.map_provider_google_terrain));
-				break;
-			case map_provider_osm_mapnik:
-				label.changeTextProperties(MAP_LABEL_FONT_SIZE, getResources().getString(R.string.map_provider_osm_mapnik));
-				break;
-			case map_provider_osm_mapquest:
-				label.changeTextProperties(MAP_LABEL_FONT_SIZE,
-						getResources().getString(R.string.map_provider_osm_mapquest));
-				break;
-			case map_provider_local_tiles:
-				label.changeTextProperties(MAP_LABEL_FONT_SIZE,
-						getResources().getString(R.string.map_provider_local_tiles));
-				break;
-			case map_provider_geoserver:
-				label.changeTextProperties(MAP_LABEL_FONT_SIZE, getResources().getString(R.string.map_provider_geoserver));
-				break;
-			default:
-				break;
-		}
-	}
-
-	public void setMapType() {
-
+	public void loadLayers() {
 		for (TileOverlay tiles : map.getTileOverlays()) {
 			tiles.remove();
 		}
 
+		boolean redrawClaims = false;
+
+		// Add base layer
 		switch (mapType) {
 			case map_provider_google_normal:
 				map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
@@ -680,40 +686,55 @@ public class MainMapFragment extends SupportMapFragment {
 				OsmTileProvider mapNikTileProvider = new OsmTileProvider(256, 256, OSM_MAPNIK_BASE_URL);
 				map.setMapType(GoogleMap.MAP_TYPE_NONE);
 				map.addTileOverlay(new TileOverlayOptions().tileProvider(mapNikTileProvider));
-				redrawVisibleProperties();
+				redrawClaims = true;
 				break;
 			case map_provider_osm_mapquest:
 				OsmTileProvider mapQuestTileProvider = new OsmTileProvider(256, 256, OSM_MAPQUEST_BASE_URL);
 				map.setMapType(GoogleMap.MAP_TYPE_NONE);
 				map.addTileOverlay(new TileOverlayOptions().tileProvider(mapQuestTileProvider));
-				redrawVisibleProperties();
+				redrawClaims = true;
 				break;
 			case map_provider_local_tiles:
 				map.setMapType(GoogleMap.MAP_TYPE_NONE);
 				map.addTileOverlay(new TileOverlayOptions().tileProvider(new LocalMapTileProvider()));
-				redrawVisibleProperties();
+				redrawClaims = true;
 				break;
 			case map_provider_geoserver:
 				map.setMapType(GoogleMap.MAP_TYPE_NONE);
-				SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(mapView.getContext());
-				map.addTileOverlay(new TileOverlayOptions().tileProvider(new WmsMapTileProvider(256, 256, preferences)));
-				redrawVisibleProperties();
+				map.addTileOverlay(new TileOverlayOptions().tileProvider(new WmsMapTileProvider(256, 256)));
+				redrawClaims = true;
+				break;
+			case map_provider_empty:
+				map.setMapType(GoogleMap.MAP_TYPE_NONE);
+				redrawClaims = true;
 				break;
 			default:
 				break;
 		}
-		setMapLabel();
 
-		Configuration provider = Configuration.getConfigurationByName(MAIN_MAP_TYPE);
+		// Add user layers
+		List<UserLayer> userLayers = UserLayer.getUserLayers(false);
+		if(userLayers != null && userLayers.size() > 0) {
+			for(UserLayer userLayer : userLayers) {
+				if(userLayer.getEnabled()){
+					File mbtileFile = new File(userLayer.getFilePath());
+					if(mbtileFile.exists()) {
+						try {
+							TileOverlayOptions opts = new TileOverlayOptions();
+							opts.tileProvider(new MbTilesProvider(mbtileFile));
+							map.addTileOverlay(opts);
+							redrawClaims = true;
+						} catch (Exception ex){
+							Log.d("UserLayer","Failed to add user map layer. " + ex.getMessage());
+							ex.printStackTrace();
+						}
+					}
+				}
+			}
+		}
 
-		if (provider != null) {
-			provider.setValue(mapType.toString());
-			provider.update();
-		} else {
-			provider = new Configuration();
-			provider.setName(MAIN_MAP_TYPE);
-			provider.setValue(mapType.toString());
-			provider.create();
+		if(redrawClaims) {
+			redrawVisibleProperties();
 		}
 	}
 
@@ -726,52 +747,15 @@ public class MainMapFragment extends SupportMapFragment {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-
 		switch (item.getItemId()) {
-			case R.id.action_settings:
-				return true;
-			case R.id.map_provider_google_normal:
-				mapType = MapType.map_provider_google_normal;
-				setMapType();
-				return true;
-			case R.id.map_provider_google_satellite:
-				mapType = MapType.map_provider_google_satellite;
-				setMapType();
-				return true;
-			case R.id.map_provider_google_hybrid:
-				mapType = MapType.map_provider_google_hybrid;
-				setMapType();
-				return true;
-			case R.id.map_provider_google_terrain:
-				mapType = MapType.map_provider_google_terrain;
-				setMapType();
-				return true;
-			case R.id.map_provider_osm_mapnik:
-				mapType = MapType.map_provider_osm_mapnik;
-				setMapType();
-				return true;
-			case R.id.map_provider_osm_mapquest:
-				mapType = MapType.map_provider_osm_mapquest;
-				setMapType();
-				return true;
-			case R.id.map_provider_local_tiles:
-				mapType = MapType.map_provider_local_tiles;
-				setMapType();
-				return true;
-			case R.id.map_provider_geoserver:
-				mapType = MapType.map_provider_geoserver;
-				setMapType();
-				return true;
 			case R.id.action_center_and_follow:
 				if (isFollowing) {
 					isFollowing = false;
 					myLocation.remove();
 					myLocation = null;
+					lh.setCustomListener(null);
 				} else {
-					LatLng currentLocation = null;
-					if(lastKnownLocation != null){
-						currentLocation = new LatLng(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude());
-					}
+					LatLng currentLocation = lh.getLastKnownLocation();
 
 					if (currentLocation != null && currentLocation.latitude != 0.0 && currentLocation.longitude != 0.0) {
 						map.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, 18), 1000, null);
@@ -779,6 +763,7 @@ public class MainMapFragment extends SupportMapFragment {
 								.title(mapView.getContext().getResources().getString(R.string.title_i_m_here))
 								.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_menu_mylocation)));
 						myLocation.setClusterGroup(Constants.MY_LOCATION_MARKERS_GROUP);
+						lh.setCustomListener(myLocationListener);
 						isFollowing = true;
 
 					} else {
@@ -789,29 +774,16 @@ public class MainMapFragment extends SupportMapFragment {
 				return true;
 
 			case R.id.action_center_community_area:
-
-				if (!Boolean.parseBoolean(Configuration.getConfigurationByName("isInitialized").getValue())) {
-					Toast toast;
-					String toastMessage = String
-							.format(OpenTenureApplication.getContext().getString(R.string.message_app_not_yet_initialized));
-
-					toast = Toast.makeText(OpenTenureApplication.getContext(), toastMessage, Toast.LENGTH_LONG);
-					toast.show();
-
-					return true;
+				if (checkInitialized()) {
+					boundCameraToInterestArea();
 				}
-
-				MainMapFragment mapFrag = OpenTenureApplication.getMapFragment();
-
-				mapFrag.boundCameraToInterestArea();
 				return true;
 
 			case R.id.action_download_claims:
 
-				if (!Boolean.parseBoolean(Configuration.getConfigurationByName("isInitialized").getValue())) {
+				if (!OpenTenureApplication.getInstance().isInitialized()) {
 					Toast toast;
-					String toastMessage = String
-							.format(OpenTenureApplication.getContext().getString(R.string.message_app_not_yet_initialized));
+					String toastMessage = String.format(OpenTenureApplication.getContext().getString(R.string.message_app_not_yet_initialized));
 
 					toast = Toast.makeText(OpenTenureApplication.getContext(), toastMessage, Toast.LENGTH_LONG);
 					toast.show();
@@ -820,8 +792,7 @@ public class MainMapFragment extends SupportMapFragment {
 				}
 
 				if (!OpenTenureApplication.isLoggedin()) {
-					Toast toast = Toast.makeText(OpenTenureApplication.getContext(), R.string.message_login_before,
-							Toast.LENGTH_LONG);
+					Toast toast = Toast.makeText(OpenTenureApplication.getContext(), R.string.message_login_before, Toast.LENGTH_LONG);
 					toast.show();
 					return true;
 				} else {
@@ -852,46 +823,9 @@ public class MainMapFragment extends SupportMapFragment {
 					}
 					return true;
 				}
-			case R.id.action_login:
-
-				if (!Boolean.parseBoolean(Configuration.getConfigurationByName("isInitialized").getValue())) {
-					Toast toast;
-					String toastMessage = String
-							.format(OpenTenureApplication.getContext().getString(R.string.message_app_not_yet_initialized));
-
-					toast = Toast.makeText(OpenTenureApplication.getContext(), toastMessage, Toast.LENGTH_LONG);
-					toast.show();
-					return true;
-				}
-
-				OpenTenureApplication.setActivity(getActivity());
-
-				Context context = getActivity().getApplicationContext();
-				Intent intent2 = new Intent(context, LoginActivity.class);
-				startActivity(intent2);
-
-				OpenTenureApplication.setActivity(getActivity());
-
-				return false;
-
-			case R.id.action_logout:
-
-				try {
-
-					LogoutTask logoutTask = new LogoutTask();
-
-					logoutTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, getActivity());
-
-				} catch (Exception e) {
-					Log.d("Details", "An error ");
-
-					e.printStackTrace();
-				}
-
-				return true;
 			case R.id.action_download_tiles:
 
-				if (!Boolean.parseBoolean(Configuration.getConfigurationByName("isInitialized").getValue())) {
+				if (!OpenTenureApplication.getInstance().isInitialized()) {
 					Toast toast;
 					String toastMessage = String
 							.format(OpenTenureApplication.getContext().getString(R.string.message_app_not_yet_initialized));
@@ -941,6 +875,31 @@ public class MainMapFragment extends SupportMapFragment {
 		}
 	}
 
+	private boolean checkInitialized() {
+		if (!OpenTenureApplication.getInstance().isInitialized()) {
+			Toast toast;
+			String toastMessage = String.format(OpenTenureApplication.getContext().getString(R.string.message_app_not_yet_initialized));
+
+			toast = Toast.makeText(OpenTenureApplication.getContext(), toastMessage, Toast.LENGTH_LONG);
+			toast.show();
+
+			return false;
+		}
+		return true;
+	}
+
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if(requestCode == MapLayersActivity.REQUEST_CODE && resultCode == MapLayersActivity.RESPONSE_CODE){
+			try {
+				mapType = MapType.valueOf(Configuration.getConfigurationValue(MainMapFragment.MAIN_MAP_TYPE));
+			} catch (Exception e) {
+				mapType = MapType.map_provider_google_normal;
+			}
+			loadLayers();
+		}
+	}
+
 	private void downloadClaims() {
 		ProgressBar bar = (ProgressBar) mapView.findViewById(R.id.progress_bar);
 
@@ -968,41 +927,31 @@ public class MainMapFragment extends SupportMapFragment {
 
 			LatLngBounds bounds = map.getProjection().getVisibleRegion().latLngBounds;
 
-			SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(mapView.getContext());
-
 			List<Tile> tiles = null;
 			OfflineTilesProvider provider = null;
 
-			String currentTilesProvider = sharedPrefs.getString(OpenTenure.tiles_provider,
-					OfflineTilesProvider.TilesProviderType.GeoServer.toString());
-
-			if (currentTilesProvider.equalsIgnoreCase(TilesProviderType.GeoServer.toString())) {
-				provider = new OfflineWmsMapTileProvider(OfflineTilesProvider.TILE_WIDTH,
-						OfflineTilesProvider.TILE_HEIGHT, sharedPrefs);
-			} else if (currentTilesProvider.equalsIgnoreCase(TilesProviderType.TMS.toString())) {
-				provider = new OfflineTmsMapTilesProvider(OfflineTilesProvider.TILE_WIDTH,
-						OfflineTilesProvider.TILE_HEIGHT, sharedPrefs);
-			} else {
-				provider = new OfflineWtmsMapTilesProvider(OfflineTilesProvider.TILE_WIDTH,
-						OfflineTilesProvider.TILE_HEIGHT, sharedPrefs);
+			String currentTilesProvider = "geoserver";
+			if(OpenTenureApplication.getInstance().getProject() != null && !StringUtility.isEmpty(OpenTenureApplication.getInstance().getProject().getTilesServerType())){
+				currentTilesProvider = OpenTenureApplication.getInstance().getProject().getTilesServerType().toLowerCase();
 			}
+
+			if (currentTilesProvider.equalsIgnoreCase(TilesProviderType.geoserver.toString())) {
+				provider = new OfflineWmsMapTileProvider(OfflineTilesProvider.TILE_WIDTH, OfflineTilesProvider.TILE_HEIGHT);
+			} else if (currentTilesProvider.equalsIgnoreCase(TilesProviderType.tms.toString())) {
+				provider = new OfflineTmsMapTilesProvider(OfflineTilesProvider.TILE_WIDTH, OfflineTilesProvider.TILE_HEIGHT);
+			} else {
+				provider = new OfflineWtmsMapTilesProvider(OfflineTilesProvider.TILE_WIDTH, OfflineTilesProvider.TILE_HEIGHT);
+			}
+
 			tiles = provider.getTilesForLatLngBounds(bounds, (int)currentZoomLevel, (int)maxSupportedZoomLevel);
 
 			if ((tilesToDownload + tiles.size()) < MAX_TILES_IN_DOWNLOAD_QUEUE) {
-
 				Tile.createTiles(tiles);
 				Log.d(this.getClass().getName(), "Created " + tiles.size() + " tiles to download");
 				tilesToDownload = Tile.getTilesToDownload();
-				Toast.makeText(getActivity().getBaseContext(),
-						String.format(getActivity().getBaseContext().getResources().getString(R.string.tiles_queued),
-								tilesToDownload),
-						Toast.LENGTH_LONG).show();
+				Toast.makeText(getActivity().getBaseContext(), String.format(getActivity().getBaseContext().getResources().getString(R.string.tiles_queued), tilesToDownload), Toast.LENGTH_LONG).show();
 			} else {
-				Toast.makeText(getActivity().getBaseContext(),
-						String.format(
-								getActivity().getBaseContext().getResources().getString(R.string.too_many_tiles_queued),
-								tilesToDownload),
-						Toast.LENGTH_LONG).show();
+				Toast.makeText(getActivity().getBaseContext(), String.format(getActivity().getBaseContext().getResources().getString(R.string.too_many_tiles_queued), tilesToDownload), Toast.LENGTH_LONG).show();
 			}
 
 			Task task = Task.getTask(TileDownloadTask.TASK_ID);
@@ -1023,7 +972,6 @@ public class MainMapFragment extends SupportMapFragment {
 		} else {
 			Toast.makeText(getActivity().getBaseContext(), R.string.zoom_level_too_low, Toast.LENGTH_LONG).show();
 		}
-
 	}
 
 	private void storeCameraPosition(CameraPosition cameraPosition) {
@@ -1140,8 +1088,8 @@ public class MainMapFragment extends SupportMapFragment {
 	}
 
 	private void drawAreaOfInterest() {
-		if(communityArea != null && communityArea.getPolyline() != null){
-			communityArea.getPolyline().remove();
+		if(communityArea != null && communityArea.getPolylines() != null){
+			communityArea.removeFromMap();
 		} else {
 			communityArea = new CommunityArea(map);
 		}
@@ -1150,14 +1098,13 @@ public class MainMapFragment extends SupportMapFragment {
 
 	public void boundCameraToInterestArea() {
 
-		if (Boolean.parseBoolean(Configuration.getConfigurationByName("isInitialized").getValue())) {
-
+		if (OpenTenureApplication.getInstance().isInitialized()) {
 			drawAreaOfInterest();
 			LatLngBounds.Builder bounds;
 			// setup map
 			bounds = new LatLngBounds.Builder();
 			// get all cars from the datbase with getter method
-			List<LatLng> K = CommunityArea.getPolyline().getPoints();
+			List<LatLng> K = CommunityArea.getPoints();
 
 			// loop through cars in the database
 			for (LatLng cn : K) {
@@ -1168,9 +1115,6 @@ public class MainMapFragment extends SupportMapFragment {
 
 			// set bounds with all the map points
 			map.animateCamera(CameraUpdateFactory.newLatLngBounds(bounds.build(), 400, 400, 10));
-
 		}
-
 	}
-
 }

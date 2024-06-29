@@ -32,9 +32,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.fao.sola.clients.android.opentenure.OpenTenureApplication;
+import org.fao.sola.clients.android.opentenure.network.response.LanguageResponse;
 
 public class Language {
 
@@ -273,6 +275,33 @@ public class Language {
 			}
 		}
 		return result;
+	}
+
+	public static void update(List<LanguageResponse> languages){
+		if (languages != null && (languages.size() > 0)) {
+			for (Iterator<LanguageResponse> iterator = languages.iterator(); iterator.hasNext();) {
+				LanguageResponse response = iterator.next();
+
+				try {
+					Language lang = new Language();
+
+					lang.setActive(response.isActive());
+					lang.setIsDefault(response.isIsDefault());
+					lang.setLtr(response.isLtr());
+					lang.setCode(response.getCode());
+					lang.setDisplayValue(response.getDisplayValue());
+					lang.setItemOrder(response.getItemOrder());
+					if (lang.getLanguage(response.getCode()) == null) {
+						lang.add();
+					}
+					else {
+						lang.updateLanguage();
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}
 	}
 
 	public int updateLanguage() {

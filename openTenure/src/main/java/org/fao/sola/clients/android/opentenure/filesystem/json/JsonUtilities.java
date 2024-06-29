@@ -36,9 +36,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.Instant;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.TemporalAccessor;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -47,7 +44,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
-import java.util.UUID;
 import java.lang.reflect.Modifier;
 
 import android.content.SharedPreferences;
@@ -68,9 +64,8 @@ import org.fao.sola.clients.android.opentenure.model.ClaimStatus;
 import org.fao.sola.clients.android.opentenure.model.Owner;
 import org.fao.sola.clients.android.opentenure.model.ShareProperty;
 import org.fao.sola.clients.android.opentenure.model.PropertyLocation;
-import org.fao.sola.clients.android.opentenure.network.response.Boundary;
+import org.fao.sola.clients.android.opentenure.network.response.BoundaryResponse;
 
-import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -119,19 +114,11 @@ public class JsonUtilities {
 
 				// tempClaim.setChallengedClaim(null);
 				tempClaim.setDescription(claim.getName());
-				tempClaim
-						.setChallengedClaimId(claim.getChallengedClaim() != null ? claim
-								.getChallengedClaim().getClaimId() : null);
+				tempClaim.setChallengedClaimId(claim.getChallengedClaim() != null ? claim.getChallengedClaim().getClaimId() : null);
 				tempClaim.setId(claimId);
+				tempClaim.setProjectId(claim.getProjectId());
 
-				// Server ulr
-				SharedPreferences preferences = PreferenceManager
-						.getDefaultSharedPreferences(OpenTenureApplication
-								.getContext());
-
-				String serverUrl = preferences.getString(
-						OpenTenurePreferencesActivity.CS_URL_PREF,
-						OpenTenureApplication._DEFAULT_COMMUNITY_SERVER);
+				String serverUrl = OpenTenureApplication.getInstance().getServerUrl();
 
 				if (serverUrl.contains("//")) {
 					splittpedServerUrl = serverUrl.split("//");
@@ -354,14 +341,14 @@ public class JsonUtilities {
 
 	}
 
-	public static String boundaryToJson(Boundary boundary) {
+	public static String boundaryToJson(BoundaryResponse boundaryResponse) {
 		try {
 			Gson gson = new GsonBuilder()
 					.setPrettyPrinting()
 					.serializeNulls()
 					.excludeFieldsWithModifiers(Modifier.TRANSIENT)
 					.create();
-			return gson.toJson(boundary);
+			return gson.toJson(boundaryResponse);
 		} catch (Throwable e) {
 			Log.d("CreateClaimJson",	"An error has occurred" + e.getMessage());
 			e.printStackTrace();

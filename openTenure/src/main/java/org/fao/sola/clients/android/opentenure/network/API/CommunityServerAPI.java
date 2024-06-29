@@ -34,6 +34,7 @@ import java.lang.reflect.Type;
 import java.net.UnknownHostException;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.apache.http.Header;
@@ -55,12 +56,17 @@ import org.fao.sola.clients.android.opentenure.OpenTenurePreferencesActivity;
 import org.fao.sola.clients.android.opentenure.filesystem.json.model.Claim;
 import org.fao.sola.clients.android.opentenure.network.LoginActivity;
 import org.fao.sola.clients.android.opentenure.network.response.ApiResponse;
-import org.fao.sola.clients.android.opentenure.network.response.Boundary;
-import org.fao.sola.clients.android.opentenure.network.response.BoundaryStatus;
-import org.fao.sola.clients.android.opentenure.network.response.BoundaryType;
-import org.fao.sola.clients.android.opentenure.network.response.GeoRequired;
+import org.fao.sola.clients.android.opentenure.network.response.BoundaryResponse;
+import org.fao.sola.clients.android.opentenure.network.response.BoundaryStatusResponse;
+import org.fao.sola.clients.android.opentenure.network.response.BoundaryTypeResponse;
+import org.fao.sola.clients.android.opentenure.network.response.ClaimTypeResponse;
 import org.fao.sola.clients.android.opentenure.network.response.GetAttachmentResponse;
 import org.fao.sola.clients.android.opentenure.network.response.GetCommunityAreaResponse;
+import org.fao.sola.clients.android.opentenure.network.response.IdTypeResponse;
+import org.fao.sola.clients.android.opentenure.network.response.LandUseResponse;
+import org.fao.sola.clients.android.opentenure.network.response.LanguageResponse;
+import org.fao.sola.clients.android.opentenure.network.response.ProjectResponse;
+import org.fao.sola.clients.android.opentenure.network.response.RefDataResponse;
 import org.fao.sola.clients.android.opentenure.network.response.ResultResponse;
 import org.fao.sola.clients.android.opentenure.network.response.SaveAttachmentResponse;
 import org.fao.sola.clients.android.opentenure.network.response.SaveClaimResponse;
@@ -122,16 +128,14 @@ public class CommunityServerAPI {
 					.getDefaultSharedPreferences(OpenTenureApplication
 							.getContext());
 
-			String csUrl = OpenTenurePreferences.getString(
-					OpenTenurePreferencesActivity.CS_URL_PREF,
-					OpenTenureApplication._DEFAULT_COMMUNITY_SERVER);
+			String csUrl = OpenTenureApplication.getInstance().getServerUrl();
 
 			if (csUrl.trim().equals(""))
 				csUrl = OpenTenureApplication._DEFAULT_COMMUNITY_SERVER;
 
 			String url = String.format(CommunityServerAPIUtilities.HTTPS_LOGIN,
 					csUrl, OpenTenureApplication.getInstance()
-							.getLocalization(), username, password);
+							.getLanguageCode(), username, password);
 
 			HttpGet request = new HttpGet(url);
 
@@ -214,16 +218,14 @@ public class CommunityServerAPI {
 					.getDefaultSharedPreferences(OpenTenureApplication
 							.getContext());
 
-			String csUrl = OpenTenurePreferences.getString(
-					OpenTenurePreferencesActivity.CS_URL_PREF,
-					OpenTenureApplication._DEFAULT_COMMUNITY_SERVER);
+			String csUrl = OpenTenureApplication.getInstance().getServerUrl();
 
 			if (csUrl.trim().equals(""))
 				csUrl = OpenTenureApplication._DEFAULT_COMMUNITY_SERVER;
 
 			String url = String.format(
 					CommunityServerAPIUtilities.HTTPS_LOGOUT, csUrl,
-					OpenTenureApplication.getInstance().getLocalization());
+					OpenTenureApplication.getInstance().getLanguageCode());
 			HttpGet request = new HttpGet(url);
 
 			/* Preparing to store coockies */
@@ -281,25 +283,42 @@ public class CommunityServerAPI {
 		}
 	}
 
-	public static List<org.fao.sola.clients.android.opentenure.network.response.Claim> getAllClaims() {
+	public static String getCurrentUser() {
+		String csUrl = OpenTenureApplication.getInstance().getServerUrl();
 
+		String url = String.format(CommunityServerAPIUtilities.HTTPS_GET_CURRENT_USER, csUrl, OpenTenureApplication.getInstance().getLanguageCode());
+		HttpGet request = new HttpGet(url);
+		AndroidHttpClient client = OpenTenureApplication.getHttpClient();
+		CookieStore coockieStore = OpenTenureApplication.getCoockieStore();
+		HttpContext context = new BasicHttpContext();
+		context.setAttribute(ClientContext.COOKIE_STORE, coockieStore);
+
+		try {
+			HttpResponse response = client.execute(request, context);
+			setServerProtoVersion(response);
+
+			if (response.getStatusLine().getStatusCode() == (HttpStatus.SC_OK)) {
+				String userName = CommunityServerAPIUtilities.Slurp(response.getEntity().getContent(), 1024);
+				return userName;
+			} else {
+				return null;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "";
+	}
+
+	public static List<org.fao.sola.clients.android.opentenure.network.response.Claim> getAllClaims() {
 		/*
 		 * Creating the url to call
 		 */
-
-		SharedPreferences OpenTenurePreferences = PreferenceManager
-				.getDefaultSharedPreferences(OpenTenureApplication.getContext());
-
-		String csUrl = OpenTenurePreferences.getString(
-				OpenTenurePreferencesActivity.CS_URL_PREF,
-				OpenTenureApplication._DEFAULT_COMMUNITY_SERVER);
-
-		if (csUrl.trim().equals(""))
-			csUrl = OpenTenureApplication._DEFAULT_COMMUNITY_SERVER;
+		String csUrl = OpenTenureApplication.getInstance().getServerUrl();
 
 		String url = String.format(
 				CommunityServerAPIUtilities.HTTPS_GETALLCLAIMS, csUrl,
-				OpenTenureApplication.getInstance().getLocalization());
+				OpenTenureApplication.getInstance().getLanguageCode(),
+				OpenTenureApplication.getInstance().getProject().getId());
 		HttpGet request = new HttpGet(url);
 
 		AndroidHttpClient client = OpenTenureApplication.getHttpClient();
@@ -342,27 +361,20 @@ public class CommunityServerAPI {
 
 	}
 
-	public static List<org.fao.sola.clients.android.opentenure.network.response.Claim> getAllClaimsByBox(
-			String[] coordinates) {
+	public static List<org.fao.sola.clients.android.opentenure.network.response.Claim> getAllClaimsByBox(String[] coordinates) {
 
 		/*
 		 * Creating the url to call
 		 */
+		SharedPreferences OpenTenurePreferences = PreferenceManager.getDefaultSharedPreferences(OpenTenureApplication.getContext());
 
-		SharedPreferences OpenTenurePreferences = PreferenceManager
-				.getDefaultSharedPreferences(OpenTenureApplication.getContext());
-
-		String csUrl = OpenTenurePreferences.getString(
-				OpenTenurePreferencesActivity.CS_URL_PREF,
-				OpenTenureApplication._DEFAULT_COMMUNITY_SERVER);
-
-		if (csUrl.trim().equals(""))
-			csUrl = OpenTenureApplication._DEFAULT_COMMUNITY_SERVER;
+		String csUrl = OpenTenureApplication.getInstance().getServerUrl();
 
 		String url = String.format(
 				CommunityServerAPIUtilities.HTTPS_GETALLCLAIMSBYBOX, csUrl,
-				OpenTenureApplication.getInstance().getLocalization(),
+				OpenTenureApplication.getInstance().getLanguageCode(),
 				coordinates[0], coordinates[1], coordinates[2], coordinates[3],
+				OpenTenureApplication.getInstance().getProject().getId(),
 				"100");
 		HttpGet request = new HttpGet(url);
 
@@ -426,16 +438,14 @@ public class CommunityServerAPI {
 		SharedPreferences OpenTenurePreferences = PreferenceManager
 				.getDefaultSharedPreferences(OpenTenureApplication.getContext());
 
-		String csUrl = OpenTenurePreferences.getString(
-				OpenTenurePreferencesActivity.CS_URL_PREF,
-				OpenTenureApplication._DEFAULT_COMMUNITY_SERVER);
+		String csUrl = OpenTenureApplication.getInstance().getServerUrl();
 
 		if (csUrl.trim().equals(""))
 			csUrl = OpenTenureApplication._DEFAULT_COMMUNITY_SERVER;
 
 		String url = String.format(
 				CommunityServerAPIUtilities.HTTPS_WITHDRAWCLAIM, csUrl,
-				OpenTenureApplication.getInstance().getLocalization(), claimId);
+				OpenTenureApplication.getInstance().getLanguageCode(), claimId);
 		HttpGet request = new HttpGet(url);
 
 		Log.d("CommunityServerAPI",
@@ -505,15 +515,13 @@ public class CommunityServerAPI {
 		SharedPreferences OpenTenurePreferences = PreferenceManager
 				.getDefaultSharedPreferences(OpenTenureApplication.getContext());
 
-		String csUrl = OpenTenurePreferences.getString(
-				OpenTenurePreferencesActivity.CS_URL_PREF,
-				OpenTenureApplication._DEFAULT_COMMUNITY_SERVER);
+		String csUrl = OpenTenureApplication.getInstance().getServerUrl();
 
 		if (csUrl.trim().equals(""))
 			csUrl = OpenTenureApplication._DEFAULT_COMMUNITY_SERVER;
 
 		String url = String.format(CommunityServerAPIUtilities.HTTPS_GETCLAIM,
-				csUrl, OpenTenureApplication.getInstance().getLocalization(),
+				csUrl, OpenTenureApplication.getInstance().getLanguageCode(),
 				claimId);
 		HttpGet request = new HttpGet(url);
 
@@ -579,9 +587,7 @@ public class CommunityServerAPI {
 		SharedPreferences OpenTenurePreferences = PreferenceManager
 				.getDefaultSharedPreferences(OpenTenureApplication.getContext());
 
-		String csUrl = OpenTenurePreferences.getString(
-				OpenTenurePreferencesActivity.CS_URL_PREF,
-				OpenTenureApplication._DEFAULT_COMMUNITY_SERVER);
+		String csUrl = OpenTenureApplication.getInstance().getServerUrl();
 
 		if (csUrl.trim().equals(""))
 			csUrl = OpenTenureApplication._DEFAULT_COMMUNITY_SERVER;
@@ -713,554 +719,116 @@ public class CommunityServerAPI {
 
 	}
 
-	public static List<org.fao.sola.clients.android.opentenure.network.response.LandUse> getLandUses() {
+	public static List<LandUseResponse> getLandUses() {
+		return getList(LandUseResponse[].class, false, CommunityServerAPIUtilities.HTTPS_GETLANDUSE);
+	}
 
+	public static List<ProjectResponse> getProjects() {
+		return getList(ProjectResponse[].class, true, CommunityServerAPIUtilities.HTTPS_GET_PROJECTS);
+	}
+
+	public static <T> List<T> getList(final Class<T[]> clazz, boolean includeCookies, String serverMethod, String... args) {
 		SharedPreferences OpenTenurePreferences = PreferenceManager
 				.getDefaultSharedPreferences(OpenTenureApplication.getContext());
 
-		String csUrl = OpenTenurePreferences.getString(
-				OpenTenurePreferencesActivity.CS_URL_PREF,
-				OpenTenureApplication._DEFAULT_COMMUNITY_SERVER);
+		String csUrl = OpenTenureApplication.getInstance().getServerUrl();
+		List<String> stringArgs = new ArrayList<String>();
+		stringArgs.add(csUrl);
 
-		if (csUrl.trim().equals(""))
-			csUrl = OpenTenureApplication._DEFAULT_COMMUNITY_SERVER;
+		String url;
 
-		String url = String.format(
-				CommunityServerAPIUtilities.HTTPS_GETLANDUSE, csUrl);
+		if(args != null && args.length > 0) {
+			for(String a: args) {
+				stringArgs.add(a);
+			}
+		}
+
+		url = String.format(serverMethod, stringArgs.toArray());
 		HttpGet request = new HttpGet(url);
-
 		AndroidHttpClient client = OpenTenureApplication.getHttpClient();
 
 		try {
+			HttpResponse response;
 
-			HttpResponse response = client.execute(request);
-
-			setServerProtoVersion(response);
-
-			String json = CommunityServerAPIUtilities.Slurp(response
-					.getEntity().getContent(), 1024);
-
-			if (response.getStatusLine().getStatusCode() == (HttpStatus.SC_OK)) {
-
-				Log.d("CommunityServerAPI", "GET LAND USES JSON RESPONSE "
-						+ json);
-
-				Type listType = new TypeToken<ArrayList<org.fao.sola.clients.android.opentenure.network.response.LandUse>>() {
-				}.getType();
-				List<org.fao.sola.clients.android.opentenure.network.response.LandUse> landUseList = new Gson()
-						.fromJson(json, listType);
-
-				if (landUseList != null)
-					Log.d("CommunityServerAPI", "RETRIEVED LAND USE LIST"
-							+ landUseList.size());
-
-				return landUseList;
-
+			if(includeCookies){
+				CookieStore coockieStore = OpenTenureApplication.getCoockieStore();
+				HttpContext context = new BasicHttpContext();
+				context.setAttribute(ClientContext.COOKIE_STORE, coockieStore);
+				response = client.execute(request, context);
 			} else {
-
-				Log.d("CommunityServerAPI",
-						"GET LAND USES NOT SUCCEDED : HTTP STATUS "
-								+ response.getStatusLine().getStatusCode()
-								+ "  "
-								+ response.getStatusLine().getReasonPhrase());
-
-				return null;
-
+				response = client.execute(request);
 			}
 
-		} catch (java.net.SocketException se) {
-
-			Log.d("CommunityServerAPI",
-					"GET LAND USES NETWORK ERROR SE" + se.getMessage());
-			se.printStackTrace();
-			OpenTenureApplication.getInstance().setNetworkError(true);
-			return null;
-		} catch (java.net.SocketTimeoutException stoe) {
-
-			Log.d("CommunityServerAPI", "GET LAND USES NETWORK ERROR STOE"
-					+ stoe.getMessage());
-			stoe.printStackTrace();
-			OpenTenureApplication.getInstance().setNetworkError(true);
-			return null;
-		} catch (javax.net.ssl.SSLException ssle) {
-
-			Log.d("CommunityServerAPI", "GET LAND USES NETWORK ERROR SSLE"
-					+ ssle.getMessage());
-			ssle.printStackTrace();
-			OpenTenureApplication.getInstance().setNetworkError(true);
-			return null;
-		} catch (Exception ex) {
-
-			Log.d("CommunityServerAPI",
-					"GET LAND USES ERROR " + ex.getMessage());
-			ex.printStackTrace();
-			return null;
-
-		}
-
-	}
-
-	public static List<org.fao.sola.clients.android.opentenure.network.response.Language> getLanguages() {
-
-		SharedPreferences OpenTenurePreferences = PreferenceManager
-				.getDefaultSharedPreferences(OpenTenureApplication.getContext());
-
-		String csUrl = OpenTenurePreferences.getString(
-				OpenTenurePreferencesActivity.CS_URL_PREF,
-				OpenTenureApplication._DEFAULT_COMMUNITY_SERVER);
-
-		if (csUrl.trim().equals(""))
-			csUrl = OpenTenureApplication._DEFAULT_COMMUNITY_SERVER;
-
-		String url = String.format(
-				CommunityServerAPIUtilities.HTTPS_GETLANGUAGES, csUrl);
-		HttpGet request = new HttpGet(url);
-
-		AndroidHttpClient client = OpenTenureApplication.getHttpClient();
-
-		try {
-
-			HttpResponse response = client.execute(request);
-
-			setServerProtoVersion(response);
-
-			String json = CommunityServerAPIUtilities.Slurp(response
-					.getEntity().getContent(), 1024);
-
-			if (response.getStatusLine().getStatusCode() == (HttpStatus.SC_OK)) {
-
-				Log.d("CommunityServerAPI", "GET LANGUAGES JSON RESPONSE "
-						+ json);
-
-				Type listType = new TypeToken<ArrayList<org.fao.sola.clients.android.opentenure.network.response.Language>>() {
-				}.getType();
-				List<org.fao.sola.clients.android.opentenure.network.response.Language> languageList = new Gson()
-						.fromJson(json, listType);
-
-				if (languageList != null)
-					Log.d("CommunityServerAPI", "RETRIEVED LANGUAGES LIST"
-							+ languageList.size());
-
-				return languageList;
-
-			} else {
-
-				Log.d("CommunityServerAPI",
-						"GET LANGUGES NOT SUCCEDED : HTTP STATUS "
-								+ response.getStatusLine().getStatusCode()
-								+ "  "
-								+ response.getStatusLine().getReasonPhrase());
-
-				return null;
-
-			}
-
-		} catch (java.net.SocketException se) {
-
-			Log.d("CommunityServerAPI",
-					"GET LANGUAGES NETWORK ERROR SE" + se.getMessage());
-			se.printStackTrace();
-			OpenTenureApplication.getInstance().setNetworkError(true);
-			return null;
-		} catch (java.net.SocketTimeoutException stoe) {
-
-			Log.d("CommunityServerAPI", "GET LANGUAGES NETWORK ERROR STOE"
-					+ stoe.getMessage());
-			stoe.printStackTrace();
-			OpenTenureApplication.getInstance().setNetworkError(true);
-			return null;
-		} catch (javax.net.ssl.SSLException ssle) {
-
-			Log.d("CommunityServerAPI", "GET LANGUAGES NETWORK ERROR SSLE"
-					+ ssle.getMessage());
-			ssle.printStackTrace();
-			OpenTenureApplication.getInstance().setNetworkError(true);
-			return null;
-		} catch (Exception ex) {
-
-			Log.d("CommunityServerAPI",
-					"GET LANGUAGES ERROR " + ex.getMessage());
-			ex.printStackTrace();
-			return null;
-
-		}
-
-	}
-
-	public static List<org.fao.sola.clients.android.opentenure.network.response.IdType> getIdTypes() {
-
-		SharedPreferences OpenTenurePreferences = PreferenceManager
-				.getDefaultSharedPreferences(OpenTenureApplication.getContext());
-
-		String csUrl = OpenTenurePreferences.getString(
-				OpenTenurePreferencesActivity.CS_URL_PREF,
-				OpenTenureApplication._DEFAULT_COMMUNITY_SERVER);
-
-		if (csUrl.trim().equals(""))
-			csUrl = OpenTenureApplication._DEFAULT_COMMUNITY_SERVER;
-
-		String url = String.format(
-				CommunityServerAPIUtilities.HTTPS_GETIDTYPES, csUrl);
-		HttpGet request = new HttpGet(url);
-
-		AndroidHttpClient client = OpenTenureApplication.getHttpClient();
-
-		try {
-
-			HttpResponse response = client.execute(request);
-
-			setServerProtoVersion(response);
-
-			String json = CommunityServerAPIUtilities.Slurp(response
-					.getEntity().getContent(), 1024);
-
-			if (response.getStatusLine().getStatusCode() == (HttpStatus.SC_OK)) {
-
-				Log.d("CommunityServerAPI", "GET ALL ID TYPES JSON RESPONSE "
-						+ json);
-
-				Type listType = new TypeToken<ArrayList<org.fao.sola.clients.android.opentenure.network.response.IdType>>() {
-				}.getType();
-				List<org.fao.sola.clients.android.opentenure.network.response.IdType> idTypesList = new Gson()
-						.fromJson(json, listType);
-
-				if (idTypesList != null)
-					Log.d("CommunityServerAPI", "RETRIEVED ID TYPES LIST"
-							+ idTypesList.size());
-
-				return idTypesList;
-
-			} else {
-
-				Log.d("CommunityServerAPI",
-						"GET ALL ID TYPES NOT SUCCEDED : HTTP STATUS "
-								+ response.getStatusLine().getStatusCode()
-								+ "  "
-								+ response.getStatusLine().getReasonPhrase());
-
-				return null;
-
-			}
-
-		} catch (java.net.SocketException se) {
-
-			Log.d("CommunityServerAPI", "GET ALL ID TYPES NETWORK ERROR SE"
-					+ se.getMessage());
-			se.printStackTrace();
-			OpenTenureApplication.getInstance().setNetworkError(true);
-			return null;
-		} catch (java.net.SocketTimeoutException stoe) {
-
-			Log.d("CommunityServerAPI", "GET ALL ID TYPES NETWORK ERROR STOE"
-					+ stoe.getMessage());
-			stoe.printStackTrace();
-			OpenTenureApplication.getInstance().setNetworkError(true);
-			return null;
-		} catch (javax.net.ssl.SSLException ssle) {
-
-			Log.d("CommunityServerAPI", "GET ALL ID TYPES NETWORK ERROR SSLE"
-					+ ssle.getMessage());
-			ssle.printStackTrace();
-			OpenTenureApplication.getInstance().setNetworkError(true);
-			return null;
-		}
-
-		catch (Exception ex) {
-
-			Log.d("CommunityServerAPI",
-					"GET ALL ID TYPES ERROR " + ex.getMessage());
-			ex.printStackTrace();
-			return null;
-
-		}
-
-	}
-
-	public static List<BoundaryStatus> getBoundaryStatuses() {
-		SharedPreferences OpenTenurePreferences = PreferenceManager.getDefaultSharedPreferences(OpenTenureApplication.getContext());
-		String csUrl = OpenTenurePreferences.getString(
-				OpenTenurePreferencesActivity.CS_URL_PREF,
-				OpenTenureApplication._DEFAULT_COMMUNITY_SERVER);
-
-		if (csUrl.trim().equals(""))
-			csUrl = OpenTenureApplication._DEFAULT_COMMUNITY_SERVER;
-
-		String url = String.format(CommunityServerAPIUtilities.HTTPS_GET_BOUNDARY_STATUSES, csUrl);
-		HttpGet request = new HttpGet(url);
-		AndroidHttpClient client = OpenTenureApplication.getHttpClient();
-
-		try {
-
-			HttpResponse response = client.execute(request);
 			setServerProtoVersion(response);
 			String json = CommunityServerAPIUtilities.Slurp(response.getEntity().getContent(), 1024);
 
 			if (response.getStatusLine().getStatusCode() == (HttpStatus.SC_OK)) {
-				Log.d("CommunityServerAPI", "GET ALL BOUNDARY STATUSES JSON RESPONSE " + json);
+				Log.d("CommunityServerAPI", "GET " + clazz.getName() + " JSON RESPONSE " + json);
 
-				Type listType = new TypeToken<ArrayList<BoundaryStatus>>() {}.getType();
-				List<BoundaryStatus> statuses = new Gson().fromJson(json, listType);
-
-				if (statuses != null)
-					Log.d("CommunityServerAPI", "RETRIEVED BOUNDARY STATUSES " + statuses.size());
-
-				return statuses;
-			} else {
-
-				Log.d("CommunityServerAPI",
-						"GET ALL BOUNDARY STATUSES NOT SUCCEDED : HTTP STATUS "
-								+ response.getStatusLine().getStatusCode()
-								+ "  "
-								+ response.getStatusLine().getReasonPhrase());
-				return null;
-			}
-		} catch (java.net.SocketException se) {
-			Log.d("CommunityServerAPI", "GET ALL BOUNDARY STATUSES NETWORK ERROR SE " + se.getMessage());
-			se.printStackTrace();
-			OpenTenureApplication.getInstance().setNetworkError(true);
-			return null;
-		} catch (java.net.SocketTimeoutException stoe) {
-			Log.d("CommunityServerAPI", "GET ALL BOUNDARY STATUSES NETWORK ERROR STOE "	+ stoe.getMessage());
-			stoe.printStackTrace();
-			OpenTenureApplication.getInstance().setNetworkError(true);
-			return null;
-		} catch (javax.net.ssl.SSLException ssle) {
-			Log.d("CommunityServerAPI", "GET ALL BOUNDARY STATUSES NETWORK ERROR SSLE "	+ ssle.getMessage());
-			ssle.printStackTrace();
-			OpenTenureApplication.getInstance().setNetworkError(true);
-			return null;
-		}
-		catch (Exception ex) {
-			Log.d("CommunityServerAPI","GET ALL BOUNDARY STATUSES ERROR " + ex.getMessage());
-			ex.printStackTrace();
-			return null;
-		}
-	}
-
-	public static List<BoundaryType> getBoundaryTypes() {
-		SharedPreferences OpenTenurePreferences = PreferenceManager.getDefaultSharedPreferences(OpenTenureApplication.getContext());
-		String csUrl = OpenTenurePreferences.getString(
-				OpenTenurePreferencesActivity.CS_URL_PREF,
-				OpenTenureApplication._DEFAULT_COMMUNITY_SERVER);
-
-		if (csUrl.trim().equals(""))
-			csUrl = OpenTenureApplication._DEFAULT_COMMUNITY_SERVER;
-
-		String url = String.format(CommunityServerAPIUtilities.HTTPS_GET_BOUNDARY_TYPES, csUrl);
-		HttpGet request = new HttpGet(url);
-		AndroidHttpClient client = OpenTenureApplication.getHttpClient();
-
-		try {
-
-			HttpResponse response = client.execute(request);
-			setServerProtoVersion(response);
-			String json = CommunityServerAPIUtilities.Slurp(response.getEntity().getContent(), 1024);
-
-			if (response.getStatusLine().getStatusCode() == (HttpStatus.SC_OK)) {
-				Log.d("CommunityServerAPI", "GET ALL BOUNDARY TYPES JSON RESPONSE " + json);
-
-				Type listType = new TypeToken<ArrayList<BoundaryType>>() {}.getType();
-				List<BoundaryType> types = new Gson().fromJson(json, listType);
+				final T[] jsonToObject = new Gson().fromJson(json, clazz);
+				List<T> types = Arrays.asList(jsonToObject);
 
 				if (types != null)
-					Log.d("CommunityServerAPI", "RETRIEVED BOUNDARY TYPES " + types.size());
+					Log.d("CommunityServerAPI", "RETRIEVED " + clazz.getName() + " " + types.size());
 
 				return types;
 			} else {
-
 				Log.d("CommunityServerAPI",
-						"GET ALL BOUNDARY TYPES NOT SUCCEDED : HTTP STATUS "
+						"GET ALL " + clazz.getName() + " NOT SUCCEDED : HTTP STATUS "
 								+ response.getStatusLine().getStatusCode()
 								+ "  "
 								+ response.getStatusLine().getReasonPhrase());
 				return null;
 			}
 		} catch (java.net.SocketException se) {
-			Log.d("CommunityServerAPI", "GET ALL BOUNDARY TYPES NETWORK ERROR SE " + se.getMessage());
+			Log.d("CommunityServerAPI", "GET ALL " + clazz.getName() + " NETWORK ERROR SE " + se.getMessage());
 			se.printStackTrace();
 			OpenTenureApplication.getInstance().setNetworkError(true);
 			return null;
 		} catch (java.net.SocketTimeoutException stoe) {
-			Log.d("CommunityServerAPI", "GET ALL BOUNDARY TYPES NETWORK ERROR STOE "	+ stoe.getMessage());
+			Log.d("CommunityServerAPI", "GET ALL " + clazz.getName() + " NETWORK ERROR STOE "	+ stoe.getMessage());
 			stoe.printStackTrace();
 			OpenTenureApplication.getInstance().setNetworkError(true);
 			return null;
 		} catch (javax.net.ssl.SSLException ssle) {
-			Log.d("CommunityServerAPI", "GET ALL BOUNDARY TYPES NETWORK ERROR SSLE "	+ ssle.getMessage());
+			Log.d("CommunityServerAPI", "GET ALL " + clazz.getName() + " NETWORK ERROR SSLE "	+ ssle.getMessage());
 			ssle.printStackTrace();
 			OpenTenureApplication.getInstance().setNetworkError(true);
 			return null;
 		}
 		catch (Exception ex) {
-			Log.d("CommunityServerAPI","GET ALL BOUNDARY TYPES ERROR " + ex.getMessage());
+			Log.d("CommunityServerAPI","GET ALL \" + typeDescription + \" ERROR " + ex.getMessage());
 			ex.printStackTrace();
 			return null;
 		}
 	}
 
-	public static List<Boundary> getBoundaries() {
-		SharedPreferences OpenTenurePreferences = PreferenceManager.getDefaultSharedPreferences(OpenTenureApplication.getContext());
-		String csUrl = OpenTenurePreferences.getString(
-				OpenTenurePreferencesActivity.CS_URL_PREF,
-				OpenTenureApplication._DEFAULT_COMMUNITY_SERVER);
-
-		if (csUrl.trim().equals(""))
-			csUrl = OpenTenureApplication._DEFAULT_COMMUNITY_SERVER;
-
-		String url = String.format(CommunityServerAPIUtilities.HTTPS_GET_BOUNDARIES, csUrl,
-				OpenTenureApplication.getInstance().getLocalization());
-		HttpGet request = new HttpGet(url);
-		AndroidHttpClient client = OpenTenureApplication.getHttpClient();
-
-		try {
-
-			HttpResponse response = client.execute(request);
-			setServerProtoVersion(response);
-			String json = CommunityServerAPIUtilities.Slurp(response.getEntity().getContent(), 1024);
-
-			if (response.getStatusLine().getStatusCode() == (HttpStatus.SC_OK)) {
-				Log.d("CommunityServerAPI", "GET ALL BOUNDARIES JSON RESPONSE " + json);
-
-				Type listType = new TypeToken<ArrayList<Boundary>>() {}.getType();
-				List<Boundary> types = new Gson().fromJson(json, listType);
-
-				if (types != null)
-					Log.d("CommunityServerAPI", "RETRIEVED BOUNDARIES " + types.size());
-
-				return types;
-			} else {
-
-				Log.d("CommunityServerAPI",
-						"GET ALL BOUNDARIES NOT SUCCEDED : HTTP STATUS "
-								+ response.getStatusLine().getStatusCode()
-								+ "  "
-								+ response.getStatusLine().getReasonPhrase());
-				return null;
-			}
-		} catch (java.net.SocketException se) {
-			Log.d("CommunityServerAPI", "GET ALL BOUNDARIES NETWORK ERROR SE " + se.getMessage());
-			se.printStackTrace();
-			OpenTenureApplication.getInstance().setNetworkError(true);
-			return null;
-		} catch (java.net.SocketTimeoutException stoe) {
-			Log.d("CommunityServerAPI", "GET ALL BOUNDARIES NETWORK ERROR STOE "	+ stoe.getMessage());
-			stoe.printStackTrace();
-			OpenTenureApplication.getInstance().setNetworkError(true);
-			return null;
-		} catch (javax.net.ssl.SSLException ssle) {
-			Log.d("CommunityServerAPI", "GET ALL BOUNDARIES NETWORK ERROR SSLE "	+ ssle.getMessage());
-			ssle.printStackTrace();
-			OpenTenureApplication.getInstance().setNetworkError(true);
-			return null;
-		}
-		catch (Exception ex) {
-			Log.d("CommunityServerAPI","GET ALL BOUNDARIES ERROR " + ex.getMessage());
-			ex.printStackTrace();
-			return null;
-		}
+	public static List<LanguageResponse> getLanguages() {
+		return getList(LanguageResponse[].class, false, CommunityServerAPIUtilities.HTTPS_GETLANGUAGES);
 	}
 
-	public static String getCommunityArea() {
+	public static List<IdTypeResponse> getIdTypes() {
+		return getList(IdTypeResponse[].class, false, CommunityServerAPIUtilities.HTTPS_GETIDTYPES);
+	}
+
+	public static List<BoundaryStatusResponse> getBoundaryStatuses() {
+		return getList(BoundaryStatusResponse[].class, false, CommunityServerAPIUtilities.HTTPS_GET_BOUNDARY_STATUSES);
+	}
+
+	public static List<BoundaryTypeResponse> getBoundaryTypes() {
+		return getList(BoundaryTypeResponse[].class, false, CommunityServerAPIUtilities.HTTPS_GET_BOUNDARY_TYPES);
+	}
+
+	public static List<BoundaryResponse> getBoundaries() {
+		return getList(BoundaryResponse[].class, true, CommunityServerAPIUtilities.HTTPS_GET_BOUNDARIES, OpenTenureApplication.getInstance().getLanguageCode());
+	}
+
+	public static List<ClaimTypeResponse> getClaimTypes() {
 
 		SharedPreferences OpenTenurePreferences = PreferenceManager
 				.getDefaultSharedPreferences(OpenTenureApplication.getContext());
 
-		String csUrl = OpenTenurePreferences.getString(
-				OpenTenurePreferencesActivity.CS_URL_PREF,
-				OpenTenureApplication._DEFAULT_COMMUNITY_SERVER);
-
-		if (csUrl.trim().equals(""))
-			csUrl = OpenTenureApplication._DEFAULT_COMMUNITY_SERVER;
-
-		String url = String.format(
-				CommunityServerAPIUtilities.HTTPS_GETCOMMUNITYAREA, csUrl,
-				OpenTenureApplication.getInstance().getLocalization());
-		HttpGet request = new HttpGet(url);
-
-		AndroidHttpClient client = OpenTenureApplication.getHttpClient();
-
-		try {
-
-			HttpResponse response = client.execute(request);
-
-			setServerProtoVersion(response);
-
-			String json = CommunityServerAPIUtilities.Slurp(response
-					.getEntity().getContent(), 1024);
-
-			if (response.getStatusLine().getStatusCode() == (HttpStatus.SC_OK)) {
-
-				Log.d("CommunityServerAPI", "GET COMMUNITY AREA JSON RESPONSE "
-						+ json);
-
-				GetCommunityAreaResponse area = new Gson().fromJson(json,
-						GetCommunityAreaResponse.class);
-
-				if (area != null)
-					Log.d("CommunityServerAPI", "RETRIEVED COMMUNITY AREA"
-							+ area.getResult());
-
-				return area.getResult();
-
-			} else {
-
-				Log.d("CommunityServerAPI",
-						"GET COMMUNITY AREA NOT SUCCEDED : HTTP STATUS "
-								+ response.getStatusLine().getStatusCode()
-								+ "  "
-								+ response.getStatusLine().getReasonPhrase());
-
-				return null;
-
-			}
-
-		} catch (java.net.ConnectException ce) {
-			Log.d("CommunityServerAPI", "GET COMMUNITY AREA NETWORK ERROR CE"
-					+ ce.getMessage());
-			ce.printStackTrace();
-			OpenTenureApplication.getInstance().setNetworkError(true);
-			return null;
-
-		} catch (java.net.SocketException se) {
-
-			Log.d("CommunityServerAPI", "GET COMMUNITY AREA NETWORK ERROR SE"
-					+ se.getMessage());
-			se.printStackTrace();
-			OpenTenureApplication.getInstance().setNetworkError(true);
-			return null;
-		} catch (java.net.SocketTimeoutException stoe) {
-
-			Log.d("CommunityServerAPI", "GET COMMUNITY AREA NETWORK ERROR STOE"
-					+ stoe.getMessage());
-			stoe.printStackTrace();
-			OpenTenureApplication.getInstance().setNetworkError(true);
-			return null;
-		} catch (javax.net.ssl.SSLException ssle) {
-
-			Log.d("CommunityServerAPI", "GET COMMUNITY AREA NETWORK ERROR SSLE"
-					+ ssle.getMessage());
-			ssle.printStackTrace();
-			OpenTenureApplication.getInstance().setNetworkError(true);
-			return null;
-		} catch (Exception ex) {
-
-			Log.d("CommunityServerAPI",
-					"GET COMMUNITY AREA ERROR " + ex.getMessage());
-			ex.printStackTrace();
-			return null;
-
-		}
-
-	}
-
-	public static List<org.fao.sola.clients.android.opentenure.network.response.ClaimType> getClaimTypes() {
-
-		SharedPreferences OpenTenurePreferences = PreferenceManager
-				.getDefaultSharedPreferences(OpenTenureApplication.getContext());
-
-		String csUrl = OpenTenurePreferences.getString(
-				OpenTenurePreferencesActivity.CS_URL_PREF,
-				OpenTenureApplication._DEFAULT_COMMUNITY_SERVER);
+		String csUrl = OpenTenureApplication.getInstance().getServerUrl();
 
 		if (csUrl.trim().equals(""))
 			csUrl = OpenTenureApplication._DEFAULT_COMMUNITY_SERVER;
@@ -1284,16 +852,16 @@ public class CommunityServerAPI {
 				Log.d("CommunityServerAPI",
 						"GET ALL CLAIM TYPES JSON RESPONSE " + json);
 
-				Type listType = new TypeToken<ArrayList<org.fao.sola.clients.android.opentenure.network.response.ClaimType>>() {
+				Type listType = new TypeToken<ArrayList<ClaimTypeResponse>>() {
 				}.getType();
-				List<org.fao.sola.clients.android.opentenure.network.response.ClaimType> claimTypeList = new Gson()
+				List<ClaimTypeResponse> claimTypeResponseList = new Gson()
 						.fromJson(json, listType);
 
-				if (claimTypeList != null)
+				if (claimTypeResponseList != null)
 					Log.d("CommunityServerAPI", "RETRIEVED CLAIM TYPES LIST"
-							+ claimTypeList.size());
+							+ claimTypeResponseList.size());
 
-				return claimTypeList;
+				return claimTypeResponseList;
 
 			} else {
 
@@ -1350,202 +918,8 @@ public class CommunityServerAPI {
 
 	}
 
-	public static List<org.fao.sola.clients.android.opentenure.network.response.ClaimType> getdocumentTypes() {
-
-		SharedPreferences OpenTenurePreferences = PreferenceManager
-				.getDefaultSharedPreferences(OpenTenureApplication.getContext());
-
-		String csUrl = OpenTenurePreferences.getString(
-				OpenTenurePreferencesActivity.CS_URL_PREF,
-				OpenTenureApplication._DEFAULT_COMMUNITY_SERVER);
-
-		if (csUrl.trim().equals(""))
-			csUrl = OpenTenureApplication._DEFAULT_COMMUNITY_SERVER;
-
-		System.out.println("Localization "
-				+ OpenTenureApplication.getInstance().getLocalization());
-
-		String url = String.format(
-				CommunityServerAPIUtilities.HTTPS_GETDOCUMENTYPES, csUrl);
-
-		System.out.println("URL " + url);
-		HttpGet request = new HttpGet(url);
-
-		AndroidHttpClient client = OpenTenureApplication.getHttpClient();
-
-		try {
-
-			HttpResponse response = client.execute(request);
-
-			setServerProtoVersion(response);
-
-			String json = CommunityServerAPIUtilities.Slurp(response
-					.getEntity().getContent(), 1024);
-
-			if (response.getStatusLine().getStatusCode() == (HttpStatus.SC_OK)) {
-
-				Log.d("CommunityServerAPI",
-						"GET ALL DOCUMENT TYPES JSON RESPONSE " + json);
-
-				Type listType = new TypeToken<ArrayList<org.fao.sola.clients.android.opentenure.network.response.ClaimType>>() {
-				}.getType();
-				List<org.fao.sola.clients.android.opentenure.network.response.ClaimType> claimTypeList = new Gson()
-						.fromJson(json, listType);
-
-				if (claimTypeList != null)
-					Log.d("CommunityServerAPI",
-							"Ho recuperato la lista dei TYPES di dimensione"
-									+ claimTypeList.size());
-
-				return claimTypeList;
-
-			} else {
-
-				Log.d("CommunityServerAPI",
-						"GET ALL DOCUMENT TYPES NOT SUCCEDED : HTTP STATUS "
-								+ response.getStatusLine().getStatusCode()
-								+ "  "
-								+ response.getStatusLine().getReasonPhrase());
-
-				return null;
-
-			}
-
-		} catch (java.net.ConnectException ce) {
-			Log.d("CommunityServerAPI",
-					"GET ALL DOCUMENT TYPES NETWORK ERROR CE" + ce.getMessage());
-			ce.printStackTrace();
-			OpenTenureApplication.getInstance().setNetworkError(true);
-			return null;
-
-		} catch (java.net.SocketException se) {
-
-			Log.d("CommunityServerAPI",
-					"GET ALL DOCUMENT TYPES NETWORK ERROR SE" + se.getMessage());
-			se.printStackTrace();
-			OpenTenureApplication.getInstance().setNetworkError(true);
-			return null;
-		} catch (java.net.SocketTimeoutException stoe) {
-
-			Log.d("CommunityServerAPI",
-					"GET ALL DOCUMENT TYPES NETWORK ERROR STOE"
-							+ stoe.getMessage());
-			stoe.printStackTrace();
-			OpenTenureApplication.getInstance().setNetworkError(true);
-			return null;
-		} catch (javax.net.ssl.SSLException ssle) {
-
-			Log.d("CommunityServerAPI",
-					"GET ALL DOCUMENT TYPES NETWORK ERROR SSLE"
-							+ ssle.getMessage());
-			ssle.printStackTrace();
-			OpenTenureApplication.getInstance().setNetworkError(true);
-			return null;
-		} catch (Exception ex) {
-
-			Log.d("CommunityServerAPI",
-					"GET ALL DOCUMENT TYPES ERROR " + ex.getMessage());
-			ex.printStackTrace();
-			return null;
-
-		}
-	}
-
-	public static String getGeometryRequired() {
-
-		SharedPreferences OpenTenurePreferences = PreferenceManager
-				.getDefaultSharedPreferences(OpenTenureApplication.getContext());
-
-		String csUrl = OpenTenurePreferences.getString(
-				OpenTenurePreferencesActivity.CS_URL_PREF,
-				OpenTenureApplication._DEFAULT_COMMUNITY_SERVER);
-
-		if (csUrl.trim().equals(""))
-			csUrl = OpenTenureApplication._DEFAULT_COMMUNITY_SERVER;
-
-		System.out.println("Localization "
-				+ OpenTenureApplication.getInstance().getLocalization());
-
-		String url = String.format(
-				CommunityServerAPIUtilities.HTTPS_GETPARCELGEOMREQUIRED, csUrl,
-				OpenTenureApplication.getInstance().getLocalization());
-
-		System.out.println("URL " + url);
-		HttpGet request = new HttpGet(url);
-
-		AndroidHttpClient client = OpenTenureApplication.getHttpClient();
-
-		try {
-
-			HttpResponse response = client.execute(request);
-
-			setServerProtoVersion(response);
-
-			String json = CommunityServerAPIUtilities.Slurp(response
-					.getEntity().getContent(), 1024);
-
-			if (response.getStatusLine().getStatusCode() == (HttpStatus.SC_OK)) {
-
-				Log.d("CommunityServerAPI",
-						"GET PARCEL GEOMETRY REQUIRED JSON RESPONSE " + json);
-
-				Type type = new GeoRequired().getClass();
-				GeoRequired required = new Gson().fromJson(json, type);
-
-				return required.getResult();
-
-			} else {
-
-				Log.d("CommunityServerAPI",
-						"GET PARCEL GEOMETRY REQUIRED NOT SUCCEDED : HTTP STATUS "
-								+ response.getStatusLine().getStatusCode()
-								+ "  "
-								+ response.getStatusLine().getReasonPhrase());
-
-				return null;
-
-			}
-
-		} catch (java.net.ConnectException ce) {
-			Log.d("CommunityServerAPI",
-					"GET PARCEL GEOMETRY REQUIRED NETWORK ERROR CE"
-							+ ce.getMessage());
-			ce.printStackTrace();
-			OpenTenureApplication.getInstance().setNetworkError(true);
-			return null;
-
-		} catch (java.net.SocketException se) {
-
-			Log.d("CommunityServerAPI",
-					"GET PARCEL GEOMETRY REQUIRED NETWORK ERROR SE"
-							+ se.getMessage());
-			se.printStackTrace();
-			OpenTenureApplication.getInstance().setNetworkError(true);
-			return null;
-		} catch (java.net.SocketTimeoutException stoe) {
-
-			Log.d("CommunityServerAPI",
-					"GET PARCEL GEOMETRY REQUIRED NETWORK ERROR STOE"
-							+ stoe.getMessage());
-			stoe.printStackTrace();
-			OpenTenureApplication.getInstance().setNetworkError(true);
-			return null;
-		} catch (javax.net.ssl.SSLException ssle) {
-
-			Log.d("CommunityServerAPI",
-					"GET PARCEL GEOMETRY NETWORK ERROR SSLE"
-							+ ssle.getMessage());
-			ssle.printStackTrace();
-			OpenTenureApplication.getInstance().setNetworkError(true);
-			return null;
-		} catch (Exception ex) {
-
-			Log.d("CommunityServerAPI", "GET PARCEL GEOMETRY REQUIRED ERROR "
-					+ ex.getMessage());
-			ex.printStackTrace();
-			return null;
-
-		}
+	public static List<RefDataResponse> getDocumentTypes() {
+		return getList(RefDataResponse[].class, false, CommunityServerAPIUtilities.HTTPS_GETDOCUMENTYPES);
 	}
 
 	public static SaveClaimResponse saveClaim(String claim) {
@@ -1553,15 +927,13 @@ public class CommunityServerAPI {
 		SharedPreferences OpenTenurePreferences = PreferenceManager
 				.getDefaultSharedPreferences(OpenTenureApplication.getContext());
 
-		String csUrl = OpenTenurePreferences.getString(
-				OpenTenurePreferencesActivity.CS_URL_PREF,
-				OpenTenureApplication._DEFAULT_COMMUNITY_SERVER);
+		String csUrl = OpenTenureApplication.getInstance().getServerUrl();
 
 		if (csUrl.trim().equals(""))
 			csUrl = OpenTenureApplication._DEFAULT_COMMUNITY_SERVER;
 
 		String url = String.format(CommunityServerAPIUtilities.HTTPS_SAVECLAIM,
-				csUrl, OpenTenureApplication.getInstance().getLocalization());
+				csUrl, OpenTenureApplication.getInstance().getLanguageCode());
 
 		HttpPost request = new HttpPost(url);
 
@@ -1653,15 +1025,13 @@ public class CommunityServerAPI {
 
 		SharedPreferences OpenTenurePreferences = PreferenceManager.getDefaultSharedPreferences(OpenTenureApplication.getContext());
 
-		String csUrl = OpenTenurePreferences.getString(
-				OpenTenurePreferencesActivity.CS_URL_PREF,
-				OpenTenureApplication._DEFAULT_COMMUNITY_SERVER);
+		String csUrl = OpenTenureApplication.getInstance().getServerUrl();
 
 		if (csUrl.trim().equals(""))
 			csUrl = OpenTenureApplication._DEFAULT_COMMUNITY_SERVER;
 
 		String url = String.format(CommunityServerAPIUtilities.HTTPS_SAVE_BOUNDARY,
-				csUrl, OpenTenureApplication.getInstance().getLocalization());
+				csUrl, OpenTenureApplication.getInstance().getLanguageCode());
 
 		HttpPost request = new HttpPost(url);
 
@@ -1740,16 +1110,14 @@ public class CommunityServerAPI {
 		SharedPreferences OpenTenurePreferences = PreferenceManager
 				.getDefaultSharedPreferences(OpenTenureApplication.getContext());
 
-		String csUrl = OpenTenurePreferences.getString(
-				OpenTenurePreferencesActivity.CS_URL_PREF,
-				OpenTenureApplication._DEFAULT_COMMUNITY_SERVER);
+		String csUrl = OpenTenureApplication.getInstance().getServerUrl();
 
 		if (csUrl.trim().equals(""))
 			csUrl = OpenTenureApplication._DEFAULT_COMMUNITY_SERVER;
 
 		String url = String.format(
 				CommunityServerAPIUtilities.HTTPS_SAVEATTACHMENT, csUrl,
-				OpenTenureApplication.getInstance().getLocalization());
+				OpenTenureApplication.getInstance().getLanguageCode());
 
 		HttpPost request = new HttpPost(url);
 		SaveAttachmentResponse saveAttachmentResponse = null;
@@ -1823,19 +1191,12 @@ public class CommunityServerAPI {
 
 		Log.d("CommunityServerAPI", "chunk descriptor" + payload);
 
-		SharedPreferences OpenTenurePreferences = PreferenceManager
-				.getDefaultSharedPreferences(OpenTenureApplication.getContext());
-
-		String csUrl = OpenTenurePreferences.getString(
-				OpenTenurePreferencesActivity.CS_URL_PREF,
-				OpenTenureApplication._DEFAULT_COMMUNITY_SERVER);
-
-		if (csUrl.trim().equals(""))
-			csUrl = OpenTenureApplication._DEFAULT_COMMUNITY_SERVER;
+		String csUrl = OpenTenureApplication.getInstance().getServerUrl();
 
 		String url = String.format(
 				CommunityServerAPIUtilities.HTTPS_UPLOADCHUNK, csUrl,
-				OpenTenureApplication.getInstance().getLocalization());
+				OpenTenureApplication.getInstance().getLanguageCode(),
+				OpenTenureApplication.getInstance().getProject().getId());
 
 		HttpPost request = new HttpPost(url);
 		ApiResponse apiResponse = null;
@@ -1902,13 +1263,11 @@ public class CommunityServerAPI {
 		SharedPreferences OpenTenurePreferences = PreferenceManager
 				.getDefaultSharedPreferences(OpenTenureApplication.getContext());
 
-		String csUrl = OpenTenurePreferences.getString(
-				OpenTenurePreferencesActivity.CS_URL_PREF,
-				OpenTenureApplication._DEFAULT_COMMUNITY_SERVER);
+		String csUrl = OpenTenureApplication.getInstance().getServerUrl();
 
 		String url = String.format(
 				CommunityServerAPIUtilities.HTTPS_ADDCLAIMATTACHMENT, csUrl,
-				OpenTenureApplication.getInstance().getLocalization(), claimId,
+				OpenTenureApplication.getInstance().getLanguageCode(), claimId,
 				attachmentId);
 
 		HttpGet request = new HttpGet(url);

@@ -28,8 +28,6 @@
  */
 package org.fao.sola.clients.android.opentenure.maps;
 
-import java.io.IOException;
-import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -53,7 +51,6 @@ import android.graphics.Paint;
 import android.graphics.Paint.Align;
 import android.graphics.Rect;
 import android.graphics.Typeface;
-import android.util.Log;
 
 import com.androidmapsextensions.ClusterGroup;
 import com.androidmapsextensions.GoogleMap;
@@ -460,7 +457,7 @@ public class BasePropertyBoundary {
 		ClaimType ct = new ClaimType();
 		String areaString = null;
 
-		DisplayNameLocalizer dnl = new DisplayNameLocalizer(OpenTenureApplication.getInstance().getLocalization());
+		DisplayNameLocalizer dnl = new DisplayNameLocalizer(OpenTenureApplication.getInstance().getLanguageCode());
 
 		calculateArea();
 
@@ -478,7 +475,7 @@ public class BasePropertyBoundary {
 						+ ", "
 						+ context.getString(R.string.type)
 						+ ": "
-						+ dnl.getLocalizedDisplayName(ct.getDisplayValueByType(claim.getType())) + ", "
+						+ dnl.getLocalizedDisplayName(ct.getDisplayValueByCode(claim.getType())) + ", "
 						+ areaString);
 
 	}

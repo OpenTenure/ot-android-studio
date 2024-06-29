@@ -56,6 +56,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.androidmapsextensions.ClusterGroup;
@@ -104,13 +106,14 @@ import org.fao.sola.clients.android.opentenure.maps.MainMapFragment.MapType;
 import org.fao.sola.clients.android.opentenure.model.Bookmark;
 import org.fao.sola.clients.android.opentenure.model.Boundary;
 import org.fao.sola.clients.android.opentenure.model.Configuration;
+import org.fao.sola.clients.android.opentenure.model.UserLayer;
 import org.fao.sola.clients.android.opentenure.tools.GisUtility;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 public class BoundaryMapFragment extends Fragment  implements SensorEventListener {
-	private BoundaryDispatcher boundaryDispatcher;
 	private BoundaryActivity boundaryActivity;
 	private static final int MAP_LABEL_FONT_SIZE = 16;
 	private static final String OSM_MAPNIK_BASE_URL = "http://a.tile.openstreetmap.org/{z}/{x}/{y}.png";
@@ -122,7 +125,6 @@ public class BoundaryMapFragment extends Fragment  implements SensorEventListene
 	private EditableBoundary.MapMode mapMode = EditableBoundary.MapMode.add_boundary;
 	private MapType mapType = MapType.map_provider_google_normal;
 	private View mapView;
-	private MapLabel label;
 	private GoogleMap map;
 	private EditableBoundary currentBoundary;
 	private List<BaseBoundary> visibleBoundaries;
@@ -132,6 +134,7 @@ public class BoundaryMapFragment extends Fragment  implements SensorEventListene
 	private double snapLat;
 	private double snapLon;
 	private Menu menu;
+	private MenuItem mapToolsMenu;
 	private boolean isRotating = false;
 	private boolean isFollowing = false;
 	private Marker myLocation;
@@ -148,6 +151,7 @@ public class BoundaryMapFragment extends Fragment  implements SensorEventListene
 
 	// device sensor manager
 	private SensorManager mSensorManager;
+	private TextView txtCoords;
 
 	@Override
 	public void onAttach(Activity activity) {
@@ -155,7 +159,6 @@ public class BoundaryMapFragment extends Fragment  implements SensorEventListene
 
 		try {
 			boundaryActivity = (BoundaryActivity) activity;
-			boundaryDispatcher = (BoundaryDispatcher) activity;
 		} catch (ClassCastException e) {
 			throw new ClassCastException(activity.toString() + " must be BoundaryActivity implementing BoundaryDispatcher");
 		}
@@ -184,6 +187,7 @@ public class BoundaryMapFragment extends Fragment  implements SensorEventListene
 		menu.clear();
 		inflater.inflate(R.menu.boundary_map, menu);
 		menu.findItem(R.id.action_stop_rotating).setVisible(false);
+		mapToolsMenu = menu.findItem(R.id.action_change_map_mode);
 
 		MenuItem saveAction = menu.findItem(R.id.action_save);
 		saveAction.setVisible(editable());
@@ -193,10 +197,34 @@ public class BoundaryMapFragment extends Fragment  implements SensorEventListene
 			menu.findItem(R.id.action_change_map_mode).getSubMenu().removeItem(R.id.action_add_boundary);
 			mapMode = EditableBoundary.MapMode.measure;
 		}
+
+		switch (mapMode) {
+			case add_boundary:
+				mapToolsMenu.getSubMenu().findItem(R.id.action_add_boundary).setChecked(true);
+				break;
+			case measure:
+				mapToolsMenu.getSubMenu().findItem(R.id.action_measure).setChecked(true);
+				break;
+		}
+
 		this.menu = menu;
 		super.onCreateOptionsMenu(menu, inflater);
 		setHasOptionsMenu(true);
 		setRetainInstance(true);
+	}
+
+	private void uncheckMapToolsMenus() {
+		if(mapToolsMenu != null){
+			MenuItem addBoundary = mapToolsMenu.getSubMenu().findItem(R.id.action_add_boundary);
+			MenuItem measure = mapToolsMenu.getSubMenu().findItem(R.id.action_measure);
+
+			if(addBoundary != null) {
+				addBoundary.setChecked(false);
+			}
+			if(measure != null) {
+				measure.setChecked(false);
+			}
+		}
 	}
 
 	@Override
@@ -229,16 +257,10 @@ public class BoundaryMapFragment extends Fragment  implements SensorEventListene
 	@Override
 	public void onDestroyView() {
 		Fragment map = getFragmentManager().findFragmentById(R.id.boundary_map_fragment);
-		Fragment label = getFragmentManager().findFragmentById(R.id.boundary_map_provider_label);
 		try {
 			if (map.isResumed()) {
 				FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
 				ft.remove(map);
-				ft.commit();
-			}
-			if (label.isResumed()) {
-				FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-				ft.remove(label);
 				ft.commit();
 			}
 		} catch (Exception e) {
@@ -317,8 +339,7 @@ public class BoundaryMapFragment extends Fragment  implements SensorEventListene
 		super.onCreateView(inflater, container, savedInstanceState);
 		mapView = inflater.inflate(R.layout.fragment_boundary_map, container, false);
 		setHasOptionsMenu(true);
-		label = (MapLabel) getChildFragmentManager().findFragmentById(R.id.boundary_map_provider_label);
-		label.changeTextProperties(MAP_LABEL_FONT_SIZE,	getActivity().getResources().getString(R.string.map_provider_google_normal));
+		txtCoords = (TextView) mapView.findViewById(R.id.txtCoords);
 		final BoundaryMapFragment that = this;
 
 		// Location client
@@ -335,6 +356,7 @@ public class BoundaryMapFragment extends Fragment  implements SensorEventListene
 					return;
 				}
 				lastKnownLocation = locationResult.getLastLocation();
+				txtCoords.setText(String.format(getResources().getString(R.string.accuracy), lastKnownLocation.getAccuracy()));
 			}
 		};
 
@@ -348,7 +370,6 @@ public class BoundaryMapFragment extends Fragment  implements SensorEventListene
 				settings.addMarkersDynamically(true);
 				map.setClustering(settings);
 
-				//MapsInitializer.initialize(this.getActivity());
 				map.setInfoWindowAdapter(new PopupAdapter(inflater));
 				map.setOnCameraIdleListener(new GoogleMap.OnCameraIdleListener() {
 					@Override
@@ -366,7 +387,7 @@ public class BoundaryMapFragment extends Fragment  implements SensorEventListene
 					// probably an orientation change don't move the view but
 					// restore the current type of the map
 					mapType = MapType.valueOf(savedInstanceState.getString(MAP_TYPE));
-					setMapType(true);
+					loadLayers(true);
 				} else {
 					// restore the latest map type used on the main map
 					try {
@@ -375,7 +396,7 @@ public class BoundaryMapFragment extends Fragment  implements SensorEventListene
 						mapType = MapType.map_provider_google_normal;
 					}
 					// don't draw properties since we might not have loaded them yet
-					setMapType(false);
+					loadLayers(false);
 				}
 
 				hideVisibleBoundaries();
@@ -466,6 +487,14 @@ public class BoundaryMapFragment extends Fragment  implements SensorEventListene
 			}
 		});
 
+		ImageButton btnLayers = mapView.findViewById(R.id.btnLayers);
+		btnLayers.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				Intent mapLayersActivity = new Intent(getContext(), MapLayersActivity.class);
+				startActivityForResult(mapLayersActivity, MapLayersActivity.REQUEST_CODE);
+			}
+		});
 		return mapView;
 	}
 
@@ -600,63 +629,14 @@ public class BoundaryMapFragment extends Fragment  implements SensorEventListene
 		visibleBoundariesMultiPolygon.setSRID(Constants.SRID);
 	}
 
-	private void setMapLabel() {
-
-		String mode = null;
-
-		switch (mapMode) {
-			case add_boundary:
-				mode = ": " + getResources().getString(R.string.action_add_boundary);
-				break;
-			case measure:
-				mode = ": " + getResources().getString(R.string.action_measure);
-				break;
-		}
-
-		switch (mapType) {
-			case map_provider_google_normal:
-				label.changeTextProperties(MAP_LABEL_FONT_SIZE,
-						getResources().getString(R.string.map_provider_google_normal) + mode);
-				break;
-			case map_provider_google_satellite:
-				label.changeTextProperties(MAP_LABEL_FONT_SIZE,
-						getResources().getString(R.string.map_provider_google_satellite) + mode);
-				break;
-			case map_provider_google_hybrid:
-				label.changeTextProperties(MAP_LABEL_FONT_SIZE,
-						getResources().getString(R.string.map_provider_google_hybrid) + mode);
-				break;
-			case map_provider_google_terrain:
-				label.changeTextProperties(MAP_LABEL_FONT_SIZE,
-						getResources().getString(R.string.map_provider_google_terrain) + mode);
-				break;
-			case map_provider_osm_mapnik:
-				label.changeTextProperties(MAP_LABEL_FONT_SIZE,
-						getResources().getString(R.string.map_provider_osm_mapnik) + mode);
-				break;
-			case map_provider_osm_mapquest:
-				label.changeTextProperties(MAP_LABEL_FONT_SIZE,
-						getResources().getString(R.string.map_provider_osm_mapquest) + mode);
-				break;
-			case map_provider_local_tiles:
-				label.changeTextProperties(MAP_LABEL_FONT_SIZE,
-						getResources().getString(R.string.map_provider_local_tiles) + mode);
-				break;
-			case map_provider_geoserver:
-				label.changeTextProperties(MAP_LABEL_FONT_SIZE,
-						getResources().getString(R.string.map_provider_geoserver) + mode);
-				break;
-			default:
-				break;
-		}
-	}
-
-	private void setMapType(boolean drawBoundaries) {
-
+	private void loadLayers(boolean forceDraw) {
 		for (TileOverlay tiles : map.getTileOverlays()) {
 			tiles.remove();
 		}
 
+		boolean redrawBoundaries = false;
+
+		// Add base layer
 		switch (mapType) {
 			case map_provider_google_normal:
 				map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
@@ -673,40 +653,57 @@ public class BoundaryMapFragment extends Fragment  implements SensorEventListene
 			case map_provider_osm_mapnik:
 				OsmTileProvider mapNikTileProvider = new OsmTileProvider(256, 256, OSM_MAPNIK_BASE_URL);
 				map.setMapType(GoogleMap.MAP_TYPE_NONE);
-				map.addTileOverlay(
-						new TileOverlayOptions().tileProvider(mapNikTileProvider).zIndex(CUSTOM_TILE_PROVIDER_Z_INDEX));
-				if (drawBoundaries) {
-					redrawBoundaries();
-				}
+				map.addTileOverlay(new TileOverlayOptions().tileProvider(mapNikTileProvider));
+				redrawBoundaries = true;
 				break;
 			case map_provider_osm_mapquest:
 				OsmTileProvider mapQuestTileProvider = new OsmTileProvider(256, 256, OSM_MAPQUEST_BASE_URL);
 				map.setMapType(GoogleMap.MAP_TYPE_NONE);
-				map.addTileOverlay(
-						new TileOverlayOptions().tileProvider(mapQuestTileProvider).zIndex(CUSTOM_TILE_PROVIDER_Z_INDEX));
-				if (drawBoundaries) {
-					redrawBoundaries();
-				}
+				map.addTileOverlay(new TileOverlayOptions().tileProvider(mapQuestTileProvider));
+				redrawBoundaries = true;
 				break;
 			case map_provider_local_tiles:
 				map.setMapType(GoogleMap.MAP_TYPE_NONE);
-				map.addTileOverlay(new TileOverlayOptions().tileProvider(new LocalMapTileProvider())
-						.zIndex(CUSTOM_TILE_PROVIDER_Z_INDEX));
-				if (drawBoundaries) {
-					redrawBoundaries();
-				}
+				map.addTileOverlay(new TileOverlayOptions().tileProvider(new LocalMapTileProvider()));
+				redrawBoundaries = true;
 				break;
 			case map_provider_geoserver:
 				map.setMapType(GoogleMap.MAP_TYPE_NONE);
-				map.addTileOverlay(new TileOverlayOptions().tileProvider(new WmsMapTileProvider(256, 256, PreferenceManager.getDefaultSharedPreferences(mapView.getContext()))));
-				if (drawBoundaries) {
-					redrawBoundaries();
-				}
+				map.addTileOverlay(new TileOverlayOptions().tileProvider(new WmsMapTileProvider(256, 256)));
+				redrawBoundaries = true;
+				break;
+			case map_provider_empty:
+				map.setMapType(GoogleMap.MAP_TYPE_NONE);
+				redrawBoundaries = true;
 				break;
 			default:
 				break;
 		}
-		setMapLabel();
+
+		// Add user layers
+		List<UserLayer> userLayers = UserLayer.getUserLayers(false);
+		if (userLayers != null && userLayers.size() > 0) {
+			for (UserLayer userLayer : userLayers) {
+				if (userLayer.getEnabled()) {
+					File mbtileFile = new File(userLayer.getFilePath());
+					if (mbtileFile.exists()) {
+						try {
+							TileOverlayOptions opts = new TileOverlayOptions();
+							opts.tileProvider(new MbTilesProvider(mbtileFile));
+							map.addTileOverlay(opts);
+							redrawBoundaries = true;
+						} catch (Exception ex) {
+							Log.d("UserLayer", "Failed to add user map layer. " + ex.getMessage());
+							ex.printStackTrace();
+						}
+					}
+				}
+			}
+		}
+
+		if (redrawBoundaries && forceDraw) {
+			redrawBoundaries();
+		}
 	}
 
 	private void redrawBoundaries() {
@@ -752,46 +749,14 @@ public class BoundaryMapFragment extends Fragment  implements SensorEventListene
 			case R.id.action_add_boundary:
 				mapMode = EditableBoundary.MapMode.add_boundary;
 				currentBoundary.deselect();
+				uncheckMapToolsMenus();
 				cancelDistance();
-				setMapLabel();
 				return true;
 			case R.id.action_measure:
 				mapMode = EditableBoundary.MapMode.measure;
 				currentBoundary.deselect();
+				uncheckMapToolsMenus();
 				cancelDistance();
-				setMapLabel();
-				return true;
-			case R.id.map_provider_google_normal:
-				mapType = MapType.map_provider_google_normal;
-				setMapType(true);
-				return true;
-			case R.id.map_provider_google_satellite:
-				mapType = MapType.map_provider_google_satellite;
-				setMapType(true);
-				return true;
-			case R.id.map_provider_google_hybrid:
-				mapType = MapType.map_provider_google_hybrid;
-				setMapType(true);
-				return true;
-			case R.id.map_provider_google_terrain:
-				mapType = MapType.map_provider_google_terrain;
-				setMapType(true);
-				return true;
-			case R.id.map_provider_osm_mapnik:
-				mapType = MapType.map_provider_osm_mapnik;
-				setMapType(true);
-				return true;
-			case R.id.map_provider_osm_mapquest:
-				mapType = MapType.map_provider_osm_mapquest;
-				setMapType(true);
-				return true;
-			case R.id.map_provider_local_tiles:
-				mapType = MapType.map_provider_local_tiles;
-				setMapType(true);
-				return true;
-			case R.id.map_provider_geoserver:
-				mapType = MapType.map_provider_geoserver;
-				setMapType(true);
 				return true;
 			case R.id.action_save:
 				boundaryActivity.onSave();
@@ -876,7 +841,14 @@ public class BoundaryMapFragment extends Fragment  implements SensorEventListene
 					break;
 			}
 		}
-
+		if(requestCode == MapLayersActivity.REQUEST_CODE && resultCode == MapLayersActivity.RESPONSE_CODE){
+			try {
+				mapType = MapType.valueOf(Configuration.getConfigurationValue(MainMapFragment.MAIN_MAP_TYPE));
+			} catch (Exception e) {
+				mapType = MapType.map_provider_google_normal;
+			}
+			loadLayers(true);
+		}
 		super.onActivityResult(requestCode, resultCode, data);
 	}
 

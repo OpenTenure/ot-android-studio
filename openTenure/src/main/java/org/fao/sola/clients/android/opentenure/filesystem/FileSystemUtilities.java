@@ -80,6 +80,8 @@ public class FileSystemUtilities {
 	private static String _CLAIMANT_PREFIX = "claimant_";
 	private static String _ATTACHMENT_FOLDER = "attachments";
 	private static String _OPEN_TENURE_FOLDER = "Open Tenure";
+
+	private static String _MBTILES_FOLDER = "mbtiles";
 	private static String _CERTIFICATES = "Certificates";
 	private static String _IMPORT = "Import";
 	private static String _EXPORT = "Export";
@@ -338,6 +340,25 @@ public class FileSystemUtilities {
 			// if file, then delete it
 
 			Log.d("FileSystemUtilities", "is not a folder : " + folder.getAbsolutePath());
+		}
+	}
+
+	public static File getMbTilesFolder() {
+		if (isExternalStorageWritable()) {
+			try {
+				Context context = OpenTenureApplication.getContext();
+				File appFolder = context.getExternalFilesDir(null);
+				File folder = new File(appFolder.getAbsoluteFile() + File.separator + _MBTILES_FOLDER);
+
+				if(!folder.exists()) {
+					folder.mkdir();
+				}
+				return folder;
+			} catch (Exception e) {
+				return null;
+			}
+		} else {
+			return null;
 		}
 	}
 

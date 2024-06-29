@@ -41,6 +41,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 import java.util.UUID;
 
+import org.fao.sola.clients.android.opentenure.OpenTenureApplication;
 import org.fao.sola.clients.android.opentenure.model.Attachment;
 
 import org.fao.sola.clients.android.opentenure.model.MD5;
@@ -92,7 +93,6 @@ public class UploadChunks {
 						chunk = Arrays.copyOfRange(chunk, 0, rsz);
 
 					payload.setMd5(MD5.calculateMD5(chunk));
-
 					payload.setAttachmentId(attachmentId);
 					payload.setClaimId(attachment.getClaimId());
 					payload.setId(UUID.randomUUID().toString());
@@ -113,8 +113,7 @@ public class UploadChunks {
 					 * Calling the server.....
 					 * ***/
 
-					ApiResponse res = CommunityServerAPI.uploadChunk(json,
-							chunk);
+					ApiResponse res = CommunityServerAPI.uploadChunk(json, chunk);
 
 					if (res.getHttpStatusCode() == 200) {
 

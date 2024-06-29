@@ -31,13 +31,13 @@ import java.util.List;
 
 public class GetClaimTypesResponse extends ApiResponse{
 	
-	List<ClaimType> types;
+	List<ClaimTypeResponse> types;
 
-	public List<ClaimType> getTypes() {
+	public List<ClaimTypeResponse> getTypes() {
 		return types;
 	}
 
-	public void setTypes(List<ClaimType> types) {
+	public void setTypes(List<ClaimTypeResponse> types) {
 		this.types = types;
 	}
 

@@ -51,6 +51,7 @@ import com.vividsolutions.jts.geom.Geometry;
 import com.vividsolutions.jts.geom.GeometryFactory;
 import com.vividsolutions.jts.geom.LineString;
 import com.vividsolutions.jts.geom.LinearRing;
+import com.vividsolutions.jts.geom.MultiPolygon;
 import com.vividsolutions.jts.geom.Point;
 import com.vividsolutions.jts.geom.Polygon;
 import com.vividsolutions.jts.io.ParseException;
@@ -663,6 +664,20 @@ public class Vertex {
 			vertices.add(vertex);
 		}
 
+		return vertices;
+	}
+
+	public static List<Vertex> shellFromPolygon(Polygon poly) {
+		List<Vertex> vertices = new ArrayList<Vertex>();
+		if(poly != null) {
+			for (int i = 0; i < poly.getExteriorRing().getNumPoints() - 1; i++) {
+				Coordinate mapCoordinate = poly.getExteriorRing().getCoordinates()[i];
+				Vertex vertex = new Vertex(new LatLng(
+					mapCoordinate.getOrdinate(Coordinate.Y),
+					mapCoordinate.getOrdinate(Coordinate.X)));
+				vertices.add(vertex);
+			}
+		}
 		return vertices;
 	}
 

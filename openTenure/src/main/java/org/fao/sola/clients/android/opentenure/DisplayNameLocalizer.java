@@ -1,4 +1,4 @@
-/**
+package org.fao.sola.clients.android.opentenure; /**
  * ******************************************************************************************
  * Copyright (C) 2014 - Food and Agriculture Organization of the United Nations (FAO).
  * All rights reserved.
@@ -25,8 +25,10 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * *********************************************************************************************
  */
-package org.fao.sola.clients.android.opentenure;
 
+
+import org.fao.sola.clients.android.opentenure.OpenTenureApplication;
+import org.fao.sola.clients.android.opentenure.model.Language;
 
 public class DisplayNameLocalizer {
 	/*
@@ -38,22 +40,23 @@ public class DisplayNameLocalizer {
 	private int currentLanguageItemOrder;
 	private int defaultLanguageItemOrder;
 	
-	public DisplayNameLocalizer(String localization){
+	public DisplayNameLocalizer() {
+		this(OpenTenureApplication.getInstance().getLanguageCode());
+	}
+
+	public DisplayNameLocalizer(String languageCode) {
 		currentLanguageItemOrder = 1;
 		defaultLanguageItemOrder = 1;
 
-		org.fao.sola.clients.android.opentenure.model.Language defaultLanguage = org.fao.sola.clients.android.opentenure.model.Language.getDefaultLanguage();
-		
+		Language defaultLanguage = Language.getDefaultLanguage();
 		if(defaultLanguage != null){
 			defaultLanguageItemOrder = defaultLanguage.getItemOrder();
 		}
-		
-		org.fao.sola.clients.android.opentenure.model.Language currentLanguage = org.fao.sola.clients.android.opentenure.model.Language.getLanguage(OpenTenureApplication.getInstance().getLocalization());
-		
+
+		Language currentLanguage = Language.getLanguage(languageCode);
 		if(currentLanguage != null){
 			currentLanguageItemOrder = currentLanguage.getItemOrder();
 		}
-		
 	}
 	
 	public String getLocalizedDisplayName(String unlocalizedDisplayName){

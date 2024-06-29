@@ -49,8 +49,6 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.core.app.NavUtils;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import android.util.SparseArray;
@@ -536,7 +534,7 @@ public class ClaimActivity extends FragmentActivity implements ClaimDispatcher,
 		}
 
 		private String getSectionTitle(int position) {
-			DisplayNameLocalizer dnl = new DisplayNameLocalizer(OpenTenureApplication.getInstance().getLocalization());
+			DisplayNameLocalizer dnl = new DisplayNameLocalizer(OpenTenureApplication.getInstance().getLanguageCode());
 			int sectionPosition = position - NUMBER_OF_STATIC_SECTIONS;
 
 			String sectionTitle = null;

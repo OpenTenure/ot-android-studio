@@ -27,23 +27,21 @@
  */
 package org.fao.sola.clients.android.opentenure.maps;
 
+import android.graphics.BitmapFactory;
+import android.util.Log;
+
+import com.google.android.gms.maps.model.Tile;
+import com.google.android.gms.maps.model.TileProvider;
+
+import org.fao.sola.clients.android.opentenure.OpenTenureApplication;
+import org.fao.sola.clients.android.opentenure.maps.OfflineTilesProvider.TilesProviderType;
+import org.fao.sola.clients.android.opentenure.tools.StringUtility;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-
-import org.fao.sola.clients.android.opentenure.OpenTenure;
-import org.fao.sola.clients.android.opentenure.OpenTenureApplication;
-import org.fao.sola.clients.android.opentenure.maps.OfflineTilesProvider.TilesProviderType;
-
-import android.content.SharedPreferences;
-import android.graphics.BitmapFactory;
-import android.preference.PreferenceManager;
-import android.util.Log;
-
-import com.google.android.gms.maps.model.Tile;
-import com.google.android.gms.maps.model.TileProvider;
 
 public class LocalMapTileProvider implements TileProvider {
 	public static final int TILE_WIDTH = 256;
@@ -52,18 +50,18 @@ public class LocalMapTileProvider implements TileProvider {
 
 	private OfflineTilesProvider tilesProvider;
 	public LocalMapTileProvider() {
+
+		String currentTilesProvider = "geoserver";
+		if(OpenTenureApplication.getInstance().getProject() != null && !StringUtility.isEmpty(OpenTenureApplication.getInstance().getProject().getTilesServerType())){
+			currentTilesProvider = OpenTenureApplication.getInstance().getProject().getTilesServerType().toLowerCase();
+		}
 		
-		SharedPreferences prefs = PreferenceManager
-				.getDefaultSharedPreferences(OpenTenureApplication.getContext());
-		
-		String currentTilesProvider = prefs.getString(OpenTenure.tiles_provider, TilesProviderType.GeoServer.toString());
-		
-		if(currentTilesProvider.equals(TilesProviderType.GeoServer.toString())){
-			tilesProvider = new OfflineWmsMapTileProvider(TILE_WIDTH, TILE_HEIGHT, prefs);
-		}else if(currentTilesProvider.equals(TilesProviderType.TMS.toString())){
-			tilesProvider = new OfflineTmsMapTilesProvider(TILE_WIDTH, TILE_HEIGHT, prefs);
+		if(currentTilesProvider.equals(TilesProviderType.geoserver.toString())){
+			tilesProvider = new OfflineWmsMapTileProvider(TILE_WIDTH, TILE_HEIGHT);
+		}else if(currentTilesProvider.equals(TilesProviderType.tms.toString())){
+			tilesProvider = new OfflineTmsMapTilesProvider(TILE_WIDTH, TILE_HEIGHT);
 		}else{
-			tilesProvider = new OfflineWtmsMapTilesProvider(TILE_WIDTH, TILE_HEIGHT, prefs);
+			tilesProvider = new OfflineWtmsMapTilesProvider(TILE_WIDTH, TILE_HEIGHT);
 		}
 	}
 
@@ -86,12 +84,11 @@ public class LocalMapTileProvider implements TileProvider {
 		try {
 			File tileFile = new File(tileFileName);
 			if(tileFile.exists()){
-				if(tileFile.lastModified() < (System
-						.currentTimeMillis() - TileDownloadTask.TILE_REFRESH_TIME)){
+				if(tileFile.lastModified() < (System.currentTimeMillis() - TileDownloadTask.TILE_REFRESH_TIME)){
 					// The tile does not comply our caching policy
 					// so we delete it and return null
 					tileFile.delete();
-				}else{
+				} else {
 					in = new FileInputStream(tileFileName);
 					buffer = new ByteArrayOutputStream();
 

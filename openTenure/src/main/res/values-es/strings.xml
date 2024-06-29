@@ -8,8 +8,8 @@
     <string name="action_new">Nuevo</string>
     <string name="action_import">Importación</string>
     <string name="action_add_from_gps">Nuevo</string>
-    <string name="action_add_boundary">Add boundary marker</string>
-    <string name="action_add_non_boundary">Add non boundary marker</string>
+    <string name="action_add_boundary">Add boundaryResponse marker</string>
+    <string name="action_add_non_boundary">Add non boundaryResponse marker</string>
     <string name="action_measure">Measure</string>
     <string name="action_export_geo">Export geographic data</string>
     <string name="action_change_map_mode">Change map mode</string>
@@ -493,7 +493,7 @@
     <string name="language_dialog_title">Select a language</string>
     <string name="message_add_map_bookmark_marker">Add map bookmark marker?</string>
     <string name="markers_distance_label">Distance</string>
-    <string name="message_add_non_boundary_marker">Add non boundary marker?</string>
+    <string name="message_add_non_boundary_marker">Add non boundaryResponse marker?</string>
     <string name="message_available_shares">The sum of the shares is less than 100%</string>
     <string name="message_claim_import_already_present">The claim is already present on the client</string>
     <string name="message_claim_import_claim_not_belongs_to_community">This claim does not belong to the community</string>
@@ -525,7 +525,7 @@
     <string name="wtms_url_pref_dialog_title">Enter the URL of your Web Tiles Map Server</string>
     <string name="wtms_url_pref_summary">Base URL of your Web Tiles Map Server</string>
     <string name="wtms_url_pref_title">WTMS URL</string>
-    <string name="boundary">Áreas de la Comunidad</string>
+    <string name="boundaryResponse">Áreas de la Comunidad</string>
     <string name="title_boundaries">Área de la Comunidad</string>
     <string name="title_boundary_details">Detalles</string>
     <string name="boundary_name">Nombre *</string>

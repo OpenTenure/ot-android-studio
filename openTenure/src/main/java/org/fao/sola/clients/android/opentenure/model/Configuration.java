@@ -43,6 +43,8 @@ public class Configuration {
 	
 	public static final String PROTOVERSION_NAME = "PROTOVERSION";
 
+	public static final String PROJECT_ID = "PROJECT_ID";
+
 	public String getConfigurationId() {
 		return configurationId;
 	}

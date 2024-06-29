@@ -49,10 +49,16 @@ public class Claim {
 		this.version = version;
 	}
 
+	public String getProjectId() {
+		return projectId;
+	}
 
+	public void setProjectId(String projectId) {
+		this.projectId = projectId;
+	}
 
 	String id ;
 	String statusCode;
 	String version;
-
+	String projectId;
 }

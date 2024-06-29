@@ -46,7 +46,7 @@ import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
-public class FormRetriever extends AsyncTask<Void, Integer, Integer> {
+public class FormRetriever {
 
 	private String oldDefaultFormTemplateUrl;
 	private String defaultFormTemplateUrl;
@@ -64,11 +64,7 @@ public class FormRetriever extends AsyncTask<Void, Integer, Integer> {
 			// server url has been specified
 			// use the default one for the explicitly configured server
 			// or the default one
-			formUrl = String.format(urlPattern,
-					OpenTenurePreferences.getString(
-							OpenTenurePreferencesActivity.CS_URL_PREF,
-							OpenTenureApplication._DEFAULT_COMMUNITY_SERVER));
-
+			formUrl = String.format(urlPattern, OpenTenureApplication.getInstance().getServerUrl());
 		}
 
 		return formUrl;
@@ -193,7 +189,7 @@ public class FormRetriever extends AsyncTask<Void, Integer, Integer> {
 
 	}
 
-	protected Integer doInBackground(Void... params) {
+	public boolean retrieve() {
 
 		int result = 0;
 		
@@ -209,8 +205,7 @@ public class FormRetriever extends AsyncTask<Void, Integer, Integer> {
 			// let's try the old 'get default only' one
 			result = saveOldDefaultForm();
 		}
-		return result;
-
+		return result > 0;
 	}
 
 	private String getBody(InputStream inputStream) throws IOException {
@@ -245,13 +240,5 @@ public class FormRetriever extends AsyncTask<Void, Integer, Integer> {
 
 		body = stringBuilder.toString();
 		return body;
-	}
-
-	protected void onPostExecute(Integer result) {
-
-		if (result > 0) {
-			OpenTenureApplication.getInstance().setCheckedForm(true);
-			OpenTenureApplication.getInstance().setSettingsSynchronized();
-		}
 	}
 }

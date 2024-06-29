@@ -144,8 +144,8 @@ public class SubmitClaimListener implements OnClickListener {
 			Person person = claim.getPerson();
 
 			boolean isDefaultCertificateDocumentTypeAvailable = false;
-			DocumentType dt = DocumentType.getDocumentType(PDFClaimExporter.DEFAULT_CERTIFICATE_DOCUMENT_TYPE);
-			if(dt!= null && PDFClaimExporter.DEFAULT_CERTIFICATE_DOCUMENT_TYPE.equalsIgnoreCase(dt.getType()) && dt.isActive()){
+			DocumentType dt = DocumentType.getItem(PDFClaimExporter.DEFAULT_CERTIFICATE_DOCUMENT_TYPE);
+			if(dt!= null && PDFClaimExporter.DEFAULT_CERTIFICATE_DOCUMENT_TYPE.equalsIgnoreCase(dt.getCode()) && dt.getActive()){
 				isDefaultCertificateDocumentTypeAvailable = true;
 			}
 

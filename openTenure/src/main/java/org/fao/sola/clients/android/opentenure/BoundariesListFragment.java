@@ -49,10 +49,10 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import org.fao.sola.clients.android.opentenure.model.Boundary;
-import org.fao.sola.clients.android.opentenure.model.Configuration;
 import org.fao.sola.clients.android.opentenure.network.API.CommunityServerAPI;
 import org.fao.sola.clients.android.opentenure.network.LoginActivity;
 import org.fao.sola.clients.android.opentenure.network.LogoutTask;
+import org.fao.sola.clients.android.opentenure.network.response.BoundaryResponse;
 
 import java.util.List;
 
@@ -78,22 +78,6 @@ public class BoundariesListFragment extends ListFragment {
 
     @Override
     public void onPrepareOptionsMenu(Menu menu) {
-        MenuItem itemIn;
-        MenuItem itemOut;
-
-        if (mainActivity.getMode().compareTo(ModeDispatcher.Mode.MODE_RW) == 0) {
-            if (OpenTenureApplication.isLoggedin()) {
-                itemIn = menu.findItem(R.id.action_login);
-                itemIn.setVisible(false);
-                itemOut = menu.findItem(R.id.action_logout);
-                itemOut.setVisible(true);
-            } else {
-                itemIn = menu.findItem(R.id.action_login);
-                itemIn.setVisible(true);
-                itemOut = menu.findItem(R.id.action_logout);
-                itemOut.setVisible(false);
-            }
-        }
         super.onPrepareOptionsMenu(menu);
     }
 
@@ -114,7 +98,7 @@ public class BoundariesListFragment extends ListFragment {
     public boolean onOptionsItemSelected(final MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_new:
-                if (!Boolean.parseBoolean(Configuration.getConfigurationByName("isInitialized").getValue())) {
+                if (!OpenTenureApplication.getInstance().isInitialized()) {
                     String newMessage = String.format(OpenTenureApplication.getContext().getString(R.string.message_app_not_yet_initialized));
 
                     Toast newToast = Toast.makeText(OpenTenureApplication.getContext(), newMessage, Toast.LENGTH_LONG);
@@ -128,19 +112,19 @@ public class BoundariesListFragment extends ListFragment {
                 return true;
             case R.id.action_refresh:
 
-                AsyncTask<Void, Void, List<org.fao.sola.clients.android.opentenure.network.response.Boundary>> task = new AsyncTask<Void, Void, List<org.fao.sola.clients.android.opentenure.network.response.Boundary>>() {
+                AsyncTask<Void, Void, List<BoundaryResponse>> task = new AsyncTask<Void, Void, List<BoundaryResponse>>() {
                     @Override
                     protected void onPreExecute() {
                         item.setEnabled(false);
                     }
 
                     @Override
-                    protected List<org.fao.sola.clients.android.opentenure.network.response.Boundary> doInBackground(Void... voids) {
+                    protected List<BoundaryResponse> doInBackground(Void... voids) {
                         return CommunityServerAPI.getBoundaries();
                     }
 
                     @Override
-                    protected void onPostExecute(List<org.fao.sola.clients.android.opentenure.network.response.Boundary> boundaries) {
+                    protected void onPostExecute(List<BoundaryResponse> boundaries) {
                         if (boundaries != null) {
                             org.fao.sola.clients.android.opentenure.model.Boundary.updateBoundariesFromResponse(boundaries);
                         }
@@ -154,35 +138,6 @@ public class BoundariesListFragment extends ListFragment {
                 };
 
                 task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-                return true;
-            case R.id.action_login:
-                if (!Boolean.parseBoolean(Configuration.getConfigurationByName("isInitialized").getValue())) {
-                    Toast toast;
-                    String toastMessage = String.format(OpenTenureApplication
-                            .getContext().getString(
-                                    R.string.message_app_not_yet_initialized));
-                    toast = Toast.makeText(OpenTenureApplication.getContext(), toastMessage, Toast.LENGTH_LONG);
-                    toast.show();
-                    return true;
-                }
-
-                OpenTenureApplication.setActivity(getActivity());
-
-                Context context = getActivity().getApplicationContext();
-                Intent intent2 = new Intent(context, LoginActivity.class);
-                startActivity(intent2);
-
-                OpenTenureApplication.setActivity(getActivity());
-                return true;
-
-            case R.id.action_logout:
-                try {
-                    LogoutTask logoutTask = new LogoutTask();
-                    logoutTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, getActivity());
-                } catch (Exception e) {
-                    Log.d("Details", "An error ");
-                    e.printStackTrace();
-                }
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -225,6 +180,8 @@ public class BoundariesListFragment extends ListFragment {
             filter = savedInstanceState.getString(FILTER_KEY);
             ((BoundariesListAdapter) getListAdapter()).getFilter().filter(filter);
         }
+        OpenTenureApplication.setActivity(getActivity());
+        OpenTenureApplication.setBoundariesListFragment(this);
         return rootView;
     }
 

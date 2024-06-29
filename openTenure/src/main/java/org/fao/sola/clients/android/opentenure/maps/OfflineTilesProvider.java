@@ -27,15 +27,15 @@
  */
 package org.fao.sola.clients.android.opentenure.maps;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.fao.sola.clients.android.opentenure.model.Tile;
-
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.UrlTileProvider;
+
+import org.fao.sola.clients.android.opentenure.model.Tile;
+
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class OfflineTilesProvider extends UrlTileProvider {
 
@@ -46,7 +46,7 @@ public abstract class OfflineTilesProvider extends UrlTileProvider {
 	private static final int MIN_ZOOM_LEVEL = 6;
 	public static final int TILE_WIDTH = 256;
 	public static final int TILE_HEIGHT = 256;
-	public enum TilesProviderType{WTMS, TMS, GeoServer};
+	public enum TilesProviderType{wtms, tms, geoserver};
 	protected abstract TilesProviderType getType();
 	protected abstract String getBaseStorageDir();
 	protected abstract String getTilesSuffix();

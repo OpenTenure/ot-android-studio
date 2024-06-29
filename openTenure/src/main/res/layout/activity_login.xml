@@ -57,34 +57,55 @@
                 android:imeActionLabel="@string/action_sign_in_short"
                 android:imeOptions="actionUnspecified"
                 android:inputType="textPassword"
-                android:textAlignment="viewStart"             
+                android:textAlignment="viewStart"
                 android:maxLines="1"
                 android:singleLine="true" />
-	<LinearLayout 
-	    android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-	    android:orientation="horizontal">
-            <Button
-                android:id="@+id/log_in_button"
+
+            <EditText
+                android:id="@+id/server_url"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/cs_url_pref_title"
+                android:inputType="text"
+                android:maxLines="1"
+                android:singleLine="true" />
+
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:paddingStart="12dp"
-                android:paddingEnd="12dp"
-                android:layout_weight="1"
-                android:text="@string/action_log_in_register" />
-            
-            <Button
-                android:id="@+id/log_in_cancel_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:paddingStart="12dp"
-                android:paddingEnd="12dp"
-                android:layout_weight="1"
-                android:text="@string/cancel" />
+                android:layout_gravity="center"
+                android:orientation="horizontal">
+                <Button
+                    android:id="@+id/log_in_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:text="@string/action_log_in_register" />
+
+                <Button
+                    android:id="@+id/log_in_cancel_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:text="@string/cancel" />
             </LinearLayout>
+
+            <TextView
+                android:id="@+id/txtError"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                android:textColor="#F44336"
+                android:visibility="gone"
+                android:textStyle="italic" />
+
         </LinearLayout>
     </ScrollView>
 

@@ -27,9 +27,8 @@
  */
 package org.fao.sola.clients.android.opentenure.model;
 
-import org.fao.sola.clients.android.opentenure.DisplayNameLocalizer;
 import org.fao.sola.clients.android.opentenure.OpenTenureApplication;
-import org.fao.sola.clients.android.opentenure.filesystem.FileSystemUtilities;
+import org.fao.sola.clients.android.opentenure.network.response.BoundaryResponse;
 import org.fao.sola.clients.android.opentenure.tools.StringUtility;
 
 import java.sql.Connection;
@@ -37,10 +36,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
+import java.util.UUID;
 
 public class Boundary {
 
@@ -50,13 +48,14 @@ public class Boundary {
 	private String typeCode;
 	private String authorityName;
 	private String parentId;
+	private String projectId;
 	private String recorderName;
 	private String statusCode;
 	private String geom;
 	private boolean processed;
 	private int version;
 	private String displayName;
-	private static final String SQL_SELECT = "SELECT ID, NAME, TYPE_CODE, AUTHORITY_NAME, PARENT_ID, RECORDER_NAME, GEOM, STATUS_CODE, PROCESSED, VERSION FROM BOUNDARY ";
+	private static final String SQL_SELECT = "SELECT ID, NAME, TYPE_CODE, AUTHORITY_NAME, PARENT_ID, RECORDER_NAME, GEOM, STATUS_CODE, PROCESSED, VERSION, PROJECT_ID FROM BOUNDARY ";
 
 	public Boundary(){
 	}
@@ -67,6 +66,14 @@ public class Boundary {
 
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	public String getProjectId() {
+		return projectId;
+	}
+
+	public void setProjectId(String projectId) {
+		this.projectId = projectId;
 	}
 
 	public String getName() {
@@ -170,7 +177,7 @@ public class Boundary {
 		try {
 			localConnection = db.getConnection();
 			statement = localConnection
-					.prepareStatement("INSERT INTO BOUNDARY(ID, NAME, TYPE_CODE, AUTHORITY_NAME, PARENT_ID, RECORDER_NAME, GEOM, STATUS_CODE, PROCESSED, VERSION) VALUES (?,?,?,?,?,?,?,?,?,?)");
+					.prepareStatement("INSERT INTO BOUNDARY(ID, NAME, TYPE_CODE, AUTHORITY_NAME, PARENT_ID, RECORDER_NAME, GEOM, STATUS_CODE, PROCESSED, VERSION, PROJECT_ID) VALUES (?,?,?,?,?,?,?,?,?,?,?)");
 
 			statement.setString(1, getId());
 			statement.setString(2, getName());
@@ -182,6 +189,7 @@ public class Boundary {
 			statement.setString(8, getStatusCode());
 			statement.setBoolean(9, isProcessed());
 			statement.setInt(10, getVersion());
+			statement.setString(11, getProjectId());
 
 			result = statement.executeUpdate();
 		} catch (SQLException e) {
@@ -213,13 +221,20 @@ public class Boundary {
 
 		try {
 			localConnection = OpenTenureApplication.getInstance().getDatabase().getConnection();
-			String sql = SQL_SELECT + " ORDER BY PARENT_ID, NAME";
+			String sql = SQL_SELECT + " WHERE PROJECT_ID=?";
 			if(statusCode != null && !statusCode.equals("")){
-				sql = SQL_SELECT + " WHERE STATUS_CODE=? ORDER BY PARENT_ID, NAME";
+				sql += " AND STATUS_CODE=?";
 			}
+			sql += " ORDER BY PARENT_ID, NAME";
 			statement = localConnection.prepareStatement(sql);
+
+			if(OpenTenureApplication.getInstance().getProject() != null) {
+				statement.setString(1, OpenTenureApplication.getInstance().getProject().getId());
+			} else {
+				statement.setString(1, "");
+			}
 			if(statusCode != null && !statusCode.equals("")){
-				statement.setString(1, statusCode);
+				statement.setString(2, statusCode);
 			}
 			rs = statement.executeQuery();
 
@@ -327,6 +342,7 @@ public class Boundary {
 		boundary.setStatusCode(rs.getString(8));
 		boundary.setProcessed(rs.getBoolean(9));
 		boundary.setVersion(rs.getInt(10));
+		boundary.setProjectId(rs.getString(11));
 		return boundary;
 	}
 
@@ -358,8 +374,14 @@ public class Boundary {
 
 		try {
 			localConnection = OpenTenureApplication.getInstance().getDatabase().getConnection();
-			String sql = SQL_SELECT + " WHERE TYPE_CODE NOT IN (SELECT CODE FROM BOUNDARY_TYPE ORDER BY LEVEL DESC LIMIT 1) ORDER BY PARENT_ID, NAME";
+			String sql = SQL_SELECT + " WHERE PROJECT_ID=? AND TYPE_CODE NOT IN (SELECT CODE FROM BOUNDARY_TYPE ORDER BY LEVEL DESC LIMIT 1) ORDER BY PARENT_ID, NAME";
 			statement = localConnection.prepareStatement(sql);
+			if(OpenTenureApplication.getInstance().getProject() != null) {
+				statement.setString(1, OpenTenureApplication.getInstance().getProject().getId());
+			} else {
+				statement.setString(1, "");
+			}
+
 			rs = statement.executeQuery();
 
 			while (rs.next()) {
@@ -468,7 +490,7 @@ public class Boundary {
 		try {
 			localConnection = OpenTenureApplication.getInstance().getDatabase().getConnection();
 			statement = localConnection
-					.prepareStatement("UPDATE BOUNDARY SET NAME=?, TYPE_CODE=?, AUTHORITY_NAME=?, PARENT_ID=?, RECORDER_NAME=?, GEOM=?, STATUS_CODE=?, PROCESSED=?, VERSION=? WHERE ID = ?");
+					.prepareStatement("UPDATE BOUNDARY SET NAME=?, TYPE_CODE=?, AUTHORITY_NAME=?, PARENT_ID=?, RECORDER_NAME=?, GEOM=?, STATUS_CODE=?, PROCESSED=?, VERSION=?, PROJECT_ID=? WHERE ID = ?");
 
 			statement.setString(1, getName());
 			statement.setString(2, getTypeCode());
@@ -479,7 +501,8 @@ public class Boundary {
 			statement.setString(7, getStatusCode());
 			statement.setBoolean(8, isProcessed());
 			statement.setInt(9, getVersion());
-			statement.setString(10, getId());
+			statement.setString(10, getProjectId());
+			statement.setString(11, getId());
 
 			result = statement.executeUpdate();
 		} catch (SQLException e) {
@@ -573,25 +596,25 @@ public class Boundary {
 		return result;
 	}
 
-	public static void updateBoundariesFromResponse(List<org.fao.sola.clients.android.opentenure.network.response.Boundary> boundaries){
+	public static void updateBoundariesFromResponse(List<BoundaryResponse> boundaries){
 		if (boundaries != null && (boundaries.size() > 0)) {
-			for (Iterator<org.fao.sola.clients.android.opentenure.network.response.Boundary> iterator = boundaries.iterator(); iterator.hasNext();) {
-				org.fao.sola.clients.android.opentenure.network.response.Boundary boundary = iterator.next();
+			for (Iterator<BoundaryResponse> iterator = boundaries.iterator(); iterator.hasNext();) {
+				BoundaryResponse boundaryResponse = iterator.next();
 				Boundary dbBoundary = new Boundary();
 
-				dbBoundary.setId(boundary.getId());
-				dbBoundary.setName(boundary.getName());
-				dbBoundary.setAuthorityName(boundary.getAuthorityName());
-				dbBoundary.setTypeCode(boundary.getTypeCode());
-				dbBoundary.setParentId(boundary.getParentId());
-
-				dbBoundary.setGeom(boundary.getGeom());
-				dbBoundary.setRecorderName(boundary.getRecorderName());
-				dbBoundary.setStatusCode(boundary.getStatusCode());
-				dbBoundary.setVersion(boundary.getRowVersion());
+				dbBoundary.setId(boundaryResponse.getId());
+				dbBoundary.setName(boundaryResponse.getName());
+				dbBoundary.setAuthorityName(boundaryResponse.getAuthorityName());
+				dbBoundary.setTypeCode(boundaryResponse.getTypeCode());
+				dbBoundary.setParentId(boundaryResponse.getParentId());
+				dbBoundary.setProjectId(boundaryResponse.getProjectId());
+				dbBoundary.setGeom(boundaryResponse.getGeom());
+				dbBoundary.setRecorderName(boundaryResponse.getRecorderName());
+				dbBoundary.setStatusCode(boundaryResponse.getStatusCode());
+				dbBoundary.setVersion(boundaryResponse.getRowVersion());
 				dbBoundary.setProcessed(true);
 
-				if (org.fao.sola.clients.android.opentenure.model.Boundary.getById(boundary.getId()) == null)
+				if (org.fao.sola.clients.android.opentenure.model.Boundary.getById(boundaryResponse.getId()) == null)
 					dbBoundary.insert();
 				else
 					dbBoundary.update();
@@ -599,19 +622,19 @@ public class Boundary {
 		}
 	}
 
-	public org.fao.sola.clients.android.opentenure.network.response.Boundary convertToResponse(){
-		org.fao.sola.clients.android.opentenure.network.response.Boundary responseBoundary = new org.fao.sola.clients.android.opentenure.network.response.Boundary();
+	public BoundaryResponse convertToResponse(){
+		BoundaryResponse responseBoundaryResponse = new BoundaryResponse();
 
-		responseBoundary.setId(getId());
-		responseBoundary.setName(getName());
-		responseBoundary.setAuthorityName(getAuthorityName());
-		responseBoundary.setTypeCode(getTypeCode());
-		responseBoundary.setParentId(getParentId());
-
-		responseBoundary.setGeom(getGeom());
-		responseBoundary.setRecorderName(getRecorderName());
-		responseBoundary.setStatusCode(getStatusCode());
-		responseBoundary.setRowVersion(getVersion());
-		return responseBoundary;
+		responseBoundaryResponse.setId(getId());
+		responseBoundaryResponse.setName(getName());
+		responseBoundaryResponse.setAuthorityName(getAuthorityName());
+		responseBoundaryResponse.setTypeCode(getTypeCode());
+		responseBoundaryResponse.setParentId(getParentId());
+		responseBoundaryResponse.setProjectId(getProjectId());
+		responseBoundaryResponse.setGeom(getGeom());
+		responseBoundaryResponse.setRecorderName(getRecorderName());
+		responseBoundaryResponse.setStatusCode(getStatusCode());
+		responseBoundaryResponse.setRowVersion(getVersion());
+		return responseBoundaryResponse;
 	}
 }

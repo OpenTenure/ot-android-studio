@@ -32,16 +32,6 @@ import org.fao.sola.clients.android.opentenure.model.Claim;
 import org.fao.sola.clients.android.opentenure.model.Configuration;
 import org.fao.sola.clients.android.opentenure.model.Database;
 import org.fao.sola.clients.android.opentenure.model.Task;
-import org.fao.sola.clients.android.opentenure.network.BoundaryStatusTask;
-import org.fao.sola.clients.android.opentenure.network.BoundaryTask;
-import org.fao.sola.clients.android.opentenure.network.BoundaryTypeTask;
-import org.fao.sola.clients.android.opentenure.network.UpdateClaimTypesTask;
-import org.fao.sola.clients.android.opentenure.network.UpdateCommunityArea;
-import org.fao.sola.clients.android.opentenure.network.UpdateDocumentTypesTask;
-import org.fao.sola.clients.android.opentenure.network.UpdateIdTypesTask;
-import org.fao.sola.clients.android.opentenure.network.UpdateLandUsesTask;
-import org.fao.sola.clients.android.opentenure.network.UpdateLanguagesTask;
-import org.fao.sola.clients.android.opentenure.network.UpdateParcelGeoRequiredTask;
 import org.fao.sola.clients.android.opentenure.network.API.CommunityServerAPI;
 
 import android.app.Activity;
@@ -91,7 +81,6 @@ public class InitializationActivity extends Activity {
 							db.open();
 							if (db.isOpen()) {
 								checkPerformDbUpgrades();
-								createInitializationConfig();
 								Log.d(this.getClass().getName(), "db opened");
 								StartOpenTenure start = new StartOpenTenure(getBaseContext());
 								start.execute();
@@ -115,20 +104,8 @@ public class InitializationActivity extends Activity {
 		} else {
 			Log.d(this.getClass().getName(), "db not encrypted");
 			checkPerformDbUpgrades();
-			createInitializationConfig();
 			StartOpenTenure start = new StartOpenTenure(this);
 			start.execute();
-		}
-
-	}
-	
-	private void createInitializationConfig(){
-		Configuration conf = Configuration.getConfigurationByName("isInitialized");
-		if (conf == null) {
-			conf = new Configuration();
-			conf.setName("isInitialized");
-			conf.setValue("false");
-			conf.create();
 		}
 	}
 
@@ -166,99 +143,13 @@ public class InitializationActivity extends Activity {
 					"check to see if the application is initialized");
 			
 			OpenTenureApplication.getInstance().setNetworkError(false);
-
-			if (Boolean.parseBoolean(Configuration.getConfigurationByName("isInitialized").getValue())) {
-
-				Log.d(this.getClass().getName(),"starting tasks for static data download");
-
-				if (!OpenTenureApplication.getInstance().isCheckedTypes()) {
-					Log.d(this.getClass().getName(),"starting tasks for claim type download");
-
-					UpdateClaimTypesTask updateCT = new UpdateClaimTypesTask();
-					updateCT.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-				}
-
-				if (!OpenTenureApplication.getInstance().isCheckedDocTypes()) {
-					Log.d(this.getClass().getName(),"starting tasks for document type download");
-
-					UpdateDocumentTypesTask updateCT = new UpdateDocumentTypesTask();
-					updateCT.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-				}
-
-				if (!OpenTenureApplication.getInstance().isCheckedIdTypes()) {
-					Log.d(this.getClass().getName(),"starting tasks for ID type download");
-
-					UpdateIdTypesTask updateIdType = new UpdateIdTypesTask();
-					updateIdType.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-				}
-
-				if (!OpenTenureApplication.getInstance().isCheckedLandUses()) {
-					Log.d(this.getClass().getName(),"starting tasks for land use type download");
-
-					UpdateLandUsesTask updateLu = new UpdateLandUsesTask();
-					updateLu.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-				}
-
-				if (!OpenTenureApplication.getInstance().isCheckedLanguages()) {
-					Log.d(this.getClass().getName(),"starting tasks for languages download");
-
-					UpdateLanguagesTask updateLang = new UpdateLanguagesTask();
-					updateLang.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-				}
-
-				if (!OpenTenureApplication.getInstance().isCheckedCommunityArea()) {
-					Log.d(this.getClass().getName(),"starting tasks for community area download");
-
-					UpdateCommunityArea updateArea = new UpdateCommunityArea();
-					updateArea.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-				}
-				
-				if (!OpenTenureApplication.getInstance().isCheckedGeometryRequired()) {
-					Log.d(this.getClass().getName(),"starting tasks for parcel geometry setting download");
-
-					UpdateParcelGeoRequiredTask updateGeo = new UpdateParcelGeoRequiredTask();
-					updateGeo.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-				}
-				
-				if (!OpenTenureApplication.getInstance().isCheckedForm()) {
-					Log.d(this.getClass().getName(),"starting tasks for form retrieval");
-
-					FormRetriever formRetriever = new FormRetriever(context);
-					formRetriever.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-				}
-
-				if (!OpenTenureApplication.getInstance().isCheckedBoundaryStatus()) {
-					Log.d(this.getClass().getName(),"starting tasks for boundary statuses download");
-
-					BoundaryStatusTask updateBoundaryStatus = new BoundaryStatusTask();
-					updateBoundaryStatus.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-				}
-
-				if (!OpenTenureApplication.getInstance().isCheckedBoundaryStatus()) {
-					Log.d(this.getClass().getName(),"starting tasks for boundary types download");
-
-					BoundaryTypeTask updateBoundaryType = new BoundaryTypeTask();
-					updateBoundaryType.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-				}
-
-				if (!OpenTenureApplication.getInstance().isCheckedBoundaries()) {
-					Log.d(this.getClass().getName(),"starting tasks for boundaries download");
-
-					BoundaryTask updateBoundaries = new BoundaryTask();
-					updateBoundaries.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-				}
-			}
+			Claim.resetClaimUploading();
 			
-			int setted = Claim.resetClaimUploading();
-			
-			System.out.println("Claim cambiati in created : " + setted);
-
 			String serverProtoVersion = CommunityServerAPI.getServerProtoVersion();
 			String expectedProtoVersion = Configuration.getConfigurationValue(Configuration.PROTOVERSION_NAME);
 			Toast toast;
 
 			if(expectedProtoVersion != null && serverProtoVersion != null){
-
 				if(expectedProtoVersion.compareTo(serverProtoVersion) > 0){
 					toast = Toast.makeText(getBaseContext(), R.string.message_update_server, Toast.LENGTH_LONG);
 					toast.show();
@@ -267,6 +158,7 @@ public class InitializationActivity extends Activity {
 					toast.show();
 				}
 			}
+
 			// Cleanup pending tiles download tasks in case of unclean shutdown
 			Task.deleteAllTasks();
 			Intent i = new Intent(InitializationActivity.this, OpenTenure.class);

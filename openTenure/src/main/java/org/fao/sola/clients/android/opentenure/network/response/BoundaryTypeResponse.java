@@ -25,56 +25,14 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * *********************************************************************************************
  */
-package org.fao.sola.clients.android.opentenure.network;
+package org.fao.sola.clients.android.opentenure.network.response;
 
-import java.util.Iterator;
-import java.util.List;
-
-import org.fao.sola.clients.android.opentenure.OpenTenureApplication;
-import org.fao.sola.clients.android.opentenure.network.API.CommunityServerAPI;
-import org.fao.sola.clients.android.opentenure.network.response.LandUse;
-
-import android.os.AsyncTask;
-
-public class UpdateLandUsesTask extends AsyncTask<String, Void, List<LandUse>> {
-
-	@Override
-	protected List<LandUse> doInBackground(String... params) {
-		List<LandUse> types = CommunityServerAPI.getLandUses();
-		return types;
+public class BoundaryTypeResponse extends RefDataResponse {
+	int level;
+	public int getLevel() {
+		return level;
 	}
-
-	@Override
-	protected void onPostExecute(List<LandUse> types) {
-
-		if (types != null && (types.size() > 0)) {
-			
-			org.fao.sola.clients.android.opentenure.model.LandUse.setAllLandUseNoActive();
-
-			for (Iterator<LandUse> iterator = types.iterator(); iterator.hasNext();) {
-				LandUse use = (LandUse) iterator.next();
-
-				org.fao.sola.clients.android.opentenure.model.LandUse landUse = new org.fao.sola.clients.android.opentenure.model.LandUse();
-
-				landUse.setDescription(use.getDescription());
-				landUse.setType(use.getCode());
-				landUse.setDisplayValue(use.getDisplayValue());
-				if (org.fao.sola.clients.android.opentenure.model.LandUse
-						.getLandUse(use.getCode()) == null) {
-					landUse.add();
-
-				}
-
-				else {
-					landUse.updadateLandUse();
-				}
-
-			}
-
-			OpenTenureApplication.getInstance().setCheckedLandUses(true);
-			OpenTenureApplication.getInstance().setSettingsSynchronized();
-		}
-
+	public void setLevel(int level) {
+		this.level = level;
 	}
-
 }

@@ -179,10 +179,7 @@ public class PreImportTask extends AsyncTask<Object, Void, Object[]> {
 									.getDefaultSharedPreferences(OpenTenureApplication
 											.getContext());
 
-							String serverUrl = preferences
-									.getString(
-											OpenTenurePreferencesActivity.CS_URL_PREF,
-											OpenTenureApplication._DEFAULT_COMMUNITY_SERVER);
+							String serverUrl = OpenTenureApplication.getInstance().getServerUrl();
 
 							if (!serverUrl.trim().equals(""))
 								serverAddress = serverUrl.split("//")[1];

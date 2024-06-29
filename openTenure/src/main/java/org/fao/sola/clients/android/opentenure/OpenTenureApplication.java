@@ -27,9 +27,20 @@
  */
 package org.fao.sola.clients.android.opentenure;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
+import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.pm.PackageManager.NameNotFoundException;
+import android.content.res.Resources;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.net.http.AndroidHttpClient;
+import android.os.AsyncTask;
+import android.preference.PreferenceManager;
+import android.telephony.TelephonyManager;
+import android.text.TextUtils;
+import android.util.Log;
+import android.view.View;
 
 import org.apache.http.client.CookieStore;
 import org.apache.http.client.protocol.ClientContext;
@@ -41,21 +52,16 @@ import org.fao.sola.clients.android.opentenure.maps.MainMapFragment;
 import org.fao.sola.clients.android.opentenure.model.ClaimType;
 import org.fao.sola.clients.android.opentenure.model.Configuration;
 import org.fao.sola.clients.android.opentenure.model.Database;
+import org.fao.sola.clients.android.opentenure.model.Project;
+import org.fao.sola.clients.android.opentenure.network.API.CommunityServerAPI;
+import org.fao.sola.clients.android.opentenure.tools.StringUtility;
 
-import android.app.Activity;
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.content.pm.PackageManager.NameNotFoundException;
-import android.content.res.Resources;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
-import android.net.http.AndroidHttpClient;
-import android.preference.PreferenceManager;
-import androidx.multidex.MultiDexApplication;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+
 import androidx.fragment.app.FragmentActivity;
-import android.telephony.TelephonyManager;
-import android.util.Log;
-import android.view.View;
+import androidx.multidex.MultiDexApplication;
 
 public class OpenTenureApplication extends MultiDexApplication {
 
@@ -65,26 +71,14 @@ public class OpenTenureApplication extends MultiDexApplication {
 	private Database database;
 	private static Context context;
 	private boolean networkError = false;
-	private boolean checkedTypes = false;
-	private boolean checkedDocTypes = false;
-	private boolean checkedIdTypes = false;
-	private boolean checkedLandUses = false;
-	private boolean checkedLanguages = false;
-	private boolean checkedGeometryRequired = false;
-	private boolean checkedBoundaryTypes = false;
-	private boolean checkedBoundaryStatus = false;
-	private boolean checkedBoundaries = false;
-
-	private boolean checkedCommunityArea = false;
-	private boolean checkedForm = false;
-	private boolean initialized = false;
+	private Project project = null;
 	private static final String SEMAPHORE = "semaphore";
 	private static final String _KHMER_LOCALIZATION = "km-KH";
 	private static final String _ALBANIAN_LOCALIZATION = "sq-AL";
 	private static final String _ARABIC_LOCALIZATION = "ar-JO";
 	private static final String _BURMESE_LOCALIZATION = "my-MM";
 	private static final String _SAMOAN_LOCALIZATION = "sm-WS";
-	private String localization;
+	private String languageCode;
 	private Locale locale;
 	private boolean khmer = false;
 	private boolean albanian = false;
@@ -106,12 +100,17 @@ public class OpenTenureApplication extends MultiDexApplication {
 
 	private static View personsView;
 	private static LocalClaimsFragment localClaimsFragment;
+	private static BoundariesListFragment boundariesListFragment;
 	private static FragmentActivity newsFragmentActivity;
 	public static String _DEFAULT_COMMUNITY_SERVER = "http://smsmcl.opentenure.org:8080";
 
 	private static volatile int claimsToDownload = 0;
 	private static volatile int initialClaimsToDownload = 0;
 	private static volatile int claimsDownloaded = 0;
+
+	public interface AsyncTaskHandler {
+		public void onTaskComplete(boolean success);
+	}
 
 	public static OpenTenureApplication getInstance() {
 		return sInstance;
@@ -157,6 +156,13 @@ public class OpenTenureApplication extends MultiDexApplication {
 		ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 		NetworkInfo netInfo = cm.getActiveNetworkInfo();
 		return (netInfo != null && netInfo.isConnected() && netInfo.getType() == ConnectivityManager.TYPE_MOBILE);
+	}
+
+	public void setServerUrl(String url){
+		if(url != null && !TextUtils.isEmpty(url)) {
+			SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(OpenTenureApplication.getContext());
+			settings.edit().putString(OpenTenurePreferencesActivity.CS_URL_PREF, url).apply();
+		}
 	}
 
 	public static String getConnectionType(int type, int subType) {
@@ -283,30 +289,6 @@ public class OpenTenureApplication extends MultiDexApplication {
 		OpenTenureApplication.context = context;
 	}
 
-	public boolean isCheckedDocTypes() {
-		return checkedDocTypes;
-	}
-
-	public void setCheckedDocTypes(boolean checkedDocTypes) {
-		this.checkedDocTypes = checkedDocTypes;
-	}
-
-	public boolean isCheckedLanguages() {
-		return checkedLanguages;
-	}
-
-	public void setCheckedLanguages(boolean checkedLanguages) {
-		this.checkedLanguages = checkedLanguages;
-	}
-
-	public boolean isCheckedGeometryRequired() {
-		return checkedGeometryRequired;
-	}
-
-	public void setCheckedGeometryRequired(boolean checkedGeometryRequired) {
-		this.checkedGeometryRequired = checkedGeometryRequired;
-	}
-
 	/*
 	 * Return the single instance of the inizialized HttpClient that handle
 	 * connection and session to the server
@@ -324,10 +306,8 @@ public class OpenTenureApplication extends MultiDexApplication {
 	 * connection and session to the server
 	 */
 	public static synchronized void closeHttpClient() {
-
 		mHttpClient.close();
 		mHttpClient = null;
-
 	}
 
 	public static Activity getActivity() {
@@ -346,62 +326,6 @@ public class OpenTenureApplication extends MultiDexApplication {
 		OpenTenureApplication.mapFragment = mapFragment;
 	}
 
-	public boolean isCheckedTypes() {
-		return checkedTypes;
-	}
-
-	public boolean isCheckedIdTypes() {
-		return checkedIdTypes;
-	}
-
-	public void setCheckedIdTypes(boolean checkedIdTypes) {
-		this.checkedIdTypes = checkedIdTypes;
-	}
-
-	public boolean isCheckedBoundaryTypes() {
-		return checkedBoundaryTypes;
-	}
-
-	public void setCheckedBoundaryTypes(boolean checkedBoundaryTypes) {
-		this.checkedBoundaryTypes = checkedBoundaryTypes;
-	}
-
-	public boolean isCheckedBoundaryStatus() {
-		return checkedBoundaryStatus;
-	}
-
-	public void setCheckedBoundaryStatus(boolean checkedBoundaryStatus) {
-		this.checkedBoundaryStatus = checkedBoundaryStatus;
-	}
-
-	public boolean isCheckedBoundaries() {
-		return checkedBoundaries;
-	}
-
-	public void setCheckedBoundaries(boolean checkedBoundaries) {
-		this.checkedBoundaries = checkedBoundaries;
-	}
-
-	public boolean isCheckedLandUses() {
-		return checkedLandUses;
-	}
-
-	public void setCheckedLandUses(boolean checkedLandUses) {
-		this.checkedLandUses = checkedLandUses;
-	}
-
-	public boolean isCheckedForm() {
-		return checkedForm;
-	}
-
-	public void setCheckedForm(boolean checkedForm) {
-		this.checkedForm = checkedForm;
-	}
-
-	public void setCheckedTypes(boolean checkedTypes) {
-		this.checkedTypes = checkedTypes;
-	}
-
 	public static View getPersonsView() {
 		return personsView;
 	}
@@ -418,16 +342,16 @@ public class OpenTenureApplication extends MultiDexApplication {
 		OpenTenureApplication.claimTypes = claimTypes;
 	}
 
-	public boolean isCheckedCommunityArea() {
-		return checkedCommunityArea;
-	}
-
-	public void setCheckedCommunityArea(boolean checkedCommunityArea) {
-		this.checkedCommunityArea = checkedCommunityArea;
-	}
-
 	public static LocalClaimsFragment getLocalClaimsFragment() {
 		return localClaimsFragment;
+	}
+
+	public static BoundariesListFragment getBoundariesListFragment() {
+		return boundariesListFragment;
+	}
+
+	public static void setBoundariesListFragment(BoundariesListFragment boundariesListFragment) {
+		OpenTenureApplication.boundariesListFragment = boundariesListFragment;
 	}
 
 	public Locale getLocale() {
@@ -493,16 +417,79 @@ public class OpenTenureApplication extends MultiDexApplication {
 		}
 	}
 
-	public String getLocalization() {
-		return localization;
+	public String getLanguageCode() {
+		return languageCode;
 	}
 
 	public boolean isInitialized() {
-		return initialized;
+		return getProject() != null;
 	}
 
-	public void setInitialized(boolean initialized) {
-		this.initialized = initialized;
+	public Project getProject() {
+		if(project == null){
+			Configuration conf = Configuration.getConfigurationByName(Configuration.PROJECT_ID);
+			if(conf != null && !StringUtility.isEmpty(conf.getValue())) {
+				project = Project.getProject(conf.getValue());
+			}
+		}
+		return project;
+	}
+
+	public void setProject(String projectId) {
+		Project p = Project.getProject(projectId);
+		setProject(p);
+	}
+
+	public void setProject(Project project) {
+		Configuration conf = Configuration.getConfigurationByName(Configuration.PROJECT_ID);
+		if(conf == null) {
+			conf = new Configuration();
+			conf.setName(Configuration.PROJECT_ID);
+			conf.setValue(project.getId());
+			conf.create();
+		} else {
+			conf.setValue(project.getId());
+			conf.update();
+		}
+		this.project = project;
+	}
+
+	public String getServerUrl(){
+		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(OpenTenureApplication.getContext());
+		return settings.getString(OpenTenurePreferencesActivity.CS_URL_PREF, OpenTenureApplication._DEFAULT_COMMUNITY_SERVER);
+	}
+
+	/** Returns true is user is logged in and the session didn't expire.*/
+	public void checkLoginSession(final AsyncTaskHandler handler) {
+		AsyncTask task = new AsyncTask<Object, Void, Boolean>() {
+			@Override
+			protected Boolean doInBackground(Object... objects) {
+				boolean result = isLoggedin();
+				if(result){
+					String userName = CommunityServerAPI.getCurrentUser();
+					if(StringUtility.empty(userName).equals("") || !StringUtility.empty(userName).equals(getUsername())){
+						result = false;
+					}
+				}
+				return result;
+			}
+
+			@Override
+			protected void onPostExecute(final Boolean result) {
+				if(!result){
+					setUsername("");
+					OpenTenureApplication.setLoggedin(false);
+					if(getLocalClaimsFragment() != null) {
+						getLocalClaimsFragment().getActivity().invalidateOptionsMenu();
+					}
+				}
+				if(handler!=null){
+					handler.onTaskComplete(result);
+				}
+			}
+		};
+
+		task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
 	public boolean isNetworkError() {
@@ -511,10 +498,6 @@ public class OpenTenureApplication extends MultiDexApplication {
 
 	public void setNetworkError(boolean networkError) {
 		this.networkError = networkError;
-	}
-
-	public void setLocalization(String localization) {
-		this.localization = localization;
 	}
 
 	public static ClaimDetailsFragment getDetailsFragment() {
@@ -565,42 +548,28 @@ public class OpenTenureApplication extends MultiDexApplication {
 		this.samoan = samoan;
 	}
 
-	public void setLocalization(Locale locale) {
-
+	public void setLanguageCode(Locale locale) {
 		Resources.getSystem().getConfiguration().setLocale(locale);
-
 		locale.getDisplayLanguage();
 		if (isKhmer()) {
-
-			localization = OpenTenureApplication._KHMER_LOCALIZATION;
+			languageCode = OpenTenureApplication._KHMER_LOCALIZATION;
 		} else if (isAlbanian()) {
-
-			localization = OpenTenureApplication._ALBANIAN_LOCALIZATION;
-
+			languageCode = OpenTenureApplication._ALBANIAN_LOCALIZATION;
 		} else if (isBurmese()) {
-
-			localization = OpenTenureApplication._BURMESE_LOCALIZATION;
-
+			languageCode = OpenTenureApplication._BURMESE_LOCALIZATION;
 		} else if (isSamoan()) {
-
-			localization = OpenTenureApplication._SAMOAN_LOCALIZATION;
-
-
+			languageCode = OpenTenureApplication._SAMOAN_LOCALIZATION;
 		} else if (locale.getLanguage().toLowerCase(locale).equals("ar")) {
-
-			localization = _ARABIC_LOCALIZATION;
-
+			languageCode = _ARABIC_LOCALIZATION;
 		} else {
-
-			localization = Resources.getSystem().getConfiguration().locale
+			languageCode = Resources.getSystem().getConfiguration().locale
 					.getLanguage()
 					+ "-"
 					+ Resources.getSystem().getConfiguration().locale
 					.getCountry();
 		}
 		setLocale(locale);
-		System.out.println("Localization is now: " + localization);
-
+		System.out.println("Localization is now: " + languageCode);
 	}
 
 	public static void setLocalClaimsFragment(LocalClaimsFragment localClaimsFragment) {
@@ -659,38 +628,6 @@ public class OpenTenureApplication extends MultiDexApplication {
 				changingClaims = new ArrayList<String>();
 			return this.changingClaims;
 
-		}
-	}
-
-	public synchronized void setSettingsSynchronized() {
-		if (OpenTenureApplication.getInstance().isCheckedCommunityArea()
-				&& OpenTenureApplication.getInstance().isCheckedTypes()
-				&& OpenTenureApplication.getInstance().isCheckedDocTypes()
-				&& OpenTenureApplication.getInstance().isCheckedLandUses()
-				&& OpenTenureApplication.getInstance().isCheckedLanguages()
-				&& OpenTenureApplication.getInstance().isCheckedBoundaryStatus()
-				&& OpenTenureApplication.getInstance().isCheckedBoundaryTypes()
-				&& OpenTenureApplication.getInstance().isCheckedBoundaries()
-				&& OpenTenureApplication.getInstance().isCheckedForm()
-				&& OpenTenureApplication.getInstance().isCheckedGeometryRequired()
-		) {
-			OpenTenureApplication.getInstance().setInitialized(true);
-			Configuration conf = Configuration.getConfigurationByName("isInitialized");
-			conf.setValue("true");
-			conf.update();
-
-			FragmentActivity fa = (FragmentActivity) OpenTenureApplication.getNewsFragment();
-			if (fa != null)
-				fa.invalidateOptionsMenu();
-
-			Configuration latitude = Configuration.getConfigurationByName(MainMapFragment.MAIN_MAP_LATITUDE);
-			if (latitude != null)
-				latitude.delete();
-
-			/*MainMapFragment mapFrag = OpenTenureApplication.getMapFragment();
-			if(mapFrag != null) {
-				mapFrag.boundCameraToInterestArea();
-			}*/
 		}
 	}
 }

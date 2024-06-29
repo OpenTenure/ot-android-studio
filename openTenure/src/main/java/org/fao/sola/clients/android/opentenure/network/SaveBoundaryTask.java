@@ -106,6 +106,15 @@ public class SaveBoundaryTask extends AsyncTask<Object, ResultResponse, ResultRe
                     break;
                 }
 
+                // User cannot access the project recorded for the boundary
+                case 460: {
+                    toast = Toast.makeText(OpenTenureApplication.getContext(),
+                            OpenTenureApplication.getContext().getResources()
+                                    .getString(R.string.message_project_not_accessible_error), Toast.LENGTH_LONG);
+                    toast.show();
+                    break;
+                }
+
                 case 200: {
 					/* OK */
                     try {

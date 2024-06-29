@@ -40,7 +40,6 @@ import org.fao.sola.clients.android.opentenure.filesystem.json.JsonUtilities;
 import org.fao.sola.clients.android.opentenure.model.Claim;
 import org.fao.sola.clients.android.opentenure.model.ClaimStatus;
 import org.fao.sola.clients.android.opentenure.model.ClaimType;
-import org.fao.sola.clients.android.opentenure.model.Configuration;
 import org.fao.sola.clients.android.opentenure.network.LoginActivity;
 import org.fao.sola.clients.android.opentenure.network.LogoutTask;
 import org.fao.sola.clients.android.opentenure.tools.StringUtility;
@@ -117,32 +116,11 @@ public class LocalClaimsFragment extends ListFragment {
 
     @Override
     public void onPrepareOptionsMenu(Menu menu) {
-        MenuItem itemIn;
-        MenuItem itemOut;
-
         try {
             Thread.sleep(400);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
-        Log.d(this.getClass().getName(), "Is the user logged in ? : "
-                + OpenTenureApplication.isLoggedin());
-
-        if (mainActivity.getMode().compareTo(ModeDispatcher.Mode.MODE_RW) == 0) {
-            if (OpenTenureApplication.isLoggedin()) {
-                itemIn = menu.findItem(R.id.action_login);
-                itemIn.setVisible(false);
-                itemOut = menu.findItem(R.id.action_logout);
-                itemOut.setVisible(true);
-            } else {
-                itemIn = menu.findItem(R.id.action_login);
-                itemIn.setVisible(true);
-                itemOut = menu.findItem(R.id.action_logout);
-                itemOut.setVisible(false);
-            }
-        }
-
         super.onPrepareOptionsMenu(menu);
     }
 
@@ -157,8 +135,6 @@ public class LocalClaimsFragment extends ListFragment {
 
         if (mainActivity.getMode().compareTo(ModeDispatcher.Mode.MODE_RO) == 0) {
             menu.removeItem(R.id.action_new);
-            menu.removeItem(R.id.action_login);
-            menu.removeItem(R.id.action_logout);
             menu.removeItem(R.id.action_show_deleted);
         }
         super.onCreateOptionsMenu(menu, inflater);
@@ -180,7 +156,7 @@ public class LocalClaimsFragment extends ListFragment {
                 backupToast.show();
                 return true;
             case R.id.action_new:
-                if (!Boolean.parseBoolean(Configuration.getConfigurationByName("isInitialized").getValue())) {
+                if (!OpenTenureApplication.getInstance().isInitialized()) {
                     String newMessage = String.format(OpenTenureApplication
                             .getContext().getString(
                                     R.string.message_app_not_yet_initialized));
@@ -215,7 +191,7 @@ public class LocalClaimsFragment extends ListFragment {
                 return true;
             case R.id.action_import_zip:
 
-                if (!Boolean.parseBoolean(Configuration.getConfigurationByName("isInitialized").getValue())) {
+                if (!OpenTenureApplication.getInstance().isInitialized()) {
                     String newMessage = String.format(OpenTenureApplication
                             .getContext().getString(
                                     R.string.message_app_not_yet_initialized));
@@ -237,39 +213,6 @@ public class LocalClaimsFragment extends ListFragment {
                     startActivityForResult(intent, REQUEST_IMPORT);
                 } catch (Exception e) {
                     Log.d(this.getClass().getName(), "Unable to start file chooser intent due to " + e.getMessage());
-                }
-                return true;
-            case R.id.action_login:
-
-                if (!Boolean.parseBoolean(Configuration.getConfigurationByName("isInitialized").getValue())) {
-                    Toast toast;
-                    String toastMessage = String.format(OpenTenureApplication
-                            .getContext().getString(
-                                    R.string.message_app_not_yet_initialized));
-
-                    toast = Toast.makeText(OpenTenureApplication.getContext(), toastMessage, Toast.LENGTH_LONG);
-                    toast.show();
-
-                    return true;
-                }
-
-                OpenTenureApplication.setActivity(getActivity());
-
-                Context context = getActivity().getApplicationContext();
-                Intent intent2 = new Intent(context, LoginActivity.class);
-                startActivity(intent2);
-
-                OpenTenureApplication.setActivity(getActivity());
-
-                return true;
-
-            case R.id.action_logout:
-                try {
-                    LogoutTask logoutTask = new LogoutTask();
-                    logoutTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, getActivity());
-                } catch (Exception e) {
-                    Log.d("Details", "An error ");
-                    e.printStackTrace();
                 }
                 return true;
             case R.id.action_show_deleted:
@@ -451,6 +394,7 @@ public class LocalClaimsFragment extends ListFragment {
         btnSortByClaimNum.setOnClickListener(sortListener);
 
         update();
+        OpenTenureApplication.setActivity(getActivity());
         OpenTenureApplication.setLocalClaimsFragment(this);
 
         return rootView;
@@ -495,7 +439,7 @@ public class LocalClaimsFragment extends ListFragment {
     protected void update() {
         List<Claim> claims = Claim.getSimplifiedClaimsForList();
         List<ClaimListTO> claimListTOs = new ArrayList<ClaimListTO>();
-        DisplayNameLocalizer dnl = new DisplayNameLocalizer(OpenTenureApplication.getInstance().getLocalization());
+        DisplayNameLocalizer dnl = new DisplayNameLocalizer(OpenTenureApplication.getInstance().getLanguageCode());
 
         for (Claim claim : claims) {
             if (excludeClaimIds != null && !excludeClaimIds.contains(claim.getClaimId())) {
@@ -508,7 +452,7 @@ public class LocalClaimsFragment extends ListFragment {
 
                     if(!StringUtility.isEmpty(claim.getType())){
                         slogan += ", " + getResources().getString(R.string.type)
-                                + ": " + dnl.getLocalizedDisplayName(new ClaimType().getDisplayValueByType(claim.getType()));
+                                + ": " + dnl.getLocalizedDisplayName(new ClaimType().getDisplayValueByCode(claim.getType()));
                     }
 
                     slogan += ", " + getResources().getString(R.string.occupiedSince) + ": " + claimDate ;

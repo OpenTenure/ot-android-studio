@@ -137,7 +137,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_weight="2"
-            android:text="@string/boundary"
+            android:text="@string/boundaryResponse"
             style="@style/LabelOpenTenure" />
 
         <LinearLayout

@@ -27,39 +27,50 @@
  */
 package org.fao.sola.clients.android.opentenure.network.response;
 
-public class IdType {
-	
-	
-    String code;
-    String displayValue;
-    String description;
-    String status;
-    
-    
-	public String getCode() {
-		return code;
-	}
-	public void setCode(String code) {
-		this.code = code;
-	}
-	public String getDisplayValue() {
-		return displayValue;
-	}
-	public void setDisplayValue(String displayValue) {
-		this.displayValue = displayValue;
-	}
-	public String getDescription() {
-		return description;
-	}
-	public void setDescription(String description) {
-		this.description = description;
-	}
-	public String getStatus() {
-		return status;
-	}
-	public void setStatus(String status) {
-		this.status = status;
-	}
-    
+public class LanguageResponse extends RefDataResponse {
 
+ 	public int getItemOrder() {
+		return itemOrder;
+	}
+
+	public void setItemOrder(int itemOrder) {
+		this.itemOrder = itemOrder;
+	}
+
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
+	}
+
+	public boolean isIsDefault() {
+		return isDefault;
+	}
+
+	public void setIsDefault(boolean isDefault) {
+		this.isDefault = isDefault;
+	}
+
+	public boolean isLtr() {
+		return ltr;
+	}
+
+	public void setLtr(boolean ltr) {
+		this.ltr = ltr;
+	}
+
+	int itemOrder;
+	boolean active;
+	boolean isDefault;
+	boolean ltr;
+	
+
+	@Override
+	public String toString() {
+		return "DocumentType [code=" + code +
+				", displayValue=" + displayValue + ", itemOrder=" + itemOrder +", active=" + active +", isDefault=" + isDefault +", ltr=" + ltr + "]";
+		
+	}
 }

@@ -27,6 +27,7 @@
  */
 package org.fao.sola.clients.android.opentenure.maps;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,6 +42,7 @@ import org.fao.sola.clients.android.opentenure.model.Bookmark;
 import org.fao.sola.clients.android.opentenure.model.Claim;
 import org.fao.sola.clients.android.opentenure.model.Configuration;
 import org.fao.sola.clients.android.opentenure.model.HoleVertex;
+import org.fao.sola.clients.android.opentenure.model.UserLayer;
 
 import com.androidmapsextensions.ClusterGroup;
 import com.androidmapsextensions.ClusteringSettings;
@@ -61,10 +63,12 @@ import com.androidmapsextensions.TileOverlay;
 import com.androidmapsextensions.TileOverlayOptions;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.MapsInitializer;
+import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
@@ -85,6 +89,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.hardware.GeomagneticField;
 import android.hardware.Sensor;
@@ -94,7 +99,6 @@ import android.hardware.SensorManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
-import com.google.android.gms.location.LocationRequest;
 import android.os.Bundle;
 import android.os.Looper;
 import android.preference.PreferenceManager;
@@ -102,60 +106,62 @@ import android.preference.PreferenceManager;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class ClaimMapFragment extends Fragment implements SensorEventListener {
 
 	enum MapMode {
 		add_boundary, add_non_boundary, measure, edit_hole, insert_boundary
-	};
-
-	private static final int MAP_LABEL_FONT_SIZE = 16;
+	}
 	private static final String OSM_MAPNIK_BASE_URL = "http://a.tile.openstreetmap.org/{z}/{x}/{y}.png";
 	private static final String OSM_MAPQUEST_BASE_URL = "http://otile1.mqcdn.com/tiles/1.0.0/osm/{z}/{x}/{y}.png";
-	private static final float CUSTOM_TILE_PROVIDER_Z_INDEX = 1.0f;
 	protected static final float MEASURE_Z_INDEX = 3.0f;
 	private static final int BOOKMARK_RESULT = 100;
 
 	private MapMode mapMode = MapMode.add_boundary;
 	private MapType mapType = MapType.map_provider_google_normal;
 	private View mapView;
-	private MapLabel label;
 	private GoogleMap map;
 	private EditablePropertyBoundary currentProperty;
 	private EditablePropertyBoundary currentHole;
 	private List<BasePropertyBoundary> visibleProperties;
 	private List<Claim> allClaims;
 	private MultiPolygon visiblePropertiesMultiPolygon;
-	private boolean saved = false;
 	private ClaimDispatcher claimActivity;
 	private ModeDispatcher modeActivity;
 	private final static String MAP_TYPE = "__MAP_TYPE__";
 	private double snapLat;
 	private double snapLon;
-	private Menu menu;
 	private boolean isRotating = false;
 	private boolean isFollowing = false;
 	private Marker myLocation;
 	private CameraPosition newCameraPosition;
-	private FusedLocationProviderClient fusedLocationClient;
-	private LocationCallback locationCallback;
-	private LocationRequest locationRequest;
 	private boolean adjacenciesReset = false;
-	private Location lastKnownLocation;
 	private Marker distanceStart;
 	private Marker distanceEnd;
 	private Marker distanceMarker;
 	private Marker bookmark;
 	private Polyline distanceSegment;
 	LatLng lastCameraPosition = null;
+	private FusedLocationProviderClient fusedLocationClient;
+	private LocationCallback locationCallback;
+	private LocationRequest locationRequest;
+	private TextView txtCoords;
+	private Location lastKnownLocation;
+	private MenuItem mapToolsMenu;
+	private Menu menu;
 
 	// device sensor manager
 	private SensorManager mSensorManager;
@@ -188,14 +194,30 @@ public class ClaimMapFragment extends Fragment implements SensorEventListener {
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		menu.clear();
 		inflater.inflate(R.menu.claim_map, menu);
-		menu.findItem(R.id.action_stop_rotating).setVisible(false);
+		mapToolsMenu = menu.findItem(R.id.action_change_map_mode);
+
 		if (modeActivity.getMode().compareTo(ModeDispatcher.Mode.MODE_RO) == 0) {
 			menu.removeItem(R.id.action_add_from_gps);
-			menu.findItem(R.id.action_change_map_mode).getSubMenu().removeItem(R.id.action_add_boundary);
-			menu.findItem(R.id.action_change_map_mode).getSubMenu().removeItem(R.id.action_insert_boundary);
+			mapToolsMenu.getSubMenu().removeItem(R.id.action_add_boundary);
+			mapToolsMenu.getSubMenu().removeItem(R.id.action_insert_boundary);
 			menu.findItem(R.id.action_change_map_mode).getSubMenu().removeItem(R.id.action_add_non_boundary);
-			menu.findItem(R.id.action_change_map_mode).getSubMenu().removeItem(R.id.action_edit_hole);
+			mapToolsMenu.getSubMenu().removeItem(R.id.action_edit_hole);
 			mapMode = MapMode.measure;
+		}
+
+		switch (mapMode) {
+			case add_boundary:
+				mapToolsMenu.getSubMenu().findItem(R.id.action_add_boundary).setChecked(true);
+				break;
+			case measure:
+				mapToolsMenu.getSubMenu().findItem(R.id.action_measure).setChecked(true);
+				break;
+			case insert_boundary:
+				mapToolsMenu.getSubMenu().findItem(R.id.action_insert_boundary).setChecked(true);
+				break;
+			case add_non_boundary:
+				mapToolsMenu.getSubMenu().findItem(R.id.action_add_non_boundary).setChecked(true);
+				break;
 		}
 
 		this.menu = menu;
@@ -210,27 +232,16 @@ public class ClaimMapFragment extends Fragment implements SensorEventListener {
 		startLocationUpdates();
 		if (isRotating) {
 			mSensorManager.registerListener(this, mSensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR),
-					SensorManager.SENSOR_DELAY_UI);
+						SensorManager.SENSOR_DELAY_UI);
 		}
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
+		stopLocationUpdates();
 		// to stop the listener and save battery
 		mSensorManager.unregisterListener(this);
-		stopLocationUpdates();
-	}
-
-	private void stopLocationUpdates() {
-		fusedLocationClient.removeLocationUpdates(locationCallback);
-	}
-
-	private void startLocationUpdates() {
-		if (ActivityCompat.checkSelfPermission(OpenTenureApplication.getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-				&& ActivityCompat.checkSelfPermission(OpenTenureApplication.getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-		}
-		fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, Looper.getMainLooper());
 	}
 
 	@Override
@@ -239,7 +250,7 @@ public class ClaimMapFragment extends Fragment implements SensorEventListener {
 	}
 
 	public void reloadBoundary() {
-		if(currentProperty != null) {
+		if (map != null) {
 			currentProperty.reload();
 		}
 	}
@@ -252,16 +263,10 @@ public class ClaimMapFragment extends Fragment implements SensorEventListener {
 	@Override
 	public void onDestroyView() {
 		Fragment map = getFragmentManager().findFragmentById(R.id.claim_map_fragment);
-		Fragment label = getFragmentManager().findFragmentById(R.id.claim_map_provider_label);
 		try {
 			if (map.isResumed()) {
 				FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
 				ft.remove(map);
-				ft.commit();
-			}
-			if (label.isResumed()) {
-				FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-				ft.remove(label);
 				ft.commit();
 			}
 		} catch (Exception e) {
@@ -315,13 +320,13 @@ public class ClaimMapFragment extends Fragment implements SensorEventListener {
 			// No property exists for this claim
 			// so we center where we left the main map
 			float zoom = map.getMaxZoomLevel() - MainMapFragment.MAX_ZOOM_LEVELS_TO_DOWNLOAD;
-			if(bookmark != null){
+			if (bookmark != null) {
 				bookmark.remove();
 			}
-			bookmark = createMapBookmarkMarker(new LatLng(bm.getLat(),bm.getLon()),bm.getName());
+			bookmark = createMapBookmarkMarker(new LatLng(bm.getLat(), bm.getLon()), bm.getName());
 			try {
 				map.moveCamera(CameraUpdateFactory.newLatLngZoom(
-						new LatLng(bm.getLat(), bm.getLon()),zoom));
+						new LatLng(bm.getLat(), bm.getLon()), zoom));
 			} catch (Exception e) {
 			}
 		}
@@ -342,10 +347,8 @@ public class ClaimMapFragment extends Fragment implements SensorEventListener {
 		super.onCreateView(inflater, container, savedInstanceState);
 		mapView = inflater.inflate(R.layout.fragment_claim_map, container, false);
 		setHasOptionsMenu(true);
-		label = (MapLabel) getChildFragmentManager().findFragmentById(R.id.claim_map_provider_label);
-//		label = (MapLabel) getActivity().getSupportFragmentManager().findFragmentById(R.id.claim_map_provider_label);
-		label.changeTextProperties(MAP_LABEL_FONT_SIZE,
-				getActivity().getResources().getString(R.string.map_provider_google_normal));
+		txtCoords = (TextView) mapView.findViewById(R.id.txtCoords);
+		final ClaimMapFragment that = this;
 
 		// Location client
 		fusedLocationClient = LocationServices.getFusedLocationProviderClient(OpenTenureApplication.getContext());
@@ -361,6 +364,7 @@ public class ClaimMapFragment extends Fragment implements SensorEventListener {
 					return;
 				}
 				lastKnownLocation = locationResult.getLastLocation();
+				txtCoords.setText(String.format(getResources().getString(R.string.accuracy), lastKnownLocation.getAccuracy()));
 			}
 		};
 
@@ -369,12 +373,45 @@ public class ClaimMapFragment extends Fragment implements SensorEventListener {
 			@Override
 			public void onMapReady(GoogleMap googleMap) {
 				map = googleMap;
-			    ClusteringSettings settings = new ClusteringSettings();
-			    settings.clusterOptionsProvider(new OpenTenureClusterOptionsProvider(getResources()));
-			    settings.addMarkersDynamically(true);
-			    map.setClustering(settings);
+				ClusteringSettings settings = new ClusteringSettings();
+				settings.clusterOptionsProvider(new OpenTenureClusterOptionsProvider(getResources()));
+				settings.addMarkersDynamically(true);
+				map.setClustering(settings);
+
+				// Set compass location to the right
+				try {
+					final ViewGroup parent = (ViewGroup) mapViewFragment.getView().findViewWithTag("GoogleMapMyLocationButton").getParent();
+					container.post(new Runnable() {
+						@Override
+						public void run() {
+							try {
+								Resources r = getResources();
+								//convert our dp margin into pixels
+								int marginPixels = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 20, r.getDisplayMetrics());
+								// Get the map compass view
+								View mapCompass = parent.getChildAt(4);
+
+								// create layoutParams, giving it our wanted width and height(important, by default the width is "match parent")
+								RelativeLayout.LayoutParams rlp = new RelativeLayout.LayoutParams(mapCompass.getHeight(),mapCompass.getHeight());
+								// position on top right
+								rlp.addRule(RelativeLayout.ALIGN_PARENT_LEFT, 0);
+								rlp.addRule(RelativeLayout.ALIGN_PARENT_TOP);
+								rlp.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+								rlp.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, 0);
+								//give compass margin
+								rlp.setMargins(marginPixels, marginPixels, marginPixels, marginPixels);
+								mapCompass.setLayoutParams(rlp);
+							} catch (Exception ex) {
+								ex.printStackTrace();
+							}
+						}
+					});
+				} catch (Exception ex) {
+					ex.printStackTrace();
+				}
 
 				map.setInfoWindowAdapter(new PopupAdapter(inflater));
+
 				map.setOnCameraIdleListener(new GoogleMap.OnCameraIdleListener() {
 					@Override
 					public void onCameraIdle() {
@@ -432,7 +469,7 @@ public class ClaimMapFragment extends Fragment implements SensorEventListener {
 					// probably an orientation change don't move the view but
 					// restore the current type of the map
 					mapType = MapType.valueOf(savedInstanceState.getString(MAP_TYPE));
-					setMapType(true);
+					loadLayers(true);
 				} else {
 					// restore the latest map type used on the main map
 					try {
@@ -441,12 +478,11 @@ public class ClaimMapFragment extends Fragment implements SensorEventListener {
 						mapType = MapType.map_provider_google_normal;
 					}
 					// don't draw properties since we might not have loaded them yet
-					setMapType(false);
+					loadLayers(false);
 				}
 
 				hideVisibleProperties();
-				currentProperty = new EditablePropertyBoundary(mapView.getContext(), map,
-						claimActivity.getClaimId(), claimActivity, visibleProperties, modeActivity.getMode());
+				currentProperty = new EditablePropertyBoundary(mapView.getContext(), map, claimActivity.getClaimId(), claimActivity, visibleProperties, modeActivity.getMode());
 
 				centerMapOnCurrentProperty(null);
 				reloadVisibleProperties(true);
@@ -454,6 +490,7 @@ public class ClaimMapFragment extends Fragment implements SensorEventListener {
 				drawAreaOfInterest();
 
 				if (modeActivity.getMode().compareTo(ModeDispatcher.Mode.MODE_RW) == 0) {
+					// Allow adding, removing and dragging markers
 					map.setOnMapLongClickListener(new OnMapLongClickListener() {
 						@Override
 						public void onMapLongClick(final LatLng position) {
@@ -465,8 +502,7 @@ public class ClaimMapFragment extends Fragment implements SensorEventListener {
 						@Override
 						public void onMarkerDrag(Marker mark) {
 							PointPairDistance ppd = new PointPairDistance();
-							DistanceToPoint.computeDistance(visiblePropertiesMultiPolygon,
-									new Coordinate(mark.getPosition().longitude, mark.getPosition().latitude), ppd);
+							DistanceToPoint.computeDistance(visiblePropertiesMultiPolygon, new Coordinate(mark.getPosition().longitude, mark.getPosition().latitude), ppd);
 
 							if (ppd.getDistance() < BasePropertyBoundary.SNAP_THRESHOLD) {
 								snapLat = ppd.getCoordinate(0).y;
@@ -493,6 +529,7 @@ public class ClaimMapFragment extends Fragment implements SensorEventListener {
 						}
 
 					});
+
 				}
 
 				map.setOnMarkerClickListener(new OnMarkerClickListener() {
@@ -535,30 +572,47 @@ public class ClaimMapFragment extends Fragment implements SensorEventListener {
 				currentProperty.redrawProperty();
 			}
 		});
+
+		ImageButton btnLayers = mapView.findViewById(R.id.btnLayers);
+		btnLayers.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				Intent mapLayersActivity = new Intent(getContext(), MapLayersActivity.class);
+				startActivityForResult(mapLayersActivity, MapLayersActivity.REQUEST_CODE);
+			}
+		});
+
 		return mapView;
 	}
 
 	private boolean handleDistanceMarkerClick(Marker mark) {
-
 		hideDistance();
+
 		if ((distanceStart != null && mark.equals(distanceStart))
 				|| (distanceEnd != null && mark.equals(distanceEnd))) {
 			// Second click on a selected marker: stop measuring
+			colorDistanceMarkers(false);
 			distanceStart = null;
 			distanceEnd = null;
 		} else if (distanceEnd != null && distanceStart == null) {
 			// measureStart selected
 			distanceStart = mark;
+			colorDistanceMarkers(true);
 		} else if (distanceStart != null && distanceEnd == null) {
 			// measureEnd selected
 			distanceEnd = mark;
+			colorDistanceMarkers(true);
 		} else if (distanceStart != null && distanceEnd != null) {
 			// new measureEnd selected
+			colorDistanceMarkers(false);
 			distanceStart = distanceEnd;
 			distanceEnd = mark;
+			colorDistanceMarkers(true);
 		} else if (distanceStart == null && distanceEnd == null) {
 			// measureStart selected
 			distanceStart = mark;
+			distanceStart.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.ot_orange_marker));
+			colorDistanceMarkers(true);
 		}
 		if (distanceStart != null && distanceEnd != null) {
 			showDistance();
@@ -566,10 +620,25 @@ public class ClaimMapFragment extends Fragment implements SensorEventListener {
 		return true;
 	}
 
+	private void colorDistanceMarkers(boolean selected) {
+		BitmapDescriptor icon;
+		if(selected) {
+			icon = BitmapDescriptorFactory.fromResource(R.drawable.ot_orange_marker);
+		} else {
+			icon = BitmapDescriptorFactory.fromResource(R.drawable.ot_blue_marker);
+		}
+
+		if(distanceStart != null) {
+			distanceStart.setIcon(icon);
+		}
+		if(distanceEnd != null) {
+			distanceEnd.setIcon(icon);
+		}
+	}
+
 	private void showDistance() {
 		if (distanceStart != null && distanceEnd != null) {
-			double distance = SphericalUtil.computeDistanceBetween(distanceStart.getPosition(),
-					distanceEnd.getPosition());
+			double distance = SphericalUtil.computeDistanceBetween(distanceStart.getPosition(), distanceEnd.getPosition());
 
 			if (distance < 0.01) {
 				return;
@@ -583,13 +652,12 @@ public class ClaimMapFragment extends Fragment implements SensorEventListener {
 			polylineOptions.color(Color.BLACK);
 			distanceSegment = map.addPolyline(polylineOptions);
 
-			distanceMarker = map
-					.addMarker(
-							new MarkerOptions()
-									.position(new LatLng((distanceStart.getPosition().latitude
-											+ distanceEnd.getPosition().latitude) / 2,
-											(distanceStart.getPosition().longitude + distanceEnd.getPosition().longitude) / 2))
-									.anchor(0.5f, 1.0f));
+			distanceMarker = map.addMarker(
+					new MarkerOptions()
+							.position(new LatLng((distanceStart.getPosition().latitude
+									+ distanceEnd.getPosition().latitude) / 2,
+									(distanceStart.getPosition().longitude + distanceEnd.getPosition().longitude) / 2))
+							.anchor(0.5f, 1.0f));
 			distanceMarker.setAlpha(0.0f);
 			distanceMarker.setInfoWindowAnchor(.5f, 1.0f);
 			distanceMarker.setClusterGroup(ClusterGroup.NOT_CLUSTERED);
@@ -598,7 +666,6 @@ public class ClaimMapFragment extends Fragment implements SensorEventListener {
 					getResources().getString(R.string.meters));
 			distanceMarker.setTitle(title);
 			distanceMarker.showInfoWindow();
-
 		}
 	}
 
@@ -615,7 +682,7 @@ public class ClaimMapFragment extends Fragment implements SensorEventListener {
 
 	private void cancelDistance() {
 		hideDistance();
-
+		colorDistanceMarkers(false);
 		distanceStart = null;
 		distanceEnd = null;
 	}
@@ -643,7 +710,9 @@ public class ClaimMapFragment extends Fragment implements SensorEventListener {
 		if (allClaims == null) {
 			allClaims = Claim.getSimplifiedClaimsForMap();
 		}
+
 		visibleProperties = new ArrayList<BasePropertyBoundary>();
+
 		for (Claim claim : allClaims) {
 			if (!claim.getClaimId().equalsIgnoreCase(claimActivity.getClaimId())) {
 				BasePropertyBoundary bpb = new BasePropertyBoundary(mapView.getContext(), map, claim.getClaimId(), updateArea);
@@ -658,7 +727,6 @@ public class ClaimMapFragment extends Fragment implements SensorEventListener {
 		List<Polygon> visiblePropertiesPolygonList = new ArrayList<Polygon>();
 
 		for (BasePropertyBoundary visibleProperty : visibleProperties) {
-
 			if (visibleProperty.getVertices() != null && visibleProperty.getVertices().size() > 0) {
 				visiblePropertiesPolygonList.add(visibleProperty.getPolygon());
 			}
@@ -669,87 +737,16 @@ public class ClaimMapFragment extends Fragment implements SensorEventListener {
 		GeometryFactory gf = new GeometryFactory();
 		visiblePropertiesMultiPolygon = gf.createMultiPolygon(visiblePropertiesPolygons);
 		visiblePropertiesMultiPolygon.setSRID(Constants.SRID);
-
 	}
 
-	private void setMapLabel() {
-
-		String mode = null;
-
-		switch (mapMode) {
-			case add_boundary:
-				mode = ": " + getResources().getString(R.string.action_add_boundary);
-				break;
-			case insert_boundary:
-				mode = ": " + getResources().getString(R.string.action_insert_boundary);
-				break;
-			case add_non_boundary:
-				mode = ": " + getResources().getString(R.string.action_add_non_boundary);
-				break;
-			case edit_hole:
-				mode = ": " + getResources().getString(R.string.action_add_hole) ;
-				if(currentProperty.getSelectedHoleNumber() == -1){
-					List<List<HoleVertex>> holesVertices = currentProperty.getHolesVertices();
-					int holeNumber;
-					if(holesVertices == null){
-						holeNumber = 0;
-					}else{
-						holeNumber = holesVertices.size();
-					}
-					mode += " " + holeNumber;
-				}else{
-					mode += " " + currentProperty.getSelectedHoleNumber();
-				}
-				break;
-			case measure:
-				mode = ": " + getResources().getString(R.string.action_measure);
-				break;
-		}
-
-		switch (mapType) {
-			case map_provider_google_normal:
-				label.changeTextProperties(MAP_LABEL_FONT_SIZE,
-						getResources().getString(R.string.map_provider_google_normal) + mode);
-				break;
-			case map_provider_google_satellite:
-				label.changeTextProperties(MAP_LABEL_FONT_SIZE,
-						getResources().getString(R.string.map_provider_google_satellite) + mode);
-				break;
-			case map_provider_google_hybrid:
-				label.changeTextProperties(MAP_LABEL_FONT_SIZE,
-						getResources().getString(R.string.map_provider_google_hybrid) + mode);
-				break;
-			case map_provider_google_terrain:
-				label.changeTextProperties(MAP_LABEL_FONT_SIZE,
-						getResources().getString(R.string.map_provider_google_terrain) + mode);
-				break;
-			case map_provider_osm_mapnik:
-				label.changeTextProperties(MAP_LABEL_FONT_SIZE,
-						getResources().getString(R.string.map_provider_osm_mapnik) + mode);
-				break;
-			case map_provider_osm_mapquest:
-				label.changeTextProperties(MAP_LABEL_FONT_SIZE,
-						getResources().getString(R.string.map_provider_osm_mapquest) + mode);
-				break;
-			case map_provider_local_tiles:
-				label.changeTextProperties(MAP_LABEL_FONT_SIZE,
-						getResources().getString(R.string.map_provider_local_tiles) + mode);
-				break;
-			case map_provider_geoserver:
-				label.changeTextProperties(MAP_LABEL_FONT_SIZE,
-						getResources().getString(R.string.map_provider_geoserver) + mode);
-				break;
-			default:
-				break;
-		}
-	}
-
-	private void setMapType(boolean drawProperties) {
-
+	private void loadLayers(boolean forceDraw) {
 		for (TileOverlay tiles : map.getTileOverlays()) {
 			tiles.remove();
 		}
 
+		boolean redrawClaims = false;
+
+		// Add base layer
 		switch (mapType) {
 			case map_provider_google_normal:
 				map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
@@ -766,41 +763,57 @@ public class ClaimMapFragment extends Fragment implements SensorEventListener {
 			case map_provider_osm_mapnik:
 				OsmTileProvider mapNikTileProvider = new OsmTileProvider(256, 256, OSM_MAPNIK_BASE_URL);
 				map.setMapType(GoogleMap.MAP_TYPE_NONE);
-				map.addTileOverlay(
-						new TileOverlayOptions().tileProvider(mapNikTileProvider).zIndex(CUSTOM_TILE_PROVIDER_Z_INDEX));
-				if (drawProperties) {
-					redrawProperties();
-				}
+				map.addTileOverlay(new TileOverlayOptions().tileProvider(mapNikTileProvider));
+				redrawClaims = true;
 				break;
 			case map_provider_osm_mapquest:
 				OsmTileProvider mapQuestTileProvider = new OsmTileProvider(256, 256, OSM_MAPQUEST_BASE_URL);
 				map.setMapType(GoogleMap.MAP_TYPE_NONE);
-				map.addTileOverlay(
-						new TileOverlayOptions().tileProvider(mapQuestTileProvider).zIndex(CUSTOM_TILE_PROVIDER_Z_INDEX));
-				if (drawProperties) {
-					redrawProperties();
-				}
+				map.addTileOverlay(new TileOverlayOptions().tileProvider(mapQuestTileProvider));
+				redrawClaims = true;
 				break;
 			case map_provider_local_tiles:
 				map.setMapType(GoogleMap.MAP_TYPE_NONE);
-				map.addTileOverlay(new TileOverlayOptions().tileProvider(new LocalMapTileProvider())
-						.zIndex(CUSTOM_TILE_PROVIDER_Z_INDEX));
-				if (drawProperties) {
-					redrawProperties();
-				}
+				map.addTileOverlay(new TileOverlayOptions().tileProvider(new LocalMapTileProvider()));
+				redrawClaims = true;
 				break;
 			case map_provider_geoserver:
 				map.setMapType(GoogleMap.MAP_TYPE_NONE);
-				SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(mapView.getContext());
-				map.addTileOverlay(new TileOverlayOptions().tileProvider(new WmsMapTileProvider(256, 256, preferences)));
-				if (drawProperties) {
-					redrawProperties();
-				}
+				map.addTileOverlay(new TileOverlayOptions().tileProvider(new WmsMapTileProvider(256, 256)));
+				redrawClaims = true;
+				break;
+			case map_provider_empty:
+				map.setMapType(GoogleMap.MAP_TYPE_NONE);
+				redrawClaims = true;
 				break;
 			default:
 				break;
 		}
-		setMapLabel();
+
+		// Add user layers
+		List<UserLayer> userLayers = UserLayer.getUserLayers(false);
+		if (userLayers != null && userLayers.size() > 0) {
+			for (UserLayer userLayer : userLayers) {
+				if (userLayer.getEnabled()) {
+					File mbtileFile = new File(userLayer.getFilePath());
+					if (mbtileFile.exists()) {
+						try {
+							TileOverlayOptions opts = new TileOverlayOptions();
+							opts.tileProvider(new MbTilesProvider(mbtileFile));
+							map.addTileOverlay(opts);
+							redrawClaims = true;
+						} catch (Exception ex) {
+							Log.d("UserLayer", "Failed to add user map layer. " + ex.getMessage());
+							ex.printStackTrace();
+						}
+					}
+				}
+			}
+		}
+
+		if (redrawClaims && forceDraw) {
+			redrawProperties();
+		}
 	}
 
 	private void redrawProperties() {
@@ -822,7 +835,6 @@ public class ClaimMapFragment extends Fragment implements SensorEventListener {
 	private void redrawVisibleProperties() {
 		hideVisibleProperties();
 		showVisibleProperties();
-
 	}
 
 	private void drawAreaOfInterest() {
@@ -838,6 +850,24 @@ public class ClaimMapFragment extends Fragment implements SensorEventListener {
 		}
 	}
 
+	private void uncheckMapToolsMenus() {
+		if(mapToolsMenu != null){
+			MenuItem addBoundary = mapToolsMenu.getSubMenu().findItem(R.id.action_add_boundary);
+			MenuItem insertBoundary = mapToolsMenu.getSubMenu().findItem(R.id.action_insert_boundary);
+			MenuItem measure = mapToolsMenu.getSubMenu().findItem(R.id.action_measure);
+
+			if(addBoundary != null) {
+				addBoundary.setChecked(false);
+			}
+			if(insertBoundary != null) {
+				insertBoundary.setChecked(false);
+			}
+			if(measure != null) {
+				measure.setChecked(false);
+			}
+		}
+	}
+
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// handle item selection
@@ -845,98 +875,62 @@ public class ClaimMapFragment extends Fragment implements SensorEventListener {
 		switch (item.getItemId()) {
 			case R.id.action_settings:
 				return true;
-			case R.id.action_add_boundary :
+			case R.id.action_add_boundary:
 				mapMode = MapMode.add_boundary;
 				currentProperty.deselect();
+				uncheckMapToolsMenus();
+				item.setChecked(true);
 				cancelDistance();
-				setMapLabel();
 				return true;
-			case R.id.action_insert_boundary :
+			case R.id.action_insert_boundary:
 				mapMode = MapMode.insert_boundary;
 				currentProperty.deselect();
+				uncheckMapToolsMenus();
+				item.setChecked(true);
 				cancelDistance();
-				setMapLabel();
 				return true;
 			case R.id.action_add_non_boundary:
 				mapMode = MapMode.add_non_boundary;
 				currentProperty.deselect();
 				cancelDistance();
-				setMapLabel();
 				return true;
 			case R.id.action_measure:
 				mapMode = MapMode.measure;
 				currentProperty.deselect();
+				uncheckMapToolsMenus();
+				item.setChecked(true);
 				cancelDistance();
-				setMapLabel();
 				return true;
 			case R.id.action_edit_hole:
 				mapMode = MapMode.edit_hole;
 				currentProperty.deselect();
 				cancelDistance();
-				List<List<HoleVertex>> holesVertices =  currentProperty.getHolesVertices();
+				List<List<HoleVertex>> holesVertices = currentProperty.getHolesVertices();
 				final CharSequence[] options;
-				if(holesVertices != null){
-					options = new CharSequence[holesVertices.size()+1];
-					for(int i = 0 ; i < holesVertices.size() ; i++){
-						options[i] = i+"";
+				if (holesVertices != null) {
+					options = new CharSequence[holesVertices.size() + 1];
+					for (int i = 0; i < holesVertices.size(); i++) {
+						options[i] = i + "";
 					}
-				}else{
+				} else {
 					options = new CharSequence[1];
 				}
-				options[options.length-1] = getResources().getString(R.string.new_hole);
+				options[options.length - 1] = getResources().getString(R.string.new_hole);
 				AlertDialog.Builder selectHoleDialog = new AlertDialog.Builder(
-						mapView.getContext()).setTitle(getResources().getString(R.string.title_select_hole)).setItems(options,new DialogInterface.OnClickListener() {
+						mapView.getContext()).setTitle(getResources().getString(R.string.title_select_hole)).setItems(options, new DialogInterface.OnClickListener() {
 
 					@Override
 					public void onClick(
 							DialogInterface dialog,
 							int which) {
-						if(which==options.length-1){
+						if (which == options.length - 1) {
 							currentProperty.setSelectedHoleNumber(-1);
-						}else{
+						} else {
 							currentProperty.setSelectedHoleNumber(which);
 						}
-						setMapLabel();
 					}
 				});
 				selectHoleDialog.show();
-				return true;
-			case R.id.map_provider_google_normal:
-				mapType = MapType.map_provider_google_normal;
-				setMapType(true);
-				return true;
-			case R.id.map_provider_google_satellite:
-				mapType = MapType.map_provider_google_satellite;
-				setMapType(true);
-				return true;
-			case R.id.map_provider_google_hybrid:
-				mapType = MapType.map_provider_google_hybrid;
-				setMapType(true);
-				return true;
-			case R.id.map_provider_google_terrain:
-				mapType = MapType.map_provider_google_terrain;
-				setMapType(true);
-				return true;
-			case R.id.map_provider_osm_mapnik:
-				mapType = MapType.map_provider_osm_mapnik;
-				setMapType(true);
-				return true;
-			case R.id.map_provider_osm_mapquest:
-				mapType = MapType.map_provider_osm_mapquest;
-				setMapType(true);
-				return true;
-			case R.id.map_provider_local_tiles:
-				mapType = MapType.map_provider_local_tiles;
-				setMapType(true);
-				return true;
-			case R.id.map_provider_geoserver:
-				mapType = MapType.map_provider_geoserver;
-				setMapType(true);
-				return true;
-			case R.id.action_save:
-				saved = true;
-				toast = Toast.makeText(mapView.getContext(), R.string.message_saved, Toast.LENGTH_SHORT);
-				toast.show();
 				return true;
 			case R.id.action_export_geo:
 				currentProperty.saveGeometry();
@@ -944,12 +938,10 @@ public class ClaimMapFragment extends Fragment implements SensorEventListener {
 				toast.show();
 				return true;
 			case R.id.action_new_picture:
-				Log.d(this.getClass().getName(), "newPicture");
 				centerMapOnCurrentProperty(new CancelableCallback() {
 
 					@Override
 					public void onFinish() {
-						Log.d(this.getClass().getName(), "onFinish");
 						currentProperty.saveSnapshot();
 					}
 
@@ -957,16 +949,6 @@ public class ClaimMapFragment extends Fragment implements SensorEventListener {
 					public void onCancel() {
 					}
 				});
-				return true;
-			case R.id.action_submit:
-				if (saved) {
-					toast = Toast.makeText(mapView.getContext(), R.string.message_submitted, Toast.LENGTH_SHORT);
-					toast.show();
-				} else {
-					toast = Toast.makeText(mapView.getContext(), R.string.message_save_claim_before_submit,
-							Toast.LENGTH_SHORT);
-					toast.show();
-				}
 				return true;
 			case R.id.action_center_and_follow:
 				if (isFollowing) {
@@ -993,7 +975,6 @@ public class ClaimMapFragment extends Fragment implements SensorEventListener {
 				return true;
 			case R.id.action_add_from_gps:
 				LatLng newLocation = null;
-
 				if(lastKnownLocation != null){
 					newLocation = new LatLng(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude());
 				}
@@ -1011,8 +992,7 @@ public class ClaimMapFragment extends Fragment implements SensorEventListener {
 					mSensorManager.registerListener(this, mSensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR), SensorManager.SENSOR_DELAY_UI);
 					isRotating = true;
 				} else {
-					Toast.makeText(getActivity().getBaseContext(), R.string.check_location_service, Toast.LENGTH_LONG)
-							.show();
+					Toast.makeText(getActivity().getBaseContext(), R.string.check_location_service, Toast.LENGTH_LONG).show();
 				}
 				return true;
 			case R.id.action_stop_rotating:
@@ -1031,26 +1011,42 @@ public class ClaimMapFragment extends Fragment implements SensorEventListener {
 		}
 	}
 
+	private void stopLocationUpdates() {
+		fusedLocationClient.removeLocationUpdates(locationCallback);
+	}
+
+	private void startLocationUpdates() {
+		if (ActivityCompat.checkSelfPermission(OpenTenureApplication.getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+				&& ActivityCompat.checkSelfPermission(OpenTenureApplication.getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+		}
+		fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, Looper.getMainLooper());
+	}
+
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
-
 		if (data != null) { // No selection has been done
-
 			switch (requestCode) {
 				case BOOKMARK_RESULT:
 					String bookmarkId = data.getStringExtra(SelectBookmarkActivity.BOOKMARK_ID_KEY);
-					Log.d(this.getClass().getName(), "Selected bookmark: " + bookmarkId);
 					centerMapOnBookmark(bookmarkId);
 					break;
 			}
 		}
-
+		if(requestCode == MapLayersActivity.REQUEST_CODE && resultCode == MapLayersActivity.RESPONSE_CODE){
+			try {
+				mapType = MapType.valueOf(Configuration.getConfigurationValue(MainMapFragment.MAIN_MAP_TYPE));
+			} catch (Exception e) {
+				mapType = MapType.map_provider_google_normal;
+			}
+			loadLayers(true);
+		}
 		super.onActivityResult(requestCode, resultCode, data);
 	}
 
 	@Override
 	public void onAccuracyChanged(Sensor sensor, int accuracy) {
 		// nothing to do as of now
+
 	}
 
 	@Override

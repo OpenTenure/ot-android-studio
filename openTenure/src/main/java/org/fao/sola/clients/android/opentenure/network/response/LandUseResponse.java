@@ -25,42 +25,14 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * *********************************************************************************************
  */
-package org.fao.sola.clients.android.opentenure.network;
+package org.fao.sola.clients.android.opentenure.network.response;
 
-import android.os.AsyncTask;
-import org.fao.sola.clients.android.opentenure.OpenTenureApplication;
-import org.fao.sola.clients.android.opentenure.network.API.CommunityServerAPI;
-import org.fao.sola.clients.android.opentenure.network.response.BoundaryStatus;
-import java.util.Iterator;
-import java.util.List;
-
-public class BoundaryStatusTask extends AsyncTask<String, Void, List<BoundaryStatus>> {
+public class LandUseResponse extends RefDataResponse {
+	public LandUseResponse(){}
 
 	@Override
-	protected List<BoundaryStatus> doInBackground(String... params) {
-		List<BoundaryStatus> statuses = CommunityServerAPI.getBoundaryStatuses();
-		return statuses;
-	}
-
-	@Override
-	protected void onPostExecute(List<BoundaryStatus> statuses) {
-		if (statuses != null && (statuses.size() > 0)) {
-			org.fao.sola.clients.android.opentenure.model.BoundaryStatus.setAllInactive();
-			for (Iterator<BoundaryStatus> iterator = statuses.iterator(); iterator.hasNext();) {
-				BoundaryStatus status = iterator.next();
-				org.fao.sola.clients.android.opentenure.model.BoundaryStatus dbStatus = new org.fao.sola.clients.android.opentenure.model.BoundaryStatus();
-
-				dbStatus.setDescription(status.getDescription());
-				dbStatus.setCode(status.getCode());
-				dbStatus.setDisplayValue(status.getDisplayValue());
-				if (org.fao.sola.clients.android.opentenure.model.BoundaryStatus.getItem(status.getCode()) == null)
-					dbStatus.insert();
-				else
-					dbStatus.update();
-			}
-
-			OpenTenureApplication.getInstance().setCheckedBoundaryStatus(true);
-			OpenTenureApplication.getInstance().setSettingsSynchronized();
-		}
+	public String toString() {
+		return "DocumentType [code=" + code + ", description=" + description
+				+ ", displayValue=" + displayValue + ", status=" + status + "]";
 	}
 }
