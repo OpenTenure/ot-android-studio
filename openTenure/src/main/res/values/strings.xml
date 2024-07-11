@@ -565,7 +565,7 @@
     <string name="action_add_hole">Add hole marker</string>
     <string name="title_select_hole">Select hole</string>
     <string name="boundaryResponse">Community Area</string>
-    <string name="accuracy">Accuracy: %.2fm</string>
+    <string name="accuracy">GPS accuracy: %.2fm</string>
     <string name="layer_name">Layer name</string>
     <string name="enter_layer_name">Enter layer name</string>
     <string name="edit">Edit</string>

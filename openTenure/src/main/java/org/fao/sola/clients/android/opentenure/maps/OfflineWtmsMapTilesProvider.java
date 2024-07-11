@@ -40,7 +40,7 @@ public class OfflineWtmsMapTilesProvider extends OfflineTilesProvider{
     
     public OfflineWtmsMapTilesProvider(int width, int height) {
     	super(width, height);
-		String URL_STRING = "http://host/path/%d/%d/%d.jpg";
+		URL_STRING = "http://host/path/%d/%d/%d.jpg";
 
 		if(OpenTenureApplication.getInstance().getProject() != null){
 			if(!StringUtility.isEmpty(OpenTenureApplication.getInstance().getProject().getTilesServerUrl())){
