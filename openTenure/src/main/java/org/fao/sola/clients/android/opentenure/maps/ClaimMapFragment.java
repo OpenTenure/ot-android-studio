@@ -205,6 +205,11 @@ public class ClaimMapFragment extends Fragment implements SensorEventListener {
 			mapMode = MapMode.measure;
 		}
 
+		Claim claim = Claim.getClaim(claimActivity.getClaimId());
+		if (claim != null && !claim.isUploadable()) {
+			menu.removeItem(R.id.action_new_picture);
+		}
+
 		switch (mapMode) {
 			case add_boundary:
 				mapToolsMenu.getSubMenu().findItem(R.id.action_add_boundary).setChecked(true);

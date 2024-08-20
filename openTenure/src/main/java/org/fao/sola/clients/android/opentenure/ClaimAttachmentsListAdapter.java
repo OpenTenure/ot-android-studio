@@ -108,8 +108,8 @@ public class ClaimAttachmentsListAdapter extends ArrayAdapter<String> {
 			keyValueDocTypes = dt.getKeyValueMap(onlyActive);
 
 			List<String> list = new ArrayList<String>();
-			TreeSet<String> keys = new TreeSet<String>(keyValueDocTypes.keySet());
-			for (String key : keys) {
+
+			for(String key: keyValueDocTypes.keySet()){
 				String value = keyValueDocTypes.get(key);
 				list.add(value);
 			}

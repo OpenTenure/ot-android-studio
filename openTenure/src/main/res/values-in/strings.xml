@@ -402,19 +402,7 @@
     <string name="language_dialog_title">Select Pilih bahasa</string>
 	<string name="title_restart_dialog">Restart diperlukan</string>
 	<string name="message_restart_dialog">Perubahan konfigurasi OpenTenure membutuhkan restart untuk menjadi efektif. Apakah Anda ingin me-restart OpenTenure sekarang?</string>
-	
-    <string-array name="language_keys">
-        <item >Khmer</item>
-        <item >Albanian</item>
-        <item >Myanmar</item>
-        <item >Default</item>
-        </string-array>
-    <string-array name="language_values">
-        <item >khmer_language</item>
-        <item >albanian_language</item>
-        <item >burmese_language</item>
-        <item >default_language</item>
-        </string-array>
+
     <string-array name="tiles_provider_keys">
         <item >WTMS</item>
         <item >TMS</item>

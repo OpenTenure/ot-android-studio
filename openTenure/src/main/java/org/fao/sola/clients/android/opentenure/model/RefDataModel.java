@@ -8,8 +8,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -186,7 +186,7 @@ public abstract class RefDataModel extends Model {
     protected static <T extends RefDataModel> Map<String,String> getKeyValueMap(String tableName, Class<T> klass, boolean onlyActive) {
         List<T> list = getItems(tableName, klass, onlyActive, true, false);
 
-        Map<String,String> keyValueMap = new HashMap<String,String>();
+        Map<String,String> keyValueMap = new LinkedHashMap<>();
 
         for (Iterator<T> iterator = list.iterator(); iterator.hasNext();) {
             T item = iterator.next();
@@ -198,7 +198,7 @@ public abstract class RefDataModel extends Model {
     protected static <T extends RefDataModel> Map<String,String> getValueKeyMap(String tableName, Class<T> klass, boolean onlyActive) {
         List<T> list = getItems(tableName, klass, onlyActive, true, false);
 
-        Map<String,String> keyValueMap = new HashMap<String,String>();
+        Map<String,String> keyValueMap = new LinkedHashMap<>();
 
         for (Iterator<T> iterator = list.iterator(); iterator.hasNext();) {
             T item = iterator.next();

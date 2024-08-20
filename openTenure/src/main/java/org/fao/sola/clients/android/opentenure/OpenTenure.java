@@ -128,15 +128,12 @@ public class OpenTenure extends FragmentActivity implements ModeDispatcher,
         OpenTenureApplication.getInstance().setKhmer(language.equals(OpenTenure.khmer_language));
         OpenTenureApplication.getInstance().setAlbanian(language.equals(OpenTenure.albanian_language));
         OpenTenureApplication.getInstance().setBurmese(language.equals(OpenTenure.burmese_language));
-        OpenTenureApplication.getInstance().setSamoan(language.equals(OpenTenure.samoan_language));
         if (OpenTenureApplication.getInstance().isKhmer()) {
             setLocale(context, new Locale("km"));
         } else if (OpenTenureApplication.getInstance().isAlbanian()) {
             setLocale(context, new Locale("sq"));
         } else if (OpenTenureApplication.getInstance().isBurmese()) {
             setLocale(context, new Locale("my"));
-        } else if (OpenTenureApplication.getInstance().isSamoan()) {
-            setLocale(context, new Locale("sm"));
         } else {
             setLocale(context, Locale.getDefault());
         }
@@ -515,7 +512,7 @@ public class OpenTenure extends FragmentActivity implements ModeDispatcher,
                 startActivityForResult(intent, OpenTenurePreferencesActivity.REQUEST_CODE);
                 return true;
             case R.id.action_export_log:
-                exportLog();
+                OpenTenureApplication.getInstance().exportLog();
                 String backupMessage = String.format(OpenTenureApplication
                         .getContext().getString(R.string.message_log_exported));
                 Toast backupToast = Toast.makeText(OpenTenureApplication.getContext(), backupMessage, Toast.LENGTH_LONG);
@@ -885,15 +882,15 @@ public class OpenTenure extends FragmentActivity implements ModeDispatcher,
             if(isInitialized) {
                 setAppTitle();
                 thisActivity.invalidateOptionsMenu();
-                if(OpenTenureApplication.getLocalClaimsFragment() != null){
+                if(OpenTenureApplication.getLocalClaimsFragment() != null && OpenTenureApplication.getLocalClaimsFragment().getActivity() != null){
                     OpenTenureApplication.getLocalClaimsFragment().getActivity().invalidateOptionsMenu();
                     OpenTenureApplication.getLocalClaimsFragment().update();
                 }
-                if(OpenTenureApplication.getBoundariesListFragment() != null){
+                if(OpenTenureApplication.getBoundariesListFragment() != null && OpenTenureApplication.getBoundariesListFragment().getActivity() != null){
                     OpenTenureApplication.getBoundariesListFragment().getActivity().invalidateOptionsMenu();
                     OpenTenureApplication.getBoundariesListFragment().update();
                 }
-                if(OpenTenureApplication.getMapFragment() != null){
+                if(OpenTenureApplication.getMapFragment() != null && OpenTenureApplication.getMapFragment().getActivity() != null){
                     OpenTenureApplication.getMapFragment().getActivity().invalidateOptionsMenu();
                     OpenTenureApplication.getMapFragment().refreshMap(true);
                 }
@@ -920,26 +917,6 @@ public class OpenTenure extends FragmentActivity implements ModeDispatcher,
         });
 
         initTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-    }
-
-    private void exportLog() {
-        String exportPath = null;
-        try {
-            Log.d(this.getClass().getName(), "**** Open Tenure Application Log ****");
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddhhmmss", Locale.US);
-            exportPath = FileSystemUtilities.getOpentenureFolder() + File.separator + dateFormat.format(new Date()) + "-log-export.txt";
-
-            new ProcessBuilder()
-                    .command("logcat", "-d", "-f", exportPath)
-                    .redirectErrorStream(true)
-                    .start();
-            // Clear log to avoid duplicate lines
-            new ProcessBuilder()
-                    .command("logcat", "-c")
-                    .redirectErrorStream(true)
-                    .start();
-        } catch (Exception e) {
-        }
     }
 
     public void restart() {

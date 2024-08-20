@@ -386,16 +386,6 @@
     <string name="title_restart_dialog"> ចាប់ផ្តើមឡើងវិញ </string>
     <string name="message_restart_dialog"> ផ្លាស់ប្តូរក្នុងការកំណត់រចនាសម្ព័ន្ធ OpenTenure មួយតម្រូវឱ្យចាប់ផ្ដើមឡើងវិញដើម្បីឱ្យមានប្រសិទ្ធិភាព។ តើអ្នកចង់ចាប់ផ្ដើមឡើងវិញ OpenTenure ឥឡូវនេះ? </string>
 
-    <string-array name="language_keys">
-        <item>ខ្មែរ</item>
-        <item>អាល់បានី</item>
-        <item>លំនាំដើម</item>
-    </string-array>
-    <string-array name="language_values">
-        <item>khmer_language</item>
-        <item>albanian_language</item>
-        <item>default_language</item>
-    </string-array>
     <string-array name="tiles_provider_keys">
         <item >WTMS</item>
         <item >TMS</item>

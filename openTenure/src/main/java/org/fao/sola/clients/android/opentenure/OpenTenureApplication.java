@@ -56,7 +56,10 @@ import org.fao.sola.clients.android.opentenure.model.Project;
 import org.fao.sola.clients.android.opentenure.network.API.CommunityServerAPI;
 import org.fao.sola.clients.android.opentenure.tools.StringUtility;
 
+import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -77,13 +80,11 @@ public class OpenTenureApplication extends MultiDexApplication {
 	private static final String _ALBANIAN_LOCALIZATION = "sq-AL";
 	private static final String _ARABIC_LOCALIZATION = "ar-JO";
 	private static final String _BURMESE_LOCALIZATION = "my-MM";
-	private static final String _SAMOAN_LOCALIZATION = "sm-WS";
 	private String languageCode;
 	private Locale locale;
 	private boolean khmer = false;
 	private boolean albanian = false;
 	private boolean burmese = false;
-	private boolean samoan = false;
 	private static boolean loggedin;
 	private static String username;
 	private static Activity activity;
@@ -206,6 +207,25 @@ public class OpenTenureApplication extends MultiDexApplication {
 		}
 	}
 
+	public void exportLog() {
+		String exportPath = null;
+		try {
+			Log.d(this.getClass().getName(), "**** Open Tenure Application Log ****");
+			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddhhmmss", Locale.US);
+			exportPath = FileSystemUtilities.getOpentenureFolder() + File.separator + dateFormat.format(new Date()) + "-log-export.txt";
+
+			new ProcessBuilder()
+					.command("logcat", "-d", "-f", exportPath)
+					.redirectErrorStream(true)
+					.start();
+			// Clear log to avoid duplicate lines
+			new ProcessBuilder()
+					.command("logcat", "-c")
+					.redirectErrorStream(true)
+					.start();
+		} catch (Exception e) {
+		}
+	}
 	@Override
 	public void onCreate() {
 
@@ -479,7 +499,7 @@ public class OpenTenureApplication extends MultiDexApplication {
 				if(!result){
 					setUsername("");
 					OpenTenureApplication.setLoggedin(false);
-					if(getLocalClaimsFragment() != null) {
+					if(getLocalClaimsFragment() != null && getLocalClaimsFragment().getActivity() != null) {
 						getLocalClaimsFragment().getActivity().invalidateOptionsMenu();
 					}
 				}
@@ -540,14 +560,6 @@ public class OpenTenureApplication extends MultiDexApplication {
 		this.burmese = burmese;
 	}
 
-	public boolean isSamoan() {
-		return samoan;
-	}
-
-	public void setSamoan(boolean samoan) {
-		this.samoan = samoan;
-	}
-
 	public void setLanguageCode(Locale locale) {
 		Resources.getSystem().getConfiguration().setLocale(locale);
 		locale.getDisplayLanguage();
@@ -557,8 +569,6 @@ public class OpenTenureApplication extends MultiDexApplication {
 			languageCode = OpenTenureApplication._ALBANIAN_LOCALIZATION;
 		} else if (isBurmese()) {
 			languageCode = OpenTenureApplication._BURMESE_LOCALIZATION;
-		} else if (isSamoan()) {
-			languageCode = OpenTenureApplication._SAMOAN_LOCALIZATION;
 		} else if (locale.getLanguage().toLowerCase(locale).equals("ar")) {
 			languageCode = _ARABIC_LOCALIZATION;
 		} else {

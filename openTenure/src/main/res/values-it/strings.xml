@@ -360,19 +360,6 @@
     <string name="language_dialog_title">Scegli una lingua</string>
 	<string name="title_restart_dialog">Riavvio necessario</string>
 	<string name="message_restart_dialog">Un cambiamento della configurazione di OpenTenure richiede un riavvio per avere effetto. Vuoi riavviare OpenTenure adesso?</string>
-    
-    <string-array name="language_keys">
-        <item >Khmer</item>
-        <item >Albanese</item>
-        <item >Albanese</item>
-        <item >Sistema Android</item>
-        </string-array>
-    <string-array name="language_values">
-        <item >khmer_language</item>
-        <item >albanian_language</item>
-        <item >burmese_language</item>
-        <item >default_language</item>
-        </string-array>
 
     <string-array name="tiles_provider_keys">
         <item >WTMS</item>

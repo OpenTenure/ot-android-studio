@@ -37,7 +37,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.SortedSet;
-import java.util.TreeSet;
 
 import org.fao.sola.clients.android.opentenure.exceptions.OpenTenureException;
 import org.fao.sola.clients.android.opentenure.filesystem.FileSystemUtilities;
@@ -379,9 +378,7 @@ public class ClaimDetailsFragment extends Fragment {
 		valueKeyClaimTypesMap = ct.getValueKeyMap(onlyActiveValues);
 		List<String> list = new ArrayList<String>();
 
-		SortedSet<String> keys = new TreeSet<String>(
-				keyValueClaimTypesMap.keySet());
-		for (String key : keys) {
+		for (String key : keyValueClaimTypesMap.keySet()) {
 			String value = keyValueClaimTypesMap.get(key);
 			list.add(value);
 		}
@@ -401,8 +398,7 @@ public class ClaimDetailsFragment extends Fragment {
 		valueKeyMapLandUse = lu.getValueKeyMap(onlyActiveValues);
 
 		List<String> landUseslist = new ArrayList<String>();
-		keys = new TreeSet<String>(keyValueMapLandUse.keySet());
-		for (String key : keys) {
+		for (String key : keyValueMapLandUse.keySet()) {
 			String value = keyValueMapLandUse.get(key);
 			landUseslist.add(value);
 		}

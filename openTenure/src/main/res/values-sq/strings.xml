@@ -386,16 +386,6 @@
     <string name="wtms_url_pref_summary">Base URL of your Web Tiles Map Server</string>
     <string name="wtms_url_pref_dialog_title">Vendos URL te Web Tiles Map Server-it tuaj</string>
 
-    <string-array name="language_keys">
-        <item>Khmer</item>
-        <item>Albanian</item>
-        <item>Default</item>
-    </string-array>
-    <string-array name="language_values">
-        <item>khmer_language</item>
-        <item>albanian_language</item>
-        <item>default_language</item>
-    </string-array>
     <string-array name="tiles_provider_keys">
         <item >WTMS</item>
         <item >TMS</item>

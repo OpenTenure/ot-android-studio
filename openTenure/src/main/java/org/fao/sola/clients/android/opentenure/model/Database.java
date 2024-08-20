@@ -45,6 +45,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import org.fao.sola.clients.android.opentenure.OpenTenure;
+import org.fao.sola.clients.android.opentenure.OpenTenureApplication;
 import org.fao.sola.clients.android.opentenure.R;
 import org.fao.sola.clients.android.opentenure.filesystem.FileSystemUtilities;
 import org.h2.tools.RunScript;
@@ -181,9 +183,11 @@ public class Database {
 				}
 				Log.d(this.getClass().getName(), "... opened");
 			} catch (ClassNotFoundException e) {
-				Log.d(this.getClass().getName(), e.getMessage());
+				OpenTenureApplication.getInstance().exportLog();
+				//Log.d(this.getClass().getName(), e.getMessage());
 			} catch (SQLException e) {
-				Log.d(this.getClass().getName(), e.getMessage());
+				OpenTenureApplication.getInstance().exportLog();
+				//Log.d(this.getClass().getName(), e.getMessage());
 			}
 		}
 	}

@@ -433,17 +433,15 @@
     <string name="message_restart_dialog">A change in OpenTenure configuration requires a restart to become effective. Would you like to restart OpenTenure now?</string>
 
     <string-array name="language_keys">
-        <item >Khmer</item>
-        <item >Albanian</item>
-        <item >Myanmar</item>
-        <item >Samoa</item>
+        <item >ខ្មែរ</item>
+        <item >Shqip</item>
+        <item >မြန်မာ</item>
         <item >Default</item>
     </string-array>
     <string-array name="language_values">
         <item >khmer_language</item>
         <item >albanian_language</item>
         <item >burmese_language</item>
-        <item >samoan_language</item>
         <item >default_language</item>
     </string-array>
     <string-array name="tiles_provider_keys">

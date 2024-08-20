@@ -386,16 +386,6 @@
     <string name="wtms_url_pref_summary">URL padrão do seu Servidor de Mapa Web</string>
     <string name="wtms_url_pref_dialog_title">Digite a URL do seu Servidor de Mapa Web</string>
 
-    <string-array name="language_keys">
-        <item>Khmer</item>
-        <item>Albanês</item>
-        <item>Padrão</item>
-    </string-array>
-    <string-array name="language_values">
-        <item>khmer_language</item>
-        <item>albanian_language</item>
-        <item>default_language</item>
-    </string-array>
     <string-array name="tiles_provider_keys">
         <item >WTMS</item>
         <item >TMS</item>
