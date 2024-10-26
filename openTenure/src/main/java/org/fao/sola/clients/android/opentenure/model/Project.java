@@ -173,7 +173,7 @@ public class Project extends Model {
         try {
             String where = "";
             if(onlyActive){
-                where = " where ACTIVE = 'true'";
+                where = " where ACTIVE = true";
             }
 
             statement = prepareStatement("SELECT " + fields + " FROM PROJECT" + where + " ORDER BY DISPLAY_NAME");
@@ -229,7 +229,7 @@ public class Project extends Model {
 
     public static void update(List<ProjectResponse> projects) {
         if (projects != null && (projects.size() > 0)) {
-            PreparedStatement statement = prepareStatement("UPDATE PROJECT SET ACTIVE='false' WHERE ACTIVE= 'true'");
+            PreparedStatement statement = prepareStatement("UPDATE PROJECT SET ACTIVE=false WHERE ACTIVE= true");
             executeStatement(statement);
 
             for (Iterator<ProjectResponse> iterator = projects.iterator(); iterator.hasNext();) {

@@ -75,14 +75,6 @@ public class ShareDetailsActivityTRY extends FragmentActivity {
 	@Override
 	public void onResume() {
 		super.onResume();
-		OpenTenureApplication.getInstance().getDatabase().open();
-		
-//		Locale locale = new Locale("km-KM");
-//		Locale.setDefault(locale);
-//		android.content.res.Configuration config = new android.content.res.Configuration();
-//		config.locale = locale;
-//		getBaseContext().getResources().updateConfiguration(config,
-//		      getBaseContext().getResources().getDisplayMetrics());
 	};
 
 	@Override
@@ -91,13 +83,6 @@ public class ShareDetailsActivityTRY extends FragmentActivity {
 		super.onCreate(savedInstanceState);
 		Intent intent = getIntent();
 		setContentView(R.layout.share_details);
-		
-//		Locale locale = new Locale("km-KM");
-//		Locale.setDefault(locale);
-//		android.content.res.Configuration config = new android.content.res.Configuration();
-//		config.locale = locale;
-//		getBaseContext().getResources().updateConfiguration(config,
-//		      getBaseContext().getResources().getDisplayMetrics());
 
 		claimId = intent.getStringExtra("claimId");
 

@@ -91,8 +91,6 @@ public class PersonActivity extends FragmentActivity implements PersonDispatcher
 	@Override
 	public void onResume() {
 		super.onResume();
-		OpenTenureApplication.getInstance().getDatabase().open();
-
 	};
 
 	@Override

@@ -88,7 +88,7 @@ public class SurveyFormTemplate {
 			localConnection = OpenTenureApplication.getInstance().getDatabase()
 					.getConnection();
 			statement = localConnection
-					.prepareStatement("INSERT INTO SURVEY_FORM_TEMPLATE(SURVEY_FORM_TEMPLATE_ID, NAME, VALUE) VALUES (?,?,?)");
+					.prepareStatement("INSERT INTO SURVEY_FORM_TEMPLATE(SURVEY_FORM_TEMPLATE_ID, NAME, \"VALUE\") VALUES (?,?,?)");
 			statement.setString(1, sft.getSurveyFormTemplateId());
 			statement.setString(2, sft.getName());
 			statement.setCharacterStream(3, new StringReader(sft.getValue()));
@@ -123,7 +123,7 @@ public class SurveyFormTemplate {
 
 			localConnection = db.getConnection();
 			statement = localConnection
-					.prepareStatement("INSERT INTO SURVEY_FORM_TEMPLATE(SURVEY_FORM_TEMPLATE_ID, NAME, VALUE) VALUES (?,?,?)");
+					.prepareStatement("INSERT INTO SURVEY_FORM_TEMPLATE(SURVEY_FORM_TEMPLATE_ID, NAME, \"VALUE\") VALUES (?,?,?)");
 			statement.setString(1, getSurveyFormTemplateId());
 			statement.setString(2, getName());
 			statement.setCharacterStream(3, new StringReader(getValue()));
@@ -228,7 +228,7 @@ public class SurveyFormTemplate {
 			localConnection = OpenTenureApplication.getInstance().getDatabase()
 					.getConnection();
 			statement = localConnection
-					.prepareStatement("UPDATE SURVEY_FORM_TEMPLATE SET NAME=?, VALUE=? WHERE SURVEY_FORM_TEMPLATE_ID=?");
+					.prepareStatement("UPDATE SURVEY_FORM_TEMPLATE SET NAME=?, \"VALUE\"=? WHERE SURVEY_FORM_TEMPLATE_ID=?");
 			statement.setString(1, sft.getName());
 			statement.setCharacterStream(2, new StringReader(sft.getValue()));
 			statement.setString(3, sft.getSurveyFormTemplateId());
@@ -263,7 +263,7 @@ public class SurveyFormTemplate {
 
 			localConnection = db.getConnection();
 			statement = localConnection
-					.prepareStatement("UPDATE SURVEY_FORM_TEMPLATE SET NAME=?, VALUE=? WHERE SURVEY_FORM_TEMPLATE_ID=?");
+					.prepareStatement("UPDATE SURVEY_FORM_TEMPLATE SET NAME=?, \"VALUE\"=? WHERE SURVEY_FORM_TEMPLATE_ID=?");
 			statement.setString(1, getName());
 			statement.setCharacterStream(2, new StringReader(getValue()));
 			statement.setString(3, getSurveyFormTemplateId());
@@ -300,7 +300,7 @@ public class SurveyFormTemplate {
 			localConnection = OpenTenureApplication.getInstance().getDatabase()
 					.getConnection();
 			statement = localConnection
-					.prepareStatement("SELECT VALUE FROM SURVEY_FORM_TEMPLATE WHERE NAME=?");
+					.prepareStatement("SELECT \"VALUE\" FROM SURVEY_FORM_TEMPLATE WHERE NAME=?");
 			statement.setString(1, name);
 			rs = statement.executeQuery();
 			while (rs.next()) {
@@ -365,7 +365,7 @@ public class SurveyFormTemplate {
 			localConnection = OpenTenureApplication.getInstance().getDatabase()
 					.getConnection();
 			statement = localConnection
-					.prepareStatement("SELECT SURVEY_FORM_TEMPLATE_ID, VALUE FROM SURVEY_FORM_TEMPLATE WHERE NAME=?");
+					.prepareStatement("SELECT SURVEY_FORM_TEMPLATE_ID, \"VALUE\" FROM SURVEY_FORM_TEMPLATE WHERE NAME=?");
 			statement.setString(1, name);
 			rs = statement.executeQuery();
 			while (rs.next()) {
@@ -415,7 +415,7 @@ public class SurveyFormTemplate {
 			localConnection = OpenTenureApplication.getInstance().getDatabase()
 					.getConnection();
 			statement = localConnection
-					.prepareStatement("SELECT NAME, VALUE FROM SURVEY_FORM_TEMPLATE");
+					.prepareStatement("SELECT NAME, \"VALUE\" FROM SURVEY_FORM_TEMPLATE");
 			rs = statement.executeQuery();
 			while (rs.next()) {
 				String key = rs.getString(1);
@@ -462,7 +462,7 @@ public class SurveyFormTemplate {
 			localConnection = OpenTenureApplication.getInstance().getDatabase()
 					.getConnection();
 			statement = localConnection
-					.prepareStatement("SELECT NAME, VALUE FROM SURVEY_FORM_TEMPLATE WHERE SURVEY_FORM_TEMPLATE_ID=?");
+					.prepareStatement("SELECT NAME, \"VALUE\" FROM SURVEY_FORM_TEMPLATE WHERE SURVEY_FORM_TEMPLATE_ID=?");
 			statement.setString(1, surveyFormTemplateId);
 			rs = statement.executeQuery();
 			while (rs.next()) {

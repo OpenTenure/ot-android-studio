@@ -16,6 +16,7 @@
     <string name="error_generic_conection">အင်တာနက် ချိတ်ဆက်နေစဉ် မှားယွင်းမှု တခု ရှိသည် </string>
     <string name="error_connection">အင်တာနက် ဆက်သွယ်၍ မရပါ</string>
     <string name="error_field_required">ယခု အကွက်ကို ဖြည့်ရန် လိုအပ်သည်</string>
+    <string name="error_server_url_required">ဆာဗာလိပ်စာလိုသည်</string>
     <string name="message_login_before">စနစ်အတွင်းသို့ အရင် ဝင်ပါ</string>
     <string name="message_logout_ok">စနစ်အတွင်းမှ ထွက်ပြီးပါပြီ</string>
     <string name="message_login_ok">စနစ်အတွင်းသို့ ဝင်ပြီးပါပြီ</string>

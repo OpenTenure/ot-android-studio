@@ -49,7 +49,6 @@ import org.fao.sola.clients.android.opentenure.network.API.CommunityServerAPI;
 import org.fao.sola.clients.android.opentenure.network.response.ApiResponse;
 import org.fao.sola.clients.android.opentenure.network.response.UploadChunkPayload;
 import org.fao.sola.clients.android.opentenure.network.response.UploadChunksResponse;
-import org.h2.util.New;
 
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;

@@ -89,7 +89,6 @@ public class BoundaryActivity extends FragmentActivity implements BoundaryDispat
 
     @Override
     public void onResume() {
-        OpenTenureApplication.getInstance().getDatabase().open();
         OpenTenure.setLocale(this);
         super.onResume();
     }

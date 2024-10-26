@@ -82,7 +82,6 @@ public class ShareDetailsActivity extends FragmentActivity implements
 	public void onResume() {
 		update();
 		super.onResume();
-		OpenTenureApplication.getInstance().getDatabase().open();
 	};
 
 	@Override

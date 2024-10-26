@@ -141,7 +141,7 @@ public class BoundaryType extends RefDataModel {
 
 	public static void update(List<BoundaryTypeResponse> types) {
 		if (types != null && (types.size() > 0) && tableName != null) {
-			PreparedStatement statement = prepareStatement("UPDATE " + tableName + " SET ACTIVE='false' WHERE ACTIVE= 'true'");
+			PreparedStatement statement = prepareStatement("UPDATE " + tableName + " SET ACTIVE=false WHERE ACTIVE= true");
 			executeStatement(statement);
 
 			for (Iterator<BoundaryTypeResponse> iterator = types.iterator(); iterator.hasNext();) {

@@ -66,7 +66,6 @@ public class SelectPersonActivity extends FragmentActivity implements ModeDispat
 	@Override
 	public void onResume() {
 		super.onResume();
-		OpenTenureApplication.getInstance().getDatabase().open();
 	};
 
 	@Override

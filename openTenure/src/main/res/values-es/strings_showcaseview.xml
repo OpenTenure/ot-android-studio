@@ -1,224 +1,176 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-    <string name="action_showcase">Ver el Tutorial</string>
-    <string name="showcase_main_title">Que es SOLA Tenencia Abierta</string>
-    <string name="showcase_main_message">\n \n 
-        									\n Tenencia Abierta es una aplicación de software de código abierto, desarrollado por las Naciones Unidas y la FAO, para la grabación en el campo de los derechos de propiedad.
-											\n Los límites de una propiedad pueden ser mapeados y asignar detalles del propietario puede ser capturado, 
-                                            \n así como justificantes y fotos de la propiedad.
-											\n Tenencia Abierta se utiliza con un servidor de la comunidad basada en web (como SOLA Server Community) donde existentes detalles de la propiedad 
-                                            \n y el mapa de las imágenes se puede descargar antes de la captura de campo y nuevos detalles se puede cargar después de la captura de campo.
-
-     </string>
-    <string name="showcase_claim_title">Detalles de reclamación</string>
-    <string name="showcase_news_message">\n \n 
-        									La pestaña de Noticias le dan acceso a la prueba de la FAO (SOLA Server Community) Página web donde se pueden revisar propiedades subidas
-                                         \n con detalle de captura utilizando Tenencia Abierta 
-                                         \n También proporciona acceso al software libre SOLA (Comunidad de Software Libre) Página web donde se puede encontrar más información sobre
-                                         \n SOLA soluciones de software de código abierto</string>
-    
-    <string name="showcase_map_message">\n \n El Mapa de la comunidad Tab te da acceso a ver el mapa de Tenencia Abierta
-                                        
+    <string name="action_showcase">Ver Tutorial</string>
+    <string name="showcase_main_title">¿Qué es SOLA Open Tenure?</string>
+    <string name="showcase_main_message">
+        Open Tenure es una aplicación de software de código abierto, desarrollada por la UN-FAO, para el solicitud de derechos de titularidad en el campo.
+        Los límites de una titularidad pueden ser mapeados y los detalles de el predio y la titularidad pueden ser capturados, así como imágenes de documentos de apoyo y fotos de el predio.
+        Open Tenure se utiliza con un servidor comunitario basado en la web (como SOLA Community Server) donde los detalles de las titularidades existentes y la cartografía pueden descargarse antes de la captura en el campo, y los nuevos detalles pueden subirse después de la captura en el campo.
     </string>
-    <string name="showcase_persons_message">\n
-        									 Muestra la lista de personas que hace la reclamación en nombre de otros o a sí mismos
-        									\n \n
-        									 Seleccione un elemento de la lista para editar los detalles acerca de la persona
-                                            \n incluyendo el nombre, fecha de nacimiento, sexo, detalles de identificación y foto
-											\n \n ....o.... 
+    <string name="showcase_claim_title">Detalles de la solicitud</string>
+    <string name="showcase_news_message">
+        La pestaña de Noticias te da acceso al sitio web del Servidor Comunitario de prueba de FAO SOLA, donde puedes revisar los detalles de el predio capturados con Open Tenure.
+        También proporciona acceso al sitio web de la Comunidad de Software Libre FLOSS SOLA, donde puedes obtener más información sobre las soluciones de software libre de SOLA.
     </string>
-    <string name="showcase_claims_message">\n La tabla de las reclamaciones muestra una lista de reclamos de propiedad que han sido descargados y los grabados en el dispositivo junto con su estado 
-                                           \n \n Tipos de estado:
-                                           \n   •   G - Guardados
-                                           \n   •   S - Subido/No moderado
-                                           \n   *   D - Desafió
-                                           \n   •   M - Moderado
-                                           \n   •   R - Rechazado
-                                           \n   •   Rt - Retirado
+    <string name="showcase_map_message">
+        La pestaña Mapa Comunitario te da acceso al visor de mapas de Open Tenure.
     </string>
-    <string name="showcase_claim_select_message"> \n \n \n
-        										 Seleccione una reclamación de la lista para ver o editar sus detalles y un mapa de la propiedad
- 										      \n \n Utilice el icono de la flecha azul para cargar un reclamo al servidor de Comunidad
-										      \n \n Utilice la X roja para eliminar un reclamo de la lista local
+    <string name="showcase_persons_message">
+        Muestra la lista de personas que hacen la solicitud en nombre de otros o de sí mismos.
+        Selecciona un elemento de la lista para editar detalles sobre la persona, incluidos nombre, fecha de nacimiento, género, detalles de identificación y foto.
     </string>
-    
-    <string name="showcase_claim_message"> \n Describir un reclamo de propiedad de los detalles que entran a través de una serie de tablas
-                                           \n Las primeras 6 pestañas poseen un formato fijo de pestañas para describir las caracteristicas LADM / STDM.
-                                           \n Las últimas 2 pestañas son dinámicas y el contenido de estas pestañas se definen mediante la aplicación de administración web de SOLA.
-                                           \n \n La pestaña de Reclamación tiene los siguientes campos:
-                                           \n* "Nombre de la Demanda" siendo el nombre o identificador que la propiedad se conoce comúnmente como
-                                           \n* "Tipo de Demanda" siendo el (LADM o SOLA extensión) derecho primario de la propiedad
-                                           \n* "Uso de la Tierra" siendo la (la extención SOLA) la corriente primaria uso de la tierra para la propiedad
-                                           \n* "Fecha de Demanda aplica desde(AAAA-MM-DD)" siendo la fecha en que el derecho primario fue conocido a existir
-                                           \n* "Notas" siendo cualquier detalle adicional considerado apropiado por el Registrador de la Comunidad
-                                           \n \n En la parte inferior hay dos botones:
-                                           \n* "Agregar Demandante (o Modificar)" para registrar el propietario(s) de la propiedad
-                                           \n* "Selecione la Demanda a desafiar" en el caso de un reclamo de propiedad que se disputa y un desafío ha sido registrado. Esto permite que el reto de este vinculado a un reclamo de propiedad anterior
-     </string>
-    
-    <string name="showcase_claim_map_message">\n \n Permite definir los límites de la reclamación establecido en el mapa imaginario como el mapa base para una referencia
-                                              y, en caso necesario, la posición GPS del dispositivo móvil con GPS incorporado.
-                                        	  \n \n Una vez que todos los límites se han definido, un mapa de la reclamación de propiedad puede ser generado y se agrega como un documento de apoyo a la afirmación de la propiedad
+    <string name="showcase_claims_message">
+        La pestaña Lista de Reclamaciones muestra una lista de reclamaciones de titularidades descargadas o registradas en tu dispositivo junto con su estado:
+        •   L - Presentada
+        •   U - Subida/No moderada
+        •   C - A resolver
+        •   M - Moderada
+        •   R - Rechazada
+        •   W - Retirada
     </string>
-    
-    <string name="showcase_claim_mapdraw_message">\n \n Una pulsación larga en el mapa crea una nueva frontera de esquina
-        										  \n \n Un ligero toque en una esquina de frontera pone a esa esquina en modo de edicion
-                                                  \n Las operaciones del modo de edición son:
-                                                  \n* el icono blanco X elimina la esquina frontera seleccionado
-                                                  \n* el icono blanco de la Brújula ofrece edición espacial precisa. Las flechas permiten movimiento en cada dirección cardinal.
-                                                  \n Utilice estas flechas para la definición precisa de las curvas de contorno y luego el icono blanco de punto cuando la esquina frontera está suficientemente definido
-                                                  \n* El círculo blanco con un icono de Diagonal es para salir del modo Edición
-                                           		  \n \n Pulsación larga en una marca existente para arrastrar alrededor
-                                                  \n \n Tenencia abierta puede ajustar a las esquinas de contorno existente o en las líneas de contorno existentes
+    <string name="showcase_claim_select_message">
+        Selecciona una solicitud de la lista para ver o editar sus detalles y mapear el predio.
+        Usa el ícono de Flecha azul para subir una solicitud al Servidor Comunitario.
+        Usa el ícono de X roja para eliminar una solicitud de la lista localmente.
     </string>
-    <string name="showcase_claim_document_message">\n \n \n 
-        										 Muestra una lista de los documentos adjuntos a la reclamación de propiedad
-         										   \n \n 
-         										  Un documento se puede seleccionar de la lista para ver sus detalles
-                                                  \n La X roja borra el documento del reclamo de propiedad
-         										    
-        										 
-        	                                        
+    <string name="showcase_claim_message">
+        Describe una solicitud de titularidad ingresando detalles a través de una serie de pestañas. La pestaña solicitud tiene estos campos:
+        • "Nombre de la solicitud" es el nombre o identificador por el que comúnmente se conoce el predio.
+        • "Tipo de solicitud" es el derecho principal para el predio.
+        • "Uso del predio/parcela" es el uso principal actual del terreno.
+        • "Ocupado desde" es la fecha en que se conoció por primera vez el derecho principal.
+        • "Área Comunitaria" es el área donde se encuentra el predio.
+        • "Notas" son cualquier detalle adicional considerado apropiado por el Registrador Comunitario.
+        En la parte inferior del formulario hay dos botones:
+        • "Añadir (o Modificar) solicitante" para registrar titular(es) de el predio.
+        • "Seleccionar solicitud a Desafiar" en caso de que se haya registrado un situacion a resolver contra la solicitud de el predio.
     </string>
-    <string name="showcase_claim_documentAttach_message">\n \n \n 
-        										  El icono del clip de parcela le permite adjuntar un archivo existente que ha sido previamente almacenados en el dispositivo
-        										   \n \n
-        										  El icono de la cámara activa la cámara de su dispositivo para que pueda tomar una foto y para que esa imagen
-                                                  /n se adjunta a la reclamación de propiedad
-        										    
-         										  
-        	                                        
+    <string name="showcase_claim_map_message">
+        Te permite definir los límites de la solicitud de el predio utilizando la imagen del mapa como base de referencia y, cuando sea necesario, la posición GPS del dispositivo móvil.
+        Una vez que se hayan definido todos los límites, se puede generar un mapa de la solicitud de el predio y agregarlo como un documento de apoyo.
     </string>
-    
-    <string name="showcase_claim_adjacencies_message">\n \n \n 
-        										 Registro del propietario o nombre de las propiedades adyacentes en función de su ubicación relativa
-                                                  \n que está grabando el reclamo de propiedad (en el norte, sur, este y oeste)
-         										   \n \n 
-         										  Donde hay reclamos de propiedad contiguos grabados por Tenencia Abierta, estos reclamos de propiedad automáticamente se mostrarán como adyacentes.
-         										  
-        										 
-        	                                        
+    <string name="showcase_claim_mapdraw_message">
+        Una pulsación larga en el mapa crea una nueva esquina de límite.
+        Un toque (ligero) en una esquina de límite pone esa esquina en modo de edición.
+        Las operaciones en modo de edición son:
+        * El ícono de X blanca elimina la esquina de límite seleccionada.
+        * El ícono de brújula blanca proporciona una edición espacial precisa.
+        * Usa estos íconos para una definición precisa de las esquinas de límite y luego el ícono de punto blanco cuando la esquina esté definida.
+        * El ícono de círculo blanco con una diagonal sale del modo de edición.
+        Mantén pulsado un marcador existente para moverlo. Permite ajustar a esquinas o líneas de límite existentes.
     </string>
-    
-    <string name="showcase_claim_challenges_message">\n \n \n 
-        										  Muestra una lista de los desafíos formulados en contra de este reclamo de propiedad
-                                                  \n \n Para ver los detalles de un desafío, anote el nombre de la propiedad impugnada o el demandante
-                                                  y buscarlo con uno de esos nombres en la ficha Lista de Reclamaciones
-        										    
+    <string name="showcase_claim_document_message">
+        Muestra una lista de documentos adjuntos a la solicitud de el predio.
+        Un documento puede ser seleccionado de la lista para ver sus detalles.
+        El ícono de X roja elimina el documento de la solicitud de el predio.
     </string>
-    
+    <string name="showcase_claim_documentAttach_message">
+        El ícono de clip te permite adjuntar un archivo existente almacenado previamente en tu dispositivo.
+        El ícono de cámara activa la cámara de tu dispositivo para tomar una foto y adjuntar esa imagen a la solicitud de el predio.
+    </string>
+    <string name="showcase_claim_adjacencies_message">
+        Registra el titulare o el nombre de el predio adyacente según su ubicación en relación con la solicitud de el predio registrada (por ejemplo, norte, sur, este y oeste).
+        Cuando haya reclamaciones de titularidad adyacentes registradas por Open Tenure, se mostrarán automáticamente como adyacentes.
+    </string>
+    <string name="showcase_claim_challenges_message">
+        Muestra una lista de cualquier situacion a resolver hecho contra esta solicitud de titularidad.
+        Para ver los detalles de un situacion a resolver, anota el nombre de el predio a resolver o del solicitante y búscalo usando uno de esos nombres en la pestaña Lista de Reclamaciones.
+    </string>
     <string name="showcase_claim_shares_message">
-        										  Enumera las participaciones en la propiedad registrando para el reclamo de propiedad
-         										   \n (Tenencia Abierta Asume una propiedad simple (100 por ciento) en el nombre de la demandante y este
-                                                    es lo que se verá inicialmente en esta lista. Este arreglo simple de 100 por ciento de participación se puede modificar mediante los siguientes mecanismos)
-                                                    
-         										  \n Una participacion se puede seleccionar de la lista para que vea el propietario (s) asociado a esa participación y para cambiar los detalles del propietario o añadir
-                                                   otros propietarios para la participación
-                                                  
-												  \n El control del contador permite que el porcentaje asociado con la cuota va a cambiar
-                                                  
-                                                  \n La X roja permite borrar una participacion  
-                                
-												  \n El icono verde + le permite añadir una nueva acción para grabar un acuerdo de propiedad más complejo para el reclamo de propiedad
-                                                  
-                                                  \n Tenencia Abierta no le permitirá grabar un arreglo o participación en la propiedad que no suman el 100 por ciento
-        										 
-        	                                        
+        Lista los porcentajes de titularidad registrados para la solicitud de titularidad (asumiendo una simple titularidad del 100% en nombre del solicitante).
+        El porcentaje de participación puede ser modificado tocando una participación para ver los titulares asociados con esa participación y cambiar los detalles del titulare o añadir más titulares.
+        El ícono de contador permite cambiar el porcentaje asociado con la participación.
+        El ícono de X roja permite eliminar una participación.
+        El ícono verde de + te permite añadir una nueva participación para registrar un arreglo de titularidad más complejo.
+        Open Tenure no permitirá registrar un arreglo de titularidad que no totalice el 100%.
     </string>
-    <string name="showcase_actionNews_message"> \n \n El triángulo blanco que encierra un icono de signo de exclamación aparece cuando Tenencia Abierta se ejecuta por primera vez. Esta función
-                                                \n debe ser utilizado a continuación para inicializar la Tenencia Abierto para su uso con un servidor de Comunidad particular,
-                                                \n \n El icono de inicio de sesión le da acceso al servidor de la comunidad una vez que haya introducido su nombre de usuario y contraseña
-                                                \n (obtenida mediante el registro en el sitio web del servidor de comunidades)
-                                                \n \n El icono de bloqueo encripta los datos capturados mediante la Tenencia Abierta cuando estos datos son presentados por correo electrónico
-        										\n \n El icono de la lista da acceso a:
-        										\n• "Ajustes" para definir la capa de URL y valores de mapa para el servidor de comunidades, Geoserver (mapa imaginario) y formulario de encuesta
-												\n•  "Ver Tutorial" para volver a visualizar este tutorial
-           
+    <string name="showcase_actionNews_message">
+        El ícono de triángulo blanco con un signo de exclamación se muestra cuando Open Tenure se ejecuta por primera vez. Esta función debe usarse para inicializar Open Tenure con un Servidor Comunitario particular.
+        El ícono de inicio de sesión te da acceso al Servidor Comunitario una vez que hayas ingresado tu nombre de usuario y contraseña (obtenidos al registrarte en el sitio web del Servidor Comunitario).
+        El ícono de candado encripta los datos capturados con Open Tenure cuando estos datos se envían por correo electrónico.
+        El ícono de lista da acceso a:
+        • "Configuración" para definir los valores de la URL y la capa de mapa para el Servidor Comunitario, Geoserver (imágenes de mapas) y formulario de encuesta.
+        • "Ver Tutorial" para volver a visitar este tutorial.
     </string>
-    <string name="showcase_actionMap_message"> \n Mapa de la Comunidad Icono de tabla:
-                                               \n* El icono de descarga de archivos sólo se muestra una vez se ha ampliado la escala al máximo y comienza la descarga de mosaicos de mapa de las imágenes
-                                               \n del Geoserver para la zona que aparece en el mapa de espectador Tenencia Abierta 
-                                               \n* el icono de inicio de sesión para mostrar formulario de acceso (primero debes registrarte como usuario en el servidor de la Comunidad)
-                                               \n* El Icono Mapa que tiene un dobles centra la visualización del mapa de Tenencia Abierta en el área de la comunidad(s) de interés definida
-                                               \n* el icono de objetivo Centro centra la visualización del mapa de Tenencia Abierta en su ubicación actual
-        								  	   \n* el icono de la nube de Descargar inicia la descarga de la propiedad, afirma detalles del servidor de comunidades de la zona
-                                               \n  que aparece en el mapa de espectador Tenencia Abierta
-        									   \n* El icono de la lista presenta las opciones de capas base de los mapas  disponibles para la selección de Tenencia Abierta
+    <string name="showcase_actionMap_message">
+        Íconos de la pestaña Mapa Comunitario:
+        * El ícono de descarga de archivo solo se muestra cuando estás acercado al máximo y comienza la descarga de mosaicos de imágenes del mapa desde Geoserver para el área actualmente mostrada en el visor de mapas de Open Tenure.
+        * El ícono de mapa (plegado) centra la visualización del mapa de Open Tenure en el área de interés definida por la comunidad.
+        * El ícono de diana centra la visualización del mapa de Open Tenure en tu ubicación actual.
+        * El ícono de descarga en la nube comienza la descarga de detalles de reclamaciones de titularidad desde el Servidor Comunitario para el área actualmente mostrada en el visor de mapas de Open Tenure.
+        * El ícono de lista presenta las opciones de capa de mapa base de Open Tenure disponibles para selección.
     </string>
-    <string name="showcase_actionPersons_message"> \n Haga clic en el icono + para añadir una nueva persona o grupo y registrar los detalles aplicables:
-                                                \n \n Persona
-                                                \n* "Nombre" (Obligatorio) - guardar primer nombre
-                                                \n* "Apellido" (Obligatorio) - nombre de la familia
-                                                \n* "Fecha de Nacimiento" (Obligatorio) - utilizar el control de fecha o introducir manualmente en formato AAAA-MM-DD
-                                                \n* "Genero" (Obligatorio)
-                                                \n* "Tipo Identificación" seleccióne valor de la lista
-                                                \n* "Número de Identificacion" Tomar del document de identificación
-                                                \n* "Dirección Postal"
-                                                \n* "Dirección de Correo Electronico" - this email address is where automated messages concerning the property claim will be sent
-                                                \n* "Número de Celular"
-                                                \n* "Número de Teléfono de Contacto"
-                                                \n \n Grupo
-                                                \n* "Nombre" (Obligatorio) - Nombre del Grupo
-                                                \n* "Fecha de Establecimiento" (Obligatorio) - utilizar el control de fecha o introducir manualmente en formato AAAA-MM-DD
-                                                \n* "Número de Identificación" - puede que no tengan pero para entidades legalmente reconocidas, como las empresas, registre su número de registro
-                                                \n* "Dirección Postal"
-                                                \n* "Dirección de Correo Electrónoco" - Esta dirección de correo electrónico es a la que se enviarán los mensajes automatizados relativas a la reivindicación de propiedad
-                                                \n* "Número de Celular"
-                                                \n* "Número de Teléfono de Contacto"
-                                                
-                                                
+    <string name="showcase_actionPersons_message">
+        Haz clic en el ícono de + para añadir una nueva persona o grupo y registrar los detalles aplicables:
+        Persona:
+        * "Nombre" (obligatorio) - registra el nombre.
+        * "Apellido" (obligatorio) - apellido.
+        * "Fecha de nacimiento" (obligatorio) - usa el control de fecha o ingrésala manualmente en formato AAAA-MM-DD.
+        * "Género" (obligatorio).
+        * "Tipo de ID" selecciona el valor de la lista.
+        * "Número de ID" regístralo desde el documento de identidad.
+
+		* "Dirección".
+        * "Correo Electrónico" - esta dirección es donde se enviarán los mensajes automatizados sobre la solicitud de titularidad.
+        * "Número de teléfono móvil".
+        * "Número de teléfono de contacto".
+
+        Grupo:
+        * "Nombre" (obligatorio) - nombre del grupo.
+        * "Fecha de creación" (obligatorio) - usa el control de fecha o ingrésala manualmente en formato AAAA-MM-DD.
+        * "Número de ID" - puede que no exista, pero para entidades legalmente reconocidas, como empresas, registra su número de solicitud.
+        * "Dirección".
+        * "Correo Electrónico" - esta dirección es donde se enviarán los mensajes automatizados sobre la solicitud de titularidad.
+        * "Número de teléfono móvil".
+        * "Número de teléfono de contacto".
     </string>
-    <string name="showcase_actionClaims_message"> \n \n El icono de la persona de la bandera se utiliza para grabar un nuevo reclamo de propiedad
-                                                  \n \n El icono de inicio de sesión para acceder al formulario de inicio de sesión que podrá volver a cargar los reclamos de propiedad terminados
-                                                  \n \n El icono de la lista da acceso a:
-                                                  \n• "Ajustes" para definir los valores de URL y capa de mapa para el servidor de comunidades, Geoserver (mapa imaginario) y el icono del formulario Lista encuesta da acceso a:
-                                                  \n•  "Ver Tutorial" para volver a visitar este tutorial
-                                                  \n•  "Respaldar datos locales" a la copia de seguridad de datos de reclamaciones registradas en su dispositivo
+
+    <string name="showcase_actionClaims_message">
+        El ícono de la Persona con Bandera para registrar una nueva solicitud de titularidad.
+        El ícono de inicio de sesión para mostrar el formulario de inicio de sesión, que luego te permitirá subir reclamaciones de titularidad completadas.
+        El ícono de lista da acceso a:
+        • "Configuración" para definir los valores de URL y la capa de mapa para el Servidor Comunitario, Geoserver (imágenes de mapas) y el formulario de encuesta.
+        • "Ver Tutorial" para volver a visitar este tutorial.
+        • "Copia de seguridad de datos locales" para hacer una copia de seguridad de los datos de solicitud de titularidad registrados en tu dispositivo.
     </string>
-    
-    <string name="showcase_actionClaimDetails_message"> \n \n  El icono Guardar guarda todos los datos que describen este reclamo
-                                                        \n \n  El icono de exportación crea un archivo comprimido zip de la reclamación (por correo electrónico al servidor de la comunidad)
-                                                        \n una vez que el reclamo de propiedad ha sido completamente grabado y guardado
-        												\n \n  El icono de impresión crea un resumen de los detalles de la declaración de propiedad
-                                                        \n una vez que una reclamación de propiedad ha sido asignada la reclamacion de propiedad se ha guardado.
-                                                        \n \n El icono de la lista contiene una opción del menú de Ver Tutorial para volver a visitar este tutorial
-</string>
-    <string name="showcase_actionClaimMap_message"> \n \n  El + icono verde crea un nuevo límite de esquina en la posición actual, determinado por el dispositivo GPS incorporado.
-                                                     Debido a las limitaciones de precisión del GPS incorporado, este rincón límite debe ser colocado de nuevo (utilizar una acción de pulsación larga en la pantalla del mapa)
-                                                     en relación con el mapa de imágenes si la posición límite es claro en el mapa de imágenes. En tales situaciones, Tenencia Abierta registra tanto
-                                                    la posición GPS y la posición de las imágenes del mapa.
-                                                    \n \n El icono blanco rota el mapa y muestra la brújula del dispositivo. Para detener la función de rotación, utilice el
-                                                      círculo blanco con un icono de Diagonal. Un remolino de movimiento de dos dedos también girar el mapa. Útil para la orientación en el campo
-        										    \n  El icono de ojo de buey centra el mapa en su posición actual (según lo determinado por el GPS integrado)
-        										    \n \n  El icono de dispositivo genera un mapa basado en la visualización del mapa actual y automáticamente se conecta esto como un apoyo
-                                                     documentar el reclamo de propiedad. En el caso de un mapa anterior se almacena como un documento de apoyo que reemplazó el mapa más antiguo.
+
+    <string name="showcase_actionClaimDetails_message">
+        El ícono de Guardar guarda todos los datos que describen esta solicitud.
+        El ícono de Exportar crea un archivo comprimido zip de la solicitud (para enviar por correo electrónico al servidor comunitario) una vez que la solicitud de titularidad haya sido completamente registrada y guardada.
+        El ícono de Imprimir crea un resumen de los detalles de la solicitud de titularidad una vez que la solicitud haya sido mapeada y guardada.
+        El ícono de lista contiene una opción de menú de "Ver Tutorial" para volver a visitar este tutorial.
     </string>
-    
-    
-    <string name="showcase_actionAlert1_message"> \n \n  Debe inicializar la aplicación.
-        
+
+    <string name="showcase_actionClaimMap_message">
+        El ícono de llave inglesa te permite cambiar entre diferentes modos de edición de mapas, como: agregar marcadores al límite principal, agregar marcadores que no forman parte del límite principal o medir la distancia entre marcadores.
+        El ícono verde de + crea una nueva esquina del límite en la posición actual determinada por el GPS incorporado del dispositivo.
+        El ícono de rotación blanco rota el mapa y muestra la brújula del dispositivo. Para detener la función de rotación, usa el ícono de círculo blanco con una diagonal. Un movimiento circular con dos dedos también rotará el mapa. Útil para la orientación en el campo.
+        El ícono de Diana centra el mapa en tu posición actual (según lo determinado por el GPS incorporado).
+        El ícono de Dispositivo genera un mapa basado en la visualización actual del mapa y lo adjunta automáticamente como un documento de apoyo a la solicitud de titularidad.
     </string>
-    <string name="showcase_actionAlert_message"> \n   Este icono inicia (Tenencia Abierta) configurándolo para su uso con la pruebade servido de SOLA Comunidad.
-                                                  \n  Cuando usted necesite  conectarse al servidor de la comunidad, para su comunidad tendrá que despejar cualquier
-                                                  \n Datos de tenencia abiertas en su dispositivo, cambie la configuración de URL para el servidor de la comunidad y reiniciar.
-                                                  \n \n  Estos pasos son los siguientes:
-                                                  \n  1) Uso de los ajustes de Android - Aplicaciones - Tenencia Abierta. Haga clic en el botón Borrar datos
-                                                  \n  2) Cambie los valores de URL en la opción de menú Configuración disponible en la lista de las reivindicaciones en el formulario inicial principal de Tenencia Abierta
-                                                  \n  3) Utilice el icono de triángulo para (re) innstalar Tenencia Abierta (disponible en la ficha Noticias en el formulario inicial principal de Tenencia Abierta )
+
+    <string name="showcase_actionAlert1_message">
+        Ahora debes inicializar la aplicación.
     </string>
-    
-    <string name="showcase_end_message">\n \n 
-        									..y ahora..
-											\n \n Por favor, intente usar Tenencia Abierta. Si tienes alguna sugerencia o te encuentras con algún problema
-                                            \n por favor contactanos (neil.pullar@fao.org)
-											\n\n Puede ver este tutorial de nuevo en cualquier momento seleccionando "Ver Tutorial" de la Lista - opción de menú Ver Tutorial.
-     </string>
-    
-    
+
+    <string name="showcase_actionAlert_message">
+        Este ícono inicializa Open Tenure configurándolo para su uso con el Servidor Comunitario de prueba SOLA.
+        Cuando necesites conectarte al servidor comunitario para tu comunidad, tendrás que borrar cualquier dato de Open Tenure en tu dispositivo, cambiar los ajustes de URL para el servidor comunitario y volver a inicializar.
+        Estos son los pasos:
+        1) Usar Configuración de Android - Aplicaciones - Open Tenure. Hacer clic en el botón Borrar datos.
+        2) Cambiar los valores de URL en el menú de Configuración disponible en la pestaña Lista de Reclamaciones del formulario principal inicial de Open Tenure.
+        3) Usar el ícono de Triángulo para (re)inicializar Open Tenure (disponible en la pestaña Noticias del formulario principal inicial de Open Tenure).
+    </string>
+
+    <string name="showcase_end_message">
+        ...y ahora...
+        Por favor, prueba a usar Open Tenure. Si tienes alguna sugerencia o te encuentras con algún problema, por favor contáctanos (MariaPaola.Rizzo@fao.org).
+        Puedes volver a ver este tutorial en cualquier momento seleccionando "Ver Tutorial" en el menú de la lista - opción "Ver Tutorial".
+    </string>
+
     <string name="next">Siguiente</string>
     <string name="close">Cerrar</string>
     <string name="skip">Omitir</string>
-    <string name="ok">Okay</string>
-    
+    <string name="ok">OK</string>
+
 </resources>

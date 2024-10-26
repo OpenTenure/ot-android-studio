@@ -64,8 +64,7 @@ public class SelectClaimActivity extends FragmentActivity implements ModeDispatc
 	@Override
 	public void onResume() {
 		super.onResume();
-		OpenTenureApplication.getInstance().getDatabase().open();
-		
+
 	};
 
 	@Override

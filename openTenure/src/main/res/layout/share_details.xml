@@ -54,17 +54,10 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingBottom="5dp"
+                android:orientation="horizontal"
                 android:paddingStart="100dp"
-                android:paddingTop="5dp" >
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@color/light_background_opentenure"
-                    android:text="@string/add_owner"
-                    android:textSize="20sp" />
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp">
 
                 <ImageView
                     android:id="@+id/action_new_owner"
@@ -73,8 +66,15 @@
                     android:layout_gravity="left"
                     android:layout_weight="1"
                     android:contentDescription="@string/add_owner"
-                    android:src="@android:drawable/ic_input_add"
-                    />
+                    android:src="@android:drawable/ic_input_add" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/light_background_opentenure"
+                    android:text="@string/add_owner"
+                    android:textSize="20sp" />
+
             </LinearLayout>
         </LinearLayout>
 

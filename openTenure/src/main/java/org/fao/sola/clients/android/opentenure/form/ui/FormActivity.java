@@ -107,9 +107,7 @@ public class FormActivity extends FragmentActivity {
 
 	@Override
 	public void onResume() {
-
 		super.onResume();
-		OpenTenureApplication.getInstance().getDatabase().open();
 	};
 
 	@Override

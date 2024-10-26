@@ -97,7 +97,6 @@ public class SectionElementActivity extends FragmentActivity implements
 	@Override
 	public void onResume() {
 		super.onResume();
-		OpenTenureApplication.getInstance().getDatabase().open();
 	};
 
 	@Override

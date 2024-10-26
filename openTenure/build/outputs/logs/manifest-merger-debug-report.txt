@@ -15,71 +15,65 @@ ADDED from C:\Projects\SOLA\Project\GIT\SOLA\open_tenure\ot-android-studio\openT
 INJECTED from C:\Projects\SOLA\Project\GIT\SOLA\open_tenure\ot-android-studio\openTenure\src\main\AndroidManifest.xml:2:1-206:12
 INJECTED from C:\Projects\SOLA\Project\GIT\SOLA\open_tenure\ot-android-studio\openTenure\src\main\AndroidManifest.xml:2:1-206:12
 INJECTED from C:\Projects\SOLA\Project\GIT\SOLA\open_tenure\ot-android-studio\openTenure\src\main\AndroidManifest.xml:2:1-206:12
-MERGED from [com.google.maps.android:android-maps-utils:0.5] C:\Users\Alex\.gradle\caches\transforms-3\866308d9b4d46b0b04d45bbe2ebfbdd7\transformed\jetified-android-maps-utils-0.5\AndroidManifest.xml:2:1-13:12
-MERGED from [:aFileChooser] C:\Projects\SOLA\Project\GIT\SOLA\open_tenure\ot-android-studio\aFileChooser\build\intermediates\merged_manifest\debug\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.legacy:legacy-support-v4:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\21ed44a59d1ba4e81c080f09fd02842f\transformed\legacy-support-v4-1.0.0\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.mediarouter:mediarouter:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\c0bdc6a2155f205578084ebad6da5f4f\transformed\mediarouter-1.0.0\AndroidManifest.xml:17:1-22:12
-MERGED from [com.google.android.material:material:1.1.0] C:\Users\Alex\.gradle\caches\transforms-3\06c2fdf36b8499c2eb181b1d4442d719\transformed\material-1.1.0\AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.appcompat:appcompat:1.1.0] C:\Users\Alex\.gradle\caches\transforms-3\4a3bd1f31f14ccae1d711d08d9fc88f2\transformed\appcompat-1.1.0\AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.multidex:multidex:2.0.0] C:\Users\Alex\.gradle\caches\transforms-3\d2b53c82602dcdc48a459c0f746d1e47\transformed\multidex-2.0.0\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:17:1-145:12
-MERGED from [com.google.android.gms:play-services-maps:18.0.2] C:\Users\Alex\.gradle\caches\transforms-3\754cbdc1cc0e17b6a6fee999461dc8ed\transformed\jetified-play-services-maps-18.0.2\AndroidManifest.xml:17:1-44:12
-MERGED from [com.google.android.gms:play-services-location:18.0.0] C:\Users\Alex\.gradle\caches\transforms-3\c89030a3d129e7cc86d9767f76dcca66\transformed\jetified-play-services-location-18.0.0\AndroidManifest.xml:2:1-9:12
-MERGED from [androidx.media:media:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\91f1642e2a270776e556d15371f64bf4\transformed\media-1.0.0\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\f99458ab18ea25dab26606510d12f169\transformed\legacy-support-core-ui-1.0.0\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.palette:palette:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\28ecc3002a87aa4d6766f444e3a338e5\transformed\palette-1.0.0\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\07be97de1f7472e5f0cdb709fab67338\transformed\legacy-support-core-utils-1.0.0\AndroidManifest.xml:17:1-22:12
-MERGED from [com.google.android.gms:play-services-base:18.0.1] C:\Users\Alex\.gradle\caches\transforms-3\7b34a4ccbe9cf462858e5a0dcdd1e108\transformed\jetified-play-services-base-18.0.1\AndroidManifest.xml:16:1-24:12
-MERGED from [com.google.android.gms:play-services-places-placereport:17.0.0] C:\Users\Alex\.gradle\caches\transforms-3\4bae9b415a6b4c5b041cceca1ec77204\transformed\jetified-play-services-places-placereport-17.0.0\AndroidManifest.xml:17:1-24:12
-MERGED from [com.google.android.gms:play-services-tasks:18.0.1] C:\Users\Alex\.gradle\caches\transforms-3\05d23f36e41468d4655f40c9d6b25f1a\transformed\jetified-play-services-tasks-18.0.1\AndroidManifest.xml:2:1-6:12
-MERGED from [com.google.android.gms:play-services-basement:18.0.0] C:\Users\Alex\.gradle\caches\transforms-3\90816fab45c6045140ab72460ecdfb4b\transformed\jetified-play-services-basement-18.0.0\AndroidManifest.xml:16:1-26:12
-MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] C:\Users\Alex\.gradle\caches\transforms-3\671a06b1893081f2c8ad60f3958f34d7\transformed\coordinatorlayout-1.1.0\AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.transition:transition:1.2.0] C:\Users\Alex\.gradle\caches\transforms-3\98523101c9963e531757127a1e8b685c\transformed\transition-1.2.0\AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.appcompat:appcompat-resources:1.1.0] C:\Users\Alex\.gradle\caches\transforms-3\265b2e9fa85529a4c855375d21860cb8\transformed\jetified-appcompat-resources-1.1.0\AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] C:\Users\Alex\.gradle\caches\transforms-3\cc60296bcd6f42dfa5f76f9c0a5cc1a3\transformed\vectordrawable-animated-1.1.0\AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] C:\Users\Alex\.gradle\caches\transforms-3\b2cd8d669c990a22e05180b75bd6a08f\transformed\vectordrawable-1.1.0\AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.viewpager2:viewpager2:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\4eda47e8e663d7656d969a0ff6b6a7b6\transformed\jetified-viewpager2-1.0.0\AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.fragment:fragment:1.1.0] C:\Users\Alex\.gradle\caches\transforms-3\cea5151aa06ceabd565517f60d2d89c5\transformed\fragment-1.1.0\AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.loader:loader:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\ce51b2fe61819d8e2b7ab01a204a2296\transformed\loader-1.0.0\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.viewpager:viewpager:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\34512101be2ed2f5fdc74ffc413b7aa8\transformed\viewpager-1.0.0\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\9a17619f1c9b9582fca4b7f81433af44\transformed\drawerlayout-1.0.0\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\70051f4b295c861980b57970c8885a90\transformed\slidingpanelayout-1.0.0\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.recyclerview:recyclerview:1.1.0] C:\Users\Alex\.gradle\caches\transforms-3\9e1d4f8f0375e8e046d4b4131d85e943\transformed\recyclerview-1.1.0\AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.customview:customview:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\b2555f03229cb3fd5668ea7c3eaea4bb\transformed\customview-1.0.0\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\1a50da70ad169867c6e113aef71d1359\transformed\swiperefreshlayout-1.0.0\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\f548f19075e860a502651d03c0bdb8a9\transformed\asynclayoutinflater-1.0.0\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.activity:activity:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\f21f0cd7c3e0d179b4df4271d39db2da\transformed\jetified-activity-1.0.0\AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.core:core:1.6.0] C:\Users\Alex\.gradle\caches\transforms-3\bed1499ddf24b58a00cde4888426cb94\transformed\core-1.6.0\AndroidManifest.xml:17:1-26:12
-MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\65dfa7529cda83889e241e7b460f7ec4\transformed\cursoradapter-1.0.0\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.room:room-runtime:2.5.0] C:\Users\Alex\.gradle\caches\transforms-3\c7101898c9de429c10d06dcf62bf4bbf\transformed\room-runtime-2.5.0\AndroidManifest.xml:17:1-31:12
-MERGED from [androidx.sqlite:sqlite-framework:2.3.0] C:\Users\Alex\.gradle\caches\transforms-3\719c9116fabfad8cc698838039dc0abb\transformed\sqlite-framework-2.3.0\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.startup:startup-runtime:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\92b00e4628c5c8b84705b613b174fd24\transformed\jetified-startup-runtime-1.0.0\AndroidManifest.xml:17:1-33:12
-MERGED from [androidx.cardview:cardview:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\64a2d392994452577a480e11197fabd6\transformed\cardview-1.0.0\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.documentfile:documentfile:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\d0ba5a155415781d35e9bc5bbfe349c2\transformed\documentfile-1.0.0\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\3720f74479d1bf1b71b3563ead82bc28\transformed\localbroadcastmanager-1.0.0\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.print:print:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\89d7c0a63c4c68190d59f33c4abce116\transformed\print-1.0.0\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.interpolator:interpolator:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\f3521e625b4ba3bfb9db345ad459607d\transformed\interpolator-1.0.0\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\Alex\.gradle\caches\transforms-3\0c7bb944f3e4dca76f0e2467ecc7ea80\transformed\versionedparcelable-1.1.1\AndroidManifest.xml:17:1-27:12
-MERGED from [androidx.lifecycle:lifecycle-livedata:2.1.0] C:\Users\Alex\.gradle\caches\transforms-3\5b94482bd795100e27b5d710b59b2036\transformed\lifecycle-livedata-2.1.0\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.1.0] C:\Users\Alex\.gradle\caches\transforms-3\4ec007e91329afea67b7320fb25843b8\transformed\lifecycle-livedata-core-2.1.0\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.arch.core:core-runtime:2.1.0] C:\Users\Alex\.gradle\caches\transforms-3\bf97780cd6c8e42a6f56dbc470e67515\transformed\core-runtime-2.1.0\AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.lifecycle:lifecycle-service:2.1.0] C:\Users\Alex\.gradle\caches\transforms-3\8e6682436d593a15ccb410341b723fdf\transformed\jetified-lifecycle-service-2.1.0\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.lifecycle:lifecycle-runtime:2.1.0] C:\Users\Alex\.gradle\caches\transforms-3\a1d5d16b9b1035f516f6fe86d954cf1e\transformed\lifecycle-runtime-2.1.0\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.savedstate:savedstate:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\fe3c09e81a8bda6708fa897efb6089c7\transformed\jetified-savedstate-1.0.0\AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.sqlite:sqlite:2.3.0] C:\Users\Alex\.gradle\caches\transforms-3\7aa965d33600a334d229bed15ace7700\transformed\sqlite-2.3.0\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.tracing:tracing:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\1d2299f5940cbdf2dbd4ffd921d2acfc\transformed\jetified-tracing-1.0.0\AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.1.0] C:\Users\Alex\.gradle\caches\transforms-3\ae45172f514b1784546b95f56dc3c0da\transformed\lifecycle-viewmodel-2.1.0\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.annotation:annotation-experimental:1.1.0] C:\Users\Alex\.gradle\caches\transforms-3\a83a03db1daa4314d8622e6d887074b5\transformed\jetified-annotation-experimental-1.1.0\AndroidManifest.xml:17:1-24:12
-INJECTED from C:\Projects\SOLA\Project\GIT\SOLA\open_tenure\ot-android-studio\openTenure\src\main\AndroidManifest.xml:2:1-206:12
-INJECTED from C:\Projects\SOLA\Project\GIT\SOLA\open_tenure\ot-android-studio\openTenure\src\main\AndroidManifest.xml:2:1-206:12
-INJECTED from C:\Projects\SOLA\Project\GIT\SOLA\open_tenure\ot-android-studio\openTenure\src\main\AndroidManifest.xml:2:1-206:12
+MERGED from [com.google.maps.android:android-maps-utils:0.5] C:\Users\Alex\.gradle\caches\transforms-3\0c19c1f61a5921d90a1a7f520e1b4be2\transformed\jetified-android-maps-utils-0.5\AndroidManifest.xml:2:1-13:12
+MERGED from [:aFileChooser] C:\Projects\SOLA\Project\GIT\SOLA\open_tenure\ot-android-studio\aFileChooser\build\intermediates\merged_manifest\debug\processDebugManifest\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.legacy:legacy-support-v4:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\fd2a992ff7a107687864b8f04f1f9f87\transformed\legacy-support-v4-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.mediarouter:mediarouter:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\8e3fced8464cefb37133f919edb5488e\transformed\mediarouter-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [com.google.android.material:material:1.1.0] C:\Users\Alex\.gradle\caches\transforms-3\ee8e94e0a0de10553d0b44c2a09d4292\transformed\material-1.1.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.appcompat:appcompat:1.1.0] C:\Users\Alex\.gradle\caches\transforms-3\36ed8e49196193d4e1df1264753bb8ff\transformed\appcompat-1.1.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.multidex:multidex:2.0.0] C:\Users\Alex\.gradle\caches\transforms-3\040de53e674419ef1a47377911a434c5\transformed\multidex-2.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:17:1-145:12
+MERGED from [com.google.android.gms:play-services-maps:18.2.0] C:\Users\Alex\.gradle\caches\transforms-3\ef74b1325c9d8a81c72e5a385bf9b457\transformed\jetified-play-services-maps-18.2.0\AndroidManifest.xml:17:1-44:12
+MERGED from [com.google.android.gms:play-services-location:18.0.0] C:\Users\Alex\.gradle\caches\transforms-3\9d27fa82bc8bd54fd15d4679fa6dfd47\transformed\jetified-play-services-location-18.0.0\AndroidManifest.xml:2:1-9:12
+MERGED from [androidx.media:media:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\cc215b09d16f13aa1976bfec1076e608\transformed\media-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\6a88ff296b77cbce38defa8cd7fa8b38\transformed\legacy-support-core-ui-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.palette:palette:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\93b359e29545952cede3eb0fc7c21c53\transformed\palette-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\006371251bf468871025870e9c39239c\transformed\legacy-support-core-utils-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [com.google.android.gms:play-services-base:18.0.1] C:\Users\Alex\.gradle\caches\transforms-3\de36686df7a425ac8a97c03dec1481a7\transformed\jetified-play-services-base-18.0.1\AndroidManifest.xml:16:1-24:12
+MERGED from [com.google.android.gms:play-services-tasks:18.0.1] C:\Users\Alex\.gradle\caches\transforms-3\3128806c10203039de1b40011632665e\transformed\jetified-play-services-tasks-18.0.1\AndroidManifest.xml:2:1-6:12
+MERGED from [com.google.android.gms:play-services-places-placereport:17.0.0] C:\Users\Alex\.gradle\caches\transforms-3\cb6abba3b716ecbcf5ce9e4bbfc98497\transformed\jetified-play-services-places-placereport-17.0.0\AndroidManifest.xml:17:1-24:12
+MERGED from [com.google.android.gms:play-services-basement:18.0.0] C:\Users\Alex\.gradle\caches\transforms-3\a0ff2900023dd966a7d80ef9ca8a8f13\transformed\jetified-play-services-basement-18.0.0\AndroidManifest.xml:16:1-26:12
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] C:\Users\Alex\.gradle\caches\transforms-3\ec3b33ff9c821584a0693dc9b6751dd3\transformed\coordinatorlayout-1.1.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.transition:transition:1.2.0] C:\Users\Alex\.gradle\caches\transforms-3\5983275a03c6ee514e5e4400f2c7505f\transformed\transition-1.2.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.appcompat:appcompat-resources:1.1.0] C:\Users\Alex\.gradle\caches\transforms-3\74e44df71a12dc7a2e463ef934533735\transformed\jetified-appcompat-resources-1.1.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] C:\Users\Alex\.gradle\caches\transforms-3\9fe6fdf63cbb0f9f0b4b96d13e98c8ef\transformed\vectordrawable-animated-1.1.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] C:\Users\Alex\.gradle\caches\transforms-3\ec41cf3d26fa3fcc888a637a538986b1\transformed\vectordrawable-1.1.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.viewpager2:viewpager2:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\d63afa88e3a53234b21219ce5de98418\transformed\jetified-viewpager2-1.0.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.fragment:fragment:1.1.0] C:\Users\Alex\.gradle\caches\transforms-3\4814959422ec301e41d451482033775a\transformed\fragment-1.1.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.loader:loader:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\821bfa7e3b0f0f144ad087d3b8a0b848\transformed\loader-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.viewpager:viewpager:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\18fa42151ba1d151043059eeefc8fe50\transformed\viewpager-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\89c99b36c75291d39e827c9a67873bb9\transformed\drawerlayout-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\25b7674fea4a2dc5132947b137ffbe95\transformed\slidingpanelayout-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.recyclerview:recyclerview:1.1.0] C:\Users\Alex\.gradle\caches\transforms-3\bb962950bf1999403af52d409d1eda91\transformed\recyclerview-1.1.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.customview:customview:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\ec5f3844528d7defe98b7edee9f80bbb\transformed\customview-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\d4013cbb901d02e050b6fe29f39fedf5\transformed\swiperefreshlayout-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\55fd278c2bd7ed0726ed8b9f313e53dd\transformed\asynclayoutinflater-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.activity:activity:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\b4fa300f142efa9b29a933aa39608627\transformed\jetified-activity-1.0.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.core:core:1.6.0] C:\Users\Alex\.gradle\caches\transforms-3\64f86152db47189b3d5a2aa8b53c5849\transformed\core-1.6.0\AndroidManifest.xml:17:1-26:12
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\41af842ae1524a0632f19900b6221afd\transformed\cursoradapter-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.room:room-runtime:2.5.0] C:\Users\Alex\.gradle\caches\transforms-3\14fb2498363212b1c4d2d6324967944f\transformed\room-runtime-2.5.0\AndroidManifest.xml:17:1-31:12
+MERGED from [androidx.sqlite:sqlite-framework:2.3.0] C:\Users\Alex\.gradle\caches\transforms-3\ecffb10f9d5ead19202d80b5628e26e1\transformed\sqlite-framework-2.3.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.startup:startup-runtime:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\34903fcc7c2d1fccde94d8188a122537\transformed\jetified-startup-runtime-1.0.0\AndroidManifest.xml:17:1-33:12
+MERGED from [androidx.cardview:cardview:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\963789b6e1dd17987c10806ebe665936\transformed\cardview-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.documentfile:documentfile:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\505fbcd7f20a67cdbfcffb49ea4343a2\transformed\documentfile-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\bb70dfcadb1b3babfcd321012a1f6f0e\transformed\localbroadcastmanager-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.print:print:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\bc1fe0365c95955600d134aa88e878b6\transformed\print-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.interpolator:interpolator:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\9a94ea5307e736e8cd0d82eb2304fe62\transformed\interpolator-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\Alex\.gradle\caches\transforms-3\c002299bafc9a195d7323babb7ac9033\transformed\versionedparcelable-1.1.1\AndroidManifest.xml:17:1-27:12
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.1.0] C:\Users\Alex\.gradle\caches\transforms-3\36d332af484dc2a3c276310389f4fbbc\transformed\lifecycle-livedata-2.1.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.1.0] C:\Users\Alex\.gradle\caches\transforms-3\5d4cd92b870055be755bd91736dfcee7\transformed\lifecycle-livedata-core-2.1.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.arch.core:core-runtime:2.1.0] C:\Users\Alex\.gradle\caches\transforms-3\98e226749eee7a045bf8de74baa2b50f\transformed\core-runtime-2.1.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.lifecycle:lifecycle-service:2.1.0] C:\Users\Alex\.gradle\caches\transforms-3\3647e17c2c6281ca43eae63e64c42ef1\transformed\jetified-lifecycle-service-2.1.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.1.0] C:\Users\Alex\.gradle\caches\transforms-3\8487d3dac977c84670dada0a90eea7d7\transformed\lifecycle-runtime-2.1.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.savedstate:savedstate:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\3920db67d5839c3db30a304ea8980beb\transformed\jetified-savedstate-1.0.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.sqlite:sqlite:2.3.0] C:\Users\Alex\.gradle\caches\transforms-3\04ca38fcea5187cd95a23de7c1fa04fd\transformed\sqlite-2.3.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.tracing:tracing:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\cccf27e78835130872361d491b020f01\transformed\jetified-tracing-1.0.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.1.0] C:\Users\Alex\.gradle\caches\transforms-3\ce0e04b4ff0c56717a6422823a73c5f2\transformed\lifecycle-viewmodel-2.1.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.annotation:annotation-experimental:1.1.0] C:\Users\Alex\.gradle\caches\transforms-3\2c48563d6e18699a8ac235fd347cf608\transformed\jetified-annotation-experimental-1.1.0\AndroidManifest.xml:17:1-24:12
 	package
-		INJECTED from C:\Projects\SOLA\Project\GIT\SOLA\open_tenure\ot-android-studio\openTenure\src\main\AndroidManifest.xml
-		ADDED from C:\Projects\SOLA\Project\GIT\SOLA\open_tenure\ot-android-studio\openTenure\src\main\AndroidManifest.xml:2:1-206:12
 		INJECTED from C:\Projects\SOLA\Project\GIT\SOLA\open_tenure\ot-android-studio\openTenure\src\main\AndroidManifest.xml
 	android:versionName
 		ADDED from C:\Projects\SOLA\Project\GIT\SOLA\open_tenure\ot-android-studio\openTenure\src\main\AndroidManifest.xml:6:5-31
-		INJECTED from C:\Projects\SOLA\Project\GIT\SOLA\open_tenure\ot-android-studio\openTenure\src\main\AndroidManifest.xml
 		INJECTED from C:\Projects\SOLA\Project\GIT\SOLA\open_tenure\ot-android-studio\openTenure\src\main\AndroidManifest.xml
 	xmlns:tools
 		ADDED from C:\Projects\SOLA\Project\GIT\SOLA\open_tenure\ot-android-studio\openTenure\src\main\AndroidManifest.xml:3:5-51
@@ -89,7 +83,6 @@ INJECTED from C:\Projects\SOLA\Project\GIT\SOLA\open_tenure\ot-android-studio\op
 		ADDED from C:\Projects\SOLA\Project\GIT\SOLA\open_tenure\ot-android-studio\openTenure\src\main\AndroidManifest.xml:2:11-69
 	android:versionCode
 		ADDED from C:\Projects\SOLA\Project\GIT\SOLA\open_tenure\ot-android-studio\openTenure\src\main\AndroidManifest.xml:4:5-29
-		INJECTED from C:\Projects\SOLA\Project\GIT\SOLA\open_tenure\ot-android-studio\openTenure\src\main\AndroidManifest.xml
 		INJECTED from C:\Projects\SOLA\Project\GIT\SOLA\open_tenure\ot-android-studio\openTenure\src\main\AndroidManifest.xml
 uses-permission#android.permission.CAMERA
 ADDED from C:\Projects\SOLA\Project\GIT\SOLA\open_tenure\ot-android-studio\openTenure\src\main\AndroidManifest.xml:8:5-65
@@ -109,16 +102,16 @@ ADDED from C:\Projects\SOLA\Project\GIT\SOLA\open_tenure\ot-android-studio\openT
 		ADDED from C:\Projects\SOLA\Project\GIT\SOLA\open_tenure\ot-android-studio\openTenure\src\main\AndroidManifest.xml:11:22-73
 uses-permission#android.permission.ACCESS_NETWORK_STATE
 ADDED from C:\Projects\SOLA\Project\GIT\SOLA\open_tenure\ot-android-studio\openTenure\src\main\AndroidManifest.xml:12:5-79
-MERGED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:24:5-79
-MERGED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:24:5-79
-MERGED from [com.google.android.gms:play-services-maps:18.0.2] C:\Users\Alex\.gradle\caches\transforms-3\754cbdc1cc0e17b6a6fee999461dc8ed\transformed\jetified-play-services-maps-18.0.2\AndroidManifest.xml:23:5-79
-MERGED from [com.google.android.gms:play-services-maps:18.0.2] C:\Users\Alex\.gradle\caches\transforms-3\754cbdc1cc0e17b6a6fee999461dc8ed\transformed\jetified-play-services-maps-18.0.2\AndroidManifest.xml:23:5-79
+MERGED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:24:5-79
+MERGED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:24:5-79
+MERGED from [com.google.android.gms:play-services-maps:18.2.0] C:\Users\Alex\.gradle\caches\transforms-3\ef74b1325c9d8a81c72e5a385bf9b457\transformed\jetified-play-services-maps-18.2.0\AndroidManifest.xml:23:5-79
+MERGED from [com.google.android.gms:play-services-maps:18.2.0] C:\Users\Alex\.gradle\caches\transforms-3\ef74b1325c9d8a81c72e5a385bf9b457\transformed\jetified-play-services-maps-18.2.0\AndroidManifest.xml:23:5-79
 	android:name
 		ADDED from C:\Projects\SOLA\Project\GIT\SOLA\open_tenure\ot-android-studio\openTenure\src\main\AndroidManifest.xml:12:22-76
 uses-permission#android.permission.INTERNET
 ADDED from C:\Projects\SOLA\Project\GIT\SOLA\open_tenure\ot-android-studio\openTenure\src\main\AndroidManifest.xml:13:5-67
-MERGED from [com.google.android.gms:play-services-maps:18.0.2] C:\Users\Alex\.gradle\caches\transforms-3\754cbdc1cc0e17b6a6fee999461dc8ed\transformed\jetified-play-services-maps-18.0.2\AndroidManifest.xml:24:5-67
-MERGED from [com.google.android.gms:play-services-maps:18.0.2] C:\Users\Alex\.gradle\caches\transforms-3\754cbdc1cc0e17b6a6fee999461dc8ed\transformed\jetified-play-services-maps-18.0.2\AndroidManifest.xml:24:5-67
+MERGED from [com.google.android.gms:play-services-maps:18.2.0] C:\Users\Alex\.gradle\caches\transforms-3\ef74b1325c9d8a81c72e5a385bf9b457\transformed\jetified-play-services-maps-18.2.0\AndroidManifest.xml:24:5-67
+MERGED from [com.google.android.gms:play-services-maps:18.2.0] C:\Users\Alex\.gradle\caches\transforms-3\ef74b1325c9d8a81c72e5a385bf9b457\transformed\jetified-play-services-maps-18.2.0\AndroidManifest.xml:24:5-67
 	android:name
 		ADDED from C:\Projects\SOLA\Project\GIT\SOLA\open_tenure\ot-android-studio\openTenure\src\main\AndroidManifest.xml:13:22-64
 uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
@@ -127,10 +120,6 @@ ADDED from C:\Projects\SOLA\Project\GIT\SOLA\open_tenure\ot-android-studio\openT
 		ADDED from C:\Projects\SOLA\Project\GIT\SOLA\open_tenure\ot-android-studio\openTenure\src\main\AndroidManifest.xml:14:79-105
 	android:name
 		ADDED from C:\Projects\SOLA\Project\GIT\SOLA\open_tenure\ot-android-studio\openTenure\src\main\AndroidManifest.xml:14:22-78
-uses-permission#android.permission.MANAGE_EXTERNAL_STORAGE
-ADDED from C:\Projects\SOLA\Project\GIT\SOLA\open_tenure\ot-android-studio\openTenure\src\main\AndroidManifest.xml:15:5-82
-	android:name
-		ADDED from C:\Projects\SOLA\Project\GIT\SOLA\open_tenure\ot-android-studio\openTenure\src\main\AndroidManifest.xml:15:22-79
 uses-permission#android.permission.READ_EXTERNAL_STORAGE
 ADDED from C:\Projects\SOLA\Project\GIT\SOLA\open_tenure\ot-android-studio\openTenure\src\main\AndroidManifest.xml:16:5-107
 	android:maxSdkVersion
@@ -143,8 +132,8 @@ ADDED from C:\Projects\SOLA\Project\GIT\SOLA\open_tenure\ot-android-studio\openT
 		ADDED from C:\Projects\SOLA\Project\GIT\SOLA\open_tenure\ot-android-studio\openTenure\src\main\AndroidManifest.xml:17:22-95
 uses-feature#0x00020000
 ADDED from C:\Projects\SOLA\Project\GIT\SOLA\open_tenure\ot-android-studio\openTenure\src\main\AndroidManifest.xml:19:5-21:35
-MERGED from [com.google.android.gms:play-services-maps:18.0.2] C:\Users\Alex\.gradle\caches\transforms-3\754cbdc1cc0e17b6a6fee999461dc8ed\transformed\jetified-play-services-maps-18.0.2\AndroidManifest.xml:26:5-28:35
-MERGED from [com.google.android.gms:play-services-maps:18.0.2] C:\Users\Alex\.gradle\caches\transforms-3\754cbdc1cc0e17b6a6fee999461dc8ed\transformed\jetified-play-services-maps-18.0.2\AndroidManifest.xml:26:5-28:35
+MERGED from [com.google.android.gms:play-services-maps:18.2.0] C:\Users\Alex\.gradle\caches\transforms-3\ef74b1325c9d8a81c72e5a385bf9b457\transformed\jetified-play-services-maps-18.2.0\AndroidManifest.xml:26:5-28:35
+MERGED from [com.google.android.gms:play-services-maps:18.2.0] C:\Users\Alex\.gradle\caches\transforms-3\ef74b1325c9d8a81c72e5a385bf9b457\transformed\jetified-play-services-maps-18.2.0\AndroidManifest.xml:26:5-28:35
 	android:glEsVersion
 		ADDED from C:\Projects\SOLA\Project\GIT\SOLA\open_tenure\ot-android-studio\openTenure\src\main\AndroidManifest.xml:20:9-41
 	android:required
@@ -157,44 +146,47 @@ ADDED from C:\Projects\SOLA\Project\GIT\SOLA\open_tenure\ot-android-studio\openT
 		ADDED from C:\Projects\SOLA\Project\GIT\SOLA\open_tenure\ot-android-studio\openTenure\src\main\AndroidManifest.xml:23:19-57
 queries
 ADDED from C:\Projects\SOLA\Project\GIT\SOLA\open_tenure\ot-android-studio\openTenure\src\main\AndroidManifest.xml:26:5-28:15
-MERGED from [com.google.android.gms:play-services-maps:18.0.2] C:\Users\Alex\.gradle\caches\transforms-3\754cbdc1cc0e17b6a6fee999461dc8ed\transformed\jetified-play-services-maps-18.0.2\AndroidManifest.xml:30:5-34:15
-MERGED from [com.google.android.gms:play-services-maps:18.0.2] C:\Users\Alex\.gradle\caches\transforms-3\754cbdc1cc0e17b6a6fee999461dc8ed\transformed\jetified-play-services-maps-18.0.2\AndroidManifest.xml:30:5-34:15
+MERGED from [com.google.android.gms:play-services-maps:18.2.0] C:\Users\Alex\.gradle\caches\transforms-3\ef74b1325c9d8a81c72e5a385bf9b457\transformed\jetified-play-services-maps-18.2.0\AndroidManifest.xml:30:5-34:15
+MERGED from [com.google.android.gms:play-services-maps:18.2.0] C:\Users\Alex\.gradle\caches\transforms-3\ef74b1325c9d8a81c72e5a385bf9b457\transformed\jetified-play-services-maps-18.2.0\AndroidManifest.xml:30:5-34:15
 package#com.google.android.apps.maps
 ADDED from C:\Projects\SOLA\Project\GIT\SOLA\open_tenure\ot-android-studio\openTenure\src\main\AndroidManifest.xml:27:9-64
-MERGED from [com.google.android.gms:play-services-maps:18.0.2] C:\Users\Alex\.gradle\caches\transforms-3\754cbdc1cc0e17b6a6fee999461dc8ed\transformed\jetified-play-services-maps-18.0.2\AndroidManifest.xml:33:9-64
-MERGED from [com.google.android.gms:play-services-maps:18.0.2] C:\Users\Alex\.gradle\caches\transforms-3\754cbdc1cc0e17b6a6fee999461dc8ed\transformed\jetified-play-services-maps-18.0.2\AndroidManifest.xml:33:9-64
+MERGED from [com.google.android.gms:play-services-maps:18.2.0] C:\Users\Alex\.gradle\caches\transforms-3\ef74b1325c9d8a81c72e5a385bf9b457\transformed\jetified-play-services-maps-18.2.0\AndroidManifest.xml:33:9-64
+MERGED from [com.google.android.gms:play-services-maps:18.2.0] C:\Users\Alex\.gradle\caches\transforms-3\ef74b1325c9d8a81c72e5a385bf9b457\transformed\jetified-play-services-maps-18.2.0\AndroidManifest.xml:33:9-64
 	android:name
 		ADDED from C:\Projects\SOLA\Project\GIT\SOLA\open_tenure\ot-android-studio\openTenure\src\main\AndroidManifest.xml:27:18-61
 application
 ADDED from C:\Projects\SOLA\Project\GIT\SOLA\open_tenure\ot-android-studio\openTenure\src\main\AndroidManifest.xml:30:5-204:20
-MERGED from [com.google.maps.android:android-maps-utils:0.5] C:\Users\Alex\.gradle\caches\transforms-3\866308d9b4d46b0b04d45bbe2ebfbdd7\transformed\jetified-android-maps-utils-0.5\AndroidManifest.xml:7:5-11:19
-MERGED from [com.google.maps.android:android-maps-utils:0.5] C:\Users\Alex\.gradle\caches\transforms-3\866308d9b4d46b0b04d45bbe2ebfbdd7\transformed\jetified-android-maps-utils-0.5\AndroidManifest.xml:7:5-11:19
-MERGED from [com.google.android.material:material:1.1.0] C:\Users\Alex\.gradle\caches\transforms-3\06c2fdf36b8499c2eb181b1d4442d719\transformed\material-1.1.0\AndroidManifest.xml:22:5-20
-MERGED from [com.google.android.material:material:1.1.0] C:\Users\Alex\.gradle\caches\transforms-3\06c2fdf36b8499c2eb181b1d4442d719\transformed\material-1.1.0\AndroidManifest.xml:22:5-20
-MERGED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:28:5-143:19
-MERGED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:28:5-143:19
-MERGED from [com.google.android.gms:play-services-maps:18.0.2] C:\Users\Alex\.gradle\caches\transforms-3\754cbdc1cc0e17b6a6fee999461dc8ed\transformed\jetified-play-services-maps-18.0.2\AndroidManifest.xml:36:5-42:19
-MERGED from [com.google.android.gms:play-services-maps:18.0.2] C:\Users\Alex\.gradle\caches\transforms-3\754cbdc1cc0e17b6a6fee999461dc8ed\transformed\jetified-play-services-maps-18.0.2\AndroidManifest.xml:36:5-42:19
-MERGED from [com.google.android.gms:play-services-location:18.0.0] C:\Users\Alex\.gradle\caches\transforms-3\c89030a3d129e7cc86d9767f76dcca66\transformed\jetified-play-services-location-18.0.0\AndroidManifest.xml:7:5-20
-MERGED from [com.google.android.gms:play-services-location:18.0.0] C:\Users\Alex\.gradle\caches\transforms-3\c89030a3d129e7cc86d9767f76dcca66\transformed\jetified-play-services-location-18.0.0\AndroidManifest.xml:7:5-20
-MERGED from [com.google.android.gms:play-services-base:18.0.1] C:\Users\Alex\.gradle\caches\transforms-3\7b34a4ccbe9cf462858e5a0dcdd1e108\transformed\jetified-play-services-base-18.0.1\AndroidManifest.xml:19:5-23:19
-MERGED from [com.google.android.gms:play-services-base:18.0.1] C:\Users\Alex\.gradle\caches\transforms-3\7b34a4ccbe9cf462858e5a0dcdd1e108\transformed\jetified-play-services-base-18.0.1\AndroidManifest.xml:19:5-23:19
-MERGED from [com.google.android.gms:play-services-places-placereport:17.0.0] C:\Users\Alex\.gradle\caches\transforms-3\4bae9b415a6b4c5b041cceca1ec77204\transformed\jetified-play-services-places-placereport-17.0.0\AndroidManifest.xml:22:5-20
-MERGED from [com.google.android.gms:play-services-places-placereport:17.0.0] C:\Users\Alex\.gradle\caches\transforms-3\4bae9b415a6b4c5b041cceca1ec77204\transformed\jetified-play-services-places-placereport-17.0.0\AndroidManifest.xml:22:5-20
-MERGED from [com.google.android.gms:play-services-tasks:18.0.1] C:\Users\Alex\.gradle\caches\transforms-3\05d23f36e41468d4655f40c9d6b25f1a\transformed\jetified-play-services-tasks-18.0.1\AndroidManifest.xml:5:5-20
-MERGED from [com.google.android.gms:play-services-tasks:18.0.1] C:\Users\Alex\.gradle\caches\transforms-3\05d23f36e41468d4655f40c9d6b25f1a\transformed\jetified-play-services-tasks-18.0.1\AndroidManifest.xml:5:5-20
-MERGED from [com.google.android.gms:play-services-basement:18.0.0] C:\Users\Alex\.gradle\caches\transforms-3\90816fab45c6045140ab72460ecdfb4b\transformed\jetified-play-services-basement-18.0.0\AndroidManifest.xml:20:5-24:19
-MERGED from [com.google.android.gms:play-services-basement:18.0.0] C:\Users\Alex\.gradle\caches\transforms-3\90816fab45c6045140ab72460ecdfb4b\transformed\jetified-play-services-basement-18.0.0\AndroidManifest.xml:20:5-24:19
-MERGED from [androidx.core:core:1.6.0] C:\Users\Alex\.gradle\caches\transforms-3\bed1499ddf24b58a00cde4888426cb94\transformed\core-1.6.0\AndroidManifest.xml:24:5-89
-MERGED from [androidx.core:core:1.6.0] C:\Users\Alex\.gradle\caches\transforms-3\bed1499ddf24b58a00cde4888426cb94\transformed\core-1.6.0\AndroidManifest.xml:24:5-89
-MERGED from [androidx.room:room-runtime:2.5.0] C:\Users\Alex\.gradle\caches\transforms-3\c7101898c9de429c10d06dcf62bf4bbf\transformed\room-runtime-2.5.0\AndroidManifest.xml:23:5-29:19
-MERGED from [androidx.room:room-runtime:2.5.0] C:\Users\Alex\.gradle\caches\transforms-3\c7101898c9de429c10d06dcf62bf4bbf\transformed\room-runtime-2.5.0\AndroidManifest.xml:23:5-29:19
-MERGED from [androidx.startup:startup-runtime:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\92b00e4628c5c8b84705b613b174fd24\transformed\jetified-startup-runtime-1.0.0\AndroidManifest.xml:25:5-31:19
-MERGED from [androidx.startup:startup-runtime:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\92b00e4628c5c8b84705b613b174fd24\transformed\jetified-startup-runtime-1.0.0\AndroidManifest.xml:25:5-31:19
-MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\Alex\.gradle\caches\transforms-3\0c7bb944f3e4dca76f0e2467ecc7ea80\transformed\versionedparcelable-1.1.1\AndroidManifest.xml:24:5-25:19
-MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\Alex\.gradle\caches\transforms-3\0c7bb944f3e4dca76f0e2467ecc7ea80\transformed\versionedparcelable-1.1.1\AndroidManifest.xml:24:5-25:19
+INJECTED from C:\Projects\SOLA\Project\GIT\SOLA\open_tenure\ot-android-studio\openTenure\src\main\AndroidManifest.xml:30:5-204:20
+MERGED from [com.google.maps.android:android-maps-utils:0.5] C:\Users\Alex\.gradle\caches\transforms-3\0c19c1f61a5921d90a1a7f520e1b4be2\transformed\jetified-android-maps-utils-0.5\AndroidManifest.xml:7:5-11:19
+MERGED from [com.google.maps.android:android-maps-utils:0.5] C:\Users\Alex\.gradle\caches\transforms-3\0c19c1f61a5921d90a1a7f520e1b4be2\transformed\jetified-android-maps-utils-0.5\AndroidManifest.xml:7:5-11:19
+MERGED from [com.google.android.material:material:1.1.0] C:\Users\Alex\.gradle\caches\transforms-3\ee8e94e0a0de10553d0b44c2a09d4292\transformed\material-1.1.0\AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.material:material:1.1.0] C:\Users\Alex\.gradle\caches\transforms-3\ee8e94e0a0de10553d0b44c2a09d4292\transformed\material-1.1.0\AndroidManifest.xml:22:5-20
+MERGED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:28:5-143:19
+MERGED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:28:5-143:19
+MERGED from [com.google.android.gms:play-services-maps:18.2.0] C:\Users\Alex\.gradle\caches\transforms-3\ef74b1325c9d8a81c72e5a385bf9b457\transformed\jetified-play-services-maps-18.2.0\AndroidManifest.xml:36:5-42:19
+MERGED from [com.google.android.gms:play-services-maps:18.2.0] C:\Users\Alex\.gradle\caches\transforms-3\ef74b1325c9d8a81c72e5a385bf9b457\transformed\jetified-play-services-maps-18.2.0\AndroidManifest.xml:36:5-42:19
+MERGED from [com.google.android.gms:play-services-location:18.0.0] C:\Users\Alex\.gradle\caches\transforms-3\9d27fa82bc8bd54fd15d4679fa6dfd47\transformed\jetified-play-services-location-18.0.0\AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-location:18.0.0] C:\Users\Alex\.gradle\caches\transforms-3\9d27fa82bc8bd54fd15d4679fa6dfd47\transformed\jetified-play-services-location-18.0.0\AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-base:18.0.1] C:\Users\Alex\.gradle\caches\transforms-3\de36686df7a425ac8a97c03dec1481a7\transformed\jetified-play-services-base-18.0.1\AndroidManifest.xml:19:5-23:19
+MERGED from [com.google.android.gms:play-services-base:18.0.1] C:\Users\Alex\.gradle\caches\transforms-3\de36686df7a425ac8a97c03dec1481a7\transformed\jetified-play-services-base-18.0.1\AndroidManifest.xml:19:5-23:19
+MERGED from [com.google.android.gms:play-services-tasks:18.0.1] C:\Users\Alex\.gradle\caches\transforms-3\3128806c10203039de1b40011632665e\transformed\jetified-play-services-tasks-18.0.1\AndroidManifest.xml:5:5-20
+MERGED from [com.google.android.gms:play-services-tasks:18.0.1] C:\Users\Alex\.gradle\caches\transforms-3\3128806c10203039de1b40011632665e\transformed\jetified-play-services-tasks-18.0.1\AndroidManifest.xml:5:5-20
+MERGED from [com.google.android.gms:play-services-places-placereport:17.0.0] C:\Users\Alex\.gradle\caches\transforms-3\cb6abba3b716ecbcf5ce9e4bbfc98497\transformed\jetified-play-services-places-placereport-17.0.0\AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.gms:play-services-places-placereport:17.0.0] C:\Users\Alex\.gradle\caches\transforms-3\cb6abba3b716ecbcf5ce9e4bbfc98497\transformed\jetified-play-services-places-placereport-17.0.0\AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.gms:play-services-basement:18.0.0] C:\Users\Alex\.gradle\caches\transforms-3\a0ff2900023dd966a7d80ef9ca8a8f13\transformed\jetified-play-services-basement-18.0.0\AndroidManifest.xml:20:5-24:19
+MERGED from [com.google.android.gms:play-services-basement:18.0.0] C:\Users\Alex\.gradle\caches\transforms-3\a0ff2900023dd966a7d80ef9ca8a8f13\transformed\jetified-play-services-basement-18.0.0\AndroidManifest.xml:20:5-24:19
+MERGED from [androidx.core:core:1.6.0] C:\Users\Alex\.gradle\caches\transforms-3\64f86152db47189b3d5a2aa8b53c5849\transformed\core-1.6.0\AndroidManifest.xml:24:5-89
+MERGED from [androidx.core:core:1.6.0] C:\Users\Alex\.gradle\caches\transforms-3\64f86152db47189b3d5a2aa8b53c5849\transformed\core-1.6.0\AndroidManifest.xml:24:5-89
+MERGED from [androidx.room:room-runtime:2.5.0] C:\Users\Alex\.gradle\caches\transforms-3\14fb2498363212b1c4d2d6324967944f\transformed\room-runtime-2.5.0\AndroidManifest.xml:23:5-29:19
+MERGED from [androidx.room:room-runtime:2.5.0] C:\Users\Alex\.gradle\caches\transforms-3\14fb2498363212b1c4d2d6324967944f\transformed\room-runtime-2.5.0\AndroidManifest.xml:23:5-29:19
+MERGED from [androidx.startup:startup-runtime:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\34903fcc7c2d1fccde94d8188a122537\transformed\jetified-startup-runtime-1.0.0\AndroidManifest.xml:25:5-31:19
+MERGED from [androidx.startup:startup-runtime:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\34903fcc7c2d1fccde94d8188a122537\transformed\jetified-startup-runtime-1.0.0\AndroidManifest.xml:25:5-31:19
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\Alex\.gradle\caches\transforms-3\c002299bafc9a195d7323babb7ac9033\transformed\versionedparcelable-1.1.1\AndroidManifest.xml:24:5-25:19
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\Alex\.gradle\caches\transforms-3\c002299bafc9a195d7323babb7ac9033\transformed\versionedparcelable-1.1.1\AndroidManifest.xml:24:5-25:19
+	android:extractNativeLibs
+		INJECTED from C:\Projects\SOLA\Project\GIT\SOLA\open_tenure\ot-android-studio\openTenure\src\main\AndroidManifest.xml
 	android:appComponentFactory
-		ADDED from [androidx.core:core:1.6.0] C:\Users\Alex\.gradle\caches\transforms-3\bed1499ddf24b58a00cde4888426cb94\transformed\core-1.6.0\AndroidManifest.xml:24:18-86
+		ADDED from [androidx.core:core:1.6.0] C:\Users\Alex\.gradle\caches\transforms-3\64f86152db47189b3d5a2aa8b53c5849\transformed\core-1.6.0\AndroidManifest.xml:24:18-86
 	android:supportsRtl
 		ADDED from C:\Projects\SOLA\Project\GIT\SOLA\open_tenure\ot-android-studio\openTenure\src\main\AndroidManifest.xml:39:9-35
 	android:label
@@ -215,8 +207,8 @@ MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\Al
 		ADDED from C:\Projects\SOLA\Project\GIT\SOLA\open_tenure\ot-android-studio\openTenure\src\main\AndroidManifest.xml:36:9-85
 uses-library#org.apache.http.legacy
 ADDED from C:\Projects\SOLA\Project\GIT\SOLA\open_tenure\ot-android-studio\openTenure\src\main\AndroidManifest.xml:40:9-88
-MERGED from [com.google.android.gms:play-services-maps:18.0.2] C:\Users\Alex\.gradle\caches\transforms-3\754cbdc1cc0e17b6a6fee999461dc8ed\transformed\jetified-play-services-maps-18.0.2\AndroidManifest.xml:39:9-41:40
-MERGED from [com.google.android.gms:play-services-maps:18.0.2] C:\Users\Alex\.gradle\caches\transforms-3\754cbdc1cc0e17b6a6fee999461dc8ed\transformed\jetified-play-services-maps-18.0.2\AndroidManifest.xml:39:9-41:40
+MERGED from [com.google.android.gms:play-services-maps:18.2.0] C:\Users\Alex\.gradle\caches\transforms-3\ef74b1325c9d8a81c72e5a385bf9b457\transformed\jetified-play-services-maps-18.2.0\AndroidManifest.xml:39:9-41:40
+MERGED from [com.google.android.gms:play-services-maps:18.2.0] C:\Users\Alex\.gradle\caches\transforms-3\ef74b1325c9d8a81c72e5a385bf9b457\transformed\jetified-play-services-maps-18.2.0\AndroidManifest.xml:39:9-41:40
 	android:required
 		ADDED from C:\Projects\SOLA\Project\GIT\SOLA\open_tenure\ot-android-studio\openTenure\src\main\AndroidManifest.xml:40:61-85
 	android:name
@@ -229,10 +221,10 @@ ADDED from C:\Projects\SOLA\Project\GIT\SOLA\open_tenure\ot-android-studio\openT
 		ADDED from C:\Projects\SOLA\Project\GIT\SOLA\open_tenure\ot-android-studio\openTenure\src\main\AndroidManifest.xml:43:13-62
 meta-data#com.google.android.gms.version
 ADDED from C:\Projects\SOLA\Project\GIT\SOLA\open_tenure\ot-android-studio\openTenure\src\main\AndroidManifest.xml:45:9-47:69
-MERGED from [com.google.maps.android:android-maps-utils:0.5] C:\Users\Alex\.gradle\caches\transforms-3\866308d9b4d46b0b04d45bbe2ebfbdd7\transformed\jetified-android-maps-utils-0.5\AndroidManifest.xml:8:9-10:69
-MERGED from [com.google.maps.android:android-maps-utils:0.5] C:\Users\Alex\.gradle\caches\transforms-3\866308d9b4d46b0b04d45bbe2ebfbdd7\transformed\jetified-android-maps-utils-0.5\AndroidManifest.xml:8:9-10:69
-MERGED from [com.google.android.gms:play-services-basement:18.0.0] C:\Users\Alex\.gradle\caches\transforms-3\90816fab45c6045140ab72460ecdfb4b\transformed\jetified-play-services-basement-18.0.0\AndroidManifest.xml:21:9-23:69
-MERGED from [com.google.android.gms:play-services-basement:18.0.0] C:\Users\Alex\.gradle\caches\transforms-3\90816fab45c6045140ab72460ecdfb4b\transformed\jetified-play-services-basement-18.0.0\AndroidManifest.xml:21:9-23:69
+MERGED from [com.google.maps.android:android-maps-utils:0.5] C:\Users\Alex\.gradle\caches\transforms-3\0c19c1f61a5921d90a1a7f520e1b4be2\transformed\jetified-android-maps-utils-0.5\AndroidManifest.xml:8:9-10:69
+MERGED from [com.google.maps.android:android-maps-utils:0.5] C:\Users\Alex\.gradle\caches\transforms-3\0c19c1f61a5921d90a1a7f520e1b4be2\transformed\jetified-android-maps-utils-0.5\AndroidManifest.xml:8:9-10:69
+MERGED from [com.google.android.gms:play-services-basement:18.0.0] C:\Users\Alex\.gradle\caches\transforms-3\a0ff2900023dd966a7d80ef9ca8a8f13\transformed\jetified-play-services-basement-18.0.0\AndroidManifest.xml:21:9-23:69
+MERGED from [com.google.android.gms:play-services-basement:18.0.0] C:\Users\Alex\.gradle\caches\transforms-3\a0ff2900023dd966a7d80ef9ca8a8f13\transformed\jetified-play-services-basement-18.0.0\AndroidManifest.xml:21:9-23:69
 	android:value
 		ADDED from C:\Projects\SOLA\Project\GIT\SOLA\open_tenure\ot-android-studio\openTenure\src\main\AndroidManifest.xml:47:13-66
 	android:name
@@ -481,383 +473,377 @@ action#com.google.android.gms.measurement.UPLOAD
 ADDED from C:\Projects\SOLA\Project\GIT\SOLA\open_tenure\ot-android-studio\openTenure\src\main\AndroidManifest.xml:200:17-83
 	android:name
 		ADDED from C:\Projects\SOLA\Project\GIT\SOLA\open_tenure\ot-android-studio\openTenure\src\main\AndroidManifest.xml:200:25-81
-uses-sdk
-INJECTED from C:\Projects\SOLA\Project\GIT\SOLA\open_tenure\ot-android-studio\openTenure\src\main\AndroidManifest.xml reason: use-sdk injection requested
-INJECTED from C:\Projects\SOLA\Project\GIT\SOLA\open_tenure\ot-android-studio\openTenure\src\main\AndroidManifest.xml
-INJECTED from C:\Projects\SOLA\Project\GIT\SOLA\open_tenure\ot-android-studio\openTenure\src\main\AndroidManifest.xml
-MERGED from [com.google.maps.android:android-maps-utils:0.5] C:\Users\Alex\.gradle\caches\transforms-3\866308d9b4d46b0b04d45bbe2ebfbdd7\transformed\jetified-android-maps-utils-0.5\AndroidManifest.xml:5:5-43
-MERGED from [com.google.maps.android:android-maps-utils:0.5] C:\Users\Alex\.gradle\caches\transforms-3\866308d9b4d46b0b04d45bbe2ebfbdd7\transformed\jetified-android-maps-utils-0.5\AndroidManifest.xml:5:5-43
-MERGED from [:aFileChooser] C:\Projects\SOLA\Project\GIT\SOLA\open_tenure\ot-android-studio\aFileChooser\build\intermediates\merged_manifest\debug\AndroidManifest.xml:20:5-44
-MERGED from [:aFileChooser] C:\Projects\SOLA\Project\GIT\SOLA\open_tenure\ot-android-studio\aFileChooser\build\intermediates\merged_manifest\debug\AndroidManifest.xml:20:5-44
-MERGED from [androidx.legacy:legacy-support-v4:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\21ed44a59d1ba4e81c080f09fd02842f\transformed\legacy-support-v4-1.0.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.legacy:legacy-support-v4:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\21ed44a59d1ba4e81c080f09fd02842f\transformed\legacy-support-v4-1.0.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.mediarouter:mediarouter:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\c0bdc6a2155f205578084ebad6da5f4f\transformed\mediarouter-1.0.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.mediarouter:mediarouter:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\c0bdc6a2155f205578084ebad6da5f4f\transformed\mediarouter-1.0.0\AndroidManifest.xml:20:5-44
-MERGED from [com.google.android.material:material:1.1.0] C:\Users\Alex\.gradle\caches\transforms-3\06c2fdf36b8499c2eb181b1d4442d719\transformed\material-1.1.0\AndroidManifest.xml:20:5-44
-MERGED from [com.google.android.material:material:1.1.0] C:\Users\Alex\.gradle\caches\transforms-3\06c2fdf36b8499c2eb181b1d4442d719\transformed\material-1.1.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.appcompat:appcompat:1.1.0] C:\Users\Alex\.gradle\caches\transforms-3\4a3bd1f31f14ccae1d711d08d9fc88f2\transformed\appcompat-1.1.0\AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.appcompat:appcompat:1.1.0] C:\Users\Alex\.gradle\caches\transforms-3\4a3bd1f31f14ccae1d711d08d9fc88f2\transformed\appcompat-1.1.0\AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.multidex:multidex:2.0.0] C:\Users\Alex\.gradle\caches\transforms-3\d2b53c82602dcdc48a459c0f746d1e47\transformed\multidex-2.0.0\AndroidManifest.xml:20:5-43
-MERGED from [androidx.multidex:multidex:2.0.0] C:\Users\Alex\.gradle\caches\transforms-3\d2b53c82602dcdc48a459c0f746d1e47\transformed\multidex-2.0.0\AndroidManifest.xml:20:5-43
-MERGED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:21:5-44
-MERGED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:21:5-44
-MERGED from [com.google.android.gms:play-services-maps:18.0.2] C:\Users\Alex\.gradle\caches\transforms-3\754cbdc1cc0e17b6a6fee999461dc8ed\transformed\jetified-play-services-maps-18.0.2\AndroidManifest.xml:20:5-44
-MERGED from [com.google.android.gms:play-services-maps:18.0.2] C:\Users\Alex\.gradle\caches\transforms-3\754cbdc1cc0e17b6a6fee999461dc8ed\transformed\jetified-play-services-maps-18.0.2\AndroidManifest.xml:20:5-44
-MERGED from [com.google.android.gms:play-services-location:18.0.0] C:\Users\Alex\.gradle\caches\transforms-3\c89030a3d129e7cc86d9767f76dcca66\transformed\jetified-play-services-location-18.0.0\AndroidManifest.xml:5:5-44
-MERGED from [com.google.android.gms:play-services-location:18.0.0] C:\Users\Alex\.gradle\caches\transforms-3\c89030a3d129e7cc86d9767f76dcca66\transformed\jetified-play-services-location-18.0.0\AndroidManifest.xml:5:5-44
-MERGED from [androidx.media:media:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\91f1642e2a270776e556d15371f64bf4\transformed\media-1.0.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.media:media:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\91f1642e2a270776e556d15371f64bf4\transformed\media-1.0.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\f99458ab18ea25dab26606510d12f169\transformed\legacy-support-core-ui-1.0.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\f99458ab18ea25dab26606510d12f169\transformed\legacy-support-core-ui-1.0.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.palette:palette:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\28ecc3002a87aa4d6766f444e3a338e5\transformed\palette-1.0.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.palette:palette:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\28ecc3002a87aa4d6766f444e3a338e5\transformed\palette-1.0.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\07be97de1f7472e5f0cdb709fab67338\transformed\legacy-support-core-utils-1.0.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\07be97de1f7472e5f0cdb709fab67338\transformed\legacy-support-core-utils-1.0.0\AndroidManifest.xml:20:5-44
-MERGED from [com.google.android.gms:play-services-base:18.0.1] C:\Users\Alex\.gradle\caches\transforms-3\7b34a4ccbe9cf462858e5a0dcdd1e108\transformed\jetified-play-services-base-18.0.1\AndroidManifest.xml:18:5-43
-MERGED from [com.google.android.gms:play-services-base:18.0.1] C:\Users\Alex\.gradle\caches\transforms-3\7b34a4ccbe9cf462858e5a0dcdd1e108\transformed\jetified-play-services-base-18.0.1\AndroidManifest.xml:18:5-43
-MERGED from [com.google.android.gms:play-services-places-placereport:17.0.0] C:\Users\Alex\.gradle\caches\transforms-3\4bae9b415a6b4c5b041cceca1ec77204\transformed\jetified-play-services-places-placereport-17.0.0\AndroidManifest.xml:20:5-44
-MERGED from [com.google.android.gms:play-services-places-placereport:17.0.0] C:\Users\Alex\.gradle\caches\transforms-3\4bae9b415a6b4c5b041cceca1ec77204\transformed\jetified-play-services-places-placereport-17.0.0\AndroidManifest.xml:20:5-44
-MERGED from [com.google.android.gms:play-services-tasks:18.0.1] C:\Users\Alex\.gradle\caches\transforms-3\05d23f36e41468d4655f40c9d6b25f1a\transformed\jetified-play-services-tasks-18.0.1\AndroidManifest.xml:4:5-43
-MERGED from [com.google.android.gms:play-services-tasks:18.0.1] C:\Users\Alex\.gradle\caches\transforms-3\05d23f36e41468d4655f40c9d6b25f1a\transformed\jetified-play-services-tasks-18.0.1\AndroidManifest.xml:4:5-43
-MERGED from [com.google.android.gms:play-services-basement:18.0.0] C:\Users\Alex\.gradle\caches\transforms-3\90816fab45c6045140ab72460ecdfb4b\transformed\jetified-play-services-basement-18.0.0\AndroidManifest.xml:18:5-43
-MERGED from [com.google.android.gms:play-services-basement:18.0.0] C:\Users\Alex\.gradle\caches\transforms-3\90816fab45c6045140ab72460ecdfb4b\transformed\jetified-play-services-basement-18.0.0\AndroidManifest.xml:18:5-43
-MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] C:\Users\Alex\.gradle\caches\transforms-3\671a06b1893081f2c8ad60f3958f34d7\transformed\coordinatorlayout-1.1.0\AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] C:\Users\Alex\.gradle\caches\transforms-3\671a06b1893081f2c8ad60f3958f34d7\transformed\coordinatorlayout-1.1.0\AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.transition:transition:1.2.0] C:\Users\Alex\.gradle\caches\transforms-3\98523101c9963e531757127a1e8b685c\transformed\transition-1.2.0\AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.transition:transition:1.2.0] C:\Users\Alex\.gradle\caches\transforms-3\98523101c9963e531757127a1e8b685c\transformed\transition-1.2.0\AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.appcompat:appcompat-resources:1.1.0] C:\Users\Alex\.gradle\caches\transforms-3\265b2e9fa85529a4c855375d21860cb8\transformed\jetified-appcompat-resources-1.1.0\AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.appcompat:appcompat-resources:1.1.0] C:\Users\Alex\.gradle\caches\transforms-3\265b2e9fa85529a4c855375d21860cb8\transformed\jetified-appcompat-resources-1.1.0\AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] C:\Users\Alex\.gradle\caches\transforms-3\cc60296bcd6f42dfa5f76f9c0a5cc1a3\transformed\vectordrawable-animated-1.1.0\AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] C:\Users\Alex\.gradle\caches\transforms-3\cc60296bcd6f42dfa5f76f9c0a5cc1a3\transformed\vectordrawable-animated-1.1.0\AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] C:\Users\Alex\.gradle\caches\transforms-3\b2cd8d669c990a22e05180b75bd6a08f\transformed\vectordrawable-1.1.0\AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] C:\Users\Alex\.gradle\caches\transforms-3\b2cd8d669c990a22e05180b75bd6a08f\transformed\vectordrawable-1.1.0\AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.viewpager2:viewpager2:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\4eda47e8e663d7656d969a0ff6b6a7b6\transformed\jetified-viewpager2-1.0.0\AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.viewpager2:viewpager2:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\4eda47e8e663d7656d969a0ff6b6a7b6\transformed\jetified-viewpager2-1.0.0\AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.fragment:fragment:1.1.0] C:\Users\Alex\.gradle\caches\transforms-3\cea5151aa06ceabd565517f60d2d89c5\transformed\fragment-1.1.0\AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.fragment:fragment:1.1.0] C:\Users\Alex\.gradle\caches\transforms-3\cea5151aa06ceabd565517f60d2d89c5\transformed\fragment-1.1.0\AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.loader:loader:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\ce51b2fe61819d8e2b7ab01a204a2296\transformed\loader-1.0.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.loader:loader:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\ce51b2fe61819d8e2b7ab01a204a2296\transformed\loader-1.0.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.viewpager:viewpager:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\34512101be2ed2f5fdc74ffc413b7aa8\transformed\viewpager-1.0.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.viewpager:viewpager:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\34512101be2ed2f5fdc74ffc413b7aa8\transformed\viewpager-1.0.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\9a17619f1c9b9582fca4b7f81433af44\transformed\drawerlayout-1.0.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\9a17619f1c9b9582fca4b7f81433af44\transformed\drawerlayout-1.0.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\70051f4b295c861980b57970c8885a90\transformed\slidingpanelayout-1.0.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\70051f4b295c861980b57970c8885a90\transformed\slidingpanelayout-1.0.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.recyclerview:recyclerview:1.1.0] C:\Users\Alex\.gradle\caches\transforms-3\9e1d4f8f0375e8e046d4b4131d85e943\transformed\recyclerview-1.1.0\AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.recyclerview:recyclerview:1.1.0] C:\Users\Alex\.gradle\caches\transforms-3\9e1d4f8f0375e8e046d4b4131d85e943\transformed\recyclerview-1.1.0\AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.customview:customview:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\b2555f03229cb3fd5668ea7c3eaea4bb\transformed\customview-1.0.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.customview:customview:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\b2555f03229cb3fd5668ea7c3eaea4bb\transformed\customview-1.0.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\1a50da70ad169867c6e113aef71d1359\transformed\swiperefreshlayout-1.0.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\1a50da70ad169867c6e113aef71d1359\transformed\swiperefreshlayout-1.0.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\f548f19075e860a502651d03c0bdb8a9\transformed\asynclayoutinflater-1.0.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\f548f19075e860a502651d03c0bdb8a9\transformed\asynclayoutinflater-1.0.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.activity:activity:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\f21f0cd7c3e0d179b4df4271d39db2da\transformed\jetified-activity-1.0.0\AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.activity:activity:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\f21f0cd7c3e0d179b4df4271d39db2da\transformed\jetified-activity-1.0.0\AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.core:core:1.6.0] C:\Users\Alex\.gradle\caches\transforms-3\bed1499ddf24b58a00cde4888426cb94\transformed\core-1.6.0\AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.core:core:1.6.0] C:\Users\Alex\.gradle\caches\transforms-3\bed1499ddf24b58a00cde4888426cb94\transformed\core-1.6.0\AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\65dfa7529cda83889e241e7b460f7ec4\transformed\cursoradapter-1.0.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\65dfa7529cda83889e241e7b460f7ec4\transformed\cursoradapter-1.0.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.room:room-runtime:2.5.0] C:\Users\Alex\.gradle\caches\transforms-3\c7101898c9de429c10d06dcf62bf4bbf\transformed\room-runtime-2.5.0\AndroidManifest.xml:21:5-44
-MERGED from [androidx.room:room-runtime:2.5.0] C:\Users\Alex\.gradle\caches\transforms-3\c7101898c9de429c10d06dcf62bf4bbf\transformed\room-runtime-2.5.0\AndroidManifest.xml:21:5-44
-MERGED from [androidx.sqlite:sqlite-framework:2.3.0] C:\Users\Alex\.gradle\caches\transforms-3\719c9116fabfad8cc698838039dc0abb\transformed\sqlite-framework-2.3.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.sqlite:sqlite-framework:2.3.0] C:\Users\Alex\.gradle\caches\transforms-3\719c9116fabfad8cc698838039dc0abb\transformed\sqlite-framework-2.3.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.startup:startup-runtime:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\92b00e4628c5c8b84705b613b174fd24\transformed\jetified-startup-runtime-1.0.0\AndroidManifest.xml:21:5-23:41
-MERGED from [androidx.startup:startup-runtime:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\92b00e4628c5c8b84705b613b174fd24\transformed\jetified-startup-runtime-1.0.0\AndroidManifest.xml:21:5-23:41
-MERGED from [androidx.cardview:cardview:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\64a2d392994452577a480e11197fabd6\transformed\cardview-1.0.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.cardview:cardview:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\64a2d392994452577a480e11197fabd6\transformed\cardview-1.0.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.documentfile:documentfile:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\d0ba5a155415781d35e9bc5bbfe349c2\transformed\documentfile-1.0.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.documentfile:documentfile:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\d0ba5a155415781d35e9bc5bbfe349c2\transformed\documentfile-1.0.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\3720f74479d1bf1b71b3563ead82bc28\transformed\localbroadcastmanager-1.0.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\3720f74479d1bf1b71b3563ead82bc28\transformed\localbroadcastmanager-1.0.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.print:print:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\89d7c0a63c4c68190d59f33c4abce116\transformed\print-1.0.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.print:print:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\89d7c0a63c4c68190d59f33c4abce116\transformed\print-1.0.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.interpolator:interpolator:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\f3521e625b4ba3bfb9db345ad459607d\transformed\interpolator-1.0.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.interpolator:interpolator:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\f3521e625b4ba3bfb9db345ad459607d\transformed\interpolator-1.0.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\Alex\.gradle\caches\transforms-3\0c7bb944f3e4dca76f0e2467ecc7ea80\transformed\versionedparcelable-1.1.1\AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\Alex\.gradle\caches\transforms-3\0c7bb944f3e4dca76f0e2467ecc7ea80\transformed\versionedparcelable-1.1.1\AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.lifecycle:lifecycle-livedata:2.1.0] C:\Users\Alex\.gradle\caches\transforms-3\5b94482bd795100e27b5d710b59b2036\transformed\lifecycle-livedata-2.1.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-livedata:2.1.0] C:\Users\Alex\.gradle\caches\transforms-3\5b94482bd795100e27b5d710b59b2036\transformed\lifecycle-livedata-2.1.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.1.0] C:\Users\Alex\.gradle\caches\transforms-3\4ec007e91329afea67b7320fb25843b8\transformed\lifecycle-livedata-core-2.1.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.1.0] C:\Users\Alex\.gradle\caches\transforms-3\4ec007e91329afea67b7320fb25843b8\transformed\lifecycle-livedata-core-2.1.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.arch.core:core-runtime:2.1.0] C:\Users\Alex\.gradle\caches\transforms-3\bf97780cd6c8e42a6f56dbc470e67515\transformed\core-runtime-2.1.0\AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.arch.core:core-runtime:2.1.0] C:\Users\Alex\.gradle\caches\transforms-3\bf97780cd6c8e42a6f56dbc470e67515\transformed\core-runtime-2.1.0\AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.lifecycle:lifecycle-service:2.1.0] C:\Users\Alex\.gradle\caches\transforms-3\8e6682436d593a15ccb410341b723fdf\transformed\jetified-lifecycle-service-2.1.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-service:2.1.0] C:\Users\Alex\.gradle\caches\transforms-3\8e6682436d593a15ccb410341b723fdf\transformed\jetified-lifecycle-service-2.1.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-runtime:2.1.0] C:\Users\Alex\.gradle\caches\transforms-3\a1d5d16b9b1035f516f6fe86d954cf1e\transformed\lifecycle-runtime-2.1.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-runtime:2.1.0] C:\Users\Alex\.gradle\caches\transforms-3\a1d5d16b9b1035f516f6fe86d954cf1e\transformed\lifecycle-runtime-2.1.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.savedstate:savedstate:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\fe3c09e81a8bda6708fa897efb6089c7\transformed\jetified-savedstate-1.0.0\AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.savedstate:savedstate:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\fe3c09e81a8bda6708fa897efb6089c7\transformed\jetified-savedstate-1.0.0\AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.sqlite:sqlite:2.3.0] C:\Users\Alex\.gradle\caches\transforms-3\7aa965d33600a334d229bed15ace7700\transformed\sqlite-2.3.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.sqlite:sqlite:2.3.0] C:\Users\Alex\.gradle\caches\transforms-3\7aa965d33600a334d229bed15ace7700\transformed\sqlite-2.3.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.tracing:tracing:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\1d2299f5940cbdf2dbd4ffd921d2acfc\transformed\jetified-tracing-1.0.0\AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.tracing:tracing:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\1d2299f5940cbdf2dbd4ffd921d2acfc\transformed\jetified-tracing-1.0.0\AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.1.0] C:\Users\Alex\.gradle\caches\transforms-3\ae45172f514b1784546b95f56dc3c0da\transformed\lifecycle-viewmodel-2.1.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.1.0] C:\Users\Alex\.gradle\caches\transforms-3\ae45172f514b1784546b95f56dc3c0da\transformed\lifecycle-viewmodel-2.1.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.annotation:annotation-experimental:1.1.0] C:\Users\Alex\.gradle\caches\transforms-3\a83a03db1daa4314d8622e6d887074b5\transformed\jetified-annotation-experimental-1.1.0\AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.annotation:annotation-experimental:1.1.0] C:\Users\Alex\.gradle\caches\transforms-3\a83a03db1daa4314d8622e6d887074b5\transformed\jetified-annotation-experimental-1.1.0\AndroidManifest.xml:20:5-22:41
-INJECTED from C:\Projects\SOLA\Project\GIT\SOLA\open_tenure\ot-android-studio\openTenure\src\main\AndroidManifest.xml
-INJECTED from C:\Projects\SOLA\Project\GIT\SOLA\open_tenure\ot-android-studio\openTenure\src\main\AndroidManifest.xml
-	android:targetSdkVersion
-		INJECTED from C:\Projects\SOLA\Project\GIT\SOLA\open_tenure\ot-android-studio\openTenure\src\main\AndroidManifest.xml
-		ADDED from C:\Projects\SOLA\Project\GIT\SOLA\open_tenure\ot-android-studio\openTenure\src\main\AndroidManifest.xml
-		INJECTED from C:\Projects\SOLA\Project\GIT\SOLA\open_tenure\ot-android-studio\openTenure\src\main\AndroidManifest.xml
-	android:minSdkVersion
-		INJECTED from C:\Projects\SOLA\Project\GIT\SOLA\open_tenure\ot-android-studio\openTenure\src\main\AndroidManifest.xml
-		ADDED from C:\Projects\SOLA\Project\GIT\SOLA\open_tenure\ot-android-studio\openTenure\src\main\AndroidManifest.xml
-		INJECTED from C:\Projects\SOLA\Project\GIT\SOLA\open_tenure\ot-android-studio\openTenure\src\main\AndroidManifest.xml
 meta-data#android.support.FILE_PROVIDER_PATHS
 ADDED from C:\Projects\SOLA\Project\GIT\SOLA\open_tenure\ot-android-studio\openTenure\src\main\AndroidManifest.xml:53:13-55:57
 	android:resource
 		ADDED from C:\Projects\SOLA\Project\GIT\SOLA\open_tenure\ot-android-studio\openTenure\src\main\AndroidManifest.xml:55:17-55
 	android:name
 		ADDED from C:\Projects\SOLA\Project\GIT\SOLA\open_tenure\ot-android-studio\openTenure\src\main\AndroidManifest.xml:54:17-67
+uses-sdk
+INJECTED from C:\Projects\SOLA\Project\GIT\SOLA\open_tenure\ot-android-studio\openTenure\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from C:\Projects\SOLA\Project\GIT\SOLA\open_tenure\ot-android-studio\openTenure\src\main\AndroidManifest.xml
+INJECTED from C:\Projects\SOLA\Project\GIT\SOLA\open_tenure\ot-android-studio\openTenure\src\main\AndroidManifest.xml
+MERGED from [com.google.maps.android:android-maps-utils:0.5] C:\Users\Alex\.gradle\caches\transforms-3\0c19c1f61a5921d90a1a7f520e1b4be2\transformed\jetified-android-maps-utils-0.5\AndroidManifest.xml:5:5-43
+MERGED from [com.google.maps.android:android-maps-utils:0.5] C:\Users\Alex\.gradle\caches\transforms-3\0c19c1f61a5921d90a1a7f520e1b4be2\transformed\jetified-android-maps-utils-0.5\AndroidManifest.xml:5:5-43
+MERGED from [:aFileChooser] C:\Projects\SOLA\Project\GIT\SOLA\open_tenure\ot-android-studio\aFileChooser\build\intermediates\merged_manifest\debug\processDebugManifest\AndroidManifest.xml:20:5-44
+MERGED from [:aFileChooser] C:\Projects\SOLA\Project\GIT\SOLA\open_tenure\ot-android-studio\aFileChooser\build\intermediates\merged_manifest\debug\processDebugManifest\AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-v4:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\fd2a992ff7a107687864b8f04f1f9f87\transformed\legacy-support-v4-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-v4:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\fd2a992ff7a107687864b8f04f1f9f87\transformed\legacy-support-v4-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.mediarouter:mediarouter:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\8e3fced8464cefb37133f919edb5488e\transformed\mediarouter-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.mediarouter:mediarouter:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\8e3fced8464cefb37133f919edb5488e\transformed\mediarouter-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.material:material:1.1.0] C:\Users\Alex\.gradle\caches\transforms-3\ee8e94e0a0de10553d0b44c2a09d4292\transformed\material-1.1.0\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.material:material:1.1.0] C:\Users\Alex\.gradle\caches\transforms-3\ee8e94e0a0de10553d0b44c2a09d4292\transformed\material-1.1.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.appcompat:appcompat:1.1.0] C:\Users\Alex\.gradle\caches\transforms-3\36ed8e49196193d4e1df1264753bb8ff\transformed\appcompat-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.appcompat:appcompat:1.1.0] C:\Users\Alex\.gradle\caches\transforms-3\36ed8e49196193d4e1df1264753bb8ff\transformed\appcompat-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.multidex:multidex:2.0.0] C:\Users\Alex\.gradle\caches\transforms-3\040de53e674419ef1a47377911a434c5\transformed\multidex-2.0.0\AndroidManifest.xml:20:5-43
+MERGED from [androidx.multidex:multidex:2.0.0] C:\Users\Alex\.gradle\caches\transforms-3\040de53e674419ef1a47377911a434c5\transformed\multidex-2.0.0\AndroidManifest.xml:20:5-43
+MERGED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:21:5-44
+MERGED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:21:5-44
+MERGED from [com.google.android.gms:play-services-maps:18.2.0] C:\Users\Alex\.gradle\caches\transforms-3\ef74b1325c9d8a81c72e5a385bf9b457\transformed\jetified-play-services-maps-18.2.0\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-maps:18.2.0] C:\Users\Alex\.gradle\caches\transforms-3\ef74b1325c9d8a81c72e5a385bf9b457\transformed\jetified-play-services-maps-18.2.0\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-location:18.0.0] C:\Users\Alex\.gradle\caches\transforms-3\9d27fa82bc8bd54fd15d4679fa6dfd47\transformed\jetified-play-services-location-18.0.0\AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-location:18.0.0] C:\Users\Alex\.gradle\caches\transforms-3\9d27fa82bc8bd54fd15d4679fa6dfd47\transformed\jetified-play-services-location-18.0.0\AndroidManifest.xml:5:5-44
+MERGED from [androidx.media:media:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\cc215b09d16f13aa1976bfec1076e608\transformed\media-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.media:media:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\cc215b09d16f13aa1976bfec1076e608\transformed\media-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\6a88ff296b77cbce38defa8cd7fa8b38\transformed\legacy-support-core-ui-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\6a88ff296b77cbce38defa8cd7fa8b38\transformed\legacy-support-core-ui-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.palette:palette:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\93b359e29545952cede3eb0fc7c21c53\transformed\palette-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.palette:palette:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\93b359e29545952cede3eb0fc7c21c53\transformed\palette-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\006371251bf468871025870e9c39239c\transformed\legacy-support-core-utils-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\006371251bf468871025870e9c39239c\transformed\legacy-support-core-utils-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-base:18.0.1] C:\Users\Alex\.gradle\caches\transforms-3\de36686df7a425ac8a97c03dec1481a7\transformed\jetified-play-services-base-18.0.1\AndroidManifest.xml:18:5-43
+MERGED from [com.google.android.gms:play-services-base:18.0.1] C:\Users\Alex\.gradle\caches\transforms-3\de36686df7a425ac8a97c03dec1481a7\transformed\jetified-play-services-base-18.0.1\AndroidManifest.xml:18:5-43
+MERGED from [com.google.android.gms:play-services-tasks:18.0.1] C:\Users\Alex\.gradle\caches\transforms-3\3128806c10203039de1b40011632665e\transformed\jetified-play-services-tasks-18.0.1\AndroidManifest.xml:4:5-43
+MERGED from [com.google.android.gms:play-services-tasks:18.0.1] C:\Users\Alex\.gradle\caches\transforms-3\3128806c10203039de1b40011632665e\transformed\jetified-play-services-tasks-18.0.1\AndroidManifest.xml:4:5-43
+MERGED from [com.google.android.gms:play-services-places-placereport:17.0.0] C:\Users\Alex\.gradle\caches\transforms-3\cb6abba3b716ecbcf5ce9e4bbfc98497\transformed\jetified-play-services-places-placereport-17.0.0\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-places-placereport:17.0.0] C:\Users\Alex\.gradle\caches\transforms-3\cb6abba3b716ecbcf5ce9e4bbfc98497\transformed\jetified-play-services-places-placereport-17.0.0\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-basement:18.0.0] C:\Users\Alex\.gradle\caches\transforms-3\a0ff2900023dd966a7d80ef9ca8a8f13\transformed\jetified-play-services-basement-18.0.0\AndroidManifest.xml:18:5-43
+MERGED from [com.google.android.gms:play-services-basement:18.0.0] C:\Users\Alex\.gradle\caches\transforms-3\a0ff2900023dd966a7d80ef9ca8a8f13\transformed\jetified-play-services-basement-18.0.0\AndroidManifest.xml:18:5-43
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] C:\Users\Alex\.gradle\caches\transforms-3\ec3b33ff9c821584a0693dc9b6751dd3\transformed\coordinatorlayout-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] C:\Users\Alex\.gradle\caches\transforms-3\ec3b33ff9c821584a0693dc9b6751dd3\transformed\coordinatorlayout-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.transition:transition:1.2.0] C:\Users\Alex\.gradle\caches\transforms-3\5983275a03c6ee514e5e4400f2c7505f\transformed\transition-1.2.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.transition:transition:1.2.0] C:\Users\Alex\.gradle\caches\transforms-3\5983275a03c6ee514e5e4400f2c7505f\transformed\transition-1.2.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.appcompat:appcompat-resources:1.1.0] C:\Users\Alex\.gradle\caches\transforms-3\74e44df71a12dc7a2e463ef934533735\transformed\jetified-appcompat-resources-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.appcompat:appcompat-resources:1.1.0] C:\Users\Alex\.gradle\caches\transforms-3\74e44df71a12dc7a2e463ef934533735\transformed\jetified-appcompat-resources-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] C:\Users\Alex\.gradle\caches\transforms-3\9fe6fdf63cbb0f9f0b4b96d13e98c8ef\transformed\vectordrawable-animated-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] C:\Users\Alex\.gradle\caches\transforms-3\9fe6fdf63cbb0f9f0b4b96d13e98c8ef\transformed\vectordrawable-animated-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] C:\Users\Alex\.gradle\caches\transforms-3\ec41cf3d26fa3fcc888a637a538986b1\transformed\vectordrawable-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] C:\Users\Alex\.gradle\caches\transforms-3\ec41cf3d26fa3fcc888a637a538986b1\transformed\vectordrawable-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.viewpager2:viewpager2:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\d63afa88e3a53234b21219ce5de98418\transformed\jetified-viewpager2-1.0.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.viewpager2:viewpager2:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\d63afa88e3a53234b21219ce5de98418\transformed\jetified-viewpager2-1.0.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.fragment:fragment:1.1.0] C:\Users\Alex\.gradle\caches\transforms-3\4814959422ec301e41d451482033775a\transformed\fragment-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.fragment:fragment:1.1.0] C:\Users\Alex\.gradle\caches\transforms-3\4814959422ec301e41d451482033775a\transformed\fragment-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.loader:loader:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\821bfa7e3b0f0f144ad087d3b8a0b848\transformed\loader-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.loader:loader:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\821bfa7e3b0f0f144ad087d3b8a0b848\transformed\loader-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager:viewpager:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\18fa42151ba1d151043059eeefc8fe50\transformed\viewpager-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager:viewpager:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\18fa42151ba1d151043059eeefc8fe50\transformed\viewpager-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\89c99b36c75291d39e827c9a67873bb9\transformed\drawerlayout-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\89c99b36c75291d39e827c9a67873bb9\transformed\drawerlayout-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\25b7674fea4a2dc5132947b137ffbe95\transformed\slidingpanelayout-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\25b7674fea4a2dc5132947b137ffbe95\transformed\slidingpanelayout-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.recyclerview:recyclerview:1.1.0] C:\Users\Alex\.gradle\caches\transforms-3\bb962950bf1999403af52d409d1eda91\transformed\recyclerview-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.recyclerview:recyclerview:1.1.0] C:\Users\Alex\.gradle\caches\transforms-3\bb962950bf1999403af52d409d1eda91\transformed\recyclerview-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.customview:customview:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\ec5f3844528d7defe98b7edee9f80bbb\transformed\customview-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.customview:customview:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\ec5f3844528d7defe98b7edee9f80bbb\transformed\customview-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\d4013cbb901d02e050b6fe29f39fedf5\transformed\swiperefreshlayout-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\d4013cbb901d02e050b6fe29f39fedf5\transformed\swiperefreshlayout-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\55fd278c2bd7ed0726ed8b9f313e53dd\transformed\asynclayoutinflater-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\55fd278c2bd7ed0726ed8b9f313e53dd\transformed\asynclayoutinflater-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.activity:activity:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\b4fa300f142efa9b29a933aa39608627\transformed\jetified-activity-1.0.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.activity:activity:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\b4fa300f142efa9b29a933aa39608627\transformed\jetified-activity-1.0.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.core:core:1.6.0] C:\Users\Alex\.gradle\caches\transforms-3\64f86152db47189b3d5a2aa8b53c5849\transformed\core-1.6.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.core:core:1.6.0] C:\Users\Alex\.gradle\caches\transforms-3\64f86152db47189b3d5a2aa8b53c5849\transformed\core-1.6.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\41af842ae1524a0632f19900b6221afd\transformed\cursoradapter-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\41af842ae1524a0632f19900b6221afd\transformed\cursoradapter-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.room:room-runtime:2.5.0] C:\Users\Alex\.gradle\caches\transforms-3\14fb2498363212b1c4d2d6324967944f\transformed\room-runtime-2.5.0\AndroidManifest.xml:21:5-44
+MERGED from [androidx.room:room-runtime:2.5.0] C:\Users\Alex\.gradle\caches\transforms-3\14fb2498363212b1c4d2d6324967944f\transformed\room-runtime-2.5.0\AndroidManifest.xml:21:5-44
+MERGED from [androidx.sqlite:sqlite-framework:2.3.0] C:\Users\Alex\.gradle\caches\transforms-3\ecffb10f9d5ead19202d80b5628e26e1\transformed\sqlite-framework-2.3.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.sqlite:sqlite-framework:2.3.0] C:\Users\Alex\.gradle\caches\transforms-3\ecffb10f9d5ead19202d80b5628e26e1\transformed\sqlite-framework-2.3.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.startup:startup-runtime:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\34903fcc7c2d1fccde94d8188a122537\transformed\jetified-startup-runtime-1.0.0\AndroidManifest.xml:21:5-23:41
+MERGED from [androidx.startup:startup-runtime:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\34903fcc7c2d1fccde94d8188a122537\transformed\jetified-startup-runtime-1.0.0\AndroidManifest.xml:21:5-23:41
+MERGED from [androidx.cardview:cardview:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\963789b6e1dd17987c10806ebe665936\transformed\cardview-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.cardview:cardview:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\963789b6e1dd17987c10806ebe665936\transformed\cardview-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.documentfile:documentfile:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\505fbcd7f20a67cdbfcffb49ea4343a2\transformed\documentfile-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.documentfile:documentfile:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\505fbcd7f20a67cdbfcffb49ea4343a2\transformed\documentfile-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\bb70dfcadb1b3babfcd321012a1f6f0e\transformed\localbroadcastmanager-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\bb70dfcadb1b3babfcd321012a1f6f0e\transformed\localbroadcastmanager-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.print:print:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\bc1fe0365c95955600d134aa88e878b6\transformed\print-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.print:print:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\bc1fe0365c95955600d134aa88e878b6\transformed\print-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.interpolator:interpolator:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\9a94ea5307e736e8cd0d82eb2304fe62\transformed\interpolator-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.interpolator:interpolator:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\9a94ea5307e736e8cd0d82eb2304fe62\transformed\interpolator-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\Alex\.gradle\caches\transforms-3\c002299bafc9a195d7323babb7ac9033\transformed\versionedparcelable-1.1.1\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\Alex\.gradle\caches\transforms-3\c002299bafc9a195d7323babb7ac9033\transformed\versionedparcelable-1.1.1\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.1.0] C:\Users\Alex\.gradle\caches\transforms-3\36d332af484dc2a3c276310389f4fbbc\transformed\lifecycle-livedata-2.1.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.1.0] C:\Users\Alex\.gradle\caches\transforms-3\36d332af484dc2a3c276310389f4fbbc\transformed\lifecycle-livedata-2.1.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.1.0] C:\Users\Alex\.gradle\caches\transforms-3\5d4cd92b870055be755bd91736dfcee7\transformed\lifecycle-livedata-core-2.1.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.1.0] C:\Users\Alex\.gradle\caches\transforms-3\5d4cd92b870055be755bd91736dfcee7\transformed\lifecycle-livedata-core-2.1.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.arch.core:core-runtime:2.1.0] C:\Users\Alex\.gradle\caches\transforms-3\98e226749eee7a045bf8de74baa2b50f\transformed\core-runtime-2.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.arch.core:core-runtime:2.1.0] C:\Users\Alex\.gradle\caches\transforms-3\98e226749eee7a045bf8de74baa2b50f\transformed\core-runtime-2.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-service:2.1.0] C:\Users\Alex\.gradle\caches\transforms-3\3647e17c2c6281ca43eae63e64c42ef1\transformed\jetified-lifecycle-service-2.1.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-service:2.1.0] C:\Users\Alex\.gradle\caches\transforms-3\3647e17c2c6281ca43eae63e64c42ef1\transformed\jetified-lifecycle-service-2.1.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.1.0] C:\Users\Alex\.gradle\caches\transforms-3\8487d3dac977c84670dada0a90eea7d7\transformed\lifecycle-runtime-2.1.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.1.0] C:\Users\Alex\.gradle\caches\transforms-3\8487d3dac977c84670dada0a90eea7d7\transformed\lifecycle-runtime-2.1.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.savedstate:savedstate:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\3920db67d5839c3db30a304ea8980beb\transformed\jetified-savedstate-1.0.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.savedstate:savedstate:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\3920db67d5839c3db30a304ea8980beb\transformed\jetified-savedstate-1.0.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.sqlite:sqlite:2.3.0] C:\Users\Alex\.gradle\caches\transforms-3\04ca38fcea5187cd95a23de7c1fa04fd\transformed\sqlite-2.3.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.sqlite:sqlite:2.3.0] C:\Users\Alex\.gradle\caches\transforms-3\04ca38fcea5187cd95a23de7c1fa04fd\transformed\sqlite-2.3.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.tracing:tracing:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\cccf27e78835130872361d491b020f01\transformed\jetified-tracing-1.0.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.tracing:tracing:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\cccf27e78835130872361d491b020f01\transformed\jetified-tracing-1.0.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.1.0] C:\Users\Alex\.gradle\caches\transforms-3\ce0e04b4ff0c56717a6422823a73c5f2\transformed\lifecycle-viewmodel-2.1.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.1.0] C:\Users\Alex\.gradle\caches\transforms-3\ce0e04b4ff0c56717a6422823a73c5f2\transformed\lifecycle-viewmodel-2.1.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.annotation:annotation-experimental:1.1.0] C:\Users\Alex\.gradle\caches\transforms-3\2c48563d6e18699a8ac235fd347cf608\transformed\jetified-annotation-experimental-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.annotation:annotation-experimental:1.1.0] C:\Users\Alex\.gradle\caches\transforms-3\2c48563d6e18699a8ac235fd347cf608\transformed\jetified-annotation-experimental-1.1.0\AndroidManifest.xml:20:5-22:41
+	android:targetSdkVersion
+		INJECTED from C:\Projects\SOLA\Project\GIT\SOLA\open_tenure\ot-android-studio\openTenure\src\main\AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from C:\Projects\SOLA\Project\GIT\SOLA\open_tenure\ot-android-studio\openTenure\src\main\AndroidManifest.xml
 uses-permission#android.permission.WAKE_LOCK
-ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:23:5-68
+ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:23:5-68
 	android:name
-		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:23:22-65
+		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:23:22-65
 uses-permission#android.permission.RECEIVE_BOOT_COMPLETED
-ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:25:5-81
+ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:25:5-81
 	android:name
-		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:25:22-78
+		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:25:22-78
 uses-permission#android.permission.FOREGROUND_SERVICE
-ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:26:5-77
+ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:26:5-77
 	android:name
-		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:26:22-74
+		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:26:22-74
 provider#androidx.startup.InitializationProvider
-ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:29:9-37:20
-MERGED from [androidx.startup:startup-runtime:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\92b00e4628c5c8b84705b613b174fd24\transformed\jetified-startup-runtime-1.0.0\AndroidManifest.xml:26:9-30:34
-MERGED from [androidx.startup:startup-runtime:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\92b00e4628c5c8b84705b613b174fd24\transformed\jetified-startup-runtime-1.0.0\AndroidManifest.xml:26:9-30:34
+ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:29:9-37:20
+MERGED from [androidx.startup:startup-runtime:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\34903fcc7c2d1fccde94d8188a122537\transformed\jetified-startup-runtime-1.0.0\AndroidManifest.xml:26:9-30:34
+MERGED from [androidx.startup:startup-runtime:1.0.0] C:\Users\Alex\.gradle\caches\transforms-3\34903fcc7c2d1fccde94d8188a122537\transformed\jetified-startup-runtime-1.0.0\AndroidManifest.xml:26:9-30:34
 	tools:node
-		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:33:13-31
+		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:33:13-31
 	android:authorities
-		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:31:13-68
+		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:31:13-68
 	android:exported
-		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:32:13-37
+		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:32:13-37
 	android:name
-		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:30:13-67
+		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:30:13-67
 meta-data#androidx.work.WorkManagerInitializer
-ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:34:13-36:52
+ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:34:13-36:52
 	android:value
-		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:36:17-49
+		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:36:17-49
 	android:name
-		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:35:17-68
+		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:35:17-68
 service#androidx.work.impl.background.systemalarm.SystemAlarmService
-ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:39:9-45:35
+ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:39:9-45:35
 	android:enabled
-		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:42:13-72
+		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:42:13-72
 	android:exported
-		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:43:13-37
+		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:43:13-37
 	tools:ignore
-		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:44:13-60
+		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:44:13-60
 	tools:targetApi
-		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:45:13-32
+		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:45:13-32
 	android:directBootAware
-		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:41:13-44
+		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:41:13-44
 	android:name
-		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:40:13-88
+		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:40:13-88
 service#androidx.work.impl.background.systemjob.SystemJobService
-ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:46:9-52:35
+ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:46:9-52:35
 	android:enabled
-		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:49:13-70
+		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:49:13-70
 	android:exported
-		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:50:13-36
+		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:50:13-36
 	android:permission
-		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:51:13-69
+		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:51:13-69
 	tools:targetApi
-		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:52:13-32
+		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:52:13-32
 	android:directBootAware
-		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:48:13-44
+		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:48:13-44
 	android:name
-		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:47:13-84
+		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:47:13-84
 service#androidx.work.impl.foreground.SystemForegroundService
-ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:53:9-59:35
+ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:53:9-59:35
 	android:enabled
-		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:56:13-77
+		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:56:13-77
 	android:exported
-		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:57:13-37
+		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:57:13-37
 	tools:ignore
-		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:58:13-60
+		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:58:13-60
 	tools:targetApi
-		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:59:13-32
+		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:59:13-32
 	android:directBootAware
-		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:55:13-44
+		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:55:13-44
 	android:name
-		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:54:13-81
+		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:54:13-81
 receiver#androidx.work.impl.utils.ForceStopRunnable$BroadcastReceiver
-ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:61:9-66:35
+ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:61:9-66:35
 	android:enabled
-		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:64:13-35
+		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:64:13-35
 	android:exported
-		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:65:13-37
+		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:65:13-37
 	tools:targetApi
-		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:66:13-32
+		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:66:13-32
 	android:directBootAware
-		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:63:13-44
+		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:63:13-44
 	android:name
-		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:62:13-88
+		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:62:13-88
 receiver#androidx.work.impl.background.systemalarm.ConstraintProxy$BatteryChargingProxy
-ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:67:9-77:20
+ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:67:9-77:20
 	android:enabled
-		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:70:13-36
+		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:70:13-36
 	android:exported
-		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:71:13-37
+		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:71:13-37
 	tools:targetApi
-		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:72:13-32
+		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:72:13-32
 	android:directBootAware
-		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:69:13-44
+		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:69:13-44
 	android:name
-		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:68:13-106
+		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:68:13-106
 intent-filter#action:name:android.intent.action.ACTION_POWER_CONNECTED+action:name:android.intent.action.ACTION_POWER_DISCONNECTED
-ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:73:13-76:29
+ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:73:13-76:29
 action#android.intent.action.ACTION_POWER_CONNECTED
-ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:74:17-87
+ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:74:17-87
 	android:name
-		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:74:25-84
+		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:74:25-84
 action#android.intent.action.ACTION_POWER_DISCONNECTED
-ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:75:17-90
+ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:75:17-90
 	android:name
-		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:75:25-87
+		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:75:25-87
 receiver#androidx.work.impl.background.systemalarm.ConstraintProxy$BatteryNotLowProxy
-ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:78:9-88:20
+ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:78:9-88:20
 	android:enabled
-		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:81:13-36
+		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:81:13-36
 	android:exported
-		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:82:13-37
+		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:82:13-37
 	tools:targetApi
-		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:83:13-32
+		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:83:13-32
 	android:directBootAware
-		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:80:13-44
+		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:80:13-44
 	android:name
-		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:79:13-104
+		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:79:13-104
 intent-filter#action:name:android.intent.action.BATTERY_LOW+action:name:android.intent.action.BATTERY_OKAY
-ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:84:13-87:29
+ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:84:13-87:29
 action#android.intent.action.BATTERY_OKAY
-ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:85:17-77
+ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:85:17-77
 	android:name
-		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:85:25-74
+		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:85:25-74
 action#android.intent.action.BATTERY_LOW
-ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:86:17-76
+ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:86:17-76
 	android:name
-		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:86:25-73
+		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:86:25-73
 receiver#androidx.work.impl.background.systemalarm.ConstraintProxy$StorageNotLowProxy
-ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:89:9-99:20
+ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:89:9-99:20
 	android:enabled
-		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:92:13-36
+		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:92:13-36
 	android:exported
-		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:93:13-37
+		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:93:13-37
 	tools:targetApi
-		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:94:13-32
+		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:94:13-32
 	android:directBootAware
-		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:91:13-44
+		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:91:13-44
 	android:name
-		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:90:13-104
+		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:90:13-104
 intent-filter#action:name:android.intent.action.DEVICE_STORAGE_LOW+action:name:android.intent.action.DEVICE_STORAGE_OK
-ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:95:13-98:29
+ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:95:13-98:29
 action#android.intent.action.DEVICE_STORAGE_LOW
-ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:96:17-83
+ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:96:17-83
 	android:name
-		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:96:25-80
+		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:96:25-80
 action#android.intent.action.DEVICE_STORAGE_OK
-ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:97:17-82
+ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:97:17-82
 	android:name
-		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:97:25-79
+		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:97:25-79
 receiver#androidx.work.impl.background.systemalarm.ConstraintProxy$NetworkStateProxy
-ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:100:9-109:20
+ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:100:9-109:20
 	android:enabled
-		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:103:13-36
+		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:103:13-36
 	android:exported
-		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:104:13-37
+		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:104:13-37
 	tools:targetApi
-		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:105:13-32
+		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:105:13-32
 	android:directBootAware
-		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:102:13-44
+		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:102:13-44
 	android:name
-		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:101:13-103
+		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:101:13-103
 intent-filter#action:name:android.net.conn.CONNECTIVITY_CHANGE
-ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:106:13-108:29
+ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:106:13-108:29
 action#android.net.conn.CONNECTIVITY_CHANGE
-ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:107:17-79
+ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:107:17-79
 	android:name
-		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:107:25-76
+		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:107:25-76
 receiver#androidx.work.impl.background.systemalarm.RescheduleReceiver
-ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:110:9-121:20
+ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:110:9-121:20
 	android:enabled
-		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:113:13-36
+		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:113:13-36
 	android:exported
-		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:114:13-37
+		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:114:13-37
 	tools:targetApi
-		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:115:13-32
+		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:115:13-32
 	android:directBootAware
-		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:112:13-44
+		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:112:13-44
 	android:name
-		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:111:13-88
+		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:111:13-88
 intent-filter#action:name:android.intent.action.BOOT_COMPLETED+action:name:android.intent.action.TIMEZONE_CHANGED+action:name:android.intent.action.TIME_SET
-ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:116:13-120:29
+ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:116:13-120:29
 action#android.intent.action.BOOT_COMPLETED
-ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:117:17-79
+ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:117:17-79
 	android:name
-		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:117:25-76
+		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:117:25-76
 action#android.intent.action.TIME_SET
-ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:118:17-73
+ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:118:17-73
 	android:name
-		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:118:25-70
+		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:118:25-70
 action#android.intent.action.TIMEZONE_CHANGED
-ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:119:17-81
+ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:119:17-81
 	android:name
-		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:119:25-78
+		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:119:25-78
 receiver#androidx.work.impl.background.systemalarm.ConstraintProxyUpdateReceiver
-ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:122:9-131:20
+ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:122:9-131:20
 	android:enabled
-		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:125:13-72
+		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:125:13-72
 	android:exported
-		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:126:13-37
+		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:126:13-37
 	tools:targetApi
-		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:127:13-32
+		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:127:13-32
 	android:directBootAware
-		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:124:13-44
+		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:124:13-44
 	android:name
-		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:123:13-99
+		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:123:13-99
 intent-filter#action:name:androidx.work.impl.background.systemalarm.UpdateProxies
-ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:128:13-130:29
+ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:128:13-130:29
 action#androidx.work.impl.background.systemalarm.UpdateProxies
-ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:129:17-98
+ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:129:17-98
 	android:name
-		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:129:25-95
+		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:129:25-95
 receiver#androidx.work.impl.diagnostics.DiagnosticsReceiver
-ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:132:9-142:20
+ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:132:9-142:20
 	android:enabled
-		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:135:13-35
+		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:135:13-35
 	android:exported
-		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:136:13-36
+		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:136:13-36
 	android:permission
-		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:137:13-57
+		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:137:13-57
 	tools:targetApi
-		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:138:13-32
+		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:138:13-32
 	android:directBootAware
-		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:134:13-44
+		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:134:13-44
 	android:name
-		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:133:13-78
+		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:133:13-78
 intent-filter#action:name:androidx.work.diagnostics.REQUEST_DIAGNOSTICS
-ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:139:13-141:29
+ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:139:13-141:29
 action#androidx.work.diagnostics.REQUEST_DIAGNOSTICS
-ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:140:17-88
+ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:140:17-88
 	android:name
-		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\9b000dca1b2d2bc918f8871c9e3e8cbe\transformed\work-runtime-2.8.0\AndroidManifest.xml:140:25-85
+		ADDED from [androidx.work:work-runtime:2.8.0] C:\Users\Alex\.gradle\caches\transforms-3\5ddeb7e2bcda38484214fb22279cbf7f\transformed\work-runtime-2.8.0\AndroidManifest.xml:140:25-85
 activity#com.google.android.gms.common.api.GoogleApiActivity
-ADDED from [com.google.android.gms:play-services-base:18.0.1] C:\Users\Alex\.gradle\caches\transforms-3\7b34a4ccbe9cf462858e5a0dcdd1e108\transformed\jetified-play-services-base-18.0.1\AndroidManifest.xml:20:9-22:45
+ADDED from [com.google.android.gms:play-services-base:18.0.1] C:\Users\Alex\.gradle\caches\transforms-3\de36686df7a425ac8a97c03dec1481a7\transformed\jetified-play-services-base-18.0.1\AndroidManifest.xml:20:9-22:45
 	android:exported
-		ADDED from [com.google.android.gms:play-services-base:18.0.1] C:\Users\Alex\.gradle\caches\transforms-3\7b34a4ccbe9cf462858e5a0dcdd1e108\transformed\jetified-play-services-base-18.0.1\AndroidManifest.xml:22:19-43
+		ADDED from [com.google.android.gms:play-services-base:18.0.1] C:\Users\Alex\.gradle\caches\transforms-3\de36686df7a425ac8a97c03dec1481a7\transformed\jetified-play-services-base-18.0.1\AndroidManifest.xml:22:19-43
 	android:theme
-		ADDED from [com.google.android.gms:play-services-base:18.0.1] C:\Users\Alex\.gradle\caches\transforms-3\7b34a4ccbe9cf462858e5a0dcdd1e108\transformed\jetified-play-services-base-18.0.1\AndroidManifest.xml:21:19-78
+		ADDED from [com.google.android.gms:play-services-base:18.0.1] C:\Users\Alex\.gradle\caches\transforms-3\de36686df7a425ac8a97c03dec1481a7\transformed\jetified-play-services-base-18.0.1\AndroidManifest.xml:21:19-78
 	android:name
-		ADDED from [com.google.android.gms:play-services-base:18.0.1] C:\Users\Alex\.gradle\caches\transforms-3\7b34a4ccbe9cf462858e5a0dcdd1e108\transformed\jetified-play-services-base-18.0.1\AndroidManifest.xml:20:19-85
+		ADDED from [com.google.android.gms:play-services-base:18.0.1] C:\Users\Alex\.gradle\caches\transforms-3\de36686df7a425ac8a97c03dec1481a7\transformed\jetified-play-services-base-18.0.1\AndroidManifest.xml:20:19-85
 service#androidx.room.MultiInstanceInvalidationService
-ADDED from [androidx.room:room-runtime:2.5.0] C:\Users\Alex\.gradle\caches\transforms-3\c7101898c9de429c10d06dcf62bf4bbf\transformed\room-runtime-2.5.0\AndroidManifest.xml:24:9-28:63
+ADDED from [androidx.room:room-runtime:2.5.0] C:\Users\Alex\.gradle\caches\transforms-3\14fb2498363212b1c4d2d6324967944f\transformed\room-runtime-2.5.0\AndroidManifest.xml:24:9-28:63
 	android:exported
-		ADDED from [androidx.room:room-runtime:2.5.0] C:\Users\Alex\.gradle\caches\transforms-3\c7101898c9de429c10d06dcf62bf4bbf\transformed\room-runtime-2.5.0\AndroidManifest.xml:27:13-37
+		ADDED from [androidx.room:room-runtime:2.5.0] C:\Users\Alex\.gradle\caches\transforms-3\14fb2498363212b1c4d2d6324967944f\transformed\room-runtime-2.5.0\AndroidManifest.xml:27:13-37
 	tools:ignore
-		ADDED from [androidx.room:room-runtime:2.5.0] C:\Users\Alex\.gradle\caches\transforms-3\c7101898c9de429c10d06dcf62bf4bbf\transformed\room-runtime-2.5.0\AndroidManifest.xml:28:13-60
+		ADDED from [androidx.room:room-runtime:2.5.0] C:\Users\Alex\.gradle\caches\transforms-3\14fb2498363212b1c4d2d6324967944f\transformed\room-runtime-2.5.0\AndroidManifest.xml:28:13-60
 	android:directBootAware
-		ADDED from [androidx.room:room-runtime:2.5.0] C:\Users\Alex\.gradle\caches\transforms-3\c7101898c9de429c10d06dcf62bf4bbf\transformed\room-runtime-2.5.0\AndroidManifest.xml:26:13-43
+		ADDED from [androidx.room:room-runtime:2.5.0] C:\Users\Alex\.gradle\caches\transforms-3\14fb2498363212b1c4d2d6324967944f\transformed\room-runtime-2.5.0\AndroidManifest.xml:26:13-43
 	android:name
-		ADDED from [androidx.room:room-runtime:2.5.0] C:\Users\Alex\.gradle\caches\transforms-3\c7101898c9de429c10d06dcf62bf4bbf\transformed\room-runtime-2.5.0\AndroidManifest.xml:25:13-74
+		ADDED from [androidx.room:room-runtime:2.5.0] C:\Users\Alex\.gradle\caches\transforms-3\14fb2498363212b1c4d2d6324967944f\transformed\room-runtime-2.5.0\AndroidManifest.xml:25:13-74

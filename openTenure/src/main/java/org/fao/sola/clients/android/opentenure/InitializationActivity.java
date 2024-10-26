@@ -43,6 +43,8 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import androidx.core.app.ActivityCompat;
+
+import android.os.Handler;
 import android.text.InputType;
 import android.util.Log;
 import android.widget.EditText;
@@ -57,56 +59,26 @@ public class InitializationActivity extends Activity {
 		OpenTenure.setLocale(this);
 
 		final Database db = OpenTenureApplication.getInstance().getDatabase();
-		// Create it, if it doesn't exist
-		db.init();
-		// Try to open it
-		db.open();
-		if (!db.isOpen()) {
-			// We failed so we ask for a password
-			AlertDialog.Builder dbPasswordDialog = new AlertDialog.Builder(this);
-			dbPasswordDialog.setTitle(R.string.message_db_locked);
-			final EditText dbPasswordInput = new EditText(this);
-			dbPasswordInput.setInputType(InputType.TYPE_CLASS_TEXT
-					| InputType.TYPE_TEXT_VARIATION_PASSWORD);
-			dbPasswordDialog.setView(dbPasswordInput);
-			dbPasswordDialog.setMessage(getResources().getString(
-					R.string.message_db_password));
+		// Init database
+		Context ctx = this;
+		Runnable okRun = new Runnable() {
+			@Override
+			public void run() {
+				Log.d(this.getClass().getName(), "db not encrypted");
+				checkPerformDbUpgrades();
+				StartOpenTenure start = new StartOpenTenure(ctx);
+				start.execute();
+			}
+		};
+		Runnable cancelRun = new Runnable() {
+			@Override
+			public void run() {
+				Log.d(this.getClass().getName(), "db is still closed");
+				finish();
+			}
+		};
 
-			dbPasswordDialog.setPositiveButton(R.string.confirm,
-					new OnClickListener() {
-
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							db.setPassword(dbPasswordInput.getText().toString());
-							db.open();
-							if (db.isOpen()) {
-								checkPerformDbUpgrades();
-								Log.d(this.getClass().getName(), "db opened");
-								StartOpenTenure start = new StartOpenTenure(getBaseContext());
-								start.execute();
-							} else {
-								Log.d(this.getClass().getName(),
-										"db is still closed");
-								finish();
-							}
-						}
-					});
-			dbPasswordDialog.setNegativeButton(R.string.cancel,
-					new OnClickListener() {
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							Log.d(this.getClass().getName(),
-									"password not provided");
-							finish();
-						}
-					});
-			dbPasswordDialog.show();
-		} else {
-			Log.d(this.getClass().getName(), "db not encrypted");
-			checkPerformDbUpgrades();
-			StartOpenTenure start = new StartOpenTenure(this);
-			start.execute();
-		}
+		db.unlock(this, okRun, cancelRun);
 	}
 
 	private void checkPerformDbUpgrades() {

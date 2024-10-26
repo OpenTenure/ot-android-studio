@@ -234,7 +234,7 @@ public abstract class RefDataModel extends Model {
 
             String where = "";
             if(onlyActive){
-                where = " where ACTIVE = 'true'";
+                where = " where ACTIVE = true";
             }
 
             statement = prepareStatement("SELECT CODE, DISPLAY_VALUE, DESCRIPTION, ACTIVE FROM " + tableName + where + " ORDER BY DISPLAY_VALUE");
@@ -306,7 +306,7 @@ public abstract class RefDataModel extends Model {
 
     protected static <T extends RefDataModel, S extends RefDataResponse> void update(List<S> types, String tableName, Class<T> klass) {
         if (types != null && (types.size() > 0) && tableName != null) {
-            PreparedStatement statement = prepareStatement("UPDATE " + tableName + " SET ACTIVE='false' WHERE ACTIVE= 'true'");
+            PreparedStatement statement = prepareStatement("UPDATE " + tableName + " SET ACTIVE=false WHERE ACTIVE= true");
             executeStatement(statement);
 
             for (Iterator<S> iterator = types.iterator(); iterator.hasNext();) {

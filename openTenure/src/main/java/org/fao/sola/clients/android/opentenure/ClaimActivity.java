@@ -122,7 +122,6 @@ public class ClaimActivity extends FragmentActivity implements ClaimDispatcher,
 
 	@Override
 	public void onResume() {
-		OpenTenureApplication.getInstance().getDatabase().open();
 		OpenTenure.setLocale(this);
 		super.onResume();
 	}
@@ -563,8 +562,7 @@ public class ClaimActivity extends FragmentActivity implements ClaimDispatcher,
 		this.claimId = claimId;
 		if (claimId != null && !claimId.equalsIgnoreCase(CREATE_CLAIM_ID)) {
 			Claim claim = Claim.getClaim(claimId);
-			setTitle(getResources().getString(R.string.app_name) + ": "
-					+ claim.getName());
+			setTitle(claim.getName());
 		}
 	}
 

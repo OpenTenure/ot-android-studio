@@ -62,7 +62,6 @@ public class SelectBookmarkActivity extends FragmentActivity {
 	@Override
 	public void onResume() {
 		super.onResume();
-		OpenTenureApplication.getInstance().getDatabase().open();
 	};
 
 	@Override

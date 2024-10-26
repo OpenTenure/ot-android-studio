@@ -33,27 +33,22 @@
                 android:title="@string/action_add_hole" />
             </menu>
     </item>
-
-    <item android:id="@+id/action_rotate"
-          android:icon="@drawable/screenrotation"
-          android:title="@string/action_rotate"
-        android:showAsAction="ifRoom" />
-	<item android:id="@+id/action_stop_rotating"
+    <item android:id="@+id/action_center_and_follow"
+        android:icon="@drawable/position"
+        android:title="@string/action_center"
+        android:showAsAction="always" />
+    <item
+        android:id="@+id/action_rotate"
+        android:icon="@drawable/screenrotation"
+        android:showAsAction="ifRoom"
+        android:title="@string/action_rotate" />
+    <item android:id="@+id/action_stop_rotating"
           android:icon="@drawable/stop"
           android:title="@string/action_stop_rotating"
         android:showAsAction="ifRoom" />
     <item android:id="@+id/action_export_geo"
         android:title="@string/action_export_geo"
         android:showAsAction="never" />
-    <item android:id="@+id/action_go_to"
-          android:icon="@drawable/position"
-          android:title="@string/action_go_to"
-        android:showAsAction="ifRoom" >
-        <menu>
-            <item android:id="@+id/action_center_and_follow"
-                  android:title="@string/action_center" />
-            <item android:id="@+id/action_select_bookmark"
-                  android:title="@string/action_select_bookmark" />
-            </menu>
-    </item>
+    <item android:id="@+id/action_select_bookmark"
+        android:title="@string/action_select_bookmark" />
 </menu>

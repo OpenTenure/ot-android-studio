@@ -89,7 +89,7 @@ public class Configuration {
 			localConnection = OpenTenureApplication.getInstance().getDatabase()
 					.getConnection();
 			statement = localConnection
-					.prepareStatement("INSERT INTO CONFIGURATION(CONFIGURATION_ID, NAME, VALUE) VALUES (?,?,?)");
+					.prepareStatement("INSERT INTO CONFIGURATION(CONFIGURATION_ID, NAME, \"VALUE\") VALUES (?,?,?)");
 			statement.setString(1, cfg.getConfigurationId());
 			statement.setString(2, cfg.getName());
 			statement.setCharacterStream(3, new StringReader(cfg.getValue()));
@@ -124,7 +124,7 @@ public class Configuration {
 
 			localConnection = db.getConnection();
 			statement = localConnection
-					.prepareStatement("INSERT INTO CONFIGURATION(CONFIGURATION_ID, NAME, VALUE) VALUES (?,?,?)");
+					.prepareStatement("INSERT INTO CONFIGURATION(CONFIGURATION_ID, NAME, \"VALUE\") VALUES (?,?,?)");
 			statement.setString(1, getConfigurationId());
 			statement.setString(2, getName());
 			statement.setCharacterStream(3, new StringReader(getValue()));
@@ -229,7 +229,7 @@ public class Configuration {
 			localConnection = OpenTenureApplication.getInstance().getDatabase()
 					.getConnection();
 			statement = localConnection
-					.prepareStatement("UPDATE CONFIGURATION SET NAME=?, VALUE=? WHERE CONFIGURATION_ID=?");
+					.prepareStatement("UPDATE CONFIGURATION SET NAME=?, \"VALUE\"=? WHERE CONFIGURATION_ID=?");
 			statement.setString(1, cfg.getName());
 			statement.setCharacterStream(2, new StringReader(cfg.getValue()));
 			statement.setString(3, cfg.getConfigurationId());
@@ -264,7 +264,7 @@ public class Configuration {
 
 			localConnection = db.getConnection();
 			statement = localConnection
-					.prepareStatement("UPDATE CONFIGURATION SET NAME=?, VALUE=? WHERE CONFIGURATION_ID=?");
+					.prepareStatement("UPDATE CONFIGURATION SET NAME=?, \"VALUE\"=? WHERE CONFIGURATION_ID=?");
 			statement.setString(1, getName());
 			statement.setCharacterStream(2, new StringReader(getValue()));
 			statement.setString(3, getConfigurationId());
@@ -301,7 +301,7 @@ public class Configuration {
 			localConnection = OpenTenureApplication.getInstance().getDatabase()
 					.getConnection();
 			statement = localConnection
-					.prepareStatement("SELECT CFG.VALUE FROM CONFIGURATION CFG WHERE CFG.NAME=?");
+					.prepareStatement("SELECT CFG.\"VALUE\" FROM CONFIGURATION CFG WHERE CFG.NAME=?");
 			statement.setString(1, name);
 			rs = statement.executeQuery();
 			while (rs.next()) {
@@ -346,7 +346,7 @@ public class Configuration {
 			localConnection = OpenTenureApplication.getInstance().getDatabase()
 					.getConnection();
 			statement = localConnection
-					.prepareStatement("SELECT CFG.CONFIGURATION_ID, CFG.VALUE FROM CONFIGURATION CFG WHERE CFG.NAME=?");
+					.prepareStatement("SELECT CFG.CONFIGURATION_ID, CFG.\"VALUE\" FROM CONFIGURATION CFG WHERE CFG.NAME=?");
 			statement.setString(1, name);
 			rs = statement.executeQuery();
 			while (rs.next()) {
@@ -394,7 +394,7 @@ public class Configuration {
 			localConnection = OpenTenureApplication.getInstance().getDatabase()
 					.getConnection();
 			statement = localConnection
-					.prepareStatement("SELECT CFG.NAME, CFG.VALUE FROM CONFIGURATION CFG");
+					.prepareStatement("SELECT CFG.NAME, CFG.\"VALUE\" FROM CONFIGURATION CFG");
 			rs = statement.executeQuery();
 			while (rs.next()) {
 				String key = rs.getString(1);
@@ -439,7 +439,7 @@ public class Configuration {
 			localConnection = OpenTenureApplication.getInstance().getDatabase()
 					.getConnection();
 			statement = localConnection
-					.prepareStatement("SELECT CFG.NAME, CFG.VALUE FROM CONFIGURATION CFG WHERE CFG.CONFIGURATION_ID=?");
+					.prepareStatement("SELECT CFG.NAME, CFG.\"VALUE\" FROM CONFIGURATION CFG WHERE CFG.CONFIGURATION_ID=?");
 			statement.setString(1, configurationId);
 			rs = statement.executeQuery();
 			while (rs.next()) {

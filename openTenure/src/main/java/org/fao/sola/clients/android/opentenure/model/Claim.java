@@ -1320,7 +1320,7 @@ public class Claim {
 		try {
 
 			localConnection = OpenTenureApplication.getInstance().getDatabase().getConnection();
-			statement = localConnection.prepareStatement("SELECT COUNT (*) FROM CLAIM WHERE PROJCT_ID=?");
+			statement = localConnection.prepareStatement("SELECT COUNT (*) FROM CLAIM WHERE PROJECT_ID=?");
 			if(OpenTenureApplication.getInstance().getProject() != null) {
 				statement.setString(1, OpenTenureApplication.getInstance().getProject().getId());
 			} else {

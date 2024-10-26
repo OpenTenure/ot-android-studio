@@ -45,7 +45,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import org.fao.sola.clients.android.opentenure.OpenTenure;
 import org.fao.sola.clients.android.opentenure.OpenTenureApplication;
 import org.fao.sola.clients.android.opentenure.R;
 import org.fao.sola.clients.android.opentenure.filesystem.FileSystemUtilities;
@@ -58,12 +57,10 @@ import android.content.DialogInterface.OnClickListener;
 import android.text.InputType;
 import android.util.Log;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class Database {
 
-	boolean open = false;
-	boolean isEncrypted = false;
-	private Connection connection;
 	private Context context;
 
 	private String DB_PATH;
@@ -71,19 +68,14 @@ public class Database {
 	private String DB_NAME;
 
 	private String DB_FILE_NAME;
-
+	private Connection conn;
 	private String password;
-
-	public boolean isEncrypted() {
-		return isEncrypted;
-	}
 
 	public String getPassword() {
 		return password;
 	}
 
 	public void setPassword(String password) {
-
 		if (password != null && !password.equals("")) {
 			this.password = password;
 		} else {
@@ -96,13 +88,12 @@ public class Database {
 		this.password = password;
 		DB_PATH = context.getFilesDir().getPath();
 		DB_NAME = "opentenure";
-		DB_FILE_NAME = "opentenure.h2.db";
+		DB_FILE_NAME = "opentenure.mv.db";
 	}
 
 	private String getUrl() {
-		String url = "jdbc:h2:" + DB_PATH + "/" + DB_NAME + ";FILE_LOCK=FS"
-				+ ";USER=sa" + ";IFEXISTS=TRUE" + ";PAGE_SIZE=1024"
-				+ ";CACHE_SIZE=8192";
+		String url = "jdbc:h2:file:" + DB_PATH + "/" + DB_NAME + ";FILE_LOCK=FS"
+				+ ";USER=sa" + ";IFEXISTS=TRUE;CACHE_SIZE=8192";
 		if (password != null && !password.equals("")) {
 			// We are using 'opentenure' as user password. The blank after the
 			// file encryption password is required by H2: DON'T REMOVE IT
@@ -111,7 +102,6 @@ public class Database {
 			url += ";PASSWORD=opentenure";
 		}
 		return url;
-
 	}
 
 	public boolean init() {
@@ -131,19 +121,56 @@ public class Database {
 		return true;
 	}
 
-	public void unlock(final Context context) {
+	public boolean checkCanOpen() {
+		try {
+			if(conn !=null) {
+				return true;
+			}
+			// This connection object is likely used by H2 engine as cached pool. Screens get opened faster when this connection is available.
+			Class.forName("org.h2.Driver");
+			conn = getConnection();
+			if(conn == null) {
+				return false;
+			}
+			Log.d(this.getClass().getName(), "... opened");
+			return true;
+		} catch (Exception e) {
+			conn = null;
+			Log.d(this.getClass().getName(), e.getMessage());
+		}
+		return false;
+	}
+
+	public void close() {
+		if (conn != null) {
+			try {
+				password = "";
+				Log.d(this.getClass().getName(), "closing db ...");
+				conn.close();
+				conn = null;
+				Log.d(this.getClass().getName(), "... closed");
+			} catch (Exception e) {
+				Log.d(this.getClass().getName(), e.getMessage());
+			}
+		}
+	}
+
+	public void unlock(final Context context, Runnable okRun, Runnable cancelRun) {
 		// Create it, if it doesn't exist
 		init();
-		// Try to open it
-		open();
-		if (!isOpen()) {
+
+		// Try to open with default password
+		boolean opened = checkCanOpen();
+		if(okRun != null) {
+			okRun.run();
+		}
+
+		/*if (!opened) {
 			// We failed so we ask for a password
-			AlertDialog.Builder dbPasswordDialog = new AlertDialog.Builder(
-					context);
+			AlertDialog.Builder dbPasswordDialog = new AlertDialog.Builder(context);
 			dbPasswordDialog.setTitle(R.string.message_db_locked);
 			final EditText dbPasswordInput = new EditText(context);
-			dbPasswordInput.setInputType(InputType.TYPE_CLASS_TEXT
-					| InputType.TYPE_TEXT_VARIATION_PASSWORD);
+			dbPasswordInput.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
 
 			dbPasswordDialog.setView(dbPasswordInput);
 			dbPasswordDialog.setMessage(context.getResources().getString(
@@ -151,58 +178,29 @@ public class Database {
 
 			dbPasswordDialog.setPositiveButton(R.string.confirm,
 					new OnClickListener() {
-
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
 							setPassword(dbPasswordInput.getText().toString());
-							open();
+							if(okRun != null) {
+								okRun.run();
+							}
 						}
 					});
 			dbPasswordDialog.setNegativeButton(R.string.cancel,
 					new OnClickListener() {
-
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
+							if(cancelRun != null) {
+								cancelRun.run();
+							}
 						}
 					});
 			dbPasswordDialog.show();
-		}
-	}
-
-	public void open() {
-		if (!isOpen()) {
-			try {
-				Log.d(this.getClass().getName(), "opening db ...");
-				Class.forName("org.h2.Driver");
-				connection = DriverManager.getConnection(getUrl());
-				open = true;
-				if(password == null || password.equalsIgnoreCase("")){
-					isEncrypted = false;
-				}else{
-					isEncrypted = true;
-				}
-				Log.d(this.getClass().getName(), "... opened");
-			} catch (ClassNotFoundException e) {
-				OpenTenureApplication.getInstance().exportLog();
-				//Log.d(this.getClass().getName(), e.getMessage());
-			} catch (SQLException e) {
-				OpenTenureApplication.getInstance().exportLog();
-				//Log.d(this.getClass().getName(), e.getMessage());
+		} else {
+			if(okRun != null) {
+				okRun.run();
 			}
-		}
-	}
-
-	public void close() {
-		if (isOpen()) {
-			try {
-				password = "";
-				Log.d(this.getClass().getName(), "closing db ...");
-				connection.close();
-				open = false;
-				Log.d(this.getClass().getName(), "... closed");
-			} catch (SQLException e) {
-			}
-		}
+		}*/
 	}
 
 	public void changeEncryption(String oldPassword, String newPassword) {
@@ -233,21 +231,20 @@ public class Database {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		open();
+		checkCanOpen();
 	}
 
-	public void sync() {
-		if (!isOpen()) {
-			return;
-		}
 
+	public void sync() {
+		//Log.d(this.getClass().getName(), "synching db ...");
+		//exec("CHECKPOINT SYNC");
+		//Log.d(this.getClass().getName(), "... synched");
+	}
+
+	public void syncDb() {
 		Log.d(this.getClass().getName(), "synching db ...");
 		exec("CHECKPOINT SYNC");
 		Log.d(this.getClass().getName(), "... synched");
-	}
-
-	public boolean isOpen() {
-		return open;
 	}
 
 	private boolean databaseExists() {
@@ -261,7 +258,6 @@ public class Database {
 	}
 
 	private boolean createDataBase() {
-
 		InputStream is = null;
 		OutputStream os = null;
 		try {
@@ -307,23 +303,13 @@ public class Database {
 	}
 
 	public Connection getConnection() {
-
 		try {
-
 			return DriverManager.getConnection(getUrl());
-
-		} catch (SQLException e) {
-
-			Log.d(this.getClass().getName(),
-					"getConnection first try exception");
+		} catch (Exception e) {
+			Log.d(this.getClass().getName(), "getConnection first try exception");
+			Toast.makeText(context, "Failed to get connection: " + e.getMessage(), Toast.LENGTH_LONG);
+			OpenTenureApplication.getInstance().exportLog();
 			e.printStackTrace();
-			try {
-				unlock(context);
-				return DriverManager.getConnection(getUrl());
-			} catch (Exception e2) {
-				Log.d(this.getClass().getName(),
-						"getConnection second try exception");
-			}
 		}
 		return null;
 	}
@@ -332,7 +318,7 @@ public class Database {
 		Connection localConnection = null;
 		Statement statement = null;
 		try {
-			localConnection = DriverManager.getConnection(getUrl());
+			localConnection = getConnection();
 			statement = localConnection.createStatement();
 			statement.execute(command);
 		} catch (Exception exception) {
@@ -358,8 +344,7 @@ public class Database {
 		ResultSet rs = null;
 
 		try {
-
-			localConnection = DriverManager.getConnection(getUrl());
+			localConnection = getConnection();
 			Log.d(this.getClass().getName(), "Executing script <" + script
 					+ ">");
 			InputStream scriptStream = context.getAssets().open(script);
@@ -409,7 +394,7 @@ public class Database {
 
 		try {
 
-			localConnection = DriverManager.getConnection(getUrl());
+			localConnection = getConnection();
 			InputStream scriptStream = context.getAssets().open(
 					"upgradepath.sql");
 

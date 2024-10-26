@@ -86,7 +86,7 @@ public class AdditionalInfo {
 			localConnection = OpenTenureApplication.getInstance().getDatabase()
 					.getConnection();
 			statement = localConnection
-					.prepareStatement("INSERT INTO ADDITIONAL_INFO (ADDITIONAL_INFO_ID, CLAIM_ID, NAME, VALUE) VALUES(?,?,?,?)");
+					.prepareStatement("INSERT INTO ADDITIONAL_INFO (ADDITIONAL_INFO_ID, CLAIM_ID, NAME, \"VALUE\") VALUES(?,?,?,?)");
 			statement.setString(1, additionalInfo.getAdditionalInfoId());
 			statement.setString(2, additionalInfo.getClaimId());
 			statement.setString(3, additionalInfo.getName());
@@ -122,7 +122,7 @@ public class AdditionalInfo {
 
 			localConnection = db.getConnection();
 			statement = localConnection
-					.prepareStatement("INSERT INTO ADDITIONAL_INFO (ADDITIONAL_INFO_ID, CLAIM_ID, NAME, VALUE) VALUES(?,?,?,?)");
+					.prepareStatement("INSERT INTO ADDITIONAL_INFO (ADDITIONAL_INFO_ID, CLAIM_ID, NAME, \"VALUE\") VALUES(?,?,?,?)");
 			statement.setString(1, getAdditionalInfoId());
 			statement.setString(2, getClaimId());
 			statement.setString(3, getName());
@@ -226,7 +226,7 @@ public class AdditionalInfo {
 			localConnection = OpenTenureApplication.getInstance().getDatabase()
 					.getConnection();
 			statement = localConnection
-					.prepareStatement("UPDATE ADDITIONAL_INFO SET CLAIM_ID=?, NAME=?, VALUE=? WHERE ADDITIONAL_INFO_ID=?");
+					.prepareStatement("UPDATE ADDITIONAL_INFO SET CLAIM_ID=?, NAME=?, \"VALUE\"=? WHERE ADDITIONAL_INFO_ID=?");
 			statement.setString(1, additionalInfo.getClaimId());
 			statement.setString(2, additionalInfo.getName());
 			statement.setString(3, additionalInfo.getValue());
@@ -262,7 +262,7 @@ public class AdditionalInfo {
 
 			localConnection = db.getConnection();
 			statement = localConnection
-					.prepareStatement("UPDATE ADDITIONAL_INFO SET CLAIM_ID=?, NAME=?, VALUE=? WHERE ADDITIONAL_INFO_ID=?");
+					.prepareStatement("UPDATE ADDITIONAL_INFO SET CLAIM_ID=?, NAME=?, \"VALUE\"=? WHERE ADDITIONAL_INFO_ID=?");
 			statement.setString(1, getClaimId());
 			statement.setString(2, getName());
 			statement.setString(3, getValue());
@@ -300,7 +300,7 @@ public class AdditionalInfo {
 			localConnection = OpenTenureApplication.getInstance().getDatabase()
 					.getConnection();
 			statement = localConnection
-					.prepareStatement("SELECT CLAIM_ID, NAME, VALUE FROM ADDITIONAL_INFO WHERE ADDITIONAL_INFO_ID=?");
+					.prepareStatement("SELECT CLAIM_ID, NAME, \"VALUE\" FROM ADDITIONAL_INFO WHERE ADDITIONAL_INFO_ID=?");
 			statement.setString(1, additionalInfoId);
 			rs = statement.executeQuery();
 			while (rs.next()) {
@@ -347,7 +347,7 @@ public class AdditionalInfo {
 
 			localConnection = db.getConnection();
 			statement = localConnection
-					.prepareStatement("SELECT VALUE FROM ADDITIONAL_INFO META WHERE META.CLAIM_ID=? AND META.NAME=?");
+					.prepareStatement("SELECT \"VALUE\" FROM ADDITIONAL_INFO META WHERE META.CLAIM_ID=? AND META.NAME=?");
 			statement.setString(1, claimId);
 			statement.setString(2, name);
 			rs = statement.executeQuery();
@@ -400,7 +400,7 @@ public class AdditionalInfo {
 			localConnection = OpenTenureApplication.getInstance().getDatabase()
 					.getConnection();
 			statement = localConnection
-					.prepareStatement("SELECT ADDITIONAL_INFO_ID, NAME, VALUE FROM ADDITIONAL_INFO META WHERE META.CLAIM_ID=?");
+					.prepareStatement("SELECT ADDITIONAL_INFO_ID, NAME, \"VALUE\" FROM ADDITIONAL_INFO META WHERE META.CLAIM_ID=?");
 			statement.setString(1, claimId);
 			rs = statement.executeQuery();
 			while (rs.next()) {

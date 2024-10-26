@@ -279,9 +279,6 @@ public class MainMapFragment extends SupportMapFragment {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		if(mapView != null){
-			return mapView;
-		}
 		super.onCreateView(inflater, container, savedInstanceState);
 		mapView = inflater.inflate(R.layout.main_map, container, false);
 		setHasOptionsMenu(true);

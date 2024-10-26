@@ -23,6 +23,7 @@
         android:showAsAction="never" />
     <item android:id="@+id/action_lock"
         android:icon="@drawable/lock"
+        android:visible="false"
         android:title="@string/action_lock_db"
         android:showAsAction="never" />
      <item android:id="@+id/action_showcase"

@@ -147,14 +147,12 @@ public class LocationHelper {
 						(float)currentLocation.getAltitude(),
 						System.currentTimeMillis()
 				);
-				if (OpenTenureApplication.getInstance().getDatabase().isOpen()) {
-					org.fao.sola.clients.android.opentenure.model.Location loc = org.fao.sola.clients.android.opentenure.model.Location
-							.getLocation(CURRENT);
-					if(loc != null) {
-						loc.setLat(location.getLatitude());
-						loc.setLon(location.getLongitude());
-						loc.update();
-					}
+				org.fao.sola.clients.android.opentenure.model.Location loc = org.fao.sola.clients.android.opentenure.model.Location
+						.getLocation(CURRENT);
+				if(loc != null) {
+					loc.setLat(location.getLatitude());
+					loc.setLon(location.getLongitude());
+					loc.update();
 				}
 			}
 
@@ -190,9 +188,9 @@ public class LocationHelper {
 						(float)currentLocation.getAltitude(),
 						System.currentTimeMillis()
 				);
-				if (OpenTenureApplication.getInstance().getDatabase().isOpen()) {
-					org.fao.sola.clients.android.opentenure.model.Location loc = org.fao.sola.clients.android.opentenure.model.Location
-							.getLocation(CURRENT);
+				org.fao.sola.clients.android.opentenure.model.Location loc = org.fao.sola.clients.android.opentenure.model.Location
+						.getLocation(CURRENT);
+				if(loc != null) {
 					loc.setLat(location.getLatitude());
 					loc.setLon(location.getLongitude());
 					loc.update();

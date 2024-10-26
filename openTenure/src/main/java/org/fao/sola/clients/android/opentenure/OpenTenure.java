@@ -42,6 +42,7 @@ import org.fao.sola.clients.android.opentenure.model.Project;
 import org.fao.sola.clients.android.opentenure.network.InitializationTask;
 import org.fao.sola.clients.android.opentenure.network.LoginActivity;
 import org.fao.sola.clients.android.opentenure.network.LogoutTask;
+import org.fao.sola.clients.android.opentenure.tools.StringUtility;
 
 import android.app.ActivityManager;
 import android.app.AlertDialog;
@@ -66,6 +67,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
@@ -141,15 +143,14 @@ public class OpenTenure extends FragmentActivity implements ModeDispatcher,
 
     @Override
     public void onResume() {
-        OpenTenureApplication.getInstance().getDatabase().open();
         setLocale(this);
         super.onResume();
     }
 
     @Override
     public void onDestroy() {
-        cleanup();
         super.onDestroy();
+        cleanup();
     }
 
     @Override
@@ -173,10 +174,6 @@ public class OpenTenure extends FragmentActivity implements ModeDispatcher,
             }
         });
         exitDialog.show();
-    }
-
-    public void cleanup() {
-        OpenTenureApplication.getInstance().getDatabase().close();
     }
 
     private String getFirstRun() {
@@ -358,7 +355,7 @@ public class OpenTenure extends FragmentActivity implements ModeDispatcher,
             case 1:
                 if(!isInitialized) {
                     sv.setShowcase(new ViewTarget(findViewById(R.id.action_init)), true);
-                    sv.setContentTitle("  ");
+                    sv.setContentTitle("");
                     sv.setContentText(getString(R.string.showcase_actionNews_message));
                     break;
                 }
@@ -368,7 +365,7 @@ public class OpenTenure extends FragmentActivity implements ModeDispatcher,
                 break;
             case 3:
                 if (findViewById(R.id.action_download_claims) != null) {
-                    sv.setContentTitle("  ");
+                    sv.setContentTitle("");
                     sv.setShowcase(new ViewTarget(findViewById(R.id.action_download_claims)), true);
                     sv.setContentText(getString(R.string.showcase_actionMap_message));
                     break;
@@ -395,9 +392,10 @@ public class OpenTenure extends FragmentActivity implements ModeDispatcher,
                     sv.setContentText(getString(R.string.showcase_actionClaims_message));
                 } else {
                     if (!isInitialized) {
+                        mViewPager.setCurrentItem(0);
+                        sv.setShowcase(new ViewTarget(findViewById(R.id.action_init)), true);
                         slideTitle = "";
                         slideText = getString(R.string.showcase_actionAlert1_message);
-                        mViewPager.setCurrentItem(0);
                         setAlpha(1.0f, tabs);
                     } else {
                         sv.hide();
@@ -410,9 +408,10 @@ public class OpenTenure extends FragmentActivity implements ModeDispatcher,
             case 7:
                 if (numberOfClaims > 0) {
                     if (!isInitialized) {
+                        mViewPager.setCurrentItem(0);
+                        sv.setShowcase(new ViewTarget(findViewById(R.id.action_init)), true);
                         slideTitle = "";
                         slideText = getString(R.string.showcase_actionAlert1_message);
-                        mViewPager.setCurrentItem(0);
                         setAlpha(1.0f, tabs);
                     } else {
                         sv.hide();
@@ -422,6 +421,7 @@ public class OpenTenure extends FragmentActivity implements ModeDispatcher,
                     }
                 } else {
                     if (!isInitialized) {
+                        mViewPager.setCurrentItem(0);
                         sv.setShowcase(new ViewTarget(findViewById(R.id.action_init)), true);
                         sv.setContentText(getString(R.string.showcase_actionAlert_message));
                         sv.setButtonText(getString(R.string.close));
@@ -436,6 +436,7 @@ public class OpenTenure extends FragmentActivity implements ModeDispatcher,
                 break;
             case 8:
                 if (numberOfClaims > 0 && !isInitialized) {
+                    mViewPager.setCurrentItem(0);
                     sv.setShowcase(new ViewTarget(findViewById(R.id.action_init)), true);
                     sv.setContentText(getString(R.string.showcase_actionAlert_message));
                     sv.setButtonText(getString(R.string.close));
@@ -547,14 +548,10 @@ public class OpenTenure extends FragmentActivity implements ModeDispatcher,
                 showSwitchProjects();
                 return false;
             case R.id.action_lock:
-                if (OpenTenureApplication.getInstance().getDatabase().isOpen()) {
-                    if (OpenTenureApplication.getInstance().getDatabase().isEncrypted()) {
-                        changeOldPassword();
-                    } else {
-                        setNewPassword(null, OpenTenureApplication.getActivity());
-                    }
+                if (StringUtility.isEmpty(OpenTenureApplication.getInstance().getDatabase().getPassword())) {
+                    changeOldPassword();
                 } else {
-                    OpenTenureApplication.getInstance().getDatabase().unlock(getApplicationContext());
+                    setNewPassword(null, OpenTenureApplication.getActivity());
                 }
                 return true;
             default:
@@ -719,7 +716,7 @@ public class OpenTenure extends FragmentActivity implements ModeDispatcher,
                                                             if (!OpenTenureApplication
                                                                     .getInstance()
                                                                     .getDatabase()
-                                                                    .isOpen()) {
+                                                                    .checkCanOpen()) {
 
                                                                 AlertDialog.Builder confirmationDialogBuilder = new AlertDialog.Builder(ctx);
                                                                 confirmationDialogBuilder
@@ -920,7 +917,6 @@ public class OpenTenure extends FragmentActivity implements ModeDispatcher,
     }
 
     public void restart() {
-        cleanup();
         finish();
         Intent mStartActivity = OpenTenureApplication.getContext().getPackageManager().getLaunchIntentForPackage(OpenTenureApplication.getContext().getPackageName());
         startActivity(mStartActivity);
@@ -966,6 +962,11 @@ public class OpenTenure extends FragmentActivity implements ModeDispatcher,
         }
     }
 
+    public void cleanup() {
+        OpenTenureApplication.getInstance().getDatabase().close();
+        OpenTenureApplication.getInstance().getDatabase().syncDb();
+    }
+
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
         public SectionsPagerAdapter(FragmentManager fm) {
             super(fm);
@@ -973,7 +974,7 @@ public class OpenTenure extends FragmentActivity implements ModeDispatcher,
 
         @Override
         public Fragment getItem(int position) {
-             switch (position) {
+            switch (position) {
                 case 0:
                     return new NewsFragment();
                 case 1:
