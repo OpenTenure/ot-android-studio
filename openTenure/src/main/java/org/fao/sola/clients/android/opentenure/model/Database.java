@@ -92,15 +92,7 @@ public class Database {
 	}
 
 	private String getUrl() {
-		String url = "jdbc:h2:file:" + DB_PATH + "/" + DB_NAME + ";FILE_LOCK=FS"
-				+ ";USER=sa" + ";IFEXISTS=TRUE;CACHE_SIZE=8192";
-		if (password != null && !password.equals("")) {
-			// We are using 'opentenure' as user password. The blank after the
-			// file encryption password is required by H2: DON'T REMOVE IT
-			url += ";PASSWORD=" + password + " opentenure;CIPHER=AES";
-		} else {
-			url += ";PASSWORD=opentenure";
-		}
+		String url = "jdbc:h2:file:" + DB_PATH + "/" + DB_NAME + ";USER=sa;PASSWORD=opentenure";
 		return url;
 	}
 
@@ -127,7 +119,7 @@ public class Database {
 				return true;
 			}
 			// This connection object is likely used by H2 engine as cached pool. Screens get opened faster when this connection is available.
-			Class.forName("org.h2.Driver");
+			//Class.forName("org.h2.Driver");
 			conn = getConnection();
 			if(conn == null) {
 				return false;

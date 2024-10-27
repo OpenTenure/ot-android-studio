@@ -1,18 +1,18 @@
 apply plugin: 'com.android.application'
 
 android {
-        compileSdkVersion 33
+        compileSdkVersion 34
 
     defaultConfig {
         applicationId "org.fao.sola.clients.android.opentenure"
         minSdkVersion 26
         targetSdk 34
-        versionCode 38
-        versionName '1.20'
+        versionCode 39
+        versionName '1.21'
         multiDexEnabled true
         compileOptions {
-            sourceCompatibility JavaVersion.VERSION_11
-            targetCompatibility JavaVersion.VERSION_11
+            sourceCompatibility JavaVersion.VERSION_1_8
+            targetCompatibility JavaVersion.VERSION_1_8
         }
         useLibrary 'org.apache.http.legacy'
     }
@@ -35,8 +35,8 @@ android {
     }
     namespace 'org.fao.sola.clients.android.opentenure'
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_11
-        targetCompatibility JavaVersion.VERSION_11
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 }
 
@@ -53,7 +53,7 @@ dependencies {
     api 'androidx.mediarouter:mediarouter:1.0.0'
     api 'androidx.multidex:multidex:2.0.0'
     //implementation files('libs/org.apache.http.legacy.jar')
-    implementation files('libs/h2-2.3.232.jar')
+    implementation files('libs/h2-2.2.224.jar')
     implementation files('libs/httpcore-4.3.2.jar')
     implementation files('libs/httpmime-4.3.jar')
     implementation files('libs/jackson-annotations-2.4.2.jar')
